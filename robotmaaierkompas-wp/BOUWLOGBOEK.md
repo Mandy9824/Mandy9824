@@ -329,3 +329,15 @@ robotmaaierkompas-wp/
 | Prijstaak | Statuspaneel: **uitgeschakeld, niet ingepland**. Geen verzoeken naar bol.com. |
 | Affiliatelinks | Statuspaneel: geen links ingesteld. Geen concept bevat bol.com of affiliatelinks. |
 | Eindstand | **76 pagina's, alle concept; 0 berichten; niets gepubliceerd.** Geen pagina zonder placeholder, geen "KvK". Indexering geblokkeerd, HTTPS geldig, fonts zelf gehost, Yoast 28.6 actief, WebP mogelijk. |
+
+---
+
+## Besluit 5 oktober 2026: productafbeeldingen
+
+- **Geen Bol-afbeeldingen en geen Google-afbeeldingen. Niets van afbeeldingensites halen.** Tot er een veilige bron is, staan overal de plaatsvervangers uit het ontwerp ("Foto volgt", `rmk-ph`). Daarmee is de open vraag over "WEL Bol-afbeeldingen" uit ronde 3 beantwoord.
+- Veilige bronnen voor later:
+  1. de persmap of mediapagina van de fabrikant, met de gebruiksvoorwaarden en een bronvermelding;
+  2. foto's die de PR-afdeling van de fabrikant aanlevert;
+  3. na acceptatie door Bol: Bol-afbeeldingen via de API, met de oorspronkelijke URL.
+- Gecontroleerd: het thema en de scripts laden geen externe afbeeldingen. Vijf patronen gebruiken de plaatsvervanger.
+- Auteursfoto: Mandy heeft vier versies aangeleverd (400 en 800 px, WebP en JPG). Ze staan **niet in deze openbare repository**. Mandy uploadt ze zelf in Media, met alt-tekst "Mandy van den Broek".
