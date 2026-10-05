@@ -63,10 +63,11 @@ add_filter( 'wpseo_schema_person_data', function ( $data, $user_id ) {
 	return $data;
 }, 10, 2 );
 
-// Yoast-metabeschrijving per pagina via de REST-API (meta._yoast_wpseo_metadesc), alleen voor wie de pagina mag bewerken.
+// Yoast-metabeschrijving en kruimelpadtitel per pagina via de REST-API (meta._yoast_wpseo_metadesc, meta._yoast_wpseo_bctitle), alleen voor wie de pagina mag bewerken.
 add_action( 'init', function () {
 	foreach ( array( 'page', 'post' ) as $type ) {
-		register_post_meta( $type, '_yoast_wpseo_metadesc', array(
+		foreach ( array( '_yoast_wpseo_metadesc', '_yoast_wpseo_bctitle' ) as $yoast_key ) {
+		register_post_meta( $type, $yoast_key, array(
 			'type'          => 'string',
 			'single'        => true,
 			'show_in_rest'  => true,
@@ -74,6 +75,7 @@ add_action( 'init', function () {
 				return current_user_can( 'edit_post', $post_id );
 			},
 		) );
+		}
 	}
 } );
 
@@ -116,3 +118,55 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 remove_action( 'wp_head', 'wp_generator' );
 remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
+
+/* ------------------------------------------------------------------ 6. Geen lege fotoplaatsvervangers
+ * Een beeldblok met alleen de plaatsvervanger ("Foto volgt") wordt bij het renderen weggehaald,
+ * en de productkop wordt dan één kolom. Zodra er een echte <img> in het blok staat, blijft het staan. */
+function rmk_strip_photo_placeholders( $html ) {
+	if ( false === strpos( (string) $html, 'rmk-ph' ) ) {
+		return $html;
+	}
+	$re   = '#<div class="rmk-product__media">\s*(?:<!--.*?-->\s*)?<div class="rmk-ph">.*?</span></div>\s*</div>#s';
+	$html = preg_replace_callback( '#<div class="rmk-product__head">(\s*' . substr( $re, 1, -2 ) . ')#s', function ( $m ) {
+		return '<div class="rmk-product__head rmk-product__head--nomedia">';
+	}, $html );
+	return preg_replace( $re, '', $html );
+}
+add_filter( 'render_block', function ( $content, $block ) {
+	return 'core/html' === $block['blockName'] ? rmk_strip_photo_placeholders( $content ) : $content;
+}, 17, 2 );
+
+/* ------------------------------------------------------------------ 7. Nooit indexeerbaar: beheerroutes, data, /ga/
+ * - REST-antwoorden van rmk/v1 krijgen X-Robots-Tag: noindex (de routes vragen bovendien een beheerder).
+ * - robots.txt: niet crawlen van de beheerroutes en het opgeslagen modelbestand.
+ * - /ga/ krijgt al X-Robots-Tag: noindex, nofollow (inc/affiliate-redirect.php) en staat in geen sitemap.
+ * - Concepten staan nooit in de sitemap: Yoast neemt alleen gepubliceerde, indexeerbare pagina's op;
+ *   hieronder ook een vangnet voor de WordPress-kernsitemap. */
+add_filter( 'rest_post_dispatch', function ( $response, $server, $request ) {
+	if ( 0 === strpos( $request->get_route(), '/rmk/v1' ) && $response instanceof WP_REST_Response ) {
+		$response->header( 'X-Robots-Tag', 'noindex, nofollow' );
+	}
+	return $response;
+}, 10, 3 );
+add_filter( 'robots_txt', function ( $out, $public ) {
+	$rules = "Disallow: /wp-json/rmk/\nDisallow: /wp-content/uploads/rmk/\n";
+	// Binnen de groep "User-agent: *" (Yoast schrijft zijn eigen blok, daarom als laatste filter).
+	if ( preg_match( '/^User-agent:\s*\*\s*$/mi', $out, $m, PREG_OFFSET_CAPTURE ) ) {
+		$at = $m[0][1] + strlen( $m[0][0] );
+		return substr( $out, 0, $at ) . "\n" . rtrim( $rules ) . substr( $out, $at );
+	}
+	return "User-agent: *\n" . $rules . "\n" . $out;
+}, PHP_INT_MAX, 2 );
+add_filter( 'wp_sitemaps_posts_query_args', function ( $args ) {
+	$args['post_status'] = 'publish';
+	return $args;
+} );
+add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function ( $ids ) {
+	return array_merge( (array) $ids, get_posts( array( 'post_type' => 'any', 'post_status' => array( 'draft', 'pending', 'future', 'private' ), 'fields' => 'ids', 'posts_per_page' => -1 ) ) );
+} );
+
+/* ------------------------------------------------------------------ 8. Eén skiplink
+ * Het ontwerp heeft een eigen skiplink ("Naar de inhoud", naar #inhoud). De automatische skiplink van
+ * blokthema's wijst naar een element dat in onze templates niet bestaat; die zetten we uit. */
+remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link' );
+remove_action( 'wp_footer', 'the_block_template_skip_link' );

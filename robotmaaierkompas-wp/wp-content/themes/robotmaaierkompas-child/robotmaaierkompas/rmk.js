@@ -124,13 +124,15 @@
       var cap = m2 ? needCapacity(m2, form.zones && form.zones.checked) : null;
       if (need) need.textContent = cap ? 'Minimaal ' + nl(cap, 0) + ' m² opgegeven capaciteit (eigen vuistregel).' : '';
       var onlyFinal = form.final && form.final.checked, sort = sortEl ? sortEl.value : 'score';
+      var noExtra = form.zonder_extra && form.zonder_extra.checked;
       var visible = rows.filter(function (r) {
         var d = r.dataset, price = parse(d.price), sc = $('[data-rmk-score]', r);
         var ok = navs.indexOf(d.nav) > -1 &&
           (!cap || (parse(d.capacity) || 0) >= cap) &&
           (!slope || (parse(d.slope) || 0) >= slope) &&
           (!budget || price == null || price <= budget) &&
-          (!onlyFinal || (sc && sc.dataset.kind === 'eind'));
+          (!onlyFinal || (sc && sc.dataset.kind === 'eind')) &&
+          (!noExtra || d.extra === 'geen');   /* data-extra: geen | module | ingebouwd */
         r.hidden = !ok; return ok;
       });
       var tot = function (r) { var s = $('[data-rmk-score]', r); return s && s.dataset.total ? +s.dataset.total : -1; };

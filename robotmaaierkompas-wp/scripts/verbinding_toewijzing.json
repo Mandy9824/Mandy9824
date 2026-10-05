@@ -1,0 +1,13 @@
+{
+  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12.",
+  "toewijzingen": [
+    { "model": "M002", "bronveld": "4G", "tekst": "4G ingebouwd, met einddatum", "extra": "ingebouwd" },
+    { "model": "M010", "bronveld": "Extra kosten: verbinding (4G/EPOS)", "tekst": "4G ingebouwd; correctiedata gratis", "extra": "ingebouwd" },
+    { "model": "M006", "bronveld": "Extra kosten: data-abonnement (4G)", "tekst": "4G ingebouwd; abonnement na proefperiode", "extra": "ingebouwd" },
+    { "model": "M001", "bronveld": "Extra kosten: 4G (Access+)", "tekst": "Losse module (Access+)", "extra": "module" },
+    { "model": "M004", "bronveld": "Extra kosten: link-module (4G)", "tekst": "Losse link-module", "extra": "module" },
+    { "model": "M005", "bronveld": "Extra kosten: link-module, messen, accu", "tekst": "Losse link-module", "extra": "module" },
+    { "model": "M008", "bronveld": "Extra kosten: Link-module (4G)", "tekst": "Losse link-module", "extra": "module" },
+    { "model": "M011", "bronveld": "Extra kosten: abonnement", "tekst": "Geen abonnement, geen GPS-tracking", "extra": "geen" }
+  ]
+}

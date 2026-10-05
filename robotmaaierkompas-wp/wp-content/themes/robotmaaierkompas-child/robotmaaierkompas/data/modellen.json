@@ -1,6 +1,6 @@
 {
   "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
-  "gegenereerd": "2026-10-05 20:43",
+  "gegenereerd": "2026-10-05 20:54",
   "bronbestand": "robotmaaierkompas_modeldata_v1.xlsx",
   "scoremodel": "v1.0 (concept tot bevriezing)",
   "algemeen": {
@@ -246,6 +246,13 @@
       },
       "reviews_gelezen": 1,
       "beschikbaarheid": "uitlopend",
+      "verbinding": {
+        "tekst": "Losse module (Access+)",
+        "extra": "module",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://nl.navimow.com/products/navimow-access"
+      },
       "reviews": [
         {
           "bron": "MediaMarkt.nl",
@@ -493,6 +500,13 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "4G ingebouwd, met einddatum",
+        "extra": "ingebouwd",
+        "status": "gecontroleerd",
+        "datum": "2026-10-05",
+        "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf"
+      },
       "reviews": [
         {
           "bron": "Gamma.nl",
@@ -624,6 +638,7 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": null,
+      "verbinding": null,
       "reviews": [],
       "ean": null
     },
@@ -862,6 +877,13 @@
       },
       "reviews_gelezen": 5,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "Losse link-module",
+        "extra": "module",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module"
+      },
       "reviews": [
         {
           "bron": "MediaMarkt.nl",
@@ -1117,6 +1139,13 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "Losse link-module",
+        "extra": "module",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module"
+      },
       "reviews": [],
       "ean": null
     },
@@ -1353,6 +1382,13 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "4G ingebouwd; abonnement na proefperiode",
+        "extra": "ingebouwd",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf"
+      },
       "reviews": [
         {
           "bron": "Coolblue",
@@ -1443,6 +1479,7 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": null,
+      "verbinding": null,
       "reviews": [],
       "ean": null
     },
@@ -1681,6 +1718,13 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "Losse link-module",
+        "extra": "module",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://nl.dreametech.com/products/link-module-1-jaar-gratis-verbindingsservice-voor-a1-a1pro"
+      },
       "reviews": [
         {
           "bron": "Coolblue",
@@ -1928,6 +1972,13 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "4G ingebouwd; correctiedata gratis",
+        "extra": "ingebouwd",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://www.husqvarna.com/nl/installatie-van-de-robotmaaier/husqvarna-epos-rs1-referentiestation/"
+      },
       "reviews": [],
       "ean": null
     },
@@ -2164,6 +2215,13 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "Geen abonnement, geen GPS-tracking",
+        "extra": "geen",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-05",
+        "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html"
+      },
       "reviews": [
         {
           "bron": "Coolblue",
@@ -2254,6 +2312,7 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": null,
+      "verbinding": null,
       "reviews": [],
       "ean": null
     },
@@ -2339,6 +2398,7 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": null,
+      "verbinding": null,
       "reviews": [],
       "ean": null
     },
@@ -2417,6 +2477,7 @@
       },
       "reviews_gelezen": 0,
       "beschikbaarheid": null,
+      "verbinding": null,
       "reviews": [],
       "ean": null
     }

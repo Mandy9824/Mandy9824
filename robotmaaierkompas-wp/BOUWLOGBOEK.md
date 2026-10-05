@@ -475,3 +475,122 @@ Alles is **concept** gebleven: 76 pagina's in concept, 0 berichten, niets gepubl
 1. `excel_naar_json.py … --upload` draaien, zodat de messen en de Dreame-module live staan.
 2. Controleren: auteursblok (rol, bio, datum), artikellijst (leeg zolang er niets gepubliceerd is), productboxscores in de HTML, scoretabel zonder lege kolom, en de toelichting in de calculator.
 3. Daarna zijn ook Over ons, Hoe we beoordelen en pagina 1 vrij van invulvelden. Die blijven concept tot Mandy ze publiceert.
+
+---
+
+## Ronde 6 (5 oktober 2026): data live, homepage, pagina 2 en 11, lanceervoorbereiding
+
+Alles is **concept** gebleven: 76 pagina's, 0 berichten, niets gepubliceerd. "Zoekmachines niet laten indexeren" staat aan. De voorpagina-instelling is niet gewijzigd (pagina 9).
+
+### 1. Modelbestand via de dataroute (thema 1.2.3)
+- `excel_naar_json.py … --upload`, met het wachtwoord alleen via `RMK_WP_APP_PASSWORD`, staat nu in de database en in `uploads/rmk/`. Het statuspaneel zegt "via de API opgeslagen", en `modelsUrl` op de site wijst naar `uploads/rmk/modellen.json`.
+- **Calculator, getest in Chromium** met de live `rmk.js` en het live modelbestand:
+  - de keuzelijst toont precies de acht modellen;
+  - Dreame: Link-module 99,99 euro met als toelichting "met 3 jaar service; ook verkrijgbaar voor 69 euro met 1 jaar service", messen 38 euro als "eigen berekening uit de opgave van de fabrikant";
+  - Mova 800 en 1200: messen 28 euro, accu 79 euro, levensduur leeg;
+  - Eufy: messen 40 euro;
+  - aanschaf overal leeg. Daardoor toont de calculator pas een uitkomst als de bezoeker zelf een aanschafprijs invult; zo is hij ontworpen.
+- **Auteursblok** op pagina 1, de methodepagina en Over ons: foto, rol "Oprichter en redacteur", de bio, en "Laatst nagekeken op 5 oktober 2026" (de datum van de laatste wijziging).
+- **Artikellijst** op de auteurspagina: de shortcode werkt. Hij toont nu niets, ook geen kop, omdat er nog niets gepubliceerd is.
+- **Productboxen:** de score staat in de HTML (16 scorecellen op pagina 1, allemaal "functie", 92,7 tot 60,9). De lege kolom "Beste voor" is weg.
+- Nieuw in de data: `scripts/verbinding_toewijzing.json`, met per model een korte omschrijving van verbinding en diefstalbeveiliging, de bronregel en een filtercategorie (`geen`, `module`, `ingebouwd`), zonder bedragen. Alleen M011 krijgt "geen", want alleen daar bevestigt de fabrikant "geen abonnement". Bij M010 zijn de 4G-kosten op termijn niet bevestigd, dus "ingebouwd".
+
+### 2. Homepage en pagina 2 (en pagina 11)
+- **Homepage (#9):** titel uit het md-bestand. De hero heeft H1 en introtekst, zonder de knoppen en het label "Onafhankelijk vergeleken" uit het patroon (geen tekst in het bestand); de illustratie (geen productfoto) staat erin. Verder:
+  - kaarten "Waar wil je mee beginnen?" naar pagina 1, 12, 2 en de methodepagina;
+  - de keuzehulp;
+  - "Wat we anders doen" en "Wie zit erachter?" (met een link naar Over ons);
+  - het auteursblok en de affiliate-melding.
+
+  Weggelaten, omdat er geen tekst voor was: de standaard keuzehulp-inleiding, "Kies per situatie", "Hoe we beoordelen" (stappen) en "Onlangs bijgewerkt".
+- **Pagina 2 (#12):** de filterbare **vergelijkingstabel** voor de acht modellen, uit modellen.json:
+  - kolommen Functiescore, Navigatie, Oppervlak, Helling, Geluid en Verbinding, elk met een statusbadge;
+  - per model "Bijgewerkt op …" en een link naar zijn productbox op pagina 1.
+  - Filters: navigatie (RTK of GPS, Camera, LiDAR), oppervlak met marge, helling, en **"Zonder losse module of abonnement"**. Dat laatste filter werkt pas met 1.2.4 (lokaal getest: alleen Gardena blijft over).
+  - Weggehaald: het budgetveld, sorteren op prijs, "Alleen met eindscore", de kolommen "Doorgang" en "Prijs vanaf", en de prijszin in het bijschrift.
+  - Verder: de tekst, "Wat de kolommen betekenen", de keuzehulp, drie FAQ-vragen, een bronnenlijst met 22 fabrikant- en handleidingbronnen, en de link "de pagina over onafhankelijke tests" naar `/robotmaaier-test-consumentenbond/` (kernpagina 4, concept).
+  - Getest in Chromium: navigatie- en oppervlaktefilter werken (900 m² geeft Husqvarna, Mova 1200 en Dreame), net als de keuzehulp.
+  - **Eigen fout, hersteld:** mijn eerste versie van de tabel haalde bij het verwijderen van het budgetveld ook het einde van het filterformulier en de sorteerkeuze weg. Daardoor werkte de keuzehulp niet (JavaScript-fout). Opnieuw opgebouwd met een exacte vervanging, en daarna voor alle 14 gebouwde pagina's gecontroleerd dat de HTML goed sluit.
+- **Pagina 11 (#17) `/robotmaaier-zonder-grensdraad/`** met het kopersgidspatroon: titel en H1, eerlijkheidsblok, kort antwoord, de gids met inhoudsopgave (vijf koppen), de tabel voor- en nadelen, de keuzehulp, vier FAQ-vragen, een bronnenlijst (18 bronnen) en het auteursblok. Gecontroleerd tegen modellen.json: referentiestation 309 euro, de gateway met LAN-kabel, Mova en Dreame zonder antenne maar met module voor GPS, en Navimow met netwerk-RTK. Dat klopt allemaal.
+  - Let op: de FAQ zegt "hellingen tot 30 of 45%". De Eufy E15 Solo staat in het modelbestand op 32,5% (tegenstrijdig, laagste waarde).
+- **Metabeschrijvingen** voor homepage, pagina 2 en pagina 11 staan in Yoast.
+
+### 3. Links en woordgebruik
+- Alle interne links in de inhoud van de acht pagina's van de eerste golf wijzen naar bestaande concepten, en ankers bestaan. Geen kapotte links.
+- Wel en niet gelinkt in de inhoud (afgezien van menu en footer):
+
+| van \ naar | home | p1 | p2 | p12 | methode |
+|---|---|---|---|---|---|
+| home | — | ja | ja | ja | ja |
+| p1 | ja | — | ja | ja | ja |
+| p2 | ja | ja | — | **nee** | ja |
+| p12 | ja | **nee** | **nee** | — | ja |
+| methode | ja | **nee** | **nee** | **nee** | — |
+
+  Niet toegevoegd, omdat er geen tekst voor is. Het menu en de footer bevatten wel links naar de methodepagina en naar kosten.
+- **"getest" en "onze test" komen nergens voor**, niet in de 76 concepten en niet in het thema.
+
+### Lanceervoorbereiding
+**1. Fotoplaatsvervangers.**
+- Pagina 1: de beeldblokken "Foto volgt" zijn uit de inhoud gehaald en de productkoppen zijn één kolom.
+- Thema 1.2.4: een filter haalt bij het renderen elk beeldblok weg dat alleen de plaatsvervanger bevat, met CSS als vangnet. Een echte `<img>` blijft staan. Dat geldt voor de latere golven (beste koop, grote en kleine tuin, goedkope robotmaaier, Husqvarna vs Gardena) en de kop-aan-kop-pagina.
+
+**2. SEO per pagina** (homepage, p1, p2, p11, p12, methode, Over ons, auteur), via de Yoast-uitvoer in de API, want concepten zijn niet openbaar:
+- **H1:** precies één per pagina.
+- **Titels:** uniek.
+- **Metabeschrijving:** aanwezig bij zes pagina's; **ontbreekt bij Over ons en de auteurspagina** (niet aangeleverd; niet verzonnen).
+- **Canonical:** Yoast laat die weg zolang een pagina noindex of concept is. Lokaal gecontroleerd dat een gepubliceerde, indexeerbare pagina een **zelfverwijzende canonical** krijgt en in de sitemap komt.
+- **Schema** (gecontroleerd op structuur, verwijzingen en verplichte velden): per pagina Article, WebPage, BreadcrumbList, WebSite en Person/Organization. Op de auteurspagina komt ImageObject erbij. Er zijn geen fouten, geen ontbrekende verwijzingen en geen Product of Review. `datePublished` staat bij concepten op een nepdatum; dat wordt bij publiceren de echte datum.
+  - Een officiële validator (validator.schema.org of de Rich Results Test van Google) kan alleen openbare URL's lezen: draai die na publicatie.
+- **Breadcrumbs:** zichtbaar op alle pagina's behalve de homepage, en BreadcrumbList in het schema. Pagina 1 had in het zichtbare pad "Beste robotmaaiers", maar staat niet onder de hub; dat is weggehaald, zodat zichtbaar pad en schema overeenkomen. Yoast gebruikt in het schema de volledige SEO-titel als naam. In 1.2.4 kan de korte kruimelpadtitel (`_yoast_wpseo_bctitle`) via de API worden gezet.
+- **Mobiel** (390 px) en desktop (1366 px) in Chromium: geen horizontaal scrollen, geen JavaScript-fouten.
+
+**3. Sitemap, robots en redirects (live):**
+- `http://` geeft een 301 naar `https://`, en `www.` een 301 naar het adres zonder www, met behoud van pad en querystring.
+- Sitemap: `sitemap_index.xml` geeft 404 en `wp-sitemap.xml` een 301 daarnaartoe; dat is normaal zolang de site noindex is. `page-sitemap.xml` bevat alleen `/`, **geen concepten**.
+- `robots.txt` (live, gecachet door LiteSpeed) is de standaard van WordPress met `Sitemap: …/wp-sitemap.xml`, en daarmee na de lancering bruikbaar via de 301. Met 1.2.4 komen er `Disallow: /wp-json/rmk/` en `Disallow: /wp-content/uploads/rmk/` bij, binnen de groep `User-agent: *` (lokaal getest naast het Yoast-blok).
+- Er wordt geen HSTS-header meegestuurd. Dat is optioneel; aanzetten kan in hPanel.
+- **PageSpeed Insights:** niet uitvoerbaar. De API gaf 429 (geen API-sleutel), en de pagina's zijn concepten, dus voor PSI 404. Gemeten met **Lighthouse 12 (lab)** op de echte paginaschil (header, footer, CSS, JS en lettertypen van robotmaaierkompas.nl) met de weergegeven conceptinhoud:
+
+| Pagina | Mobiel perf | LCP | CLS | TBT | Desktop perf | LCP | CLS | TBT |
+|---|---|---|---|---|---|---|---|---|
+| Homepage | 97 | 2,1 s | 0 | 80 ms | 99 | 0,7 s | 0 | 0 ms |
+| P1 zonder draad | 93 | 2,4 s | 0 | 130 ms | 100 | 0,7 s | 0 | 0 ms |
+| P2 vergelijken | 93 | 2,4 s | 0 | 120 ms | 100 | 0,6 s | 0 | 0 ms |
+| P11 zonder grensdraad | 96 | 2,1 s | 0 | 80 ms | 100 | 0,6 s | 0 | 0 ms |
+| P12 kosten | 95 | 2,5 s | 0 | 80 ms | 100 | 0,7 s | 0 | 0 ms |
+| Hoe we beoordelen | 96 | 2,2 s | 0 | 80 ms | 100 | 0,6 s | 0 | 0 ms |
+| Over ons | 95 | 2,1 s | 0 | 20 ms | 100 | 0,6 s | 0 | 0 ms |
+| Auteur | 97 | 2,2 s | 0 | 20 ms | 100 | 0,6 s | 0 | 0 ms |
+
+  - **INP kan een labmeting niet geven** (daar zijn echte bezoekers voor nodig). TBT is de labvervanger en is overal laag. Alle LCP- en CLS-waarden vallen binnen "goed" (LCP ≤ 2,5 s, CLS ≤ 0,1); P12 zit precies op de grens van 2,5 s.
+  - Toegankelijkheid 98 en best practices 96. Toegankelijkheid: de automatische skiplink van WordPress wijst naar een niet-bestaand element; die staat in 1.2.4 uit, de eigen skiplink "Naar de inhoud" blijft. Best practices: een lettertypefout die alleen in de testopstelling optreedt (ander domein).
+  - Na de lancering, met de pagina's openbaar: PSI mobiel en desktop opnieuw draaien. Velddata (CrUX, INP) komen pas na enkele weken bezoek.
+
+**4. Nooit in de sitemap en nooit indexeerbaar:**
+- **Concepten:** Yoast neemt alleen gepubliceerde, indexeerbare pagina's op (lokaal en live gecontroleerd). In 1.2.4 sluit `wpseo_exclude_from_sitemap_by_post_ids` ook alle concepten, ingeplande, wachtende en privépagina's expliciet uit, en de kernsitemap van WordPress vraagt alleen `publish` op. Voor bezoekers geven concepten 404.
+- **`/ga/`:** `X-Robots-Tag: noindex, nofollow` (live: 404 met noindex, want er zijn geen links ingesteld), en geen onderdeel van een sitemap.
+- **Beheerroutes `/wp-json/rmk/v1/…`:** 401 zonder beheerder, met `X-Robots-Tag: noindex`. In 1.2.4 ook `noindex, nofollow` op de antwoorden en Disallow in robots.txt.
+- **`uploads/rmk/modellen.json`** is openbaar (nodig voor de calculator) en heeft in 1.2.4 een Disallow in robots.txt. Er staan geen prijzen en geen Bol-gegevens in.
+
+### Bevindingen en vragen voor Mandy
+- ⚠️ **Menu en footer linken naar pagina's buiten de eerste golf:** `/beste-robotmaaier/`, `/vergelijken/`, `/kopersgids/` en `/hulp/`. Na de lancering van alleen de eerste golf geven die op elke pagina een 404. Kies een van deze opties:
+  - die vier sectiepagina's mee publiceren (ze hebben nog alleen een invulveld, dus er is tekst nodig);
+  - of het menu tijdelijk aanpassen, bijvoorbeeld "Beste robotmaaiers" naar `/robotmaaier-zonder-draad/`, "Vergelijkingen" naar `/robotmaaier-test-vergelijking/`, en Kopersgids en Hulp tot golf 2 uit het menu. Dat is een themawijziging.
+- ⚠️ **Hostinger Reach** laadt `cdn-reach.hostinger.com/js/embed.js` op elke pagina, zonder toestemming en zonder vermelding in de privacyverklaring. Ook Hostinger AI Assistant en Easy Onboarding zijn actief. Zet plugins die je niet gebruikt uit, of neem ze op in de privacyverklaring en de cookiebanner.
+- Metabeschrijvingen voor **Over ons** en de **auteurspagina** ontbreken.
+- Pagina 11: "hellingen tot 30 of 45%" tegenover 32,5% bij de Eufy E15 Solo.
+- Pagina 2 linkt in de tekst naar kernpagina 4 (`/robotmaaier-test-consumentenbond/`). Die is nog een leeg concept. Publiceer je pagina 2 in de eerste golf, dan moet die link eruit of moet pagina 4 mee.
+
+### Thema 1.2.4 (gebouwd en lokaal getest; Mandy moet het nog uploaden)
+- Lege fotoplaatsvervangers weg (filter en CSS).
+- Filter "Zonder losse module of abonnement".
+- Noindex op de beheerroutes, en robots.txt-regels binnen de groep `User-agent: *`.
+- Uitsluiting van concepten in de sitemap.
+- `_yoast_wpseo_bctitle` via de API.
+- De automatische skiplink van WordPress uit.
+
+**Na het uploaden van 1.2.4 (nog niet gedaan):**
+1. Korte kruimelpadtitels zetten: p1 "Robotmaaier zonder draad", p2 "Robotmaaiers vergelijken", p11 "Robotmaaier zonder grensdraad", p12 "Kosten", methode "Hoe we beoordelen", Over ons "Over ons", auteur "Mandy van den Broek".
+2. Controleren: robots.txt, het filter op pagina 2, en het verdwijnen van plaatsvervangers op de latere-golfpagina's.
+3. Bij de lancering: indexering aan, sitemap indienen in Search Console (DNS-verificatie), PSI en de Rich Results Test van Google op de openbare URL's.

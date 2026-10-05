@@ -270,6 +270,8 @@ def main():
     pad_t = __import__("os").path.join(__import__("os").path.dirname(__file__), "kosten_toewijzing.json")
     _tw = json.load(open(pad_t, encoding="utf-8")) if __import__("os").path.exists(pad_t) else {}
     toewijzing, besluiten = _tw.get("toewijzingen", []), _tw.get("besluiten", [])
+    pad_v = __import__("os").path.join(__import__("os").path.dirname(__file__), "verbinding_toewijzing.json")
+    verbinding_tw = json.load(open(pad_v, encoding="utf-8"))["toewijzingen"] if __import__("os").path.exists(pad_v) else []
     rapport = {"kosten_niet_gebruikt": [], "overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
                "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": []}
     uit_modellen = []
@@ -397,6 +399,17 @@ def main():
                     and not b["status"].startswith(STATUS_LEEG) and getal(b["bronwaarde"]) is not None:
                 kosten[key] = {"waarde": getal(b["bronwaarde"]), "bron": b["bron"], "datum": b["datum"]}
 
+        verbinding = None
+        for t in verbinding_tw:
+            if t["model"] != mid:
+                continue
+            rij_b = next((b for b in mbron if norm(kolom(b, "Veld")) == norm(t["bronveld"])), None)
+            st = norm(kolom(rij_b, "Status")) if rij_b else ""
+            if not rij_b or not datum(kolom(rij_b, "Datum")) or st.startswith(STATUS_LEEG) or st.startswith("winkelclaim"):
+                rapport["kosten_niet_gebruikt"].append(f"{mid} verbinding: bronregel ontbreekt of status {st or '-'}")
+                continue
+            verbinding = {"tekst": t["tekst"], "extra": t["extra"], "status": st, "datum": datum(kolom(rij_b, "Datum")),
+                          "bron": str(kolom(rij_b, "Bron") or "").split(" ; ")[0].strip()}
         if leeg(rij.get("beschikbaarheid")):
             rapport["beschikbaarheid_onbekend"].append(mid)
         # Kostenvelden uit de vaste toewijzing (scripts/kosten_toewijzing.json)
@@ -439,6 +452,7 @@ def main():
             "scores": scores,
             "reviews_gelezen": gelezen,
             "beschikbaarheid": None if leeg(rij.get("beschikbaarheid")) else norm(rij.get("beschikbaarheid")),
+            "verbinding": verbinding,
             "reviews": r_uit,
             "ean": None,  # nog niet in het Excel-bestand; nodig voor de Bol-prijstaak
         })

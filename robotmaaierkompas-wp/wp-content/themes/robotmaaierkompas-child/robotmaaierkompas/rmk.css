@@ -388,3 +388,6 @@ img.rmk-avatar { object-fit: cover; padding: 0; }
 .rmk-rule { font-size: var(--rmk-fs-xs); color: var(--rmk-text-muted); }
 .rmk-rule summary { cursor: pointer; font-weight: 700; color: var(--rmk-text); min-height: var(--rmk-tap); display: inline-flex; align-items: center; }
 .rmk-calc__missing { font-size: var(--rmk-fs-xs); color: var(--rmk-green-200); }
+/* Zonder foto: productkop op één kolom (zie inc/techniek.php, rmk_strip_photo_placeholders). */
+.rmk-product__head--nomedia, .rmk-product__head:not(:has(.rmk-product__media)) { grid-template-columns: 1fr; }
+.rmk-product__media:has(> .rmk-ph) { display: none; }
