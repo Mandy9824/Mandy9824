@@ -594,3 +594,71 @@ Alles is **concept** gebleven: 76 pagina's, 0 berichten, niets gepubliceerd. "Zo
 1. Korte kruimelpadtitels zetten: p1 "Robotmaaier zonder draad", p2 "Robotmaaiers vergelijken", p11 "Robotmaaier zonder grensdraad", p12 "Kosten", methode "Hoe we beoordelen", Over ons "Over ons", auteur "Mandy van den Broek".
 2. Controleren: robots.txt, het filter op pagina 2, en het verdwijnen van plaatsvervangers op de latere-golfpagina's.
 3. Bij de lancering: indexering aan, sitemap indienen in Search Console (DNS-verificatie), PSI en de Rich Results Test van Google op de openbare URL's.
+
+---
+
+## Ronde 7 (5 oktober 2026): na 1.2.4, menu, plugins, pagina 4, LCP
+
+Alles is **concept**: 76 pagina's, 0 berichten, niets gepubliceerd. "Zoekmachines niet laten indexeren" staat aan.
+
+### 1. Controle na 1.2.4 en de kruimelpadtitels
+- **Filter "Zonder losse module of abonnement"** werkt met de live `rmk.js` 1.2.4: alleen de Gardena Smart Sileno Free 800 blijft over, en er zijn geen fouten.
+- **robots.txt** heeft nu binnen de groep `User-agent: *` de regels `Disallow: /wp-json/rmk/` en `Disallow: /wp-content/uploads/rmk/`. Dat blijkt uit een verzoek dat de cache omzeilt.
+  - De gewone URL gaf nog de oude versie, ook nadat ik de LiteSpeed-cache had geleegd. Die komt waarschijnlijk uit de **Hostinger-CDN** (header `server: hcdn`). Leeg de CDN-cache in hPanel, of wacht tot hij verloopt (max-age 7 dagen).
+- **Fotoblokken op latere pagina's** (beste koop, grote en kleine tuin, goedkope robotmaaier, Husqvarna vs Gardena): geen `rmk-ph` meer in de HTML, en de productkoppen staan op één kolom.
+- **Korte kruimelpadtitels** gezet. In het schema staat nu bijvoorbeeld "Home › Kosten" en "Home › Over ons › Mandy van den Broek", gelijk aan de zichtbare paden. Ook pagina 4: "Robotmaaier test".
+
+### 2. Menu en footer (tijdelijk)
+- De **template-onderdelen header en footer** zijn aangepast als aanpassing in de database (bron `custom`); de themabestanden zijn ongewijzigd.
+  - Menu: Robotmaaier zonder draad · Kosten · Vergelijken (`/robotmaaier-test-vergelijking/`) · Hoe we beoordelen · Over ons.
+  - Footer "Kiezen": Robotmaaier zonder draad, Vergelijken, Kosten. De kolom "Leren" (Kopersgids, Hulp) is weg. "Over ons" en de juridische links blijven.
+  - Live gecontroleerd: geen links meer naar `/beste-robotmaaier/`, `/vergelijken/`, `/kopersgids/` of `/hulp/`, ook niet in de inhoud van de pagina's van de eerste golf.
+- **Terugzetten** zodra die pagina's bestaan: in de site-editor bij Patronen > Template-onderdelen > Header en Footer kies je "Aanpassingen wissen". Dan geldt weer het volledige ontwerpmenu uit het thema.
+- Let op: zolang de aanpassing bestaat, komen wijzigingen aan het header- of footerpatroon in het thema niet door.
+
+### 3. Plugins en scripts van derden
+- **Uitgeschakeld:** Hostinger Reach, Hostinger AI, Hostinger Easy Onboarding en Hostinger Tools. **Actief:** LiteSpeed Cache en Yoast SEO.
+- Daarna gecontroleerd: http gaat nog met een 301 naar https, en www naar het adres zonder www (het werkt op serverniveau, niet via Hostinger Tools).
+- **Vóór toestemming in Chromium:** geen enkel verzoek naar een ander domein dan robotmaaierkompas.nl. Er wordt geen cookie en geen localStorage gezet (alleen `wordpress_test_cookie`, en dat komt van de inlogpagina die ik zelf opende). De cookiebanner verschijnt. Het script `cdn-reach.hostinger.com/js/embed.js` is weg.
+
+### 4. Metabeschrijvingen
+Over ons en de auteurspagina: de teksten uit de opdracht staan in Yoast (gecontroleerd via `yoast_head_json`).
+
+### 5. Tekstwijzigingen
+- **Pagina 11:** de FAQ zegt nu "Bij de modellen die wij bekeken noemen fabrikanten hellingen van 30 tot 45%".
+- **Pagina 12:** onderaan staat nu de zin over pagina 1 en 2, met links naar `/robotmaaier-zonder-draad/` en `/robotmaaier-test-vergelijking/`.
+- **Methodepagina:** onder het scoremodel staat de zin met links naar pagina 1, pagina 2 en `/robotmaaier-kosten/`.
+
+### 6. Pagina 4 `/robotmaaier-test-consumentenbond/` (#13)
+- Gebouwd met het kopersgidspatroon:
+  - titel en metabeschrijving uit het md-bestand, en de eerlijkheidsblok-variant "Gebaseerd op openbare pagina's van de genoemde organisaties, bekeken op 5 oktober 2026. We testen de maaiers niet zelf en nemen geen testcijfers over.";
+  - de tabel, de gids met inhoudsopgave en een genummerd stappenplan;
+  - vier FAQ-vragen, "Wat we niet weten" en het auteursblok;
+  - interne links naar pagina 2 ("onze vergelijking", "de vergelijkingspagina"), `/robotmaaier-kosten/`, `/robotmaaier-zonder-draad/` ("Onze selectie") en de methodepagina (eerlijkheidsblok).
+- **Bronnen:** gewone links, zonder `sponsored` of `nofollow`.
+  - ⚠️ Het md-bestand geeft alleen domeinen. De links gaan daarom naar `https://www.test-aankoop.be`, `https://www.test.de/maehroboter/` en `https://www.consumentenbond.nl`. **Vul de precieze URL's in** (het Test-Aankoop-artikel en de vergelijker, de grasmaaierpagina van de Consumentenbond), en controleer de Stiftung Warentest-URL. Vanuit de bouwomgeving kon ik die sites niet openen.
+- Gemeld en niet gewijzigd:
+  - "getest" komt vier keer voor, telkens over de tests van andere organisaties ("Welke modellen precies zijn getest"), niet over ons.
+  - De tekst noemt bedragen: "een set messen bij de geteste modellen tot 15 euro" (Stiftung Warentest) en "verpakkingen messen van ongeveer 15 tot 40 euro". Dat zijn afgeronde bedragen; de opdracht zegt "geen prijzen".
+  - De cijfers van de tests (34 en 14 modellen, strook tot 20 cm) heb ik niet kunnen nagaan.
+
+### 7. LCP van pagina 12 (lab, Lighthouse 12, mobiel)
+- **LCP-element:** de alinea "Het korte antwoord" (tekst, geen afbeelding). De tijd zit vrijwel helemaal in de **render-vertraging**, door twee render-blokkerende stijlbladen (`tokens.css` en `rmk.css`, elk ongeveer 1,1 s op gesimuleerd 4G).
+- Gemeten op de live paginaschil (mediaan van 3 metingen):
+
+| Variant | LCP | FCP |
+|---|---|---|
+| Nu (twee CSS-bestanden) | 2,62 s | 2,07 s |
+| CSS verkleind inline in de `<head>` | **1,23 s** | 1,23 s |
+| Inline CSS en vet lettertype vooraf laden | 1,21 s | 1,21 s |
+
+- **Thema 1.2.5:** `tokens.css` en `rmk.css` gaan verkleind inline in de `<head>`, gecachet per themaversie en bestandsdatum. Uitzetten kan met het filter `rmk_inline_css`. De editor gebruikt nog de bestanden. Het vooraf laden van het lettertype heb ik niet toegevoegd, want dat leverde minder dan 0,05 s op.
+- Lokaal pixelvergelijking op 390 en 1366 px: inline CSS en de CSS-bestanden geven **identieke** screenshots.
+- De inline CSS is ongeveer 39 KB (ongecomprimeerd) per pagina. Dat is de prijs voor één ronde minder.
+- **Werkt pas na upload van 1.2.5.** Meet daarna opnieuw op de live site; na de lancering ook met PSI.
+
+### Nog te doen
+- [ ] Mandy: thema 1.2.5 uploaden en activeren. Daarna meet ik de LCP van pagina 12 opnieuw.
+- [ ] Mandy: de CDN-cache in hPanel legen (robots.txt).
+- [ ] Mandy: de precieze bron-URL's voor pagina 4.
+- [ ] Bij golf 2: de header- en footeraanpassing wissen, of de sectiepagina's eerst vullen en publiceren.

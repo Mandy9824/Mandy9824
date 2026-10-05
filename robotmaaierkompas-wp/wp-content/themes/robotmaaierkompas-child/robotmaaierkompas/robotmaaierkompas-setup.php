@@ -9,14 +9,22 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'RMK_DIR', __DIR__ );
 define( 'RMK_URL', get_stylesheet_directory_uri() . '/robotmaaierkompas' );
-define( 'RMK_VER', '1.2.4' );
+define( 'RMK_VER', '1.2.5' );
 
 /* ------------------------------------------------------------------------
  * 1. CSS en JS + configuratie voor rmk.js
  * --------------------------------------------------------------------- */
 add_action( 'wp_enqueue_scripts', function () {
-	wp_enqueue_style( 'rmk-tokens', RMK_URL . '/tokens.css', array(), RMK_VER );
-	wp_enqueue_style( 'rmk', RMK_URL . '/rmk.css', array( 'rmk-tokens' ), RMK_VER );
+	// Snelheid (LCP): tokens.css en rmk.css worden verkleind inline in de <head> gezet in plaats van als twee
+	// render-blokkerende bestanden (lab, mobiel: LCP pagina 12 van 2,6 naar 1,2 s). Uitzetten: filter rmk_inline_css.
+	if ( apply_filters( 'rmk_inline_css', true ) && ( $css = rmk_inline_css() ) ) {
+		wp_register_style( 'rmk', false, array(), RMK_VER );
+		wp_enqueue_style( 'rmk' );
+		wp_add_inline_style( 'rmk', $css );
+	} else {
+		wp_enqueue_style( 'rmk-tokens', RMK_URL . '/tokens.css', array(), RMK_VER );
+		wp_enqueue_style( 'rmk', RMK_URL . '/rmk.css', array( 'rmk-tokens' ), RMK_VER );
+	}
 	wp_enqueue_script( 'rmk', RMK_URL . '/rmk.js', array(), RMK_VER, array( 'strategy' => 'defer', 'in_footer' => true ) );
 	$config = apply_filters( 'rmk_config', array(
 		// Modelbestand voor de kostencalculator. Zie data/modellen.voorbeeld.json voor de opbouw.
@@ -26,6 +34,27 @@ add_action( 'wp_enqueue_scripts', function () {
 	) );
 	wp_add_inline_script( 'rmk', 'window.rmkConfig=' . wp_json_encode( $config ) . ';', 'before' );
 } );
+
+/** Verkleinde inhoud van tokens.css + rmk.css, gecachet per themaversie en bestandsdatum. */
+function rmk_inline_css() {
+	$files = array( RMK_DIR . '/tokens.css', RMK_DIR . '/rmk.css' );
+	$key   = 'rmk_css_' . md5( RMK_VER . implode( '', array_map( function ( $f ) { return is_readable( $f ) ? filemtime( $f ) : 0; }, $files ) ) );
+	$css   = get_transient( $key );
+	if ( false === $css ) {
+		$css = '';
+		foreach ( $files as $f ) {
+			$c    = is_readable( $f ) ? (string) file_get_contents( $f ) : '';
+			$c    = preg_replace( '#/\*.*?\*/#s', '', $c );
+			$c    = preg_replace( '/\s+/', ' ', $c );
+			$c    = preg_replace( '/\s*([{};,])\s*/', '$1', $c ); // geen spaties rond ":" of ">" weghalen (selectors)
+			$css .= str_replace( ';}', '}', trim( $c ) );
+		}
+		// url(...) in de CSS is relatief aan het bestand; inline wordt dat relatief aan de pagina.
+		$css = preg_replace( '#url\((?![\'"]?(?:data:|https?:|/))([\'"]?)#', 'url($1' . RMK_URL . '/', $css );
+		set_transient( $key, $css, WEEK_IN_SECONDS );
+	}
+	return $css;
+}
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'editor-styles' );
