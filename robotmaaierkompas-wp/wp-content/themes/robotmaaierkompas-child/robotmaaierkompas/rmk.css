@@ -298,6 +298,7 @@ a.rmk-card:hover { border-color: var(--rmk-green-500); }
 .rmk-author { display: grid; grid-template-columns: auto 1fr; gap: var(--rmk-space-4); padding: var(--rmk-space-5); background: var(--rmk-surface); border: 1px solid var(--rmk-border); border-radius: var(--rmk-radius-lg); }
 .rmk-avatar { width: 4rem; height: 4rem; border-radius: 50%; background: var(--rmk-green-100); color: var(--rmk-green-900); display: grid; place-items: center; font-family: var(--rmk-font-display); font-weight: 800; font-size: 1.25rem; overflow: hidden; }
 .rmk-avatar--lg { width: 7rem; height: 7rem; font-size: 2rem; }
+img.rmk-avatar { object-fit: cover; padding: 0; }
 .rmk-author__body { display: flex; flex-direction: column; gap: var(--rmk-space-2); min-width: 0; }
 .rmk-author__name { font-family: var(--rmk-font-display); font-weight: 700; font-size: var(--rmk-fs-md); color: var(--rmk-heading); }
 .rmk-author__roles { display: flex; flex-wrap: wrap; gap: var(--rmk-space-2); }

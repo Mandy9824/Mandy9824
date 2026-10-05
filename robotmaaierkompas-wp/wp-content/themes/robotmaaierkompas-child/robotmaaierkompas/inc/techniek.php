@@ -54,8 +54,42 @@ add_filter( 'wpseo_schema_person_data', function ( $data, $user_id ) {
 	if ( $alt ) {
 		$data['alternateName'] = array_values( array_filter( array_map( 'trim', explode( ',', $alt ) ) ) );
 	}
+	// sameAs: één URL per regel in het profielveld rmk_same_as, samengevoegd met wat Yoast al heeft.
+	$same = $user_id ? preg_split( '/[\s,]+/', (string) get_user_meta( $user_id, 'rmk_same_as', true ), -1, PREG_SPLIT_NO_EMPTY ) : array();
+	$same = array_values( array_filter( array_map( 'esc_url_raw', $same ) ) );
+	if ( $same ) {
+		$data['sameAs'] = array_values( array_unique( array_merge( isset( $data['sameAs'] ) ? (array) $data['sameAs'] : array(), $same ) ) );
+	}
 	return $data;
 }, 10, 2 );
+
+// Yoast-metabeschrijving per pagina via de REST-API (meta._yoast_wpseo_metadesc), alleen voor wie de pagina mag bewerken.
+add_action( 'init', function () {
+	foreach ( array( 'page', 'post' ) as $type ) {
+		register_post_meta( $type, '_yoast_wpseo_metadesc', array(
+			'type'          => 'string',
+			'single'        => true,
+			'show_in_rest'  => true,
+			'auth_callback' => function ( $allowed, $meta_key, $post_id ) {
+				return current_user_can( 'edit_post', $post_id );
+			},
+		) );
+	}
+} );
+
+// Beide velden zijn via de REST-API (/wp/v2/users/<id>, "meta") te zetten door wie de gebruiker mag bewerken.
+add_action( 'init', function () {
+	foreach ( array( 'rmk_alternate_name', 'rmk_same_as' ) as $key ) {
+		register_meta( 'user', $key, array(
+			'type'          => 'string',
+			'single'        => true,
+			'show_in_rest'  => true,
+			'auth_callback' => function ( $allowed, $meta_key, $object_id ) {
+				return current_user_can( 'edit_user', $object_id );
+			},
+		) );
+	}
+} );
 
 /* ------------------------------------------------------------------ 3. Afbeeldingen: WebP en lazy loading */
 // Nieuwe JPEG- en PNG-uploads krijgen WebP-afmetingen (WordPress-kern, vanaf 5.8; GD of Imagick met WebP nodig).

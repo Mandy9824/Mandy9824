@@ -204,7 +204,8 @@
       fetch(CFG.modelsUrl, { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
         if (!data || !data.modellen) return;
         general = data.algemeen || {};
-        models = data.modellen.filter(function (m) { return m.slug && m.naam && !/[\[\]]/.test(m.naam); });
+        var only = (root.dataset.models || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean);   /* data-models="M001,M002" beperkt de lijst */
+        models = data.modellen.filter(function (m) { return m.slug && m.naam && !/[\[\]]/.test(m.naam) && (!only.length || only.indexOf(m.id) > -1); });
         models.forEach(function (m) { var o = document.createElement('option'); o.value = m.slug; o.textContent = m.naam; sel.appendChild(o); });
       }).catch(function () {});
     }

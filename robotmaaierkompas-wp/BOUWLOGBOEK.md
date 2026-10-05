@@ -341,3 +341,76 @@ robotmaaierkompas-wp/
   3. na acceptatie door Bol: Bol-afbeeldingen via de API, met de oorspronkelijke URL.
 - Gecontroleerd: het thema en de scripts laden geen externe afbeeldingen. De patronen productbox, productbox-zonder-prijs en kop-aan-kop gebruiken de plaatsvervanger.
 - Auteursfoto: Mandy heeft vier versies aangeleverd (400 en 800 px, WebP en JPG). Ze staan **niet in deze openbare repository**. Mandy uploadt ze zelf in Media, met alt-tekst "Mandy van den Broek".
+
+---
+
+## Ronde 4 (5 oktober 2026): teksten, auteursfoto en pagina 12
+
+Bronnen: `teksten-site.md`, `pagina-12-wat-kost-een-robotmaaier.md` en de foto's van Mandy. Alle pagina's zijn **concept** gebleven en er is niets gepubliceerd. De teksten staan woord voor woord zoals aangeleverd. Ik heb alleen links toegevoegd waar de tekst naar een pagina of het e-mailadres verwijst. De bestanden zelf staan niet in deze openbare repository.
+
+### Live gedaan
+- **Media:** `mandy-van-den-broek-800.webp` (#89) en `-400.webp` (#90), met alt-tekst "Mandy van den Broek".
+- **Auteurspagina** `/over-ons/mandy-van-den-broek/`: foto (400, en 800 voor scherpe schermen), naam, bio (Achtergrond en Werkwijze), drie links (rel="me") en het contactblok. Nog open, want niet in de tekst:
+  - `[rol]` (chip onder de naam);
+  - "Verantwoordelijk voor" `[taak]`;
+  - de kaarten bij "Artikelen van Mandy van den Broek" (er zijn nog geen gepubliceerde artikelen).
+- **Over ons:** titel "Over robotmaaierkompas.nl", twee alinea's, met links naar de auteurspagina en naar "Zo verdienen we geld".
+- **Contact, Privacyverklaring** ("Laatst bijgewerkt: oktober 2026"), **Cookiebeleid** (tabel), **Affiliate-melding** en **Redactiebeleid** (titel aangepast; het anker `#correcties` zit op "Fouten"): tekst geplaatst. De regel "Versie [versie] · geldig vanaf [datum]" heb ik weggehaald, want daar is geen tekst voor aangeleverd. **Deze vijf pagina's hebben geen invulvelden meer en zijn dus publiceerbaar.** Mandy publiceert ze zelf.
+- **Colofon:** tekst geplaatst. De "Opmerking voor Mandy (niet publiceren)" over het adres staat tussen [haken] in een kader, zodat publiceren geblokkeerd blijft tot hij weg is. Er staat geen adres, geen KvK en geen btw.
+- **Hoe we beoordelen:** het dubbele kopje "Over ons" is weg; de inhoudsopgave linkt nu naar `/over-ons/`. Het invulveld `[e-mailadres]` in het correctieblok is ingevuld met contact@robotmaaierkompas.nl. Ook het patroon is aangepast. Nog open: zeven keer `[toelichting]` in de scoretabel, en de prijzenalinea.
+- **Pagina 12 `/robotmaaier-kosten/`:** titel "Wat kost een robotmaaier? Prijzen en verborgen kosten (2026)", opgebouwd binnen het kostenpatroon:
+  - eerlijkheidsblok in de variant zonder reviewaantal;
+  - de tekst met twee tabellen;
+  - de **kostencalculator** met `data-models="M001,M002,M004,M005,M006,M008,M010,M011"`;
+  - de FAQ (drie vragen uit de tekst) en "Wat we nog niet weten";
+  - een **bronnenlijst met 18 bronnen** uit blad Bronnen (handleidingen en fabrikantpagina's, met datum), plus het scoremodel.
+
+  Kruimelpad: Home > Kosten, zoals de URL-structuur; het patroon had Kopersgids. Geen productboxen, geen Bol-gegevens, geen affiliatelinks (gecontroleerd in de weergegeven HTML).
+
+### Pagina 12: winkelprijzen in de tekst (besluit nodig)
+De opdracht zegt "geen winkelprijzen", maar de tekst bevat ze wel. Ik heb niets weggehaald of herschreven. Elke passage staat tussen haken als `[Winkelprijs, niet tonen zonder besluit: …]`, en dat blokkeert publiceren:
+1. "Het korte antwoord": de prijsrange 700 tot 3.050 euro ("van een winkel of de fabrikant").
+2. "Wat betaal je voor de maaier zelf?": de prijsranges per model.
+3. Messentabel, Navimow i206 AWD: "24,99 euro voor 12". Die prijs komt van **Coolblue** (winkelclaim); de andere messenprijzen komen van de fabrikant.
+4. Rekenvoorbeeld: "aanschaf rond 730 euro (Coolblue, …)" en het totaal dat daarop rust.
+5. FAQ: "(rond 730 euro)" en "(rond 1.100 euro)".
+
+### Pagina 12: gecontroleerd tegen het Excel-bestand
+- **Klopt met fabrikantbronnen:** Access+ 99,99 euro met 1 jaar data en daarna 29,90 euro per jaar (M001); link-module 249 euro (M004, M005); reserve-accu 79 euro (M004); Dreame-module 69 of 99,99 euro; messen van Mova 14,99, Dreame 19,99, Eufy 39,99 en Husqvarna 26,99; referentiestation 309 euro (adviesprijs); Gardena zonder abonnement; Eufy VS 19,99 dollar.
+- **Let op:**
+  - De tekst noemt bij wifi "Dreame A1 Pro en **Ecovacs-modellen**". Ecovacs (M009) is uitverkocht en zit niet in de selectie van acht.
+  - "3 jaar gratis service volgens Mova NL" klopt met Mova NL. In het Excel-bestand staat de gratis periode als tegenstrijdig (Mova US zegt 1 jaar).
+  - "Messen voor 160 tot 215 euro over vijf jaar" en "Per jaar (eigen berekening)" zijn eigen berekeningen uit de tekst; die heb ik niet nagerekend.
+
+### Kostencalculator (modellen.json)
+- Nieuw: `scripts/kosten_toewijzing.json` legt vast welk kostenveld uit welke bronregel komt. Alleen fabrikant- of handleidingregels tellen, dus geen winkelclaim, niet geopend of tegenstrijdig. Het bedrag komt met een vaste regex uit de kolom Waarde.
+- Ingevuld:
+  - installatie 0 (alle acht, handleiding);
+  - M001: antidiefstal 99,99, verbinding 29,90 per jaar, gratis periode 1 jaar;
+  - M004 en M005: antidiefstal 249 en accu 79;
+  - M011: verbinding 0 ("geen abonnement").
+- **Leeg gelaten, en waarom:**
+  - aanschaf: geen winkelprijzen;
+  - messen per jaar: alleen een eigen bandbreedte, geen bedrag uit een bron;
+  - M002: 4G-verlenging niet gevonden, en de messenprijs komt alleen van een winkel;
+  - M006: abonnementsprijs EU niet gevonden;
+  - M008: twee module-opties, keuze nodig;
+  - M010: referentiestation alleen zonder dekking, en de 4G-kosten zijn niet bevestigd;
+  - M011: gateway (fabrikant spreekt zichzelf tegen);
+  - accu-levensduur, stroom en onderhoud: overal niet gevonden.
+- Op de live site staat nog `modellen.json` uit thema 1.2.0, zonder deze kostenvelden. Die van 1.2.2 heeft ze wel.
+
+### Thema 1.2.2 (in de repository; Mandy moet het nog uploaden)
+- `rmk.js`: de calculator toont alleen de modellen uit `data-models`. In 1.2.0 staan alle 13 in de keuzelijst.
+- Auteursblok: foto uit Media (`mandy-van-den-broek-400`), naam "Mandy van den Broek" en de profiellink zijn ingevuld. Nog open: `[rol]`, `[Eén of twee zinnen …]` en "Laatst nagekeken op [datum]". Daardoor blijven alle pagina's met een auteursblok geblokkeerd.
+- Person-schema:
+  - Profielvelden `rmk_alternate_name` en `rmk_same_as`, via de API te zetten.
+  - `alternateName` en `sameAs` komen daaruit in het Yoast-schema. Lokaal getest: Person met alternateName "Mandy Brook" en de drie links.
+  - Yoast voegt zelf het websiteveld van de gebruiker toe aan sameAs.
+- `_yoast_wpseo_metadesc` is via de API te zetten, voor de metabeschrijving van pagina 12.
+- Het methodepatroon heeft geen dubbel "Over ons" meer.
+
+### Na het uploaden van 1.2.2 (nog niet gedaan)
+- Profiel van gebruiker 1: `rmk_alternate_name` = "Mandy Brook" en `rmk_same_as` = de drie links.
+- Metabeschrijving van pagina 12 uit het md-bestand.
+- Controle dat de calculator alleen de acht modellen toont, met bron en datum bij de ingevulde kosten.

@@ -264,7 +264,9 @@ def main():
             if r and r[0] and str(r[0]).startswith("Minimum aantal gelezen reviews") and getal(r[1]):
                 minimum = int(getal(r[1]))
 
-    rapport = {"overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
+    pad_t = __import__("os").path.join(__import__("os").path.dirname(__file__), "kosten_toewijzing.json")
+    toewijzing = json.load(open(pad_t, encoding="utf-8"))["toewijzingen"] if __import__("os").path.exists(pad_t) else []
+    rapport = {"kosten_niet_gebruikt": [], "overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
                "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": []}
     uit_modellen = []
 
@@ -385,7 +387,7 @@ def main():
         # Geen winkelprijzen in de zichtbare weergave (besluit 5 oktober 2026): aanschaf blijft leeg.
         if "extra_installatiekosten" in specs and getal(specs["extra_installatiekosten"]["waarde"]) is not None:
             s = specs["extra_installatiekosten"]
-            kosten["installatie"] = {"waarde": getal(s["waarde"]), "bron": s["bron"], "datum": s["datum"]}
+            kosten["installatie"] = {"waarde": getal(s["waarde"]), "bron": s["bron"].split(" ; ")[0], "datum": s["datum"]}
         for key, b in beste.items():
             if key in KOSTEN and key not in ("aanschaf", "installatie") and b["bron"] and b["datum"] \
                     and not b["status"].startswith(STATUS_LEEG) and getal(b["bronwaarde"]) is not None:
@@ -393,6 +395,27 @@ def main():
 
         if leeg(rij.get("beschikbaarheid")):
             rapport["beschikbaarheid_onbekend"].append(mid)
+        # Kostenvelden uit de vaste toewijzing (scripts/kosten_toewijzing.json)
+        for t in toewijzing:
+            if t["model"] != mid:
+                continue
+            rij_b = next((b for b in mbron if norm(kolom(b, "Veld")) == norm(t["bronveld"])), None)
+            st = norm(kolom(rij_b, "Status")) if rij_b else ""
+            bron_t, datum_t = (str(kolom(rij_b, "Bron") or "").strip(), datum(kolom(rij_b, "Datum"))) if rij_b else ("", None)
+            if not rij_b or not bron_t or not datum_t or st.startswith(STATUS_LEEG) or st.startswith("tegenstrijdig") \
+                    or st.startswith("winkelclaim") or "bol.com" in norm(bron_t):
+                rapport["kosten_niet_gebruikt"].append(f"{mid} {t['veld']}: bronregel ontbreekt of status {st or '-'}")
+                continue
+            waarde_t = str(kolom(rij_b, "Waarde") or "")
+            if t.get("vast") == "geen":
+                w = 0 if re.match(r"^\s*geen\b", waarde_t, re.I) else None
+            else:
+                m_ = re.search(t["regex"], waarde_t)
+                w = getal(m_.group(1)) if m_ else None
+            if w is None:
+                rapport["kosten_niet_gebruikt"].append(f"{mid} {t['veld']}: bedrag niet gevonden in '{waarde_t[:60]}'")
+                continue
+            kosten[t["veld"]] = {"waarde": w, "bron": bron_t.split(" ; ")[0], "datum": datum_t, "status": st}
         uit_modellen.append({
             "id": mid, "slug": slugify(naam), "naam": naam, "merk": rij.get("merk"), "model": rij.get("model"),
             "kosten": kosten,

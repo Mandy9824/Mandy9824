@@ -1,6 +1,6 @@
 {
   "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
-  "gegenereerd": "2026-10-05 19:57",
+  "gegenereerd": "2026-10-05 20:25",
   "bronbestand": "robotmaaierkompas_modeldata_v1.xlsx",
   "scoremodel": "v1.0 (concept tot bevriezing)",
   "algemeen": {
@@ -29,9 +29,10 @@
           "datum": "2026-10-05"
         },
         "antidiefstal": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 99.99,
+          "bron": "https://nl.navimow.com/products/navimow-access",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "antenne_gateway": {
           "waarde": null,
@@ -59,14 +60,16 @@
           "datum": null
         },
         "verbinding_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 29.9,
+          "bron": "https://nl.navimow.com/products/navimow-access",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "gratis_periode_jaren": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 1.0,
+          "bron": "https://nl.navimow.com/products/navimow-access",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "onderhoud_per_jaar": {
           "waarde": null,
@@ -642,9 +645,10 @@
           "datum": "2026-10-05"
         },
         "antidiefstal": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 249.0,
+          "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "antenne_gateway": {
           "waarde": null,
@@ -657,9 +661,10 @@
           "datum": null
         },
         "accu_prijs": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 79.0,
+          "bron": "https://nl.mova.tech/products/oplaadbare-lithium-ion-batterij-robotmaaier",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "accu_levensduur_jaren": {
           "waarde": null,
@@ -900,9 +905,10 @@
           "datum": "2026-10-05"
         },
         "antidiefstal": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 249.0,
+          "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "antenne_gateway": {
           "waarde": null,
@@ -915,9 +921,10 @@
           "datum": null
         },
         "accu_prijs": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 79.0,
+          "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "accu_levensduur_jaren": {
           "waarde": null,
@@ -1697,7 +1704,7 @@
         },
         "installatie": {
           "waarde": 0,
-          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/installatie-van-de-robotmaaier/husqvarna-epos-rs1-referentiestation/",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
           "datum": "2026-10-05"
         },
         "antidiefstal": {
@@ -1932,7 +1939,7 @@
         },
         "installatie": {
           "waarde": 0,
-          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776 ; https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://www.coolblue.nl/product/959330/gardena-smart-sileno-free-800.html ; https://www.proshop.nl/Robot-grasmaaier/Gardena-smart-SILENO-free-robotic-lawnmower-800-m/3344401",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
           "datum": "2026-10-05"
         },
         "antidiefstal": {
@@ -1966,9 +1973,10 @@
           "datum": null
         },
         "verbinding_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html",
+          "datum": "2026-10-05",
+          "status": "fabrikantclaim"
         },
         "gratis_periode_jaren": {
           "waarde": null,
