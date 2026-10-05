@@ -1,21 +1,98 @@
 {
-  "_uitleg": "Welke kostenvelden van de calculator uit welke regel in blad Bronnen komen. Elk bedrag wordt met de regex uit de kolom Waarde van die regel gehaald; bron, datum en status komen uit dezelfde regel. Regels met status 'niet gevonden', 'niet geopend' of 'tegenstrijdig' en regels van een winkel (winkelclaim) worden niet gebruikt. 'geen' als vaste waarde betekent: de bron zegt dat er geen kosten zijn (0). Alles wat hier niet staat, blijft null.",
+  "_uitleg": "Welke kostenvelden van de calculator uit welke regel in blad Bronnen komen. Elk bedrag wordt met de regex uit de kolom Waarde van die regel gehaald; bron, datum en status komen uit dezelfde regel. Regels met status 'niet gevonden', 'niet geopend' of 'tegenstrijdig' en regels van een winkel (winkelclaim) worden niet gebruikt. 'geen' als vaste waarde betekent: de bron zegt dat er geen kosten zijn (0). Alles wat hier niet staat, blijft null. Onder 'besluiten' staan bedragen die Mandy zelf heeft vastgesteld (5 oktober 2026); die krijgen de aanduiding uit 'bron' en de datum van de genoemde bronregel.",
   "toewijzingen": [
-    { "model": "M001", "veld": "antidiefstal",          "bronveld": "Extra kosten: 4G (Access+)", "regex": "^([\\d,]+) euro" },
-    { "model": "M001", "veld": "verbinding_per_jaar",   "bronveld": "Extra kosten: 4G (Access+)", "regex": "daarna ([\\d,]+) euro per jaar" },
-    { "model": "M001", "veld": "gratis_periode_jaren",  "bronveld": "Extra kosten: 4G (Access+)", "regex": "(\\d+) jaar data" },
-    { "model": "M004", "veld": "antidiefstal",          "bronveld": "Extra kosten: link-module (4G)", "regex": "^([\\d,]+) euro" },
-    { "model": "M004", "veld": "accu_prijs",            "bronveld": "Extra kosten: accu", "regex": "([\\d,]+) euro" },
-    { "model": "M005", "veld": "antidiefstal",          "bronveld": "Extra kosten: link-module, messen, accu", "regex": "link-module ([\\d,]+) euro" },
-    { "model": "M005", "veld": "accu_prijs",            "bronveld": "Extra kosten: link-module, messen, accu", "regex": "accu [\\d,]+ Ah ([\\d,]+) euro" },
-    { "model": "M011", "veld": "verbinding_per_jaar",   "bronveld": "Extra kosten: abonnement", "vast": "geen" }
+    {
+      "model": "M001",
+      "veld": "antidiefstal",
+      "bronveld": "Extra kosten: 4G (Access+)",
+      "regex": "^([\\d,]+) euro"
+    },
+    {
+      "model": "M001",
+      "veld": "verbinding_per_jaar",
+      "bronveld": "Extra kosten: 4G (Access+)",
+      "regex": "daarna ([\\d,]+) euro per jaar"
+    },
+    {
+      "model": "M001",
+      "veld": "gratis_periode_jaren",
+      "bronveld": "Extra kosten: 4G (Access+)",
+      "regex": "(\\d+) jaar data"
+    },
+    {
+      "model": "M004",
+      "veld": "antidiefstal",
+      "bronveld": "Extra kosten: link-module (4G)",
+      "regex": "^([\\d,]+) euro"
+    },
+    {
+      "model": "M004",
+      "veld": "accu_prijs",
+      "bronveld": "Extra kosten: accu",
+      "regex": "([\\d,]+) euro"
+    },
+    {
+      "model": "M005",
+      "veld": "antidiefstal",
+      "bronveld": "Extra kosten: link-module, messen, accu",
+      "regex": "link-module ([\\d,]+) euro"
+    },
+    {
+      "model": "M005",
+      "veld": "accu_prijs",
+      "bronveld": "Extra kosten: link-module, messen, accu",
+      "regex": "accu [\\d,]+ Ah ([\\d,]+) euro"
+    },
+    {
+      "model": "M011",
+      "veld": "verbinding_per_jaar",
+      "bronveld": "Extra kosten: abonnement",
+      "vast": "geen"
+    }
   ],
   "bewust_leeg": {
     "M002": "4G-verlenging NL niet gevonden; messenprijs alleen van een winkel (Coolblue)",
     "M006": "data-abonnement: NL/EU-prijs niet gevonden",
-    "M008": "Link-module heeft twee opties (69 euro 1 jaar of 99,99 euro 3 jaar): keuze nodig",
+    "M008": "verlengprijs van de Link-module na de serviceperiode niet gevonden",
     "M010": "referentiestation (309 euro) alleen nodig zonder dekking; 4G-SIM-kosten niet bevestigd",
     "M011": "gateway: fabrikant spreekt zichzelf tegen",
-    "alle": "messen per jaar is een eigen berekening met een bandbreedte (geen enkel bedrag); accu-levensduur, stroom en onderhoud niet gevonden; aanschaf: geen winkelprijzen"
-  }
+    "alle": "aanschaf leeg (besluit: geen winkelprijzen); messen per jaar alleen voor M004, M005, M006 en M008 (besluit); accu-levensduur, stroom en onderhoud niet gevonden"
+  },
+  "besluiten": [
+    {
+      "model": "M004",
+      "veld": "messen_per_jaar",
+      "waarde": 28,
+      "bron": "eigen berekening uit de opgave van de fabrikant",
+      "bronveld": "Extra kosten: messen"
+    },
+    {
+      "model": "M005",
+      "veld": "messen_per_jaar",
+      "waarde": 28,
+      "bron": "eigen berekening uit de opgave van de fabrikant",
+      "bronveld": "Extra kosten: link-module, messen, accu"
+    },
+    {
+      "model": "M008",
+      "veld": "messen_per_jaar",
+      "waarde": 38,
+      "bron": "eigen berekening uit de opgave van de fabrikant",
+      "bronveld": "Extra kosten: messen"
+    },
+    {
+      "model": "M006",
+      "veld": "messen_per_jaar",
+      "waarde": 40,
+      "bron": "eigen berekening uit de opgave van de fabrikant",
+      "bronveld": "Extra kosten: messen"
+    },
+    {
+      "model": "M008",
+      "veld": "antidiefstal",
+      "waarde": 99.99,
+      "bronveld": "Extra kosten: Link-module (4G)",
+      "toelichting": "met 3 jaar service; ook verkrijgbaar voor 69 euro met 1 jaar service"
+    }
+  ]
 }

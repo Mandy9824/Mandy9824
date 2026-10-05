@@ -1,6 +1,6 @@
 {
   "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
-  "gegenereerd": "2026-10-05 20:25",
+  "gegenereerd": "2026-10-05 20:43",
   "bronbestand": "robotmaaierkompas_modeldata_v1.xlsx",
   "scoremodel": "v1.0 (concept tot bevriezing)",
   "algemeen": {
@@ -656,9 +656,10 @@
           "datum": null
         },
         "messen_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 28,
+          "bron": "eigen berekening uit de opgave van de fabrikant",
+          "datum": "2026-10-05",
+          "bron_url": "https://nl.mova.tech/products/mova-robot-lawn-mower-kit"
         },
         "accu_prijs": {
           "waarde": 79.0,
@@ -916,9 +917,10 @@
           "datum": null
         },
         "messen_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 28,
+          "bron": "eigen berekening uit de opgave van de fabrikant",
+          "datum": "2026-10-05",
+          "bron_url": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module"
         },
         "accu_prijs": {
           "waarde": 79.0,
@@ -1146,9 +1148,10 @@
           "datum": null
         },
         "messen_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 40,
+          "bron": "eigen berekening uit de opgave van de fabrikant",
+          "datum": "2026-10-05",
+          "bron_url": "https://www.eufy.com/nl/products/t292e041"
         },
         "accu_prijs": {
           "waarde": null,
@@ -1461,9 +1464,11 @@
           "datum": "2026-10-05"
         },
         "antidiefstal": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 99.99,
+          "bron": "https://nl.dreametech.com/products/link-module-1-jaar-gratis-verbindingsservice-voor-a1-a1pro",
+          "datum": "2026-10-05",
+          "bron_url": "https://nl.dreametech.com/products/link-module-1-jaar-gratis-verbindingsservice-voor-a1-a1pro",
+          "toelichting": "met 3 jaar service; ook verkrijgbaar voor 69 euro met 1 jaar service"
         },
         "antenne_gateway": {
           "waarde": null,
@@ -1471,9 +1476,10 @@
           "datum": null
         },
         "messen_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 38,
+          "bron": "eigen berekening uit de opgave van de fabrikant",
+          "datum": "2026-10-05",
+          "bron_url": "https://nl.dreametech.com/products/blads-12-dreame-a1-a1-pro-copy"
         },
         "accu_prijs": {
           "waarde": null,

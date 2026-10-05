@@ -11,7 +11,7 @@
     { "titel": "Beste koop robotmaaier", "slug": "robotmaaier-beste-koop", "patroon": "pagina-toplijst", "soort": "kern 5", "golf": 2 },
     { "titel": "Robotmaaier grote tuin", "slug": "robotmaaier-grote-tuin", "patroon": "pagina-toplijst", "soort": "kern 9", "golf": 2 },
     { "titel": "Robotmaaier kleine tuin", "slug": "robotmaaier-kleine-tuin", "patroon": "pagina-toplijst", "soort": "kern 10", "golf": 4 },
-    { "titel": "Robotmaaier zonder begrenzingsdraad", "slug": "robotmaaier-zonder-begrenzingsdraad", "patroon": "pagina-toplijst", "soort": "kern 11", "golf": 4 },
+    { "titel": "Robotmaaier zonder begrenzingsdraad", "slug": "robotmaaier-zonder-grensdraad", "patroon": "pagina-toplijst", "soort": "kern 11", "golf": 4 },
     { "titel": "Wat kost een robotmaaier", "slug": "robotmaaier-kosten", "patroon": "pagina-kosten", "soort": "kern 12", "golf": 1 },
 
     { "titel": "Merken", "slug": "merken", "inhoud": "overzicht", "soort": "sectie" },

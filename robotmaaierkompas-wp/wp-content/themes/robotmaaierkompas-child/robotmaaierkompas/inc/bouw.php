@@ -218,7 +218,8 @@ function rmk_status_checks() {
 	$miss  = array_filter( $fonts, function ( $f ) { return ! is_readable( RMK_DIR . '/fonts/' . $f ); } );
 	$add( ! $miss, 'Lettertypen zelf gehost (WOFF2)', $miss ? 'ontbreekt: ' . implode( ', ', $miss ) : '' );
 	$data = rmk_models_data();
-	$add( ! empty( $data['modellen'] ), 'data/modellen.json aanwezig', isset( $data['gegenereerd'] ) ? 'gegenereerd ' . $data['gegenereerd'] . ', ' . count( $data['modellen'] ) . ' modellen' : '' );
+	$saved = get_option( 'rmk_modellen' );
+	$add( ! empty( $data['modellen'] ), 'Modelbestand aanwezig', ( $saved ? 'via de API opgeslagen op ' . wp_date( 'j-n-Y H:i', $saved['opgeslagen'] ) : 'uit het thema' ) . ( isset( $data['gegenereerd'] ) ? ', gegenereerd ' . $data['gegenereerd'] . ', ' . count( $data['modellen'] ) . ' modellen' : '' ) );
 	$pub = (int) wp_count_posts( 'page' )->publish + (int) wp_count_posts( 'post' )->publish;
 	$add( 0 === $pub, 'Niets gepubliceerd', $pub . ' gepubliceerd' );
 	$next = wp_next_scheduled( RMK_BOL_HOOK );

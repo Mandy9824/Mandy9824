@@ -197,7 +197,7 @@
       var el = f(key), s = src(key); if (!el) return;
       var w = entry && entry.waarde != null && parse(entry.waarde) != null ? entry.waarde : '';
       el.value = w === '' ? '' : String(w).replace('.', ',');
-      if (s) { s.hidden = false; s.textContent = w === '' ? 'Niet in het modelbestand' : 'Bron: ' + (entry.bron || 'onbekend') + (entry.datum ? ' · ' + entry.datum : ''); }
+      if (s) { s.hidden = false; s.textContent = w === '' ? 'Niet in het modelbestand' : 'Bron: ' + (entry.bron || 'onbekend') + (entry.datum ? ' · ' + entry.datum : '') + (entry.toelichting ? ' · ' + entry.toelichting : ''); }
     }
     var sel = f('model');
     if (sel && CFG.modelsUrl) {

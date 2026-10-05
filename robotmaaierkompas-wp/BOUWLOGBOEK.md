@@ -414,3 +414,64 @@ De opdracht zegt "geen winkelprijzen", maar de tekst bevat ze wel. Ik heb niets 
 - Profiel van gebruiker 1: `rmk_alternate_name` = "Mandy Brook" en `rmk_same_as` = de drie links.
 - Metabeschrijving van pagina 12 uit het md-bestand.
 - Controle dat de calculator alleen de acht modellen toont, met bron en datum bij de ingevulde kosten.
+
+---
+
+## Ronde 5 (5 oktober 2026): profiel, besluiten pagina 12, methode, pagina 1, dataroute
+
+Alles is **concept** gebleven: 76 pagina's in concept, 0 berichten, niets gepubliceerd, en de homepage geeft `noindex, nofollow`. Er zijn geen prijzen, geen Bol-gegevens en geen affiliatelinks geplaatst.
+
+### Live gedaan (met thema 1.2.2)
+- **Profiel van gebruiker 1:** `rmk_alternate_name` = "Mandy Brook" en `rmk_same_as` = keukenapparaatgids.nl, compareaitools.org en de LinkedIn-link. In het schema van de site staat nu Person "Mandy van den Broek", met alternateName "Mandy Brook" en sameAs met die drie links. Yoast voegt zelf ook het siteadres toe.
+- **Schemafoto** via Yoast op `mandy-van-den-broek-800.webp`. Dat was een Gravatar.
+- **Metabeschrijvingen** van pagina 12, pagina 1 en de methodepagina staan uit de md-bestanden in Yoast; gecontroleerd via `yoast_head_json`.
+- **Calculator (thema 1.2.2):** het filter op de acht modellen werkt, en `modellen.json` heeft de kostenvelden van ronde 4. De messen en de Dreame-module uit ronde 5 komen er pas in met 1.2.3 of via de dataroute.
+- **Auteursblok (1.2.2):** foto, naam en profiellink staan erin. Rol, bio en datum volgen met 1.2.3.
+- **Pagina 12:** de besluiten zijn verwerkt.
+  - Alle haken zijn weg.
+  - Navimow-messen: "ongeveer 25 euro voor 12 stuks".
+  - Rekenvoorbeeld: "aanschaf rond 730 euro (laagste nieuwe prijs op 5 oktober 2026)".
+  - "Ecovacs-modellen" is weg; er staat nu "Dreame A1 Pro: een 2,4 GHz wifi-signaal wordt aanbevolen voor de app."
+  - Er staat geen winkelnaam meer in de tekst. Afgeronde bedragen met "ongeveer" of "rond" zijn blijven staan.
+  - De pagina heeft **geen invulvelden meer en is dus publiceerbaar**.
+- **Colofon:** alleen de vier zinnen uit de opdracht. De opmerking voor Mandy is weg. Publiceerbaar.
+- **Auteurspagina:** rol "Oprichter en redacteur" en verantwoordelijk voor "Onderzoek, scoremodel en redactie". De vaste artikelkaarten zijn vervangen door `[rmk_artikelen_auteur]`, een automatische lijst van gepubliceerde pagina's van deze auteur, zonder verplichte pagina's, sectiepagina's en homepage. Zonder gepubliceerde artikelen toont die niets, ook geen kop. **Werkt pas met 1.2.3**; tot dan staat de shortcode als tekst in het concept en blijft publiceren geblokkeerd.
+- **Hoe we beoordelen:**
+  - opnieuw opgebouwd met de tekst uit het md-bestand, binnen het methodepatroon;
+  - titel "Hoe we beoordelen: scoremodel, bronnen en statussen";
+  - in het kort, wel/niet, scoretabel met de kolom **"Gebaseerd op"** (de zeven omschrijvingen uit punt 5), geluid en helling;
+  - eindscore of functiescore, statusbadges met de definities uit de tekst, reviews, keuzehulp en marges, prijzen, verdienmodel;
+  - **Versies** met alleen de twee regels uit de tekst, en het correctieblok.
+
+  Er zijn geen invulvelden meer in de pagina zelf. Hij blijft geblokkeerd door het auteursblok tot 1.2.3.
+- **Pagina 1 `/robotmaaier-zonder-draad/`:** gebouwd met het toplijstpatroon.
+  - Titel uit het md-bestand, "Door Mandy van den Broek · bijgewerkt op 5 oktober 2026", en het eerlijkheidsblok in de variant zonder reviewaantal.
+  - Tabel "Welke past bij jouw tuin?" en de keuzehulp.
+  - **Scoretabel** `[rmk_scoretabel]` met de acht modellen, op volgorde van de onafgeronde score: M002 92,7, M010 87,3, M005 80,5, M004 80,5, M008 78,6, M001 75,9, M006 63,2, M011 60,9. Elke rij toont "Functiescore" met "voorlopig, zonder betrouwbaarheid uit reviews en prijs-kwaliteit". De lege kolom "Beste voor" verdwijnt met 1.2.3.
+  - Acht **productboxen (zonder prijs):** naam, score uit modellen.json, de plaatsvervanger "Foto volgt" en "Bekijk de prijs bij de winkel". Geen knop, geen prijs, geen winkel.
+  - Bij elk model staan de teksten uit het md-bestand onder de box.
+  - FAQ (drie vragen), "Wat we nog niet weten", **bronnenlijst met 49 bron-URL's** uit blad Bronnen (fabrikanten en handleidingen; winkels, Bol, "niet gevonden/geopend" en winkelclaims weggelaten), en het auteursblok.
+  - Weggelaten, omdat er geen tekst voor was: "Snel kiezen", de standaardinleiding en "Zo hebben we vergeleken" uit het patroon, en in de productboxen "beste voor", de reviewregel en plus- en minpunten (die staan als tekst onder de box).
+- **Scoreblokken in de productboxen:** in 1.2.2 staat in de HTML nog "–", en de browser rekent de score uit `data-scores`. Met 1.2.3 staat de score al in de HTML (`data-model`).
+- **Links:** `/robotmaaier-kosten/`, `/robotmaaier-test-vergelijking/` en `/hoe-we-beoordelen/` bestaan als concept. Voor `/robotmaaier-zonder-grensdraad/` is de slug van kernpagina 11 aangepast (was `robotmaaier-zonder-begrenzingsdraad`), ook in `paginas.json`. Alle vier zijn concept, dus voor bezoekers geven ze 404 tot ze zijn gepubliceerd.
+- **Publiceerbaar** (geen invulveld meer): affiliate-melding, colofon, contact, cookies, privacy, redactiebeleid en robotmaaier-kosten.
+
+### Data
+- Besluiten in `scripts/kosten_toewijzing.json` ("besluiten"):
+  - messen per jaar: M004 en M005 28 euro, M008 38 euro, M006 40 euro, als "eigen berekening uit de opgave van de fabrikant", met de datum en de URL (`bron_url`) van de messenregel;
+  - M008 antidiefstal 99,99 euro, met als toelichting "met 3 jaar service; ook verkrijgbaar voor 69 euro met 1 jaar service";
+  - Mova accu 79 euro, levensduur leeg;
+  - aanschaf leeg.
+- De calculator toont de toelichting achter de bron (1.2.3).
+
+### Thema 1.2.3 (gebouwd en lokaal getest; Mandy moet het nog uploaden)
+- **Dataroute** `POST /wp-json/rmk/v1/modellen` en `GET` (alleen beheerders). Het bestand wordt gecontroleerd en geweigerd bij: geen lijst, ontbrekend id/slug/naam, een prijslijst, een ingevulde aanschaf, bol.com of meer dan 2 MB. Daarna wordt het opgeslagen in de database (`rmk_modellen`) en in `wp-content/uploads/rmk/modellen.json`, en wordt de cache geleegd. De calculator en de scores gebruiken dan die versie; zonder opgeslagen versie gebruikt de site het bestand uit het thema. Het statuspaneel toont de bron.
+  - Script: `RMK_WP_APP_PASSWORD=… python3 scripts/excel_naar_json.py <xlsx> --upload https://robotmaaierkompas.nl --gebruiker <naam>`. Het wachtwoord gaat alleen via een omgevingsvariabele, nooit als argument of in de repository.
+  - Lokaal getest: een redacteur krijgt 403, en "geen modellen", "bol.com" en "aanschaf" worden geweigerd met 400. Uploaden lukt: 13 modellen, het uploadbestand bestaat en `modelsUrl` wijst ernaar.
+- **Auteursblok:** rol "Oprichter en redacteur", de bio uit de opdracht, en "Laatst nagekeken op" met de datum van de laatste wijziging van de pagina (gevuld bij het renderen). Geen invulvelden meer.
+- `[rmk_artikelen_auteur]`; scorecel met `data-model` (server-side score); de kolom "Beste voor" in de scoretabel verdwijnt als die leeg is; de toelichting staat in de calculator.
+
+### Na het uploaden van 1.2.3 (nog niet gedaan)
+1. `excel_naar_json.py … --upload` draaien, zodat de messen en de Dreame-module live staan.
+2. Controleren: auteursblok (rol, bio, datum), artikellijst (leeg zolang er niets gepubliceerd is), productboxscores in de HTML, scoretabel zonder lege kolom, en de toelichting in de calculator.
+3. Daarna zijn ook Over ons, Hoe we beoordelen en pagina 1 vrij van invulvelden. Die blijven concept tot Mandy ze publiceert.

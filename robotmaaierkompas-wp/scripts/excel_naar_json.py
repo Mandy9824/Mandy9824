@@ -4,7 +4,8 @@ robotmaaierkompas.nl: modeldata (Excel) -> data/modellen.json
 
 Gebruik:
     python3 scripts/excel_naar_json.py pad/naar/robotmaaierkompas_modeldata_v1.xlsx \
-        [--uit wp-content/themes/robotmaaierkompas-child/robotmaaierkompas/data/modellen.json]
+        [--uit wp-content/themes/robotmaaierkompas-child/robotmaaierkompas/data/modellen.json] \
+        [--upload https://robotmaaierkompas.nl --gebruiker <naam>]   # wachtwoord: RMK_WP_APP_PASSWORD
 
 Leest de bladen Modellen, Bronnen, Prijzen en Reviews en schrijft modellen.json in het
 formaat van data/modellen.voorbeeld.json (algemeen + modellen[].kosten), aangevuld met
@@ -254,6 +255,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("xlsx")
     ap.add_argument("--uit", default="wp-content/themes/robotmaaierkompas-child/robotmaaierkompas/data/modellen.json")
+    ap.add_argument("--upload", metavar="SITE", help="ook opslaan via de beheerroute, bijv. https://robotmaaierkompas.nl")
+    ap.add_argument("--gebruiker", help="WordPress-gebruiker voor --upload (wachtwoord via RMK_WP_APP_PASSWORD)")
     args = ap.parse_args()
 
     wb = openpyxl.load_workbook(args.xlsx, data_only=True)
@@ -265,7 +268,8 @@ def main():
                 minimum = int(getal(r[1]))
 
     pad_t = __import__("os").path.join(__import__("os").path.dirname(__file__), "kosten_toewijzing.json")
-    toewijzing = json.load(open(pad_t, encoding="utf-8"))["toewijzingen"] if __import__("os").path.exists(pad_t) else []
+    _tw = json.load(open(pad_t, encoding="utf-8")) if __import__("os").path.exists(pad_t) else {}
+    toewijzing, besluiten = _tw.get("toewijzingen", []), _tw.get("besluiten", [])
     rapport = {"kosten_niet_gebruikt": [], "overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
                "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": []}
     uit_modellen = []
@@ -416,6 +420,18 @@ def main():
                 rapport["kosten_niet_gebruikt"].append(f"{mid} {t['veld']}: bedrag niet gevonden in '{waarde_t[:60]}'")
                 continue
             kosten[t["veld"]] = {"waarde": w, "bron": bron_t.split(" ; ")[0], "datum": datum_t, "status": st}
+        # Besluiten van Mandy (vaste bedragen), met de datum en de URL van de genoemde bronregel
+        for t in besluiten:
+            if t["model"] != mid:
+                continue
+            rij_b = next((b for b in mbron if norm(kolom(b, "Veld")) == norm(t["bronveld"])), None)
+            if not rij_b or not datum(kolom(rij_b, "Datum")):
+                rapport["kosten_niet_gebruikt"].append(f"{mid} {t['veld']}: bronregel '{t['bronveld']}' ontbreekt")
+                continue
+            url_b = str(kolom(rij_b, "Bron") or "").split(" ; ")[0].strip()
+            kosten[t["veld"]] = {"waarde": t["waarde"], "bron": t.get("bron") or url_b, "datum": datum(kolom(rij_b, "Datum")), "bron_url": url_b}
+            if t.get("toelichting"):
+                kosten[t["veld"]]["toelichting"] = t["toelichting"]
         uit_modellen.append({
             "id": mid, "slug": slugify(naam), "naam": naam, "merk": rij.get("merk"), "model": rij.get("model"),
             "kosten": kosten,
@@ -441,6 +457,26 @@ def main():
         json.dump(data, fh, ensure_ascii=False, indent=2)
         fh.write("\n")
     print(json.dumps({"geschreven": args.uit, "modellen": len(uit_modellen), **rapport}, ensure_ascii=False, indent=2))
+    if args.upload:
+        upload(args.upload, args.gebruiker, data)
+
+
+def upload(site, gebruiker, data):
+    """POST naar /wp-json/rmk/v1/modellen. Het toepassingswachtwoord komt uit de omgevingsvariabele
+    RMK_WP_APP_PASSWORD (nooit als argument, nooit in een bestand in de repository)."""
+    import base64, os, urllib.request, urllib.error
+    pw = os.environ.get("RMK_WP_APP_PASSWORD")
+    if not gebruiker or not pw:
+        sys.exit("Upload: geef --gebruiker en zet RMK_WP_APP_PASSWORD in de omgeving.")
+    req = urllib.request.Request(site.rstrip("/") + "/wp-json/rmk/v1/modellen", method="POST",
+                                 data=json.dumps(data, ensure_ascii=False).encode("utf-8"),
+                                 headers={"Content-Type": "application/json",
+                                          "Authorization": "Basic " + base64.b64encode(f"{gebruiker}:{pw}".encode()).decode()})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            print("Upload gelukt:", r.read().decode())
+    except urllib.error.HTTPError as e:
+        sys.exit(f"Upload geweigerd (HTTP {e.code}): {e.read().decode()[:500]}")
 
 
 if __name__ == "__main__":
