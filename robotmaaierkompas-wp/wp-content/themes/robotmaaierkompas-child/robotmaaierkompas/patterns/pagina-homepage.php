@@ -1,0 +1,76 @@
+<?php
+/**
+ * Title: RMK pagina – Homepage
+ * Slug: robotmaaierkompas/pagina-homepage
+ * Categories: robotmaaierkompas-paginas
+ * Description: Hero, keuzehulp, situaties, werkwijze, recente updates.
+ * Viewport Width: 1280
+ * Block Types: core/post-content
+ * Post Types: page, post
+ */
+?>
+<!-- wp:group {"tagName":"main","anchor":"inhoud","className":"rmk","layout":{"type":"default"}} -->
+<main class="wp-block-group rmk" id="inhoud">
+<!-- wp:html -->
+<section class="rmk-hero" aria-labelledby="h1">
+  <div class="rmk-container rmk-hero__inner">
+    <div class="rmk-hero__text">
+      <p class="rmk-eyebrow">Onafhankelijk vergeleken</p>
+      <h1 id="h1">Welke robotmaaier past bij jouw tuin?</h1>
+      <p class="rmk-lead">We vergelijken [aantal] robotmaaiers op specificaties en gebruikersreviews, met een openbaar scoremodel. We testen niet zelf, en elke waarde laat zien waar hij vandaan komt.</p>
+      <div class="rmk-row">
+        <a class="rmk-btn" href="/beste-robotmaaier/" style="background: #FFFFFF; color: #133B26">Bekijk de beste robotmaaiers</a>
+        <a class="rmk-btn" href="/robotmaaier-test-vergelijking/" style="border-color: #A3C9AE; color: #FFFFFF">Zelf vergelijken</a>
+      </div>
+    </div>
+    <div class="rmk-hero__art" aria-hidden="true">
+      <svg viewBox="0 0 400 340" width="100%"><g fill="none" stroke="#2A7049" stroke-width="1.4"><path d="M-20 300c80-40 120-120 210-130s170 50 230 20"/><path d="M-20 260c90-40 120-110 200-118s160 40 240 8"/><path d="M-20 220c90-40 120-90 190-96s150 30 250 0"/><path d="M-20 180c100-40 120-74 180-76s140 20 260-10"/><path d="M-20 140c110-36 130-52 170-54s130 10 270-22"/><path d="M-20 100c110-30 140-34 170-34s120 4 270-30"/></g><g transform="translate(200 170)"><circle r="62" fill="none" stroke="#FFFFFF" stroke-width="3"/><path d="M30 -30 7 7 -7 -7Z" fill="#A3C9AE"/><path d="M-30 30 -7 -7 7 7Z" fill="#5B5E57"/><circle r="4" fill="#133B26"/></g></svg>
+    </div>
+  </div>
+</section>
+<section class="rmk-container rmk-section--tight" aria-labelledby="hulp" style="padding-top: 48px; display: flex; flex-direction: column; gap: 12px">
+  <p class="rmk-eyebrow">Keuzehulp</p>
+  <h2 id="hulp" style="font-size: var(--rmk-fs-xl)">Begin bij je tuin, niet bij het merk</h2>
+  <p class="rmk-meta">Fabrikanten noemen een maximale oppervlakte onder gunstige omstandigheden. De keuzehulp telt daar met een eigen vuistregel marge bij op; je ziet precies hoeveel en waarom.</p>
+</section>
+<!-- /wp:html -->
+<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:pattern {"slug":"robotmaaierkompas/keuzehulp"} /-->
+</div>
+<!-- /wp:group -->
+<!-- wp:html -->
+<section class="rmk-section rmk-section--alt" aria-labelledby="situ">
+  <div class="rmk-container" style="display: flex; flex-direction: column; gap: 24px">
+    <h2 id="situ" style="font-size: var(--rmk-fs-xl)">Kies per situatie</h2>
+    <div class="rmk-grid">
+      <a class="rmk-card" href="[url hubpagina]"><h3>[Tuinsituatie]</h3><p class="rmk-small">[één regel uitleg]</p><span class="rmk-card__more">Bekijk de keuze</span></a>
+      <a class="rmk-card" href="[url hubpagina]"><h3>[Tuinsituatie]</h3><p class="rmk-small">[één regel uitleg]</p><span class="rmk-card__more">Bekijk de keuze</span></a>
+      <a class="rmk-card" href="[url hubpagina]"><h3>[Tuinsituatie]</h3><p class="rmk-small">[één regel uitleg]</p><span class="rmk-card__more">Bekijk de keuze</span></a>
+    </div>
+  </div>
+</section>
+<section class="rmk-section" aria-labelledby="hoe">
+  <div class="rmk-container" style="display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; flex-direction: column; gap: 8px; max-width: 42rem"><h2 id="hoe" style="font-size: var(--rmk-fs-xl)">Hoe we beoordelen</h2><p class="rmk-meta">Geen proeftuin, wel een vaste werkwijze die je kunt nalopen.</p></div>
+    <ol class="rmk-steps">
+      <li><h3 style="font-size: var(--rmk-fs-md)">Specificaties verzamelen</h3><p class="rmk-small">Uit de handleiding, van de fabrikant en van winkels. Elke waarde krijgt een status, van gecontroleerd tot niet gevonden.</p></li>
+      <li><h3 style="font-size: var(--rmk-fs-md)">Reviews lezen</h3><p class="rmk-small">Betrouwbaarheid telt pas mee als we minstens 50 gebruikersreviews van een model hebben gelezen.</p></li>
+      <li><h3 style="font-size: var(--rmk-fs-md)">Scoren met een open model</h3><p class="rmk-small">Zeven onderdelen van 0 tot 10, met vaste gewichten. Eindscore van 0 tot 100 alleen als alles bekend is.</p></li>
+    </ol>
+    <a href="/hoe-we-beoordelen/#scoremodel" style="font-weight: 700">Lees hoe we beoordelen</a>
+  </div>
+</section>
+<section class="rmk-section rmk-section--alt" aria-labelledby="nieuw">
+  <div class="rmk-container" style="display: flex; flex-direction: column; gap: 24px">
+    <h2 id="nieuw" style="font-size: var(--rmk-fs-xl)">Onlangs bijgewerkt</h2>
+    <div class="rmk-grid rmk-grid--wide">
+      <a class="rmk-card" href="[url]"><span class="rmk-meta">[Type] · bijgewerkt [datum]</span><h3>[Titel]</h3></a>
+      <a class="rmk-card" href="[url]"><span class="rmk-meta">[Type] · bijgewerkt [datum]</span><h3>[Titel]</h3></a>
+      <a class="rmk-card" href="[url]"><span class="rmk-meta">[Type] · bijgewerkt [datum]</span><h3>[Titel]</h3></a>
+    </div>
+  </div>
+</section>
+<!-- /wp:html -->
+</main>
+<!-- /wp:group -->

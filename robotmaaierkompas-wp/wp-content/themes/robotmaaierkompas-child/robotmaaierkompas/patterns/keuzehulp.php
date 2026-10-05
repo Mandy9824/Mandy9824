@@ -1,0 +1,28 @@
+<?php
+/**
+ * Title: RMK – Tuingrootte-keuzehulp
+ * Slug: robotmaaierkompas/keuzehulp
+ * Categories: robotmaaierkompas
+ * Description: Rekent met een eigen vuistregel (+30% / +50%) een minimale opgegeven capaciteit uit. Vereist rmk.js.
+ * Viewport Width: 1280
+ */
+?>
+<!-- wp:html -->
+<div class="rmk-helper" data-rmk-helper>
+  <form style="display: flex; flex-direction: column; gap: var(--rmk-space-5)">
+    <div class="rmk-grid">
+      <div class="rmk-field"><label class="rmk-label" for="h-m2">Oppervlakte gazon</label><div class="rmk-inputgroup"><input id="h-m2" name="m2" class="rmk-input" inputmode="numeric" autocomplete="off"><span>m²</span></div><small>Alleen gras, zonder terras en borders.</small></div>
+      <div class="rmk-field"><label class="rmk-label" for="h-slope">Steilste stuk (optioneel)</label><div class="rmk-inputgroup"><input id="h-slope" name="slope" class="rmk-input" inputmode="numeric" autocomplete="off"><span>%</span></div><small>Hoogteverschil in cm over 100 cm.</small></div>
+    </div>
+    <label class="rmk-toggle" style="border-radius: 8px; justify-content: flex-start"><input type="checkbox" name="zones">Zones, bomen of smalle doorgangen</label>
+  </form>
+  <div class="rmk-helper__result" aria-live="polite">
+    <p data-rmk-notready>Vul de oppervlakte van je gazon in.</p>
+    <div data-rmk-ready hidden style="display: flex; flex-direction: column; gap: var(--rmk-space-3)">
+      <p style="font-family: var(--rmk-font-display); font-weight: 700; font-size: var(--rmk-fs-md); color: var(--rmk-green-950)">Zoek een maaier met een opgegeven capaciteit van minstens <span data-out="cap"></span> m²<span data-out="slope"></span>.</p>
+      <details class="rmk-rule"><summary>Eigen vuistregel: <span data-out="margin"></span> marge</summary><p>Dit is onze eigen vuistregel, geen meting en geen norm van een fabrikant. Fabrikanten noemen de maximale oppervlakte onder gunstige omstandigheden. Wij tellen daar marge bij op, zodat de maaier niet aan zijn grens werkt: +30% voor een open gazon, +50% bij zones, bomen of smalle doorgangen. Is je tuin eenvoudiger, dan kun je met minder marge toe.</p></details>
+      <div class="rmk-row"><a class="rmk-btn rmk-btn--primary" href="/robotmaaier-test-vergelijking/" data-out="link" data-base="/robotmaaier-test-vergelijking/">Toon passende modellen</a></div>
+    </div>
+  </div>
+</div>
+<!-- /wp:html -->

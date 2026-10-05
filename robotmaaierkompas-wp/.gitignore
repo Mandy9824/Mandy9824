@@ -1,0 +1,8 @@
+# Bronbestanden en geheimen niet in deze (openbare) repo
+*.xlsx
+BLAUWDRUK.md
+docs/
+.env
+*.local.php
+backups/
+robotmaaierkompas-child.zip

@@ -1,0 +1,41 @@
+<div class="rmk-calc" data-rmk-calc>
+  <form class="rmk-calc__form" aria-describedby="calc-hint">
+    <div class="rmk-field" style="grid-column: 1 / -1"><label class="rmk-label" for="c-model">Waarden uit het modelbestand (optioneel)</label><select id="c-model" name="model" class="rmk-select"><option value="">Eigen bedragen</option></select><small id="calc-hint">Kies een model om bedragen met bron en datum in te vullen, of vul alles zelf in. Er zijn geen standaardwaarden.</small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-aanschaf">Aanschafprijs</label><div class="rmk-inputgroup"><span>€</span><input id="c-aanschaf" name="aanschaf" data-name="aanschaf" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="aanschaf" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-installatie">Installatie</label><div class="rmk-inputgroup"><span>€</span><input id="c-installatie" name="installatie" data-name="installatie" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="installatie" hidden></small></div>
+    <fieldset style="grid-column: 1 / -1; border: 0; padding: 0; margin: 0; display: grid; gap: var(--rmk-space-4); grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr))"><legend class="rmk-label">Eenmalige opties</legend>
+<div class="rmk-field"><label class="rmk-label" for="c-antidiefstal">Antidiefstalmodule</label><div class="rmk-inputgroup"><span>€</span><input id="c-antidiefstal" name="antidiefstal" data-name="antidiefstalmodule" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="antidiefstal" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-antenne_gateway">Antenne of gateway</label><div class="rmk-inputgroup"><span>€</span><input id="c-antenne_gateway" name="antenne_gateway" data-name="antenne of gateway" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="antenne_gateway" hidden></small></div>
+    </fieldset>
+<div class="rmk-field"><label class="rmk-label" for="c-messen_per_jaar">Messen per jaar</label><div class="rmk-inputgroup"><span>€</span><input id="c-messen_per_jaar" name="messen_per_jaar" data-name="messen" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="messen_per_jaar" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-accu_prijs">Nieuwe accu</label><div class="rmk-inputgroup"><span>€</span><input id="c-accu_prijs" name="accu_prijs" data-name="accuprijs" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="accu_prijs" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-accu_levensduur_jaren">Accu gaat mee</label><div class="rmk-inputgroup"><input id="c-accu_levensduur_jaren" name="accu_levensduur_jaren" data-name="levensduur accu" class="rmk-input" inputmode="decimal" autocomplete="off"><span>jaar</span></div><small class="rmk-field__src" data-src-for="accu_levensduur_jaren" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-stroom_kwh_per_seizoen">Stroom per seizoen</label><div class="rmk-inputgroup"><input id="c-stroom_kwh_per_seizoen" name="stroom_kwh_per_seizoen" data-name="stroomverbruik" class="rmk-input" inputmode="decimal" autocomplete="off"><span>kWh</span></div><small class="rmk-field__src" data-src-for="stroom_kwh_per_seizoen" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-stroomprijs_per_kwh">Stroomprijs</label><div class="rmk-inputgroup"><span>€</span><input id="c-stroomprijs_per_kwh" name="stroomprijs_per_kwh" data-name="stroomprijs" class="rmk-input" inputmode="decimal" autocomplete="off"><span>/kWh</span></div><small class="rmk-field__src" data-src-for="stroomprijs_per_kwh" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-verbinding_per_jaar">Verbinding per jaar na de gratis periode</label><div class="rmk-inputgroup"><span>€</span><input id="c-verbinding_per_jaar" name="verbinding_per_jaar" data-name="verbinding" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="verbinding_per_jaar" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-gratis_periode_jaren">Gratis periode verbinding</label><div class="rmk-inputgroup"><input id="c-gratis_periode_jaren" name="gratis_periode_jaren" data-name="gratis periode" class="rmk-input" inputmode="decimal" autocomplete="off"><span>jaar</span></div><small class="rmk-field__src" data-src-for="gratis_periode_jaren" hidden></small></div>
+<div class="rmk-field"><label class="rmk-label" for="c-onderhoud_per_jaar">Onderhoud per jaar</label><div class="rmk-inputgroup"><span>€</span><input id="c-onderhoud_per_jaar" name="onderhoud_per_jaar" data-name="onderhoud" class="rmk-input" inputmode="decimal" autocomplete="off"></div><small class="rmk-field__src" data-src-for="onderhoud_per_jaar" hidden></small></div>
+    <div class="rmk-field"><label class="rmk-label" for="c-jaren">Reken met</label><div class="rmk-inputgroup"><input id="c-jaren" name="jaren" class="rmk-input" inputmode="numeric" autocomplete="off"><span>jaar</span></div></div>
+  </form>
+  <section class="rmk-calc__out" aria-labelledby="out-t" aria-live="polite">
+    <h3 id="out-t" style="font-size: var(--rmk-fs-md)">Totale kosten</h3>
+    <p data-rmk-notready>Vul minimaal de aanschafprijs en het aantal jaren in.</p>
+    <div data-rmk-ready hidden style="display: flex; flex-direction: column; gap: var(--rmk-space-4)">
+      <p class="rmk-meta">Over <span data-out="years"></span> jaar</p>
+      <div style="display: flex; flex-direction: column; gap: 6px"><span class="rmk-calc__big" data-out="total"></span><span class="rmk-meta" data-out="per"></span></div>
+      <ul class="rmk-calc__rows">
+        <li data-part="aanschaf"><span>Aanschaf</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="installatie"><span>Installatie</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="antidiefstal"><span>Antidiefstalmodule</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="antenne_gateway"><span>Antenne of gateway</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="messen_per_jaar"><span>Messen</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="accu_prijs"><span>Accu</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="stroom"><span>Stroom</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="verbinding_per_jaar"><span>Verbinding na gratis periode</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+        <li data-part="onderhoud_per_jaar"><span>Onderhoud</span><span class="rmk-num"></span><div class="rmk-bar"><i style="width:0%"></i></div></li>
+      </ul>
+      <p class="rmk-small">Accu vervangen: <span data-out="accCount"></span>. Rekenvoorbeeld zonder rente of inflatie.</p>
+      <p class="rmk-calc__missing" data-out="missing"></p>
+    </div>
+  </section>
+</div>

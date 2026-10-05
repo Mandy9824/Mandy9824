@@ -1,0 +1,25 @@
+{
+  "_uitleg": "Kopieer naar data/modellen.json en vul in. Elke waarde heeft een bron en een datum; de calculator toont die bij het veld. Laat 'waarde' op null als je geen bron hebt. Modellen met [haken] in de naam worden niet getoond.",
+  "algemeen": {
+    "stroomprijs_per_kwh": { "waarde": null, "bron": "[bron stroomprijs]", "datum": "[datum]" }
+  },
+  "modellen": [
+    {
+      "slug": "[model-slug]",
+      "naam": "[Modelnaam]",
+      "kosten": {
+        "aanschaf":               { "waarde": null, "bron": "[winkel]", "datum": "[datum, tijd]" },
+        "installatie":            { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "antidiefstal":           { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "antenne_gateway":        { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "messen_per_jaar":        { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "accu_prijs":             { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "accu_levensduur_jaren":  { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "stroom_kwh_per_seizoen": { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "verbinding_per_jaar":    { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "gratis_periode_jaren":   { "waarde": null, "bron": "[bron]", "datum": "[datum]" },
+        "onderhoud_per_jaar":     { "waarde": null, "bron": "[bron]", "datum": "[datum]" }
+      }
+    }
+  ]
+}

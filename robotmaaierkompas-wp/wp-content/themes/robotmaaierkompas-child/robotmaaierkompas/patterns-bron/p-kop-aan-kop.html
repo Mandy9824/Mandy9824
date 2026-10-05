@@ -1,0 +1,47 @@
+<div class="rmk-container">
+  <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li><a href="/vergelijken/">Vergelijkingen</a></li><li aria-current="page">[Model A] of [Model B]</li></ol></nav>
+  <header class="rmk-pagehead">
+    <p class="rmk-eyebrow">Kop-aan-kop</p>
+    <h1>[Model A] of [Model B]: [het belangrijkste verschil]</h1>
+    <p class="rmk-lead">[Twee zinnen: wat de modellen gemeen hebben en waar ze verschillen.]</p>
+  </header>
+</div>
+<!--@pattern eerlijkheidsblok-->
+<section class="rmk-container rmk-section--tight" aria-label="De twee modellen">
+  <div class="rmk-h2h">
+    <div class="rmk-h2h__col">{{PHOTO}}<h2 style="font-size: var(--rmk-fs-lg)">[Model A]</h2>{{MINIS}}<p class="rmk-bestfor"><span>Beste voor</span><b>[beste voor]</b></p></div>
+    <div class="rmk-h2h__col">{{PHOTO}}<h2 style="font-size: var(--rmk-fs-lg)">[Model B]</h2>{{MINIS}}<p class="rmk-bestfor"><span>Beste voor</span><b>[beste voor]</b></p></div>
+  </div>
+</section>
+<section class="rmk-container rmk-section--tight" aria-labelledby="verschil" style="display: flex; flex-direction: column; gap: 16px">
+  <h2 id="verschil" style="font-size: var(--rmk-fs-xl)">Specificaties naast elkaar</h2>
+  <div class="rmk-tablewrap" role="region" aria-labelledby="verschil" tabindex="0">
+    <table class="rmk-specs rmk-diff" style="min-width: 640px">
+      <thead><tr><th scope="col" style="width: 28%"><span class="rmk-sr">Kenmerk</span></th><th scope="col">[Model A]</th><th scope="col">[Model B]</th></tr></thead>
+      <tbody>
+        <!-- Zet class="is-win" op de cel met de gunstigste waarde, alleen als beide waarden bekend zijn. -->
+        <tr><th scope="row">Navigatie</th><td><div class="rmk-specs__val">[waarde]{{STATUS}}</div></td><td><div class="rmk-specs__val">[waarde]{{STATUS}}</div></td></tr>
+        <tr><th scope="row">Maximale oppervlakte</th><td><div class="rmk-specs__val">[waarde] m²{{STATUS}}</div></td><td><div class="rmk-specs__val">[waarde] m²{{STATUS}}</div></td></tr>
+        <tr><th scope="row">Maximale helling</th><td><div class="rmk-specs__val">[waarde]%{{STATUS}}</div></td><td><div class="rmk-specs__val">[waarde]%{{STATUS}}</div></td></tr>
+        <tr><th scope="row">Geluid</th><td><div class="rmk-specs__val">[waarde] dB(A){{STATUS}}</div></td><td><div class="rmk-specs__val">[waarde] dB(A){{STATUS}}</div></td></tr>
+        <tr><th scope="row">Verbinding na gratis periode</th><td><div class="rmk-specs__val">[waarde]{{STATUS}}</div></td><td><div class="rmk-specs__val">[waarde]{{STATUS}}</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="rmk-small">"Beter" geeft alleen aan welke waarde gunstiger is op papier, niet hoe het in jouw tuin uitpakt.</p>
+</section>
+<section class="rmk-container rmk-section--tight" aria-labelledby="oordeel" style="display: flex; flex-direction: column; gap: 16px">
+  <h2 id="oordeel" style="font-size: var(--rmk-fs-xl)">Welke past bij jou?</h2>
+  <div class="rmk-verdict">
+    <div><h3 style="font-size: var(--rmk-fs-md)">Kies [Model A] als…</h3><ul class="rmk-small" style="padding-left: 18px; display: flex; flex-direction: column; gap: 6px; color: var(--rmk-text)"><li>[situatie]</li><li>[situatie]</li></ul></div>
+    <div><h3 style="font-size: var(--rmk-fs-md)">Kies [Model B] als…</h3><ul class="rmk-small" style="padding-left: 18px; display: flex; flex-direction: column; gap: 6px; color: var(--rmk-text)"><li>[situatie]</li><li>[situatie]</li></ul></div>
+  </div>
+</section>
+<section class="rmk-container rmk-section--tight" aria-labelledby="prijs" style="display: flex; flex-direction: column; gap: 16px; padding-bottom: 64px">
+  <h2 id="prijs" style="font-size: var(--rmk-fs-xl)">Prijzen</h2>
+  <p class="rmk-affnote">{{ICON_INFO}}<span>Advertentie: via deze knoppen krijgen wij mogelijk een commissie. Dat verandert de vergelijking niet.</span></p>
+  <div class="rmk-h2h">
+    <div class="rmk-offers"><div class="rmk-offer"><span class="rmk-offer__shop">[Model A] · bol.com</span><span class="rmk-offer__price">€ [prijs]</span><a class="rmk-btn rmk-btn--primary" href="[affiliatelink bol.com of /ga/…]" rel="sponsored nofollow">Naar bol.com</a><span class="rmk-offer__src">Bron: bol.com · prijs van [datum, tijd]</span></div></div>
+    <div class="rmk-offers"><div class="rmk-offer"><span class="rmk-offer__shop">[Model B] · bol.com</span><span class="rmk-offer__price">€ [prijs]</span><a class="rmk-btn rmk-btn--primary" href="[affiliatelink bol.com of /ga/…]" rel="sponsored nofollow">Naar bol.com</a><span class="rmk-offer__src">Bron: bol.com · prijs van [datum, tijd]</span></div></div>
+  </div>
+</section>

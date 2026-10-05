@@ -1,0 +1,128 @@
+/* =========================================================================
+   robotmaaierkompas.nl — designtokens (v1.0)
+   Eén bron voor kleur, type, ruimte, vorm en beweging.
+   Alle componenten (rmk.css) lezen alleen deze variabelen.
+   Contrast: alle tekst-/achtergrondparen hieronder halen WCAG AA (≥ 4,5:1).
+   ========================================================================= */
+
+:root {
+  /* --- Merkkleur: Kompasgroen ------------------------------------------- */
+  --rmk-green-950: #0E2E1D;
+  --rmk-green-900: #133B26;
+  --rmk-green-800: #184C31;   /* hover, donkere vlakken            */
+  --rmk-green-700: #1E5E3C;   /* HOOFDKLEUR: knoppen, links, merk  */
+  --rmk-green-600: #2A7049;
+  --rmk-green-500: #3E865B;   /* balken (niet voor kleine tekst)   */
+  --rmk-green-300: #A3C9AE;
+  --rmk-green-200: #C9DFCF;
+  --rmk-green-100: #E2EEE5;
+  --rmk-green-50:  #F1F7F2;
+
+  /* --- Tweede kleur: Veldsteen (warm neutraal) -------------------------- */
+  --rmk-stone-950: #1A1C19;
+  --rmk-stone-900: #262925;   /* broodtekst                         */
+  --rmk-stone-800: #383B36;
+  --rmk-stone-700: #4A4D47;
+  --rmk-stone-600: #5B5E57;   /* secundaire tekst (6:1 op stone-50) */
+  --rmk-stone-400: #9A9C93;   /* lijnen, iconen (geen tekst)        */
+  --rmk-stone-300: #C8C9C0;
+  --rmk-stone-200: #E0E0D8;
+  --rmk-stone-100: #EDECE6;
+  --rmk-stone-50:  #F6F5F1;   /* paginagrond                        */
+  --rmk-white:     #FFFFFF;
+
+  /* --- Status (specs-badges & meldingen) -------------------------------
+     Kleur is nooit de enige drager: elke status heeft ook icoon + tekst. */
+  --rmk-status-ok-bg:        #E2EEE5;  --rmk-status-ok-fg:        #184C31;  /* gecontroleerd   */
+  --rmk-status-maker-bg:     #E5EBF2;  --rmk-status-maker-fg:     #2A4462;  /* fabrikantclaim  */
+  --rmk-status-shop-bg:      #F0EADF;  --rmk-status-shop-fg:      #574628;  /* winkelclaim     */
+  --rmk-status-conflict-bg:  #FBE7D2;  --rmk-status-conflict-fg:  #7E3D00;  /* tegenstrijdig   */
+  --rmk-status-missing-bg:   #FFFFFF;  --rmk-status-missing-fg:   #4A4D47;  /* niet gevonden   */
+
+  /* --- Semantische rollen ------------------------------------------------ */
+  --rmk-bg:            var(--rmk-stone-50);
+  --rmk-surface:       var(--rmk-white);
+  --rmk-surface-alt:   var(--rmk-stone-100);
+  --rmk-surface-brand: var(--rmk-green-50);
+  --rmk-text:          var(--rmk-stone-900);
+  --rmk-text-muted:    var(--rmk-stone-600);
+  --rmk-text-inverse:  var(--rmk-white);
+  --rmk-heading:       var(--rmk-stone-950);
+  --rmk-border:        var(--rmk-stone-200);
+  --rmk-border-strong: var(--rmk-stone-300);
+  --rmk-brand:         var(--rmk-green-700);
+  --rmk-brand-hover:   var(--rmk-green-800);
+  --rmk-brand-strong:  var(--rmk-green-900);
+  --rmk-link:          var(--rmk-green-700);
+  --rmk-link-hover:    var(--rmk-green-900);
+  --rmk-bar-fill:      var(--rmk-green-500);
+  --rmk-bar-track:     var(--rmk-stone-100);
+  --rmk-focus:         #133B26;
+  --rmk-focus-ring:    0 0 0 2px var(--rmk-white), 0 0 0 5px var(--rmk-focus);
+
+  /* --- Typografie --------------------------------------------------------
+     Display: Schibsted Grotesk (stevig, krantachtig, tabelcijfers)
+     Tekst:   Atkinson Hyperlegible (ontworpen voor leesbaarheid)
+     Zelf hosten als WOFF2 in productie (sneller, AVG-vriendelijk).        */
+  --rmk-font-display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --rmk-font-body:    "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --rmk-fs-xs:   0.8125rem;                                   /* 13px  */
+  --rmk-fs-sm:   0.9375rem;                                   /* 15px  */
+  --rmk-fs-base: 1.0625rem;                                   /* 17px  */
+  --rmk-fs-md:   1.1875rem;                                   /* 19px  */
+  --rmk-fs-lg:   clamp(1.25rem, 1.12rem + 0.55vw, 1.5rem);    /* 20→24 */
+  --rmk-fs-xl:   clamp(1.5rem, 1.28rem + 0.95vw, 2rem);       /* 24→32 */
+  --rmk-fs-2xl:  clamp(1.875rem, 1.45rem + 1.8vw, 2.75rem);   /* 30→44 */
+  --rmk-fs-3xl:  clamp(2.25rem, 1.6rem + 2.7vw, 3.5rem);      /* 36→56 */
+
+  --rmk-lh-tight: 1.15;
+  --rmk-lh-snug:  1.3;
+  --rmk-lh-body:  1.6;
+
+  --rmk-fw-regular: 400;
+  --rmk-fw-medium:  500;
+  --rmk-fw-bold:    700;
+
+  /* --- Ruimte (4px-raster) ----------------------------------------------- */
+  --rmk-space-1:  0.25rem;
+  --rmk-space-2:  0.5rem;
+  --rmk-space-3:  0.75rem;
+  --rmk-space-4:  1rem;
+  --rmk-space-5:  1.25rem;
+  --rmk-space-6:  1.5rem;
+  --rmk-space-8:  2rem;
+  --rmk-space-10: 2.5rem;
+  --rmk-space-12: 3rem;
+  --rmk-space-16: 4rem;
+  --rmk-space-20: 5rem;
+
+  /* --- Layout ------------------------------------------------------------ */
+  --rmk-content: 72rem;     /* 1152px paginabreedte */
+  --rmk-prose:   42rem;     /* 672px leesbreedte    */
+  --rmk-gutter:  1rem;      /* 16px mobiel          */
+  --rmk-tap:     2.75rem;   /* 44px minimale klikzone */
+
+  /* --- Vorm ---------------------------------------------------------------- */
+  --rmk-radius-sm:   4px;
+  --rmk-radius-md:   8px;
+  --rmk-radius-lg:   12px;
+  --rmk-radius-pill: 999px;
+  --rmk-border-w:    1px;
+  --rmk-shadow-1: 0 1px 2px rgb(26 28 25 / 0.06), 0 1px 1px rgb(26 28 25 / 0.04);
+  --rmk-shadow-2: 0 4px 16px rgb(26 28 25 / 0.08), 0 1px 3px rgb(26 28 25 / 0.06);
+
+  /* --- Beweging (sober) ---------------------------------------------------- */
+  --rmk-dur:  140ms;
+  --rmk-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (min-width: 48rem) {   /* ≥ 768px */
+  :root { --rmk-gutter: 1.5rem; }
+}
+@media (min-width: 64rem) {   /* ≥ 1024px */
+  :root { --rmk-gutter: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --rmk-dur: 0ms; }
+}

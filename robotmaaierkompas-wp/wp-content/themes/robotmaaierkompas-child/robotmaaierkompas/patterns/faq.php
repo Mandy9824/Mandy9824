@@ -1,0 +1,17 @@
+<?php
+/**
+ * Title: RMK – FAQ
+ * Slug: robotmaaierkompas/faq
+ * Categories: robotmaaierkompas
+ * Description: Uitklapbare vragen (details/summary), zonder JavaScript.
+ * Viewport Width: 1280
+ */
+?>
+<!-- wp:html -->
+<div class="rmk-faq">
+  <details><summary>Testen jullie de robotmaaiers zelf?</summary><div><p>Nee. We vergelijken specificaties en lezen gebruikersreviews. Elke waarde heeft een bron en een status.</p></div></details>
+  <details><summary>Waarom zie ik soms geen eindscore?</summary><div><p>Een eindscore tonen we alleen als alle zeven onderdelen bekend zijn. Zijn er vijf of zes bekend, dan zie je een functiescore met het label "voorlopig, zonder" en de namen van de ontbrekende onderdelen. Bij minder dan vijf geven we geen score.</p></div></details>
+  <details><summary>Wanneer telt betrouwbaarheid mee?</summary><div><p>Pas als we minstens 50 gebruikersreviews van het model hebben gelezen.</p></div></details>
+  <details><summary>Hoe actueel zijn de prijzen?</summary><div><p>Elke prijs staat met winkel, bron en datum. Is een prijs ouder dan [termijn], dan staat er "prijs wordt bijgewerkt".</p></div></details>
+</div>
+<!-- /wp:html -->

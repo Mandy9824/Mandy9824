@@ -1,0 +1,31 @@
+<?php
+/**
+ * Title: RMK – Productbox (prijs wordt bijgewerkt / leeg)
+ * Slug: robotmaaierkompas/productbox-zonder-prijs
+ * Categories: robotmaaierkompas
+ * Description: Toestanden: geen foto, prijs wordt bijgewerkt, leeg prijsveld, nog geen reviews.
+ * Viewport Width: 1280
+ */
+?>
+<!-- wp:html -->
+<article class="rmk-product" aria-labelledby="p-[model-slug]">
+  <div class="rmk-product__head">
+    <div class="rmk-product__media"><!-- Vervang door <img src="..." alt="[Modelnaam]" width="400" height="400" loading="lazy"> zodra er een foto met toestemming is. --><div class="rmk-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15.5c0-3.6 4-6.5 9-6.5s9 2.9 9 6.5v1H3v-1Z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><span>Foto volgt</span></div></div>
+    <div class="rmk-product__title">
+      <span class="rmk-rank">[positie] · [categorie]</span>
+      <h3 id="p-[model-slug]">[Modelnaam]</h3>
+      <p class="rmk-bestfor"><span>Beste voor</span><b>[beste voor]</b></p>
+      <div class="rmk-scorecell" data-rmk-score data-scores="betrouwbaarheid=[0–10]; navigatie=[0–10]; prijskwaliteit=[0–10]; hellingen=[0–10]; app=[0–10]; veiligheid=[0–10]; geluid=[0–10]; reviews=[aantal gelezen reviews]"><div class="rmk-minis"><b data-out="total">–</b><small data-out="kind">Score</small></div><span class="rmk-provisional" data-out="label" hidden></span></div>
+      <p class="rmk-reviews"><span>Nog geen reviews gevonden</span> <span class="rmk-src">Gezocht op bol.com op [datum]</span></p>
+    </div>
+  </div>
+  <div class="rmk-proscons">
+    <div><h4>Pluspunten</h4><ul class="rmk-pros"><li>[pluspunt]</li></ul></div>
+    <div><h4>Minpunten</h4><ul class="rmk-cons"><li>[minpunt]</li></ul></div>
+  </div>
+  <div class="rmk-product__aside rmk-offers">
+    <div class="rmk-offer"><span class="rmk-offer__shop">bol.com</span><span class="rmk-offer__price rmk-offer__price--updating" role="status"><svg class="rmk-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg>Prijs wordt bijgewerkt</span><a class="rmk-btn rmk-btn--primary" href="[affiliatelink bol.com of /ga/…]" rel="sponsored nofollow">Naar bol.com</a><span class="rmk-offer__src">Bron: bol.com · laatste prijs is ouder dan [termijn]</span></div>
+    <div class="rmk-offer"><span class="rmk-offer__shop">[winkel]</span><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span><a class="rmk-btn rmk-btn--secondary" href="[affiliatelink of /ga/…]" rel="sponsored nofollow">Naar [winkel]</a><span class="rmk-offer__src">Geen actuele prijs van deze winkel</span></div>
+  </div>
+</article>
+<!-- /wp:html -->

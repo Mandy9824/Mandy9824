@@ -1,0 +1,1500 @@
+{
+  "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
+  "gegenereerd": "2026-10-05 18:55",
+  "bronbestand": "modeldata.xlsx",
+  "scoremodel": "v1.0 (concept tot bevriezing)",
+  "algemeen": {
+    "stroomprijs_per_kwh": {
+      "waarde": null,
+      "bron": null,
+      "datum": null
+    }
+  },
+  "modellen": [
+    {
+      "id": "M001",
+      "slug": "segway-navimow-i105e",
+      "naam": "Segway Navimow i105E",
+      "merk": "Segway Navimow",
+      "model": "i105E",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "max_tuingrootte_m2": {
+          "waarde": 500,
+          "status": "winkelclaim",
+          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
+          "datum": "2026-10-04"
+        },
+        "geluid_dba": {
+          "waarde": 58,
+          "status": "winkelclaim",
+          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
+          "datum": "2026-10-04"
+        },
+        "maaibreedte_cm": {
+          "waarde": 18,
+          "status": "winkelclaim",
+          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
+          "datum": "2026-10-04"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": 6
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M002",
+      "slug": "segway-navimow-i206-awd",
+      "naam": "Segway Navimow i206 AWD",
+      "merk": "Segway Navimow",
+      "model": "i206 AWD",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "RTK+vision",
+          "status": "gecontroleerd",
+          "bron": "https://be.navimow.com/collections/navimow-i-series",
+          "datum": "2026-10-04",
+          "opmerking": "Fabrikantpagina: NRTK + Vision. MediaMarkt noemt ten onrechte LiDAR (LiDAR zit in i2 LiDAR-lijn)"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Daarnaast max 20 VisionFence-uit-zones (aparte functie)"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Fabrikant noemt 150+ obstakels"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 600,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Specificatietabel handleiding (kopie op mansier.com van de officiële handleiding, 260109)"
+        },
+        "max_helling_pct": {
+          "waarde": 45,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Handleiding en be.navimow.com; 24 graden is hetzelfde"
+        },
+        "geluid_dba": {
+          "waarde": 59,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "De tabel noemt ook 51 dB(A); waarschijnlijk geluidsdruk. Beslissen: scoremodel gebruikt LWA voor alle merken als dat is opgegeven"
+        },
+        "ip_klasse": {
+          "waarde": "IP66",
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Winkels noemen soms IPX6"
+        },
+        "maaibreedte_cm": {
+          "waarde": 18,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04"
+        },
+        "maaihoogte_mm": {
+          "waarde": "20-60",
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Handleiding: 2-6 cm"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Standaardcode 0000 (wijzigen aan te raden)"
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Alarm bij optillen en bij overschrijden virtuele grens; alleen onder 4G"
+        },
+        "gps_tracking": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Locatie in de app; alleen bij ingeschakelde antidiefstal en 4G"
+        },
+        "mes_stop": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Optilsensor stopt de messen"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Camera; handleiding noemt geen specifieke personendetectie, wel obstakels, huisdieren en dieren"
+        },
+        "geofence": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Verboden zones (BioLife), kanalen, VisionFence-uit-zones"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04"
+        },
+        "app_smarthome": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Alexa, Google Assistant, Hornbach"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Knoppen op de maaier: maaien starten, stoppen, naar huis"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Navimow OS via de app"
+        },
+        "garantie": {
+          "waarde": "3 jaar toestel; 2 jaar accu en voedingsadapter (handleiding, alleen bij erkende dealer en met aankoopbewijs)",
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Coolblue vermeldt 2 jaar op de productpagina; voorwaarden: erkende dealer en aankoopbewijs"
+        },
+        "vierwielaandrijving": {
+          "waarde": null,
+          "status": "tegenstrijdig",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Handleiding noemt vierwielaandrijving; be.navimow.com \"3 AWD\"; winkels \"3-wheel AWD\". Bonus niet toegepast"
+        },
+        "app_ios_android": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "App Store en Play Store",
+          "datum": "2026-10-04",
+          "opmerking": "Nog onderzoeken, ook app-rating en aantal ratings"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": 10,
+        "prijskwaliteit": null,
+        "hellingen": 8,
+        "app": null,
+        "veiligheid": 10.0,
+        "geluid": 6
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [
+        {
+          "winkel": "Bol.com",
+          "prijs": 849,
+          "datum": "2026-10-04",
+          "op_voorraad": null,
+          "affiliate_mogelijk": null,
+          "bron": "Google Shopping-blok in je Google-check; nog op de winkelpagina controleren",
+          "opmerking": "Doorgestreepte prijs 899",
+          "statisch_tonen": false
+        },
+        {
+          "winkel": "Coolblue",
+          "prijs": 899,
+          "datum": "2026-10-04",
+          "op_voorraad": null,
+          "affiliate_mogelijk": null,
+          "bron": "Google Shopping-blok in je Google-check; nog op de winkelpagina controleren",
+          "opmerking": "Coolblue-pagina toont adviesprijs 899 en een lagere actieprijs (wisselt per snapshot)",
+          "statisch_tonen": true
+        },
+        {
+          "winkel": "Gamma.nl",
+          "prijs": 899,
+          "datum": "2026-10-04",
+          "op_voorraad": null,
+          "affiliate_mogelijk": null,
+          "bron": "https://www.gamma.nl/assortiment/segway-navimow-robotmaaier-i206-awd-draadloos-600-m2/p/B369202",
+          "opmerking": "849 met Gamma Voordeelpas; zoekresultaat, nog op de pagina controleren",
+          "statisch_tonen": true
+        }
+      ],
+      "reviews": [
+        {
+          "bron": "Gamma.nl",
+          "peildatum": "2026-10-04",
+          "aantal_totaal": 35,
+          "gemiddelde": 4.6,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 5; teksten nog niet gelezen"
+        },
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-04",
+          "aantal_totaal": 5,
+          "gemiddelde": 9.5,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 10; kleine telling (andere snapshot: 2 reviews)"
+        },
+        {
+          "bron": "Gamma.be",
+          "peildatum": "2026-10-04",
+          "aantal_totaal": 16,
+          "gemiddelde": null,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": "ja",
+          "opmerking": "Zelfde model, Belgische site; kan overlappen met Gamma.nl; aantal wisselt per snapshot (11 tot 16)"
+        }
+      ],
+      "ean": null
+    },
+    {
+      "id": "M003",
+      "slug": "segway-navimow-i210-lidar",
+      "naam": "Segway Navimow i210 LiDAR",
+      "merk": "Segway Navimow",
+      "model": "i210 LiDAR",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "max_tuingrootte_m2": {
+          "waarde": 1000,
+          "status": "winkelclaim",
+          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
+          "datum": "2026-10-04"
+        },
+        "geluid_dba": {
+          "waarde": 59,
+          "status": "winkelclaim",
+          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
+          "datum": "2026-10-04"
+        },
+        "maaibreedte_cm": {
+          "waarde": 22,
+          "status": "winkelclaim",
+          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
+          "datum": "2026-10-04"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": 6
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M004",
+      "slug": "mova-lidax-ultra-800",
+      "naam": "Mova LiDAX Ultra 800",
+      "merk": "Mova",
+      "model": "LiDAX Ultra 800",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "max_tuingrootte_m2": {
+          "waarde": 800,
+          "status": "winkelclaim",
+          "bron": "https://www.mediamarkt.nl/nl/product/_mova-lidax-ultra-800-robotmaaier-1897657.html",
+          "datum": "2026-10-04",
+          "opmerking": "Gewicht tegenstrijdig: 12 kg (MediaMarkt) of 13,7 kg (datasheet)"
+        },
+        "max_helling_pct": {
+          "waarde": 45,
+          "status": "winkelclaim",
+          "bron": "https://www.mediamarkt.nl/nl/product/_mova-lidax-ultra-800-robotmaaier-1897657.html",
+          "datum": "2026-10-04",
+          "opmerking": "Gewicht tegenstrijdig: 12 kg (MediaMarkt) of 13,7 kg (datasheet)"
+        },
+        "vierwielaandrijving": {
+          "waarde": "nee",
+          "status": "winkelclaim",
+          "bron": "https://www.mediamarkt.nl/nl/product/_mova-lidax-ultra-800-robotmaaier-1897657.html",
+          "datum": "2026-10-04",
+          "opmerking": "Gewicht tegenstrijdig: 12 kg (MediaMarkt) of 13,7 kg (datasheet)"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": 8,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M005",
+      "slug": "mova-lidax-ultra-1200",
+      "naam": "Mova LiDAX Ultra 1200",
+      "merk": "Mova",
+      "model": "LiDAX Ultra 1200",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "LiDAR",
+          "status": "fabrikantclaim",
+          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "UltraView 2.0"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "fabrikantclaim",
+          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
+          "datum": "2026-10-04"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "fabrikantclaim",
+          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "LiDAR en AI-camera, huisdiermodus"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "fabrikantclaim",
+          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
+          "datum": "2026-10-04"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 1200,
+          "status": "fabrikantclaim",
+          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
+          "datum": "2026-10-04",
+          "opmerking": "Datasheet van Mova, gehost door Hornbach; handleiding nog niet geopend"
+        },
+        "max_helling_pct": {
+          "waarde": 45,
+          "status": "winkelclaim",
+          "bron": "https://www.agrieuro.co.uk/mova-lidax-ultra-1200-robot-lawn-mower-without-installation-choose-your-gift-p-72863_71400.html",
+          "datum": "2026-10-04",
+          "opmerking": "Ook Alza"
+        },
+        "geluid_dba": {
+          "waarde": 57,
+          "status": "winkelclaim",
+          "bron": "https://www.agrieuro.co.uk/mova-lidax-ultra-1200-robot-lawn-mower-without-installation-choose-your-gift-p-72863_71400.html",
+          "datum": "2026-10-04",
+          "opmerking": "Ook Multitronic; onduidelijk of geluidsvermogen of geluidsdruk"
+        },
+        "ip_klasse": {
+          "waarde": "IPX6",
+          "status": "winkelclaim",
+          "bron": "https://multitronic.fi/en/products/4612185/dreame-mova-lidax-1200-ultra--smart--wi-fi--1200-m--robotgrasklippare",
+          "datum": "2026-10-04",
+          "opmerking": "Alleen waterdicht gerangschikt; vergelijkt niet automatisch met IP66"
+        },
+        "maaibreedte_cm": {
+          "waarde": 20,
+          "status": "winkelclaim",
+          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
+          "datum": "2026-10-04",
+          "opmerking": "Alza Hongarije"
+        },
+        "maaihoogte_mm": {
+          "waarde": "30-100",
+          "status": "winkelclaim",
+          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
+          "datum": "2026-10-04"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "winkelclaim",
+          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
+          "datum": "2026-10-04",
+          "opmerking": "\"pin protection, anti-lift sensor and audible alarm\""
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "winkelclaim",
+          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
+          "datum": "2026-10-04",
+          "opmerking": "\"pin protection, anti-lift sensor and audible alarm\""
+        },
+        "mes_stop": {
+          "waarde": 1,
+          "status": "winkelclaim",
+          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
+          "datum": "2026-10-04",
+          "opmerking": "\"pin protection, anti-lift sensor and audible alarm\""
+        },
+        "garantie": {
+          "waarde": "3 jaar (Mova, registratie vereist; winkel Verenigd Koninkrijk)",
+          "status": "winkelclaim",
+          "bron": "https://www.agrieuro.co.uk/mova-lidax-ultra-1200-robot-lawn-mower-without-installation-choose-your-gift-p-72863_71400.html",
+          "datum": "2026-10-04",
+          "opmerking": "Voorwaarden op mova.tech controleren"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": 10,
+        "prijskwaliteit": null,
+        "hellingen": 8,
+        "app": null,
+        "veiligheid": null,
+        "geluid": 6
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M006",
+      "slug": "eufy-e15-solo",
+      "naam": "Eufy E15 Solo",
+      "merk": "Eufy",
+      "model": "E15 Solo",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M007",
+      "slug": "eufy-e18",
+      "naam": "Eufy E18",
+      "merk": "Eufy",
+      "model": "E18",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M008",
+      "slug": "dreame-a1-pro",
+      "naam": "Dreame A1 Pro",
+      "merk": "Dreame",
+      "model": "A1 Pro",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M009",
+      "slug": "ecovacs-goat-o1200-lidar-pro",
+      "naam": "Ecovacs GOAT O1200 LiDAR Pro",
+      "merk": "Ecovacs",
+      "model": "GOAT O1200 LiDAR Pro",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M010",
+      "slug": "husqvarna-automower-410ve-nera",
+      "naam": "Husqvarna Automower 410VE NERA",
+      "merk": "Husqvarna",
+      "model": "Automower 410VE NERA",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M011",
+      "slug": "gardena-smart-sileno-free-800",
+      "naam": "Gardena Smart Sileno Free 800",
+      "merk": "Gardena",
+      "model": "Smart Sileno Free 800",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M012",
+      "slug": "mammotion-luba-mini-2-awd-1000",
+      "naam": "Mammotion Luba Mini 2 AWD 1000",
+      "merk": "Mammotion",
+      "model": "Luba Mini 2 AWD 1000",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M013",
+      "slug": "zoef-robot-teun",
+      "naam": "Zoef Robot Teun",
+      "merk": "Zoef Robot",
+      "model": "Teun",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "max_tuingrootte_m2": {
+          "waarde": 300,
+          "status": "winkelclaim",
+          "bron": "Google Shopping-blok in je Google-check (producttitel)",
+          "datum": "2026-10-04"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M014",
+      "slug": "bosch-visimow-18v-200",
+      "naam": "Bosch Visimow 18V-200",
+      "merk": "Bosch",
+      "model": "Visimow 18V-200",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {},
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "prijzen": [],
+      "reviews": [],
+      "ean": null
+    }
+  ]
+}

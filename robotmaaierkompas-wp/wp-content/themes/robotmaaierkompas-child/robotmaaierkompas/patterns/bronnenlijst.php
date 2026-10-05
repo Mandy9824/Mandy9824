@@ -1,0 +1,16 @@
+<?php
+/**
+ * Title: RMK – Bronnenlijst
+ * Slug: robotmaaierkompas/bronnenlijst
+ * Categories: robotmaaierkompas
+ * Description: Genummerde bronnen met type en datum.
+ * Viewport Width: 1280
+ */
+?>
+<!-- wp:html -->
+<ol class="rmk-sources">
+  <li><div><a href="[url]">[Titel bron, bijvoorbeeld handleiding of officiële productpagina]</a><div class="rmk-sources__meta"><span class="rmk-chip">Fabrikant</span><span>geraadpleegd op [datum]</span></div></div></li>
+  <li><div><a href="[url]">[Titel bron, bijvoorbeeld productpagina en reviews]</a><div class="rmk-sources__meta"><span class="rmk-chip">Winkel</span><span>[aantal] reviews gelezen op [datum]</span></div></div></li>
+  <li><div><a href="/hoe-we-beoordelen/#scoremodel">Scoremodel v1.0 (concept tot bevriezing)</a><div class="rmk-sources__meta"><span class="rmk-chip rmk-chip--brand">Eigen methode</span></div></div></li>
+</ol>
+<!-- /wp:html -->
