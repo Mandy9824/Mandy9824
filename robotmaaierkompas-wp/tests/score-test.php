@@ -90,5 +90,18 @@ if ( ! is_array( $js ) ) {
 	}
 	check( 'PHP gelijk aan rmk.js in ' . count( $cases ) . ' gevallen', 0 === $diff, $diff . ' verschillen' );
 }
+// 9. Echt modelbestand (data/modellen.json uit het Excel-bestand)
+$data = json_decode( file_get_contents( RMK_DIR . '/data/modellen.json' ), true );
+$byid = array();
+foreach ( $data['modellen'] as $m ) { $byid[ $m['id'] ] = $m; }
+$r = isset( $byid['M002'] ) ? rmk_compute_score( $byid['M002']['scores'], $byid['M002']['reviews_gelezen'] ) : null;
+check( 'modellen.json: M002 functiescore 92,7', $r && 'functie' === $r['kind'] && '92,7' === rmk_format_score( $r['value'] ), $r ? rmk_format_score( $r['value'] ) . ' ' . $r['kind'] : 'M002 ontbreekt' );
+check( 'modellen.json: M009 (uitverkocht) staat er niet in', ! isset( $byid['M009'] ) );
+check( 'modellen.json: geen niet-leverbare modellen', ! array_filter( $data['modellen'], function ( $m ) { return in_array( $m['beschikbaarheid'], array( 'uitverkocht', 'niet leverbaar' ), true ); } ) );
+check( 'modellen.json: geen prijzen en geen bol.com', false === stripos( json_encode( $data ), 'bol.com' ) && ! array_filter( $data['modellen'], function ( $m ) { return isset( $m['prijzen'] ) || null !== $m['kosten']['aanschaf']['waarde']; } ) );
+$rows = array();
+foreach ( $byid as $id => $m ) { $rows[] = array( 'id' => $id, 'score' => rmk_model_score( $m ) ); }
+echo '  ranglijst: ' . implode( ', ', array_map( function ( $x ) { return $x['id'] . ' ' . rmk_format_score( $x['score']['value'] ); }, rmk_rank( $rows ) ) ) . "\n";
+
 echo $fail ? "\n$fail test(s) mislukt\n" : "\nAlle tests geslaagd\n";
 exit( $fail ? 1 : 0 );

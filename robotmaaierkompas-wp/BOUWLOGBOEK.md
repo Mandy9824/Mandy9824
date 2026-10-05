@@ -260,3 +260,52 @@ robotmaaierkompas-wp/
 - **Domein niet bereikbaar vanuit de bouwomgeving.** `robotmaaierkompas.nl` bestaat (DNS wijst naar Hostinger), maar de omgeving weigert de verbinding: `403 host_not_allowed` ("Host not in allowlist"). Daardoor heb ik HTTPS niet kunnen controleren, geen back-up gemaakt en niets geïnstalleerd. Op de live site is niets veranderd en niets gepubliceerd.
 - **Het nieuwe Excel-bestand is niet aangeleverd.** In de map staat alleen het bestand van 4 oktober, met de bladen Leesmij, Instellingen, Modellen, Bronnen, Prijzen, Reviews en Scores. Daar zit geen blad Overzicht in en het bevat 14 modellen in plaats van 10. Daarom heb ik het script niet opnieuw gedraaid.
 - Stap 2 tot en met 6 zijn niet uitgevoerd. Ze hangen af van stap 1 en van het nieuwe bestand.
+
+---
+
+## Bouwronde 3 (5 oktober 2026): live site, eerste stappen
+
+**Besluit: voorlopig geen Bol-gegevens.** De sleutels zijn van een andere site. Daarom:
+- **Prijstaak uit.** `rmk_bol_enabled()` is onwaar, tenzij `RMK_BOL_ENABLED` in wp-config.php op true staat. Er gaan geen API-verzoeken uit, er wordt geen taak ingepland en een eerder ingeplande taak wordt weggehaald. EAN's worden niet opgezocht.
+- **Productboxen** (beide patronen) en kop-aan-kop tonen alleen de lege toestand "Bekijk de prijs bij de winkel", zonder winkelknop en zonder link. De verwijzingen naar bol.com zijn uit de patronen gehaald, en de prijzenalinea op de methodepagina is een invulveld geworden.
+- **Geen affiliatelinks aangemaakt.** De optie `rmk_affiliate_links` is leeg; het statuspaneel controleert dat.
+- **Open vraag:** in de opdracht staat "WEL Bol-afbeeldingen". Dat heb ik niet gebouwd. Het staat haaks op "geen Bol-gegevens" en zou de API of een feed nodig hebben. Laat weten wat je bedoelt.
+
+### Stap 1: indexering, Hallo wereld, permalinks
+- Bij de start was de site **indexeerbaar** (`max-image-preview:large`, geen noindex) en stond "Hallo wereld" openbaar.
+- **"Hallo wereld" verwijderd**, met de voorbeeldreactie erbij. `/hello-world/` geeft nu 404. Er zijn 0 berichten en 0 reacties.
+- **Permalinks staan op berichtnaam.** De link was `/hello-world/` en `/wp-json/` werkt.
+- **"Zoekmachines niet laten indexeren" staat nu aan.** De homepage geeft `noindex, nofollow` en de sitemaps geven 404. Die instelling is in wp-admin gezet, niet door mij: de standaard-API kan dit niet. Het thema v1.2.0 heeft er nu een route voor, `POST /wp-json/rmk/v1/noindex`, en die kan de indexering alleen aanzetten.
+- `robots.txt` noemt nog `wp-sitemap.xml`. Dat is normaal: WordPress zet de blokkade in de meta-tag, niet in robots.txt.
+
+### Stap 2: thema, Yoast, structuur
+- **Yoast SEO 28.6 is geïnstalleerd en actief** via de plugin-API.
+- De beheerder heet nu **"Mandy van den Broek"** (voor- en achternaam, weergavenaam). De gebruikersnaam en slug blijven `admin`; Yoast zet de auteursarchieven uit.
+- **Child theme: nog niet actief.** Twenty Twenty-Five staat nog aan. Mandy uploadt `robotmaaierkompas-child.zip` **versie 1.2.0** zelf. Daarna doe ik via de beheerroutes (alleen voor beheerders):
+  - `POST /rmk/v1/noindex` (voor de zekerheid),
+  - `POST /rmk/v1/paginas` (76 concepten; daarbij wordt ook de privacypagina gekoppeld),
+  - `POST /rmk/v1/seo` (Yoast op **Persoon**, de huidige gebruiker = Mandy van den Broek),
+  - `GET /rmk/v1/status`.
+
+  De knoppen in Gereedschap > Robotmaaierkompas doen hetzelfde. Er is bewust geen route om te publiceren of om de indexering uit te zetten.
+- Lokaal getest: een redacteur krijgt 403, en noindex, seo (person, gebruiker 1), paginas en status werken.
+
+### Stap 3: data uit het nieuwe Excel-bestand (bladen o.a. Overzicht en Logboek)
+- Het script herkent nu de nieuwe kolom **Beschikbaarheid**. Modellen met "uitverkocht" of "niet leverbaar" vallen weg, en alleen die kolom of een bronstatus telt. Vrije tekst in Opmerking telt niet meer: daardoor werd M001 eerst ten onrechte overgeslagen, omdat er "niet leverbaar bij Navimow NL zelf, wel nieuw bij Bol" staat.
+- Het script herkent ook samengestelde veldnamen in Bronnen ("Zones / obstakels / draad", "App iOS én Android, kaart/no-go, schema, OTA", toelichting tussen haakjes).
+- **Uitvoer:** 13 modellen. **M009 (uitverkocht) staat er niet in.** M001 staat er als "uitlopend" wel in. M006-G is geen eigen rij in Modellen; het is een variant met dezelfde score.
+- **Scores:** alle onderdeelscores van alle 13 modellen zijn gelijk aan blad Scores. Volgorde: M002 **92,7**, M010 87,3, M004 80,5, M005 80,5, M008 78,6, M001 75,9, M006 63,2, M011 60,9. M003, M007 en M012 tot en met M014 hebben geen score (nog niet uitgezocht, beschikbaarheid onbekend).
+- **Geen prijzen en geen Bol-gegevens in modellen.json** (het bestand is openbaar). Er is geen prijslijst, `aanschaf` is overal null, en 10 Bol-bronregels en 6 Bol-reviewregels zijn overgeslagen. Opmerkingen uit Bronnen gaan niet mee, want die bevatten prijzen en interne notities.
+- `tests/score-test.php` controleert dit nu ook: M002 92,7, geen M009, geen niet-leverbare modellen, geen prijzen of bol.com. Alle tests geslaagd.
+- Let op: `modellen.json` gaat mee in de zip. Bij een nieuwe Excel-versie: script draaien en de zip opnieuw uploaden (of alleen dat bestand vervangen).
+
+### Stap 4: controle
+- Live: **0 berichten, 1 pagina** (het concept "Privacybeleid" van WordPress zelf), **niets gepubliceerd**. De homepage geeft `noindex, nofollow`.
+- Geen sleutels, wachtwoorden of toepassingswachtwoorden in de repository (gecontroleerd).
+
+### Nog te doen door Mandy
+- [ ] `robotmaaierkompas-child.zip` (v1.2.0) uploaden en activeren. Daarna meld ik dat de bouwstappen gedaan kunnen worden.
+- [ ] Bedoeling van "WEL Bol-afbeeldingen" uitleggen.
+- [ ] Het concept "Privacybeleid" van WordPress (slug `privacy-policy`) mag weg zodra onze `/privacy/` er staat.
+- [ ] Het toepassingswachtwoord van het beheerdersaccount intrekken na de bouw (het staat in de chat).
+- [ ] De lijst "Wat Mandy nog zelf moet invullen of nakijken" hierboven (auteurspagina, eigenaargegevens, juridische teksten, DNS-verificatie voor Search Console).

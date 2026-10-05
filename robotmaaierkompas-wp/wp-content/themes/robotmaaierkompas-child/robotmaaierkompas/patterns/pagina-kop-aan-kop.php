@@ -61,8 +61,8 @@
   <h2 id="prijs" style="font-size: var(--rmk-fs-xl)">Prijzen</h2>
   <p class="rmk-affnote"><svg class="rmk-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg><span>Advertentie: via deze knoppen krijgen wij mogelijk een commissie. Dat verandert de vergelijking niet.</span></p>
   <div class="rmk-h2h">
-    <div class="rmk-offers"><div class="rmk-offer"><span class="rmk-offer__shop">[Model A] · bol.com</span><span class="rmk-offer__price">€ [prijs]</span><a class="rmk-btn rmk-btn--primary" href="[affiliatelink bol.com of /ga/…]" rel="sponsored nofollow">Naar bol.com</a><span class="rmk-offer__src">Bron: bol.com · prijs van [datum, tijd]</span></div></div>
-    <div class="rmk-offers"><div class="rmk-offer"><span class="rmk-offer__shop">[Model B] · bol.com</span><span class="rmk-offer__price">€ [prijs]</span><a class="rmk-btn rmk-btn--primary" href="[affiliatelink bol.com of /ga/…]" rel="sponsored nofollow">Naar bol.com</a><span class="rmk-offer__src">Bron: bol.com · prijs van [datum, tijd]</span></div></div>
+    <div class="rmk-offers"><div class="rmk-offer"><span class="rmk-offer__shop">[Model A]</span><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span><span class="rmk-offer__src">We tonen voorlopig geen winkelprijzen.</span></div></div>
+    <div class="rmk-offers"><div class="rmk-offer"><span class="rmk-offer__shop">[Model B]</span><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span><span class="rmk-offer__src">We tonen voorlopig geen winkelprijzen.</span></div></div>
   </div>
 </section>
 <!-- /wp:html -->

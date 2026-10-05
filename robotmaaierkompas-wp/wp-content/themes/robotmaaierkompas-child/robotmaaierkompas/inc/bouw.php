@@ -135,7 +135,8 @@ function rmk_build_pages( $author_id ) {
 }
 
 /** Yoast SEO-instellingen (BLAUWDRUK hoofdstuk 2, 10 en 11). */
-function rmk_configure_seo() {
+/** @param int $person_user_id Gebruiker die Yoast als Persoon (eigenaar van de site) gebruikt. */
+function rmk_configure_seo( $person_user_id = 0 ) {
 	if ( ! class_exists( 'WPSEO_Options' ) ) {
 		return new WP_Error( 'rmk_yoast', 'Yoast SEO is niet actief.' );
 	}
@@ -163,8 +164,8 @@ function rmk_configure_seo() {
 		'schema-article-type-page'     => 'Article',
 		'schema-page-type-post'        => 'WebPage',
 		'schema-article-type-post'     => 'Article',
-		'company_or_person'            => 'company',
-		'company_name'                 => 'robotmaaierkompas.nl',
+		'company_or_person'            => 'person',
+		'company_or_person_user_id'    => (int) ( $person_user_id ? $person_user_id : get_current_user_id() ),
 		'website_name'                 => 'robotmaaierkompas.nl',
 		'display-metabox-pt-attachment'=> false,
 	);
@@ -210,7 +211,7 @@ function rmk_status_checks() {
 	$add( '0' === (string) get_option( 'blog_public' ), 'Zoekmachines niet laten indexeren staat aan', 'Pas op de lanceerdatum bewust uitzetten.' );
 	$add( '/%postname%/' === get_option( 'permalink_structure' ), 'Permalinks op berichtnaam', (string) get_option( 'permalink_structure' ) );
 	$add( 0 === strpos( home_url(), 'https://' ) && 0 === strpos( site_url(), 'https://' ), 'Site- en WordPress-adres gebruiken HTTPS', home_url() );
-	$add( is_ssl() || ( defined( 'WP_CLI' ) && WP_CLI ), 'Deze verbinding is HTTPS', is_ssl() ? 'ja' : 'via WP-CLI niet te zien' );
+	$add( is_ssl() || ( defined( 'WP_CLI' ) && WP_CLI ), 'Deze verbinding is HTTPS', is_ssl() ? 'ja' : ( defined( 'WP_CLI' ) && WP_CLI ? 'via WP-CLI niet te zien' : 'nee' ) );
 	$sample = get_posts( array( 'post_type' => array( 'post', 'page' ), 'post_status' => 'any', 'name' => 'hello-world', 'numberposts' => 1 ) ) ?: get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'name' => 'sample-page', 'numberposts' => 1 ) );
 	$add( ! $sample, 'Standaardvoorbeeldpagina\'s verwijderd', $sample ? 'nog aanwezig: ' . $sample[0]->post_name : '' );
 	$fonts = array( 'atkinson-hyperlegible-400.woff2', 'atkinson-hyperlegible-700.woff2', 'schibsted-grotesk-var.woff2' );
@@ -220,9 +221,12 @@ function rmk_status_checks() {
 	$add( ! empty( $data['modellen'] ), 'data/modellen.json aanwezig', isset( $data['gegenereerd'] ) ? 'gegenereerd ' . $data['gegenereerd'] . ', ' . count( $data['modellen'] ) . ' modellen' : '' );
 	$pub = (int) wp_count_posts( 'page' )->publish + (int) wp_count_posts( 'post' )->publish;
 	$add( 0 === $pub, 'Niets gepubliceerd', $pub . ' gepubliceerd' );
-	$add( (bool) rmk_bol_credentials(), 'Bol-API-sleutels in wp-config.php', rmk_bol_credentials() ? 'ingesteld' : 'nog niet ingesteld' );
 	$next = wp_next_scheduled( RMK_BOL_HOOK );
-	$add( (bool) $next, 'Prijstaak ingepland', $next ? wp_date( 'j-n-Y H:i', $next ) : '' );
+	$add( ! rmk_bol_enabled() && ! $next, 'Prijstaak uitgeschakeld (voorlopig geen Bol-gegevens)', rmk_bol_enabled() ? 'STAAT AAN' : ( $next ? 'nog ingepland' : 'uit' ) );
+	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
+	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
+	$person = (int) ( class_exists( 'WPSEO_Options' ) ? WPSEO_Options::get( 'company_or_person_user_id' ) : 0 );
+	$add( class_exists( 'WPSEO_Options' ) && 'person' === WPSEO_Options::get( 'company_or_person' ) && $person, 'Yoast: site vertegenwoordigt een persoon', $person ? get_the_author_meta( 'display_name', $person ) : '' );
 	$add( class_exists( 'WPSEO_Options' ), 'Yoast SEO actief', defined( 'WPSEO_VERSION' ) ? WPSEO_VERSION : '' );
 	$add( wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) ), 'Server kan WebP maken' );
 	return $c;
@@ -244,7 +248,7 @@ function rmk_admin_page() {
 			$r      = rmk_build_pages( get_current_user_id() );
 			$result = $r['aangemaakt'] . " concepten aangemaakt.\n" . implode( "\n", $r['log'] );
 		} elseif ( 'seo' === $actie ) {
-			$r      = rmk_configure_seo();
+			$r      = rmk_configure_seo( get_current_user_id() );
 			$result = is_wp_error( $r ) ? $r->get_error_message() : 'Yoast SEO ingesteld.';
 		}
 	}
@@ -261,6 +265,38 @@ function rmk_admin_page() {
 	echo '<p><button class="button button-primary" name="rmk_actie" value="paginas">Paginastructuur als concepten aanmaken</button> <span class="description">Jij wordt de auteur. Bestaande pagina\'s blijven ongemoeid. Er wordt niets gepubliceerd.</span></p>';
 	echo '<p><button class="button" name="rmk_actie" value="seo">Yoast SEO instellen</button></p></form></div>';
 }
+
+/* ------------------------------------------------------------------ REST (beheerders, ook met een toepassingswachtwoord)
+ * GET  /wp-json/rmk/v1/status
+ * POST /wp-json/rmk/v1/noindex   zet "Zoekmachines niet laten indexeren" AAN (kan het niet uitzetten)
+ * POST /wp-json/rmk/v1/paginas   paginastructuur als concepten (huidige gebruiker is auteur)
+ * POST /wp-json/rmk/v1/seo       Yoast instellen; persoon = huidige gebruiker
+ * Er is bewust geen route om te publiceren of de indexering uit te zetten. */
+add_action( 'rest_api_init', function () {
+	$admin = function () {
+		return current_user_can( 'manage_options' );
+	};
+	register_rest_route( 'rmk/v1', '/status', array( 'methods' => 'GET', 'permission_callback' => $admin, 'callback' => function () {
+		return rest_ensure_response( rmk_status_checks() );
+	} ) );
+	register_rest_route( 'rmk/v1', '/noindex', array( 'methods' => 'POST', 'permission_callback' => $admin, 'callback' => function () {
+		update_option( 'blog_public', '0' );
+		do_action( 'litespeed_purge_all' );
+		return rest_ensure_response( array( 'blog_public' => get_option( 'blog_public' ) ) );
+	} ) );
+	register_rest_route( 'rmk/v1', '/paginas', array( 'methods' => 'POST', 'permission_callback' => $admin, 'callback' => function () {
+		$r = rmk_build_pages( get_current_user_id() );
+		$privacy = get_page_by_path( 'privacy', OBJECT, 'page' );
+		if ( $privacy ) {
+			update_option( 'wp_page_for_privacy_policy', $privacy->ID );
+		}
+		return rest_ensure_response( $r );
+	} ) );
+	register_rest_route( 'rmk/v1', '/seo', array( 'methods' => 'POST', 'permission_callback' => $admin, 'callback' => function () {
+		$r = rmk_configure_seo( get_current_user_id() );
+		return is_wp_error( $r ) ? $r : rest_ensure_response( array( 'ok' => true ) );
+	} ) );
+} );
 
 /* ------------------------------------------------------------------ WP-CLI */
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
@@ -280,7 +316,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 		WP_CLI::success( $r['aangemaakt'] . ' concepten aangemaakt.' );
 	} );
 	WP_CLI::add_command( 'rmk seo', function () {
-		$r = rmk_configure_seo();
+		$r = rmk_configure_seo( get_current_user_id() );
 		is_wp_error( $r ) ? WP_CLI::error( $r->get_error_message() ) : WP_CLI::success( 'Yoast SEO ingesteld.' );
 	} );
 }

@@ -15,6 +15,10 @@
  * EAN per model: wp rmk bol-ean M002 <EAN>   (komt nog niet uit het Excel-bestand)
  * Handmatig draaien: wp rmk bol-prijzen
  *
+ * STAAT UIT (besluit 5 oktober 2026): voorlopig geen Bol-gegevens. Geen API-verzoeken, geen ingeplande taak,
+ * geen prijzen. Productboxen tonen "Bekijk de prijs bij de winkel" zonder knop. Aanzetten kan pas na een nieuw
+ * besluit: define( 'RMK_BOL_ENABLED', true ); in wp-config.php plus eigen sleutels voor deze site.
+ *
  * LET OP: de endpoints hieronder zijn niet gecontroleerd tegen de API-documentatie (die was vanuit de
  * bouwomgeving niet bereikbaar). Controleer ze op https://api.bol.com/marketing/docs/catalog-api/ en
  * pas zo nodig de filters rmk_bol_token_url en rmk_bol_offer_url aan.
@@ -27,6 +31,10 @@ const RMK_BOL_EAN_OPTION = 'rmk_bol_ean';
 const RMK_BOL_HOOK       = 'rmk_bol_prijzen_ophalen';
 const RMK_BOL_MAX_AGE    = DAY_IN_SECONDS; // nooit een prijs tonen die ouder is dan 24 uur
 
+function rmk_bol_enabled() {
+	return defined( 'RMK_BOL_ENABLED' ) && true === RMK_BOL_ENABLED;
+}
+
 function rmk_bol_max_age() {
 	return min( RMK_BOL_MAX_AGE, (int) apply_filters( 'rmk_bol_max_age', RMK_BOL_MAX_AGE ) );
 }
@@ -34,6 +42,12 @@ function rmk_bol_max_age() {
 /* ------------------------------------------------------------------ planning */
 
 add_action( 'init', function () {
+	if ( ! rmk_bol_enabled() ) {
+		if ( wp_next_scheduled( RMK_BOL_HOOK ) ) {
+			wp_clear_scheduled_hook( RMK_BOL_HOOK ); // uitgeschakeld: ook een eerder ingeplande taak weghalen
+		}
+		return;
+	}
 	if ( ! wp_next_scheduled( RMK_BOL_HOOK ) ) {
 		// Twee keer per dag: één mislukte ronde laat de prijzen nog niet verlopen.
 		wp_schedule_event( time() + 300, 'twicedaily', RMK_BOL_HOOK );
@@ -59,6 +73,9 @@ add_action( 'switch_theme', function () {
 /* ------------------------------------------------------------------ API */
 
 function rmk_bol_credentials() {
+	if ( ! rmk_bol_enabled() ) {
+		return null;
+	}
 	if ( ! defined( 'RMK_BOL_CLIENT_ID' ) || ! defined( 'RMK_BOL_CLIENT_SECRET' ) || ! RMK_BOL_CLIENT_ID || ! RMK_BOL_CLIENT_SECRET ) {
 		return null;
 	}
@@ -178,6 +195,9 @@ function rmk_bol_eans() {
 
 /** De geplande taak. Geeft een korte samenvatting terug (ook voor WP-CLI). */
 function rmk_bol_fetch_all() {
+	if ( ! rmk_bol_enabled() ) {
+		return array( 'start' => time(), 'ok' => 0, 'fout' => array( 'Prijstaak staat uit (RMK_BOL_ENABLED).' ), 'zonder_ean' => array() );
+	}
 	$eans = rmk_bol_eans();
 	$log  = array( 'start' => time(), 'ok' => 0, 'fout' => array(), 'zonder_ean' => array() );
 	foreach ( rmk_models_data()['modellen'] as $m ) {
@@ -218,6 +238,9 @@ function rmk_bol_fetch_all() {
 
 /** Actuele Bol-prijs voor een model, of null als er geen is of als hij ouder is dan 24 uur. */
 function rmk_bol_price( $model_id ) {
+	if ( ! rmk_bol_enabled() ) {
+		return null;
+	}
 	$store = (array) get_option( RMK_BOL_OPTION, array() );
 	$p     = isset( $store[ $model_id ] ) ? $store[ $model_id ] : null;
 	if ( ! $p || 'ok' !== $p['status'] || empty( $p['opgehaald'] ) ) {
@@ -234,7 +257,16 @@ function rmk_bol_time( $p ) {
 }
 
 /** Prijsregel in de productbox, met bronvermelding. */
+/** Lege prijstoestand zonder winkelknop (geen affiliatelinks). */
+function rmk_offer_empty_html() {
+	return '<div class="rmk-offer"><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span>'
+		. '<span class="rmk-offer__src">We tonen voorlopig geen winkelprijzen.</span></div>';
+}
+
 function rmk_bol_offer_html( $model_id, $slug ) {
+	if ( ! rmk_bol_enabled() ) {
+		return rmk_offer_empty_html();
+	}
 	$p    = rmk_bol_price( $model_id );
 	$link = home_url( '/ga/bol/' . $slug . '/' );
 	if ( ! $p ) {
@@ -267,10 +299,16 @@ add_shortcode( 'rmk_bolprijs', function ( $atts ) {
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	WP_CLI::add_command( 'rmk bol-prijzen', function () {
+		if ( ! rmk_bol_enabled() ) {
+			WP_CLI::error( 'Prijstaak staat uit (voorlopig geen Bol-gegevens).' );
+		}
 		$log = rmk_bol_fetch_all();
 		WP_CLI::log( wp_json_encode( $log, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );
 	} );
 	WP_CLI::add_command( 'rmk bol-ean', function ( $args ) {
+		if ( ! rmk_bol_enabled() ) {
+			WP_CLI::error( 'Prijstaak staat uit (voorlopig geen Bol-gegevens).' );
+		}
 		list( $id, $ean ) = array_pad( $args, 2, '' );
 		if ( ! preg_match( '/^\d{8,14}$/', $ean ) ) {
 			WP_CLI::error( 'Gebruik: wp rmk bol-ean M002 <EAN van 8 tot 14 cijfers>' );

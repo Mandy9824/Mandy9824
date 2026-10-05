@@ -3,7 +3,7 @@
  * Title: RMK – Productbox (eerste op de pagina)
  * Slug: robotmaaierkompas/productbox
  * Categories: robotmaaierkompas
- * Description: Met affiliate-melding boven de eerste knop, bol.com en een tweede winkel, elk met prijs, bron en datum.
+ * Description: Productbox met de lege prijstoestand "Bekijk de prijs bij de winkel" (voorlopig geen winkelprijzen en geen winkelknoppen).
  * Viewport Width: 1280
  */
 ?>
@@ -16,7 +16,7 @@
       <h3 id="p-[model-slug]">[Modelnaam]</h3>
       <p class="rmk-bestfor"><span>Beste voor</span><b>[beste voor]</b></p>
       <div class="rmk-scorecell" data-rmk-score data-scores="betrouwbaarheid=[0–10]; navigatie=[0–10]; prijskwaliteit=[0–10]; hellingen=[0–10]; app=[0–10]; veiligheid=[0–10]; geluid=[0–10]; reviews=[aantal gelezen reviews]"><div class="rmk-minis"><b data-out="total">–</b><small data-out="kind">Score</small></div><span class="rmk-provisional" data-out="label" hidden></span></div>
-      <p class="rmk-reviews"><b>[gemiddelde]</b> van 5 uit <b>[aantal]</b> reviews <span class="rmk-src">Bron: bol.com, geteld op [datum]</span></p>
+      <p class="rmk-reviews"><b>[gemiddelde]</b> van 5 uit <b>[aantal]</b> reviews <span class="rmk-src">Bron: [winkel], geteld op [datum]</span></p>
     </div>
   </div>
   <div class="rmk-proscons">
@@ -24,9 +24,7 @@
     <div><h4>Minpunten</h4><ul class="rmk-cons"><li>[minpunt]</li><li>[minpunt]</li></ul></div>
   </div>
   <div class="rmk-product__aside rmk-offers">
-    <p class="rmk-affnote"><svg class="rmk-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg><span>Advertentie: via deze knoppen krijgen wij mogelijk een commissie. Dat verandert de score niet.</span></p>
-    <div class="rmk-offer"><span class="rmk-offer__shop">bol.com</span><span class="rmk-offer__price">€ [prijs]</span><a class="rmk-btn rmk-btn--primary" href="[affiliatelink bol.com of /ga/…]" rel="sponsored nofollow">Naar bol.com</a><span class="rmk-offer__src">Bron: bol.com · prijs van [datum, tijd]</span></div>
-    <div class="rmk-offer"><span class="rmk-offer__shop">[winkel]</span><span class="rmk-offer__price">€ [prijs]</span><a class="rmk-btn rmk-btn--secondary" href="[affiliatelink of /ga/…]" rel="sponsored nofollow">Naar [winkel]</a><span class="rmk-offer__src">Bron: [winkel] · prijs van [datum, tijd]</span></div>
+    <div class="rmk-offer"><span class="rmk-offer__shop">[winkel]</span><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span><span class="rmk-offer__src">We tonen voorlopig geen winkelprijzen.</span></div>
   </div>
 </article>
 <!-- /wp:html -->

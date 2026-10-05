@@ -19,8 +19,10 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
 - Meerdere bronregels voor hetzelfde veld: gecontroleerd > fabrikantclaim > winkelclaim.
 - Modellen die als "niet leverbaar" zijn gemarkeerd worden overgeslagen.
 - Er wordt niets geschat of aangevuld. Alles wat ontbreekt blijft null.
-- Bol.com-prijzen worden niet statisch gebruikt (Bol-voorwaarden art. 3.7, zie bouwlogboek):
-  die komen alleen via de prijstaak (Bol-partner-API) en worden niet ouder dan 24 uur getoond.
+- Modellen met beschikbaarheid "uitverkocht" of "niet leverbaar" worden overgeslagen.
+- Voorlopig geen Bol-gegevens: bronregels en reviews van bol.com worden overgeslagen.
+- Geen winkelprijzen in de uitvoer (modellen.json is openbaar): aanschaf blijft null, geen prijslijst.
+  Opmerkingen uit Bronnen gaan ook niet mee (die kunnen prijzen en interne notities bevatten).
 """
 import argparse
 import datetime as dt
@@ -53,8 +55,11 @@ KOLOMMEN = {
     "Bediening zonder app (1/0)": "bediening_zonder_app", "Updates over de lucht (1/0)": "ota_updates",
     "App-rating (0-5)": "app_rating", "Garantie": "garantie",
     "Extra installatiekosten (euro, eenmalig)": "extra_installatiekosten", "Opmerking": "opmerking",
+    "Mes-stop bij optillen/kantelen (1/0) - alleen informatie": "mes_stop",
+    "Beschikbaarheid (nieuw / uitlopend / uitverkocht)": "beschikbaarheid",
 }
-NIET_SPEC = {"id", "merk", "model", "generatie", "kandidaat_paginas", "opmerking"}
+NIET_SPEC = {"id", "merk", "model", "generatie", "kandidaat_paginas", "opmerking", "beschikbaarheid"}
+NIET_LEVERBAAR = ("niet leverbaar", "uitverkocht")
 
 # Veldnaam in blad Bronnen (genormaliseerd, kleine letters) -> interne sleutel
 BRONVELDEN = {
@@ -73,6 +78,14 @@ BRONVELDEN = {
     "bediening zonder app": "bediening_zonder_app", "updates over de lucht": "ota_updates",
     "app-rating": "app_rating", "garantie": "garantie",
     "extra installatiekosten": "extra_installatiekosten",
+    "zones en passages": "zones", "passages": "zones", "obstakels": "obstakelontwijking", "detectie": "obstakeldetectie",
+    "draad": "begrenzingsdraad", "ota": "ota_updates", "geofence": "geofence",
+}
+# Delen na een veldnaam die met "App" begint, gaan over de app (bijv. "App: kaart, zones, schema")
+APP_DELEN = {
+    "kaart": "app_kaart", "zones": "app_kaart", "no-go": "app_kaart", "kaart/no-go": "app_kaart",
+    "schema": "app_schema", "ota": "ota_updates", "knoppen": "bediening_zonder_app",
+    "bediening zonder app": "bediening_zonder_app", "slimme-thuiskoppeling": "app_smarthome",
 }
 STATUS_RANG = {"gecontroleerd": 3, "fabrikantclaim": 2, "winkelclaim": 1}
 STATUS_LEEG = ("niet gevonden", "niet geopend")
@@ -161,11 +174,17 @@ def kolom(rij, *namen):
 
 
 def bron_velden(veld):
-    """'Max. tuingrootte, helling, aandrijving' -> ['max. tuingrootte', 'helling', 'aandrijving']"""
-    delen = [norm(d) for d in re.split(r",| en ", str(veld or "")) if norm(d)]
-    if norm(veld) in BRONVELDEN or norm(veld) in KOSTEN_BRONVELDEN:
-        return [norm(veld)]
-    return delen
+    """'Max. tuingrootte, helling, aandrijving' -> sleutels. Toelichting tussen haakjes telt niet mee."""
+    v = norm(re.sub(r"\(.*?\)", "", str(veld or "")))
+    if v in BRONVELDEN or v in KOSTEN_BRONVELDEN:
+        return [BRONVELDEN.get(v) or KOSTEN_BRONVELDEN.get(v)]
+    delen = [norm(d) for d in re.split(r",| en | / ", v) if norm(d)]
+    uit, app = [], bool(delen) and delen[0].startswith("app")
+    for d in delen:
+        key = (APP_DELEN.get(d) if app else None) or BRONVELDEN.get(d) or KOSTEN_BRONVELDEN.get(d)
+        if key:
+            uit.append(key)
+    return uit
 
 
 def niet_leverbaar(*teksten):
@@ -245,7 +264,8 @@ def main():
             if r and r[0] and str(r[0]).startswith("Minimum aantal gelezen reviews") and getal(r[1]):
                 minimum = int(getal(r[1]))
 
-    rapport = {"overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {}}
+    rapport = {"overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
+               "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": []}
     uit_modellen = []
 
     for m in modellen:
@@ -258,8 +278,9 @@ def main():
         mprijs = [p for p in prijzen if str(kolom(p, "Model-ID") or "").strip() == mid]
         mrev = [r for r in reviews if str(kolom(r, "Model-ID") or "").strip() == mid]
 
-        if niet_leverbaar(rij.get("opmerking"), *[kolom(b, "Status") for b in mbron],
-                          *[kolom(b, "Waarde") for b in mbron if norm(kolom(b, "Veld")) in ("beschikbaarheid", "leverbaar")]):
+        # Alleen de kolom Beschikbaarheid of een bronstatus "niet leverbaar"; vrije tekst in Opmerking telt niet
+        # (die kan bijvoorbeeld "niet leverbaar bij de fabrikant, wel bij een winkel" zeggen).
+        if norm(rij.get("beschikbaarheid")) in NIET_LEVERBAAR or any(norm(kolom(b, "Status")) in NIET_LEVERBAAR for b in mbron):
             rapport["overgeslagen_niet_leverbaar"].append(mid)
             continue
 
@@ -270,10 +291,10 @@ def main():
             regel = {"bron": str(kolom(b, "Bron") or "").strip(), "datum": datum(kolom(b, "Datum")),
                      "status": status, "bronwaarde": None if leeg(kolom(b, "Waarde")) else str(kolom(b, "Waarde")),
                      "opmerking": None if leeg(kolom(b, "Opmerking")) else str(kolom(b, "Opmerking"))}
-            for veld in bron_velden(kolom(b, "Veld")):
-                key = BRONVELDEN.get(veld) or KOSTEN_BRONVELDEN.get(veld)
-                if not key:
-                    continue
+            if "bol.com" in norm(regel["bron"]) or "bol.com" in norm(kolom(b, "Veld")):
+                rapport["bol_bronnen_overgeslagen"] += 1  # voorlopig geen Bol-gegevens
+                continue
+            for key in bron_velden(kolom(b, "Veld")):
                 oud = beste.get(key)
                 rang = STATUS_RANG.get(status.split(",")[0].strip(), 0)
                 if oud is None or rang > STATUS_RANG.get(oud["status"].split(",")[0].strip(), 0):
@@ -294,16 +315,12 @@ def main():
             # tegenstrijdig: alleen met gekozen waarde in Modellen (die er hier is, want waarde niet leeg)
             velden[key] = waarde
             specs[key] = {"waarde": waarde, "status": b["status"], "bron": b["bron"], "datum": b["datum"]}
-            if b["opmerking"]:
-                specs[key]["opmerking"] = b["opmerking"]
         # Bronregels met status "niet gevonden" of tegenstrijdig zonder waarde: wel tonen, waarde null
         for key, b in beste.items():
             if key in specs or key in KOSTEN:
                 continue
             if b["bron"] and b["datum"] and (b["status"].startswith(STATUS_LEEG) or b["status"].startswith("tegenstrijdig")):
                 specs[key] = {"waarde": None, "status": b["status"], "bron": b["bron"], "datum": b["datum"]}
-                if b["opmerking"]:
-                    specs[key]["opmerking"] = b["opmerking"]
                 if key not in door_status:
                     door_status.append(key)
         if zonder:
@@ -334,6 +351,11 @@ def main():
             bron, d = str(kolom(r, "Bron") or "").strip(), datum(kolom(r, "Peildatum"))
             if not bron or not d:
                 continue
+            if "bol" in norm(bron):
+                rapport["bol_reviews_overgeslagen"] += 1  # voorlopig geen Bol-gegevens
+                continue
+            if norm(kolom(r, "Niet-onafhankelijk")) == "ja":
+                continue  # fabrikant of ander land: telt niet als onafhankelijk
             e = {"bron": bron, "peildatum": d,
                  "aantal_totaal": getal(kolom(r, "Aantal reviews totaal")),
                  "gemiddelde": getal(kolom(r, "Gemiddelde")),
@@ -360,8 +382,7 @@ def main():
 
         naam = f"{rij.get('merk') or ''} {rij.get('model') or ''}".strip()
         kosten = {k: {"waarde": None, "bron": None, "datum": None} for k in KOSTEN}
-        if laagste:
-            kosten["aanschaf"] = {"waarde": laagste["prijs"], "bron": laagste["winkel"], "datum": laagste["datum"]}
+        # Geen winkelprijzen in de zichtbare weergave (besluit 5 oktober 2026): aanschaf blijft leeg.
         if "extra_installatiekosten" in specs and getal(specs["extra_installatiekosten"]["waarde"]) is not None:
             s = specs["extra_installatiekosten"]
             kosten["installatie"] = {"waarde": getal(s["waarde"]), "bron": s["bron"], "datum": s["datum"]}
@@ -370,13 +391,15 @@ def main():
                     and not b["status"].startswith(STATUS_LEEG) and getal(b["bronwaarde"]) is not None:
                 kosten[key] = {"waarde": getal(b["bronwaarde"]), "bron": b["bron"], "datum": b["datum"]}
 
+        if leeg(rij.get("beschikbaarheid")):
+            rapport["beschikbaarheid_onbekend"].append(mid)
         uit_modellen.append({
             "id": mid, "slug": slugify(naam), "naam": naam, "merk": rij.get("merk"), "model": rij.get("model"),
             "kosten": kosten,
             "specs": specs,
             "scores": scores,
             "reviews_gelezen": gelezen,
-            "prijzen": p_uit,
+            "beschikbaarheid": None if leeg(rij.get("beschikbaarheid")) else norm(rij.get("beschikbaarheid")),
             "reviews": r_uit,
             "ean": None,  # nog niet in het Excel-bestand; nodig voor de Bol-prijstaak
         })

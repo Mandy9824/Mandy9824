@@ -1,7 +1,7 @@
 {
   "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
-  "gegenereerd": "2026-10-05 18:55",
-  "bronbestand": "modeldata.xlsx",
+  "gegenereerd": "2026-10-05 19:57",
+  "bronbestand": "robotmaaierkompas_modeldata_v1.xlsx",
   "scoremodel": "v1.0 (concept tot bevriezing)",
   "algemeen": {
     "stroomprijs_per_kwh": {
@@ -24,9 +24,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -75,37 +75,187 @@
         }
       },
       "specs": {
+        "navigatie": {
+          "waarde": "RTK+vision",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
         "max_tuingrootte_m2": {
           "waarde": 500,
-          "status": "winkelclaim",
-          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
-          "datum": "2026-10-04"
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "max_helling_pct": {
+          "waarde": 30,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf ; https://nl.navimow.com/products/navimow-i1-robot-lawn-mower",
+          "datum": "2026-10-05"
+        },
+        "vierwielaandrijving": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
         },
         "geluid_dba": {
           "waarde": 58,
-          "status": "winkelclaim",
-          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
-          "datum": "2026-10-04"
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "ip_klasse": {
+          "waarde": "IP66",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
         },
         "maaibreedte_cm": {
           "waarde": 18,
-          "status": "winkelclaim",
-          "bron": "https://www.gamma.be/nl/assortiment/l/tuin/elektrisch-tuingereedschap/robotmaaiers/merk-segway-navimow",
-          "datum": "2026-10-04"
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "maaihoogte_mm": {
+          "waarde": "20-60",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf ; https://nl.navimow.com/products/navimow-i1-robot-lawn-mower",
+          "datum": "2026-10-05"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "alarm": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "gps_tracking": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf ; https://nl.navimow.com/products/navimow-i1-robot-lawn-mower",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 4.51,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-05"
+        },
+        "garantie": {
+          "waarde": "3 jaar toestel; 2 jaar accu en voedingsadapter; messen niet (handleiding 6.4)",
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
+        },
+        "mes_stop": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://api5-h5-app-fra.ninebot.com/navimow/pdf/Navimow_i-series_User_Manual_EN.pdf",
+          "datum": "2026-10-05"
         }
       },
       "scores": {
         "betrouwbaarheid": null,
-        "navigatie": null,
+        "navigatie": 10,
         "prijskwaliteit": null,
-        "hellingen": null,
-        "app": null,
-        "veiligheid": null,
+        "hellingen": 6,
+        "app": 9,
+        "veiligheid": 3.75,
         "geluid": 6
       },
-      "reviews_gelezen": 0,
-      "prijzen": [],
-      "reviews": [],
+      "reviews_gelezen": 1,
+      "beschikbaarheid": "uitlopend",
+      "reviews": [
+        {
+          "bron": "MediaMarkt.nl",
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 2,
+          "gemiddelde": 5,
+          "aantal_gelezen": 1,
+          "structurele_storingen": 0,
+          "installatie_of_gebruiksfouten": 0,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 5; marketplace-productpagina. 2 teksten: 1 MediaMarkt NL (meegeteld, neutraal), 1 gesyndiceerd uit MediaMarkt Italië (niet meegeteld)"
+        }
+      ],
       "ean": null
     },
     {
@@ -121,9 +271,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -176,22 +326,19 @@
           "waarde": "RTK+vision",
           "status": "gecontroleerd",
           "bron": "https://be.navimow.com/collections/navimow-i-series",
-          "datum": "2026-10-04",
-          "opmerking": "Fabrikantpagina: NRTK + Vision. MediaMarkt noemt ten onrechte LiDAR (LiDAR zit in i2 LiDAR-lijn)"
+          "datum": "2026-10-04"
         },
         "zones": {
           "waarde": "ja",
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Daarnaast max 20 VisionFence-uit-zones (aparte functie)"
+          "datum": "2026-10-04"
         },
         "obstakelontwijking": {
           "waarde": "ja",
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Fabrikant noemt 150+ obstakels"
+          "datum": "2026-10-04"
         },
         "begrenzingsdraad": {
           "waarde": "nee",
@@ -203,29 +350,25 @@
           "waarde": 600,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Specificatietabel handleiding (kopie op mansier.com van de officiële handleiding, 260109)"
+          "datum": "2026-10-04"
         },
         "max_helling_pct": {
           "waarde": 45,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Handleiding en be.navimow.com; 24 graden is hetzelfde"
+          "datum": "2026-10-04"
         },
         "geluid_dba": {
           "waarde": 59,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "De tabel noemt ook 51 dB(A); waarschijnlijk geluidsdruk. Beslissen: scoremodel gebruikt LWA voor alle merken als dat is opgegeven"
+          "datum": "2026-10-04"
         },
         "ip_klasse": {
           "waarde": "IP66",
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Winkels noemen soms IPX6"
+          "datum": "2026-10-04"
         },
         "maaibreedte_cm": {
           "waarde": 18,
@@ -237,43 +380,37 @@
           "waarde": "20-60",
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Handleiding: 2-6 cm"
+          "datum": "2026-10-04"
         },
         "pincode": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Standaardcode 0000 (wijzigen aan te raden)"
+          "datum": "2026-10-04"
         },
         "alarm": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Alarm bij optillen en bij overschrijden virtuele grens; alleen onder 4G"
+          "datum": "2026-10-04"
         },
         "gps_tracking": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Locatie in de app; alleen bij ingeschakelde antidiefstal en 4G"
+          "datum": "2026-10-04"
         },
         "mes_stop": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Optilsensor stopt de messen"
+          "datum": "2026-10-04"
         },
         "obstakeldetectie": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Camera; handleiding noemt geen specifieke personendetectie, wel obstakels, huisdieren en dieren"
+          "datum": "2026-10-04"
         },
         "geofence": {
           "waarde": 1,
@@ -281,12 +418,17 @@
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
           "datum": "2026-10-04"
         },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://apps.apple.com/nl/app/navimow/id1602205067 ; https://play.google.com/store/apps/details?id=com.segway.mower",
+          "datum": "2026-10-05"
+        },
         "app_kaart": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Verboden zones (BioLife), kanalen, VisionFence-uit-zones"
+          "datum": "2026-10-04"
         },
         "app_schema": {
           "waarde": 1,
@@ -298,43 +440,43 @@
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Alexa, Google Assistant, Hornbach"
+          "datum": "2026-10-04"
         },
         "bediening_zonder_app": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Knoppen op de maaier: maaien starten, stoppen, naar huis"
+          "datum": "2026-10-04"
         },
         "ota_updates": {
           "waarde": 1,
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Navimow OS via de app"
+          "datum": "2026-10-04"
+        },
+        "app_rating": {
+          "waarde": 4.51,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-05"
         },
         "garantie": {
           "waarde": "3 jaar toestel; 2 jaar accu en voedingsadapter (handleiding, alleen bij erkende dealer en met aankoopbewijs)",
           "status": "gecontroleerd",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Coolblue vermeldt 2 jaar op de productpagina; voorwaarden: erkende dealer en aankoopbewijs"
+          "datum": "2026-10-04"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
+          "datum": "2026-10-05"
         },
         "vierwielaandrijving": {
           "waarde": null,
           "status": "tegenstrijdig",
           "bron": "https://mansier.com/wp-content/uploads/2026/03/Navimow-i2-AWD-series-User-Manual-EU-260109-nl-NL_.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Handleiding noemt vierwielaandrijving; be.navimow.com \"3 AWD\"; winkels \"3-wheel AWD\". Bonus niet toegepast"
-        },
-        "app_ios_android": {
-          "waarde": null,
-          "status": "niet gevonden",
-          "bron": "App Store en Play Store",
-          "datum": "2026-10-04",
-          "opmerking": "Nog onderzoeken, ook app-rating en aantal ratings"
+          "datum": "2026-10-04"
         }
       },
       "scores": {
@@ -342,43 +484,12 @@
         "navigatie": 10,
         "prijskwaliteit": null,
         "hellingen": 8,
-        "app": null,
+        "app": 10,
         "veiligheid": 10.0,
         "geluid": 6
       },
       "reviews_gelezen": 0,
-      "prijzen": [
-        {
-          "winkel": "Bol.com",
-          "prijs": 849,
-          "datum": "2026-10-04",
-          "op_voorraad": null,
-          "affiliate_mogelijk": null,
-          "bron": "Google Shopping-blok in je Google-check; nog op de winkelpagina controleren",
-          "opmerking": "Doorgestreepte prijs 899",
-          "statisch_tonen": false
-        },
-        {
-          "winkel": "Coolblue",
-          "prijs": 899,
-          "datum": "2026-10-04",
-          "op_voorraad": null,
-          "affiliate_mogelijk": null,
-          "bron": "Google Shopping-blok in je Google-check; nog op de winkelpagina controleren",
-          "opmerking": "Coolblue-pagina toont adviesprijs 899 en een lagere actieprijs (wisselt per snapshot)",
-          "statisch_tonen": true
-        },
-        {
-          "winkel": "Gamma.nl",
-          "prijs": 899,
-          "datum": "2026-10-04",
-          "op_voorraad": null,
-          "affiliate_mogelijk": null,
-          "bron": "https://www.gamma.nl/assortiment/segway-navimow-robotmaaier-i206-awd-draadloos-600-m2/p/B369202",
-          "opmerking": "849 met Gamma Voordeelpas; zoekresultaat, nog op de pagina controleren",
-          "statisch_tonen": true
-        }
-      ],
+      "beschikbaarheid": "nieuw",
       "reviews": [
         {
           "bron": "Gamma.nl",
@@ -389,18 +500,18 @@
           "structurele_storingen": null,
           "installatie_of_gebruiksfouten": null,
           "gepoold": null,
-          "opmerking": "Gemiddelde op 5; teksten nog niet gelezen"
+          "opmerking": "Gemiddelde op 5; teksten nog niet gelezen. 5-10: niet opnieuw gecontroleerd (gamma.nl HTTP 429)"
         },
         {
           "bron": "Coolblue",
-          "peildatum": "2026-10-04",
-          "aantal_totaal": 5,
-          "gemiddelde": 9.5,
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 8,
+          "gemiddelde": 8.7,
           "aantal_gelezen": null,
           "structurele_storingen": null,
           "installatie_of_gebruiksfouten": null,
           "gepoold": null,
-          "opmerking": "Gemiddelde op 10; kleine telling (andere snapshot: 2 reviews)"
+          "opmerking": "Gemiddelde op 10; Coolblue-productpagina (JSON-LD), 5-10. Eerdere snapshots: 5 reviews (9,5) en 2. Teksten niet gelezen: /product-reviews/ is uitgesloten in robots.txt van Coolblue"
         },
         {
           "bron": "Gamma.be",
@@ -411,7 +522,7 @@
           "structurele_storingen": null,
           "installatie_of_gebruiksfouten": null,
           "gepoold": "ja",
-          "opmerking": "Zelfde model, Belgische site; kan overlappen met Gamma.nl; aantal wisselt per snapshot (11 tot 16)"
+          "opmerking": "Zelfde model, Belgische site; kan overlappen met Gamma.nl; aantal wisselt per snapshot (11 tot 16). 5-10: niet opnieuw gecontroleerd. 5-10: gemarkeerd als niet-onafhankelijk (ander land)"
         }
       ],
       "ean": null
@@ -509,7 +620,7 @@
         "geluid": 6
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": null,
       "reviews": [],
       "ean": null
     },
@@ -526,109 +637,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "antidiefstal": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "antenne_gateway": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "messen_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "accu_prijs": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "accu_levensduur_jaren": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "stroom_kwh_per_seizoen": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "verbinding_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "gratis_periode_jaren": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "onderhoud_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        }
-      },
-      "specs": {
-        "max_tuingrootte_m2": {
-          "waarde": 800,
-          "status": "winkelclaim",
-          "bron": "https://www.mediamarkt.nl/nl/product/_mova-lidax-ultra-800-robotmaaier-1897657.html",
-          "datum": "2026-10-04",
-          "opmerking": "Gewicht tegenstrijdig: 12 kg (MediaMarkt) of 13,7 kg (datasheet)"
-        },
-        "max_helling_pct": {
-          "waarde": 45,
-          "status": "winkelclaim",
-          "bron": "https://www.mediamarkt.nl/nl/product/_mova-lidax-ultra-800-robotmaaier-1897657.html",
-          "datum": "2026-10-04",
-          "opmerking": "Gewicht tegenstrijdig: 12 kg (MediaMarkt) of 13,7 kg (datasheet)"
-        },
-        "vierwielaandrijving": {
-          "waarde": "nee",
-          "status": "winkelclaim",
-          "bron": "https://www.mediamarkt.nl/nl/product/_mova-lidax-ultra-800-robotmaaier-1897657.html",
-          "datum": "2026-10-04",
-          "opmerking": "Gewicht tegenstrijdig: 12 kg (MediaMarkt) of 13,7 kg (datasheet)"
-        }
-      },
-      "scores": {
-        "betrouwbaarheid": null,
-        "navigatie": null,
-        "prijskwaliteit": null,
-        "hellingen": 8,
-        "app": null,
-        "veiligheid": null,
-        "geluid": null
-      },
-      "reviews_gelezen": 0,
-      "prijzen": [],
-      "reviews": [],
-      "ean": null
-    },
-    {
-      "id": "M005",
-      "slug": "mova-lidax-ultra-1200",
-      "naam": "Mova LiDAX Ultra 1200",
-      "merk": "Mova",
-      "model": "LiDAX Ultra 1200",
-      "kosten": {
-        "aanschaf": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
-        },
-        "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -679,98 +690,159 @@
       "specs": {
         "navigatie": {
           "waarde": "LiDAR",
-          "status": "fabrikantclaim",
-          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "UltraView 2.0"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "zones": {
           "waarde": "ja",
-          "status": "fabrikantclaim",
-          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
-          "datum": "2026-10-04"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "obstakelontwijking": {
           "waarde": "ja",
-          "status": "fabrikantclaim",
-          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "LiDAR en AI-camera, huisdiermodus"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "begrenzingsdraad": {
           "waarde": "nee",
-          "status": "fabrikantclaim",
-          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
-          "datum": "2026-10-04"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "max_tuingrootte_m2": {
-          "waarde": 1200,
-          "status": "fabrikantclaim",
-          "bron": "https://media.hornbach.de/hb/datasheet/as.184020524.pdf",
-          "datum": "2026-10-04",
-          "opmerking": "Datasheet van Mova, gehost door Hornbach; handleiding nog niet geopend"
+          "waarde": 800,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "max_helling_pct": {
           "waarde": 45,
-          "status": "winkelclaim",
-          "bron": "https://www.agrieuro.co.uk/mova-lidax-ultra-1200-robot-lawn-mower-without-installation-choose-your-gift-p-72863_71400.html",
-          "datum": "2026-10-04",
-          "opmerking": "Ook Alza"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "vierwielaandrijving": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196 ; https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+          "datum": "2026-10-05"
         },
         "geluid_dba": {
           "waarde": 57,
-          "status": "winkelclaim",
-          "bron": "https://www.agrieuro.co.uk/mova-lidax-ultra-1200-robot-lawn-mower-without-installation-choose-your-gift-p-72863_71400.html",
-          "datum": "2026-10-04",
-          "opmerking": "Ook Multitronic; onduidelijk of geluidsvermogen of geluidsdruk"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "ip_klasse": {
           "waarde": "IPX6",
-          "status": "winkelclaim",
-          "bron": "https://multitronic.fi/en/products/4612185/dreame-mova-lidax-1200-ultra--smart--wi-fi--1200-m--robotgrasklippare",
-          "datum": "2026-10-04",
-          "opmerking": "Alleen waterdicht gerangschikt; vergelijkt niet automatisch met IP66"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "maaibreedte_cm": {
           "waarde": 20,
-          "status": "winkelclaim",
-          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
-          "datum": "2026-10-04",
-          "opmerking": "Alza Hongarije"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "maaihoogte_mm": {
           "waarde": "30-100",
-          "status": "winkelclaim",
-          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
-          "datum": "2026-10-04"
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "pincode": {
           "waarde": 1,
-          "status": "winkelclaim",
-          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
-          "datum": "2026-10-04",
-          "opmerking": "\"pin protection, anti-lift sensor and audible alarm\""
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "alarm": {
           "waarde": 1,
-          "status": "winkelclaim",
-          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
-          "datum": "2026-10-04",
-          "opmerking": "\"pin protection, anti-lift sensor and audible alarm\""
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
-        "mes_stop": {
+        "gps_tracking": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
           "waarde": 1,
-          "status": "winkelclaim",
-          "bron": "https://www.alza.hu/mova-robotic-lawnmower-lidax-ultra-1200-d13179858.htm",
-          "datum": "2026-10-04",
-          "opmerking": "\"pin protection, anti-lift sensor and audible alarm\""
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196 ; https://apps.apple.com/nl/app/movahome/id6499421624 ; https://play.google.com/store/apps/details?id=com.dreame.movahome",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196 ; https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 2.7,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/lookup?id=6499421624&country=nl ; https://play.google.com/store/apps/details?id=com.dreame.movahome&hl=nl&gl=NL",
+          "datum": "2026-10-05"
         },
         "garantie": {
-          "waarde": "3 jaar (Mova, registratie vereist; winkel Verenigd Koninkrijk)",
-          "status": "winkelclaim",
-          "bron": "https://www.agrieuro.co.uk/mova-lidax-ultra-1200-robot-lawn-mower-without-installation-choose-your-gift-p-72863_71400.html",
-          "datum": "2026-10-04",
-          "opmerking": "Voorwaarden op mova.tech controleren"
+          "waarde": "3 jaar hoofdeenheid, laadstation, adapter en motoren; 2 jaar accu en LiDAR; messen geen garantie (Mova aftersales-beleid NL)",
+          "status": "gecontroleerd",
+          "bron": "https://nl.mova.tech/pages/after-sales-policy",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "mes_stop": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         }
       },
       "scores": {
@@ -778,21 +850,44 @@
         "navigatie": 10,
         "prijskwaliteit": null,
         "hellingen": 8,
-        "app": null,
-        "veiligheid": null,
+        "app": 7,
+        "veiligheid": 6.25,
         "geluid": 6
       },
-      "reviews_gelezen": 0,
-      "prijzen": [],
-      "reviews": [],
+      "reviews_gelezen": 5,
+      "beschikbaarheid": "nieuw",
+      "reviews": [
+        {
+          "bron": "MediaMarkt.nl",
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 36,
+          "gemiddelde": 4.8,
+          "aantal_gelezen": 5,
+          "structurele_storingen": 0,
+          "installatie_of_gebruiksfouten": 1,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 5 (over alle 36, inclusief niet-onafhankelijke). 10 teksten op de productpagina: 5 van MediaMarkt NL (meegeteld), 3 gesyndiceerd uit MediaMarkt DE en 2 aangeleverd door Mova (niet meegeteld, kolom N). Van de 5 meegetelde: 1 gebruik/installatie (vast onder heg, opgelost met verboden zones), 4 neutraal, 0 storingen. Niemand 6+ maanden. Van de 5 niet-meegetelde noemt 1 (Mova-aangeleverd) dat hij het laadstation \"soms niet meteen\" vindt"
+        },
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 17,
+          "gemiddelde": 9.5,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: /product-reviews/ uitgesloten in robots.txt"
+        }
+      ],
       "ean": null
     },
     {
-      "id": "M006",
-      "slug": "eufy-e15-solo",
-      "naam": "Eufy E15 Solo",
-      "merk": "Eufy",
-      "model": "E15 Solo",
+      "id": "M005",
+      "slug": "mova-lidax-ultra-1200",
+      "naam": "Mova LiDAX Ultra 1200",
+      "merk": "Mova",
+      "model": "LiDAX Ultra 1200",
       "kosten": {
         "aanschaf": {
           "waarde": null,
@@ -800,9 +895,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -850,19 +945,417 @@
           "datum": null
         }
       },
-      "specs": {},
+      "specs": {
+        "navigatie": {
+          "waarde": "LiDAR",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 1200,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "max_helling_pct": {
+          "waarde": 45,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "vierwielaandrijving": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196 ; https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+          "datum": "2026-10-05"
+        },
+        "geluid_dba": {
+          "waarde": 57,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "ip_klasse": {
+          "waarde": "IPX6",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "maaibreedte_cm": {
+          "waarde": 20,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "maaihoogte_mm": {
+          "waarde": "30-100",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "gps_tracking": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196 ; https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 2.7,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/lookup?id=6499421624&country=nl ; https://play.google.com/store/apps/details?id=com.dreame.movahome&hl=nl&gl=NL",
+          "datum": "2026-10-05"
+        },
+        "garantie": {
+          "waarde": "3 jaar hoofdeenheid, laadstation, adapter en motoren; 2 jaar accu en LiDAR; messen geen garantie (Mova aftersales-beleid NL)",
+          "status": "gecontroleerd",
+          "bron": "https://nl.mova.tech/pages/after-sales-policy",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0696/3213/1150/files/MOVA_LiDAX_Ultra_user_manual_NL.pdf?v=1769478196",
+          "datum": "2026-10-05"
+        }
+      },
       "scores": {
         "betrouwbaarheid": null,
-        "navigatie": null,
+        "navigatie": 10,
         "prijskwaliteit": null,
-        "hellingen": null,
-        "app": null,
-        "veiligheid": null,
-        "geluid": null
+        "hellingen": 8,
+        "app": 7,
+        "veiligheid": 6.25,
+        "geluid": 6
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": "nieuw",
       "reviews": [],
+      "ean": null
+    },
+    {
+      "id": "M006",
+      "slug": "eufy-e15-solo",
+      "naam": "Eufy E15 Solo",
+      "merk": "Eufy",
+      "model": "E15 Solo",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": 0,
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "gratis_periode_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "vision",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 800,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "max_helling_pct": {
+          "waarde": 32.5,
+          "status": "tegenstrijdig, laagste waarde gebruikt",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf ; https://www.eufy.com/nl/products/t2880ga1 ; https://www.eufy.com/eu-en/products/t2880ga1 ; https://www.eufy.com/nl/blogs/lawn-mower/c15-vs-e15-vs-e18",
+          "datum": "2026-10-05"
+        },
+        "vierwielaandrijving": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "geluid_dba": {
+          "waarde": 66.3,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "ip_klasse": {
+          "waarde": "IPX6",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "maaibreedte_cm": {
+          "waarde": 20.3,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "maaihoogte_mm": {
+          "waarde": "25-75",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "pincode": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "alarm": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "gps_tracking": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf ; https://service.eufy.com/article-description/eufy-Robot-Lawn-Mower-4G-Cellular-Data-FAQ",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf ; https://www.eufy.com/nl/products/t2880ga1",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 4.12,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/search?term=eufy&country=nl (Anker eufy, id 1424956516) ; https://play.google.com/store/apps/details?id=com.oceanwing.battery.cam&hl=nl&gl=NL",
+          "datum": "2026-10-05"
+        },
+        "garantie": {
+          "waarde": "2 jaar maaier, basisstation, adapter en accu; messen en uiterlijk geen garantie (handleiding)",
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        },
+        "mes_stop": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://salesforce-knowledge-download.s3.us-west-2.amazonaws.com/000024835/en_US/000024835.pdf",
+          "datum": "2026-10-05"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": 8,
+        "prijskwaliteit": null,
+        "hellingen": 6,
+        "app": 8,
+        "veiligheid": 3.75,
+        "geluid": 2
+      },
+      "reviews_gelezen": 0,
+      "beschikbaarheid": "nieuw",
+      "reviews": [
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 6,
+          "gemiddelde": 9.5,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "E15 Solo; gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
+        }
+      ],
       "ean": null
     },
     {
@@ -939,7 +1432,7 @@
         "geluid": null
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": null,
       "reviews": [],
       "ean": null
     },
@@ -956,9 +1449,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -1006,97 +1499,188 @@
           "datum": null
         }
       },
-      "specs": {},
-      "scores": {
-        "betrouwbaarheid": null,
-        "navigatie": null,
-        "prijskwaliteit": null,
-        "hellingen": null,
-        "app": null,
-        "veiligheid": null,
-        "geluid": null
-      },
-      "reviews_gelezen": 0,
-      "prijzen": [],
-      "reviews": [],
-      "ean": null
-    },
-    {
-      "id": "M009",
-      "slug": "ecovacs-goat-o1200-lidar-pro",
-      "naam": "Ecovacs GOAT O1200 LiDAR Pro",
-      "merk": "Ecovacs",
-      "model": "GOAT O1200 LiDAR Pro",
-      "kosten": {
-        "aanschaf": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+      "specs": {
+        "navigatie": {
+          "waarde": "LiDAR",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "antidiefstal": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "antenne_gateway": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "messen_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "max_tuingrootte_m2": {
+          "waarde": 2000,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "accu_prijs": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "max_helling_pct": {
+          "waarde": 45,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "accu_levensduur_jaren": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "vierwielaandrijving": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "stroom_kwh_per_seizoen": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "geluid_dba": {
+          "waarde": 64,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "verbinding_per_jaar": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "ip_klasse": {
+          "waarde": "IPX6",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "gratis_periode_jaren": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+        "maaibreedte_cm": {
+          "waarde": 22,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
         },
-        "onderhoud_per_jaar": {
+        "maaihoogte_mm": {
+          "waarde": "30-70",
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "gps_tracking": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270 ; https://nl.dreametech.com/products/dreame-roboticmower-a1-pro",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 3.91,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/search?term=Dreamehome&country=nl (id 1564419343) ; https://play.google.com/store/apps/details?id=com.dreame.smartlife&hl=nl&gl=NL",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "mes_stop": {
           "waarde": null,
-          "bron": null,
-          "datum": null
+          "status": "niet gevonden",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270",
+          "datum": "2026-10-05"
+        },
+        "garantie": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://cdn.shopify.com/s/files/1/0584/7508/6033/files/A1_Pro_User_Manual_compressed_1-253.pdf?v=1737876270 ; https://nl.dreametech.com/products/a1-pro-uitgebreide-garantie-1-jaar",
+          "datum": "2026-10-05"
         }
       },
-      "specs": {},
       "scores": {
         "betrouwbaarheid": null,
-        "navigatie": null,
+        "navigatie": 10,
         "prijskwaliteit": null,
-        "hellingen": null,
-        "app": null,
-        "veiligheid": null,
-        "geluid": null
+        "hellingen": 8,
+        "app": 7,
+        "veiligheid": 6.25,
+        "geluid": 4
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
-      "reviews": [],
+      "beschikbaarheid": "nieuw",
+      "reviews": [
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 23,
+          "gemiddelde": 8.9,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
+        }
+      ],
       "ean": null
     },
     {
@@ -1112,9 +1696,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/installatie-van-de-robotmaaier/husqvarna-epos-rs1-referentiestation/",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -1162,18 +1746,175 @@
           "datum": null
         }
       },
-      "specs": {},
+      "specs": {
+        "navigatie": {
+          "waarde": "RTK+vision",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 1500,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "max_helling_pct": {
+          "waarde": 30,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "geluid_dba": {
+          "waarde": 60,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "ip_klasse": {
+          "waarde": "IPX5",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "maaibreedte_cm": {
+          "waarde": 22,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "maaihoogte_mm": {
+          "waarde": "20-55",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "gps_tracking": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 4.46,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/search?term=Automower%20Connect&country=nl (id 983601778) ; https://play.google.com/store/apps/details?id=com.husqvarna.automowerconnect&hl=nl&gl=NL",
+          "datum": "2026-10-05"
+        },
+        "garantie": {
+          "waarde": "2 jaar consument (voorwaarden: registratie en onderhoud volgens handleiding); robotmaaieraccu 2 jaar; verlenging via Husqvarna Care",
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/nl/ondersteuning/garantiebeleid/",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/installatie-van-de-robotmaaier/husqvarna-epos-rs1-referentiestation/",
+          "datum": "2026-10-05"
+        },
+        "vierwielaandrijving": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        },
+        "mes_stop": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://www.husqvarna.com/hbd/tdrdownload/v2/pub000105486/doc000264381/OM/N_feF_-ZIhKJd5TG3TMZSNXDafY ; https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+          "datum": "2026-10-05"
+        }
+      },
       "scores": {
         "betrouwbaarheid": null,
-        "navigatie": null,
+        "navigatie": 10,
         "prijskwaliteit": null,
-        "hellingen": null,
-        "app": null,
-        "veiligheid": null,
-        "geluid": null
+        "hellingen": 6,
+        "app": 9,
+        "veiligheid": 10.0,
+        "geluid": 6
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": "nieuw",
       "reviews": [],
       "ean": null
     },
@@ -1190,9 +1931,9 @@
           "datum": null
         },
         "installatie": {
-          "waarde": null,
-          "bron": null,
-          "datum": null
+          "waarde": 0,
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776 ; https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://www.coolblue.nl/product/959330/gardena-smart-sileno-free-800.html ; https://www.proshop.nl/Robot-grasmaaier/Gardena-smart-SILENO-free-robotic-lawnmower-800-m/3344401",
+          "datum": "2026-10-05"
         },
         "antidiefstal": {
           "waarde": null,
@@ -1240,19 +1981,188 @@
           "datum": null
         }
       },
-      "specs": {},
+      "specs": {
+        "navigatie": {
+          "waarde": "RTK",
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "obstakelontwijking": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776 ; https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html",
+          "datum": "2026-10-05"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 800,
+          "status": "fabrikantclaim",
+          "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://www.coolblue.nl/product/959330/gardena-smart-sileno-free-800.html",
+          "datum": "2026-10-05"
+        },
+        "max_helling_pct": {
+          "waarde": 30,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "geluid_dba": {
+          "waarde": 57,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "ip_klasse": {
+          "waarde": "IPX5",
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "maaibreedte_cm": {
+          "waarde": 22,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "maaihoogte_mm": {
+          "waarde": "25-45",
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "alarm": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "gps_tracking": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "obstakeldetectie": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776 ; https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html",
+          "datum": "2026-10-05"
+        },
+        "geofence": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "app_smarthome": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776 ; https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html",
+          "datum": "2026-10-05"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "app_rating": {
+          "waarde": 4.47,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/search?term=GARDENA%20smart%20system&country=nl (id 971199503) ; https://play.google.com/store/apps/details?id=com.gardena.smartgarden&hl=nl&gl=NL",
+          "datum": "2026-10-05"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776 ; https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://www.coolblue.nl/product/959330/gardena-smart-sileno-free-800.html ; https://www.proshop.nl/Robot-grasmaaier/Gardena-smart-SILENO-free-robotic-lawnmower-800-m/3344401",
+          "datum": "2026-10-05"
+        },
+        "vierwielaandrijving": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "mes_stop": {
+          "waarde": null,
+          "status": "niet gevonden",
+          "bron": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html ; https://content.tdr.dss.husqvarnagroup.net/pub000104885/doc000260776",
+          "datum": "2026-10-05"
+        },
+        "garantie": {
+          "waarde": null,
+          "status": "niet geopend",
+          "bron": "https://www.gardena.com/nl/warranty/verlengde-garantie/robotmaaiers/",
+          "datum": "2026-10-05"
+        }
+      },
       "scores": {
         "betrouwbaarheid": null,
-        "navigatie": null,
+        "navigatie": 7,
         "prijskwaliteit": null,
-        "hellingen": null,
-        "app": null,
-        "veiligheid": null,
-        "geluid": null
+        "hellingen": 6,
+        "app": 8,
+        "veiligheid": 2.5,
+        "geluid": 6
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
-      "reviews": [],
+      "beschikbaarheid": "nieuw",
+      "reviews": [
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-05",
+          "aantal_totaal": 5,
+          "gemiddelde": 9.6,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: /product-reviews/ uitgesloten in robots.txt"
+        }
+      ],
       "ean": null
     },
     {
@@ -1329,7 +2239,7 @@
         "geluid": null
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": null,
       "reviews": [],
       "ean": null
     },
@@ -1414,7 +2324,7 @@
         "geluid": null
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": null,
       "reviews": [],
       "ean": null
     },
@@ -1492,7 +2402,7 @@
         "geluid": null
       },
       "reviews_gelezen": 0,
-      "prijzen": [],
+      "beschikbaarheid": null,
       "reviews": [],
       "ean": null
     }

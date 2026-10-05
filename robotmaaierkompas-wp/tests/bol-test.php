@@ -4,9 +4,26 @@
  * Draaien: wp eval-file tests/bol-test.php
  * Na afloop worden alle testgegevens verwijderd.
  */
-if ( ! defined( 'RMK_BOL_CLIENT_ID' ) ) { define( 'RMK_BOL_CLIENT_ID', 'test' ); define( 'RMK_BOL_CLIENT_SECRET', 'test' ); }
 $GLOBALS["fail"] = 0;
 function t( $n, $c, $i = "" ) { global $fail; echo ( $c ? 'OK   ' : 'FOUT ' ) . $n . ( $i ? "  ($i)" : '' ) . "\n"; if ( ! $c ) $fail++; }
+
+// A. Standaard (besluit 5 oktober 2026): uitgeschakeld, geen verzoeken, geen taak, lege toestand zonder knop
+$calls0 = 0;
+$spy = function ( $pre ) use ( &$calls0 ) { $calls0++; return $pre; };
+add_filter( 'pre_http_request', $spy );
+t( 'Prijstaak staat standaard uit', ! rmk_bol_enabled() );
+$log0 = rmk_bol_fetch_all();
+t( 'Uitgeschakeld: geen API-verzoeken', 0 === $calls0 && 0 === $log0['ok'] );
+do_action( 'init' );
+t( 'Uitgeschakeld: geen ingeplande taak', ! wp_next_scheduled( RMK_BOL_HOOK ) );
+$h0 = rmk_bol_offer_html( 'M002', 'segway-navimow-i206-awd' );
+t( 'Lege toestand "Bekijk de prijs bij de winkel" zonder link', false !== strpos( $h0, 'Bekijk de prijs bij de winkel' ) && false === strpos( $h0, '<a ' ) && false === stripos( $h0, 'bol' ) );
+t( 'Prijscel zonder prijs', false !== strpos( rmk_price_cell( array( 'id' => 'M002' ) ), 'bij de winkel' ) );
+remove_filter( 'pre_http_request', $spy );
+
+// B. Alleen om de code te testen: tijdelijk aan, met een NAGEBOOTSTE API (testconstanten bestaan alleen in dit proces)
+define( 'RMK_BOL_ENABLED', true );
+if ( ! defined( 'RMK_BOL_CLIENT_ID' ) ) { define( 'RMK_BOL_CLIENT_ID', 'test' ); define( 'RMK_BOL_CLIENT_SECRET', 'test' ); }
 
 $calls = array();
 add_filter( 'pre_http_request', function ( $pre, $args, $url ) use ( &$calls ) {
@@ -41,7 +58,6 @@ $html = rmk_bol_offer_html( 'M002', 'segway-navimow-i206-awd' );
 t( 'Lege toestand "Prijs wordt bijgewerkt" met bron', false !== strpos( $html, 'Prijs wordt bijgewerkt' ) && false === strpos( $html, '123' ) && false !== strpos( $html, 'Bron: bol.com' ) );
 add_filter( 'rmk_bol_max_age', function () { return 3 * DAY_IN_SECONDS; } );
 t( 'Filter kan de 24 uur niet verruimen', null === rmk_bol_price( 'M002' ) );
-t( 'Taak is ingepland', (bool) wp_next_scheduled( RMK_BOL_HOOK ), wp_date( 'Y-m-d H:i', wp_next_scheduled( RMK_BOL_HOOK ) ) );
 
 delete_option( RMK_BOL_OPTION ); delete_option( RMK_BOL_EAN_OPTION ); delete_option( 'rmk_bol_laatste_run' ); delete_transient( 'rmk_bol_token' );
 echo $GLOBALS["fail"] ? $GLOBALS["fail"] . " mislukt\n" : "Alle Bol-tests geslaagd (testgegevens verwijderd)\n";
