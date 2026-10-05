@@ -339,5 +339,5 @@ robotmaaierkompas-wp/
   1. de persmap of mediapagina van de fabrikant, met de gebruiksvoorwaarden en een bronvermelding;
   2. foto's die de PR-afdeling van de fabrikant aanlevert;
   3. na acceptatie door Bol: Bol-afbeeldingen via de API, met de oorspronkelijke URL.
-- Gecontroleerd: het thema en de scripts laden geen externe afbeeldingen. Vijf patronen gebruiken de plaatsvervanger.
+- Gecontroleerd: het thema en de scripts laden geen externe afbeeldingen. De patronen productbox, productbox-zonder-prijs en kop-aan-kop gebruiken de plaatsvervanger.
 - Auteursfoto: Mandy heeft vier versies aangeleverd (400 en 800 px, WebP en JPG). Ze staan **niet in deze openbare repository**. Mandy uploadt ze zelf in Media, met alt-tekst "Mandy van den Broek".
