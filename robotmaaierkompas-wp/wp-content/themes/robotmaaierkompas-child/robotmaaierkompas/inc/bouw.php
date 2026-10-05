@@ -45,7 +45,7 @@ function rmk_legal_body( $kind ) {
 		case 'affiliate':
 			return '<h2 style="margin-top: 0">Zo verdienen we geld</h2><p>[Uitleg affiliatelinks: welke winkels en netwerken, dat je niets extra betaalt, dat de score en de volgorde niet veranderen door commissie.]</p>'
 				. '<h2>Welke programma\'s</h2><p>[Lijst van partnerprogramma\'s waarbij je bent aangesloten, pas invullen na goedkeuring.]</p>'
-				. '<h2>Prijzen van bol.com</h2><p>[Uitleg dat prijzen van bol.com via de partner-API komen, met "Bron: bol.com", en niet worden getoond als ze ouder zijn dan 24 uur.]</p>';
+				. '<h2>Prijzen</h2><p>[Uitleg dat we voorlopig geen winkelprijzen tonen; bij elk model staat "Bekijk de prijs bij de winkel".]</p>';
 		case 'cookies':
 			return '<h2 style="margin-top: 0">Welke cookies</h2><div class="rmk-tablewrap"><table class="rmk-table"><thead><tr><th scope="col">Naam</th><th scope="col">Doel</th><th scope="col">Bewaartermijn</th><th scope="col">Toestemming nodig</th></tr></thead><tbody>'
 				. '<tr><th scope="row">rmk_consent</th><td>[doel: bewaart je cookiekeuze]</td><td>[termijn]</td><td>[ja/nee]</td></tr>'
@@ -225,8 +225,12 @@ function rmk_status_checks() {
 	$add( ! rmk_bol_enabled() && ! $next, 'Prijstaak uitgeschakeld (voorlopig geen Bol-gegevens)', rmk_bol_enabled() ? 'STAAT AAN' : ( $next ? 'nog ingepland' : 'uit' ) );
 	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
 	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
-	$person = (int) ( class_exists( 'WPSEO_Options' ) ? WPSEO_Options::get( 'company_or_person_user_id' ) : 0 );
-	$add( class_exists( 'WPSEO_Options' ) && 'person' === WPSEO_Options::get( 'company_or_person' ) && $person, 'Yoast: site vertegenwoordigt een persoon', $person ? get_the_author_meta( 'display_name', $person ) : '' );
+	// Lees via Yoast's eigen helper (zoals de schema-uitvoer); WPSEO_Options::get gaf live een verouderde waarde.
+	$yo     = function ( $k ) {
+		return function_exists( 'YoastSEO' ) ? YoastSEO()->helpers->options->get( $k ) : ( class_exists( 'WPSEO_Options' ) ? WPSEO_Options::get( $k ) : null );
+	};
+	$person = (int) $yo( 'company_or_person_user_id' );
+	$add( 'person' === $yo( 'company_or_person' ) && $person, 'Yoast: site vertegenwoordigt een persoon', $person ? get_the_author_meta( 'display_name', $person ) : '' );
 	$add( class_exists( 'WPSEO_Options' ), 'Yoast SEO actief', defined( 'WPSEO_VERSION' ) ? WPSEO_VERSION : '' );
 	$add( wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) ), 'Server kan WebP maken' );
 	return $c;

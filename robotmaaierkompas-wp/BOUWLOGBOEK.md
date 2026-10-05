@@ -309,3 +309,23 @@ robotmaaierkompas-wp/
 - [ ] Het concept "Privacybeleid" van WordPress (slug `privacy-policy`) mag weg zodra onze `/privacy/` er staat.
 - [ ] Het toepassingswachtwoord van het beheerdersaccount intrekken na de bouw (het staat in de chat).
 - [ ] De lijst "Wat Mandy nog zelf moet invullen of nakijken" hierboven (auteurspagina, eigenaargegevens, juridische teksten, DNS-verificatie voor Search Console).
+
+## Bouwronde 3, vervolg: child theme actief, bouwstappen live uitgevoerd
+
+- **Child theme `robotmaaierkompas-child` 1.2.0 is actief.** Mandy heeft het geüpload en geactiveerd. Activeren kan niet via de API.
+- `POST /rmk/v1/noindex` geeft `blog_public = 0`. De homepage geeft `noindex, nofollow`.
+- **`POST /rmk/v1/paginas`: 76 concepten aangemaakt, zonder fouten.** Auteur is Mandy van den Broek (gebruiker 1). De privacypagina is gekoppeld, en de homepage is de voorpagina (concept, dus `/` geeft 404 tot de lancering).
+- **Yoast:** `POST /rmk/v1/seo` gaf ok, en daarna is via Yoast's eigen route `configuration/site_representation` ingesteld: **Persoon = gebruiker 1**. Het schema op de site toont nu de uitgever als **Person "Mandy van den Broek"**.
+  - De Yoast-controle in het statuspaneel van 1.2.0 meldt dit ten onrechte als "let op": hij las de waarde met `WPSEO_Options::get`. In **1.2.1** gebruikt hij de helper van Yoast, net als de schema-uitvoer. Upload 1.2.1 wanneer het uitkomt; het is niet dringend.
+- Het standaardconcept "Privacybeleid" van WordPress (`privacy-policy`) is verwijderd. Onze `/privacy/` staat er.
+- Het concept "Affiliate-melding" is aangepast: het kopje "Prijzen van bol.com" is vervangen door een invulveld over "geen winkelprijzen". Ook het sjabloon in `bouw.php` is aangepast.
+- **Bedieningsfout, hersteld:** door een fout in mijn eigen script is één keer een lege conceptpagina (#86) aangemaakt. Die is meteen verwijderd. Hij is nooit gepubliceerd.
+
+### Tests tegen de live omgeving
+| Test | Uitkomst |
+|---|---|
+| Publicatiecontrole: tijdelijk concept met "[" inplannen voor 2030 | **400 rmk_placeholders**; de pagina bleef concept. Daarna verwijderd. (Bewust "inplannen" gebruikt en niet "publiceren": het is dezelfde controle, en bij een fout zou er niets openbaar worden.) |
+| Score server-side: `[rmk_scoreblok model="M002"]` in de weergegeven HTML | **`92,7`, "Functiescore", "voorlopig, zonder betrouwbaarheid uit reviews en prijs-kwaliteit"** |
+| Prijstaak | Statuspaneel: **uitgeschakeld, niet ingepland**. Geen verzoeken naar bol.com. |
+| Affiliatelinks | Statuspaneel: geen links ingesteld. Geen concept bevat bol.com of affiliatelinks. |
+| Eindstand | **76 pagina's, alle concept; 0 berichten; niets gepubliceerd.** Geen pagina zonder placeholder, geen "KvK". Indexering geblokkeerd, HTTPS geldig, fonts zelf gehost, Yoast 28.6 actief, WebP mogelijk. |
