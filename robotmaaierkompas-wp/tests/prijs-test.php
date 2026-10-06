@@ -40,18 +40,28 @@ pcheck( 'Productbox: prijsblok uit modellen.json of fabrikantknop', false !== st
 pcheck( 'Productbox zonder bekend model blijft ongewijzigd', $box === rmk_fill_offers( str_replace( 'M002', 'X999', $box ) ) || false !== strpos( rmk_fill_offers( str_replace( 'M002', 'X999', $box ) ), 'Bekijk de prijs bij de winkel' ) );
 
 
-// Fotokader (1.3.1)
-$fm  = array( 'id' => 'T2', 'naam' => 'Testmaaier', 'merk' => 'Gardena', 'foto' => array( 'url' => 'https://www.gardena.com/x.png' ) );
-$kop = '<article class="rmk-product"><div class="rmk-product__head rmk-product__head--nomedia" style="grid-template-columns: 1fr"><div class="rmk-product__title"></div></div></article>';
-$met = rmk_fill_photo( $kop, $fm );
-pcheck( 'Foto: fotokader met bijschrift "Foto: Gardena" en alt-tekst', false !== strpos( $met, '<figcaption>Foto: Gardena</figcaption>' ) && false !== strpos( $met, 'alt="Testmaaier, productfoto"' ) && false === strpos( $met, '--nomedia' ) );
-pcheck( 'Zonder foto: geen beeldblok', $kop === rmk_fill_photo( $kop, array( 'naam' => 'X' ) ) );
-$b = $fm; $b['foto']['url'] = 'https://media.s-bol.com/x.jpg';
-pcheck( 'Geen Bol-afbeelding', $kop === rmk_fill_photo( $kop, $b ) || false === strpos( rmk_fill_photo( $kop, $b ), 's-bol' ) );
+// Productbox: specificatiekaart, foto, Beste voor, plus- en minpunten (1.3.2)
+$fm  = array( 'id' => 'T2', 'naam' => 'Gardena Testmaaier', 'merk' => 'Gardena', 'model' => 'Testmaaier',
+	'specs' => array( 'max_tuingrootte_m2' => array( 'waarde' => 1500 ), 'max_helling_pct' => array( 'waarde' => 32.5 ), 'navigatie' => array( 'waarde' => 'RTK+vision' ), 'geluid_dba' => array( 'waarde' => null ) ),
+	'verbinding' => array( 'extra' => 'ingebouwd' ), 'beste_voor' => 'Grote tuinen', 'pluspunten' => array( 'Plus <1>' ), 'minpunten' => array( 'Min 1', 'Min 2' ) );
+$kop = '<article class="rmk-product"><div class="rmk-product__head rmk-product__head--nomedia" style="grid-template-columns: 1fr"><div class="rmk-product__title"><h3 id="x">Gardena Testmaaier</h3></div></div><div class="rmk-product__aside rmk-offers"></div></article>';
+$k = rmk_fill_card( $kop, $fm );
+pcheck( 'Kaart zonder foto: merk en model in het vlak, "Geen productfoto beschikbaar"', false !== strpos( $k, 'rmk-speccard__brand">Gardena<' ) && false !== strpos( $k, 'rmk-speccard__model">Testmaaier<' ) && false !== strpos( $k, 'Geen productfoto beschikbaar' ) && false === strpos( $k, '--nomedia' ) );
+pcheck( 'Kenmerken: 1.500 m², 32,5%, RTK + camera, 4G', false !== strpos( $k, '<dd>1.500 m²</dd>' ) && false !== strpos( $k, '<dd>32,5%</dd>' ) && false !== strpos( $k, '<dd>RTK + camera</dd>' ) && false !== strpos( $k, '<dd>4G</dd>' ) );
+pcheck( 'Ontbrekend geluid: is-missing met "onbekend"', false !== strpos( $k, 'rmk-spec--geluid is-missing' ) && false !== strpos( $k, '<span class="rmk-sr">onbekend</span>' ) );
+pcheck( 'Beste voor na de h3', false !== strpos( $k, '</h3><p class="rmk-bestfor"><span>Beste voor</span> Grote tuinen</p>' ) );
+pcheck( 'Plus- en minpunten als lijsten, ge-escaped, voor het prijsblok', false !== strpos( $k, '<ul class="rmk-pros"><li>Plus &lt;1&gt;</li></ul>' ) && false !== strpos( $k, '<ul class="rmk-cons"><li>Min 1</li><li>Min 2</li></ul></div></div><div class="rmk-product__aside' ) );
+$fm2 = $fm; $fm2['foto'] = array( 'url' => 'https://www.gardena.com/x.png' );
+$k2 = rmk_fill_card( $kop, $fm2 );
+pcheck( 'Met foto: fotovariant met "Foto: Gardena" en alt-tekst', false !== strpos( $k2, 'rmk-speccard--photo' ) && false !== strpos( $k2, 'Foto: Gardena' ) && false !== strpos( $k2, 'alt="Gardena Testmaaier, productfoto"' ) && false === strpos( $k2, 'Geen productfoto' ) );
+$fm3 = $fm; $fm3['foto'] = array( 'url' => 'https://media.s-bol.com/x.jpg' );
+pcheck( 'Geen Bol-afbeelding (dan de kaart zonder foto)', false === strpos( rmk_fill_card( $kop, $fm3 ), 's-bol' ) );
+pcheck( 'Tweede keer vullen geeft geen dubbele kaart', 1 === substr_count( rmk_fill_card( $k, $fm ), 'rmk-speccard__specs' ) );
 $ph  = '<article class="rmk-product"><div class="rmk-product__head"><div class="rmk-product__media"><!-- x --><figure class="rmk-photo rmk-photo--square rmk-photo--placeholder"><div class="rmk-photo__frame"><img src="p.svg" alt=""></div><figcaption>Foto volgt</figcaption></figure></div><div class="rmk-product__title"></div></div></article>';
-$weg = rmk_strip_photo_placeholders( $ph );
-pcheck( 'Plaatsvervanger wordt weggehaald (nooit op een gepubliceerde pagina)', false === strpos( $weg, 'Foto volgt' ) && false !== strpos( $weg, 'rmk-product__head--nomedia' ) );
-pcheck( 'Plaatsvervanger wordt vervangen door een echte foto', false !== strpos( rmk_fill_photo( $ph, $fm ), 'Foto: Gardena' ) && false === strpos( rmk_fill_photo( $ph, $fm ), 'Foto volgt' ) );
+pcheck( 'Plaatsvervanger wordt weggehaald (nooit op een gepubliceerde pagina)', false === strpos( rmk_strip_photo_placeholders( $ph ), 'Foto volgt' ) );
+pcheck( 'Plaatsvervanger wordt vervangen door de kaart', false === strpos( rmk_fill_card( $ph, $fm ), 'Foto volgt' ) && false !== strpos( rmk_fill_card( $ph, $fm ), 'rmk-speccard' ) );
+$GLOBALS['rmk_lbl'] = rmk_score_label_html( 'Functiescore: wat deze maaier kan.' );
+pcheck( 'Scorelabel met link "Hoe we scoren"', 'Functiescore: wat deze maaier kan. <a href="/hoe-we-beoordelen/">Hoe we scoren</a>' === $GLOBALS['rmk_lbl'] );
 
 // Dataroute
 $data = array( 'modellen' => array( array( 'id' => 'M1', 'slug' => 'm1', 'naam' => 'M1', 'kosten' => array( 'aanschaf' => array( 'waarde' => null ) ), 'prijs' => $m['prijs'] ) ) );

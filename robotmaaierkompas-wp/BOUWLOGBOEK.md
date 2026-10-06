@@ -958,3 +958,95 @@ Alles is **concept**: 76 pagina's, niets is gepubliceerd. "Zoekmachines niet lat
 ### Nog te doen
 - [ ] Mandy: **1.3.1 uploaden en activeren**, en daarna **Huisstijl toepassen** (Gereedschap > Robotmaaierkompas). Daarna controleer ik live het logo, het favicon, `og:image`, het menu en de LCP.
 - [ ] Datasessie: foto's (met een duidelijke voorwaarde), prijzen verversen vóór 19 oktober, en M003.
+
+---
+
+## Ronde 11 (6 oktober 2026): thema 1.3.2, productbox met specificatiekaart
+
+Alles is **concept**: 76 pagina's, niets is gepubliceerd. "Zoekmachines niet laten indexeren" staat aan. Live draait **1.3.1**, dat Mandy heeft geüpload. **1.3.2 is gebouwd en lokaal getest; Mandy moet het nog uploaden.**
+
+### 1. Titel en score
+- Op pagina 1 (#11) zijn de zeven H3's boven de kaarten weg, zoals "Segway Navimow i206 AWD (functiescore 92,7)".
+- Naam en score staan nu alleen in de kaart.
+
+### 2. Scorelabel
+- Het gestippelde kader is weg.
+- Onder de score staat nu "Functiescore: wat deze maaier kan. Hoe we scoren", met een link naar `/hoe-we-beoordelen/`. Dat geldt in de productbox, in het scoreblok en in rmk.js; PHP en JS zijn gelijk (2001 gevallen getest).
+- **In tabellen** staat de regel één keer onder de tabel in plaats van in elke rij. Dat geldt voor de scoretabel (shortcode) en voor de vergelijkingstabel op pagina 2 (#12, één regel toegevoegd).
+
+### 3. Teksten in de kaart
+- `modellen-teksten.json` staat in de repository als `scripts/modellen_teksten.json`.
+  - Het script zet `beste_voor`, `pluspunten` en `minpunten` in modellen.json; de acht modellen worden alle acht gevonden.
+  - Live opgeslagen via de dataroute (gegenereerd 6-10-2026 15:45).
+  - De dataroute controleert de velden: een tekst of een lijst van hoogstens 8 teksten, elk hoogstens 300 tekens.
+- In de kaart:
+  - "Beste voor" met de tekst;
+  - de pluspunten en minpunten als lijsten met de plus- en mintekens uit het ontwerp, over de volle kaartbreedte.
+- Op pagina 1 zijn de losse alinea's weg: twaalf alinea's "Voor wie / Pluspunten / Minpunten", en de drie vrije alinea's bij de i105E, de E15 Solo en de Gardena (die herhaalden hetzelfde). Lege secties zijn opgeruimd.
+- ⚠️ **Daarmee verdwenen ook drie zinnen die niet in de nieuwe teksten staan:**
+  - i105E: "Het stond nog bij een winkel nieuw te koop."
+  - E15 Solo: "die twee cijfers komen niet overeen" (de minpunt noemt wel 40% en 32,5%).
+  - Gardena: "geen 4G".
+  Wil je ze terug, zet ze dan in modellen_teksten.json.
+- Gevolg: de scoretabel op pagina 1 toont nu ook de kolom "Beste voor", omdat die tekst er is. De kolom "Prijs vanaf" zegt nog "bij de winkel"; de prijs staat in de kaart.
+
+### 4. Specificatiekaart (pakket v1.3, README stap 1 tot 5)
+- **Samengevoegd:**
+  - `css/rmk-specificatiekaart.css`, 5 iconen en 2 illustraties;
+  - de snippets in `patterns-bron/specificatiekaart/`.
+  - Er wordt niets overschreven. De bestanden bevatten geen scripts en geen externe verwijzingen.
+- **CSS:** in de inline CSS, na rmk-afwerking. De verkleining laat `url(...)` en de ingebedde SVG-iconen nu onaangetast. Als bestand alleen als de inline CSS uit staat; ook in de editor.
+- **Productbox** (wordt bij het weergeven gevuld uit modellen.json):
+  - Zonder foto: de kaart met merk en model in het vlak (`aria-hidden`, want de H3 noemt ze), en "Geen productfoto beschikbaar".
+  - Met foto: de fotovariant met "Foto: (fabrikant)" en alt-tekst. Bol-, Amazon- en marketplace-domeinen worden geweigerd.
+  - **Vijf kenmerken:** oppervlak (`max_tuingrootte_m2`), helling (`max_helling_pct`), navigatie (RTK + camera, camera, LiDAR, RTK), geluid (`geluid_dba`, als "59 dB") en verbinding (4G, module, geen).
+  - Ontbreekt een waarde, dan komt de `is-missing`-chip, met "onbekend" voor schermlezers. Bij de acht modellen ontbreekt niets.
+- **Patronen:** de productboxen en kop-aan-kop hebben de kaart met invulvelden.
+- **Indeling op desktop** (vanaf 768 px): de kaart staat links; rechts staan titel, "Beste voor", score en prijs; de plus- en minpunten staan eronder over de volle breedte. Op mobiel staat alles onder elkaar. Eerst stond de titel in een smalle middenkolom; dat is aangepast.
+- **Geen lege ruimte onderin:** gemeten 1 px tussen de laatste inhoud en de rand, bij alle 8 kaarten en op alle breedtes.
+
+### 5. Browsertest (Chromium, lokaal, live header en footer)
+| Breedte | Resultaat |
+|---|---|
+| 1440 / 1366 px | Menu met vijf items zichtbaar. Kaarten in twee kolommen. Geen horizontaal scrollen. |
+| 1024 / 768 px | Menuknop. Kaarten in twee kolommen. Geen horizontaal scrollen. |
+| 390 px | Menuknop. De kaart staat bovenaan in de productbox, de chips in twee kolommen en de vijfde over de volle breedte. Geen horizontaal scrollen. |
+
+- Geen JavaScript-fouten op de homepage, pagina 1, 2 en 12.
+- Er zijn geen gestippelde kaders meer bij de scores.
+- Op pagina 1 staan 8 kaarten, elk met "Beste voor", plus- en minpunten en een prijsregel (bij de i105E de knop "Bekijk de actuele prijs").
+
+### 6. LCP (Lighthouse 12, mobiel, gzip, 3 metingen)
+| Pagina | LCP | FCP | CLS | TBT | Score |
+|---|---|---|---|---|---|
+| P1 | **1,8 s** (3×) | 0,9–1,0 s | 0 | 0–120 ms | 99–100 |
+| P12 | **1,8 / 1,8 / 1,7 s** | 0,9 s | 0 | 0–30 ms | 100 |
+
+Het doel van onder 2 s is gehaald. Het LCP-element is de H1 in de kop.
+
+### 7. Gevonden en hersteld: een beheerroute stond in de cache
+- **Fout:** LiteSpeed cachete het antwoord van `GET /wp-json/rmk/v1/status` op een verzoek met een toepassingswachtwoord. LiteSpeed ziet zo'n verzoek niet als ingelogd. Daardoor was de statuslijst ook **zonder inloggen** te zien.
+  - Inhoud: de bouwcontroles, zoals indexering, permalinks, plugininstellingen en de naam van de Yoast-persoon.
+  - Geen wachtwoorden, sleutels of conceptteksten.
+  - Andere routes heb ik nagelopen (pagina's met `context=edit`, instellingen, template-onderdelen, thema's, gebruikers, modellen): die gaven zonder inloggen 401 en werden niet gecachet.
+- **Direct gedaan:** de cache geleegd via de dataroute. Daarna gaf `/rmk/v1/status` zonder inloggen 401.
+- **In 1.3.2:** antwoorden van `/rmk/v1/` en elk REST-antwoord aan een ingelogde gebruiker of een verzoek met Basic-authenticatie krijgen `litespeed_control_set_nocache`, `Cache-Control: no-store, private` en `X-LiteSpeed-Cache-Control: no-cache`. Lokaal gecontroleerd.
+- **Tot 1.3.2 live staat:** de status alleen bekijken via Gereedschap > Robotmaaierkompas, niet via de REST-route.
+
+### Ook gedaan
+**Huisstijl:** live toegepast via de route `rmk/v1/huisstijl` (onderdeel van ronde 10, punt 6).
+- Sitepictogram is bijlage 216 (`favicon-512.png`).
+- De standaard og:image in Yoast is `deelafbeelding-1200x630-1.png` (bijlage 217).
+- De statuscontroles voor beide zijn groen.
+
+### Tests
+- `score-test.php`: geslaagd.
+- `prijs-test.php`: **29 van 29** geslaagd, nu ook voor kaart, kenmerken, `is-missing`, foto, Bol-beeld, dubbel vullen en label.
+- `bol-test.php`: geslaagd.
+- PHP-lint: in orde.
+- De zip is 404 KB.
+
+### Nog te doen
+- [ ] Mandy: **1.3.2 uploaden en activeren.** Daarna controleer ik live de kaarten, het label, de cacheheaders van `/rmk/v1/status` en de LCP.
+- [ ] Mandy: beslissen over de drie verdwenen zinnen (zie punt 3).
+- [ ] Datasessie: foto's (alleen met een duidelijke voorwaarde), prijzen verversen vóór 19 oktober, en M003.

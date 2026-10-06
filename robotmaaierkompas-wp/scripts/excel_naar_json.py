@@ -25,6 +25,7 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
 - Prijzen (besluit 6 oktober 2026): per model alleen de laagste geldige prijs ("prijs": bedrag in hele euro's,
   winkel, datum, product-URL), uit het blad Prijzen: op voorraad (= nieuw), winkel of fabrikant, geen Bol en geen
   marketplace, niet ouder dan 14 dagen. De site toont hem niet meer na 14 dagen. Aanschaf in de kosten blijft null.
+- Teksten voor de productbox (beste_voor, pluspunten, minpunten) komen uit scripts/modellen_teksten.json.
   Opmerkingen uit Bronnen gaan ook niet mee (die kunnen prijzen en interne notities bevatten).
 """
 import argparse
@@ -276,6 +277,8 @@ def main():
     toewijzing, besluiten = _tw.get("toewijzingen", []), _tw.get("besluiten", [])
     pad_v = __import__("os").path.join(__import__("os").path.dirname(__file__), "verbinding_toewijzing.json")
     verbinding_tw = json.load(open(pad_v, encoding="utf-8"))["toewijzingen"] if __import__("os").path.exists(pad_v) else []
+    pad_tk = __import__("os").path.join(__import__("os").path.dirname(__file__), "modellen_teksten.json")
+    teksten = json.load(open(pad_tk, encoding="utf-8")) if __import__("os").path.exists(pad_tk) else {}
     rapport = {"kosten_niet_gebruikt": [], "overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
                "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": [], "prijzen_verlopen": []}
     uit_modellen, prijsdatums = [], []
@@ -473,8 +476,15 @@ def main():
             "ean": None,  # nog niet in het Excel-bestand; nodig voor de Bol-prijstaak
             "prijs": laagste,
             "fabrikant_url": fabrikant_url,
+            # Teksten voor de productbox (scripts/modellen_teksten.json, aangeleverd door Mandy, 6 oktober 2026)
+            "beste_voor": teksten.get(mid, {}).get("beste_voor"),
+            "pluspunten": teksten.get(mid, {}).get("pluspunten") or [],
+            "minpunten": teksten.get(mid, {}).get("minpunten") or [],
         })
 
+    bekend = {m["id"] for m in uit_modellen}
+    rapport["teksten_zonder_model"] = sorted(k for k in teksten if k not in bekend)
+    rapport["teksten_toegevoegd"] = sorted(k for k in teksten if k in bekend)
     data = {
         "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: "
                    "pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, "

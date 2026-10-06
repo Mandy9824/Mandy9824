@@ -1,6 +1,6 @@
 {
   "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
-  "gegenereerd": "2026-10-06 10:11",
+  "gegenereerd": "2026-10-06 15:45",
   "bronbestand": "robotmaaierkompas_modeldata_v1.xlsx",
   "scoremodel": "v1.0 (concept tot bevriezing)",
   "algemeen": {
@@ -270,7 +270,17 @@
       ],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": "https://nl.navimow.com/products/navimow-i1-robot-lawn-mower"
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i1-robot-lawn-mower",
+      "beste_voor": "Tuinen tot 500 m² met een eigen antenne in plaats van netwerk-RTK",
+      "pluspunten": [
+        "Eigen antenne en camera, zonder draad",
+        "IP66"
+      ],
+      "minpunten": [
+        "De fabrikant verkoopt dit model nog alleen refurbished",
+        "Diefstalbeveiliging vraagt de losse Access+-module (99,99 euro met een jaar data, daarna 29,90 per jaar)",
+        "Helling 30%"
+      ]
     },
     {
       "id": "M002",
@@ -554,7 +564,20 @@
         "url": "https://www.coolblue.nl/product/975016/segway-navimow-i206-awd.html",
         "type": "winkel"
       },
-      "fabrikant_url": null
+      "fabrikant_url": null,
+      "beste_voor": "Tuinen tot ongeveer 600 m² met hellingen en obstakels, voor wie ingebouwde diefstalbeveiliging belangrijk is",
+      "pluspunten": [
+        "Netwerk-RTK met camera, zonder draad",
+        "Helling tot 45% volgens de fabrikant",
+        "Pincode, alarm, GPS en geofence-melding met ingebouwde 4G",
+        "3 jaar garantie op de maaier"
+      ],
+      "minpunten": [
+        "De 4G-service heeft een einddatum; geen Nederlandse verlengprijs gevonden",
+        "Netwerk-RTK is niet overal beschikbaar",
+        "De fabrikant spreekt zichzelf tegen over de aandrijving (drie of vier wielen)",
+        "Nog weinig reviews"
+      ]
     },
     {
       "id": "M003",
@@ -654,7 +677,10 @@
       "reviews": [],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": null
+      "fabrikant_url": null,
+      "beste_voor": null,
+      "pluspunten": [],
+      "minpunten": []
     },
     {
       "id": "M004",
@@ -930,7 +956,17 @@
         "url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra",
         "type": "fabrikant"
       },
-      "fabrikant_url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra"
+      "fabrikant_url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+      "beste_voor": "Tuinen tot 800 m² met veel obstakels, zonder antenne",
+      "pluspunten": [
+        "LiDAR met camera, geen RTK of draad nodig",
+        "Helling 45% volgens de fabrikant",
+        "57 dB(A)"
+      ],
+      "minpunten": [
+        "Zonder losse link-module (249 euro, 3 jaar service volgens Mova NL) geen GPS-tracking en geen melding buiten de kaart",
+        "Rating van de app op Google Play 2,7"
+      ]
     },
     {
       "id": "M005",
@@ -1177,7 +1213,17 @@
         "url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra",
         "type": "fabrikant"
       },
-      "fabrikant_url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra"
+      "fabrikant_url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+      "beste_voor": "Tuinen tot 1.200 m² met veel obstakels, zonder antenne",
+      "pluspunten": [
+        "LiDAR met camera, geen RTK of draad nodig",
+        "Helling 45% volgens de fabrikant",
+        "57 dB(A)"
+      ],
+      "minpunten": [
+        "Zonder losse link-module (249 euro, 3 jaar service volgens Mova NL) geen GPS-tracking en geen melding buiten de kaart",
+        "Rating van de app op Google Play 2,7"
+      ]
     },
     {
       "id": "M006",
@@ -1440,7 +1486,18 @@
         "url": "https://www.coolblue.nl/product/975391/eufy-e15-solo.html",
         "type": "winkel"
       },
-      "fabrikant_url": "https://www.eufy.com/nl/products/t2880ga1"
+      "fabrikant_url": "https://www.eufy.com/nl/products/t2880ga1",
+      "beste_voor": "Tuinen waar een systematisch maaipatroon met alleen een camera volstaat",
+      "pluspunten": [
+        "Alleen camera, systematisch maaipatroon",
+        "Geen draad of antenne"
+      ],
+      "minpunten": [
+        "Helling in de documentatie \"40% (18 graden)\"; we rekenen met de laagste waarde (32,5%)",
+        "Geen pincode en geen alarm",
+        "GPS en bediening zonder wifi vragen een data-abonnement; Europese prijs niet gevonden",
+        "66,3 dB(A) geluidsvermogen"
+      ]
     },
     {
       "id": "M007",
@@ -1521,7 +1578,10 @@
       "reviews": [],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": null
+      "fabrikant_url": null,
+      "beste_voor": null,
+      "pluspunten": [],
+      "minpunten": []
     },
     {
       "id": "M008",
@@ -1786,7 +1846,19 @@
         "url": "https://www.coolblue.nl/product/962143/dreame-a1-pro.html",
         "type": "winkel"
       },
-      "fabrikant_url": "https://nl.dreametech.com/products/dreame-roboticmower-a1-pro"
+      "fabrikant_url": "https://nl.dreametech.com/products/dreame-roboticmower-a1-pro",
+      "beste_voor": "Zeer grote tuinen (tot 2.000 m² volgens de fabrikant) voor een lagere aanschafprijs",
+      "pluspunten": [
+        "3D-LiDAR en een systematische route",
+        "Helling 45% volgens de fabrikant",
+        "De link-module (69 euro voor een jaar of 99,99 euro voor drie jaar) was in onze selectie de goedkoopste"
+      ],
+      "minpunten": [
+        "64 dB(A)",
+        "App-rating 3,91 (de app dient ook voor andere Dreame-apparaten)",
+        "Zonder module geen GPS-locatie en geen alarm buiten de kaart",
+        "De handleiding noemt geen garantieperiode"
+      ]
     },
     {
       "id": "M010",
@@ -2036,7 +2108,20 @@
         "url": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
         "type": "fabrikant"
       },
-      "fabrikant_url": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/"
+      "fabrikant_url": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+      "beste_voor": "Grote tuinen tot ongeveer 1.500 m² die systematisch worden gemaaid",
+      "pluspunten": [
+        "RTK met AI-camera",
+        "1.500 m² systematisch maaien volgens de fabrikant",
+        "4G ingebouwd, correctiedata gratis",
+        "Pincode, alarm, GPS en geofence-melding"
+      ],
+      "minpunten": [
+        "Prijs rond 3.000 euro",
+        "Mobiele of wifidekking over het hele gazon nodig, anders een referentiestation (adviesprijs 309 euro)",
+        "Helling 30%, aan de rand 20%",
+        "IPX5"
+      ]
     },
     {
       "id": "M011",
@@ -2299,7 +2384,19 @@
         "url": "https://www.coolblue.nl/product/959330/gardena-smart-sileno-free-800.html",
         "type": "winkel"
       },
-      "fabrikant_url": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html"
+      "fabrikant_url": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html",
+      "beste_voor": "Kleinere tuinen tot 800 m² met stabiel internet en een router met een vrije LAN-poort",
+      "pluspunten": [
+        "RTK via een gateway",
+        "Geen abonnement",
+        "Pincode en optilsensor"
+      ],
+      "minpunten": [
+        "Gateway met LAN-kabel op de router nodig",
+        "Geen camera: obstakels merkt hij pas na een botsing",
+        "Maait willekeurig volgens de handleiding",
+        "Geen alarm, GPS of geofence"
+      ]
     },
     {
       "id": "M012",
@@ -2380,7 +2477,10 @@
       "reviews": [],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": null
+      "fabrikant_url": null,
+      "beste_voor": null,
+      "pluspunten": [],
+      "minpunten": []
     },
     {
       "id": "M013",
@@ -2468,7 +2568,10 @@
       "reviews": [],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": null
+      "fabrikant_url": null,
+      "beste_voor": null,
+      "pluspunten": [],
+      "minpunten": []
     },
     {
       "id": "M014",
@@ -2549,7 +2652,10 @@
       "reviews": [],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": null
+      "fabrikant_url": null,
+      "beste_voor": null,
+      "pluspunten": [],
+      "minpunten": []
     }
   ]
 }

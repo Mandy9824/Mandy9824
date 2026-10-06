@@ -52,6 +52,14 @@ function rmk_validate_modellen( $data ) {
 		if ( ! empty( $m['foto'] ) && ( ! is_array( $m['foto'] ) || empty( $m['foto']['url'] ) || ! rmk_price_url_ok( $m['foto']['url'] ) ) ) {
 			$err[] = "Model $i: foto moet een https-URL zijn, niet van Bol of een marketplace.";
 		}
+		if ( isset( $m['beste_voor'] ) && null !== $m['beste_voor'] && ( ! is_string( $m['beste_voor'] ) || mb_strlen( $m['beste_voor'] ) > 300 ) ) {
+			$err[] = "Model $i: beste_voor moet een tekst van hoogstens 300 tekens zijn.";
+		}
+		foreach ( array( 'pluspunten', 'minpunten' ) as $lk ) {
+			if ( isset( $m[ $lk ] ) && ( ! is_array( $m[ $lk ] ) || count( $m[ $lk ] ) > 8 || array_filter( $m[ $lk ], function ( $t ) { return ! is_string( $t ) || mb_strlen( $t ) > 300; } ) ) ) {
+				$err[] = "Model $i: $lk moet een lijst van hoogstens 8 teksten zijn.";
+			}
+		}
 		if ( isset( $m['kosten']['aanschaf']['waarde'] ) && null !== $m['kosten']['aanschaf']['waarde'] ) {
 			$err[] = "Model $i: aanschafprijs is ingevuld (moet leeg blijven).";
 		}

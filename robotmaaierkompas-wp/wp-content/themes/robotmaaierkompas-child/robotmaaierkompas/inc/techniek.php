@@ -145,8 +145,18 @@ add_filter( 'render_block', function ( $content, $block ) {
  * - Concepten staan nooit in de sitemap: Yoast neemt alleen gepubliceerde, indexeerbare pagina's op;
  *   hieronder ook een vangnet voor de WordPress-kernsitemap. */
 add_filter( 'rest_post_dispatch', function ( $response, $server, $request ) {
-	if ( 0 === strpos( $request->get_route(), '/rmk/v1' ) && $response instanceof WP_REST_Response ) {
+	$rmk = 0 === strpos( $request->get_route(), '/rmk/v1' );
+	if ( $rmk && $response instanceof WP_REST_Response ) {
 		$response->header( 'X-Robots-Tag', 'noindex, nofollow' );
+	}
+	// Nooit cachen (1.3.2): de beheerroutes en elk antwoord aan een ingelogde gebruiker of een verzoek met een
+	// toepassingswachtwoord. LiteSpeed zag Basic-authenticatie niet als ingelogd en serveerde /rmk/v1/status uit de cache.
+	if ( $rmk || is_user_logged_in() || ! empty( $_SERVER['PHP_AUTH_USER'] ) || ! empty( $_SERVER['HTTP_AUTHORIZATION'] ) ) {
+		do_action( 'litespeed_control_set_nocache', 'rmk: beheer of ingelogd' );
+		if ( $response instanceof WP_REST_Response ) {
+			$response->header( 'Cache-Control', 'no-store, private, max-age=0' );
+			$response->header( 'X-LiteSpeed-Cache-Control', 'no-cache' );
+		}
 	}
 	return $response;
 }, 10, 3 );

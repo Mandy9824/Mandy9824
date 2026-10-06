@@ -402,3 +402,26 @@ img.rmk-avatar { object-fit: cover; padding: 0; }
 /* De hoofdkolom komt sinds 1.3.1 uit het afwerkpakket (css/rmk-afwerking.css, .rmk-column). */
 /* 1.3.1: plaatsvervanger uit het afwerkpakket nooit tonen (vangnet naast het filter in inc/techniek.php). */
 .rmk-product__media:has(.rmk-photo--placeholder) { display: none; }
+
+/* ---------- 1.3.2 ------------------------------------------------------------------------------------------------------------- */
+/* Label onder de score: geen kader meer, gewone kleine regel met de link "Hoe we scoren". */
+.rmk-scorenote { margin: 0; font-size: var(--rmk-fs-xs); color: var(--rmk-text-muted); line-height: 1.4; }
+.rmk-scorenote a { font-weight: 700; }
+.rmk-scorenote[hidden] { display: none; }
+.rmk-scorecell .rmk-scorenote { margin-top: var(--rmk-space-1); }
+.rmk-tablewrap + .rmk-scorenote { margin-top: var(--rmk-space-2); }
+/* "Beste voor" in de productbox: een hele zin, dus als gewone regel met een vet label. */
+.rmk-product .rmk-bestfor { display: block; color: var(--rmk-text); }
+.rmk-product .rmk-bestfor > span { font-family: var(--rmk-font-display); font-weight: 700; color: var(--rmk-brand); }
+/* Productbox met specificatiekaart (desktop): kaart links; titel, score en prijs rechts; plus- en minpunten eronder over de
+   volle breedte. Zo staat de titel niet in een smalle middenkolom en blijft er onderin geen lege ruimte. */
+@media (min-width: 48rem) {
+  .rmk-product:has(.rmk-speccard) { grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr); grid-template-rows: auto 1fr auto; align-items: start; column-gap: var(--rmk-space-6); }
+  .rmk-product:has(.rmk-speccard) > .rmk-product__head { display: contents; }
+  .rmk-product:has(.rmk-speccard) .rmk-speccard { grid-column: 1; grid-row: 1 / span 2; }
+  .rmk-product:has(.rmk-speccard) .rmk-product__title { grid-column: 2; grid-row: 1; }
+  .rmk-product:has(.rmk-speccard) > .rmk-product__aside { grid-column: 2; grid-row: 2; }
+  .rmk-product:has(.rmk-speccard) > .rmk-proscons { grid-column: 1 / -1; grid-row: 3; }
+}
+/* In tabellen geen label per rij: één regel onder de tabel (scoretabel en vergelijkingstabel). */
+.rmk-table .rmk-scorecell .rmk-scorenote { display: none; }

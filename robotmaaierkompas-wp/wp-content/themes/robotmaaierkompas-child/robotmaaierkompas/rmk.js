@@ -47,12 +47,13 @@
     else if (known.length >= MIN_PARTS) {
       res.kind = 'functie';
       res.value = sumWV / sumW * 10;   /* gewogen gemiddelde van de bekende onderdelen, op 0–100, onafgerond */
-      res.label = 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.';   /* tekstwijziging 6 oktober 2026 */
+      res.label = 'Functiescore: wat deze maaier kan.';   /* 1.3.2; de link "Hoe we scoren" komt erachter (labelHtml) */
     }
     return res;
   }
   function joinNames(a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' en ' + a[a.length - 1]; }
   var KIND = { eind: 'Eindscore', functie: 'Functiescore', geen: 'Geen score' };
+  function labelHtml(label) { return label ? label + ' <a href="/hoe-we-beoordelen/">Hoe we scoren</a>' : ''; }   /* label is een vaste tekst */
 
   /* Volledig scoreblok: <section data-rmk-score> met <li data-key data-value> (+ data-reviews op betrouwbaarheid) */
   $$('section[data-rmk-score]').forEach(function (box) {
@@ -67,7 +68,7 @@
     $('[data-out="total"]', box).textContent = r.value == null ? '–' : fmtScore(r.value);
     box.dataset.total = r.value == null ? '' : r.value;
     $('[data-out="kind"]', box).textContent = KIND[r.kind];
-    var lab = $('[data-out="label"]', box); lab.textContent = r.label; lab.hidden = !r.label;
+    var lab = $('[data-out="label"]', box); if (lab) { lab.innerHTML = labelHtml(r.label); lab.hidden = !r.label; }
     var bar = $('[data-out="bar"]', box);
     bar.setAttribute('aria-label', r.value == null ? 'Geen score' : KIND[r.kind] + ' ' + fmtScore(r.value) + ' van 100');
     $('i', bar).style.width = (r.value == null ? 0 : Math.round(r.value * 10) / 10) + '%';
@@ -101,7 +102,7 @@
     m.classList.toggle('rmk-minis--none', r.kind === 'geen');
     $('[data-out="total"]', el).textContent = r.value == null ? '–' : fmtScore(r.value);
     $('[data-out="kind"]', el).textContent = KIND[r.kind] + (r.value == null ? '' : ', van 100');
-    var lab = $('[data-out="label"]', el); if (lab) { lab.textContent = r.label; lab.hidden = !r.label; }
+    var lab = $('[data-out="label"]', el); if (lab) { lab.innerHTML = labelHtml(r.label); lab.hidden = !r.label; }
   });
 
   /* ======================= Vuistregel (eigen, geen bron) =======================

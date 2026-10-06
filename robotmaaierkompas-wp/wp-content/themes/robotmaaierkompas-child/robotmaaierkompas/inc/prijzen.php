@@ -106,7 +106,7 @@ function rmk_fill_offers( $html ) {
 		}
 		$offer = rmk_offer_html( $m );
 		$done  = false;
-		$a[0]  = rmk_fill_photo( $a[0], $m );
+		$a[0]  = rmk_fill_card( $a[0], $m );
 		return preg_replace_callback( '#<div class="rmk-offer(?: [^"]*)?"[^>]*>(?:(?!</div>).)*</div>#s', function () use ( $offer, &$done ) {
 			$out  = $done ? '' : $offer;
 			$done = true;
@@ -139,33 +139,85 @@ add_action( 'rmk_prijzen_verloop', function () {
 	}
 } );
 
-/**
- * Productfoto (afwerkpakket, fotokader): alleen als het model in modellen.json een foto heeft
- * ("foto": {"url": "https://…", "fabrikant": "Gardena", "breedte": 800, "hoogte": 600}) en de box nog geen beeld heeft.
- * Bijschrift "Foto: (fabrikant)". Zonder foto blijft de box zonder beeldblok; een plaatsvervanger wordt nooit getoond.
- * Foto's worden alleen toegevoegd met een duidelijke gebruiksvoorwaarde (dat regelt de datasessie, niet het thema).
- */
-function rmk_photo_html( array $m ) {
-	$f = isset( $m['foto'] ) && is_array( $m['foto'] ) ? $m['foto'] : null;
-	if ( ! $f || empty( $f['url'] ) || 0 !== strpos( (string) $f['url'], 'https://' ) || ! rmk_price_url_ok( $f['url'] ) ) {
-		return '';
-	}
-	$fab = ! empty( $f['fabrikant'] ) ? $f['fabrikant'] : ( isset( $m['merk'] ) ? $m['merk'] : '' );
-	$w   = ! empty( $f['breedte'] ) ? (int) $f['breedte'] : 800;
-	$h   = ! empty( $f['hoogte'] ) ? (int) $f['hoogte'] : 600;
-	return '<figure class="rmk-photo rmk-photo--square"><div class="rmk-photo__frame"><img src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
-		. '<figcaption>Foto: ' . esc_html( $fab ) . '</figcaption></figure>';
+/* ------------------------------------------------------------------ Productbox: specificatiekaart, Beste voor, plus- en minpunten (1.3.2)
+ * Pakket "specificatiekaart" (Claude Design, v1.3): zonder foto een kaart met merk, model en vijf kenmerken;
+ * met foto dezelfde kaart met de foto en "Foto: (fabrikant)". Naam en score staan alleen in de kaart.
+ * Beste voor, pluspunten en minpunten komen uit modellen.json (velden beste_voor, pluspunten, minpunten). */
+
+function rmk_nl_number( $v ) {
+	$v = (float) $v;
+	return floor( $v ) == $v ? number_format( $v, 0, ',', '.' ) : number_format( $v, 1, ',', '.' );
 }
 
-function rmk_fill_photo( $article, array $m ) {
-	$fig = rmk_photo_html( $m );
-	if ( ! $fig || false !== strpos( $article, 'rmk-photo__frame' ) && false === strpos( $article, 'rmk-photo--placeholder' ) ) {
-		return $article;
+/** De vijf kenmerken voor de kaart: [klasse, label, waarde of null]. */
+function rmk_card_specs( array $m ) {
+	$sv  = function ( $k ) use ( $m ) {
+		return isset( $m['specs'][ $k ]['waarde'] ) && '' !== $m['specs'][ $k ]['waarde'] ? $m['specs'][ $k ]['waarde'] : null;
+	};
+	$nav = $sv( 'navigatie' );
+	$map = array( 'rtk+vision' => 'RTK + camera', 'vision' => 'camera', 'lidar' => 'LiDAR', 'rtk' => 'RTK', 'gnss' => 'GNSS', 'draad' => 'draad', 'lidar+vision' => 'LiDAR + camera' );
+	$nav = null === $nav ? null : ( isset( $map[ strtolower( $nav ) ] ) ? $map[ strtolower( $nav ) ] : $nav );
+	$ver = isset( $m['verbinding']['extra'] ) ? $m['verbinding']['extra'] : null;
+	$ver = array( 'ingebouwd' => '4G', 'module' => 'module', 'geen' => 'geen' )[ $ver ] ?? null;
+	$opp = $sv( 'max_tuingrootte_m2' );
+	$hel = $sv( 'max_helling_pct' );
+	$gel = $sv( 'geluid_dba' );
+	return array(
+		array( 'oppervlak', 'Oppervlak', is_numeric( $opp ) ? rmk_nl_number( $opp ) . ' m²' : null ),
+		array( 'helling', 'Helling', is_numeric( $hel ) ? rmk_nl_number( $hel ) . '%' : null ),
+		array( 'navigatie', 'Navigatie', $nav ),
+		array( 'geluid', 'Geluid', is_numeric( $gel ) ? rmk_nl_number( $gel ) . ' dB' : null ),
+		array( 'verbinding', 'Verbinding', $ver ),
+	);
+}
+
+function rmk_speccard_html( array $m ) {
+	$specs = '';
+	foreach ( rmk_card_specs( $m ) as $c ) {
+		$specs .= null === $c[2]
+			? '<div class="rmk-spec rmk-spec--' . $c[0] . ' is-missing"><dt>' . $c[1] . '</dt><dd><span aria-hidden="true">–</span><span class="rmk-sr">onbekend</span></dd></div>'
+			: '<div class="rmk-spec rmk-spec--' . $c[0] . '"><dt>' . $c[1] . '</dt><dd>' . esc_html( $c[2] ) . '</dd></div>';
 	}
-	// Plaatsvervanger vervangen, of een beeldblok toevoegen aan een kop zonder beeld.
-	$article = preg_replace( '#<figure class="rmk-photo[^"]*rmk-photo--placeholder[^"]*">.*?</figure>#s', $fig, $article, 1, $n );
-	if ( $n ) {
-		return $article;
+	$f = isset( $m['foto'] ) && is_array( $m['foto'] ) && ! empty( $m['foto']['url'] ) && rmk_price_url_ok( $m['foto']['url'] ) ? $m['foto'] : null;
+	if ( $f ) {
+		$fab    = ! empty( $f['fabrikant'] ) ? $f['fabrikant'] : ( isset( $m['merk'] ) ? $m['merk'] : '' );
+		$w      = ! empty( $f['breedte'] ) ? (int) $f['breedte'] : 800;
+		$h      = ! empty( $f['hoogte'] ) ? (int) $f['hoogte'] : 600;
+		$visual = '<div class="rmk-speccard__visual"><img src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
+			. '<figcaption class="rmk-speccard__caption">Foto: ' . esc_html( $fab ) . '</figcaption>';
+		$cls    = 'rmk-speccard rmk-speccard--photo';
+	} else {
+		$merk   = isset( $m['merk'] ) ? $m['merk'] : '';
+		$model  = isset( $m['model'] ) && $m['model'] ? $m['model'] : $m['naam'];
+		$visual = '<div class="rmk-speccard__visual" aria-hidden="true"><p class="rmk-speccard__brand">' . esc_html( $merk ) . '</p><p class="rmk-speccard__model">' . esc_html( $model ) . '</p></div>'
+			. '<figcaption class="rmk-speccard__caption">Geen productfoto beschikbaar</figcaption>';
+		$cls    = 'rmk-speccard';
 	}
-	return preg_replace( '#<div class="rmk-product__head(?: rmk-product__head--nomedia)?"(?: style="[^"]*")?>#', '<div class="rmk-product__head"><div class="rmk-product__media">' . $fig . '</div>', $article, 1 );
+	return '<div class="' . $cls . '"><figure class="rmk-speccard__figure">' . $visual . '</figure><dl class="rmk-speccard__specs" aria-label="Belangrijkste kenmerken">' . $specs . '</dl></div>';
+}
+
+function rmk_proscons_html( array $m ) {
+	$list = function ( $key, $titel, $cls ) use ( $m ) {
+		$items = isset( $m[ $key ] ) && is_array( $m[ $key ] ) ? array_filter( array_map( 'strval', $m[ $key ] ) ) : array();
+		return $items ? '<div><h4>' . $titel . '</h4><ul class="' . $cls . '"><li>' . implode( '</li><li>', array_map( 'esc_html', $items ) ) . '</li></ul></div>' : '';
+	};
+	$h = $list( 'pluspunten', 'Pluspunten', 'rmk-pros' ) . $list( 'minpunten', 'Minpunten', 'rmk-cons' );
+	return $h ? '<div class="rmk-proscons">' . $h . '</div>' : '';
+}
+
+function rmk_fill_card( $article, array $m ) {
+	// Bestaand beeldblok, plaatsvervanger of eerdere kaart weg; de kaart komt vooraan in de kop.
+	$article = preg_replace( '#<div class="rmk-product__media">\s*(?:<!--.*?-->\s*)?(?:<figure\b.*?</figure>|<div class="rmk-ph">.*?</span></div>|<img\b[^>]*>)\s*</div>#s', '', $article );
+	$article = preg_replace( '#<div class="rmk-speccard\b[^"]*">.*?</dl>\s*</div>#s', '', $article );
+	$article = preg_replace( '#<div class="rmk-product__head(?: rmk-product__head--nomedia)?"(?: style="[^"]*")?>#', '<div class="rmk-product__head">' . rmk_speccard_html( $m ), $article, 1 );
+	if ( ! empty( $m['beste_voor'] ) && false === strpos( $article, 'rmk-bestfor' ) ) {
+		$article = preg_replace( '#(<h3\b[^>]*>.*?</h3>)#s', '$1<p class="rmk-bestfor"><span>Beste voor</span> ' . esc_html( $m['beste_voor'] ) . '</p>', $article, 1 );
+	}
+	if ( false === strpos( $article, 'rmk-proscons' ) && ( $pc = rmk_proscons_html( $m ) ) ) {
+		$article = preg_replace( '#(<div class="rmk-product__aside)#', $pc . '$1', $article, 1, $n );
+		if ( ! $n ) {
+			$article = str_replace( '</article>', $pc . '</article>', $article );
+		}
+	}
+	return $article;
 }

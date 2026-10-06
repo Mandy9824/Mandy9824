@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <rect width="400" height="300" fill="#F1F7F2"/>
+  <path d="M0 150c70-26 140-30 210-18s130 14 190-6v174H0Z" fill="#C9DFCF"/>
+  <g stroke="#A3C9AE" stroke-width="12" opacity=".55"><path d="M24 150V300"/><path d="M52 150V300"/><path d="M80 150V300"/><path d="M108 150V300"/><path d="M136 150V300"/><path d="M164 150V300"/><path d="M192 150V300"/><path d="M220 150V300"/><path d="M248 150V300"/><path d="M276 150V300"/><path d="M304 150V300"/><path d="M332 150V300"/><path d="M360 150V300"/><path d="M388 150V300"/></g>
+  <path d="M0 150c70-26 140-30 210-18s130 14 190-6" fill="none" stroke="#A3C9AE" stroke-width="2"/>
+  <circle cx="330" cy="70" r="26" fill="none" stroke="#A3C9AE" stroke-width="2.5"/><path d="M343 57 333 73 327 67Z" fill="#A3C9AE"/><path d="M317 83 327 67 333 73Z" fill="#C9DFCF"/>
+</svg>

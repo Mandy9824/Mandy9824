@@ -85,11 +85,16 @@ function rmk_compute_score( array $values, $reviews ) {
 	} elseif ( count( $known ) >= 5 ) {
 		$res['kind']  = 'functie';
 		$res['value'] = $sum_wv / $sum_w * 10;
-		// Label (tekstwijziging 6 oktober 2026). Naast het woord "Functiescore" leest het als
-		// "Functiescore. Betrouwbaarheid en prijs-kwaliteit worden toegevoegd ...". In de balkjes blijft "onvoldoende data".
-		$res['label'] = 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.';
+		// Label (1.3.2): "Functiescore: wat deze maaier kan." met daarachter de link "Hoe we scoren" (rmk_score_label_html).
+		// In de balkjes blijft "onvoldoende data".
+		$res['label'] = 'Functiescore: wat deze maaier kan.';
 	}
 	return $res;
+}
+
+/** Label onder de score, zonder kader: tekst plus de link "Hoe we scoren". */
+function rmk_score_label_html( $label ) {
+	return $label ? esc_html( $label ) . ' <a href="/hoe-we-beoordelen/">Hoe we scoren</a>' : '';
 }
 
 function rmk_join_names( array $a ) {
@@ -180,7 +185,7 @@ function rmk_render_scoreblok( array $values, $reviews, $id_suffix, $updated = '
 
 	$h  = '<section class="' . esc_attr( $cls ) . '" data-rmk-score data-ssr="1" data-total="' . esc_attr( null === $r['value'] ? '' : $r['value'] ) . '" aria-labelledby="' . esc_attr( $id ) . '">';
 	$h .= '<div class="rmk-score__head"><div class="rmk-score__total"><b data-out="total">' . esc_html( $total ) . '</b><span>/ 100</span></div>';
-	$h .= '<div class="rmk-score__kind"><strong id="' . esc_attr( $id ) . '" data-out="kind">' . esc_html( $kind ) . '</strong><span class="rmk-provisional" data-out="label"' . ( $r['label'] ? '' : ' hidden' ) . '>' . esc_html( $r['label'] ) . '</span></div></div>';
+	$h .= '<div class="rmk-score__kind"><strong id="' . esc_attr( $id ) . '" data-out="kind">' . esc_html( $kind ) . '</strong></div></div><p class="rmk-scorenote" data-out="label"' . ( $r['label'] ? '' : ' hidden' ) . '>' . rmk_score_label_html( $r['label'] ) . '</p>';
 	$h .= '<div class="rmk-scale" role="img" data-out="bar" aria-label="' . esc_attr( $aria ) . '"><i style="width:' . esc_attr( $width ) . '%"></i></div><ul class="rmk-parts">';
 	foreach ( rmk_score_model() as $p ) {
 		$v       = isset( $values[ $p['key'] ] ) ? rmk_parse_number( $values[ $p['key'] ] ) : null;
@@ -202,7 +207,7 @@ function rmk_render_scoreblok( array $values, $reviews, $id_suffix, $updated = '
 }
 
 /** Compacte scorecel (scoretabel, vergelijkingstabel). */
-function rmk_render_scorecell( array $values, $reviews ) {
+function rmk_render_scorecell( array $values, $reviews, $with_label = true ) {
 	$r     = rmk_compute_score( $values, $reviews );
 	$pairs = array();
 	foreach ( rmk_score_model() as $p ) {
@@ -214,7 +219,7 @@ function rmk_render_scorecell( array $values, $reviews ) {
 	$kind    = rmk_score_kind_label( $r['kind'] ) . ( null === $r['value'] ? '' : ', van 100' );
 	return '<div class="rmk-scorecell" data-rmk-score data-ssr="1" data-kind="' . esc_attr( $r['kind'] ) . '" data-total="' . esc_attr( null === $r['value'] ? '' : $r['value'] ) . '" data-scores="' . esc_attr( implode( '; ', $pairs ) ) . '">'
 		. '<div class="' . esc_attr( $minis ) . '"><b data-out="total">' . esc_html( rmk_format_score( $r['value'] ) ) . '</b><small data-out="kind">' . esc_html( $kind ) . '</small></div>'
-		. '<span class="rmk-provisional" data-out="label"' . ( $r['label'] ? '' : ' hidden' ) . '>' . esc_html( $r['label'] ) . '</span></div>';
+		. ( $with_label ? '<p class="rmk-scorenote" data-out="label"' . ( $r['label'] ? '' : ' hidden' ) . '>' . rmk_score_label_html( $r['label'] ) . '</p>' : '' ) . '</div>';
 }
 
 /* ------------------------------------------------------------------ shortcodes */
@@ -250,13 +255,15 @@ add_shortcode( 'rmk_scoretabel', function ( $atts ) {
 		$best  = $show_best ? '<td class="c-best">' . esc_html( isset( $m['beste_voor'] ) ? $m['beste_voor'] : '' ) . '</td>' : '';
 		$rows .= '<tr data-model="' . esc_attr( $m['slug'] ) . '"><td class="c-rank"><span class="rmk-ranknum">' . esc_html( $rank ) . '</span></td>'
 			. '<th scope="row" class="c-model">' . esc_html( $m['naam'] ) . '</th>' . $best
-			. '<td class="is-num c-score">' . rmk_render_scorecell( $m['scores'], $m['reviews_gelezen'] ) . '</td>'
+			. '<td class="is-num c-score">' . rmk_render_scorecell( $m['scores'], $m['reviews_gelezen'], false ) . '</td>'
 			. '<td class="is-num c-price" data-label="Prijs vanaf">' . $price . '</td>'
 			. '<td class="c-go"><a href="#p-' . esc_attr( $m['slug'] ) . '">Details</a></td></tr>';
 	}
 	return '<div class="rmk-tablewrap"><table class="rmk-table rmk-table--cards"><caption>Scores volgens scoremodel v1.0 (concept tot bevriezing). Volgorde op de onafgeronde score. Modellen zonder score staan onderaan.</caption>'
 		. '<thead><tr><th scope="col">#</th><th scope="col">Model</th>' . ( $show_best ? '<th scope="col">Beste voor</th>' : '' ) . '<th scope="col" class="is-num">Score</th><th scope="col" class="is-num">Prijs vanaf</th><th scope="col"><span class="rmk-sr">Details</span></th></tr></thead>'
-		. '<tbody>' . $rows . '</tbody></table></div>';
+		. '<tbody>' . $rows . '</tbody></table></div>'
+		// Eén regel onder de tabel in plaats van een label per rij.
+		. ( array_filter( $items, function ( $it ) { return 'functie' === $it['score']['kind']; } ) ? '<p class="rmk-scorenote">' . rmk_score_label_html( 'Functiescore: wat deze maaier kan.' ) . '</p>' : '' );
 } );
 
 /* ------------------------------------------------------------------ patronen met handmatig ingevulde waarden */

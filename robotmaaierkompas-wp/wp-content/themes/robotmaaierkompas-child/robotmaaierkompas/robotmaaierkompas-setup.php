@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'RMK_DIR', __DIR__ );
 define( 'RMK_URL', get_stylesheet_directory_uri() . '/robotmaaierkompas' );
-define( 'RMK_VER', '1.3.1' );
+define( 'RMK_VER', '1.3.2' );
 
 /* ------------------------------------------------------------------------
  * 1. CSS en JS + configuratie voor rmk.js
@@ -25,6 +25,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_enqueue_style( 'rmk-tokens', RMK_URL . '/tokens.css', array(), RMK_VER );
 		wp_enqueue_style( 'rmk', RMK_URL . '/rmk.css', array( 'rmk-tokens' ), RMK_VER );
 		wp_enqueue_style( 'rmk-afwerking', RMK_URL . '/css/rmk-afwerking.css', array( 'rmk' ), RMK_VER );
+		wp_enqueue_style( 'rmk-specificatiekaart', RMK_URL . '/css/rmk-specificatiekaart.css', array( 'rmk-afwerking' ), RMK_VER );
 	}
 	wp_enqueue_script( 'rmk', RMK_URL . '/rmk.js', array(), RMK_VER, array( 'strategy' => 'defer', 'in_footer' => true ) );
 	$config = apply_filters( 'rmk_config', array(
@@ -38,7 +39,7 @@ add_action( 'wp_enqueue_scripts', function () {
 
 /** Verkleinde inhoud van tokens.css + rmk.css + css/rmk-afwerking.css (afwerkpakket v1.2), gecachet per themaversie en bestandsdatum. */
 function rmk_inline_css_files() {
-	return array( 'tokens.css', 'rmk.css', 'css/rmk-afwerking.css' );
+	return array( 'tokens.css', 'rmk.css', 'css/rmk-afwerking.css', 'css/rmk-specificatiekaart.css' );
 }
 function rmk_inline_css() {
 	$files = rmk_inline_css_files();
@@ -49,9 +50,16 @@ function rmk_inline_css() {
 		foreach ( $files as $f ) {
 			$c = is_readable( RMK_DIR . '/' . $f ) ? (string) file_get_contents( RMK_DIR . '/' . $f ) : '';
 			$c = preg_replace( '#/\*.*?\*/#s', '', $c );
+			// url(...) (ook ingebedde SVG-iconen) onaangetast laten tijdens het verkleinen.
+			$urls = array();
+			$c    = preg_replace_callback( '#url\((?:"[^"]*"|\'[^\']*\'|[^)]*)\)#', function ( $u ) use ( &$urls ) {
+				$urls[] = $u[0];
+				return '__RMKURL' . ( count( $urls ) - 1 ) . '__';
+			}, $c );
 			$c = preg_replace( '/\s+/', ' ', $c );
 			$c = preg_replace( '/\s*([{};,])\s*/', '$1', $c ); // geen spaties rond ":" of ">" weghalen (selectors)
 			$c = str_replace( ';}', '}', trim( $c ) );
+			$c = preg_replace_callback( '#__RMKURL(\d+)__#', function ( $u ) use ( $urls ) { return $urls[ (int) $u[1] ]; }, $c );
 			// url(...) is relatief aan het CSS-bestand; inline wordt dat relatief aan de pagina. Daarom de map van het bestand ervoor.
 			$dir = trim( dirname( $f ), '.' );
 			$base = RMK_URL . '/' . ( $dir ? $dir . '/' : '' );
@@ -64,7 +72,7 @@ function rmk_inline_css() {
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'editor-styles' );
-	add_editor_style( array( 'robotmaaierkompas/tokens.css', 'robotmaaierkompas/rmk.css', 'robotmaaierkompas/css/rmk-afwerking.css' ) );
+	add_editor_style( array( 'robotmaaierkompas/tokens.css', 'robotmaaierkompas/rmk.css', 'robotmaaierkompas/css/rmk-afwerking.css', 'robotmaaierkompas/css/rmk-specificatiekaart.css' ) );
 } );
 
 /* ------------------------------------------------------------------------

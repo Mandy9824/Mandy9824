@@ -1,0 +1,109 @@
+{
+  "M002": {
+    "beste_voor": "Tuinen tot ongeveer 600 m² met hellingen en obstakels, voor wie ingebouwde diefstalbeveiliging belangrijk is",
+    "pluspunten": [
+      "Netwerk-RTK met camera, zonder draad",
+      "Helling tot 45% volgens de fabrikant",
+      "Pincode, alarm, GPS en geofence-melding met ingebouwde 4G",
+      "3 jaar garantie op de maaier"
+    ],
+    "minpunten": [
+      "De 4G-service heeft een einddatum; geen Nederlandse verlengprijs gevonden",
+      "Netwerk-RTK is niet overal beschikbaar",
+      "De fabrikant spreekt zichzelf tegen over de aandrijving (drie of vier wielen)",
+      "Nog weinig reviews"
+    ]
+  },
+  "M010": {
+    "beste_voor": "Grote tuinen tot ongeveer 1.500 m² die systematisch worden gemaaid",
+    "pluspunten": [
+      "RTK met AI-camera",
+      "1.500 m² systematisch maaien volgens de fabrikant",
+      "4G ingebouwd, correctiedata gratis",
+      "Pincode, alarm, GPS en geofence-melding"
+    ],
+    "minpunten": [
+      "Prijs rond 3.000 euro",
+      "Mobiele of wifidekking over het hele gazon nodig, anders een referentiestation (adviesprijs 309 euro)",
+      "Helling 30%, aan de rand 20%",
+      "IPX5"
+    ]
+  },
+  "M005": {
+    "beste_voor": "Tuinen tot 1.200 m² met veel obstakels, zonder antenne",
+    "pluspunten": [
+      "LiDAR met camera, geen RTK of draad nodig",
+      "Helling 45% volgens de fabrikant",
+      "57 dB(A)"
+    ],
+    "minpunten": [
+      "Zonder losse link-module (249 euro, 3 jaar service volgens Mova NL) geen GPS-tracking en geen melding buiten de kaart",
+      "Rating van de app op Google Play 2,7"
+    ]
+  },
+  "M004": {
+    "beste_voor": "Tuinen tot 800 m² met veel obstakels, zonder antenne",
+    "pluspunten": [
+      "LiDAR met camera, geen RTK of draad nodig",
+      "Helling 45% volgens de fabrikant",
+      "57 dB(A)"
+    ],
+    "minpunten": [
+      "Zonder losse link-module (249 euro, 3 jaar service volgens Mova NL) geen GPS-tracking en geen melding buiten de kaart",
+      "Rating van de app op Google Play 2,7"
+    ]
+  },
+  "M008": {
+    "beste_voor": "Zeer grote tuinen (tot 2.000 m² volgens de fabrikant) voor een lagere aanschafprijs",
+    "pluspunten": [
+      "3D-LiDAR en een systematische route",
+      "Helling 45% volgens de fabrikant",
+      "De link-module (69 euro voor een jaar of 99,99 euro voor drie jaar) was in onze selectie de goedkoopste"
+    ],
+    "minpunten": [
+      "64 dB(A)",
+      "App-rating 3,91 (de app dient ook voor andere Dreame-apparaten)",
+      "Zonder module geen GPS-locatie en geen alarm buiten de kaart",
+      "De handleiding noemt geen garantieperiode"
+    ]
+  },
+  "M001": {
+    "beste_voor": "Tuinen tot 500 m² met een eigen antenne in plaats van netwerk-RTK",
+    "pluspunten": [
+      "Eigen antenne en camera, zonder draad",
+      "IP66"
+    ],
+    "minpunten": [
+      "De fabrikant verkoopt dit model nog alleen refurbished",
+      "Diefstalbeveiliging vraagt de losse Access+-module (99,99 euro met een jaar data, daarna 29,90 per jaar)",
+      "Helling 30%"
+    ]
+  },
+  "M006": {
+    "beste_voor": "Tuinen waar een systematisch maaipatroon met alleen een camera volstaat",
+    "pluspunten": [
+      "Alleen camera, systematisch maaipatroon",
+      "Geen draad of antenne"
+    ],
+    "minpunten": [
+      "Helling in de documentatie \"40% (18 graden)\"; we rekenen met de laagste waarde (32,5%)",
+      "Geen pincode en geen alarm",
+      "GPS en bediening zonder wifi vragen een data-abonnement; Europese prijs niet gevonden",
+      "66,3 dB(A) geluidsvermogen"
+    ]
+  },
+  "M011": {
+    "beste_voor": "Kleinere tuinen tot 800 m² met stabiel internet en een router met een vrije LAN-poort",
+    "pluspunten": [
+      "RTK via een gateway",
+      "Geen abonnement",
+      "Pincode en optilsensor"
+    ],
+    "minpunten": [
+      "Gateway met LAN-kabel op de router nodig",
+      "Geen camera: obstakels merkt hij pas na een botsing",
+      "Maait willekeurig volgens de handleiding",
+      "Geen alarm, GPS of geofence"
+    ]
+  }
+}

@@ -10,7 +10,7 @@
 <!-- wp:html -->
 <section class="rmk-score" data-rmk-score aria-labelledby="score-[model-slug]">
   <!-- Vul per onderdeel data-value in (0 tot 10, of leeg laten als het onbekend is). Betrouwbaarheid telt pas mee vanaf 50 gelezen reviews (data-reviews).
-       Label en score worden berekend: 7 van 7 bekend = Eindscore; 5 of 6 = Functiescore met het label "Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn."; minder dan 5 = geen score. -->
+       Label en score worden berekend: 7 van 7 bekend = Eindscore; 5 of 6 = Functiescore met de regel "Functiescore: wat deze maaier kan. Hoe we scoren"; minder dan 5 = geen score. -->
   <div class="rmk-score__head">
     <div class="rmk-score__total"><b data-out="total">–</b><span>/ 100</span></div>
     <div class="rmk-score__kind"><strong id="score-[model-slug]" data-out="kind">Score</strong><span class="rmk-provisional" data-out="label" hidden></span></div>

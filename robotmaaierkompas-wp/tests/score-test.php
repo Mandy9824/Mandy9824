@@ -21,7 +21,7 @@ $m002 = array( 'betrouwbaarheid' => null, 'navigatie' => 10, 'prijskwaliteit' =>
 $r = rmk_compute_score( $m002, null );
 check( 'M002 soort = functiescore', 'functie' === $r['kind'], $r['kind'] );
 check( 'M002 weergave 92,7', '92,7' === rmk_format_score( $r['value'] ), rmk_format_score( $r['value'] ) . ' / onafgerond ' . $r['value'] );
-check( 'M002 label', 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.' === $r['label'], $r['label'] );
+check( 'M002 label', 'Functiescore: wat deze maaier kan.' === $r['label'], $r['label'] );
 
 // 2. Model met zeven onderdelen (testwaarden, geen echt model)
 $vol = array( 'betrouwbaarheid' => 8, 'navigatie' => 8, 'prijskwaliteit' => 7.3, 'hellingen' => 6, 'app' => 9, 'veiligheid' => 7.5, 'geluid' => 4 );
@@ -33,7 +33,7 @@ check( 'Volledig model geen label', '' === $r['label'] );
 
 // 3. Minder dan 50 gelezen reviews: betrouwbaarheid telt niet -> functiescore
 $r = rmk_compute_score( $vol, 49 );
-check( '49 reviews -> functiescore', 'functie' === $r['kind'] && 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.' === $r['label'], $r['label'] );
+check( '49 reviews -> functiescore', 'functie' === $r['kind'] && 'Functiescore: wat deze maaier kan.' === $r['label'], $r['label'] );
 $r = rmk_compute_score( $vol, 50 );
 check( '50 reviews -> eindscore', 'eind' === $r['kind'] );
 
