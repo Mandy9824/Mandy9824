@@ -18,7 +18,7 @@ $rmk_img  = $rmk_foto ? wp_get_attachment_image( $rmk_foto[0]->ID, array( 96, 96
   <div class="rmk-author__body">
     <p class="rmk-author__name">Mandy van den Broek</p>
     <div class="rmk-author__roles"><span class="rmk-chip">Oprichter en redacteur</span></div>
-    <p class="rmk-small">Mandy van den Broek vergelijkt producten voor kopers in Nederland. Op deze site test ze de maaiers niet zelf: ze leest handleidingen, verzamelt specificaties en telt gebruikersreviews.</p>
+    <p class="rmk-small">Mandy van den Broek vergelijkt producten voor kopers in Nederland. Op deze site vergelijkt ze robotmaaiers op handleidingen, specificaties en gebruikersreviews.</p>
     <p class="rmk-small">Laatst nagekeken op <time data-rmk-modified></time> · <a href="/over-ons/mandy-van-den-broek/">Profiel</a></p>
   </div>
 </div>

@@ -10,7 +10,7 @@
 <!-- wp:html -->
 <article class="rmk-product" aria-labelledby="p-[model-slug]">
   <div class="rmk-product__head">
-    <div class="rmk-product__media"><!-- Vervang door <img src="..." alt="[Modelnaam]" width="400" height="400" loading="lazy"> zodra er een foto met toestemming is. --><div class="rmk-ph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 15.5c0-3.6 4-6.5 9-6.5s9 2.9 9 6.5v1H3v-1Z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg><span>Foto volgt</span></div></div>
+    <div class="rmk-product__media"><!-- Met foto (alleen met een duidelijke gebruiksvoorwaarde): vervang de figure door het fotokader uit patterns-bron/afwerking/fotokader.html, met rmk-photo--square en het bijschrift "Foto: [fabrikant]". Zonder foto wordt dit blok bij het weergeven weggehaald. --><figure class="rmk-photo rmk-photo--square rmk-photo--placeholder"><div class="rmk-photo__frame"><img src="<?php echo esc_url( RMK_URL ); ?>/illustraties/foto-plaatsvervanger.svg" alt="" width="400" height="300"></div><figcaption>Foto volgt</figcaption></figure></div>
     <div class="rmk-product__title">
       <span class="rmk-rank">[positie] · [categorie]</span>
       <h3 id="p-[model-slug]">[Modelnaam]</h3>

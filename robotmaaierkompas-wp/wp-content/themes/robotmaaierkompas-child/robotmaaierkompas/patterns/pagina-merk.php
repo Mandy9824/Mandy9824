@@ -12,7 +12,7 @@
 <!-- wp:group {"tagName":"main","anchor":"inhoud","className":"rmk","layout":{"type":"default"}} -->
 <main class="wp-block-group rmk" id="inhoud">
 <!-- wp:html -->
-<div class="rmk-container">
+<div class="rmk-container rmk-column">
   <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li aria-current="page">[Merknaam]</li></ol></nav>
   <header class="rmk-pagehead">
     <p class="rmk-eyebrow">Merk</p>
@@ -21,27 +21,27 @@
   </header>
 </div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column">
 <!-- wp:pattern {"slug":"robotmaaierkompas/eerlijkheidsblok"} /-->
 </div>
 <!-- /wp:group -->
 <!-- wp:html -->
-<div class="rmk-container" style="padding-top: 24px"><h2 style="font-size: var(--rmk-fs-xl)">Alle modellen van [Merknaam]</h2></div>
+<div class="rmk-container rmk-column" style="padding-top: 24px"><h2 style="font-size: var(--rmk-fs-xl)">Alle modellen van [Merknaam]</h2></div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column">
 <!-- wp:pattern {"slug":"robotmaaierkompas/scoretabel"} /-->
 </div>
 <!-- /wp:group -->
 <!-- wp:html -->
-<section class="rmk-container rmk-section--tight" aria-label="Reviewthema's">
+<section class="rmk-container rmk-section--tight rmk-column" aria-label="Reviewthema's">
   <div class="rmk-verdict">
     <div><h2 style="font-size: var(--rmk-fs-md)">Wat gebruikers vaak positief noemen</h2><ul class="rmk-proscons rmk-pros" style="display: flex; flex-direction: column; gap: 8px; list-style: none; font-size: var(--rmk-fs-sm)"><li>[thema]</li><li>[thema]</li></ul><p class="rmk-small">Uit [aantal] gelezen reviews op [bron], [datum].</p></div>
     <div><h2 style="font-size: var(--rmk-fs-md)">Wat gebruikers vaak negatief noemen</h2><ul class="rmk-proscons rmk-cons" style="display: flex; flex-direction: column; gap: 8px; list-style: none; font-size: var(--rmk-fs-sm)"><li>[thema]</li><li>[thema]</li></ul><p class="rmk-small">Terugkerende thema's uit gelezen reviews; we meten niets zelf.</p></div>
   </div>
 </section>
-<section class="rmk-container rmk-section--tight" aria-labelledby="feiten" style="display: flex; flex-direction: column; gap: 16px">
+<section class="rmk-container rmk-section--tight rmk-column" aria-labelledby="feiten" style="display: flex; flex-direction: column; gap: 16px">
   <h2 id="feiten" style="font-size: var(--rmk-fs-xl)">Merkfeiten</h2>
   <div class="rmk-tablewrap"><table class="rmk-specs"><tbody>
     <tr><th scope="row">Navigatie in het assortiment</th><td><div class="rmk-specs__val">[waarde]<span class="rmk-status rmk-status--[ok|maker|shop|conflict|missing]">[status]</span></div></td></tr>
@@ -50,10 +50,10 @@
   </tbody></table></div>
   <div class="rmk-prose"><p>[Twee tot drie zinnen over het merk: alleen controleerbare feiten, met bron.]</p></div>
 </section>
-<div class="rmk-container"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2></div>
+<div class="rmk-container rmk-column"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2></div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column">
 <!-- wp:pattern {"slug":"robotmaaierkompas/bronnenlijst"} /-->
 </div>
 <!-- /wp:group -->

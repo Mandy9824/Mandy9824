@@ -234,6 +234,10 @@ function rmk_status_checks() {
 	$add( 'person' === $yo( 'company_or_person' ) && $person, 'Yoast: site vertegenwoordigt een persoon', $person ? get_the_author_meta( 'display_name', $person ) : '' );
 	$add( class_exists( 'WPSEO_Options' ), 'Yoast SEO actief', defined( 'WPSEO_VERSION' ) ? WPSEO_VERSION : '' );
 	$add( wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) ), 'Server kan WebP maken' );
+	$icon = (int) get_option( 'site_icon' );
+	$add( $icon > 0, 'Sitepictogram ingesteld (favicon-512.png)', $icon ? (string) wp_get_attachment_url( $icon ) : 'Gereedschap > Robotmaaierkompas > Huisstijl toepassen' );
+	$og = (string) $yo( 'og_default_image' );
+	$add( '' !== $og, 'Yoast: standaard deelafbeelding (og:image)', $og ? $og : 'Gereedschap > Robotmaaierkompas > Huisstijl toepassen' );
 	return $c;
 }
 
@@ -255,6 +259,9 @@ function rmk_admin_page() {
 		} elseif ( 'seo' === $actie ) {
 			$r      = rmk_configure_seo( get_current_user_id() );
 			$result = is_wp_error( $r ) ? $r->get_error_message() : 'Yoast SEO ingesteld.';
+		} elseif ( 'huisstijl' === $actie ) {
+			$r      = rmk_apply_huisstijl();
+			$result = is_wp_error( $r ) ? $r->get_error_message() : "Sitepictogram en standaard deelafbeelding ingesteld.\n" . $r['og_default_image'];
 		}
 	}
 	echo '<div class="wrap"><h1>Robotmaaierkompas: bouw en controle</h1>';
@@ -268,7 +275,8 @@ function rmk_admin_page() {
 	echo '</tbody></table><h2>Acties</h2><form method="post">';
 	wp_nonce_field( 'rmk_bouw' );
 	echo '<p><button class="button button-primary" name="rmk_actie" value="paginas">Paginastructuur als concepten aanmaken</button> <span class="description">Jij wordt de auteur. Bestaande pagina\'s blijven ongemoeid. Er wordt niets gepubliceerd.</span></p>';
-	echo '<p><button class="button" name="rmk_actie" value="seo">Yoast SEO instellen</button></p></form></div>';
+	echo '<p><button class="button" name="rmk_actie" value="seo">Yoast SEO instellen</button></p>';
+	echo '<p><button class="button" name="rmk_actie" value="huisstijl">Huisstijl toepassen</button> <span class="description">Sitepictogram (favicon-512.png) en de standaard deelafbeelding in Yoast (deelafbeelding-1200x630.png).</span></p></form></div>';
 }
 
 /* ------------------------------------------------------------------ REST (beheerders, ook met een toepassingswachtwoord)
@@ -276,6 +284,7 @@ function rmk_admin_page() {
  * POST /wp-json/rmk/v1/noindex   zet "Zoekmachines niet laten indexeren" AAN (kan het niet uitzetten)
  * POST /wp-json/rmk/v1/paginas   paginastructuur als concepten (huidige gebruiker is auteur)
  * POST /wp-json/rmk/v1/seo       Yoast instellen; persoon = huidige gebruiker
+ * POST /wp-json/rmk/v1/huisstijl sitepictogram en standaard og:image (afwerkpakket)
  * Er is bewust geen route om te publiceren of de indexering uit te zetten. */
 add_action( 'rest_api_init', function () {
 	$admin = function () {
@@ -300,6 +309,65 @@ add_action( 'rest_api_init', function () {
 	register_rest_route( 'rmk/v1', '/seo', array( 'methods' => 'POST', 'permission_callback' => $admin, 'callback' => function () {
 		$r = rmk_configure_seo( get_current_user_id() );
 		return is_wp_error( $r ) ? $r : rest_ensure_response( array( 'ok' => true ) );
+	} ) );
+} );
+
+/**
+ * Huisstijl (afwerkpakket): sitepictogram = favicon-512.png en de standaard og:image in Yoast = deelafbeelding-1200x630.png.
+ * Beide worden als bijlage in de mediabibliotheek gezet (één keer; daarna hergebruikt) vanuit de themamap.
+ */
+function rmk_media_from_theme( $rel, $title ) {
+	$found = get_posts( array( 'post_type' => 'attachment', 'post_status' => 'inherit', 'meta_key' => 'rmk_bron', 'meta_value' => $rel, 'numberposts' => 1, 'fields' => 'ids' ) );
+	if ( $found ) {
+		return (int) $found[0];
+	}
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	$tmp = wp_tempnam( basename( $rel ) );
+	if ( ! $tmp || ! copy( RMK_DIR . '/' . $rel, $tmp ) ) {
+		return new WP_Error( 'rmk_media', 'Kan ' . $rel . ' niet kopiëren.' );
+	}
+	// Als PNG bewaren (geen omzetting naar WebP): og:image en het sitepictogram werken zo overal.
+	$keep = function () { return array(); };
+	add_filter( 'image_editor_output_format', $keep, PHP_INT_MAX );
+	$id = media_handle_sideload( array( 'name' => basename( $rel ), 'tmp_name' => $tmp ), 0, $title );
+	remove_filter( 'image_editor_output_format', $keep, PHP_INT_MAX );
+	if ( is_wp_error( $id ) ) {
+		return $id;
+	}
+	update_post_meta( $id, 'rmk_bron', $rel );
+	update_post_meta( $id, '_wp_attachment_image_alt', '' );
+	return (int) $id;
+}
+
+function rmk_apply_huisstijl() {
+	$icon = rmk_media_from_theme( 'logo/favicon-512.png', 'robotmaaierkompas sitepictogram' );
+	if ( is_wp_error( $icon ) ) {
+		return $icon;
+	}
+	update_option( 'site_icon', $icon );
+	$og = rmk_media_from_theme( 'deelafbeelding/deelafbeelding-1200x630.png', 'robotmaaierkompas deelafbeelding' );
+	if ( is_wp_error( $og ) ) {
+		return $og;
+	}
+	$url = wp_get_attachment_url( $og );
+	if ( function_exists( 'YoastSEO' ) ) {
+		YoastSEO()->helpers->options->set( 'og_default_image', $url );
+		YoastSEO()->helpers->options->set( 'og_default_image_id', $og );
+	} elseif ( class_exists( 'WPSEO_Options' ) ) {
+		WPSEO_Options::set( 'og_default_image', $url );
+		WPSEO_Options::set( 'og_default_image_id', $og );
+	} else {
+		return new WP_Error( 'rmk_yoast', 'Yoast SEO is niet actief.' );
+	}
+	return array( 'site_icon' => $icon, 'og_default_image' => $url, 'og_default_image_id' => $og );
+}
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'rmk/v1', '/huisstijl', array( 'methods' => 'POST', 'permission_callback' => function () { return current_user_can( 'manage_options' ); }, 'callback' => function () {
+		$r = rmk_apply_huisstijl();
+		return is_wp_error( $r ) ? $r : rest_ensure_response( $r );
 	} ) );
 } );
 

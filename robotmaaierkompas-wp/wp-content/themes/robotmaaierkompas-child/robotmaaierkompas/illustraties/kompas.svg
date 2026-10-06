@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-labelledby="t"><title id="t">Kompas boven hoogtelijnen</title>
+  <rect width="400" height="400" rx="24" fill="#F1F7F2"/>
+  <g transform="translate(-60 30) scale(.9)"><g fill="none" stroke="#C9DFCF" stroke-width="2" opacity="1"><path d="M-40 330c90-50 140-140 240-150s190 60 260 25 120-40 180-30"/><path d="M-40 285c100-45 140-125 230-133s180 45 270 10 120-35 180-25"/><path d="M-40 240c100-45 140-100 215-107s170 35 280 0 120-30 185-20"/><path d="M-40 195c110-45 140-82 205-85s160 25 290-10 120-25 185-15"/><path d="M-40 150c120-40 150-60 195-62s150 12 300-24 120-20 185-10"/><path d="M-40 105c120-34 155-38 190-38s140 5 305-35 120-15 185-5"/><path d="M-40 60c125-28 160-26 185-25s130-2 310-45 120-10 185 0"/></g></g>
+  <g transform="translate(200 200)">
+    <circle r="118" fill="#FFFFFF"/><circle r="118" fill="none" stroke="#1A1C19" stroke-width="10"/>
+    <circle r="92" fill="none" stroke="#C8C9C0" stroke-width="2" stroke-dasharray="3 9"/>
+    <path d="M0-106v18M0 88v18M-106 0h18M88 0h18" stroke="#1A1C19" stroke-width="6" stroke-linecap="round"/>
+    <path d="M58-58 10 10-10-10Z" fill="#1E5E3C"/><path d="M-58 58-10-10 10 10Z" fill="#9A9C93"/>
+    <circle r="8" fill="#FFFFFF"/>
+  </g>
+</svg>

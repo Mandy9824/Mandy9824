@@ -399,7 +399,6 @@ img.rmk-avatar { object-fit: cover; padding: 0; }
 .rmk-offer__line { font-size: var(--rmk-fs-sm); color: var(--rmk-text); }
 .rmk-offer__line strong { font-family: var(--rmk-font-display); color: var(--rmk-heading); }
 .rmk-offers:empty { display: none; }
-/* Hoofdkolom en paginakop gecentreerd (voorlopig, tot het ontwerppakket er is). Brede blokken (tabellen, calculator,
-   kolommen) blijven op de volle containerbreedte, ook gecentreerd. */
-.rmk .rmk-pagehead, .rmk .rmk-crumbs, .rmk .rmk-honesty { max-width: var(--rmk-prose); margin-inline: auto; }
-.rmk .rmk-container > .rmk-prose, .rmk .rmk-container > .rmk-lead { margin-inline: auto; }
+/* De hoofdkolom komt sinds 1.3.1 uit het afwerkpakket (css/rmk-afwerking.css, .rmk-column). */
+/* 1.3.1: plaatsvervanger uit het afwerkpakket nooit tonen (vangnet naast het filter in inc/techniek.php). */
+.rmk-product__media:has(.rmk-photo--placeholder) { display: none; }

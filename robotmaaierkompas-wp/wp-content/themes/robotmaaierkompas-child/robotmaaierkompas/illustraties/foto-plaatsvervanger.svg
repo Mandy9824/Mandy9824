@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-labelledby="t"><title id="t">Nog geen productfoto</title>
+  <rect width="400" height="300" fill="#EDECE6"/>
+  <g transform="translate(200 160)" fill="none" stroke="#9A9C93" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-70 24c0-34 31-56 70-56s70 22 70 56Z"/><path d="M-70 24h140"/>
+    <circle cx="-42" cy="32" r="13"/><circle cx="42" cy="32" r="13"/>
+  </g>
+</svg>

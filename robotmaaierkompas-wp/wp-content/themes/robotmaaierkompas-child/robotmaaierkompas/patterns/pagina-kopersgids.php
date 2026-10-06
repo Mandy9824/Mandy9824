@@ -12,7 +12,7 @@
 <!-- wp:group {"tagName":"main","anchor":"inhoud","className":"rmk","layout":{"type":"default"}} -->
 <main class="wp-block-group rmk" id="inhoud">
 <!-- wp:html -->
-<div class="rmk-container">
+<div class="rmk-container rmk-column rmk-column--narrow">
   <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li aria-current="page">Kopersgids</li></ol></nav>
   <header class="rmk-pagehead" style="max-width: 48rem">
     <p class="rmk-eyebrow">Kopersgids</p>
@@ -41,23 +41,23 @@
     </article>
   </div>
 </div>
-<div class="rmk-container"><h2 style="font-size: var(--rmk-fs-xl)">Veelgestelde vragen</h2></div>
+<div class="rmk-container rmk-column rmk-column--narrow"><h2 style="font-size: var(--rmk-fs-xl)">Veelgestelde vragen</h2></div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column rmk-column--narrow","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column rmk-column--narrow">
 <!-- wp:pattern {"slug":"robotmaaierkompas/faq"} /-->
 </div>
 <!-- /wp:group -->
 <!-- wp:html -->
-<div class="rmk-container" style="padding-top: 24px"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2></div>
+<div class="rmk-container rmk-column rmk-column--narrow" style="padding-top: 24px"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2></div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column rmk-column--narrow","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column rmk-column--narrow">
 <!-- wp:pattern {"slug":"robotmaaierkompas/bronnenlijst"} /-->
 </div>
 <!-- /wp:group -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column rmk-column--narrow","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column rmk-column--narrow">
 <!-- wp:pattern {"slug":"robotmaaierkompas/auteursblok"} /-->
 </div>
 <!-- /wp:group -->

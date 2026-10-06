@@ -12,23 +12,28 @@
 <!-- wp:group {"tagName":"main","anchor":"inhoud","className":"rmk","layout":{"type":"default"}} -->
 <main class="wp-block-group rmk" id="inhoud">
 <!-- wp:html -->
-<div class="rmk-container">
-  <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li><a href="/kopersgids/">Kopersgids</a></li><li aria-current="page">Kosten</li></ol></nav>
-  <header class="rmk-pagehead">
+<section class="rmk-pageband" aria-labelledby="pagina-titel">
+  <div class="rmk-container rmk-column">
+    <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li><a href="/kopersgids/">Kopersgids</a></li><li aria-current="page">Kosten</li></ol></nav>
+    <header class="rmk-pagehead rmk-pagehead--center">
+      <img class="rmk-pageband__mark" src="<?php echo esc_url( RMK_URL ); ?>/logo/icoon-licht.svg" alt="" width="48" height="48">
     <p class="rmk-eyebrow">Kosten</p>
-    <h1>Wat kost een robotmaaier over de hele levensduur?</h1>
+    <h1 id="pagina-titel">Wat kost een robotmaaier over de hele levensduur?</h1>
     <p class="rmk-lead">De aanschafprijs is maar een deel. Reken ook eenmalige opties, messen, een nieuwe accu, stroom en de verbinding na de gratis periode mee. Vul je eigen bedragen in, of kies een model uit ons modelbestand: dan zie je bij elk bedrag de bron en de datum.</p>
-  </header>
+    </header>
+  </div>
+</section>
+<div class="rmk-container rmk-column">
   <h2 style="font-size: var(--rmk-fs-xl)">Kostencalculator</h2>
 </div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column">
 <!-- wp:pattern {"slug":"robotmaaierkompas/kostencalculator"} /-->
 </div>
 <!-- /wp:group -->
 <!-- wp:html -->
-<section class="rmk-container rmk-section" aria-labelledby="posten">
+<section class="rmk-container rmk-section rmk-column" aria-labelledby="posten">
   <div class="rmk-prose">
     <h2 id="posten" style="margin-top: 0; font-size: var(--rmk-fs-xl)">Waar de kosten zitten</h2>
     <h3>Aanschaf, installatie en eenmalige opties</h3>
@@ -39,10 +44,10 @@
     <p>Sommige modellen hebben een mobiele verbinding die na een gratis periode geld kost. Vul het jaarbedrag en de gratis periode in; de calculator rekent alleen de betaalde jaren mee.</p>
   </div>
 </section>
-<div class="rmk-container"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2></div>
+<div class="rmk-container rmk-column"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2></div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column">
 <!-- wp:pattern {"slug":"robotmaaierkompas/bronnenlijst"} /-->
 </div>
 <!-- /wp:group -->

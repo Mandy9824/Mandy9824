@@ -120,13 +120,15 @@ remove_action( 'wp_head', 'wlwmanifest_link' );
 remove_action( 'wp_head', 'rsd_link' );
 
 /* ------------------------------------------------------------------ 6. Geen lege fotoplaatsvervangers
- * Een beeldblok met alleen de plaatsvervanger ("Foto volgt") wordt bij het renderen weggehaald,
+ * Een beeldblok met alleen de plaatsvervanger ("Foto volgt", ook het fotokader-plaatsvervanger uit het afwerkpakket)
+ * wordt bij het renderen weggehaald, dus nooit op een gepubliceerde pagina getoond,
  * en de productkop wordt dan één kolom. Zodra er een echte <img> in het blok staat, blijft het staan. */
 function rmk_strip_photo_placeholders( $html ) {
-	if ( false === strpos( (string) $html, 'rmk-ph' ) ) {
+	if ( false === strpos( (string) $html, 'rmk-ph' ) && false === strpos( (string) $html, 'rmk-photo--placeholder' ) ) {
 		return $html;
 	}
-	$re   = '#<div class="rmk-product__media">\s*(?:<!--.*?-->\s*)?<div class="rmk-ph">.*?</span></div>\s*</div>#s';
+	// Oude plaatsvervanger (div.rmk-ph) en die uit het afwerkpakket (figure.rmk-photo--placeholder).
+	$re   = '#<div class="rmk-product__media">\s*(?:<!--.*?-->\s*)?(?:<div class="rmk-ph">.*?</span></div>|<figure class="rmk-photo[^"]*rmk-photo--placeholder[^"]*">.*?</figure>)\s*</div>#s';
 	$html = preg_replace_callback( '#<div class="rmk-product__head">(\s*' . substr( $re, 1, -2 ) . ')#s', function ( $m ) {
 		return '<div class="rmk-product__head rmk-product__head--nomedia">';
 	}, $html );

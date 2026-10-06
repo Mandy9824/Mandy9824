@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'RMK_DIR', __DIR__ );
 define( 'RMK_URL', get_stylesheet_directory_uri() . '/robotmaaierkompas' );
-define( 'RMK_VER', '1.3.0' );
+define( 'RMK_VER', '1.3.1' );
 
 /* ------------------------------------------------------------------------
  * 1. CSS en JS + configuratie voor rmk.js
@@ -24,6 +24,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	} else {
 		wp_enqueue_style( 'rmk-tokens', RMK_URL . '/tokens.css', array(), RMK_VER );
 		wp_enqueue_style( 'rmk', RMK_URL . '/rmk.css', array( 'rmk-tokens' ), RMK_VER );
+		wp_enqueue_style( 'rmk-afwerking', RMK_URL . '/css/rmk-afwerking.css', array( 'rmk' ), RMK_VER );
 	}
 	wp_enqueue_script( 'rmk', RMK_URL . '/rmk.js', array(), RMK_VER, array( 'strategy' => 'defer', 'in_footer' => true ) );
 	$config = apply_filters( 'rmk_config', array(
@@ -35,22 +36,27 @@ add_action( 'wp_enqueue_scripts', function () {
 	wp_add_inline_script( 'rmk', 'window.rmkConfig=' . wp_json_encode( $config ) . ';', 'before' );
 } );
 
-/** Verkleinde inhoud van tokens.css + rmk.css, gecachet per themaversie en bestandsdatum. */
+/** Verkleinde inhoud van tokens.css + rmk.css + css/rmk-afwerking.css (afwerkpakket v1.2), gecachet per themaversie en bestandsdatum. */
+function rmk_inline_css_files() {
+	return array( 'tokens.css', 'rmk.css', 'css/rmk-afwerking.css' );
+}
 function rmk_inline_css() {
-	$files = array( RMK_DIR . '/tokens.css', RMK_DIR . '/rmk.css' );
-	$key   = 'rmk_css_' . md5( RMK_VER . implode( '', array_map( function ( $f ) { return is_readable( $f ) ? filemtime( $f ) : 0; }, $files ) ) );
+	$files = rmk_inline_css_files();
+	$key   = 'rmk_css_' . md5( RMK_VER . implode( '', array_map( function ( $f ) { return is_readable( RMK_DIR . '/' . $f ) ? filemtime( RMK_DIR . '/' . $f ) : 0; }, $files ) ) );
 	$css   = get_transient( $key );
 	if ( false === $css ) {
 		$css = '';
 		foreach ( $files as $f ) {
-			$c    = is_readable( $f ) ? (string) file_get_contents( $f ) : '';
-			$c    = preg_replace( '#/\*.*?\*/#s', '', $c );
-			$c    = preg_replace( '/\s+/', ' ', $c );
-			$c    = preg_replace( '/\s*([{};,])\s*/', '$1', $c ); // geen spaties rond ":" of ">" weghalen (selectors)
-			$css .= str_replace( ';}', '}', trim( $c ) );
+			$c = is_readable( RMK_DIR . '/' . $f ) ? (string) file_get_contents( RMK_DIR . '/' . $f ) : '';
+			$c = preg_replace( '#/\*.*?\*/#s', '', $c );
+			$c = preg_replace( '/\s+/', ' ', $c );
+			$c = preg_replace( '/\s*([{};,])\s*/', '$1', $c ); // geen spaties rond ":" of ">" weghalen (selectors)
+			$c = str_replace( ';}', '}', trim( $c ) );
+			// url(...) is relatief aan het CSS-bestand; inline wordt dat relatief aan de pagina. Daarom de map van het bestand ervoor.
+			$dir = trim( dirname( $f ), '.' );
+			$base = RMK_URL . '/' . ( $dir ? $dir . '/' : '' );
+			$css .= preg_replace( '#url\((?![\'"]?(?:data:|https?:|/))([\'"]?)#', 'url($1' . $base, $c );
 		}
-		// url(...) in de CSS is relatief aan het bestand; inline wordt dat relatief aan de pagina.
-		$css = preg_replace( '#url\((?![\'"]?(?:data:|https?:|/))([\'"]?)#', 'url($1' . RMK_URL . '/', $css );
 		set_transient( $key, $css, WEEK_IN_SECONDS );
 	}
 	return $css;
@@ -58,8 +64,39 @@ function rmk_inline_css() {
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'editor-styles' );
-	add_editor_style( array( 'robotmaaierkompas/tokens.css', 'robotmaaierkompas/rmk.css' ) );
+	add_editor_style( array( 'robotmaaierkompas/tokens.css', 'robotmaaierkompas/rmk.css', 'robotmaaierkompas/css/rmk-afwerking.css' ) );
 } );
+
+/* ------------------------------------------------------------------------
+ * 1b. Favicon (afwerkpakket). Het sitepictogram (Instellingen > Algemeen, favicon-512.png) blijft ingesteld voor
+ *     WordPress en Yoast, maar de <link>-tags komen van hier: SVG, PNG 32 en apple-touch-icon. Yoast zet geen favicon.
+ * --------------------------------------------------------------------- */
+remove_action( 'wp_head', 'wp_site_icon', 99 );
+add_action( 'wp_head', function () {
+	echo '<link rel="icon" href="' . esc_url( RMK_URL . '/logo/favicon.svg' ) . '" type="image/svg+xml">' . "\n";
+	echo '<link rel="icon" href="' . esc_url( RMK_URL . '/logo/favicon-32.png' ) . '" sizes="32x32">' . "\n";
+	echo '<link rel="apple-touch-icon" href="' . esc_url( RMK_URL . '/logo/apple-touch-icon-180.png' ) . '">' . "\n";
+}, 2 );
+
+/* Logo als bestand (afwerkpakket): elk <a class="rmk-logo"> in header en footer krijgt het logobestand, ook in
+ * template-onderdelen die in de site-editor zijn aangepast. Header: licht (donkere tekst), footer: donker. */
+function rmk_logo_html( $variant ) {
+	$file = 'donker' === $variant ? 'logo-horizontaal-donker.svg' : 'logo-horizontaal-licht.svg';
+	$lazy = 'donker' === $variant ? ' loading="lazy" decoding="async"' : ''; // footerlogo staat onder de vouw
+	return '<a class="rmk-logo" href="/" aria-label="robotmaaierkompas.nl, naar de homepage"><img src="' . esc_url( RMK_URL . '/logo/' . $file ) . '" alt="" width="344" height="44"' . $lazy . '></a>';
+}
+function rmk_replace_logo( $html ) {
+	if ( false === strpos( (string) $html, 'class="rmk-logo"' ) ) {
+		return $html;
+	}
+	$variant = false !== strpos( $html, 'rmk-footer' ) ? 'donker' : 'licht';
+	return preg_replace_callback( '#<a class="rmk-logo"[^>]*>.*?</a>#s', function () use ( $variant ) {
+		return rmk_logo_html( $variant );
+	}, $html );
+}
+add_filter( 'render_block', function ( $content, $block ) {
+	return 'core/html' === $block['blockName'] ? rmk_replace_logo( $content ) : $content;
+}, 14, 2 );
 
 add_filter( 'body_class', function ( $classes ) {
 	$classes[] = 'rmk';
@@ -72,6 +109,8 @@ add_filter( 'body_class', function ( $classes ) {
 add_action( 'wp_head', function () {
 	$f = RMK_URL . '/fonts/';
 	echo '<link rel="preload" href="' . esc_url( $f . 'atkinson-hyperlegible-400.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
+	// 1.3.1: de paginakop (h1, LCP-element op homepage en kernpagina's) staat in Schibsted Grotesk; die ook vooraf laden.
+	echo '<link rel="preload" href="' . esc_url( $f . 'schibsted-grotesk-var.woff2' ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
 	echo '<style>
 @font-face{font-family:"Atkinson Hyperlegible";src:url(' . esc_url( $f . 'atkinson-hyperlegible-400.woff2' ) . ') format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"Atkinson Hyperlegible";src:url(' . esc_url( $f . 'atkinson-hyperlegible-700.woff2' ) . ') format("woff2");font-weight:700;font-display:swap}

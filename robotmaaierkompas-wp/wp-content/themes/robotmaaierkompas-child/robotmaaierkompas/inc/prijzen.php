@@ -22,7 +22,7 @@ const RMK_PRIJS_MAX_DAGEN = 14;
 
 /** Domeinen waarvan we nooit een prijs of knop tonen: Bol en marketplaces. */
 function rmk_price_blocked_hosts() {
-	return apply_filters( 'rmk_price_blocked_hosts', array( 'bol.com', 'amazon.nl', 'amazon.de', 'amazon.com', 'amzn.to', 'ebay.nl', 'ebay.de', 'marktplaats.nl', 'aliexpress.com', 'temu.com', 'awin1.com', 'zenaps.com', 'ds1.nl' ) );
+	return apply_filters( 'rmk_price_blocked_hosts', array( 'bol.com', 's-bol.com', 'bol-cdn.com', 'amazon.nl', 'media-amazon.com', 'amazon.de', 'amazon.com', 'amzn.to', 'ebay.nl', 'ebay.de', 'marktplaats.nl', 'aliexpress.com', 'temu.com', 'awin1.com', 'zenaps.com', 'ds1.nl' ) );
 }
 
 function rmk_price_url_ok( $url ) {
@@ -106,6 +106,7 @@ function rmk_fill_offers( $html ) {
 		}
 		$offer = rmk_offer_html( $m );
 		$done  = false;
+		$a[0]  = rmk_fill_photo( $a[0], $m );
 		return preg_replace_callback( '#<div class="rmk-offer(?: [^"]*)?"[^>]*>(?:(?!</div>).)*</div>#s', function () use ( $offer, &$done ) {
 			$out  = $done ? '' : $offer;
 			$done = true;
@@ -137,3 +138,34 @@ add_action( 'rmk_prijzen_verloop', function () {
 		do_action( 'litespeed_purge_all' );
 	}
 } );
+
+/**
+ * Productfoto (afwerkpakket, fotokader): alleen als het model in modellen.json een foto heeft
+ * ("foto": {"url": "https://…", "fabrikant": "Gardena", "breedte": 800, "hoogte": 600}) en de box nog geen beeld heeft.
+ * Bijschrift "Foto: (fabrikant)". Zonder foto blijft de box zonder beeldblok; een plaatsvervanger wordt nooit getoond.
+ * Foto's worden alleen toegevoegd met een duidelijke gebruiksvoorwaarde (dat regelt de datasessie, niet het thema).
+ */
+function rmk_photo_html( array $m ) {
+	$f = isset( $m['foto'] ) && is_array( $m['foto'] ) ? $m['foto'] : null;
+	if ( ! $f || empty( $f['url'] ) || 0 !== strpos( (string) $f['url'], 'https://' ) || ! rmk_price_url_ok( $f['url'] ) ) {
+		return '';
+	}
+	$fab = ! empty( $f['fabrikant'] ) ? $f['fabrikant'] : ( isset( $m['merk'] ) ? $m['merk'] : '' );
+	$w   = ! empty( $f['breedte'] ) ? (int) $f['breedte'] : 800;
+	$h   = ! empty( $f['hoogte'] ) ? (int) $f['hoogte'] : 600;
+	return '<figure class="rmk-photo rmk-photo--square"><div class="rmk-photo__frame"><img src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
+		. '<figcaption>Foto: ' . esc_html( $fab ) . '</figcaption></figure>';
+}
+
+function rmk_fill_photo( $article, array $m ) {
+	$fig = rmk_photo_html( $m );
+	if ( ! $fig || false !== strpos( $article, 'rmk-photo__frame' ) && false === strpos( $article, 'rmk-photo--placeholder' ) ) {
+		return $article;
+	}
+	// Plaatsvervanger vervangen, of een beeldblok toevoegen aan een kop zonder beeld.
+	$article = preg_replace( '#<figure class="rmk-photo[^"]*rmk-photo--placeholder[^"]*">.*?</figure>#s', $fig, $article, 1, $n );
+	if ( $n ) {
+		return $article;
+	}
+	return preg_replace( '#<div class="rmk-product__head(?: rmk-product__head--nomedia)?"(?: style="[^"]*")?>#', '<div class="rmk-product__head"><div class="rmk-product__media">' . $fig . '</div>', $article, 1 );
+}

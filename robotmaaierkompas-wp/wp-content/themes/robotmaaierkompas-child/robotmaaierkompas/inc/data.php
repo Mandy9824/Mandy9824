@@ -49,6 +49,9 @@ function rmk_validate_modellen( $data ) {
 				$err[] = "Model $i: prijsbedrag moet een heel getal in euro's zijn.";
 			}
 		}
+		if ( ! empty( $m['foto'] ) && ( ! is_array( $m['foto'] ) || empty( $m['foto']['url'] ) || ! rmk_price_url_ok( $m['foto']['url'] ) ) ) {
+			$err[] = "Model $i: foto moet een https-URL zijn, niet van Bol of een marketplace.";
+		}
 		if ( isset( $m['kosten']['aanschaf']['waarde'] ) && null !== $m['kosten']['aanschaf']['waarde'] ) {
 			$err[] = "Model $i: aanschafprijs is ingevuld (moet leeg blijven).";
 		}

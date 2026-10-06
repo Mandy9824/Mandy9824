@@ -1,0 +1,120 @@
+/* =========================================================================
+   robotmaaierkompas.nl — afwerking (v1.2)
+   Laden NA tokens.css en rmk.css. Gebruikt uitsluitend bestaande tokens
+   (--rmk-*): geen nieuwe kleuren, lettertypen of externe bestanden.
+   Afbeeldingen zijn relatief: ../illustraties/ en ../iconen/.
+   ========================================================================= */
+
+/* ---------- 1. Ruimere marges en een gecentreerde hoofdkolom --------------------------- */
+.rmk-container { padding-inline: clamp(var(--rmk-gutter), 5vw, var(--rmk-space-16)); }
+
+/* Hoofdkolom: vaste breedte, gecentreerd. Tekst blijft links uitgelijnd. */
+.rmk-column        { max-width: calc(60rem + 2 * clamp(var(--rmk-gutter), 5vw, var(--rmk-space-16))); margin-inline: auto; }
+.rmk-column--narrow { max-width: calc(var(--rmk-prose) + 4rem + 2 * clamp(var(--rmk-gutter), 5vw, var(--rmk-space-16))); }
+.rmk-column--wide   { max-width: calc(var(--rmk-content) + 2 * clamp(var(--rmk-gutter), 5vw, var(--rmk-space-16))); }
+.rmk-column .rmk-prose { max-width: none; }
+.rmk-prose { margin-inline: auto; }               /* losse tekstblokken staan nooit meer tegen de linkerrand */
+
+/* Gecentreerde kop + introductie (homepage en kernpagina's) */
+.rmk-pagehead--center { align-items: center; text-align: center; }
+.rmk-pagehead--center .rmk-lead { margin-inline: auto; }
+.rmk-pagehead--center .rmk-crumbs ol { justify-content: center; }
+.rmk-pagehead--center .rmk-honesty { text-align: left; max-width: var(--rmk-prose); margin-inline: auto; }
+
+/* Sectiekop: gecentreerde h2 met optionele inleiding */
+.rmk-section-head { display: flex; flex-direction: column; align-items: center; gap: var(--rmk-space-3); text-align: center; max-width: var(--rmk-prose); margin: 0 auto var(--rmk-space-8); }
+.rmk-section-head h2 { font-size: var(--rmk-fs-2xl); }
+.rmk-section-head p { color: var(--rmk-text-muted); }
+.rmk-section-head--start { align-items: flex-start; text-align: left; margin-inline: 0; }
+
+/* ---------- 2. Meer ruimte tussen secties, afwisselende achtergronden ------------------ */
+.rmk-section { padding-block: clamp(var(--rmk-space-12), 8vw, var(--rmk-space-20)); }
+.rmk-section--tight { padding-block: clamp(var(--rmk-space-8), 5vw, var(--rmk-space-12)); }
+.rmk-section--alt   { background: var(--rmk-surface); border-block: 1px solid var(--rmk-border); }
+.rmk-section--brand { background: var(--rmk-surface-brand); border-block: 1px solid var(--rmk-green-100); }
+.rmk-section--dark  { background: var(--rmk-green-900); color: var(--rmk-green-100); }
+.rmk-section--dark h2, .rmk-section--dark h3 { color: var(--rmk-white); }
+.rmk-section--dark .rmk-section-head p { color: var(--rmk-green-200); }
+.rmk-section--dark a:not(.rmk-btn) { color: var(--rmk-white); }
+
+/* ---------- 3. Rijkere kop: homepage-hero met kompasmotief ---------------------------- */
+.rmk-hero { position: relative; overflow: hidden; isolation: isolate; }
+.rmk-hero--motif::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("../illustraties/hero-hoogtelijnen.svg") center / cover no-repeat; opacity: 0.9; }
+.rmk-hero--center .rmk-hero__inner { flex-direction: column; justify-content: center; text-align: center; padding-block: clamp(var(--rmk-space-16), 10vw, calc(var(--rmk-space-20) + var(--rmk-space-8))); }
+.rmk-hero--center .rmk-hero__text { flex: none; align-items: center; max-width: 46rem; }
+.rmk-hero--center .rmk-lead { margin-inline: auto; }
+.rmk-hero--center .rmk-row { justify-content: center; }
+.rmk-hero__badge { width: 4rem; height: 4rem; display: grid; place-items: center; border-radius: 50%; background: var(--rmk-green-800); border: 1px solid var(--rmk-green-700); }
+.rmk-hero__badge img, .rmk-hero__badge svg { width: 2.5rem; height: 2.5rem; }
+.rmk-btn--inverse { background: var(--rmk-white); color: var(--rmk-green-900) !important; }
+.rmk-btn--inverse:hover { background: var(--rmk-green-100); }
+.rmk-btn--ghost-inverse { border-color: var(--rmk-green-300); color: var(--rmk-white) !important; }
+.rmk-btn--ghost-inverse:hover { background: var(--rmk-green-800); }
+
+/* Kop voor kernpagina's: licht vlak met hoogtelijnen, kop en intro gecentreerd */
+.rmk-pageband { position: relative; isolation: isolate; background: var(--rmk-surface-brand); border-bottom: 1px solid var(--rmk-green-100); }
+.rmk-pageband::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url("../illustraties/motief-hoogtelijnen-licht.svg") center / cover no-repeat; }
+.rmk-pageband .rmk-pagehead { padding-block: clamp(var(--rmk-space-10), 7vw, var(--rmk-space-16)); }
+.rmk-pageband__mark { width: 3rem; height: 3rem; }
+
+/* ---------- 4. Vertrouwensstrook ------------------------------------------------------------ */
+.rmk-trust { background: var(--rmk-surface); border-bottom: 1px solid var(--rmk-border); }
+.rmk-trust ul { list-style: none; margin: 0; padding: var(--rmk-space-6) 0; display: grid; gap: var(--rmk-space-4); grid-template-columns: 1fr; }
+.rmk-trust li { display: flex; align-items: center; gap: var(--rmk-space-3); font-family: var(--rmk-font-display); font-weight: 700; font-size: var(--rmk-fs-sm); color: var(--rmk-heading); }
+.rmk-trust__icon { flex: none; width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border-radius: 50%; background: var(--rmk-green-50); color: var(--rmk-green-700); }
+.rmk-trust__icon svg { width: 1.25rem; height: 1.25rem; }
+@media (min-width: 48rem) {
+  .rmk-trust ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+  .rmk-trust li { justify-content: center; padding-inline: var(--rmk-space-4); }
+  .rmk-trust li + li { border-left: 1px solid var(--rmk-border); }
+}
+
+/* ---------- 5. Vier ingangen met iconen -------------------------------------------------------- */
+.rmk-entries { display: grid; gap: var(--rmk-space-4); grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); }
+.rmk-entry { position: relative; display: flex; flex-direction: column; gap: var(--rmk-space-3); padding: var(--rmk-space-6); background: var(--rmk-surface); border: 1px solid var(--rmk-border); border-radius: var(--rmk-radius-lg); color: var(--rmk-text) !important; text-decoration: none !important; box-shadow: var(--rmk-shadow-1); transition: border-color var(--rmk-dur) var(--rmk-ease), box-shadow var(--rmk-dur) var(--rmk-ease); }
+.rmk-entry:hover { border-color: var(--rmk-green-500); box-shadow: var(--rmk-shadow-2); }
+.rmk-entry:focus-visible { box-shadow: var(--rmk-focus-ring); }
+.rmk-entry__icon { width: 3rem; height: 3rem; display: grid; place-items: center; border-radius: var(--rmk-radius-md); background: var(--rmk-green-50); color: var(--rmk-green-700); border: 1px solid var(--rmk-green-100); }
+.rmk-entry__icon svg { width: 1.5rem; height: 1.5rem; }
+.rmk-entry h3 { font-size: var(--rmk-fs-md); }
+.rmk-entry p { font-size: var(--rmk-fs-sm); color: var(--rmk-text-muted); }
+.rmk-entry__more { margin-top: auto; padding-top: var(--rmk-space-2); display: inline-flex; align-items: center; gap: var(--rmk-space-2); font-family: var(--rmk-font-display); font-weight: 700; font-size: var(--rmk-fs-sm); color: var(--rmk-link); }
+.rmk-entry__more svg { width: 1rem; height: 1rem; }
+
+/* ---------- 6. Nettere kaarten (bestaande .rmk-card) --------------------------------------------- */
+.rmk-card { padding: var(--rmk-space-6); gap: var(--rmk-space-3); box-shadow: var(--rmk-shadow-1); }
+a.rmk-card { transition: border-color var(--rmk-dur) var(--rmk-ease), box-shadow var(--rmk-dur) var(--rmk-ease); }
+a.rmk-card:hover { border-color: var(--rmk-green-500); box-shadow: var(--rmk-shadow-2); }
+a.rmk-card:focus-visible { box-shadow: var(--rmk-focus-ring); }
+.rmk-card h3 { line-height: var(--rmk-lh-snug); }
+.rmk-card__more::after { content: ""; width: 1rem; height: 1rem; background: currentColor; -webkit-mask: url("../iconen/pijl.svg") center / contain no-repeat; mask: url("../iconen/pijl.svg") center / contain no-repeat; }
+.rmk-grid, .rmk-entries { gap: var(--rmk-space-5); }
+
+/* ---------- 7. Illustraties en fotokader ------------------------------------------------------------ */
+.rmk-illustration { margin: 0; border-radius: var(--rmk-radius-lg); overflow: hidden; border: 1px solid var(--rmk-border); background: var(--rmk-surface-brand); }
+.rmk-illustration img { display: block; width: 100%; height: auto; }
+.rmk-illustration figcaption { padding: var(--rmk-space-3) var(--rmk-space-4); font-size: var(--rmk-fs-xs); color: var(--rmk-text-muted); background: var(--rmk-surface); border-top: 1px solid var(--rmk-border); }
+
+/* Productfoto van de fabrikant: vaste verhouding, rustige achtergrond, bijschrift */
+.rmk-photo { margin: 0; display: flex; flex-direction: column; gap: var(--rmk-space-2); }
+.rmk-photo__frame { aspect-ratio: 4 / 3; display: grid; place-items: center; padding: var(--rmk-space-4); background: var(--rmk-surface-alt); border: 1px solid var(--rmk-border); border-radius: var(--rmk-radius-md); overflow: hidden; }
+.rmk-photo__frame img { width: 100%; height: 100%; object-fit: contain; }
+.rmk-photo--square .rmk-photo__frame { aspect-ratio: 1; }
+.rmk-photo figcaption { font-size: var(--rmk-fs-xs); color: var(--rmk-text-muted); line-height: 1.4; }
+.rmk-product__media:has(.rmk-photo) { background: none; overflow: visible; aspect-ratio: auto; }
+
+/* ---------- 8. Logo als bestand ----------------------------------------------------------------------- */
+.rmk-logo img { display: block; height: 2.25rem; width: auto; }
+.rmk-footer .rmk-logo img { height: 2rem; }
+
+/* ---------- 9. Hoofdmenu: nooit op twee regels ---------------------------------------------------- */
+.rmk-nav a { white-space: nowrap; padding-inline: var(--rmk-space-2); }
+@media (min-width: 64rem) and (max-width: 82rem) {
+  .rmk-nav { display: none; }
+  .rmk-menu { display: block; }
+}
+
+/* ---------- 10. Rustig bewegen ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .rmk-entry, a.rmk-card { transition: none; }
+}

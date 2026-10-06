@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="t"><title id="t">Tuin van bovenaf: gazon met maaibanen, terras, border, boom en laadstation</title>
+  <rect width="640" height="400" fill="#F1F7F2"/>
+  <rect x="460" y="0" width="180" height="400" fill="#EDECE6"/>
+  <path d="M470 20h150v130H470Z" fill="#C8C9C0"/>
+  <path d="M460 170h180v210H460Z" fill="#E0E0D8"/>
+  <g stroke="#C8C9C0" stroke-width="1.5"><path d="M480 200h140M480 230h140M480 260h140M480 290h140M480 320h140M480 350h140"/></g>
+  <path d="M40 80h400v280H40Z" fill="#A3C9AE"/>
+  <path d="M40 80h400v280H40Z" fill="none" stroke="#3E865B" stroke-width="10"/>
+  <g stroke="#C9DFCF" stroke-width="10" opacity=".55"><path d="M78 96V340" /><path d="M100 96V340" /><path d="M122 96V340" /><path d="M144 96V340" /><path d="M166 96V340" /><path d="M188 96V340" /><path d="M210 96V340" /><path d="M232 96V340" /><path d="M254 96V340" /><path d="M276 96V340" /><path d="M298 96V340" /><path d="M320 96V340" /><path d="M342 96V340" /><path d="M364 96V340" /><path d="M386 96V340" /><path d="M408 96V340" /><path d="M430 96V340" /></g>
+  <path d="M40 360c40-30 90-30 130 0" fill="#3E865B"/>
+  <circle cx="110" cy="345" r="16" fill="#1E5E3C"/><circle cx="140" cy="352" r="12" fill="#2A7049"/><circle cx="78" cy="352" r="11" fill="#2A7049"/>
+  <circle cx="350" cy="170" r="54" fill="#2A7049" opacity=".9"/><circle cx="350" cy="170" r="38" fill="#3E865B"/>
+  <circle cx="338" cy="158" r="12" fill="#C9DFCF" opacity=".5"/>
+  <rect x="408" y="300" width="26" height="40" rx="5" fill="#4A4D47"/><rect x="414" y="308" width="14" height="6" rx="2" fill="#A3C9AE"/>
+  <g transform="translate(220 250)"><ellipse rx="24" ry="17" fill="#EDECE6"/><ellipse rx="24" ry="17" fill="none" stroke="#1A1C19" stroke-width="3"/><circle cx="8" cy="-4" r="3" fill="#A3C9AE"/></g>
+  <path d="M244 250h60" stroke="#1E5E3C" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
+  <g transform="translate(560 72)"><circle r="26" fill="#FFFFFF" stroke="#1A1C19" stroke-width="3"/><path d="M11-11 3 3-3-3Z" fill="#1E5E3C"/><path d="M-11 11-3-3 3 3Z" fill="#9A9C93"/></g>
+</svg>

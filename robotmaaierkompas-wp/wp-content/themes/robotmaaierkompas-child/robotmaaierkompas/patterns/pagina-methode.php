@@ -12,7 +12,7 @@
 <!-- wp:group {"tagName":"main","anchor":"inhoud","className":"rmk","layout":{"type":"default"}} -->
 <main class="wp-block-group rmk" id="inhoud">
 <!-- wp:html -->
-<div class="rmk-container">
+<div class="rmk-container rmk-column rmk-column--narrow">
   <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li aria-current="page">Hoe we beoordelen</li></ol></nav>
   <header class="rmk-pagehead" style="max-width: 48rem">
     <p class="rmk-eyebrow">Scoremodel v1.0 (concept tot bevriezing)</p>
@@ -82,13 +82,13 @@
   </div>
 </div>
 <!-- /wp:html -->
-<!-- wp:group {"className":"rmk-container rmk-block","layout":{"type":"default"}} -->
-<div class="wp-block-group rmk-container rmk-block">
+<!-- wp:group {"className":"rmk-container rmk-block rmk-column rmk-column--narrow","layout":{"type":"default"}} -->
+<div class="wp-block-group rmk-container rmk-block rmk-column rmk-column--narrow">
 <!-- wp:pattern {"slug":"robotmaaierkompas/auteursblok"} /-->
 </div>
 <!-- /wp:group -->
 <!-- wp:html -->
-<section class="rmk-container rmk-section--tight" id="correcties" aria-labelledby="corr-t" style="padding-bottom: 64px">
+<section class="rmk-container rmk-section--tight rmk-column rmk-column--narrow" id="correcties" aria-labelledby="corr-t" style="padding-bottom: 64px">
   <div class="rmk-callout"><svg class="rmk-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-8l-4 3v-3H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/></svg><p><b id="corr-t">Fout gezien?</b> Mail naar [e-mailadres] met het model en de bron. We passen het aan en noemen de wijziging bij de pagina.</p></div>
 </section>
 <!-- /wp:html -->

@@ -12,7 +12,7 @@
 <!-- wp:group {"tagName":"main","anchor":"inhoud","className":"rmk","layout":{"type":"default"}} -->
 <main class="wp-block-group rmk" id="inhoud">
 <!-- wp:html -->
-<div class="rmk-container" style="padding-bottom: 64px">
+<div class="rmk-container rmk-column rmk-column--narrow" style="padding-bottom: 64px">
   <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li><a href="/over-ons/">Over ons</a></li><li aria-current="page">[Naam auteur]</li></ol></nav>
   <header class="rmk-pagehead" style="flex-direction: row; flex-wrap: wrap; align-items: center; gap: 32px">
     <div class="rmk-avatar rmk-avatar--lg" role="img" aria-label="Portret van [Naam auteur]">[initialen]</div>

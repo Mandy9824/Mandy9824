@@ -861,3 +861,100 @@ De productboxen blijven zonder foto. Het bijschrift "Foto: (fabrikant)" en de al
 - [ ] Mandy: zet in de netwerkinstellingen van deze omgeving de nodige domeinen open. Dan kan ik prijzen verversen, M003 en de volgende modellen uitzoeken en de persvoorwaarden lezen. Nodig zijn onder andere coolblue.nl, nl.navimow.com, navimow.segway.com, nl.mova.tech, nl.dreametech.com, eufy.com, husqvarna.com, gardena.com, proshop.nl en mediamarkt.nl. Een andere mogelijkheid: jij vult de Excel-rijen aan.
 - [ ] Mandy: beslissen over de gemelde zinnen (auteursblok, methode, pagina 1, 2 en 12, en de commissiezin in de footer).
 - [ ] Prijzen verversen vóór 19 oktober.
+
+---
+
+## Ronde 10 (6 oktober 2026): thema 1.3.1, het afwerkpakket van Claude Design en 1.3.0 samen
+
+Alles is **concept**: 76 pagina's, niets is gepubliceerd. "Zoekmachines niet laten indexeren" staat aan. Er is geen netwerktoegang gebruikt voor beelden of prijzen; die blijven voor de datasessie. **Mandy moet 1.3.1 nog uploaden**; live draait nog 1.2.5.
+
+### Afwerkpakket (README stap 1 tot 9)
+| Stap | Gedaan |
+|---|---|
+| 1. Samenvoegen | `css/`, `logo/`, `iconen/`, `illustraties/` en `deelafbeelding/` staan naast `tokens.css` en `rmk.css`. De snippets en de README staan in `patterns-bron/afwerking/` (niet in de zip). De voorbeeldpagina's zijn alleen lokaal gebruikt. Ik heb de SVG's nagekeken: geen scripts en geen externe verwijzingen. |
+| 2. CSS laden | **In de inline CSS** (punt 5 van de opdracht): `rmk_inline_css()` verkleint nu `tokens.css`, `rmk.css` en `css/rmk-afwerking.css`. `url()` wordt per bestand goed gezet, dus `../illustraties/…` werkt. Valt de inline CSS uit (filter `rmk_inline_css`), dan wordt `rmk-afwerking.css` na `rmk.css` geladen. Ook toegevoegd aan `add_editor_style()`. De tijdelijke centreerregels uit 1.3.0 zijn weg; de hoofdkolom komt nu uit `.rmk-column`. |
+| 3. Favicon en deelafbeelding | `favicon.svg`, `favicon-32.png` en `apple-touch-icon-180.png` gaan via `wp_head`. De standaard-icoontags van WordPress staan uit, zodat er geen dubbele zijn; Yoast zet zelf geen favicon. **Sitepictogram** (`favicon-512.png`) en **standaard og:image in Yoast** (`deelafbeelding-1200x630.png`): de knop **Gereedschap > Robotmaaierkompas > Huisstijl toepassen** (of `POST /wp-json/rmk/v1/huisstijl`) zet beide als PNG in de mediabibliotheek. De omzetting naar WebP staat daarbij uit, want WebP gaf een verkeerd `og:image:type`. Lokaal getest: `og:image` = de PNG van 1200×630. **Kan pas na de upload van 1.3.1.** De statuspagina heeft er twee controles bij. |
+| 4. Logo | Header (`logo-horizontaal-licht.svg`) en footer (`logo-horizontaal-donker.svg`, lazy, onder de vouw). Een filter vervangt elk `a.rmk-logo` bij het weergeven, ook in de live header- en footeraanpassing (template-onderdelen `custom`). Daardoor hoefde ik daar niets aan te passen en is er vóór de upload geen kapot logo. |
+| 5. Hoofdkolom | Alle `rmk-container`s in de 76 concepten en de paginapatronen kregen `rmk-column`. `--narrow` voor kopersgidsen (o.a. pagina 4 en 11), hulp, methode, Over ons, auteur en juridisch; `--wide` voor de groep met de vergelijkingstabel op pagina 2. Groepsblokken: `className` en HTML zijn gelijk aangepast (blokvalidatie). |
+| 6. Kernpagina's | Pagina 1, 2 en 12, de latere toplijsten en de patronen toplijst, vergelijking en kosten hebben nu de lichte kop met hoogtelijnen (`rmk-pageband`), het icoon en een gecentreerde kop. De eigen eyebrow, H1 en "Door … bijgewerkt op" blijven; de snippettekst is niet gebruikt. |
+| 7. Homepage | Zie hieronder. |
+| 8. Productfoto's | Zie "Productbox". |
+| 9. Publicatiecontrole | Ongewijzigd. In de concepten van de eerste golf staan geen `[haken]` (gecontroleerd); de invulplekken staan alleen in de patronen. |
+
+### Correcties en besluiten
+1. **Hero:**
+   - Lead: de tekst uit tekstwijzigingen-afwerking.md, niet de snippettekst. De eigen H1 blijft.
+   - Eyebrow: "Onafhankelijk vergeleken", uit het ontwerp.
+   - Knoppen: de snippet linkte naar `/beste-robotmaaier/` en `/vergelijken/`, die er nog niet zijn. Nu gaan ze naar "Bekijk de robotmaaiers zonder draad" (`/robotmaaier-zonder-draad/`) en "Zelf vergelijken" (`/robotmaaier-test-vergelijking/`).
+   - **Eerlijkheidsblok:** overal de nieuwe tekst. Pagina's met het patroon gebruiken de patroontekst uit 1.3.0, de andere hebben de tekst in de inhoud. Er staat nergens meer oude tekst.
+2. **Vier ingangen:** naar `/robotmaaier-zonder-draad/`, `/robotmaaier-test-vergelijking/`, `/robotmaaier-zonder-grensdraad/` en `/robotmaaier-kosten/`.
+   - Titels en regels komen van de bestaande kaarten. Voor "Robotmaaier zonder grensdraad" is de regel afgeleid van de titel van die pagina: "Hoe werkt het met RTK, camera of LiDAR, en wanneer kies je het?"
+   - Het onderdeel "Hoe we beoordelen" is nu een donkere sectie met de bestaande kaarttekst.
+   - **Keuzehulp:** de sectie "Begin bij je tuin, niet bij het merk" met de illustratie `tuin.svg` en de knop "Naar de keuzehulp" gaat naar `/robotmaaier-zonder-draad/#keuzehulp`. Het keuzehulpblok op pagina 1 kreeg dat anker. De keuzehulp zelf staat niet meer op de homepage.
+   - **Onlangs bijgewerkt:** de shortcode `[rmk_onlangs_bijgewerkt]` toont de drie laatst bijgewerkte gepubliceerde pagina's, met Nederlandse datum. De homepage, verplichte pagina's en sectiepagina's tellen niet mee. Bij minder dan drie verschijnt er niets; live is dat nu het geval, want er is niets gepubliceerd.
+   - Verder op de homepage: "Wat we anders doen", "Wie zit erachter?", het auteursblok en de affiliate-melding, in de hoofdkolom.
+   - **Achtergronden:** donker (hero), vertrouwensstrook, wit (ingangen), licht groen (keuzehulp), standaard, en donker groen (Hoe we beoordelen).
+3. **Productbox:**
+   - Geen Bol; de prijsregel uit 1.3.0 blijft.
+   - Het fotokader uit het pakket (`rmk-photo--square`, bijschrift "Foto: (fabrikant)", alt "(model), productfoto") komt er alleen als het model in modellen.json een `foto` heeft. Bol-, Amazon- en marketplace-domeinen worden geweigerd, ook de beeldserver van Bol `s-bol.com`. De dataroute controleert dit veld ook.
+   - In de patronen staat de plaatsvervanger uit het pakket. Die wordt bij het weergeven altijd weggehaald (filter, plus CSS als vangnet), dus nooit getoond op een gepubliceerde pagina.
+   - Er zijn nu geen foto's: dat is voor de datasessie.
+4. **Tekstwijzigingen:**
+   - **Auteursblok** (patroon) en de tweede alinea van de **auteurspagina** (#78): de nieuwe teksten.
+   - **Methodepagina** (#76): de prijszin is vervangen door "Een prijs noemen we alleen met de winkel en een datum. Prijzen ouder dan 14 dagen verdwijnen automatisch, en we tonen geen prijzen van marketplace-verkopers." Het label "voorlopig, zonder" is vervangen door het nieuwe scorelabel.
+   - **Pagina 1** (#11): de koppen "(functiescore 92,7)", "(87,3)" enzovoort, zonder "voorlopig". "Alle scores zijn voorlopig en komen uit …" is "Alle scores komen uit …" geworden.
+   - **Pagina 2** (#12): ", met het label 'voorlopig'" is weggehaald.
+   - **Pagina 12** (#18): "voorlopige functiescores" is "functiescores" geworden, en "Die scores zijn voorlopig:" is "Die scores zijn functiescores:" geworden.
+   - In de eerste golf staat nergens meer "voorlopig" of "niet zelf".
+   - **Footer** (thema en live aanpassing, live gecontroleerd): "Wij kunnen een commissie ontvangen bij aankopen via links op deze site. Zie de affiliate-melding."
+   - Niet gewijzigd: de zin van het patroon affiliate-melding ("Advertentie: via deze knoppen krijgen wij mogelijk een commissie …"). Die stond niet in de opdracht.
+5. **CSS en LCP:** zie hieronder.
+6. **Logo, favicon, sitepictogram en deelafbeelding:** zie stap 3 en 4.
+7. **Afbeeldingen en prijzen:** niet aangeraakt.
+
+### Browsertest (Chromium, lokale testsite met de live header en footer en de nieuwe inhoud)
+| Breedte | Menu | Overig |
+|---|---|---|
+| 1440 en 1366 px | **Vijf items zichtbaar**, elk op één regel (44 px), geen menuknop | Hoofdkolom 1088 px gecentreerd, tekstpagina's 864 px. Geen horizontaal scrollen. |
+| 1280 en 1024 px | Menuknop. Het pakket klapt het menu in tussen 64 en 82rem, zodat items nooit over twee regels lopen. | Geen horizontaal scrollen |
+| 390 px (mobiel) | **Ingeklapt** tot de menuknop; uitgeklapt staan alle vijf items onder elkaar | Geen horizontaal scrollen |
+
+- Getest: homepage, pagina 1, 2, 4 en 12, de methodepagina en de auteurspagina. Geen JavaScript-fouten. De enige consolemelding was de auteursfoto van het live domein, die het testcertificaat in de testomgeving niet laadde.
+- Gecontroleerd:
+  - de links van de homepage (zie hierboven);
+  - het anker `#keuzehulp` op pagina 1;
+  - de prijsregels in de productboxen ("Laagste nieuwe prijs rond 899 euro bij Coolblue, gezien op 5 oktober 2026");
+  - het nieuwe label in de scorecellen;
+  - de kostencalculator (730 euro over 5 jaar geeft 146 euro per jaar);
+  - het filter met de tabel op pagina 2 (8 rijen);
+  - favicon, logo's en `og:image`;
+  - dat er geen plaatsvervanger op de pagina's staat.
+
+### LCP (Lighthouse 12, mobiel, 3 metingen, met gzip zoals de live server)
+- **Het LCP-element is nu de H1 in de nieuwe kop**, in Schibsted Grotesk.
+  - In 1.3.1 wordt dat lettertype vooraf geladen. Dat scheelt 0,4 s in FCP.
+  - Het footerlogo laadt lazy.
+
+| Pagina | LCP | FCP | CLS | TBT | Score |
+|---|---|---|---|---|---|
+| P1 `/robotmaaier-zonder-draad/` | **1,8 s** (3×) | 0,9 s | 0 | 40 ms | 100 |
+| P12 `/robotmaaier-kosten/` | **1,9 / 1,9 / 1,8 s** | 0,9 s | 0 | 10–40 ms | 100 |
+
+- Doel onder 2 s: gehaald, maar met weinig marge. Dat komt door de lettertypen van de kop (47 KB) en de basistekst.
+- **Eerlijk vergeleken met eerdere rondes:**
+  - De metingen van ronde 7 en 8 (1,2 en 1,4 s) waren te gunstig. De lettertypen laadden daar niet in de testopstelling (ander domein).
+  - Zonder gzip komt dezelfde pagina op 2,4 s.
+  - Na de upload meet ik het opnieuw op de live site, na de lancering ook met PSI.
+
+### Thema 1.3.1 (gebouwd en lokaal getest; Mandy moet het nog uploaden)
+- **Tests:**
+  - `tests/score-test.php`: geslaagd.
+  - `tests/prijs-test.php`: 23 van 23 geslaagd, nu ook voor foto en plaatsvervanger. De teller werkte niet goed binnen `wp eval-file`; dat is hersteld.
+  - `tests/bol-test.php`: geslaagd.
+  - PHP-lint: alles in orde.
+- Zip `robotmaaierkompas-child.zip`: 392 KB.
+- **Let op tot de upload:** de concepten verwijzen al naar het icoon in de kop (`logo/icoon-*.svg`) en naar `illustraties/tuin.svg`. In de voorvertoning ontbreken die beelden tot 1.3.1 actief is.
+
+### Nog te doen
+- [ ] Mandy: **1.3.1 uploaden en activeren**, en daarna **Huisstijl toepassen** (Gereedschap > Robotmaaierkompas). Daarna controleer ik live het logo, het favicon, `og:image`, het menu en de LCP.
+- [ ] Datasessie: foto's (met een duidelijke voorwaarde), prijzen verversen vóór 19 oktober, en M003.

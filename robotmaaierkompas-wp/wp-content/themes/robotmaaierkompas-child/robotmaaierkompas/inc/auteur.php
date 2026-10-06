@@ -49,7 +49,35 @@ add_shortcode( 'rmk_artikelen_auteur', function ( $atts ) {
 	$name  = get_the_author_meta( 'display_name', $author );
 	$cards = '';
 	foreach ( $posts as $p ) {
-		$cards .= '<a class="rmk-card" href="' . esc_url( get_permalink( $p ) ) . '"><span class="rmk-meta">Bijgewerkt op ' . esc_html( get_the_modified_date( 'j F Y', $p ) ) . '</span><h3>' . esc_html( get_the_title( $p ) ) . '</h3></a>';
+		$cards .= '<a class="rmk-card" href="' . esc_url( get_permalink( $p ) ) . '"><span class="rmk-meta">Bijgewerkt op ' . esc_html( rmk_date_nl( get_post_modified_time( 'Y-m-d', false, $p ) ) ) . '</span><h3>' . esc_html( get_the_title( $p ) ) . '</h3></a>';
 	}
 	return '<section class="rmk-section" aria-labelledby="art" style="display: flex; flex-direction: column; gap: 16px"><h2 id="art" style="font-size: var(--rmk-fs-xl)">Artikelen van ' . esc_html( $name ) . '</h2><div class="rmk-grid rmk-grid--wide">' . $cards . '</div></section>';
+} );
+
+/**
+ * [rmk_onlangs_bijgewerkt] (homepage): de drie laatst bijgewerkte gepubliceerde pagina's, zonder de homepage,
+ * verplichte pagina's en sectiepagina's. Zijn er minder dan drie, dan wordt het blok niet getoond.
+ */
+add_shortcode( 'rmk_onlangs_bijgewerkt', function () {
+	$posts = get_posts( array(
+		'post_type'      => array( 'page', 'post' ),
+		'post_status'    => 'publish',
+		'posts_per_page' => 3,
+		'orderby'        => 'modified',
+		'order'          => 'DESC',
+		'post__not_in'   => array_filter( array( (int) get_option( 'page_on_front' ), (int) get_the_ID() ) ),
+		'meta_query'     => array(
+			'relation' => 'OR',
+			array( 'key' => 'rmk_pagina_soort', 'compare' => 'NOT EXISTS' ),
+			array( 'key' => 'rmk_pagina_soort', 'value' => '^(verplicht|sectie|homepage)', 'compare' => 'NOT REGEXP' ),
+		),
+	) );
+	if ( count( $posts ) < 3 ) {
+		return '';
+	}
+	$cards = '';
+	foreach ( $posts as $p ) {
+		$cards .= '<a class="rmk-card" href="' . esc_url( get_permalink( $p ) ) . '"><span class="rmk-meta">Bijgewerkt op ' . esc_html( rmk_date_nl( get_post_modified_time( 'Y-m-d', false, $p ) ) ) . '</span><h3>' . esc_html( get_the_title( $p ) ) . '</h3><span class="rmk-card__more">Lezen</span></a>';
+	}
+	return '<section class="rmk-section" aria-labelledby="onlangs"><div class="rmk-container rmk-column"><div class="rmk-section-head"><h2 id="onlangs">Onlangs bijgewerkt</h2></div><div class="rmk-grid">' . $cards . '</div></div></section>';
 } );

@@ -1,10 +1,11 @@
 # Lancering robotmaaierkompas.nl: stappen voor Mandy
 
-Stand: 6 oktober 2026, thema 1.3.0 (nog uploaden). Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
+Stand: 6 oktober 2026, thema 1.3.1 (nog uploaden). Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
 Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle pagina's van de eerste golf gepubliceerd en gecontroleerd zijn.
 
 ## 1. Vooraf (de dag ervoor)
 1. Maak een back-up in hPanel (bestanden en database).
+1. Staat thema 1.3.1 actief? Klik dan één keer op **Gereedschap > Robotmaaierkompas > Huisstijl toepassen** (sitepictogram en standaard deelafbeelding in Yoast).
 2. Controleer in WordPress bij **Gereedschap > Robotmaaierkompas** of de statuscontroles groen zijn.
 3. Lees de gegevens in **Colofon**, **Privacy** en **Contact** nog één keer na (naam, e-mailadres contact@robotmaaierkompas.nl, adres). Stuur een testmail naar contact@robotmaaierkompas.nl en kijk of hij aankomt.
 4. Pagina 4: open de bronlinks in je eigen browser (zie het bouwlogboek, ronde 8 en 9).

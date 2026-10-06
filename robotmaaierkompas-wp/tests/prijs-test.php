@@ -3,11 +3,10 @@
  * Tests voor het prijsblok in de productbox (inc/prijzen.php) en de controle in de dataroute.
  * Draaien op een testsite: wp eval-file tests/prijs-test.php
  */
-$fail = 0;
+$GLOBALS['rmk_fail'] = 0; // wp eval-file draait in een functie: daarom $GLOBALS
 function pcheck( $naam, $ok, $info = '' ) {
-	global $fail;
 	echo ( $ok ? 'OK   ' : 'FOUT ' ) . $naam . ( $info ? "  ($info)" : '' ) . "\n";
-	$fail += $ok ? 0 : 1;
+	$GLOBALS['rmk_fail'] += $ok ? 0 : 1;
 }
 $m = array( 'id' => 'T1', 'fabrikant_url' => 'https://fabrikant.example/product',
 	'prijs' => array( 'bedrag' => 899, 'winkel' => 'Coolblue', 'datum' => '2026-10-05', 'url' => 'https://www.coolblue.nl/product/1/x.html', 'type' => 'winkel' ) );
@@ -40,6 +39,20 @@ pcheck( 'Productbox: oude tekst weg', false === strpos( $out, 'We tonen voorlopi
 pcheck( 'Productbox: prijsblok uit modellen.json of fabrikantknop', false !== strpos( $out, 'Laagste nieuwe prijs rond' ) || false !== strpos( $out, 'Bekijk de actuele prijs' ) || false !== strpos( $out, 'rmk-offers"></div>' ), substr( strip_tags( $out ), 0, 120 ) );
 pcheck( 'Productbox zonder bekend model blijft ongewijzigd', $box === rmk_fill_offers( str_replace( 'M002', 'X999', $box ) ) || false !== strpos( rmk_fill_offers( str_replace( 'M002', 'X999', $box ) ), 'Bekijk de prijs bij de winkel' ) );
 
+
+// Fotokader (1.3.1)
+$fm  = array( 'id' => 'T2', 'naam' => 'Testmaaier', 'merk' => 'Gardena', 'foto' => array( 'url' => 'https://www.gardena.com/x.png' ) );
+$kop = '<article class="rmk-product"><div class="rmk-product__head rmk-product__head--nomedia" style="grid-template-columns: 1fr"><div class="rmk-product__title"></div></div></article>';
+$met = rmk_fill_photo( $kop, $fm );
+pcheck( 'Foto: fotokader met bijschrift "Foto: Gardena" en alt-tekst', false !== strpos( $met, '<figcaption>Foto: Gardena</figcaption>' ) && false !== strpos( $met, 'alt="Testmaaier, productfoto"' ) && false === strpos( $met, '--nomedia' ) );
+pcheck( 'Zonder foto: geen beeldblok', $kop === rmk_fill_photo( $kop, array( 'naam' => 'X' ) ) );
+$b = $fm; $b['foto']['url'] = 'https://media.s-bol.com/x.jpg';
+pcheck( 'Geen Bol-afbeelding', $kop === rmk_fill_photo( $kop, $b ) || false === strpos( rmk_fill_photo( $kop, $b ), 's-bol' ) );
+$ph  = '<article class="rmk-product"><div class="rmk-product__head"><div class="rmk-product__media"><!-- x --><figure class="rmk-photo rmk-photo--square rmk-photo--placeholder"><div class="rmk-photo__frame"><img src="p.svg" alt=""></div><figcaption>Foto volgt</figcaption></figure></div><div class="rmk-product__title"></div></div></article>';
+$weg = rmk_strip_photo_placeholders( $ph );
+pcheck( 'Plaatsvervanger wordt weggehaald (nooit op een gepubliceerde pagina)', false === strpos( $weg, 'Foto volgt' ) && false !== strpos( $weg, 'rmk-product__head--nomedia' ) );
+pcheck( 'Plaatsvervanger wordt vervangen door een echte foto', false !== strpos( rmk_fill_photo( $ph, $fm ), 'Foto: Gardena' ) && false === strpos( rmk_fill_photo( $ph, $fm ), 'Foto volgt' ) );
+
 // Dataroute
 $data = array( 'modellen' => array( array( 'id' => 'M1', 'slug' => 'm1', 'naam' => 'M1', 'kosten' => array( 'aanschaf' => array( 'waarde' => null ) ), 'prijs' => $m['prijs'] ) ) );
 pcheck( 'Dataroute accepteert een geldige prijs', array() === rmk_validate_modellen( $data ), implode( '; ', rmk_validate_modellen( $data ) ) );
@@ -48,4 +61,4 @@ pcheck( 'Dataroute weigert marketplace', (bool) rmk_validate_modellen( $data ) )
 $data['modellen'][0]['prijs']['type'] = 'winkel'; $data['modellen'][0]['prijs']['bedrag'] = 899.5;
 pcheck( 'Dataroute weigert bedrag met centen', (bool) rmk_validate_modellen( $data ) );
 
-echo $fail ? "\n$fail test(s) mislukt\n" : "\nAlle prijstests geslaagd\n";
+echo $GLOBALS['rmk_fail'] ? "\n" . $GLOBALS['rmk_fail'] . " test(s) mislukt\n" : "\nAlle prijstests geslaagd\n";
