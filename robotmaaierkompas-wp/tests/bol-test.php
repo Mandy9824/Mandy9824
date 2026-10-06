@@ -18,7 +18,7 @@ do_action( 'init' );
 t( 'Uitgeschakeld: geen ingeplande taak', ! wp_next_scheduled( RMK_BOL_HOOK ) );
 $h0 = rmk_bol_offer_html( 'M002', 'segway-navimow-i206-awd' );
 t( 'Bol-taak uit: geen Bol-prijsblok en geen link (het prijsblok komt uit inc/prijzen.php)', '' === $h0 );
-t( 'Prijscel zonder prijs', false !== strpos( rmk_price_cell( array( 'id' => 'M002' ) ), 'bij de winkel' ) );
+t( 'Prijscel zonder geldige prijs: streepje', false !== strpos( rmk_price_cell( array( 'id' => 'M002' ) ), '–' ) );
 remove_filter( 'pre_http_request', $spy );
 
 // B. Alleen om de code te testen: tijdelijk aan, met een NAGEBOOTSTE API (testconstanten bestaan alleen in dit proces)

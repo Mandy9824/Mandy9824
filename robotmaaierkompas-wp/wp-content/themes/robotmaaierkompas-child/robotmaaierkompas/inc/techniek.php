@@ -149,17 +149,60 @@ add_filter( 'rest_post_dispatch', function ( $response, $server, $request ) {
 	if ( $rmk && $response instanceof WP_REST_Response ) {
 		$response->header( 'X-Robots-Tag', 'noindex, nofollow' );
 	}
-	// Nooit cachen (1.3.2): de beheerroutes en elk antwoord aan een ingelogde gebruiker of een verzoek met een
-	// toepassingswachtwoord. LiteSpeed zag Basic-authenticatie niet als ingelogd en serveerde /rmk/v1/status uit de cache.
-	if ( $rmk || is_user_logged_in() || ! empty( $_SERVER['PHP_AUTH_USER'] ) || ! empty( $_SERVER['HTTP_AUTHORIZATION'] ) ) {
-		do_action( 'litespeed_control_set_nocache', 'rmk: beheer of ingelogd' );
-		if ( $response instanceof WP_REST_Response ) {
-			$response->header( 'Cache-Control', 'no-store, private, max-age=0' );
-			$response->header( 'X-LiteSpeed-Cache-Control', 'no-cache' );
-		}
+	// Nooit cachen (1.3.3): geen enkel antwoord onder /wp-json/, voor LiteSpeed en voor de Hostinger-CDN.
+	// LiteSpeed zag Basic-authenticatie niet als ingelogd en serveerde /rmk/v1/status uit de cache (ronde 11).
+	// Interne aanroepen (rest_do_request op een gewone pagina) laten de paginacache met rust.
+	if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) {
+		return $response;
+	}
+	do_action( 'litespeed_control_set_nocache', 'rmk: REST-API wordt niet gecachet' );
+	if ( $response instanceof WP_REST_Response ) {
+		$response->header( 'Cache-Control', 'no-store, no-cache, private, max-age=0' );
+		$response->header( 'X-LiteSpeed-Cache-Control', 'no-cache' );
+		$response->header( 'CDN-Cache-Control', 'no-store' );
+		$response->header( 'Surrogate-Control', 'no-store' );
 	}
 	return $response;
 }, 10, 3 );
+// Ook als de REST-aanvraag al vóór de dispatch eindigt (fouten, OPTIONS): geen cache.
+add_action( 'rest_api_init', function () {
+	if ( ! defined( 'REST_REQUEST' ) || ! REST_REQUEST ) {
+		return; // rest_api_init kan ook op gewone pagina's vuren; die mogen wel gecachet worden
+	}
+	do_action( 'litespeed_control_set_nocache', 'rmk: REST-API wordt niet gecachet' );
+	if ( ! headers_sent() ) {
+		header( 'X-LiteSpeed-Cache-Control: no-cache' );
+		header( 'CDN-Cache-Control: no-store' );
+	}
+}, 0 );
+
+// /wp-json/rmk/ is alleen voor beheerders: ook de naamruimte-index (/rmk/v1) en de routelijst in /wp-json/ niet.
+add_filter( 'rest_pre_dispatch', function ( $result, $server, $request ) {
+	$route = $request->get_route();
+	if ( ( '/rmk/v1' === rtrim( $route, '/' ) || 0 === strpos( $route, '/rmk/' ) ) && ! current_user_can( 'manage_options' ) ) {
+		return new WP_Error( 'rest_forbidden', 'Alleen voor beheerders.', array( 'status' => is_user_logged_in() ? 403 : 401 ) );
+	}
+	return $result;
+}, 5, 3 );
+add_filter( 'rest_index', function ( $response ) {
+	if ( current_user_can( 'manage_options' ) || ! $response instanceof WP_REST_Response ) {
+		return $response;
+	}
+	$data = $response->get_data();
+	if ( isset( $data['namespaces'] ) ) {
+		$data['namespaces'] = array_values( array_diff( $data['namespaces'], array( 'rmk/v1' ) ) );
+	}
+	if ( isset( $data['routes'] ) ) {
+		foreach ( array_keys( $data['routes'] ) as $r ) {
+			if ( 0 === strpos( $r, '/rmk/' ) ) {
+				unset( $data['routes'][ $r ] );
+			}
+		}
+	}
+	$response->set_data( $data );
+	return $response;
+} );
+
 add_filter( 'robots_txt', function ( $out, $public ) {
 	$rules = "Disallow: /wp-json/rmk/\nDisallow: /wp-content/uploads/rmk/\n";
 	// Binnen de groep "User-agent: *" (Yoast schrijft zijn eigen blok, daarom als laatste filter).

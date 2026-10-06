@@ -221,3 +221,57 @@ function rmk_fill_card( $article, array $m ) {
 	}
 	return $article;
 }
+
+/* ------------------------------------------------------------------ Prijs in tabellen (1.3.3)
+ * Scoretabel en vergelijkingstabel: "rond 899 euro" met de winkel klein eronder, alleen bij een geldige prijs
+ * (zelfde regels als de productbox), anders "–". Onder de tabel één regel met de datum waarop de prijzen zijn gezien. */
+
+function rmk_price_cell( array $m ) {
+	$p = rmk_valid_price( $m );
+	if ( ! $p ) {
+		return '<span aria-hidden="true">–</span><span class="rmk-sr">geen actuele prijs</span>';
+	}
+	return 'rond ' . esc_html( number_format( round( (float) $p['bedrag'] ), 0, ',', '.' ) ) . ' euro<br><span class="rmk-small">' . esc_html( $p['winkel'] ) . '</span>';
+}
+
+/** "Prijzen gezien op 5 oktober 2026." voor de geldige prijzen van deze modellen; leeg als er geen is. */
+function rmk_price_date_line( array $models ) {
+	$dates = array();
+	foreach ( $models as $m ) {
+		if ( $m && ( $p = rmk_valid_price( $m ) ) ) {
+			$dates[] = $p['datum'];
+		}
+	}
+	if ( ! $dates ) {
+		return '';
+	}
+	sort( $dates );
+	$min = reset( $dates );
+	$max = end( $dates );
+	$txt = $min === $max ? 'Prijzen gezien op ' . rmk_date_nl( $min ) . '.' : 'Prijzen gezien tussen ' . rmk_date_nl( $min ) . ' en ' . rmk_date_nl( $max ) . '.';
+	return '<p class="rmk-small rmk-pricedate">' . esc_html( $txt ) . ' Laagste nieuwe prijs bij een winkel of de fabrikant, afgerond.</p>';
+}
+
+/** In de inhoud: <td data-rmk-price="M002"></td>, <p data-rmk-prijsdatum="M002,M010"></p> en data-price op tr[data-model]. */
+function rmk_fill_table_prices( $html ) {
+	if ( false === strpos( (string) $html, 'data-rmk-price' ) && false === strpos( (string) $html, 'data-rmk-prijsdatum' ) ) {
+		return $html;
+	}
+	$html = preg_replace_callback( '#(<td\b[^>]*\bdata-rmk-price="([A-Za-z0-9-]+)"[^>]*>)(.*?)(</td>)#s', function ( $c ) {
+		$m = rmk_get_model( $c[2] );
+		return $c[1] . ( $m ? rmk_price_cell( $m ) : '–' ) . $c[4];
+	}, $html );
+	// data-price (voor sorteren en het budgetfilter) op de rij van een model met een geldige prijs
+	$html = preg_replace_callback( '#<tr\b([^>]*)\bdata-price=""([^>]*)>(.*?)</tr>#s', function ( $r ) {
+		if ( ! preg_match( '#data-rmk-price="([A-Za-z0-9-]+)"#', $r[3], $id ) || ! ( $m = rmk_get_model( $id[1] ) ) || ! ( $p = rmk_valid_price( $m ) ) ) {
+			return $r[0];
+		}
+		return '<tr' . $r[1] . 'data-price="' . (int) round( (float) $p['bedrag'] ) . '"' . $r[2] . '>' . $r[3] . '</tr>';
+	}, $html );
+	return preg_replace_callback( '#<p\b[^>]*\bdata-rmk-prijsdatum="([A-Za-z0-9,\s-]+)"[^>]*>\s*</p>#', function ( $c ) {
+		return rmk_price_date_line( array_map( 'rmk_get_model', array_filter( array_map( 'trim', explode( ',', $c[1] ) ) ) ) );
+	}, $html );
+}
+add_filter( 'render_block', function ( $content, $block ) {
+	return 'core/html' === $block['blockName'] ? rmk_fill_table_prices( $content ) : $content;
+}, 13, 2 );

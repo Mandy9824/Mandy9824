@@ -279,8 +279,8 @@ function rmk_bol_offer_html( $model_id, $slug ) {
 		. '<span class="rmk-offer__src">Bron: bol.com · prijs van ' . esc_html( rmk_bol_time( $p ) ) . $extra . '</span></div>';
 }
 
-/** Cel "Prijs vanaf" in de scoretabel: alleen een actuele Bol-prijs, anders verwijzen naar de winkel. */
-function rmk_price_cell( array $m ) {
+/** Bol-prijscel (alleen als de Bol-taak ooit aan gaat; niet gebruikt). De scoretabel gebruikt rmk_price_cell() uit inc/prijzen.php. */
+function rmk_bol_price_cell( array $m ) {
 	$p = rmk_bol_price( $m['id'] );
 	if ( ! $p ) {
 		return '<span class="rmk-small">bij de winkel</span>';

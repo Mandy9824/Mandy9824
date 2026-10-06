@@ -54,11 +54,11 @@
     </div>
     <div class="rmk-tablewrap" role="region" aria-labelledby="res" tabindex="0">
       <table class="rmk-table rmk-table--sticky" style="min-width: 920px">
-        <caption>Score volgens scoremodel v1.0 (concept tot bevriezing). Prijs: laagste prijs met bron en datum op de productpagina.</caption>
-        <thead><tr><th scope="col">Model</th><th scope="col" class="is-num">Score</th><th scope="col">Navigatie</th><th scope="col">Capaciteit</th><th scope="col">Helling</th><th scope="col">Geluid</th><th scope="col">Doorgang</th><th scope="col" class="is-num">Prijs vanaf</th></tr></thead>
+        <caption>Score volgens scoremodel v1.0 (concept tot bevriezing). Prijs: laagste nieuwe prijs van een winkel of de fabrikant, hoogstens 14 dagen oud; de datum staat onder de tabel.</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col" class="is-num">Score</th><th scope="col">Navigatie</th><th scope="col">Capaciteit</th><th scope="col">Helling</th><th scope="col">Geluid</th><th scope="col">Doorgang</th><th scope="col" class="is-num">Laagste nieuwe prijs</th></tr></thead>
         <tbody>
           <!-- Eén rij per model. data-nav: draad | rtk | camera. data-capacity, data-slope, data-price: alleen getallen of leeg. -->
-          <tr data-model="[model-slug]" data-nav="[draad|rtk|camera]" data-capacity="[m²]" data-slope="[%]" data-price="[€ of leeg]">
+          <tr data-model="[model-slug]" data-nav="[draad|rtk|camera]" data-capacity="[m²]" data-slope="[%]" data-price="">
             <th scope="row"><a href="[url model]">[Modelnaam]</a></th>
             <td class="is-num"><div class="rmk-scorecell" data-rmk-score data-scores="betrouwbaarheid=[0–10]; navigatie=[0–10]; prijskwaliteit=[0–10]; hellingen=[0–10]; app=[0–10]; veiligheid=[0–10]; geluid=[0–10]; reviews=[aantal gelezen reviews]"><div class="rmk-minis"><b data-out="total">–</b><small data-out="kind">Score</small></div><span class="rmk-provisional" data-out="label" hidden></span></div></td>
             <td>[navigatie]</td>
@@ -66,10 +66,11 @@
             <td><div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px"><span>[waarde]%</span><span class="rmk-status rmk-status--[ok|maker|shop|conflict|missing]">[status]</span></div></td>
             <td><div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px"><span>[waarde] dB(A)</span><span class="rmk-status rmk-status--[ok|maker|shop|conflict|missing]">[status]</span></div></td>
             <td><div style="display:flex;flex-direction:column;align-items:flex-start;gap:4px"><span>[waarde] cm</span><span class="rmk-status rmk-status--[ok|maker|shop|conflict|missing]">[status]</span></div></td>
-            <td class="is-num"><div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px"><span class="rmk-num">€ [prijs]</span><span class="rmk-small">Bron: [winkel] · [datum]</span></div></td>
+            <td class="is-num c-price" data-rmk-price="[model-id]"></td>
           </tr>
         </tbody>
       </table>
+      <p class="rmk-small" data-rmk-prijsdatum="[model-ids, komma-gescheiden]"></p>
     </div>
     <div class="rmk-callout" data-rmk-empty hidden><p>Geen modellen passen bij deze filters. Verruim de helling of het budget, of wis de filters.</p></div>
     <p class="rmk-small">Zie je een fout of een nieuwere specificatie? <a href="/redactiebeleid/#correcties">Meld een correctie</a>.</p>

@@ -1,6 +1,6 @@
 # Lancering robotmaaierkompas.nl: stappen voor Mandy
 
-Stand: 6 oktober 2026, thema 1.3.1 (nog uploaden). Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
+Stand: 6 oktober 2026, thema 1.3.3 (nog uploaden). Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
 Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle pagina's van de eerste golf gepubliceerd en gecontroleerd zijn.
 
 ## 1. Vooraf (de dag ervoor)
@@ -41,6 +41,7 @@ Waarom deze volgorde:
 Publiceer verder niets. De andere 61 pagina's blijven concept. Ze staan niet in het menu of de footer, en de eerste golf linkt er niet naar (gecontroleerd op 6 oktober).
 
 ## 3. Controleren vóór indexering (in een privévenster, niet ingelogd)
+1. Open `https://robotmaaierkompas.nl/wp-json/rmk/v1` en `https://robotmaaierkompas.nl/wp-json/rmk/v1/status`. Beide moeten "Alleen voor beheerders" (401) geven, zonder gegevens.
 1. Leeg de **LiteSpeed-cache** (beheerbalk > LiteSpeed Cache > Alles legen) en de **CDN-cache** in hPanel.
 2. Open alle 15 adressen: geeft elk de pagina, zonder 404?
 3. Klik in het menu en in de footer elke link aan; geen 404.

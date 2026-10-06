@@ -1050,3 +1050,75 @@ Het doel van onder 2 s is gehaald. Het LCP-element is de H1 in de kop.
 - [ ] Mandy: **1.3.2 uploaden en activeren.** Daarna controleer ik live de kaarten, het label, de cacheheaders van `/rmk/v1/status` en de LCP.
 - [ ] Mandy: beslissen over de drie verdwenen zinnen (zie punt 3).
 - [ ] Datasessie: foto's (alleen met een duidelijke voorwaarde), prijzen verversen vóór 19 oktober, en M003.
+
+---
+
+## Ronde 12 (6 oktober 2026): thema 1.3.3, prijzen in de tabellen en geen cache voor de REST-API
+
+Alles is **concept**: niets is gepubliceerd. "Zoekmachines niet laten indexeren" staat aan. Live draait **1.3.2**. **1.3.3 is gebouwd en lokaal getest; Mandy moet het nog uploaden.**
+
+Er is nog geen release met uitgelichte beelden, dus dit werk zit in 1.3.3.
+
+### 1. Prijs in de scoretabel (pagina 1) en de vergelijkingstabel (pagina 2)
+- **Pagina 1** (shortcode `[rmk_scoretabel]`):
+  - De kolom "Prijs vanaf" ("bij de winkel") heet nu **"Laagste nieuwe prijs"**.
+  - Inhoud: "rond 899 euro" met de winkel klein eronder.
+  - De regels zijn dezelfde als in de productbox: nieuw, op voorraad, winkel of fabrikant, geen Bol of marketplace, hoogstens 14 dagen oud. Anders "–" (schermlezers horen "geen actuele prijs").
+- **Pagina 2** (#12) had geen prijskolom. Die heb ik toegevoegd: de kopkolom "Laagste nieuwe prijs" en per rij een cel `data-rmk-price="Mxxx"`, die bij het weergeven uit modellen.json wordt gevuld en dus ook vanzelf verloopt.
+  - Rijen met een geldige prijs krijgen ook `data-price`, zodat sorteren op prijs en het budgetfilter werken.
+- **Onder elke tabel** staat één regel: "Prijzen gezien op 5 oktober 2026. Laagste nieuwe prijs bij een winkel of de fabrikant, afgerond." Zijn er geen geldige prijzen, dan verdwijnt die regel.
+- De patronen scoretabel en vergelijkingstabel zijn op dezelfde manier aangepast.
+- Lokaal weergegeven:
+
+| Model | Prijs in de tabel |
+|---|---|
+| M002 Navimow i206 AWD | rond 899 euro, Coolblue |
+| M010 Husqvarna 410VE NERA | rond 3.049 euro, Husqvarna |
+| M005 Mova LiDAX Ultra 1200 | rond 814 euro, Mova |
+| M004 Mova LiDAX Ultra 800 | rond 699 euro, Mova |
+| M008 Dreame A1 Pro | rond 729 euro, Coolblue |
+| M001 Navimow i105E | – |
+| M006 Eufy E15 Solo | rond 918 euro, Coolblue |
+| M011 Gardena Sileno Free 800 | rond 1.099 euro, Coolblue |
+
+- **Twee fouten gevonden en hersteld:**
+  - Op pagina 2 werd de pagina op 1366 px **breder dan het scherm** (scrollWidth 1754). Oorzaak: de verborgen schermlezertekst (`.rmk-sr`, absoluut) in de prijscel viel buiten het scrollvak van de tabel. `.rmk-tablewrap` heeft nu `position: relative`; de tabel scrolt binnen haar vak, met de eerste kolom vast.
+  - Op mobiel viel bij de scoretabel op pagina 1 "Functiescore, van 100" **buiten de kaart**. Dat komt door de kolom "Beste voor" uit 1.3.2. Nu staat "Beste voor" over de volle breedte onder naam en score, en de score is smaller en loopt door op de volgende regel.
+- **Browsertest** (Chromium, 1366 en 390 px):
+  - pagina 1 en 2 zonder horizontaal scrollen en zonder JavaScript-fouten;
+  - de datumregel en de scoreregel staan onder beide tabellen.
+
+### 2. Geen cache voor `/wp-json/`
+- **1.3.3:**
+  - Elk antwoord van een echte REST-aanvraag krijgt `litespeed_control_set_nocache`, `Cache-Control: no-store, no-cache, private, max-age=0`, `X-LiteSpeed-Cache-Control: no-cache`, `CDN-Cache-Control: no-store` en `Surrogate-Control: no-store`.
+  - Gebeurt al bij `rest_api_init`, dus ook bij fouten.
+  - Interne REST-aanroepen op gewone pagina's laten de paginacache met rust: lokaal gecontroleerd dat gewone pagina's geen no-store krijgen.
+- **`/wp-json/rmk/` alleen voor beheerders:**
+  - Ook de naamruimte-index `/wp-json/rmk/v1` geeft zonder beheerder 401 "Alleen voor beheerders".
+  - `rmk/v1` en de routes staan niet meer in de openbare index `/wp-json/`.
+  - Lokaal gecontroleerd zonder inloggen.
+- **Live nu (1.3.2), zonder inloggen:**
+
+| Adres | Antwoord |
+|---|---|
+| `/wp-json/rmk/v1/status` en `/modellen` | 401, met no-store |
+| `/wp-json/rmk/v1` | 200, met alleen de lijst van routes. Geen gegevens, maar wel zichtbaar. Na 1.3.3: 401. |
+| `/wp-json/` | noemt `rmk/v1` en zijn zeven routes. Na 1.3.3 niet meer. |
+
+- **Hostinger-CDN:** de CDN gaf voor `/wp-json/rmk/v1` de status `DYNAMIC` (niet gecachet). Met `CDN-Cache-Control: no-store` hoort dat zo te blijven. Een uitzondering voor `/wp-json/*` in hPanel bij de CDN-instellingen is een extra vangnet; dat kan alleen Mandy.
+- **Na de upload van 1.3.3** (gaat niet vóór de upload): ik controleer zonder inloggen of `/wp-json/rmk/`, `/wp-json/rmk/v1` en `/wp-json/rmk/v1/status` geen gegevens teruggeven, en of de cacheheaders en `x-hcdn-cache-status` kloppen. Mandy kan hetzelfde in een privévenster doen (zie LANCERING.md, stap 3).
+
+### 3. De drie weggehaalde zinnetjes
+Die blijven weg, zoals besloten.
+
+### Tests
+- `prijs-test.php`: **34 van 34** geslaagd, nu ook voor de tabelcel, "–", prijzen ouder dan 14 dagen en de datumregel.
+- `score-test.php`: geslaagd.
+- `bol-test.php`: geslaagd. De prijscel zonder prijs is nu "–".
+- PHP-lint: in orde.
+- De zip is 404 KB.
+
+### Nog te doen
+- [ ] Mandy: **1.3.3 uploaden en activeren.** Daarna controleer ik zonder inloggen `/wp-json/rmk/` en de cacheheaders.
+- [ ] Mandy, als extra vangnet: in hPanel bij de CDN-instellingen `/wp-json/*` uitsluiten van de cache.
+- [ ] Datasessie: prijzen verversen vóór 19 oktober (anders tonen beide tabellen "–" en verdwijnt de datumregel), foto's en M003.

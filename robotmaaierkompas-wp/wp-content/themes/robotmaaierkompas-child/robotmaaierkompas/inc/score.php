@@ -251,17 +251,18 @@ add_shortcode( 'rmk_scoretabel', function ( $atts ) {
 	foreach ( $items as $it ) {
 		$m     = $it['m'];
 		$rank  = null === $it['score']['value'] ? '–' : (string) ( ++$n );
-		$price = function_exists( 'rmk_price_cell' ) ? rmk_price_cell( $m ) : '<span class="rmk-small">bij de winkel</span>';
+		$price = function_exists( 'rmk_price_cell' ) ? rmk_price_cell( $m ) : '–';
 		$best  = $show_best ? '<td class="c-best">' . esc_html( isset( $m['beste_voor'] ) ? $m['beste_voor'] : '' ) . '</td>' : '';
 		$rows .= '<tr data-model="' . esc_attr( $m['slug'] ) . '"><td class="c-rank"><span class="rmk-ranknum">' . esc_html( $rank ) . '</span></td>'
 			. '<th scope="row" class="c-model">' . esc_html( $m['naam'] ) . '</th>' . $best
 			. '<td class="is-num c-score">' . rmk_render_scorecell( $m['scores'], $m['reviews_gelezen'], false ) . '</td>'
-			. '<td class="is-num c-price" data-label="Prijs vanaf">' . $price . '</td>'
+			. '<td class="is-num c-price" data-label="Laagste nieuwe prijs">' . $price . '</td>'
 			. '<td class="c-go"><a href="#p-' . esc_attr( $m['slug'] ) . '">Details</a></td></tr>';
 	}
 	return '<div class="rmk-tablewrap"><table class="rmk-table rmk-table--cards"><caption>Scores volgens scoremodel v1.0 (concept tot bevriezing). Volgorde op de onafgeronde score. Modellen zonder score staan onderaan.</caption>'
-		. '<thead><tr><th scope="col">#</th><th scope="col">Model</th>' . ( $show_best ? '<th scope="col">Beste voor</th>' : '' ) . '<th scope="col" class="is-num">Score</th><th scope="col" class="is-num">Prijs vanaf</th><th scope="col"><span class="rmk-sr">Details</span></th></tr></thead>'
+		. '<thead><tr><th scope="col">#</th><th scope="col">Model</th>' . ( $show_best ? '<th scope="col">Beste voor</th>' : '' ) . '<th scope="col" class="is-num">Score</th><th scope="col" class="is-num">Laagste nieuwe prijs</th><th scope="col"><span class="rmk-sr">Details</span></th></tr></thead>'
 		. '<tbody>' . $rows . '</tbody></table></div>'
+		. ( function_exists( 'rmk_price_date_line' ) ? rmk_price_date_line( wp_list_pluck( $items, 'm' ) ) : '' )
 		// Eén regel onder de tabel in plaats van een label per rij.
 		. ( array_filter( $items, function ( $it ) { return 'functie' === $it['score']['kind']; } ) ? '<p class="rmk-scorenote">' . rmk_score_label_html( 'Functiescore: wat deze maaier kan.' ) . '</p>' : '' );
 } );

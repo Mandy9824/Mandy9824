@@ -63,6 +63,18 @@ pcheck( 'Plaatsvervanger wordt vervangen door de kaart', false === strpos( rmk_f
 $GLOBALS['rmk_lbl'] = rmk_score_label_html( 'Functiescore: wat deze maaier kan.' );
 pcheck( 'Scorelabel met link "Hoe we scoren"', 'Functiescore: wat deze maaier kan. <a href="/hoe-we-beoordelen/">Hoe we scoren</a>' === $GLOBALS['rmk_lbl'] );
 
+
+// Prijs in tabellen (1.3.3)
+$GLOBALS['rmk_m'] = $m;
+$cel = rmk_price_cell( array( 'prijs' => array( 'bedrag' => 899, 'winkel' => 'Coolblue', 'datum' => wp_date( 'Y-m-d' ), 'url' => 'https://www.coolblue.nl/p/1', 'type' => 'winkel' ) ) );
+pcheck( 'Tabelcel: "rond 899 euro" met de winkel klein eronder', 'rond 899 euro<br><span class="rmk-small">Coolblue</span>' === $cel, $cel );
+pcheck( 'Tabelcel zonder geldige prijs: "–"', false !== strpos( rmk_price_cell( array( 'id' => 'X' ) ), '>–<' ) );
+$oud = array( 'prijs' => array( 'bedrag' => 899, 'winkel' => 'Coolblue', 'datum' => wp_date( 'Y-m-d', time() - 20 * DAY_IN_SECONDS ), 'url' => 'https://www.coolblue.nl/p/1', 'type' => 'winkel' ) );
+pcheck( 'Tabelcel met prijs ouder dan 14 dagen: "–"', false !== strpos( rmk_price_cell( $oud ), '>–<' ) );
+$vandaag = array( 'prijs' => array( 'bedrag' => 899, 'winkel' => 'Coolblue', 'datum' => wp_date( 'Y-m-d' ), 'url' => 'https://www.coolblue.nl/p/1', 'type' => 'winkel' ) );
+pcheck( 'Datumregel onder de tabel', false !== strpos( rmk_price_date_line( array( $vandaag, $oud ) ), 'Prijzen gezien op ' . rmk_date_nl( wp_date( 'Y-m-d' ) ) . '.' ) );
+pcheck( 'Geen datumregel zonder geldige prijs', '' === rmk_price_date_line( array( $oud ) ) );
+
 // Dataroute
 $data = array( 'modellen' => array( array( 'id' => 'M1', 'slug' => 'm1', 'naam' => 'M1', 'kosten' => array( 'aanschaf' => array( 'waarde' => null ) ), 'prijs' => $m['prijs'] ) ) );
 pcheck( 'Dataroute accepteert een geldige prijs', array() === rmk_validate_modellen( $data ), implode( '; ', rmk_validate_modellen( $data ) ) );
