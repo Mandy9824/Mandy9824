@@ -658,7 +658,76 @@ Over ons en de auteurspagina: de teksten uit de opdracht staan in Yoast (gecontr
 - **Werkt pas na upload van 1.2.5.** Meet daarna opnieuw op de live site; na de lancering ook met PSI.
 
 ### Nog te doen
-- [ ] Mandy: thema 1.2.5 uploaden en activeren. Daarna meet ik de LCP van pagina 12 opnieuw.
+- [x] Mandy: thema 1.2.5 uploaden en activeren. Daarna meet ik de LCP van pagina 12 opnieuw (ronde 8).
 - [ ] Mandy: de CDN-cache in hPanel legen (robots.txt).
-- [ ] Mandy: de precieze bron-URL's voor pagina 4.
+- [x] Mandy: de precieze bron-URL's voor pagina 4 (ronde 8).
 - [ ] Bij golf 2: de header- en footeraanpassing wissen, of de sectiepagina's eerst vullen en publiceren.
+
+---
+
+## Ronde 8 (6 oktober 2026): 1.2.5 live gemeten, bronnen pagina 4, bevriezing, lanceerlijst
+
+Alles is **concept**: 76 pagina's, 0 berichten. Niets is gepubliceerd, ingepland, privé of wachtend. "Zoekmachines niet laten indexeren" staat aan. Het thema `robotmaaierkompas-child` 1.2.5 is actief.
+
+### 1. Controle van 1.2.5 op de live site
+- **De live HTML** bevat `<style id="rmk-inline-css">`, en `tokens.css` en `rmk.css` worden niet meer als bestand geladen.
+- **De opzet:** de live paginaschil (`/?nc=…`, met header, footer, CSS, JS en lettertypen van robotmaaierkompas.nl) met de weergegeven conceptinhoud. Ter vergelijking dezelfde inhoud in de 1.2.4-schil van ronde 7 (met de twee CSS-bestanden).
+- Lighthouse 12, mobiel, 3 metingen per variant:
+
+| Pagina | Variant | Perf | LCP | FCP | CLS | TBT |
+|---|---|---|---|---|---|---|
+| P12 `/robotmaaier-kosten/` | 1.2.4 | 88–92 | 2,7–2,9 s | 2,1–2,4 s | 0 | 0–160 ms |
+| P12 `/robotmaaier-kosten/` | **1.2.5 live** | **100** | **1,2 s** (3×) | 1,2 s | 0 | 0 ms |
+| P1 `/robotmaaier-zonder-draad/` | 1.2.4 | 88–90 | 2,6 s | 2,4 s | 0 | 130–170 ms |
+| P1 `/robotmaaier-zonder-draad/` | **1.2.5 live** | **100** | **1,4 s** (3×) | 1,4 s | 0 | 0–20 ms |
+
+- **Ziet het er hetzelfde uit?** Ja, op 390 en 1366 px:
+  - Ik heb van elk element op beide pagina's (534 en 871 elementen) de berekende stijlen en de positie en afmetingen vergeleken: **0 verschillen**. Alleen de ruwe tekst van tien CSS-variabelen verschilt: er staat geen spatie meer na een komma. Dat heeft geen invloed op de weergave.
+  - De screenshots zijn identiek, op twee na. Bij P1 op 1366 px verschillen 36 pixels in de knoppen van de vaste cookiebanner. Bij P12 op 390 px verschilde bij één meting een handvol pixels, bij de herhaling niet. Dat is anti-aliasing: uitvergroot zijn de knoppen gelijk.
+
+### 2. Bronnen pagina 4 (#13)
+- De bronnenlijst heeft nu vier gewone links (zonder `sponsored` of `nofollow`), allemaal "bekeken op 5 oktober 2026":
+  1. Test-Aankoop, nieuwsartikel: `https://www.test-aankoop.be/woning-energie/robotmaaiers/nieuws/test-beste-robotmaaiers-2026`
+  2. Test-Aankoop, vergelijker: `https://www.test-aankoop.be/woning-energie/robotmaaiers/vergelijker`
+  3. Stiftung Warentest: `https://www.test.de/maehroboter/`
+  4. Consumentenbond: `https://www.consumentenbond.nl/grasmaaier`
+- De afgeronde messenbedragen ("tot 15 euro", "ongeveer 15 tot 40 euro") staan er nog. Verder is er niets gewijzigd. De pagina is nog concept.
+- **Bereikbaarheid:** vanuit de bouwomgeving kon ik de sites niet openen. De netwerkproxy blokkeert alle drie de domeinen (`CONNECT 403`, ook via de ophaaltool). Daarom heb ik in een zoekmachine gekeken of de adressen in de index staan:
+
+| Link | Gevonden? |
+|---|---|
+| Vergelijker Test-Aankoop | ✅ In de index: "Vergelijk en koop de beste robotmaaier van 2026". |
+| Consumentenbond `/grasmaaier` | ✅ In de index: "Best geteste grasmaaiers in 2026". Het gaat over grasmaaiers in het algemeen; de robotmaaiers staan onder `/grasmaaier/producten/robot-grasmaaier`. |
+| ⚠️ Nieuwsartikel `…/nieuws/test-beste-robotmaaiers-2026` | **Niet gevonden.** Wel gevonden: `https://www.test-aankoop.be/woning-energie/robotmaaiers/nieuws/beste-robotmaaiers-test`, met de titel "Testaankoop test 30 robotmaaiers: dit zijn de beste robotgrasmaaiers van 2026". Misschien is jouw adres nieuwer of een doorverwijzing; dat kan ik niet nagaan. **Open het in je browser.** |
+| ⚠️ `https://www.test.de/maehroboter/` | **Niet gevonden** als eigen pagina. De testpagina in de index is `https://www.test.de/Maehroboter-im-Test-4698387-0/` ("Mähroboter im Test"). Misschien verwijst `/maehroboter/` daarnaar door; **open het in je browser.** |
+
+- ⚠️ Pagina 4 noemt bij Test-Aankoop 34 modellen. In de titel van het gevonden artikel staat "30 robotmaaiers", in de samenvatting "meer dan 30". Dat heb ik niet gewijzigd; controleer het in het artikel.
+
+### 3. Thema bevroren op 1.2.5
+Er komt geen nieuwe themaversie tenzij er een echte fout is. Wat er aan themawijzigingen opkomt, verzamel ik hier.
+
+**Verzamelde themawijzigingen (niet uitgevoerd):**
+- Geen fouten gevonden in deze ronde.
+- *Menu en footer:* de themabestanden bevatten nog het volledige ontwerpmenu; live geldt de tijdelijke aanpassing in de database. Dit vraagt geen nieuwe versie: bij golf 2 kies je "Aanpassingen wissen".
+- *Lettertype vooraf laden:* levert minder dan 0,05 s op (ronde 7) en is niet nodig.
+- *Spaties in CSS-variabelen:* de verkleining haalt de spatie na komma's weg. Dat heeft geen invloed op de weergave en vraagt geen wijziging.
+
+### 4. Lanceerlijst
+Zie **`LANCERING.md`**. Daarin staan:
+- de voorbereiding;
+- de publicatievolgorde van de 15 pagina's: juridisch, dan Over ons en de auteur, dan de methode, dan pagina 12, 11, 4, 1 en 2, en de homepage als laatste;
+- de controles vóór de indexering;
+- wanneer de indexering aangaat;
+- Search Console (DNS-verificatie, sitemap, URL-inspectie);
+- Bing Webmaster Tools (importeren uit Search Console);
+- de controles van de eerste week.
+
+Op 6 oktober gecontroleerd voor die lijst:
+- De 15 concepten van de eerste golf linken in de inhoud alleen naar elkaar. Pagina 2 linkt naar pagina 4, dus die gaan samen.
+- Er staat geen `[`, `{{`, "Alfa", "Beta", "gepeild" of "Foto volgt" in de weergegeven tekst.
+
+### Nog te doen
+- [ ] Mandy: de twee ⚠️-bronlinks van pagina 4 in je browser openen, en het aantal modellen bij Test-Aankoop (34 of 30) nagaan.
+- [ ] Mandy: de CDN-cache in hPanel legen (robots.txt). Dat staat ook in de lanceerlijst.
+- [ ] Mandy: de lancering volgens `LANCERING.md`, op een datum die jij kiest.
+- [ ] Na de bouw: de toepassingswachtwoorden intrekken.
