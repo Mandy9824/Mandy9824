@@ -21,7 +21,7 @@ $m002 = array( 'betrouwbaarheid' => null, 'navigatie' => 10, 'prijskwaliteit' =>
 $r = rmk_compute_score( $m002, null );
 check( 'M002 soort = functiescore', 'functie' === $r['kind'], $r['kind'] );
 check( 'M002 weergave 92,7', '92,7' === rmk_format_score( $r['value'] ), rmk_format_score( $r['value'] ) . ' / onafgerond ' . $r['value'] );
-check( 'M002 label', 'voorlopig, zonder betrouwbaarheid uit reviews en prijs-kwaliteit' === $r['label'], $r['label'] );
+check( 'M002 label', 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.' === $r['label'], $r['label'] );
 
 // 2. Model met zeven onderdelen (testwaarden, geen echt model)
 $vol = array( 'betrouwbaarheid' => 8, 'navigatie' => 8, 'prijskwaliteit' => 7.3, 'hellingen' => 6, 'app' => 9, 'veiligheid' => 7.5, 'geluid' => 4 );
@@ -33,7 +33,7 @@ check( 'Volledig model geen label', '' === $r['label'] );
 
 // 3. Minder dan 50 gelezen reviews: betrouwbaarheid telt niet -> functiescore
 $r = rmk_compute_score( $vol, 49 );
-check( '49 reviews -> functiescore', 'functie' === $r['kind'] && 'voorlopig, zonder betrouwbaarheid uit reviews' === $r['label'], $r['label'] );
+check( '49 reviews -> functiescore', 'functie' === $r['kind'] && 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.' === $r['label'], $r['label'] );
 $r = rmk_compute_score( $vol, 50 );
 check( '50 reviews -> eindscore', 'eind' === $r['kind'] );
 
@@ -98,7 +98,8 @@ $r = isset( $byid['M002'] ) ? rmk_compute_score( $byid['M002']['scores'], $byid[
 check( 'modellen.json: M002 functiescore 92,7', $r && 'functie' === $r['kind'] && '92,7' === rmk_format_score( $r['value'] ), $r ? rmk_format_score( $r['value'] ) . ' ' . $r['kind'] : 'M002 ontbreekt' );
 check( 'modellen.json: M009 (uitverkocht) staat er niet in', ! isset( $byid['M009'] ) );
 check( 'modellen.json: geen niet-leverbare modellen', ! array_filter( $data['modellen'], function ( $m ) { return in_array( $m['beschikbaarheid'], array( 'uitverkocht', 'niet leverbaar' ), true ); } ) );
-check( 'modellen.json: geen prijzen en geen bol.com', false === stripos( json_encode( $data ), 'bol.com' ) && ! array_filter( $data['modellen'], function ( $m ) { return isset( $m['prijzen'] ) || null !== $m['kosten']['aanschaf']['waarde']; } ) );
+check( 'modellen.json: geen prijslijsten, geen aanschaf en geen bol.com', false === stripos( json_encode( $data ), 'bol.com' ) && ! array_filter( $data['modellen'], function ( $m ) { return isset( $m['prijzen'] ) || null !== $m['kosten']['aanschaf']['waarde']; } ) );
+check( 'modellen.json: prijzen alleen van winkel of fabrikant, hele euro\'s', ! array_filter( $data['modellen'], function ( $m ) { return ! empty( $m['prijs'] ) && ( ! in_array( $m['prijs']['type'], array( 'winkel', 'fabrikant' ), true ) || ! is_int( $m['prijs']['bedrag'] ) ); } ) );
 $rows = array();
 foreach ( $byid as $id => $m ) { $rows[] = array( 'id' => $id, 'score' => rmk_model_score( $m ) ); }
 echo '  ranglijst: ' . implode( ', ', array_map( function ( $x ) { return $x['id'] . ' ' . rmk_format_score( $x['score']['value'] ); }, rmk_rank( $rows ) ) ) . "\n";

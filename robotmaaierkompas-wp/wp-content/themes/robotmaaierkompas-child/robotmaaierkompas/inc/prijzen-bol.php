@@ -16,7 +16,7 @@
  * Handmatig draaien: wp rmk bol-prijzen
  *
  * STAAT UIT (besluit 5 oktober 2026): voorlopig geen Bol-gegevens. Geen API-verzoeken, geen ingeplande taak,
- * geen prijzen. Productboxen tonen "Bekijk de prijs bij de winkel" zonder knop. Aanzetten kan pas na een nieuw
+ * geen prijzen. Productboxen krijgen hun prijsblok uit inc/prijzen.php (geen Bol). Aanzetten kan pas na een nieuw
  * besluit: define( 'RMK_BOL_ENABLED', true ); in wp-config.php plus eigen sleutels voor deze site.
  *
  * LET OP: de endpoints hieronder zijn niet gecontroleerd tegen de API-documentatie (die was vanuit de
@@ -257,10 +257,9 @@ function rmk_bol_time( $p ) {
 }
 
 /** Prijsregel in de productbox, met bronvermelding. */
-/** Lege prijstoestand zonder winkelknop (geen affiliatelinks). */
+/** Lege prijstoestand (Bol-taak uit): geen tekst; de productbox krijgt zijn prijsblok uit inc/prijzen.php. */
 function rmk_offer_empty_html() {
-	return '<div class="rmk-offer"><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span>'
-		. '<span class="rmk-offer__src">We tonen voorlopig geen winkelprijzen.</span></div>';
+	return '';
 }
 
 function rmk_bol_offer_html( $model_id, $slug ) {

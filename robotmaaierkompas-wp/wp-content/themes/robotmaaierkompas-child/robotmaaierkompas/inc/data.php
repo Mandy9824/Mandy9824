@@ -9,6 +9,8 @@
  * - Zonder opgeslagen versie gebruikt de site het bestand uit het thema (data/modellen.json).
  * - Geweigerd: geen lijst "modellen", modellen zonder id/slug/naam, een prijslijst ("prijzen"),
  *   een ingevulde aanschafprijs of bol.com-gegevens (besluit 5 oktober 2026), of meer dan 2 MB.
+ * - Toegestaan (besluit 6 oktober 2026): per model één "prijs" {bedrag (hele euro's), winkel, datum, url,
+ *   type winkel of fabrikant}; geen Bol en geen marketplace. Zie inc/prijzen.php.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -33,7 +35,19 @@ function rmk_validate_modellen( $data ) {
 			}
 		}
 		if ( isset( $m['prijzen'] ) ) {
-			$err[] = "Model $i: bevat een prijslijst (voorlopig geen winkelprijzen).";
+			$err[] = "Model $i: bevat een prijslijst (alleen één veld \"prijs\" per model).";
+		}
+		if ( isset( $m['prijs'] ) && null !== $m['prijs'] ) {
+			$pr = $m['prijs'];
+			if ( ! is_array( $pr ) || ! isset( $pr['bedrag'], $pr['winkel'], $pr['datum'], $pr['url'], $pr['type'] ) ) {
+				$err[] = "Model $i: prijs mist bedrag, winkel, datum, url of type.";
+			} elseif ( ! in_array( $pr['type'], array( 'winkel', 'fabrikant' ), true ) ) {
+				$err[] = "Model $i: prijs is niet van een winkel of de fabrikant.";
+			} elseif ( ! rmk_price_url_ok( $pr['url'] ) ) {
+				$err[] = "Model $i: prijs-URL is geen https-productpagina van een toegestane winkel.";
+			} elseif ( ! is_int( $pr['bedrag'] ) || $pr['bedrag'] <= 0 ) {
+				$err[] = "Model $i: prijsbedrag moet een heel getal in euro's zijn.";
+			}
 		}
 		if ( isset( $m['kosten']['aanschaf']['waarde'] ) && null !== $m['kosten']['aanschaf']['waarde'] ) {
 			$err[] = "Model $i: aanschafprijs is ingevuld (moet leeg blijven).";

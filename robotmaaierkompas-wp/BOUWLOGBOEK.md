@@ -731,3 +731,133 @@ Op 6 oktober gecontroleerd voor die lijst:
 - [ ] Mandy: de CDN-cache in hPanel legen (robots.txt). Dat staat ook in de lanceerlijst.
 - [ ] Mandy: de lancering volgens `LANCERING.md`, op een datum die jij kiest.
 - [ ] Na de bouw: de toepassingswachtwoorden intrekken.
+
+---
+
+## Ronde 9 (6 oktober 2026): pagina 4, tekstwijzigingen, prijzen in de productbox, thema 1.3.0
+
+Alles is **concept**: 76 pagina's, niets is gepubliceerd. "Zoekmachines niet laten indexeren" staat aan. De themabevriezing op 1.2.5 is opgeheven voor deze ene opdracht: **thema 1.3.0** is gebouwd en lokaal getest. **Mandy moet het nog uploaden**; live draait nog 1.2.5.
+
+### Netwerk
+- Vanuit de bouwomgeving zijn alleen robotmaaierkompas.nl en een zoekmachine bereikbaar.
+- **Geblokkeerd:** Coolblue, Bol, de sites van de fabrikanten (Navimow, Mova, Dreame, Eufy, Husqvarna, Gardena) en Test-Aankoop.
+- Daardoor kon ik vandaag geen winkel- of fabrikantpagina openen. Zie "Prijzen", "Afbeeldingen" en "M003".
+
+### 1. Pagina 4 (#13)
+- De bronlink van het nieuwsartikel is nu `https://www.test-aankoop.be/woning-energie/robotmaaiers/nieuws/beste-robotmaaiers-test`.
+- In de tabel staat nu "Een test van een dertigtal robotmaaiers in 2026 (34 modellen volgens hun nieuwsartikel)".
+- Ook toegepast, uit de tekstwijzigingen:
+  - het eerlijkheidsblok van pagina 4 ("… bekeken op 5 oktober 2026. We nemen geen testcijfers over.");
+  - de eerste alinea (punt 11).
+
+### 2. Tekstwijzigingen (tekstwijzigingen-afwerking.md)
+Alleen de genoemde teksten zijn gewijzigd, en elke "was"-tekst is precies gevonden. De structuur is ongewijzigd: de vervangingen zijn gecontroleerd op hetzelfde aantal `div` en `ul`.
+
+| Punt | Waar | Gedaan |
+|---|---|---|
+| 1, 2 | Homepage (#9) | Openingstekst en het tweede punt van "Wat we anders doen". De vetgedrukte eerste zin blijft vet. |
+| 3 | Eerlijkheidsblok | Op p1, p2, p11 en p12 de nieuwe zin, met een link naar `/hoe-we-beoordelen/`. Pagina 4 kreeg zijn eigen variant. Ook het patroon is bijgewerkt, met `[datum]` als invulveld. |
+| 4 | Scoreblok en scorecel | Het label is nu "Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn." (PHP en rmk.js). Het woord "Functiescore" staat er al vlak boven als soort score, dus samen lees je "Functiescore. Betrouwbaarheid …". Daarom staat het er niet nog een keer in. In de balkjes blijft "onvoldoende data", en de rekenregels zijn ongewijzigd. Alle acht modellen met een functiescore missen precies betrouwbaarheid en prijs-kwaliteit, dus het label klopt bij elk model. |
+| 5 | Productbox | Zie hieronder. |
+| 6 | Over ons (#77) | Nieuwe alinea. |
+| 7 | Footer | In het thema en in de tijdelijke live footer (template-onderdeel `custom`): "Wij vergelijken robotmaaiers op specificaties, kosten en reviews. Zie Hoe we beoordelen." Live gecontroleerd. |
+| 8 | Methodepagina (#76) | Eerste alinea. De kop "Wat we wel en niet doen" heet nu "Onze werkwijze", ook in de inhoudsopgave; de vier punten zijn vervangen. |
+| 9 | Pagina 1 (#11) | De drie teksten, en de kop "Wat we nog uitzoeken". |
+| 10 | Pagina 2 (#12) | Openingsalinea. De bestaande link "over onafhankelijke tests" blijft. |
+| 11 | Pagina 4 | Zie 1. |
+| 12 | Redactiebeleid (#84) | Nieuwe zin. De affiliate-melding heeft geen vergelijkbare zin. |
+
+**Gemeld, niet gewijzigd** (staat niet in de opdracht):
+- ⚠️ **Auteursblok** (themapatroon, op elke pagina): "Op deze site test ze de maaiers niet zelf: …". En de **auteurspagina** (#78): "Op robotmaaierkompas.nl test ze de maaiers niet zelf." Volgens de toon hoort deze zin alleen op de methodepagina en Over ons.
+- **Methodepagina:**
+  - "met het label 'voorlopig, zonder' gevolgd door de ontbrekende onderdelen". Dat label bestaat niet meer.
+  - "Op dit moment tonen we nog geen winkelprijzen." Dat klopt niet meer zodra 1.3.0 live staat.
+  - Hetzelfde "voorlopig, zonder" staat in de uitleg op de latere pagina's #14, #15, #16 en #64.
+- **Pagina 1:**
+  - de koppen "(functiescore 92,7, voorlopig)" en "(87,3, voorlopig)";
+  - "Alle scores zijn voorlopig".
+- **Pagina 2:** "met het label 'voorlopig'".
+- **Pagina 12:**
+  - "voorlopige functiescores" en "Die scores zijn voorlopig: …";
+  - de kop "Wat we nog niet weten" (punt 9 gold alleen voor pagina 1).
+- **Footer:** "Koop je via een winkelknop, dan krijgen wij mogelijk een commissie." Er zijn geen affiliatelinks.
+- Kop-aan-kop #26 (latere golf, nog met invulvelden): dezelfde lege prijstoestand als het patroon ("Bekijk de actuele prijs" naar `[fabrikantpagina Model A/B]`).
+
+### 3. Prijzen in de productbox (thema 1.3.0, `inc/prijzen.php`)
+- **Geldige prijs.** De productbox toont "Laagste nieuwe prijs rond **899 euro** bij Coolblue, gezien op 5 oktober 2026". Daaronder staat de knop "Bekijk bij Coolblue": een gewone link naar de productpagina, zonder `/ga/`, zonder `sponsored` en zonder affiliatecode.
+  - Coolblue staat in de lijst met affiliatedomeinen. Knoppen uit `inc/prijzen.php` zijn daarom uitgezonderd van het automatische `rel="sponsored nofollow"` (attribuut `data-rmk-direct`).
+- **Geen geldige prijs.** Dan alleen de knop "Bekijk de actuele prijs" naar de fabrikantpagina. Is er ook geen fabrikantpagina bekend, dan is er geen prijsblok.
+- **Geldig betekent:**
+  - een bedrag, winkel, datum en https-URL zijn ingevuld;
+  - het type is winkel of fabrikant (geen marketplace);
+  - het is geen Bol (URL en naam) en niet Amazon, eBay, Marktplaats, AliExpress, Temu of een trackingdomein;
+  - de datum ligt **niet langer dan 14 dagen** terug (dag 14 telt nog mee, dag 15 niet) en niet in de toekomst.
+- Bedragen worden afgerond op hele euro's.
+- **Automatisch verdwijnen.** De geldigheid wordt bij elke weergave berekend. Daarnaast leegt een nachtelijke taak (`rmk_prijzen_verloop`, 00:10) de LiteSpeed-cache zodra er een prijs is verlopen, zodat de prijs niet in een gecachte pagina blijft staan.
+- **Werking.** De productboxen in de pagina's hebben een scorecel met `data-model`. Het prijsblok in die box wordt bij het weergeven ingevuld, vóór de server-side score.
+  - In de inhoud van pagina 1 staat nu `<div class="rmk-offer"></div>`. **Tot 1.3.0 live staat, is dat vak in de voorvertoning leeg.**
+- **modellen.json** (script `excel_naar_json.py`): per model `prijs` = {bedrag, winkel, datum, url, type} en `fabrikant_url`, en in `algemeen` de velden `prijzen_gecontroleerd_op` en `prijs_max_dagen`.
+  - Bron is het blad **Prijzen** van het Excel-bestand: regels met "Op voorraad" = ja (volgens Leesmij betekent dat ook een nieuw exemplaar), type winkel of fabrikant, en een URL in de kolom Bron. Bol-regels worden overgeslagen.
+  - Aanschaf in de calculator blijft leeg, zoals besloten.
+  - De dataroute accepteert het veld `prijs` alleen met een heel bedrag, type winkel of fabrikant, en een toegestane https-URL.
+- **Live:** het modelbestand is via de dataroute opgeslagen (gegenereerd 6-10-2026 10:11). Met 1.2.5 heeft dat geen zichtbaar effect.
+- **Tests:**
+  - `tests/prijs-test.php` (nieuw): 18 van 18 geslaagd, onder andere voor 14 en 15 dagen, Bol, marketplace, http, afronding en de dataroute.
+  - `tests/score-test.php`: alles geslaagd; PHP en rmk.js zijn gelijk in 2001 gevallen.
+  - `tests/bol-test.php`: alles geslaagd.
+  - Lokaal weergegeven met de echte inhoud van pagina 1, op 390 en 1366 px: geen horizontaal scrollen en geen JavaScript-fouten.
+
+### 4. Prijzen van de acht modellen
+**Gecontroleerd op 6 oktober 2026, maar niet ververst.** De winkel- en fabrikantsites zijn vanuit de bouwomgeving geblokkeerd. Ik kon dus geen enkele prijs met de datum van vandaag bevestigen, en heb er daarom ook geen een met die datum ingevuld.
+
+Gebruikt worden de prijzen uit het blad Prijzen van het Excel-bestand, gezien op **5 oktober 2026**. Ze zijn geldig tot en met 19 oktober.
+
+| Model | Getoond | Bron (blad Prijzen) |
+|---|---|---|
+| M002 Navimow i206 AWD | rond 899 euro bij Coolblue | coolblue.nl/product/975016 |
+| M004 Mova LiDAX Ultra 800 | rond 699 euro bij Mova | nl.mova.tech (fabrikant) |
+| M005 Mova LiDAX Ultra 1200 | rond 814 euro bij Mova | nl.mova.tech (fabrikant) |
+| M006 Eufy E15 Solo | rond 918 euro bij Coolblue | coolblue.nl/product/975391 |
+| M008 Dreame A1 Pro | rond 729 euro bij Coolblue | coolblue.nl/product/962143 |
+| M010 Husqvarna 410VE NERA | rond 3.049 euro bij Husqvarna | husqvarna.com/nl (fabrikant) |
+| M011 Gardena Sileno Free 800 | rond 1.099 euro bij Coolblue | coolblue.nl/product/959330 |
+| M001 Navimow i105E | **geen prijs.** Alleen Bol of een marketplace-verkoper had het op voorraad; Navimow en Hornbach niet. Daarom staat er alleen de knop "Bekijk de actuele prijs" naar de Navimow-pagina. | — |
+
+- Opgevallen: M002 heeft in het blad Prijzen geen fabrikantregel. Verloopt de Coolblue-prijs, dan is er bij M002 geen knop meer.
+- **Vóór 19 oktober** (en vlak voor de lancering): prijs en voorraad opnieuw controleren in het Excel-bestand, de datum aanpassen, en het script met `--upload` draaien. Dit staat ook in `LANCERING.md`.
+
+### 5. Afbeeldingen
+Ik heb niets gedownload en niets geplaatst. De fabrikantsites zijn geblokkeerd, dus geen enkele gebruiksvoorwaarde kon ik lezen. Dit vond ik via de zoekmachine:
+
+| Fabrikant | Pers- of mediapagina | Voorwaarde |
+|---|---|---|
+| Segway-Ninebot / Navimow | Geen persmap gevonden. Wel "About us" (navimow.segway.com/pages/about-us) en nieuws (navimow.segway.com/ie/news/…). | Onbekend: **weggelaten** |
+| Mova | Geen persmap gevonden; alleen persberichten via PR Newswire. | Onbekend: **weggelaten** |
+| Dreame | Geen persmap gevonden. | Onbekend: **weggelaten** |
+| Eufy | Geen persmap gevonden. | Onbekend: **weggelaten** |
+| Husqvarna | Press room per land (bijv. `https://www.husqvarna.com/ie/learn-and-discover/press-room/`); volgens een persbericht staan de beelden in een image bank op `www.husqvarna.com/press`. Perscontact: press@husqvarna.se. | De algemene gebruiksvoorwaarden zeggen "alleen persoonlijk, niet-commercieel gebruik, tenzij anders vermeld in de Husqvarna Social Media Newsroom". De voorwaarde van de image bank zelf kon ik niet lezen: **weggelaten** |
+| Gardena | Geen persmap gevonden. | Onbekend: **weggelaten** |
+
+De productboxen blijven zonder foto. Het bijschrift "Foto: (fabrikant)" en de alt-tekst kunnen erbij zodra een beeld met een duidelijke voorwaarde er is.
+
+### 6. Layout (voorlopig, tot het pakket van Claude Design er is)
+- De containers stonden al gecentreerd (1152 px). De paginakop, het kruimelpad, het eerlijkheidsblok en de tekstkolom stonden daarbinnen links.
+- In 1.3.0 staan ze nu gecentreerd op leesbreedte (42rem), met één CSS-regel in `rmk.css`. Tabellen, de calculator en tweekolomsblokken blijven op de volle containerbreedte, ook gecentreerd.
+- Mobiel is ongewijzigd.
+- Klein verschil: paginakoppen met een eigen `max-width: 48rem` in de inhoud (kopersgids, juridisch, hulp) staan iets breder dan het kruimelpad.
+- Logo, favicon en het deelbeeld volgen met het Claude Design-pakket.
+
+### 7. M003 Segway Navimow i210 LiDAR (één model per sessie)
+- **Niet afgerond.** Voor dezelfde stappen als eerder (waarde met bron en datum in het Excel-bestand, dan het script) moet ik de pagina's van de fabrikant en de winkels kunnen openen. Die zijn geblokkeerd. Ik heb niets ingevuld en niets geschat.
+- **Te koop in Nederland: alleen een aanwijzing uit de zoekmachine, niet geopend.**
+  - Proshop.nl noemt de "Segway Navimow i210e LiDAR Pro", op voorraad.
+  - MediaMarkt **België** noemt de "i210 LiDAR Pro".
+  - Bij Coolblue of Navimow NL heb ik niets kunnen controleren.
+- ⚠️ **Vraag:** is M003 "i210 LiDAR" hetzelfde model als de "i210E LiDAR Pro" bij de winkels? Dat kan ik niet nagaan.
+- M003 is niet als niet leverbaar gemarkeerd: dat is niet vastgesteld. De volgende modellen (Husqvarna Automower 305 en 310, Gardena Sileno Minimo 250 en 500) volgen in latere sessies, één per sessie.
+
+### Nog te doen
+- [ ] Mandy: **thema 1.3.0 uploaden en activeren** (`robotmaaierkompas-child.zip`). Daarna controleer ik de productboxen, het label en de centrering live.
+- [ ] Mandy: zet in de netwerkinstellingen van deze omgeving de nodige domeinen open. Dan kan ik prijzen verversen, M003 en de volgende modellen uitzoeken en de persvoorwaarden lezen. Nodig zijn onder andere coolblue.nl, nl.navimow.com, navimow.segway.com, nl.mova.tech, nl.dreametech.com, eufy.com, husqvarna.com, gardena.com, proshop.nl en mediamarkt.nl. Een andere mogelijkheid: jij vult de Excel-rijen aan.
+- [ ] Mandy: beslissen over de gemelde zinnen (auteursblok, methode, pagina 1, 2 en 12, en de commissiezin in de footer).
+- [ ] Prijzen verversen vóór 19 oktober.

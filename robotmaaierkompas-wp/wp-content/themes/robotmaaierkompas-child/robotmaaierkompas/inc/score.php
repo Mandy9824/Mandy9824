@@ -4,7 +4,7 @@
  *
  * - Zeven onderdelen, elk 0 tot 10, gewichten 25/20/20/10/10/10/5.
  * - Betrouwbaarheid telt alleen bij minstens 50 gelezen reviews.
- * - 7 van 7 bekend: Eindscore. 5 of 6: Functiescore "voorlopig, zonder …". Minder: geen score.
+ * - 7 van 7 bekend: Eindscore. 5 of 6: Functiescore met het label "Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.". Minder: geen score.
  * - Weergave met één decimaal (92,7); rangschikken altijd op de onafgeronde waarde.
  *
  * Werkt in drie situaties:
@@ -85,10 +85,9 @@ function rmk_compute_score( array $values, $reviews ) {
 	} elseif ( count( $known ) >= 5 ) {
 		$res['kind']  = 'functie';
 		$res['value'] = $sum_wv / $sum_w * 10;
-		$names        = array_map( function ( $p ) {
-			return mb_strtolower( mb_substr( $p['label'], 0, 1 ) ) . mb_substr( $p['label'], 1 );
-		}, $missing );
-		$res['label'] = 'voorlopig, zonder ' . rmk_join_names( $names );
+		// Label (tekstwijziging 6 oktober 2026). Naast het woord "Functiescore" leest het als
+		// "Functiescore. Betrouwbaarheid en prijs-kwaliteit worden toegevoegd ...". In de balkjes blijft "onvoldoende data".
+		$res['label'] = 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.';
 	}
 	return $res;
 }

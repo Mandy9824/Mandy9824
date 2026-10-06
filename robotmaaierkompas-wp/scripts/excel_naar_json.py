@@ -22,7 +22,9 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
 - Er wordt niets geschat of aangevuld. Alles wat ontbreekt blijft null.
 - Modellen met beschikbaarheid "uitverkocht" of "niet leverbaar" worden overgeslagen.
 - Voorlopig geen Bol-gegevens: bronregels en reviews van bol.com worden overgeslagen.
-- Geen winkelprijzen in de uitvoer (modellen.json is openbaar): aanschaf blijft null, geen prijslijst.
+- Prijzen (besluit 6 oktober 2026): per model alleen de laagste geldige prijs ("prijs": bedrag in hele euro's,
+  winkel, datum, product-URL), uit het blad Prijzen: op voorraad (= nieuw), winkel of fabrikant, geen Bol en geen
+  marketplace, niet ouder dan 14 dagen. De site toont hem niet meer na 14 dagen. Aanschaf in de kosten blijft null.
   Opmerkingen uit Bronnen gaan ook niet mee (die kunnen prijzen en interne notities bevatten).
 """
 import argparse
@@ -38,6 +40,7 @@ except ImportError:  # pragma: no cover
     sys.exit("openpyxl ontbreekt: pip install openpyxl")
 
 SCOREMODEL_VERSIE = "v1.0 (concept tot bevriezing)"
+PRIJS_MAX_DAGEN = 14
 
 # Kolomkop in blad Modellen -> interne sleutel
 KOLOMMEN = {
@@ -257,6 +260,7 @@ def main():
     ap.add_argument("--uit", default="wp-content/themes/robotmaaierkompas-child/robotmaaierkompas/data/modellen.json")
     ap.add_argument("--upload", metavar="SITE", help="ook opslaan via de beheerroute, bijv. https://robotmaaierkompas.nl")
     ap.add_argument("--gebruiker", help="WordPress-gebruiker voor --upload (wachtwoord via RMK_WP_APP_PASSWORD)")
+    ap.add_argument("--vandaag", help="datum voor de 14-dagengrens van prijzen (JJJJ-MM-DD, standaard vandaag; voor tests)")
     args = ap.parse_args()
 
     wb = openpyxl.load_workbook(args.xlsx, data_only=True)
@@ -273,8 +277,9 @@ def main():
     pad_v = __import__("os").path.join(__import__("os").path.dirname(__file__), "verbinding_toewijzing.json")
     verbinding_tw = json.load(open(pad_v, encoding="utf-8"))["toewijzingen"] if __import__("os").path.exists(pad_v) else []
     rapport = {"kosten_niet_gebruikt": [], "overgeslagen_niet_leverbaar": [], "velden_zonder_bron": {}, "velden_null_door_status": {},
-               "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": []}
-    uit_modellen = []
+               "bol_bronnen_overgeslagen": 0, "bol_reviews_overgeslagen": 0, "beschikbaarheid_onbekend": [], "prijzen_verlopen": []}
+    uit_modellen, prijsdatums = [], []
+    vandaag = dt.date.fromisoformat(args.vandaag) if args.vandaag else dt.date.today()
 
     for m in modellen:
         rij = {KOLOMMEN.get(k.strip(), None): v for k, v in m.items()}
@@ -336,22 +341,33 @@ def main():
         if door_status:
             rapport["velden_null_door_status"][mid] = sorted(door_status)
 
-        # Prijzen: alleen regels met bron en datum. Bol-prijzen niet statisch tonen.
-        p_uit = []
+        # Prijzen (besluit 6 oktober 2026): per model alleen de laagste geldige prijs, met winkel, datum en URL.
+        # Geldig: prijs, datum en product-URL ingevuld; "Op voorraad" = ja (in het Excel-bestand betekent dat ook:
+        # nieuw exemplaar, zie Leesmij); type winkel of fabrikant (geen marketplace); geen Bol; niet ouder dan
+        # PRIJS_MAX_DAGEN. Bedragen worden afgerond op hele euro's. Opmerkingen en de overige regels gaan niet mee.
+        geldig, fabrikant_url = [], None
         for p in mprijs:
-            prijs, d, bron = getal(kolom(p, "Prijs")), datum(kolom(p, "Datum")), str(kolom(p, "Bron") or "").strip()
-            if prijs is None or not d or not bron:
-                continue
+            prijs, d = getal(kolom(p, "Prijs")), datum(kolom(p, "Datum"))
+            bron = str(kolom(p, "Bron") or "")
+            url = (re.findall(r"https?://[^\s;()]+", bron) or [None])[0]
             winkel = str(kolom(p, "Winkel") or "").strip()
-            p_uit.append({"winkel": winkel, "prijs": prijs, "datum": d,
-                          "op_voorraad": None if leeg(kolom(p, "Op voorraad")) else norm(kolom(p, "Op voorraad")),
-                          "affiliate_mogelijk": None if leeg(kolom(p, "Affiliatelink")) else norm(kolom(p, "Affiliatelink")),
-                          "bron": bron,
-                          "opmerking": None if leeg(kolom(p, "Opmerking")) else str(kolom(p, "Opmerking")),
-                          "statisch_tonen": "bol" not in norm(winkel)})
-        geldig = [p for p in p_uit if p["statisch_tonen"] and p["op_voorraad"] == "ja"
-                  and "marketplace" not in norm(p["opmerking"]) and "partner" not in norm(p["opmerking"])]
-        laagste = min(geldig, key=lambda p: p["prijs"]) if geldig else None
+            verkoper = str(kolom(p, "Verkoper") or "").strip()
+            soort = norm(kolom(p, "Type"))
+            if "bol" in norm(winkel + " " + verkoper + " " + bron):
+                continue  # geen Bol-gegevens
+            if soort == "fabrikant" and url and not fabrikant_url:
+                fabrikant_url = url
+            if prijs is None or prijs <= 0 or not d or not url or soort not in ("winkel", "fabrikant"):
+                continue
+            if norm(kolom(p, "Op voorraad")) != "ja":
+                continue
+            if (vandaag - dt.date.fromisoformat(d)).days > PRIJS_MAX_DAGEN:
+                rapport["prijzen_verlopen"].append(f"{mid} {winkel} {d}")
+                continue
+            naam_winkel = verkoper or re.sub(r"\s*\(.*?\)", "", winkel).strip()
+            geldig.append({"bedrag": int(round(prijs)), "winkel": naam_winkel, "datum": d, "url": url, "type": soort})
+        laagste = min(geldig, key=lambda p: p["bedrag"]) if geldig else None
+        prijsdatums.extend(datum(kolom(p, "Datum")) for p in mprijs if datum(kolom(p, "Datum")))
 
         # Reviews: alleen regels met bron en peildatum
         r_uit, gelezen, storingen = [], 0, 0
@@ -455,6 +471,8 @@ def main():
             "verbinding": verbinding,
             "reviews": r_uit,
             "ean": None,  # nog niet in het Excel-bestand; nodig voor de Bol-prijstaak
+            "prijs": laagste,
+            "fabrikant_url": fabrikant_url,
         })
 
     data = {
@@ -464,7 +482,9 @@ def main():
         "gegenereerd": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
         "bronbestand": args.xlsx.split("/")[-1],
         "scoremodel": SCOREMODEL_VERSIE,
-        "algemeen": {"stroomprijs_per_kwh": {"waarde": None, "bron": None, "datum": None}},
+        "algemeen": {"stroomprijs_per_kwh": {"waarde": None, "bron": None, "datum": None},
+                     "prijzen_gecontroleerd_op": max(prijsdatums) if prijsdatums else None,
+                     "prijs_max_dagen": PRIJS_MAX_DAGEN},
         "modellen": uit_modellen,
     }
     with open(args.uit, "w", encoding="utf-8") as fh:

@@ -1,13 +1,14 @@
 # Lancering robotmaaierkompas.nl: stappen voor Mandy
 
-Stand: 6 oktober 2026, thema 1.2.5. Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
+Stand: 6 oktober 2026, thema 1.3.0 (nog uploaden). Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
 Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle pagina's van de eerste golf gepubliceerd en gecontroleerd zijn.
 
 ## 1. Vooraf (de dag ervoor)
 1. Maak een back-up in hPanel (bestanden en database).
 2. Controleer in WordPress bij **Gereedschap > Robotmaaierkompas** of de statuscontroles groen zijn.
 3. Lees de gegevens in **Colofon**, **Privacy** en **Contact** nog één keer na (naam, e-mailadres contact@robotmaaierkompas.nl, adres). Stuur een testmail naar contact@robotmaaierkompas.nl en kijk of hij aankomt.
-4. Pagina 4: open de vier bronlinks in je eigen browser (zie het bouwlogboek, ronde 8). Twee ervan kon ik niet bevestigen.
+4. Pagina 4: open de bronlinks in je eigen browser (zie het bouwlogboek, ronde 8 en 9).
+5. **Prijzen verversen.** Een prijs in de productbox verdwijnt 14 dagen na de datum waarop hij gezien is; de huidige prijzen zijn van 5 oktober en verdwijnen na 19 oktober. Controleer vlak voor de lancering prijs en voorraad in het blad Prijzen van het Excel-bestand (nieuw, op voorraad, winkel of fabrikant, geen Bol, geen marketplace), zet de datum van die dag, en draai het script met `--upload` opnieuw.
 
 ## 2. Publiceren, in deze volgorde
 De publicatiecontrole van het thema houdt een pagina tegen als er nog `[`, "Alfa", "Beta" of "gepeild" in staat. Zie je die melding, dan staat er nog een invulveld in.

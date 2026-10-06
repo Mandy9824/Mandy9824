@@ -47,7 +47,7 @@
     else if (known.length >= MIN_PARTS) {
       res.kind = 'functie';
       res.value = sumWV / sumW * 10;   /* gewogen gemiddelde van de bekende onderdelen, op 0–100, onafgerond */
-      res.label = 'voorlopig, zonder ' + joinNames(missing.map(function (p) { return p.label.charAt(0).toLowerCase() + p.label.slice(1); }));
+      res.label = 'Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.';   /* tekstwijziging 6 oktober 2026 */
     }
     return res;
   }

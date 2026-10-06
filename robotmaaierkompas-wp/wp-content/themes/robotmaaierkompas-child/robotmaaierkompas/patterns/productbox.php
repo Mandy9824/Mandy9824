@@ -3,7 +3,7 @@
  * Title: RMK – Productbox (eerste op de pagina)
  * Slug: robotmaaierkompas/productbox
  * Categories: robotmaaierkompas
- * Description: Productbox met de lege prijstoestand "Bekijk de prijs bij de winkel" (voorlopig geen winkelprijzen en geen winkelknoppen).
+ * Description: Productbox. Het prijsblok wordt bij het weergeven ingevuld uit modellen.json (inc/prijzen.php): een geldige prijs met knop "Bekijk bij (winkel)", anders "Bekijk de actuele prijs" naar de fabrikant.
  * Viewport Width: 1280
  */
 ?>
@@ -24,7 +24,7 @@
     <div><h4>Minpunten</h4><ul class="rmk-cons"><li>[minpunt]</li><li>[minpunt]</li></ul></div>
   </div>
   <div class="rmk-product__aside rmk-offers">
-    <div class="rmk-offer"><span class="rmk-offer__shop">[winkel]</span><span class="rmk-offer__price rmk-offer__price--empty">Bekijk de prijs bij de winkel</span><span class="rmk-offer__src">We tonen voorlopig geen winkelprijzen.</span></div>
+    <div class="rmk-offer"><a class="rmk-btn rmk-btn--secondary" href="[fabrikantpagina]">Bekijk de actuele prijs</a></div>
   </div>
 </article>
 <!-- /wp:html -->

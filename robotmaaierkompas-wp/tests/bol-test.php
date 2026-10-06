@@ -17,7 +17,7 @@ t( 'Uitgeschakeld: geen API-verzoeken', 0 === $calls0 && 0 === $log0['ok'] );
 do_action( 'init' );
 t( 'Uitgeschakeld: geen ingeplande taak', ! wp_next_scheduled( RMK_BOL_HOOK ) );
 $h0 = rmk_bol_offer_html( 'M002', 'segway-navimow-i206-awd' );
-t( 'Lege toestand "Bekijk de prijs bij de winkel" zonder link', false !== strpos( $h0, 'Bekijk de prijs bij de winkel' ) && false === strpos( $h0, '<a ' ) && false === stripos( $h0, 'bol' ) );
+t( 'Bol-taak uit: geen Bol-prijsblok en geen link (het prijsblok komt uit inc/prijzen.php)', '' === $h0 );
 t( 'Prijscel zonder prijs', false !== strpos( rmk_price_cell( array( 'id' => 'M002' ) ), 'bij de winkel' ) );
 remove_filter( 'pre_http_request', $spy );
 

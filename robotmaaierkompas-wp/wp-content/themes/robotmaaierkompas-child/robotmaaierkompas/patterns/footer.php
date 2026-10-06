@@ -13,7 +13,7 @@
   <div class="rmk-container rmk-footer__top">
     <div class="rmk-footer__brand">
       <a class="rmk-logo" href="/" aria-label="robotmaaierkompas.nl, naar de homepage"><svg class="rmk-logo__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 4.6v2.6M16 24.8v2.6M4.6 16h2.6M24.8 16h2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M22.6 9.4 17.9 17.9 14.1 14.1Z" fill="#A3C9AE"/><path d="M9.4 22.6 14.1 14.1 17.9 17.9Z" fill="#5B5E57"/><circle cx="16" cy="16" r="1.5" fill="#262925"/></svg><span class="rmk-logo__word"><span>robotmaaier</span><b>kompas</b></span></a>
-      <p>Wij testen robotmaaiers niet zelf. We vergelijken specificaties met een openbaar scoremodel en lezen gebruikersreviews. Elke waarde staat met bron en datum.</p>
+      <p>Wij vergelijken robotmaaiers op specificaties, kosten en reviews. Zie <a href="/hoe-we-beoordelen/">Hoe we beoordelen</a>.</p>
       <p>Koop je via een winkelknop, dan krijgen wij mogelijk een commissie. Dat verandert geen score en geen volgorde. <a href="/hoe-we-beoordelen/#verdienmodel">Zo verdienen we geld</a></p>
     </div>
     <nav aria-label="Kiezen">

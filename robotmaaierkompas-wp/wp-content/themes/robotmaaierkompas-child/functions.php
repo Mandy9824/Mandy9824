@@ -8,6 +8,7 @@ require_once get_stylesheet_directory() . '/robotmaaierkompas/robotmaaierkompas-
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/data.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/score.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/prijzen-bol.php';
+require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/prijzen.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/affiliate-redirect.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/techniek.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/bouw.php';

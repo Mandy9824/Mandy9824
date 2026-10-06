@@ -1,6 +1,6 @@
 {
   "_uitleg": "Gegenereerd uit het modelbestand door scripts/excel_naar_json.py. Niet met de hand bewerken: pas het Excel-bestand aan en draai het script opnieuw. Waarde null = geen bron, niet gevonden, niet geopend of tegenstrijdig zonder gekozen waarde.",
-  "gegenereerd": "2026-10-05 21:16",
+  "gegenereerd": "2026-10-06 10:11",
   "bronbestand": "robotmaaierkompas_modeldata_v1.xlsx",
   "scoremodel": "v1.0 (concept tot bevriezing)",
   "algemeen": {
@@ -8,7 +8,9 @@
       "waarde": null,
       "bron": null,
       "datum": null
-    }
+    },
+    "prijzen_gecontroleerd_op": "2026-10-05",
+    "prijs_max_dagen": 14
   },
   "modellen": [
     {
@@ -266,7 +268,9 @@
           "opmerking": "Gemiddelde op 5; marketplace-productpagina. 2 teksten: 1 MediaMarkt NL (meegeteld, neutraal), 1 gesyndiceerd uit MediaMarkt Italië (niet meegeteld)"
         }
       ],
-      "ean": null
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i1-robot-lawn-mower"
     },
     {
       "id": "M002",
@@ -542,7 +546,15 @@
           "opmerking": "Zelfde model, Belgische site; kan overlappen met Gamma.nl; aantal wisselt per snapshot (11 tot 16). 5-10: niet opnieuw gecontroleerd. 5-10: gemarkeerd als niet-onafhankelijk (ander land)"
         }
       ],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 899,
+        "winkel": "Coolblue",
+        "datum": "2026-10-05",
+        "url": "https://www.coolblue.nl/product/975016/segway-navimow-i206-awd.html",
+        "type": "winkel"
+      },
+      "fabrikant_url": null
     },
     {
       "id": "M003",
@@ -640,7 +652,9 @@
       "beschikbaarheid": null,
       "verbinding": null,
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": null
     },
     {
       "id": "M004",
@@ -908,7 +922,15 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: /product-reviews/ uitgesloten in robots.txt"
         }
       ],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 699,
+        "winkel": "Mova",
+        "datum": "2026-10-05",
+        "url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+        "type": "fabrikant"
+      },
+      "fabrikant_url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra"
     },
     {
       "id": "M005",
@@ -1147,7 +1169,15 @@
         "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module"
       },
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 814,
+        "winkel": "Mova",
+        "datum": "2026-10-05",
+        "url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra",
+        "type": "fabrikant"
+      },
+      "fabrikant_url": "https://nl.mova.tech/products/robotmaaier-lidax-ultra"
     },
     {
       "id": "M006",
@@ -1402,7 +1432,15 @@
           "opmerking": "E15 Solo; gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
         }
       ],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 918,
+        "winkel": "Coolblue",
+        "datum": "2026-10-05",
+        "url": "https://www.coolblue.nl/product/975391/eufy-e15-solo.html",
+        "type": "winkel"
+      },
+      "fabrikant_url": "https://www.eufy.com/nl/products/t2880ga1"
     },
     {
       "id": "M007",
@@ -1481,7 +1519,9 @@
       "beschikbaarheid": null,
       "verbinding": null,
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": null
     },
     {
       "id": "M008",
@@ -1738,7 +1778,15 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
         }
       ],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 729,
+        "winkel": "Coolblue",
+        "datum": "2026-10-05",
+        "url": "https://www.coolblue.nl/product/962143/dreame-a1-pro.html",
+        "type": "winkel"
+      },
+      "fabrikant_url": "https://nl.dreametech.com/products/dreame-roboticmower-a1-pro"
     },
     {
       "id": "M010",
@@ -1980,7 +2028,15 @@
         "bron": "https://www.husqvarna.com/nl/installatie-van-de-robotmaaier/husqvarna-epos-rs1-referentiestation/"
       },
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 3049,
+        "winkel": "Husqvarna",
+        "datum": "2026-10-05",
+        "url": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/",
+        "type": "fabrikant"
+      },
+      "fabrikant_url": "https://www.husqvarna.com/nl/robotmaaiers/automower-410ve-nera-online-only/"
     },
     {
       "id": "M011",
@@ -2235,7 +2291,15 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: /product-reviews/ uitgesloten in robots.txt"
         }
       ],
-      "ean": null
+      "ean": null,
+      "prijs": {
+        "bedrag": 1099,
+        "winkel": "Coolblue",
+        "datum": "2026-10-05",
+        "url": "https://www.coolblue.nl/product/959330/gardena-smart-sileno-free-800.html",
+        "type": "winkel"
+      },
+      "fabrikant_url": "https://www.gardena.com/nl/producten/gazononderhoud/robotmaaiers/robotmaaier-smart-sileno-free-800-m/970716150.html"
     },
     {
       "id": "M012",
@@ -2314,7 +2378,9 @@
       "beschikbaarheid": null,
       "verbinding": null,
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": null
     },
     {
       "id": "M013",
@@ -2400,7 +2466,9 @@
       "beschikbaarheid": null,
       "verbinding": null,
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": null
     },
     {
       "id": "M014",
@@ -2479,7 +2547,9 @@
       "beschikbaarheid": null,
       "verbinding": null,
       "reviews": [],
-      "ean": null
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": null
     }
   ]
 }

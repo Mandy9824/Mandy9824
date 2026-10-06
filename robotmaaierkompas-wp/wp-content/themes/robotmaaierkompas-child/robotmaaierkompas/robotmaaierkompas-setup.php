@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'RMK_DIR', __DIR__ );
 define( 'RMK_URL', get_stylesheet_directory_uri() . '/robotmaaierkompas' );
-define( 'RMK_VER', '1.2.5' );
+define( 'RMK_VER', '1.3.0' );
 
 /* ------------------------------------------------------------------------
  * 1. CSS en JS + configuratie voor rmk.js
@@ -235,6 +235,10 @@ function rmk_add_affiliate_rel( $html ) {
 	$p = new WP_HTML_Tag_Processor( $html );
 	while ( $p->next_tag( 'a' ) ) {
 		$href = $p->get_attribute( 'href' );
+		// Winkelknoppen uit inc/prijzen.php zijn gewone links naar de productpagina, geen affiliatelinks.
+		if ( null !== $p->get_attribute( 'data-rmk-direct' ) && ! preg_match( '#^/ga(/|$|\?)#i', (string) $href ) ) {
+			continue;
+		}
 		if ( ! is_string( $href ) || ! rmk_is_affiliate_url( $href ) ) {
 			continue;
 		}
