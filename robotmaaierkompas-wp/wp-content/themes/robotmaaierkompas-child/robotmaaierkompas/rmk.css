@@ -439,3 +439,11 @@ img.rmk-avatar { object-fit: cover; padding: 0; }
   .rmk-table--cards .c-score .rmk-minis { flex-wrap: wrap; justify-content: flex-end; }
   .rmk-table--cards .c-score small { white-space: normal; text-align: right; }
 }
+/* Uitgelicht beeld in de paginakop (16:9) */
+.rmk-pagehead__media { margin: var(--rmk-space-2) 0 var(--rmk-space-6); aspect-ratio: 16 / 9; border-radius: var(--rmk-radius-lg); overflow: hidden; background: var(--rmk-surface-alt); }
+.rmk-pagehead__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* Homepage-hero met foto: foto, daarop een donkergroen verloop (tekstcontrast AA), daarboven het motief */
+.rmk-hero--photo { background: var(--rmk-green-900); }
+.rmk-hero--photo .rmk-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3; }
+.rmk-hero--photo::after { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgb(19 59 38 / 0.90) 0%, rgb(19 59 38 / 0.85) 45%, rgb(19 59 38 / 0.92) 100%); }
+.rmk-hero--photo.rmk-hero--motif::before { opacity: 0.35; }

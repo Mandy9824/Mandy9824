@@ -1122,3 +1122,72 @@ Die blijven weg, zoals besloten.
 - [ ] Mandy: **1.3.3 uploaden en activeren.** Daarna controleer ik zonder inloggen `/wp-json/rmk/` en de cacheheaders.
 - [ ] Mandy, als extra vangnet: in hPanel bij de CDN-instellingen `/wp-json/*` uitsluiten van de cache.
 - [ ] Datasessie: prijzen verversen vóór 19 oktober (anders tonen beide tabellen "–" en verdwijnt de datumregel), foto's en M003.
+
+### Aanvulling ronde 12: uitgelichte beelden (in dezelfde release 1.3.3)
+1.3.3 was nog niet geüpload, dus de beelden zitten in dezelfde release.
+
+**Gekoppeld (live, concepten):**
+
+| Pagina | Uitgelicht beeld (bijlage) |
+|---|---|
+| homepage (#9) | homepage-hero (225), 1440×810 |
+| /robotmaaier-zonder-draad/ (#11) | zonder-draad-header (226), 1440×810 |
+| /robotmaaier-kosten/ (#18) | kosten-header (223), 1600×900 |
+| /robotmaaier-test-vergelijking/ (#12) | vergelijken-header (224), 1280×720 |
+| /robotmaaier-zonder-grensdraad/ (#17) | zonder-grensdraad-header (222), 1600×900 |
+| /robotmaaier-test-consumentenbond/ (#13) | tests-header (221), 1600×900 |
+| /hoe-we-beoordelen/ (#76) | methode-header (220), 1600×900 |
+
+- Alle zeven zijn 16:9 WebP, met de WordPress-formaten 768, 1024 en (bij 1600) 1536.
+- Het zijn sfeerfoto's van tuinen, een tafel en een vergrootglas, zonder herkenbaar merk of model. **Alt-tekst:** in de mediabibliotheek leeg, dus decoratief. De H1 ernaast zegt waar de pagina over gaat. Vult Mandy een alt-tekst in, dan wordt die gebruikt.
+
+**Deelbeeld in Yoast:** per pagina het uitgelichte beeld, gecontroleerd via `yoast_head_json`.
+- Eerst gaf Yoast nog het standaardbeeld. De REST-API zet het uitgelichte beeld pas ná het opslaan, en Yoast had zijn index al bijgewerkt. Na een tweede opslag kloppen ze alle zeven.
+- ⚠️ De deelbeelden zijn **WebP**. De meeste platforms tonen dat, maar niet allemaal; een JPEG- of PNG-versie van 1200×630 is het veiligst. Dat is een keuze voor Mandy.
+
+**Thema (`inc/beeld.php`):**
+- **Kernpagina's, gidsen en de methodepagina:** het beeld staat onder de paginakop, in een 16:9-kader, met `width`, `height`, `srcset` en `sizes` (60rem of, in een smalle kolom, 50rem).
+- **Homepage:** het beeld is de achtergrond van de hero. Daarop ligt een donkergroen verloop (`#133B26` op 90 / 85 / 92%) en daarboven het hoogtelijnen- en kompasmotief op 35%.
+- **Contrast** (gemeten in Chromium op het lichtste punt achter de tekst, tekst onzichtbaar gemaakt):
+
+| Tekst | 1366 px | 390 px |
+|---|---|---|
+| H1 | 6,42:1 | 7,09:1 |
+| Introductie | 7,50:1 | 7,49:1 |
+| "Onafhankelijk vergeleken" | 4,74:1 | 4,88:1 |
+
+  Alles haalt AA. Bij het eerste verloop (86/80/90%) kwam "Onafhankelijk vergeleken" op 4,14:1; daarom is het verloop donkerder gemaakt.
+- **Laden:** het kopbeeld heeft `fetchpriority="high"` en `loading="eager"`. Alle andere beelden in de inhoud laden lazy (`wp_omit_loading_attr_threshold` = 0): auteursfoto, kompasicoon, tuinillustratie, footerlogo en foto's in de kaarten.
+  - Uitzondering: het headerlogo, klein en boven de vouw, laadt gewoon.
+- **Browsertest** (1366 en 390 px): homepage, pagina 1, 4 en 12 en de methodepagina, zonder horizontaal scrollen en zonder JavaScript-fouten.
+  - Mobiel laadt het 768-formaat, desktop het 1024-formaat (hero: 1440).
+
+**LCP (Lighthouse 12, mobiel, gzip, 3 metingen per pagina):**
+
+| Pagina | LCP | FCP | LCP-element |
+|---|---|---|---|
+| Homepage | 2,3 / 2,3 / 2,3 s | 0,9 s | hero-foto |
+| P1 | 2,3 / 2,3 / 2,3 s | 0,9 s | kopfoto |
+| P12 | 2,1 / 2,1 / 2,1 s | 0,9 s | kopfoto |
+
+- CLS is 0, TBT 0–70 ms, score 98–99.
+- ⚠️ **Het doel van onder 2,0 s wordt met de foto als LCP-element niet gehaald.** Wel valt het binnen "goed" van Core Web Vitals (≤ 2,5 s).
+- **Proeven:**
+
+| Proef | LCP |
+|---|---|
+| Kopbeeld 640 px (36–45 KB) of 480 px (23–28 KB) in plaats van 768 px (78–82 KB) | 2,0 s |
+| Plus een preload van het beeld bovenaan de `<head>` | 2,0 s |
+| Zonder preload van het kop-lettertype | 2,0 s (FCP 1,4 s) |
+| Pagina 1 zonder kopbeeld | 1,9 s |
+| Lettertypen als Latin-subset | scheelt maar 3 KB, dus geen winst |
+
+  De ondergrens in deze labopstelling ligt rond 1,9–2,0 s: een gesimuleerde TTFB van 450 ms, plus de lettertypen (samen ruim 80 KB).
+- **Opties** (Mandy kiest):
+  1. **Een kleinere mobiele versie** (bijv. 680 px breed, kwaliteit 60–75, ongeveer 40 KB): ongeveer 2,0 s. Vraagt een extra beeldformaat in het thema en het opnieuw aanmaken van de formaten voor de zeven beelden.
+  2. **Op mobiel het beeld kleiner of lager in de pagina**, zodat de H1 het LCP-element blijft: ongeveer 1,9 s.
+  3. **Zo laten** (2,1–2,3 s in het lab) en na de lancering de echte cijfers van PSI en Search Console afwachten. De lab-TTFB is strenger dan een gecachte LiteSpeed-pagina.
+  4. Het kop-lettertype (variabel, 47 KB) beperken tot de gebruikte gewichten. Verwachte winst: 0,05–0,1 s.
+- **Mijn advies:** 1 en 2 samen als 2,0 s een harde grens is, anders 3.
+
+**Tests:** score-, prijs- (34/34) en Bol-tests geslaagd, PHP-lint in orde, de zip is 408 KB.
