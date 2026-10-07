@@ -1444,3 +1444,51 @@ Gebruikt: de weergegeven inhoud uit de REST-API (`context=edit`), en voor de opm
 - [ ] Mandy: CDN-cache in hPanel volledig legen (kale `style.css` nog 1.3.3).
 - [ ] Mandy: beslissen of de tabeloverloop op de methodepagina (390 px) in het thema opgelost moet worden.
 - [ ] Prijzen verversen vóór 19 oktober; publiceren volgens LANCERING.md op jouw teken.
+
+## Ronde 20 (7 oktober 2026): tabeloverloop via aanvullende CSS, paginatekst eerste golf
+**Niets gepubliceerd**: alle pagina's zijn concept gebleven. Geen nieuwe thema-zip.
+
+### 1. Aanvullende CSS (Global Styles, gebruikersstijlen #8 van robotmaaierkompas-child)
+- Vooraf was `styles` leeg; er is geen bestaande CSS overschreven. De instellingen (`settings`) zijn ongewijzigd.
+- **De gevraagde regel alleen was niet genoeg.** Live met `.rmk-split__main > * { min-width: 0; }` bleef de methodepagina op 390 px 434 px breed.
+- **Echte oorzaak:**
+  - `.rmk-prose { margin-inline: auto; }`: in een flexkolom laten automatische marges het blok niet uitrekken. Het wordt zo breed als de minimale breedte van de tabel (413 px).
+  - `.rmk-column .rmk-prose { max-width: none; }` heft een algemene `max-width` op.
+  - De aanvullende CSS staat in de pagina vóór de themastijl (`global-styles-inline-css` vóór `rmk-inline-css`). Bij gelijke specificiteit wint dus het thema; daarom is de selector één klasse specifieker gemaakt.
+- **Opgeslagen CSS:**
+  ```css
+  .rmk-split__main > * { min-width: 0; }
+  .rmk-split > .rmk-split__main > .rmk-prose { min-width: 0; max-width: 100%; }
+  ```
+- **Live gecontroleerd** (concepttekst in de live pagina, Chromium, net als in ronde 19):
+  - methodepagina op 390 px: de pagina is 390 px breed, scrolt niet meer zijwaarts, en de scoremodeltabel scrolt in haar eigen vak (349 van 413 px);
+  - op 768, 1024 en 1440 px geen zijwaarts scrollen;
+  - pagina 2, 4 en 11 en de mesjespagina op 390 px ook niet.
+- **Vergelijking vóór en na** (zelfde regel ingevoegd in de browser): de breedte en positie van alle blokken in `.rmk-split__main` en alle tabelvakken zijn gemeten op 8 pagina's × 4 breedtes. Alleen de methodepagina op 390 px veranderde.
+- **In de volgende themaversie (1.3.5) opnemen** in `rmk.css`, bij de regels voor de inhoudsopgave:
+  ```css
+  .rmk-split__main > * { min-width: 0; }
+  .rmk-split__main > .rmk-prose { max-width: 100%; }
+  ```
+  Haal daarna de aanvullende CSS weer weg (Weergave > Editor > Stijlen > Aanvullende CSS).
+
+### 2. Paginatekst eerste golf
+- `paginatekst-eerste-golf.md` is gemaakt uit de weergegeven inhoud van de 17 conceptpagina's (volgorde van LANCERING.md). Per pagina staan erin:
+  - titel, adres (slug), metabeschrijving en het aantal H1's;
+  - de volledige tekst als gewone tekst;
+  - de bronnenlijst met URL;
+  - de interne links met doeladres.
+- Het bestand bevat geen HTML. Het staat **niet in de repository en niet op de site**; het is alleen in de sessie aan Mandy gegeven.
+- **Uitkomst:**
+  - alle 17 pagina's hebben precies één H1;
+  - de header en footer van het thema voegen geen H1 toe.
+- **Opvallend:**
+  - De zes juridische en contactpagina's hebben **geen metabeschrijving**: privacy, cookies, affiliate-melding, redactiebeleid, colofon en contact.
+  - De homepage heeft geen kruimelpadtitel. Dat is normaal voor een voorpagina.
+  - Mesjespagina: na de wijziging van ronde 19 staat er onder de tabel nog: "Dat ligt in dezelfde orde van grootte als wat wij zien voor een verpakking van 12, maar het hangt af van het aantal messen per verpakking." Niet veranderd; zeg het als die zin aangepast moet worden.
+
+### Nog te doen
+- [ ] Thema 1.3.5: de CSS-regels hierboven in `rmk.css`, daarna de aanvullende CSS verwijderen.
+- [ ] Mandy: metabeschrijvingen voor de zes juridische pagina's (of bewust leeg laten).
+- [ ] Mandy: de zin "een verpakking van 12" op de mesjespagina.
+- [ ] CDN-cache volledig legen; prijzen verversen vóór 19 oktober; publiceren op jouw teken.
