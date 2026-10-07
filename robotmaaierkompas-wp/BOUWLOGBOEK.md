@@ -1345,3 +1345,26 @@ Op verzoek geen upload: lokaal gebouwd en getest. De inhoud staat in `scripts/ro
 
 ### Nog te doen
 - [ ] Upload van ronde 15 en ronde 16 zodra `RMK_WP_APP_PASSWORD` in de omgeving staat (op jouw teken).
+
+## Ronde 17 (7 oktober 2026): upload ronde 15 en 16, niet gelukt
+**Het wachtwoord werkte niet, want het was in deze sessie niet beschikbaar.** De omgevingsvariabele `RMK_WP_APP_PASSWORD` is hier leeg; er is geen variabele met die naam of een vergelijkbare naam. Er was geen melding van de beveiliging: het script stopte zelf met "RMK_WP_APP_PASSWORD ontbreekt in de omgeving." De proxy voegt ook geen inloggegevens toe: een verzoek zonder login naar `/wp-json/wp/v2/users/me` gaf 401 "Je bent momenteel niet ingelogd". Een geheim dat je in de omgeving zet, geldt pas voor een **nieuwe sessie**. Deze sessie liep al.
+
+Daarom is **live niets gewijzigd**: geen nieuwe pagina, geen tekstwijziging.
+
+### Wel gedaan
+- **Hubtekst:** "rond 3.000 euro" is "ruim 3.000 euro" geworden in `scripts/ronde16/hub.json`, alleen in de zin "Waarom deze" bij Husqvarna. De prijsregel in de kaart blijft "rond 3.049 euro bij Husqvarna" (lokaal gecontroleerd).
+- **`scripts/ronde16_upload.py`:** werkt de hub (#10) alleen bij als die een concept is. Daarna controleert het live: de vijf kaarten in de juiste volgorde, zes brongroepen (vijf modellen en de eigen methode), geen invulvelden, geen Bol en geen affiliatelinks.
+- **Controle zonder inloggen (live):**
+  - `/wp-json/rmk/v1`, `/status` en `/modellen` geven 401 "Alleen voor beheerders.";
+  - `/wp-json/wp/v2/pages/10` geeft 401; zoeken op de slugs beste-robotmaaier en robotmaaier-mesjes geeft een lege lijst; `status=draft` is verboden (400);
+  - `/beste-robotmaaier/`, `/robotmaaier-mesjes/` en `/?page_id=10` (ook met preview) geven 404;
+  - `/wp-content/uploads/rmk/` geeft 403. De sitemap bevat alleen `/`. robots.txt blokkeert `/wp-json/rmk/` en `/wp-content/uploads/rmk/`.
+  - Het themabestand `data/modellen.json` is openbaar leesbaar (200). Het bevat dezelfde gegevens als de pagina's (specificaties, scores, teksten en prijzen met winkel), geen Bol-gegevens, en de EAN-velden zijn leeg. Dat was al zo; niet veranderd.
+
+### Volgende sessie (met het geheim actief)
+1. `python3 scripts/ronde15_upload.py`, daarna met `--schrijf`
+2. `python3 scripts/ronde16_upload.py`, daarna met `--schrijf`
+3. Daarna live controleren zoals gevraagd in ronde 17 (concepten ingelogd bekijken, links, bronnen, en opnieuw de controle zonder inloggen).
+
+### Nog te doen
+- [ ] Een nieuwe sessie starten, zodat het geheim `RMK_WP_APP_PASSWORD` geladen is; dan upload en controle van ronde 15 en 16.
