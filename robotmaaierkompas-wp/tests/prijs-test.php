@@ -75,6 +75,13 @@ $vandaag = array( 'prijs' => array( 'bedrag' => 899, 'winkel' => 'Coolblue', 'da
 pcheck( 'Datumregel onder de tabel', false !== strpos( rmk_price_date_line( array( $vandaag, $oud ) ), 'Prijzen gezien op ' . rmk_date_nl( wp_date( 'Y-m-d' ) ) . '.' ) );
 pcheck( 'Geen datumregel zonder geldige prijs', '' === rmk_price_date_line( array( $oud ) ) );
 
+
+// Analyse in de kaart (1.3.4)
+$fa = $fm; $fa['analyse'] = 'Analyse <tekst>.';
+$ka = rmk_fill_card( $kop, $fa );
+pcheck( 'Analyse onder Beste voor en boven de plus- en minpunten, ge-escaped', false !== strpos( $ka, '<p class="rmk-analyse">Analyse &lt;tekst&gt;.</p><div class="rmk-proscons">' ) && strpos( $ka, 'rmk-bestfor' ) < strpos( $ka, 'rmk-analyse' ) );
+pcheck( 'Analyse niet dubbel bij opnieuw vullen', 1 === substr_count( rmk_fill_card( $ka, $fa ), 'rmk-analyse' ) );
+
 // Dataroute
 $data = array( 'modellen' => array( array( 'id' => 'M1', 'slug' => 'm1', 'naam' => 'M1', 'kosten' => array( 'aanschaf' => array( 'waarde' => null ) ), 'prijs' => $m['prijs'] ) ) );
 pcheck( 'Dataroute accepteert een geldige prijs', array() === rmk_validate_modellen( $data ), implode( '; ', rmk_validate_modellen( $data ) ) );

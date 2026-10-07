@@ -1,0 +1,26 @@
+{
+  "M002": {
+    "analyse": "De Navimow i206 AWD combineert netwerk-RTK met een camera, zodat je geen begrenzingsdraad en in veel regio's ook geen antenne nodig hebt. Hij is bedoeld voor tuinen tot ongeveer 600 m² en klimt volgens de fabrikant tot 45%. Diefstalbeveiliging zit erin via ingebouwde 4G, met pincode, alarm, GPS en geofence-melding. Let op: de 4G-service heeft een einddatum en we vonden geen Nederlandse verlengprijs, en netwerk-RTK is niet overal beschikbaar. In onze functiescore staat dit model bovenaan."
+  },
+  "M010": {
+    "analyse": "De Automower 410VE NERA is gemaakt voor grote tuinen, tot ongeveer 1.500 m² systematisch maaien. Hij gebruikt RTK met een AI-camera en heeft 4G ingebouwd; de correctiedata is gratis. Daar staat tegenover dat de prijs rond 3.000 euro ligt en dat je mobiele of wifidekking over het hele gazon nodig hebt, anders heb je een referentiestation nodig (adviesprijs 309 euro). De helling is 30%, aan de rand 20%."
+  },
+  "M005": {
+    "analyse": "De Mova LiDAX Ultra 1200 bepaalt zijn plek met LiDAR en een camera, zonder antenne of RTK. Dat maakt de installatie eenvoudig, ook in tuinen met veel obstakels. Volgens de fabrikant haalt hij 1.200 m² en 45% helling. Voor GPS-tracking en een melding buiten de kaart heb je de losse link-module nodig (249 euro, met 3 jaar service volgens Mova NL). De app staat op 2,7 in Google Play, uit ruim 1.100 beoordelingen."
+  },
+  "M004": {
+    "analyse": "De Mova LiDAX Ultra 800 is de kleinere variant van de 1200: LiDAR met camera, zonder antenne of RTK, voor tuinen tot 800 m² en 45% helling volgens de fabrikant. Ook hier vragen GPS-tracking en een melding buiten de kaart de losse link-module (249 euro, met 3 jaar service volgens Mova NL). De app staat op 2,7 in Google Play, uit ruim 1.100 beoordelingen."
+  },
+  "M008": {
+    "analyse": "De Dreame A1 Pro heeft 3D-LiDAR en een opgegeven oppervlak tot 2.000 m²: het grootste in onze selectie. Hij rijdt systematisch en haalt volgens de fabrikant 45% helling. GPS-locatie en alarm buiten de kaart vragen een losse link-module, in onze selectie de goedkoopste (69 euro voor een jaar, 99,99 euro voor drie jaar). Het geluidsvermogen is 64 dB(A) en de app, die ook voor andere Dreame-apparaten dient, staat op 3,91 in Google Play. De handleiding noemt geen garantieperiode."
+  },
+  "M001": {
+    "analyse": "De Navimow i105E gebruikt een eigen GNSS-antenne met een camera en is bedoeld voor tuinen tot 500 m² en 30% helling. Een mobiele verbinding zit er niet in: diefstalbeveiliging vraagt de losse Access+-module (99,99 euro met een jaar data, daarna 29,90 euro per jaar). De fabrikant verkoopt hem nog alleen refurbished, dus controleer de beschikbaarheid voor je kiest."
+  },
+  "M006": {
+    "analyse": "De Eufy E15 Solo werkt met alleen een camera en maait in een systematisch patroon, zonder draad of antenne. Het geluidsvermogen is 66,3 dB(A), het hoogste in onze selectie. Er is geen pincode en geen alarm; GPS en bediening zonder wifi vragen een data-abonnement waarvan we de Europese prijs niet vonden. De documentatie noemt een helling van \"40% (18 graden)\"; die cijfers komen niet overeen, dus rekenen wij met 32,5%."
+  },
+  "M011": {
+    "analyse": "De Gardena Smart Sileno Free 800 krijgt zijn RTK-correctie via een gateway die met een LAN-kabel op je router moet, dus je hebt stabiel internet en een vrije poort nodig. Er is geen abonnement en geen 4G. Hij heeft geen camera: obstakels merkt hij pas na een botsing, en volgens de handleiding maait hij willekeurig. Pincode en optilsensor zijn er wel, een alarm, GPS of geofence niet. Hij past bij kleinere, overzichtelijke tuinen tot 800 m²."
+  }
+}

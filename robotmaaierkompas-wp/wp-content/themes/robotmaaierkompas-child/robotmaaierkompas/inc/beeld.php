@@ -9,7 +9,8 @@
  * - Het kopbeeld is het LCP-element: fetchpriority="high" en geen lazy loading. Alle andere beelden in de inhoud
  *   krijgen lazy loading (wp_omit_loading_attr_threshold = 0).
  * - Alt-tekst: die uit de mediabibliotheek. Leeg = decoratief (de H1 zegt al waar de pagina over gaat).
- * - Deelbeeld: Yoast gebruikt het uitgelichte beeld per pagina als og:image.
+ * - Deelbeeld (1.3.4): altijd het standaard deelbeeld van Claude Design (1200 x 630, PNG, Yoast-instelling
+ *   og_default_image_id), niet het WebP-kopbeeld: dat tonen niet alle sociale platforms.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -61,3 +62,30 @@ add_filter( 'render_block', function ( $content, $block ) {
 	}
 	return $content;
 }, 11, 2 );
+
+/* Deelbeeld: het standaard deelbeeld komt als eerste in de Open Graph-afbeeldingen, vóór het uitgelichte beeld. Yoast
+   toont alleen het eerste beeld (og:image en twitter:image). */
+add_filter( 'wpseo_add_opengraph_images', function ( $container ) {
+	$id = function_exists( 'YoastSEO' ) ? (int) YoastSEO()->helpers->options->get( 'og_default_image_id' ) : 0;
+	if ( $id && is_object( $container ) && method_exists( $container, 'add_image_by_id' ) ) {
+		$container->add_image_by_id( $id );
+	}
+	return $container;
+} );
+add_filter( 'wpseo_twitter_image', function ( $url ) {
+	$id = function_exists( 'YoastSEO' ) ? (int) YoastSEO()->helpers->options->get( 'og_default_image_id' ) : 0;
+	return $id && ( $u = wp_get_attachment_url( $id ) ) ? $u : $url;
+} );
+// Yoast zet alle verzamelde beelden in og:image; alleen het eerste (het standaard deelbeeld) blijft staan.
+add_filter( 'wpseo_frontend_presentation', function ( $presentation ) {
+	if ( is_object( $presentation ) ) {
+		try {
+			$imgs = $presentation->open_graph_images;
+			if ( is_array( $imgs ) && count( $imgs ) > 1 ) {
+				$presentation->open_graph_images = array_slice( $imgs, 0, 1, true );
+			}
+		} catch ( Exception $e ) { // geen Open Graph voor dit type
+		}
+	}
+	return $presentation;
+} );

@@ -1191,3 +1191,89 @@ Die blijven weg, zoals besloten.
 - **Mijn advies:** 1 en 2 samen als 2,0 s een harde grens is, anders 3.
 
 **Tests:** score-, prijs- (34/34) en Bol-tests geslaagd, PHP-lint in orde, de zip is 408 KB.
+
+---
+
+## Ronde 13 (7 oktober 2026): thema 1.3.4, inhoudsopgave, analyse in de kaart, hub en deelbeeld
+
+Alles is **concept**: 76 pagina's, niets is gepubliceerd. "Zoekmachines niet laten indexeren" staat aan. Live draait **1.3.3**. **1.3.4 is gebouwd en lokaal getest; Mandy moet het nog uploaden.**
+
+### Controle na de upload van 1.3.3 (live, zonder inloggen)
+- **`/wp-json/rmk/`:**
+  - `/wp-json/rmk` en `/rmk/` geven 404.
+  - `/rmk/v1`, `/rmk/v1/`, `/status`, `/modellen` en `/huisstijl` geven 401 "Alleen voor beheerders".
+  - Allemaal met `Cache-Control: no-store` en `X-LiteSpeed-Cache-Control: no-cache`. Er komen geen gegevens terug.
+- **De index `/wp-json/`** kwam nog uit een cache van vóór 1.3.3 (LiteSpeed én CDN: HIT) en noemde `rmk/v1` nog.
+  - Ik heb LiteSpeed geleegd via de dataroute (bij het opslaan van de analyseteksten).
+  - Daarna: `rmk/v1` staat niet meer in de index, `no-store` en `CDN-Cache-Control: no-store`, en de CDN-status is DYNAMIC.
+- **Gewone pagina's** blijven cachebaar.
+  - Kanttekening: `/` geeft nu 404, omdat de homepage concept is, en krijgt daardoor geen cache.
+
+### 1. Inhoudsopgave (methodepagina, pagina 4 en 11) en filters (pagina 2)
+- **Oorzaak:** vanaf 64rem (1024 px) was het blok vastgeplakt. In de smalle kolom stond het dan bóven de tekst in plaats van ernaast, en tijdens het scrollen schoof het over de tekst.
+- **In 1.3.4:**
+  - Onder 75rem (1200 px) is het nooit vastgeplakt (`position: static`); het staat dan boven de tekst.
+  - Vanaf 75rem staat het in een eigen gridkolom (13–16rem) naast de tekst, alleen dáár vastgeplakt, met een maximale hoogte en eigen scroll.
+  - Op die schermen is de smalle kolom van pagina's met een inhoudsopgave 64rem breed. Paginakop en kopbeeld blijven op 50rem.
+- **Getest in Chromium** (methodepagina, pagina 4, 11 en 2; 390, 768, 1024 en 1440 px). Bij het scrollen door de hele pagina gemeten of het blok tekst, kopjes, lijsten of tabellen bedekt:
+
+| Breedte | Stand | Overlap |
+|---|---|---|
+| 390 / 768 / 1024 px | `static` (pagina 2 op 1024 px: filters naast de tabel, niet vastgeplakt) | 0 |
+| 1440 px | `sticky`, naast de tekst | 0 |
+
+  Geen horizontaal scrollen en geen JavaScript-fouten.
+
+### 2. Analyse in de kaart
+- `modellen-analyse.json` staat als `scripts/modellen_analyse.json` in de repository. Het script zet per model het veld `analyse`; de acht modellen worden alle acht gevonden.
+- Live opgeslagen via de dataroute (gegenereerd 7-10-2026 12:37). De dataroute controleert het veld (tekst van hoogstens 1500 tekens).
+- **Kaart:** de analyse staat als eigen alinea onder "Beste voor" en het prijsblok en boven de plus- en minpunten, over de volle breedte en op leesbreedte. Lokaal gecontroleerd: bij alle 8 kaarten staat ze op die plek. Op 1440 en 390 px is er geen horizontaal scrollen.
+- **Pas zichtbaar met 1.3.4.**
+
+### 3. Hub `/beste-robotmaaier/` (#10, concept)
+- **Gebouwd uit `pagina-3-beste-robotmaaier.md`**, met de opbouw van pagina-hub:
+  - titel, metabeschrijving en de kruimelpadtitel "Beste robotmaaiers";
+  - het eerlijkheidsblok, "Bijgewerkt op 7 oktober 2026";
+  - het korte antwoord, de vier stappen (genummerde lijst), de keuzehulp (patroon, anker `#keuzehulp`), de situatietabel, "Waar let je op?", "Onafhankelijke tests" en "Zo beoordelen we";
+  - drie FAQ-vragen, de bronnen en het auteursblok.
+- **Controle:** één H1, geen invulvelden, geen Bol, geen €-teken, geen `/ga/`. Links alleen naar bestaande pagina's: de vijf kernpagina's, `/hoe-we-beoordelen/`, de auteur en `#keuzehulp`.
+- **Bronnenlijst:** het md-bestand gaf geen bronnen. De lijst bevat daarom de bronregels uit het Excel-bestand voor de gegevens in de tabel (navigatie, helling, oppervlak, verbinding, geluid) van de zes genoemde modellen: 12 bronnen, plus het scoremodel. Winkel- en Bol-bronnen zijn overgeslagen.
+- Niet gebruikt: de blokken "Sterkst bij" en "Alles over" van het hubpatroon. Daar is geen tekst voor.
+- **Menu en footer** (live, tijdelijke aanpassingen): "Beste robotmaaiers" staat weer als eerste item in het menu, het mobiele menu en de footerkolom "Kiezen".
+  - Zes items passen vanaf 1313 px op één regel; daaronder komt de menuknop (afwerkpakket).
+- **Homepage** (#9): de eerste ingangskaart is nu "Beste robotmaaiers" naar `/beste-robotmaaier/`.
+  - De korte tekst "Kies in vier stappen de robotmaaier die bij jouw tuin past." en de linktekst "Kies per situatie" heb ik afgeleid van de hubtekst.
+  - De link naar `/robotmaaier-zonder-draad/` blijft in de hero-knop.
+- **LANCERING.md:** 16 pagina's; de hub als nummer 15, vóór de homepage. Bijgewerkt: het aantal adressen, de sitemap en de URL-inspectie. De persmappen staan nu bij de voorbereiding.
+
+### 4. Deelbeeld
+- Voor alle pagina's het standaard deelbeeld van Claude Design: `deelafbeelding-1200x630-1.png`, de Yoast-instelling `og_default_image_id`.
+- In 1.3.4 komt het als eerste in de Open Graph-beelden, en Yoast toont daarna alleen dat ene beeld. `twitter:image` is hetzelfde beeld.
+- Lokaal gecontroleerd op de homepage, pagina 1, de methodepagina en de auteurspagina: één `og:image` (PNG 1200×630) en geen WebP of auteursfoto meer.
+- **Pas zichtbaar met 1.3.4.**
+
+### 5 en 6
+- **LCP:** niet verder geoptimaliseerd (2,1–2,3 s lab), zoals besloten.
+- **Kopbeelden:** blijven decoratief, met een lege alt-tekst.
+
+### Gemeld, niet gewijzigd
+De methodepagina (#76) noemt bij "Eindscore of functiescore" nog het label uit ronde 10: "Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn." Sinds 1.3.2 is dat label "Functiescore: wat deze maaier kan." Pas ik aan als Mandy dat wil.
+
+### Modellen voor de tweede golf (één per sessie; deze sessie: Segway Navimow)
+- **Niet afgerond.** De bronnen zijn vanuit de bouwomgeving nog steeds niet bereikbaar: nl.navimow.com, navimow.segway.com, coolblue.nl, proshop.nl en mansier.com.
+- Ik heb niets ingevuld, niets geschat en geen model als niet leverbaar gemarkeerd.
+- **Alleen een aanwijzing uit de zoekmachine** (niet geopend, niet bevestigd voor Nederland): Navimow verkoopt in Europa de i2 AWD-reeks (i205, i206, i208, i209 AWD), de i2 LiDAR-reeks en de H2-reeks. De i105E is al M001 (volgens het Excel-bestand alleen nog refurbished bij Navimow NL).
+- **Nodig:** zet de domeinen open (zie ronde 9), of vul de Excel-rijen in. Daarna doe ik Navimow, in een volgende sessie Husqvarna 105, 305 en 310 (met draad), en daarna Gardena Sileno Minimo 250 en 500 en City 250.
+- Prijzen en persmappen staan in LANCERING.md als stap vóór de lancering. De huidige prijzen verlopen na 19 oktober.
+
+### Tests
+- `prijs-test.php`: **36 van 36** geslaagd, nu ook voor de analyse en dubbel vullen.
+- Score- en Bol-tests: geslaagd.
+- PHP-lint: in orde.
+- De zip is 408 KB.
+
+### Nog te doen
+- [ ] Mandy: **1.3.4 uploaden en activeren.** Daarna controleer ik live de inhoudsopgave, de analyse, `og:image` en de hub.
+- [ ] Mandy: de CDN-cache in hPanel legen. De CDN had `/wp-json/` nog bewaard; dat is nu ververst, maar een volledige CDN-leging is het zekerst.
+- [ ] Mandy: de methodezin over het scorelabel (zie hierboven).
+- [ ] Netwerktoegang of Excel-rijen voor de modellen van de tweede golf; prijzen verversen vóór 19 oktober.

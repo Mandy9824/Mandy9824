@@ -53,7 +53,14 @@
 .rmk-split { display: flex; flex-wrap: wrap; gap: var(--rmk-space-10); align-items: flex-start; }
 .rmk-split__main { flex: 999 1 34rem; min-width: 0; }
 .rmk-split__side { flex: 1 1 18rem; min-width: 0; }
-@media (min-width: 64rem) { .rmk-split__side--sticky { position: sticky; top: var(--rmk-space-6); } }
+/* Inhoudsopgave en filters (1.3.4): onder 75rem (1200 px) nooit vastgeplakt; ze staan dan boven de tekst.
+   Vanaf 75rem een eigen kolom naast de tekst (grid), en alleen daar vastgeplakt, zodat ze nooit over de tekst schuiven. */
+@media (min-width: 75rem) {
+  .rmk-split:has(> .rmk-split__side--sticky) { display: grid; grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr); align-items: start; }
+  .rmk-split > .rmk-split__side--sticky { position: sticky; top: var(--rmk-space-6); max-height: calc(100vh - 2 * var(--rmk-space-6)); overflow-y: auto; }
+  .rmk-column--narrow:has(.rmk-split__side--sticky) { max-width: calc(64rem + 2 * clamp(var(--rmk-gutter), 5vw, var(--rmk-space-16))); }
+  .rmk-column--narrow:has(.rmk-split__side--sticky) .rmk-pagehead__media, .rmk-column--narrow:has(.rmk-split__side--sticky) .rmk-pagehead { max-width: 50rem; }
+}
 
 /* ---------- Typografische hulpjes ---------------------------------------- */
 .rmk-eyebrow { font-family: var(--rmk-font-display); font-size: var(--rmk-fs-xs); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rmk-brand); }
@@ -416,12 +423,13 @@ img.rmk-avatar { object-fit: cover; padding: 0; }
 /* Productbox met specificatiekaart (desktop): kaart links; titel, score en prijs rechts; plus- en minpunten eronder over de
    volle breedte. Zo staat de titel niet in een smalle middenkolom en blijft er onderin geen lege ruimte. */
 @media (min-width: 48rem) {
-  .rmk-product:has(.rmk-speccard) { grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr); grid-template-rows: auto 1fr auto; align-items: start; column-gap: var(--rmk-space-6); }
+  .rmk-product:has(.rmk-speccard) { grid-template-columns: minmax(15rem, 20rem) minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; align-items: start; column-gap: var(--rmk-space-6); }
   .rmk-product:has(.rmk-speccard) > .rmk-product__head { display: contents; }
   .rmk-product:has(.rmk-speccard) .rmk-speccard { grid-column: 1; grid-row: 1 / span 2; }
   .rmk-product:has(.rmk-speccard) .rmk-product__title { grid-column: 2; grid-row: 1; }
   .rmk-product:has(.rmk-speccard) > .rmk-product__aside { grid-column: 2; grid-row: 2; }
-  .rmk-product:has(.rmk-speccard) > .rmk-proscons { grid-column: 1 / -1; grid-row: 3; }
+  .rmk-product:has(.rmk-speccard) > .rmk-analyse { grid-column: 1 / -1; grid-row: 3; }
+  .rmk-product:has(.rmk-speccard) > .rmk-proscons { grid-column: 1 / -1; grid-row: 4; }
 }
 /* In tabellen geen label per rij: één regel onder de tabel (scoretabel en vergelijkingstabel). */
 .rmk-table .rmk-scorecell .rmk-scorenote { display: none; }
@@ -447,3 +455,6 @@ img.rmk-avatar { object-fit: cover; padding: 0; }
 .rmk-hero--photo .rmk-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3; }
 .rmk-hero--photo::after { content: ""; position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgb(19 59 38 / 0.90) 0%, rgb(19 59 38 / 0.85) 45%, rgb(19 59 38 / 0.92) 100%); }
 .rmk-hero--photo.rmk-hero--motif::before { opacity: 0.35; }
+
+/* Analyse in de productbox (1.3.4) */
+.rmk-analyse { margin: 0; max-width: var(--rmk-prose); color: var(--rmk-text); }

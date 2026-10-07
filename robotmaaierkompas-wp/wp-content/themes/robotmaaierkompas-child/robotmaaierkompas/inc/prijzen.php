@@ -213,6 +213,13 @@ function rmk_fill_card( $article, array $m ) {
 	if ( ! empty( $m['beste_voor'] ) && false === strpos( $article, 'rmk-bestfor' ) ) {
 		$article = preg_replace( '#(<h3\b[^>]*>.*?</h3>)#s', '$1<p class="rmk-bestfor"><span>Beste voor</span> ' . esc_html( $m['beste_voor'] ) . '</p>', $article, 1 );
 	}
+	// Analyse (1.3.4): eigen alinea onder "Beste voor", boven de plus- en minpunten.
+	if ( ! empty( $m['analyse'] ) && false === strpos( $article, 'rmk-analyse' ) ) {
+		$an      = '<p class="rmk-analyse">' . esc_html( $m['analyse'] ) . '</p>';
+		$article = preg_match( '#<div class="rmk-proscons">#', $article )
+			? preg_replace( '#(<div class="rmk-proscons">)#', $an . '$1', $article, 1 )
+			: preg_replace( '#(<div class="rmk-product__aside)#', $an . '$1', $article, 1 );
+	}
 	if ( false === strpos( $article, 'rmk-proscons' ) && ( $pc = rmk_proscons_html( $m ) ) ) {
 		$article = preg_replace( '#(<div class="rmk-product__aside)#', $pc . '$1', $article, 1, $n );
 		if ( ! $n ) {
