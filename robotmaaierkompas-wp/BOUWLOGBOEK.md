@@ -1394,3 +1394,53 @@ Het geheim `RMK_WP_APP_PASSWORD` stond in deze sessie in de omgeving; inloggen w
 - [ ] Mandy: 1.3.4 uploaden en activeren (live draait 1.3.3, laatst gezien in ronde 13b).
 - [ ] Mandy: de Navimow-zin "voor 12" bevestigen (ronde 15).
 - [ ] Publiceren volgens LANCERING.md, op jouw teken; de mesjespagina heeft nu id 236.
+
+## Ronde 19 (7 oktober 2026): 1.3.4 live, Navimow-messen, bronlabels kostenpagina
+**Niets gepubliceerd**: alle gewijzigde pagina's zijn concept gebleven.
+
+### 1. Themaversie
+- **Live draait 1.3.4.** De pagina's laden de themabestanden met `?ver=1.3.4`, en `style.css?ver=1.3.4` meldt "Version: 1.3.4". De ingebouwde CSS bevat de regels van 1.3.4 (75rem-kolom, `rmk-analyse`).
+- **Kanttekening:** het kale adres `/wp-content/themes/robotmaaierkompas-child/style.css` (zonder `?ver=`) gaf nog "Version: 1.3.3". Dat komt uit de CDN-cache: `x-hcdn-cache-status: HIT` en een `last-modified` van vóór de upload, met `max-age` van 7 dagen. Het is een cacheprobleem zonder gevolgen voor bezoekers, want de site gebruikt dat adres niet. Niet veranderd; een volledige leging van de CDN-cache in hPanel ruimt het op.
+
+### 2. Tekstwijzigingen (`scripts/ronde19_upload.py`, proefdraai en daarna `--schrijf`)
+- **Navimow-messen** is nu "ongeveer 25 euro per verpakking (het aantal messen is niet bevestigd)":
+  - in de tabel op de mesjespagina (#236; was "ongeveer 25 euro voor 12");
+  - in de tabel op de kostenpagina (#18; was "ongeveer 25 euro voor 12 stuks").
+  - Na afloop staat de nieuwe zin op beide pagina's één keer en is de oude tekst weg. De lokale kopie `scripts/ronde15/mesjes.json` is ook bijgewerkt.
+- **Bronlabels op de kostenpagina (#18):** "Handleiding" staat alleen nog bij pdf's en het documentarchief van Husqvarna (`/tdrdownload/`). Tien fabrikantpagina's kregen "Fabrikant":
+  - Navimow Access+ en Blade Assembly Plus;
+  - Husqvarna EPOS RS1 en Endurance-messen;
+  - Gardena Sileno Free 800;
+  - Eufy 4G-FAQ (service.eufy.com) en messen;
+  - Dreame: link-module 1 jaar, link-module 3 jaar en messen.
+  - Ongewijzigd: "Handleiding (kopie op mansier.com)" en "Eigen methode".
+- De labels op de mesjespagina klopten al.
+
+### 3. Live gecontroleerd, ingelogd
+Gebruikt: de weergegeven inhoud uit de REST-API (`context=edit`), en voor de opmaak die inhoud in Chromium in de live 1.3.4-pagina gezet (de concepten zijn niet als voorbeeld te openen met een toepassingswachtwoord).
+- **Inhoudsopgave/filters** op de methodepagina (#76), pagina 4 (#13), pagina 11 (#17), de mesjespagina (#236) en pagina 2 (#12), op 390, 768, 1024 en 1440 px:
+  - tot en met 1024 px `static`, op 1440 px `sticky` in de eigen kolom;
+  - tijdens het scrollen nergens over de tekst (0 overlap);
+  - geen scriptfouten.
+- **Bevinding, niet gewijzigd:** de methodepagina scrolt op 390 px horizontaal (ongeveer 25 px).
+  - De scoremodeltabel is 415 px breed; de kolom is 351 px.
+  - Oorzaak: `section.rmk-prose` heeft in de flexkolom `.rmk-split__main` `min-width: auto`. Daardoor groeit het blok mee met de tabel, in plaats van dat de tabel in haar eigen scrollvak (`.rmk-tablewrap`) blijft.
+  - Mogelijke oplossing in het thema: `.rmk-split__main > * { min-width: 0; }`.
+  - De andere vier pagina's scrollen niet horizontaal.
+- **Analyse in de kaart:** op de hub (#10) 5 van 5 kaarten en op pagina 1 (#11) 8 van 8 kaarten, steeds vóór de plus- en minpunten.
+- **Deelbeeld:**
+  - op 10 pagina's (9, 10, 11, 12, 13, 17, 18, 76, 78, 236) precies één `og:image`, namelijk `deelafbeelding-1200x630-1.png`;
+  - `twitter:image` is hetzelfde beeld;
+  - het bestand zelf geeft 200 `image/png`, 1200 × 630.
+
+### 4. Live gecontroleerd zonder inloggen
+- /beste-robotmaaier/, /robotmaaier-mesjes/, /robotmaaier-kosten/, /hoe-we-beoordelen/, `?page_id=18` en `?page_id=236&preview=true`: 404.
+- /wp-json/wp/v2/pages/18 en /236: 401. Zoeken op de slug of op "verpakking" in de REST-API: lege lijst.
+- `/?s=verpakking`: geen resultaten (alleen de vaste menu- en footerlinks).
+- `page-sitemap.xml` en `/feed/`: niets van de concepten.
+- /wp-json/rmk/v1 en /status: 401.
+
+### Nog te doen
+- [ ] Mandy: CDN-cache in hPanel volledig legen (kale `style.css` nog 1.3.3).
+- [ ] Mandy: beslissen of de tabeloverloop op de methodepagina (390 px) in het thema opgelost moet worden.
+- [ ] Prijzen verversen vóór 19 oktober; publiceren volgens LANCERING.md op jouw teken.
