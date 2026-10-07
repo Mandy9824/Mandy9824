@@ -27,7 +27,7 @@ De publicatiecontrole van het thema houdt een pagina tegen als er nog `[`, "Alfa
 | 8 | Mandy van den Broek (auteur, onder Over ons) | 78 | /over-ons/mandy-van-den-broek/ |
 | 9 | Hoe we beoordelen | 76 | /hoe-we-beoordelen/ |
 | 10 | Kosten (pagina 12) | 18 | /robotmaaier-kosten/ |
-| 11 | Robotmaaier mesjes | nieuw (zie bouwlogboek ronde 15) | /robotmaaier-mesjes/ |
+| 11 | Robotmaaier mesjes | 236 | /robotmaaier-mesjes/ |
 | 12 | Robotmaaier zonder grensdraad (pagina 11) | 17 | /robotmaaier-zonder-grensdraad/ |
 | 13 | Robotmaaier test (pagina 4) | 13 | /robotmaaier-test-consumentenbond/ |
 | 14 | Robotmaaier zonder draad (pagina 1) | 11 | /robotmaaier-zonder-draad/ |

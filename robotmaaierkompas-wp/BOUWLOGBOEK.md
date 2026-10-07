@@ -1368,3 +1368,29 @@ Daarom is **live niets gewijzigd**: geen nieuwe pagina, geen tekstwijziging.
 
 ### Nog te doen
 - [ ] Een nieuwe sessie starten, zodat het geheim `RMK_WP_APP_PASSWORD` geladen is; dan upload en controle van ronde 15 en 16.
+
+## Ronde 18 (7 oktober 2026): upload ronde 15 en 16 gelukt
+Het geheim `RMK_WP_APP_PASSWORD` stond in deze sessie in de omgeving; inloggen werkte. **Niets gepubliceerd**: alle pagina's zijn concept gebleven.
+
+### Gedaan
+1. `scripts/ronde15_upload.py` (proefdraai, daarna `--schrijf`):
+   - tekstwijzigingen op hoe-we-beoordelen (#76), robotmaaier-kosten (#18) en beste-robotmaaier (#10); alle drie bleven concept;
+   - nieuwe conceptpagina **robotmaaier-mesjes, id 236**.
+   - Controle van het script: op alle vier de pagina's ontbreekt geen interne link en staan geen invulvelden.
+2. `scripts/ronde16_upload.py` (proefdraai, daarna `--schrijf`): hub #10 bijgewerkt naar versie 2, status concept.
+   - Controle van het script: kaarten M002, M010, M005, M008, M011 in die volgorde, 6 brongroepen, geen invulvelden, geen Bol, geen affiliatelinks.
+
+### Live gecontroleerd (ingelogd, via de REST-API)
+- **Hub (#10), weergegeven inhoud:** vijf productkaarten in de juiste volgorde (Navimow i206 AWD, Husqvarna 410VE NERA, Mova LiDAX Ultra 1200, Dreame A1 Pro, Gardena Sileno Free 800), elk met specificatiekaart, Beste voor, pluspunten en prijsregel. Bronnen per model: 6, 7, 8, 8 en 4 regels, daarna "Scoremodel v1.0" als eigen methode. Geen invulvelden, geen bol.com, geen `/ga/` of sponsored. De zin met de link naar /robotmaaier-mesjes/ staat erin.
+- **Interne links hub:** /, /hoe-we-beoordelen/, /over-ons/mandy-van-den-broek/, /robotmaaier-kosten/, /robotmaaier-mesjes/, /robotmaaier-test-consumentenbond/, /robotmaaier-test-vergelijking/, /robotmaaier-zonder-draad/, /robotmaaier-zonder-grensdraad/. Ze bestaan allemaal (als concept).
+- **Mesjespagina (#236):** concept, 11 bronregels, geen invulvelden, geen Bol, geen affiliatelinks; links naar /, /hoe-we-beoordelen/, /over-ons/mandy-van-den-broek/, /robotmaaier-kosten/ en /robotmaaier-test-vergelijking/.
+
+### Live gecontroleerd zonder inloggen
+- /beste-robotmaaier/, /robotmaaier-mesjes/, /?page_id=10, /?page_id=236 (ook met preview): 404.
+- /wp-json/wp/v2/pages/10 en /236: 401. Zoeken op de slugs en `/wp-json/wp/v2/search?search=mesjes`: lege lijst. `status=draft`: 400. `/?s=mesjes`, `/page-sitemap.xml` en `/feed/` tonen niets van de concepten.
+- /wp-json/rmk/v1: 401 "Alleen voor beheerders.".
+
+### Nog te doen
+- [ ] Mandy: 1.3.4 uploaden en activeren (live draait 1.3.3, laatst gezien in ronde 13b).
+- [ ] Mandy: de Navimow-zin "voor 12" bevestigen (ronde 15).
+- [ ] Publiceren volgens LANCERING.md, op jouw teken; de mesjespagina heeft nu id 236.
