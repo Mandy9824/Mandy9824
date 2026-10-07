@@ -1314,3 +1314,34 @@ De methodepagina (#76) noemt bij "Eindscore of functiescore" nog het label uit r
 - [ ] Mandy: het wachtwoord als geheim `RMK_WP_APP_PASSWORD` in de omgeving zetten (nieuwe sessie nodig), daarna upload ik ronde 15.
 - [ ] Mandy: 1.3.4 uploaden en activeren (live draait 1.3.3).
 - [ ] Mandy: de Navimow-zin "voor 12" bevestigen.
+
+## Ronde 16 (7 oktober 2026): hub beste-robotmaaier, versie 2
+Op verzoek geen upload: lokaal gebouwd en getest. De inhoud staat in `scripts/ronde16/hub.json`, als concept, met de metabeschrijving uit het md-bestand en de kruimelpadtitel "Beste robotmaaiers".
+
+### Gebouwd
+- Inhoud uit `pagina-3-beste-robotmaaier-v2.md`, patroon pagina-hub. Titel: "Beste robotmaaier (2026): onze selectie per situatie".
+- **Vijf productkaarten** in deze volgorde: M002, M010, M005, M008, M011. Ze gebruiken hetzelfde skelet als op /robotmaaier-zonder-draad/. Het thema vult de specificatiekaart, "Beste voor", de analyse, de plus- en minpunten, de functiescore en de prijsregel (laagste nieuwe prijs met winkel en datum). De zin "Waarom deze" staat steeds onder de kaart.
+- **Functiescores** uit de tabel "In een oogopslag" nagerekend met de scorecode van het thema: 92,7 / 87,3 / 80,5 / 78,6 / 60,9. Ze kloppen. De modelnamen in die tabel linken naar hun kaart op dezelfde pagina.
+- **Links:** naar /hoe-we-beoordelen/#scoremodel, /robotmaaier-zonder-draad/, /robotmaaier-test-vergelijking/, /robotmaaier-zonder-grensdraad/, /robotmaaier-kosten/, /robotmaaier-mesjes/ en /robotmaaier-test-consumentenbond/ (Meer lezen), plus #keuzehulp en de selectie (FAQ).
+- De zin met de link naar de mesjespagina bij "Onderhoud en messen" (ronde 15) is erin gehouden. Het uploadscript van ronde 15 ziet hem dan als "al aangepast".
+- **Bronnen** per model (vijf groepen) uit het blad Bronnen:
+  - één regel per bron, met de velden zonder dubbele regels voor dezelfde bron en hetzelfde veld;
+  - de domeinnaam staat erbij, en bij één regel in het Excel-bestand met meerdere URL's ook het pad;
+  - labels: Handleiding, Fabrikant of Appwinkel;
+  - 33 regels; overgeslagen: 43 regels van winkels, winkelclaims, "niet gevonden" en "niet geopend", plus de Bol-regels;
+  - prijzen staan met winkel en datum in de kaart;
+  - daarna het scoremodel als eigen methode.
+
+### Gecontroleerd (lokaal, 390, 768, 1024 en 1440 px)
+- Vijf kaarten compleet: specificatiekaart, Beste voor, analyse, plus- en minpunten, score en prijsregel.
+- Geen `[`, `{{` of invulveld. Geen Bol en geen affiliatelinks (`/ga/` of sponsored). Eén h1, geen horizontale scroll, geen scriptfouten.
+- Ankerlinks werken. Alle interne links in de inhoud geven 200. Alleen de footerlinks naar de juridische pagina's geven lokaal 404, omdat die pagina's alleen live bestaan.
+- Menu en footer: "Beste robotmaaiers" wijst naar /beste-robotmaaier/. De eerste ingangskaart op de homepage wijst naar /beste-robotmaaier/ (zelfde inhoud als live sinds ronde 13).
+
+### Om op te letten
+- /robotmaaier-mesjes/ bestaat live pas na de upload van ronde 15. Upload ronde 15 dus vóór of samen met deze hub.
+- De prijsknoppen in de kaarten ("Bekijk bij Coolblue" en andere) zijn gewone links naar de winkel of fabrikant, net als op pagina 1, en geen affiliatelinks. De prijzen zijn van 5 oktober en verdwijnen na 19 oktober vanzelf uit de kaart.
+- Bij Husqvarna staat in "Waarom deze" "rond 3.000 euro"; de prijsregel in de kaart zegt "rond 3.049 euro". Niet veranderd.
+
+### Nog te doen
+- [ ] Upload van ronde 15 en ronde 16 zodra `RMK_WP_APP_PASSWORD` in de omgeving staat (op jouw teken).
