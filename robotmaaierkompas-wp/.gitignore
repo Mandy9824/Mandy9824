@@ -6,3 +6,4 @@ docs/
 *.local.php
 backups/
 robotmaaierkompas-child.zip
+__pycache__/
