@@ -1277,3 +1277,8 @@ De methodepagina (#76) noemt bij "Eindscore of functiescore" nog het label uit r
 - [ ] Mandy: de CDN-cache in hPanel legen. De CDN had `/wp-json/` nog bewaard; dat is nu ververst, maar een volledige CDN-leging is het zekerst.
 - [ ] Mandy: de methodezin over het scorelabel (zie hierboven).
 - [ ] Netwerktoegang of Excel-rijen voor de modellen van de tweede golf; prijzen verversen vóór 19 oktober.
+
+## Ronde 13b (7 oktober 2026): opnieuw geprobeerd
+- Live draait nog thema **1.3.3** (gezien in de openbare `style.css`). De live controle van 1.3.4 wacht dus nog op de upload.
+- Navimow opnieuw geprobeerd: navimow.com, segway.com, husqvarna.com, gardena.com en coolblue.nl zijn nog steeds **geblokkeerd** door het netwerkbeleid van de bouwomgeving. Er is niets ingevoerd en niets als niet leverbaar gemarkeerd.
+- Nodig: deze domeinen toevoegen onder *Allowed domains* in de netwerkinstellingen van de omgeving, of de Excel-rijen zelf invullen.
