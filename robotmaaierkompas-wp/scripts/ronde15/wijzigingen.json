@@ -1,0 +1,20 @@
+[
+ {
+  "id": 76,
+  "slug": "hoe-we-beoordelen",
+  "oud": "Betrouwbaarheid en prijs-kwaliteit worden toegevoegd zodra er genoeg reviews en prijzen zijn.",
+  "nieuw": "Een functiescore laat zien wat een maaier kan. Betrouwbaarheid en prijs-kwaliteit voegen we toe zodra er genoeg reviews en prijzen zijn."
+ },
+ {
+  "id": 18,
+  "slug": "robotmaaier-kosten",
+  "oud": "<p>De jaarbedragen gaan uit van gebruik het hele jaar door. In de praktijk maait een robot een deel van het jaar.</p>",
+  "nieuw": "<p>De jaarbedragen gaan uit van gebruik het hele jaar door. In de praktijk maait een robot een deel van het jaar.</p>\n<p>Hoe vaak je de mesjes vervangt en wat ze per merk kosten, lees je op de pagina <a href=\"/robotmaaier-mesjes/\">robotmaaier mesjes</a>.</p>"
+ },
+ {
+  "id": 10,
+  "slug": "beste-robotmaaier",
+  "oud": "<li><strong>Onderhoud en messen:</strong> de jaarlijkse kosten tellen mee.</li>",
+  "nieuw": "<li><strong>Onderhoud en messen:</strong> de jaarlijkse kosten tellen mee. Prijzen en vervangtermijnen per merk staan op de pagina <a href=\"/robotmaaier-mesjes/\">robotmaaier mesjes</a>.</li>"
+ }
+]

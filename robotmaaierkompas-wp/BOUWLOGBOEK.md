@@ -1282,3 +1282,35 @@ De methodepagina (#76) noemt bij "Eindscore of functiescore" nog het label uit r
 - Live draait nog thema **1.3.3** (gezien in de openbare `style.css`). De live controle van 1.3.4 wacht dus nog op de upload.
 - Navimow opnieuw geprobeerd: navimow.com, segway.com, husqvarna.com, gardena.com en coolblue.nl zijn nog steeds **geblokkeerd** door het netwerkbeleid van de bouwomgeving. Er is niets ingevoerd en niets als niet leverbaar gemarkeerd.
 - Nodig: deze domeinen toevoegen onder *Allowed domains* in de netwerkinstellingen van de omgeving, of de Excel-rijen zelf invullen.
+
+## Ronde 15 (7 oktober 2026): mesjespagina, methodezin en links
+**Live is nog niets gewijzigd.** In deze sessie staat het wachtwoord niet in de omgevingsvariabele `RMK_WP_APP_PASSWORD`, en het direct gebruiken ervan in een opdracht werd door de beveiliging van de sessie geweigerd. Alles is lokaal gebouwd en getest. Het uploadscript staat klaar in de repo.
+
+### Klaargezet
+1. **Methodepagina (#76):** de labelzin wordt "Een functiescore laat zien wat een maaier kan. Betrouwbaarheid en prijs-kwaliteit voegen we toe zodra er genoeg reviews en prijzen zijn." De oude zin kwam lokaal één keer voor, alleen op deze pagina.
+2. **Nieuwe conceptpagina `robotmaaier-mesjes`** uit `pagina-robotmaaier-mesjes.md`, met het patroon pagina-kopersgids:
+   - kruimelpad, eerlijkheidsblok ("Gebaseerd op handleidingen en fabrikantpagina's, bijgewerkt op 7 oktober 2026. We testen de maaiers niet zelf."), inhoudsopgave in de eigen kolom, tabel, vier FAQ's, "Wat we nog niet weten", bronnen en auteursblok;
+   - metabeschrijving uit het md-bestand, kruimelpadtitel "Robotmaaier mesjes";
+   - interne links: /robotmaaier-kosten/ ("Zie robotmaaier kosten"), /robotmaaier-test-vergelijking/ (op "de modellen die wij bekeken" in het korte antwoord), /hoe-we-beoordelen/ (eerlijkheidsblok). /beste-robotmaaier/ zit alleen in menu en footer: er staat in de tekst geen passende zin voor, en ik heb er geen bijgeschreven.
+   - **Bronnen** uit het blad Bronnen van het Excel-bestand: per merk de fabrikantpagina (prijs) en de handleiding (vervangtermijn), plus Stiftung Warentest (test.de/maehroboter, al gebruikt op pagina 4). Geen winkels, geen Bol.
+3. **Kostenpagina (#18), onder Messen:** "Hoe vaak je de mesjes vervangt en wat ze per merk kosten, lees je op de pagina robotmaaier mesjes."
+4. **Hub (#10), bij Onderhoud en messen:** "Prijzen en vervangtermijnen per merk staan op de pagina robotmaaier mesjes."
+5. **LANCERING.md:** 17 pagina's, de mesjespagina als nummer 11 direct na de kostenpagina; tellingen, URL-inspectie en de stap prijzen verversen (ook de messenprijzen) bijgewerkt.
+
+### Gecontroleerd (lokaal, Chromium, 390, 768, 1024 en 1440 px)
+- Op de vier pagina's geen `[`, `{{`, "Alfa", "Beta" of "gepeild" in de tekst; één h1; geen horizontale scroll; geen scriptfouten.
+- Inhoudsopgave mesjespagina: niet sticky tot 1024 px, sticky in de eigen kolom op 1440 px, nergens over de tekst.
+- Ankerlinks in de inhoudsopgave werken. De interne links in de inhoud geven allemaal 200. Alleen de footerlinks naar privacy, cookies, contact, colofon en affiliate-melding geven lokaal 404, omdat die pagina's alleen live bestaan.
+- De jaarbedragen in de tabel nagerekend: Mova 24 tot 33, Dreame 32 tot 43, Eufy 27 tot 53 euro. Klopt.
+
+### Om op te letten
+- **Navimow "ongeveer 25 euro voor 12":** de fabrikantpagina noemt volgens het Excel-bestand 25 euro zonder aantal; het aantal 12 komt van een winkelpagina (Coolblue). De tekst staat zo ook al op de kostenpagina. Ik heb hem niet veranderd. Wil je "voor 12" laten staan?
+- **Kostenpagina, bronnenlijst:** een paar fabrikantpagina's (Navimow, Husqvarna, Eufy en Dreame messen) hebben daar het label "Handleiding" in plaats van "Fabrikant". Op de mesjespagina staat het goed. Niet veranderd; zeg het als ik het op de kostenpagina moet rechtzetten.
+
+### Uploaden (volgende sessie, als `RMK_WP_APP_PASSWORD` in de omgeving staat)
+`python3 scripts/ronde15_upload.py` (proefdraai) en daarna met `--schrijf`. Het script past de drie zinnen alleen aan als de oude tekst precies één keer voorkomt, maakt de mesjespagina als **concept**, en controleert daarna live de interne links en de invulvelden.
+
+### Nog te doen
+- [ ] Mandy: het wachtwoord als geheim `RMK_WP_APP_PASSWORD` in de omgeving zetten (nieuwe sessie nodig), daarna upload ik ronde 15.
+- [ ] Mandy: 1.3.4 uploaden en activeren (live draait 1.3.3).
+- [ ] Mandy: de Navimow-zin "voor 12" bevestigen.

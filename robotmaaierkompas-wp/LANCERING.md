@@ -1,6 +1,6 @@
 # Lancering robotmaaierkompas.nl: stappen voor Mandy
 
-Stand: 7 oktober 2026, thema 1.3.4 (nog uploaden). Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
+Stand: 7 oktober 2026, thema 1.3.4 (nog uploaden), 17 pagina's in de eerste golf. Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
 Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle pagina's van de eerste golf gepubliceerd en gecontroleerd zijn.
 
 ## 1. Vooraf (de dag ervoor)
@@ -10,7 +10,7 @@ Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle
 3. Lees de gegevens in **Colofon**, **Privacy** en **Contact** nog één keer na (naam, e-mailadres contact@robotmaaierkompas.nl, adres). Stuur een testmail naar contact@robotmaaierkompas.nl en kijk of hij aankomt.
 4. Pagina 4: open de bronlinks in je eigen browser (zie het bouwlogboek, ronde 8 en 9).
 6. **Persmappen.** Lees per fabrikant de gebruiksvoorwaarde van de persbeelden opnieuw na (zie bouwlogboek ronde 9). Gebruik alleen beelden met een duidelijke toestemming voor redactioneel gebruik.
-5. **Prijzen verversen.** Een prijs in de productbox verdwijnt 14 dagen na de datum waarop hij gezien is; de huidige prijzen zijn van 5 oktober en verdwijnen na 19 oktober. Controleer vlak voor de lancering prijs en voorraad in het blad Prijzen van het Excel-bestand (nieuw, op voorraad, winkel of fabrikant, geen Bol, geen marketplace), zet de datum van die dag, en draai het script met `--upload` opnieuw.
+5. **Prijzen verversen.** Een prijs in de productbox verdwijnt 14 dagen na de datum waarop hij gezien is; de huidige prijzen zijn van 5 oktober en verdwijnen na 19 oktober. Controleer vlak voor de lancering prijs en voorraad in het blad Prijzen van het Excel-bestand (nieuw, op voorraad, winkel of fabrikant, geen Bol, geen marketplace), zet de datum van die dag, en draai het script met `--upload` opnieuw. De messenprijzen op de kostenpagina en de mesjespagina staan als vaste tekst (peildatum 5 oktober): kijk ze na op de fabrikantpagina's in de bronnenlijst en pas ze aan als ze veranderd zijn.
 
 ## 2. Publiceren, in deze volgorde
 De publicatiecontrole van het thema houdt een pagina tegen als er nog `[`, "Alfa", "Beta" of "gepeild" in staat. Zie je die melding, dan staat er nog een invulveld in.
@@ -27,17 +27,19 @@ De publicatiecontrole van het thema houdt een pagina tegen als er nog `[`, "Alfa
 | 8 | Mandy van den Broek (auteur, onder Over ons) | 78 | /over-ons/mandy-van-den-broek/ |
 | 9 | Hoe we beoordelen | 76 | /hoe-we-beoordelen/ |
 | 10 | Kosten (pagina 12) | 18 | /robotmaaier-kosten/ |
-| 11 | Robotmaaier zonder grensdraad (pagina 11) | 17 | /robotmaaier-zonder-grensdraad/ |
-| 12 | Robotmaaier test (pagina 4) | 13 | /robotmaaier-test-consumentenbond/ |
-| 13 | Robotmaaier zonder draad (pagina 1) | 11 | /robotmaaier-zonder-draad/ |
-| 14 | Robotmaaiers vergelijken (pagina 2) | 12 | /robotmaaier-test-vergelijking/ |
-| 15 | Beste robotmaaiers (hub) | 10 | /beste-robotmaaier/ |
-| 16 | Homepage | 9 | / |
+| 11 | Robotmaaier mesjes | nieuw (zie bouwlogboek ronde 15) | /robotmaaier-mesjes/ |
+| 12 | Robotmaaier zonder grensdraad (pagina 11) | 17 | /robotmaaier-zonder-grensdraad/ |
+| 13 | Robotmaaier test (pagina 4) | 13 | /robotmaaier-test-consumentenbond/ |
+| 14 | Robotmaaier zonder draad (pagina 1) | 11 | /robotmaaier-zonder-draad/ |
+| 15 | Robotmaaiers vergelijken (pagina 2) | 12 | /robotmaaier-test-vergelijking/ |
+| 16 | Beste robotmaaiers (hub) | 10 | /beste-robotmaaier/ |
+| 17 | Homepage | 9 | / |
 
 Waarom deze volgorde:
 - Eerst de pagina's waar de footer en de cookiebanner naar linken.
 - Daarna Over ons, en dan pas de auteurspagina eronder.
 - Dan de pagina's waar de inhoud naar linkt. Pagina 2 linkt naar pagina 4, en pagina 1 naar pagina 11.
+- De mesjespagina direct na de kostenpagina: ze linken naar elkaar. Publiceer ze kort na elkaar.
 - De hub (Beste robotmaaiers) vlak vóór de homepage: het menu, de footer en de eerste ingangskaart op de homepage linken ernaar, en de hub linkt naar de kernpagina's die dan al staan.
 - De homepage als laatste: dat is de voorpagina (Instellingen > Lezen), en `/` geeft 404 tot hij gepubliceerd is.
 
@@ -46,7 +48,7 @@ Publiceer verder niets. De andere 60 pagina's blijven concept. Ze staan niet in 
 ## 3. Controleren vóór indexering (in een privévenster, niet ingelogd)
 1. Open `https://robotmaaierkompas.nl/wp-json/rmk/v1` en `https://robotmaaierkompas.nl/wp-json/rmk/v1/status`. Beide moeten "Alleen voor beheerders" (401) geven, zonder gegevens.
 1. Leeg de **LiteSpeed-cache** (beheerbalk > LiteSpeed Cache > Alles legen) en de **CDN-cache** in hPanel.
-2. Open alle 16 adressen: geeft elk de pagina, zonder 404?
+2. Open alle 17 adressen: geeft elk de pagina, zonder 404?
 3. Klik in het menu en in de footer elke link aan; geen 404.
 4. Kijk of de cookiebanner verschijnt, en of "Alles weigeren" hem sluit.
 5. Pagina 12: werkt de kostencalculator (kies een model, zie je bedragen)?
@@ -60,14 +62,14 @@ Publiceer verder niets. De andere 60 pagina's blijven concept. Ze staan niet in 
 2. Leeg opnieuw de LiteSpeed-cache en de CDN-cache.
 3. Controleer in een privévenster:
    - `https://robotmaaierkompas.nl/robots.txt` bevat geen `Disallow: /`, wel `Disallow: /wp-json/rmk/` en `Disallow: /wp-content/uploads/rmk/`, en een regel `Sitemap:`.
-   - `https://robotmaaierkompas.nl/sitemap_index.xml` opent. In `page-sitemap.xml` staan precies de 16 gepubliceerde pagina's en geen concepten.
+   - `https://robotmaaierkompas.nl/sitemap_index.xml` opent. In `page-sitemap.xml` staan precies de 17 gepubliceerde pagina's en geen concepten.
    - In de broncode van een pagina (Ctrl+U) staat `index, follow` bij `robots` en een `canonical` naar het eigen adres.
 
 ## 5. Google Search Console (search.google.com/search-console)
 1. Voeg een **domeineigendom** toe: `robotmaaierkompas.nl`.
 2. Verifieer met het **DNS-TXT-record**: plak het record in hPanel bij Domeinen > DNS-zone. Dan is er geen code op de site nodig. Verificatie kan een paar minuten tot een paar uur duren.
-3. Ga naar **Sitemaps** en dien `sitemap_index.xml` in. Na een dag moet de status "Geslaagd" zijn, met 16 ontdekte pagina's.
-4. Gebruik **URL-inspectie** op de homepage, de hub `/beste-robotmaaier/`, pagina 1, 2, 4, 11 en 12 en de methodepagina, en vraag voor elk "Indexering aanvragen" (er zit een daglimiet op).
+3. Ga naar **Sitemaps** en dien `sitemap_index.xml` in. Na een dag moet de status "Geslaagd" zijn, met 17 ontdekte pagina's.
+4. Gebruik **URL-inspectie** op de homepage, de hub `/beste-robotmaaier/`, pagina 1, 2, 4, 11 en 12, de mesjespagina `/robotmaaier-mesjes/` en de methodepagina, en vraag voor elk "Indexering aanvragen" (er zit een daglimiet op).
 5. Controleer bij **Instellingen > robots.txt** of Google de nieuwe robots.txt heeft opgehaald.
 6. Controleer **Beveiliging en handmatige acties**; daar hoort niets te staan.
 
