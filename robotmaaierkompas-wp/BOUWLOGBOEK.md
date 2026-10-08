@@ -1537,3 +1537,76 @@ Uitgevoerd volgens `tekstwijzigingen-controle1.md` (secties A tot en met D), met
 - [ ] Thema 1.3.5: de CSS-regels van ronde 20 en het bijgewerkte `data/modellen.json`.
 - [ ] Beslissen over "rond de 3.000 euro" op de kostenpagina en over de vaste datums in paginakop en eerlijkheidsblok.
 - [ ] CDN-cache legen; prijzen verversen vóór 19 oktober; publiceren op jouw teken.
+
+## Ronde 22 (8 oktober 2026): kostenpagina, modelgegevens, thema 1.3.5
+**Niets gepubliceerd**: alle 77 pagina's zijn concept, er zijn 0 gepubliceerde berichten. Live draait nog **1.3.4**; **1.3.5 is gebouwd en getest; Mandy moet het nog uploaden.**
+
+### 1. Kostenpagina (#18)
+- "…en de Husqvarna Automower 410VE NERA rond de 3.000 euro" is "…boven de 3.000 euro" geworden. De pagina is concept gebleven.
+- "rond de 3.000 euro" kwam verder nergens voor: niet in de andere 76 pagina's, de modelgegevens of de template parts.
+
+### 2. Modelgegevens met nieuwe prijzen: niet gedaan
+- **Het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` staat niet in deze sessie.** In de uploadmap staat alleen `tekstwijzigingen-controle1.md`, en op de schijf staat geen xlsx.
+- In Google Drive staat alleen een spreadsheet `robotmaaierkompas_modeldata_v1` van 5 oktober. Die is ouder dan de live gegevens (gegenereerd op 7 oktober), dus niet gebruikt.
+- **Live is niets geüpload.** De tabellen en kaarten zijn dus niet veranderd: de prijzen zijn nog die van 5 oktober.
+- **Wel gecontroleerd op de live modelgegevens**, met `tests/prijs-modellen-test.php`, de echte prijsfuncties uit `inc/prijzen.php`, op 8, 19 en 20 oktober:
+  - tot en met 19 oktober tonen de kaarten de prijs met winkel en datum; vanaf 20 oktober (meer dan 14 dagen oud) is de prijs weg;
+  - modellen zonder geldige prijs tonen alleen "Bekijk de actuele prijs" naar de fabrikantpagina;
+  - er staan geen Bol-prijzen in de gegevens, en een Bol-winkel of -URL wordt geweigerd (code en eerdere tests).
+- **Gevonden:** M002 (Navimow i206 AWD) heeft geen `fabrikant_url`. Vanaf 20 oktober toont die kaart daarom **niets** (geen prijs en geen knop). Het adres van de fabrikantpagina moet in het Excel-bestand; ik heb het niet zelf ingevuld.
+- **M003 (Navimow i210 LiDAR)** staat in geen van de 17 pagina's:
+  - de scoretabel op pagina 1 noemt de acht modellen expliciet;
+  - de calculator op de kostenpagina is beperkt tot `data-models="M001,M002,M004,M005,M006,M008,M010,M011"`;
+  - de keuzehulp toont geen modellen.
+  - M003 staat wel in het modelbestand, zonder prijs.
+
+### 3. Thema 1.3.5 (`robotmaaierkompas-child.zip`, 412 KB, versie 1.3.5)
+- **(a) Tabellen naast de inhoudsopgave:** in `css/rmk-afwerking.css`, direct na `.rmk-column .rmk-prose`:
+  `.rmk-split__main > * { min-width: 0; }` en `.rmk-split__main > .rmk-prose { max-width: 100%; }`.
+  - Extra, gevonden bij het testen: `h1 { overflow-wrap: break-word; }`. Op Over ons paste "robotmaaierkompas.nl" in de H1 op 390 px niet, en de pagina scrolde 15 px zijwaarts (ook in 1.3.4). Nu breekt het woord af ("robotmaaierkompas / .nl").
+- **(b) `data/modellen.json`:** bevat al dezelfde gegevens als live, inclusief de M010-tekst uit ronde 21. De enige verschillen zijn notatie van PHP (`1.0` tegenover `1`). Nieuwe prijzen volgen met het nieuwe Excel-bestand.
+- **(c) Automatische datums:** in het nieuwe bestand `inc/redactie.php`.
+  - De datum in de paginakop (`p.rmk-meta`: "bijgewerkt op …", op privacy "Laatst bijgewerkt: …") en in het eerlijkheidsblok ("Bijgewerkt op …") wordt bij het renderen de datum van de laatste wijziging van de pagina, als `<time datetime>`.
+  - Andere datums blijven staan: per model in de tabel op pagina 2 en "gezien op" bij prijzen.
+- **(d) `RMK_AFFILIATE_ACTIVE`** (in wp-config.php, standaard uit):
+  - zolang de instelling uit staat, haalt het thema elke `<p class="rmk-affnote">` uit de uitvoer: uit het patroon affiliate-melding en uit losse kopieën, zoals in #26;
+  - met `define( 'RMK_AFFILIATE_ACTIVE', true );` komt de regel terug;
+  - het statusoverzicht (Gereedschap > Robotmaaierkompas) toont de stand.
+  - De CSS-truc `.rmk-affnote { display: none }` is in het thema niet meer nodig.
+- **Aanvullende CSS:** blijft staan tot 1.3.5 live actief is; anders komen de tabeloverloop en de regel op #26 tijdelijk terug.
+  - `scripts/ronde22_na_upload.py` controleert eerst of 1.3.5 actief is, en haalt dan de blokken van ronde 20 en 21 weg.
+  - Op de huidige CSS getest: daarna is de aanvullende CSS leeg.
+- Versie in `style.css` en `RMK_VER`: 1.3.5. PHP-lint: geen fouten.
+
+### 4. Tests
+- **Lokale WordPress-testsite:** opgezet met WordPress 7.1.3 en SQLite van GitHub (wordpress.org is geblokkeerd). Het overzetten van de live inhoud werd geweigerd door de beveiliging van de sessie (gedownloade code draaien). Daarom zonder WordPress getest:
+  - `tests/redactie-test.php`: datums en affiliate-melding op de echte inhoud van de 17 pagina's en #26, met de instelling uit en aan. Alles geslaagd.
+  - `tests/prijs-modellen-test.php`: zie hierboven.
+- **Browsertest** (Chromium):
+  - Opzet: de live paginaskelet met header en footer, de weergegeven conceptinhoud en de CSS van 1.3.4 en 1.3.5, zonder de aanvullende CSS.
+  - 17 pagina's, op 390, 768, 1024 en 1440 px.
+  - **1.3.5:** geen zijwaarts scrollen, één H1, inhoudsopgave `static` tot en met 1024 px en `sticky` op 1440 px, 0 overlap, geen scriptfouten, de regel "Advertentie" nergens zichtbaar.
+  - **Verschil met 1.3.4:** alleen de methodepagina op 390 px, die nu 390 px breed is (was 439 px), en de afbreking van de H1 op Over ons.
+- **LCP** (labmeting):
+  - Opzet: dezelfde statische kopie, mobiel profiel Moto G4, 150 ms latency, 1,6 Mbit/s, processor 4× trager, mediaan van 3 metingen.
+
+  | Pagina | 1.3.4 | 1.3.5 | LCP-element |
+  |---|---|---|---|
+  | Homepage | 0,76 s | 0,76 s | `p.rmk-lead` |
+  | Pagina 1 (zonder draad) | 0,76 s | 0,76 s | H1 |
+  | Pagina 12 (kosten) | 0,76 s | 0,76 s | H1 |
+
+  - 1.3.5 maakt de LCP niet trager. De waarden zijn lager dan de eerdere PageSpeed-metingen (2,1–2,3 s), omdat de HTML hier lokaal komt en de server- en cachetijd van Hostinger niet meetelt.
+  - Na de lancering opnieuw meten met PageSpeed Insights.
+- **Storing:** tijdens deze ronde gaf de live site ongeveer een kwartier 307, 502 en 504, ook voor gewone afbeeldingen (CDN of hosting). Daarna werkte alles weer. In die tijd is er niets naar de site geschreven.
+
+### Live gecontroleerd (na de storing)
+- 77 pagina's, allemaal concept; 0 gepubliceerde berichten; actief thema 1.3.4.
+- Zonder inloggen: /robotmaaier-kosten/ en `?page_id=18` geven 404; de REST-API (`pages/18`, `rmk/v1/modellen`) geeft 401.
+
+### Nog te doen
+- [ ] Mandy: het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` in de sessie zetten (bijlage). Daarna upload ik de nieuwe prijzen en meld ik oud en nieuw per tabel en kaart.
+- [ ] Mandy: in het Excel-bestand de fabrikantpagina (`fabrikant_url`) van M002 Navimow i206 AWD invullen.
+- [ ] Mandy: 1.3.5 uploaden en activeren; daarna draai ik `scripts/ronde22_na_upload.py --schrijf` en controleer ik live.
+- [ ] Mandy: wil je op Over ons een nettere afbreking ("robotmaaier / kompas.nl")? Dat kan met een `<wbr>` in de H1 (tekstwijziging).
+- [ ] Prijzen verversen vóór 19 oktober; publiceren op jouw teken.
