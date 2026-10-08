@@ -1,17 +1,16 @@
 # Lancering robotmaaierkompas.nl: stappen voor Mandy
 
-Stand: 8 oktober 2026, thema 1.3.5 (de laatste themaversie vóór de lancering; nog uploaden), 17 pagina's in de eerste golf. Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
+Stand: 8 oktober 2026, thema 1.3.5 actief (de laatste themaversie vóór de lancering), 17 pagina's in de eerste golf. Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
 Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle pagina's van de eerste golf gepubliceerd en gecontroleerd zijn.
 
 ## 1. Vooraf (de dag ervoor)
 1. Maak een back-up in hPanel (bestanden en database).
-1. **Thema 1.3.5** uploaden en activeren (Weergave > Thema's > Nieuw thema > Thema uploaden, `robotmaaierkompas-child.zip`, "Vervangen door geüploade versie"). Laat Claude daarna `scripts/ronde22_na_upload.py` draaien: dat haalt de tijdelijke aanvullende CSS weg, maar pas als 1.3.5 actief is.
+1. ~~Thema 1.3.5 uploaden en activeren~~ **Gedaan op 8 oktober**: 1.3.5 is actief en de tijdelijke aanvullende CSS is weggehaald (`scripts/ronde22_na_upload.py`, bouwlogboek ronde 23).
 1. Staat thema 1.3.1 actief? Klik dan één keer op **Gereedschap > Robotmaaierkompas > Huisstijl toepassen** (sitepictogram en standaard deelafbeelding in Yoast).
 2. Controleer in WordPress bij **Gereedschap > Robotmaaierkompas** of de statuscontroles groen zijn.
 3. Lees de gegevens in **Colofon**, **Privacy** en **Contact** nog één keer na (naam, e-mailadres contact@robotmaaierkompas.nl, adres). Stuur een testmail naar contact@robotmaaierkompas.nl en kijk of hij aankomt.
 4. Pagina 4: open de bronlinks in je eigen browser (zie het bouwlogboek, ronde 8 en 9).
 6. **Persmappen.** Lees per fabrikant de gebruiksvoorwaarde van de persbeelden opnieuw na (zie bouwlogboek ronde 9). Gebruik alleen beelden met een duidelijke toestemming voor redactioneel gebruik.
-5. **Prijzen verversen.** Een prijs in de productbox verdwijnt 14 dagen na de datum waarop hij gezien is; de huidige prijzen zijn van 5 oktober en verdwijnen na 19 oktober. Controleer vlak voor de lancering prijs en voorraad in het blad Prijzen van het Excel-bestand (nieuw, op voorraad, winkel of fabrikant, geen Bol, geen marketplace), zet de datum van die dag, en draai het script met `--upload` opnieuw. De messenprijzen op de kostenpagina en de mesjespagina staan als vaste tekst (peildatum 5 oktober): kijk ze na op de fabrikantpagina's in de bronnenlijst en pas ze aan als ze veranderd zijn.
 
 ## 2. Publiceren, in deze volgorde
 De publicatiecontrole van het thema houdt een pagina tegen als er nog `[`, "Alfa", "Beta" of "gepeild" in staat. Zie je die melding, dan staat er nog een invulveld in.
@@ -80,6 +79,12 @@ Publiceer verder niets. De andere 60 pagina's blijven concept. Ze staan niet in 
 3. Gebruik **URL-inspectie** op de homepage en vraag om indexering ("Request indexing").
 
 ## 7. De eerste week
+**Op de lanceerdag: uptimemonitor instellen.** Maak bij een gratis dienst (bijvoorbeeld UptimeRobot, Better Stack of de monitoring in hPanel) twee monitors aan, die elke 5 minuten kijken en je mailen als de pagina niet bereikbaar is:
+- de homepage: `https://robotmaaierkompas.nl/`
+- pagina 12: `https://robotmaaierkompas.nl/robotmaaier-kosten/`
+
+Laat de monitor controleren op status 200 (en, als de dienst dat kan, op een woord dat altijd op de pagina staat, zoals "robotmaaier"). Zet ze pas aan na het publiceren: daarvóór geven beide adressen 404.
+
 **Dag 1 tot 3:**
 - In Search Console, bij **Pagina's**: welke pagina's zijn geïndexeerd, en wat staat er bij "Niet geïndexeerd"? Verwacht zijn alleen meldingen als "Ontdekt/gecrawld, momenteel niet geïndexeerd" (dat is normaal in het begin), en "Uitgesloten door noindex" alleen voor zoekresultaten, tags of auteursarchief.
 - Is de sitemap "Geslaagd", zonder fouten?
@@ -99,6 +104,7 @@ Publiceer verder niets. De andere 60 pagina's blijven concept. Ze staan niet in 
 
 ## Bewust nog niet bij deze lancering
 - Geen affiliatelinks, geen Bol-gegevens of prijzen. De prijstaak blijft uit.
+- **Prijzen niet verversen vóór de lancering.** Dat doen we pas als er bezoekers zijn. De prijzen van 5 oktober verdwijnen na 19 oktober vanzelf uit de kaarten en tabellen; daarna tonen de kaarten alleen "Bekijk de actuele prijs" naar de fabrikantpagina. Ook de messenprijzen op de kosten- en mesjespagina (vaste tekst, peildatum 5 oktober) blijven zo staan.
 - De regel "Advertentie: via deze knoppen krijgen wij mogelijk een commissie…" staat uit. Hij komt pas terug met `define( 'RMK_AFFILIATE_ACTIVE', true );` in wp-config.php, als de affiliateprogramma's zijn goedgekeurd. Zet dan ook de oorspronkelijke zinnen over commissie terug (zie bouwlogboek ronde 21) en het patroon op de homepage.
 - Geen meetcode (GA4). Die komt pas als `RMK_GA4_ID` in wp-config.php staat, en laadt alleen na toestemming in de cookiebanner. Pas dan de privacy- en cookiepagina aan.
 - Header en footer houden het tijdelijke menu. Bij golf 2 kies je in de site-editor "Aanpassingen wissen", zodra de sectiepagina's gevuld en gepubliceerd zijn.

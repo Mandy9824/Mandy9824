@@ -1610,3 +1610,44 @@ Uitgevoerd volgens `tekstwijzigingen-controle1.md` (secties A tot en met D), met
 - [ ] Mandy: 1.3.5 uploaden en activeren; daarna draai ik `scripts/ronde22_na_upload.py --schrijf` en controleer ik live.
 - [ ] Mandy: wil je op Over ons een nettere afbreking ("robotmaaier / kompas.nl")? Dat kan met een `<wbr>` in de H1 (tekstwijziging).
 - [ ] Prijzen verversen vóór 19 oktober; publiceren op jouw teken.
+
+## Ronde 23 (8 oktober 2026): 1.3.5 live, aanvullende CSS weg, Over ons, LANCERING.md
+**Niets gepubliceerd**: alle 77 pagina's zijn concept, er zijn 0 gepubliceerde berichten.
+
+### 1. Thema 1.3.5 actief, aanvullende CSS weg
+- Live is `robotmaaierkompas-child` **1.3.5** actief; de pagina's laden `rmk.js?ver=1.3.5`.
+- `scripts/ronde22_na_upload.py` (proefdraai, daarna `--schrijf`): de blokken van ronde 20 (tabelregels) en ronde 21 (`.rmk-affnote`) zijn elk één keer gevonden en weggehaald. **De aanvullende CSS is nu leeg.**
+- **Live gecontroleerd** (weergegeven inhoud door 1.3.5, in de live pagina zonder aanvullende CSS, Chromium):
+  - methodepagina en Over ons op 360, 390, 768, 1024 en 1440 px, de andere 15 pagina's op 390 px: 26 metingen, nergens zijwaarts scrollen, geen scriptfouten;
+  - methodepagina op 390 px: de scoremodeltabel scrolt in haar eigen vak (349 van 413 px);
+  - de regel "Advertentie" staat nergens: niet in de 17 pagina's, niet in #26 husqvarna-vs-gardena (de themafilter haalt hem weg, zonder CSS) en niet op de openbare pagina; ook "commissie" staat niet op de openbare pagina;
+  - de datums in paginakop en eerlijkheidsblok zijn automatisch (`<time … data-rmk-modified>`); op pagina 2 blijven de 8 datums per model in de tabel staan.
+
+### 2. M002 Navimow i206 AWD, fabrikantpagina: niet ingevuld
+- Het opgegeven adres is `nl.navimow.com/products/seel-4-year-product-protection-plan-for-navimow-i-series-i206e-awd` (met zoekparameters).
+  - Volgens het adres is dat een **garantieplan van Seel** ("4-year product protection plan"), en voor de **i206e** AWD, niet de productpagina van de i206 AWD.
+  - navimow.com is vanuit de bouwomgeving geblokkeerd, dus ik kon de pagina niet openen.
+  - Niet ingesteld: een knop "Bekijk de actuele prijs" zou bezoekers naar een garantieplan sturen. In de opdracht stond bovendien nog "PLAK HIER HET ADRES".
+- **Het thema doet het al goed.** Op een lokale kopie met een voorbeeldadres toont de kaart van M002 tot en met 19 oktober de prijs (899 euro bij Coolblue), en vanaf 20 oktober alleen "Bekijk de actuele prijs" met een link naar dat adres. Er hoeft alleen het juiste adres in de modelgegevens.
+- **De andere zeven modellen van de eerste golf hebben een fabrikantpagina:** M001, M004 en M005 (dezelfde Mova-pagina voor de 800 en de 1200), M006, M008, M010 en M011. Of die adressen nog werken, kon ik niet nakijken: de fabrikantdomeinen zijn hier geblokkeerd.
+
+### 3. Over ons (#77): zachte koppelstreep
+- In de inhoud is `<h1>Over robotmaaierkompas.nl</h1>` (één keer gevonden) `<h1>Over robotmaaier&shy;kompas.nl</h1>` geworden. De pagina is concept gebleven.
+- De paginatitel (voor `<title>`, het kruimelpad en Yoast) is ongewijzigd "Over robotmaaierkompas.nl", zodat er geen zachte koppelstreep in zoekresultaten komt.
+- **Uitkomst, gezien op schermafbeeldingen:**
+  - op 360 en 390 px staat er "Over robotmaaier-" / "kompas.nl", zonder zijwaarts scrollen;
+  - op 768 en 1024 px staat de kop op één regel;
+  - vanaf 1280 px staat de kop door de grotere letter (56 px) en `text-wrap: balance` toch op twee regels: nu "Over robotmaaier-" / "kompas.nl", zonder de koppelstreep zou het "Over" / "robotmaaierkompas.nl" zijn.
+
+### 4. LANCERING.md
+- De stap "Prijzen verversen" is uit de voorbereiding gehaald. Onder "Bewust nog niet" staat nu waarom: prijzen verversen we pas als er bezoekers zijn, en na 19 oktober tonen de kaarten alleen "Bekijk de actuele prijs". Ook de messenprijzen blijven zo staan.
+- **Nieuw, in "De eerste week":** op de lanceerdag een uptimemonitor instellen voor de homepage en pagina 12 (`/robotmaaier-kosten/`). Elke 5 minuten, met een mail bij storing, en pas aanzetten na het publiceren.
+- De themastap (1.3.5) staat op "gedaan", en de standregel is bijgewerkt.
+
+### Live gecontroleerd zonder inloggen
+- /over-ons/, /hoe-we-beoordelen/ en `?page_id=77` geven 404; `/wp-json/wp/v2/pages/77` geeft 401; zoeken in de REST-API geeft een lege lijst.
+
+### Nog te doen
+- [ ] Mandy: het adres van de **productpagina** van de Navimow i206 AWD (niet het garantieplan, niet de i206e) aanleveren; daarna zet ik het in de modelgegevens van M002.
+- [ ] Mandy: het nieuwste Excel-bestand als bijlage, voor de nieuwe prijzen (zie ronde 22). Volgens LANCERING.md niet nodig vóór de lancering.
+- [ ] Publiceren volgens LANCERING.md op jouw teken; daarna de uptimemonitor.
