@@ -226,6 +226,7 @@ function rmk_status_checks() {
 	$add( ! rmk_bol_enabled() && ! $next, 'Prijstaak uitgeschakeld (voorlopig geen Bol-gegevens)', rmk_bol_enabled() ? 'STAAT AAN' : ( $next ? 'nog ingepland' : 'uit' ) );
 	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
 	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
+	$add( ! rmk_affiliate_actief(), 'Affiliate-melding uit (RMK_AFFILIATE_ACTIVE)', rmk_affiliate_actief() ? 'STAAT AAN: de regel "Advertentie: …" wordt getoond' : 'uit: de regel "Advertentie: …" wordt niet getoond' );
 	// Lees via Yoast's eigen helper (zoals de schema-uitvoer); WPSEO_Options::get gaf live een verouderde waarde.
 	$yo     = function ( $k ) {
 		return function_exists( 'YoastSEO' ) ? YoastSEO()->helpers->options->get( $k ) : ( class_exists( 'WPSEO_Options' ) ? WPSEO_Options::get( $k ) : null );

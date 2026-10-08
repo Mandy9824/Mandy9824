@@ -1,10 +1,11 @@
 # Lancering robotmaaierkompas.nl: stappen voor Mandy
 
-Stand: 7 oktober 2026, thema 1.3.4 (nog uploaden), 17 pagina's in de eerste golf. Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
+Stand: 8 oktober 2026, thema 1.3.5 (de laatste themaversie vóór de lancering; nog uploaden), 17 pagina's in de eerste golf. Alles is nog concept en "Zoekmachines niet laten indexeren" staat aan.
 Werk de stappen in deze volgorde af. Indexering gaat pas aan in stap 4, als alle pagina's van de eerste golf gepubliceerd en gecontroleerd zijn.
 
 ## 1. Vooraf (de dag ervoor)
 1. Maak een back-up in hPanel (bestanden en database).
+1. **Thema 1.3.5** uploaden en activeren (Weergave > Thema's > Nieuw thema > Thema uploaden, `robotmaaierkompas-child.zip`, "Vervangen door geüploade versie"). Laat Claude daarna `scripts/ronde22_na_upload.py` draaien: dat haalt de tijdelijke aanvullende CSS weg, maar pas als 1.3.5 actief is.
 1. Staat thema 1.3.1 actief? Klik dan één keer op **Gereedschap > Robotmaaierkompas > Huisstijl toepassen** (sitepictogram en standaard deelafbeelding in Yoast).
 2. Controleer in WordPress bij **Gereedschap > Robotmaaierkompas** of de statuscontroles groen zijn.
 3. Lees de gegevens in **Colofon**, **Privacy** en **Contact** nog één keer na (naam, e-mailadres contact@robotmaaierkompas.nl, adres). Stuur een testmail naar contact@robotmaaierkompas.nl en kijk of hij aankomt.
@@ -98,6 +99,7 @@ Publiceer verder niets. De andere 60 pagina's blijven concept. Ze staan niet in 
 
 ## Bewust nog niet bij deze lancering
 - Geen affiliatelinks, geen Bol-gegevens of prijzen. De prijstaak blijft uit.
+- De regel "Advertentie: via deze knoppen krijgen wij mogelijk een commissie…" staat uit. Hij komt pas terug met `define( 'RMK_AFFILIATE_ACTIVE', true );` in wp-config.php, als de affiliateprogramma's zijn goedgekeurd. Zet dan ook de oorspronkelijke zinnen over commissie terug (zie bouwlogboek ronde 21) en het patroon op de homepage.
 - Geen meetcode (GA4). Die komt pas als `RMK_GA4_ID` in wp-config.php staat, en laadt alleen na toestemming in de cookiebanner. Pas dan de privacy- en cookiepagina aan.
 - Header en footer houden het tijdelijke menu. Bij golf 2 kies je in de site-editor "Aanpassingen wissen", zodra de sectiepagina's gevuld en gepubliceerd zijn.
 - HSTS is optioneel (hPanel).

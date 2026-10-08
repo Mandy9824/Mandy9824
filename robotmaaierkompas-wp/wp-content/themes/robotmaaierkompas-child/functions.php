@@ -14,6 +14,7 @@ require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/techniek.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/bouw.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/auteur.php';
 require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/beeld.php';
+require_once get_stylesheet_directory() . '/robotmaaierkompas/inc/redactie.php';
 
 /* Geen stijlen van het hoofdthema laden die we niet gebruiken (fonts van Twenty Twenty-Five). */
 add_action( 'wp_enqueue_scripts', function () {

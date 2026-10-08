@@ -14,6 +14,10 @@
 .rmk-column--wide   { max-width: calc(var(--rmk-content) + 2 * clamp(var(--rmk-gutter), 5vw, var(--rmk-space-16))); }
 .rmk-column .rmk-prose { max-width: none; }
 .rmk-prose { margin-inline: auto; }               /* losse tekstblokken staan nooit meer tegen de linkerrand */
+/* 1.3.5: in de kolom naast de inhoudsopgave (.rmk-split__main, flexkolom) maakt margin-inline: auto een tekstblok
+   zo breed als de breedste tabel. Zo blijft een brede tabel in haar eigen scrollvak (methodepagina op 390 px). */
+.rmk-split__main > * { min-width: 0; }
+.rmk-split__main > .rmk-prose { max-width: 100%; }
 
 /* Gecentreerde kop + introductie (homepage en kernpagina's) */
 .rmk-pagehead--center { align-items: center; text-align: center; }

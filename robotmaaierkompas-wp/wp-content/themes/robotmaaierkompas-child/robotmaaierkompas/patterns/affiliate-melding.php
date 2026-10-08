@@ -4,6 +4,8 @@
  * Slug: robotmaaierkompas/affiliate-melding
  * Categories: robotmaaierkompas
  * Description: Eén keer per pagina, direct boven de eerste affiliateknop.
+ *
+ * Wordt alleen getoond als RMK_AFFILIATE_ACTIVE in wp-config.php op true staat (1.3.5, zie inc/redactie.php).
  * Viewport Width: 1280
  */
 ?>
