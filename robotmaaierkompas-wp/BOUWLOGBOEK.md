@@ -1492,3 +1492,48 @@ Gebruikt: de weergegeven inhoud uit de REST-API (`context=edit`), en voor de opm
 - [ ] Mandy: metabeschrijvingen voor de zes juridische pagina's (of bewust leeg laten).
 - [ ] Mandy: de zin "een verpakking van 12" op de mesjespagina.
 - [ ] CDN-cache volledig legen; prijzen verversen vóór 19 oktober; publiceren op jouw teken.
+
+## Ronde 21 (8 oktober 2026): tekstwijzigingen na controle 1
+Uitgevoerd volgens `tekstwijzigingen-controle1.md` (secties A tot en met D), met `scripts/ronde21_upload.py` (proefdraai, daarna `--schrijf`). Geen nieuwe thema-zip.
+**Niets gepubliceerd**: alle 77 pagina's zijn concept, er zijn 0 gepubliceerde berichten.
+
+### Toegepast (elke "Was"-tekst kwam precies één keer voor)
+- **A1** Affiliate-melding (#81): eerste alinea vervangen; de tweede alinea ("Dat verandert de score of de volgorde niet...") staat er nog.
+- **A2** Over ons (#77): nieuwe zin met een link naar /affiliate-melding/. Die link was er eerder niet, dus hij zit nu in de nieuwe zin. De links naar /hoe-we-beoordelen/#verdienmodel en /hoe-we-beoordelen/ uit de oude zin zijn weg, zoals de nieuwe tekst voorschrijft.
+- **A3** Colofon (#80) en **A4** Hoe we beoordelen (#76, "Zo verdienen we geld"): vervangen, met de link naar de affiliate-melding.
+- **A5** Footer: de aangepaste footer in de site-editor (template part `robotmaaierkompas-child//footer`) is vervangen; geldt op alle pagina's.
+- **A6** "Advertentie: via deze knoppen krijgen wij mogelijk een commissie...":
+  - **Homepage (#9):** het blok met het patroon `robotmaaierkompas/affiliate-melding` is uit de inhoud gehaald. Terugzetten: in de editor het patroon "RMK – Affiliate-melding" weer onder het auteursblok zetten.
+  - **Overal:** in de aanvullende CSS staat nu `.rmk-affnote { display: none !important; }`. Dat geldt ook voor #26 husqvarna-vs-gardena (tweede golf), die de regel los in de inhoud heeft. Daar staat de zin nog wel in de HTML, maar hij is verborgen.
+  - Weghalen zodra de affiliateprogramma's zijn goedgekeurd.
+- **B7** Husqvarna:
+  - **Hub:** "ruim 3.000 euro" is "boven de 3.000 euro" geworden.
+  - **Modelgegevens M010** (analyse en minpunt): bijgewerkt via de dataroute `rmk/v1/modellen`. Ik heb de live gegevens opgehaald en alleen die twee velden veranderd; het Excel-bestand staat niet in de repository. Ook lokaal bijgewerkt: `scripts/modellen_analyse.json`, `scripts/modellen_teksten.json` en het themabestand `data/modellen.json`.
+  - De nieuwe analyse en het nieuwe minpunt staan in de kaarten op pagina 1 (#11) en op de hub (#10).
+- **B8** en **B9** mesjespagina (#236): het eerlijkheidsblok heeft dezelfde opmaak als op de hub (vet deel met de link naar /hoe-we-beoordelen/), en de zin onder de tabel is vervangen.
+- **C** Metabeschrijvingen: alle 17 gezet in Yoast (`_yoast_wpseo_metadesc`), tussen 62 en 136 tekens. Live gecontroleerd in `yoast_head_json`.
+- **D** "Laatst nagekeken op":
+  - Dit was al automatisch: het auteursblok vult de datum van de laatste wijziging van de pagina in.
+  - Na deze ronde staat op alle pagina's met een auteursblok "8 oktober 2026". Bij het publiceren wordt dat de publicatiedag, overal gelijk.
+  - Niet automatisch zijn de vaste datums in de paginakop en het eerlijkheidsblok ("bijgewerkt op 5 oktober 2026" of "7 oktober 2026"). Die stonden niet in de lijst en zijn niet veranderd.
+
+### Gemeld, niet veranderd
+- **Kostenpagina (#18):** "…en de Husqvarna Automower 410VE NERA rond de 3.000 euro". Andere woorden, niet in de lijst.
+- **Het openbare themabestand** `/wp-content/themes/.../data/modellen.json` (reserve uit de zip van 1.3.4) bevat nog "rond 3.000 euro". De site gebruikt de opgeslagen gegevens uit de database; het lokale themabestand is bijgewerkt en gaat mee in 1.3.5.
+
+### Live gecontroleerd
+- **Ingelogd, 17 pagina's:**
+  - de nieuwe teksten staan op de juiste pagina's;
+  - "commissie", "Advertentie", "rond 3.000 euro", "ruim 3.000", "voor een verpakking van 12" en "We testen de maaiers niet zelf" komen nergens meer voor, ook niet in de footer of de header.
+- **Zonder inloggen:**
+  - de openbare footer toont de nieuwe zin, zonder "commissie" of "Advertentie";
+  - de conceptadressen en `?page_id=` (ook met preview) geven 404;
+  - de REST-API geeft 401 of een lege lijst, en `rmk/v1/modellen` geeft 401;
+  - de zoekfunctie, `page-sitemap.xml` en de feed tonen niets van de concepten.
+- **Nieuw bestand `paginatekst-eerste-golf.md`** (versie 8 oktober): alleen in de sessie aan Mandy gegeven, niet in de repository en niet op de site. Het bevat geen HTML en geen "commissie", en alle 17 pagina's hebben een metabeschrijving en één H1.
+
+### Nog te doen
+- [ ] Bij goedkeuring van de affiliateprogramma's: de oorspronkelijke zinnen terugzetten (oude teksten in `scripts/ronde21_upload.py`), het patroon op de homepage terugzetten en de CSS-regel `.rmk-affnote` weghalen.
+- [ ] Thema 1.3.5: de CSS-regels van ronde 20 en het bijgewerkte `data/modellen.json`.
+- [ ] Beslissen over "rond de 3.000 euro" op de kostenpagina en over de vaste datums in paginakop en eerlijkheidsblok.
+- [ ] CDN-cache legen; prijzen verversen vóór 19 oktober; publiceren op jouw teken.
