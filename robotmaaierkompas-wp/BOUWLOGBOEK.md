@@ -1651,3 +1651,28 @@ Uitgevoerd volgens `tekstwijzigingen-controle1.md` (secties A tot en met D), met
 - [ ] Mandy: het adres van de **productpagina** van de Navimow i206 AWD (niet het garantieplan, niet de i206e) aanleveren; daarna zet ik het in de modelgegevens van M002.
 - [ ] Mandy: het nieuwste Excel-bestand als bijlage, voor de nieuwe prijzen (zie ronde 22). Volgens LANCERING.md niet nodig vóór de lancering.
 - [ ] Publiceren volgens LANCERING.md op jouw teken; daarna de uptimemonitor.
+
+## Ronde 24 (8 oktober 2026): fabrikantpagina M002
+**Niets gepubliceerd**: alle 77 pagina's zijn concept, er zijn 0 gepubliceerde berichten.
+
+### Gedaan
+- **Live modelgegevens:** bij M002 (Segway Navimow i206 AWD) is `fabrikant_url` gezet op `https://be.navimow.com/products/navimow-i2-awd-robot-lawn-mower` (de pagina van de i2 AWD-serie, opgegeven door Mandy).
+  - Via de dataroute `rmk/v1/modellen`: de live gegevens zijn opgehaald, alleen dit ene veld is veranderd, en het geheel is teruggezet.
+  - Vóór en na vergeleken: het enige verschil is `modellen[1]/fabrikant_url` (was leeg).
+  - Back-up van vóór de wijziging in de sessie.
+- **Lokale themakopie** `data/modellen.json` (reserve): hetzelfde adres, zodat een volgende themaversie gelijk loopt. Niet opnieuw gezipt; de site gebruikt de gegevens uit de database.
+
+### Gecontroleerd
+- **Kaart van M002** (met de prijsfuncties van het thema op de live gegevens, `tests/prijs-modellen-test.php`):
+  - 9 en 19 oktober: "Laagste nieuwe prijs rond 899 euro bij Coolblue, gezien op 5 oktober 2026" met "Bekijk bij Coolblue";
+  - 20 oktober (prijs ouder dan 14 dagen): alleen de knop "Bekijk de actuele prijs", met de link naar `https://be.navimow.com/products/navimow-i2-awd-robot-lawn-mower`.
+- **Live (ingelogd, weergegeven inhoud):** op de hub (#10) en pagina 1 (#11) toont de kaart van M002 vandaag nog de prijs van 5 oktober, zoals bedoeld.
+- **Fabrikantpagina van de andere zeven modellen** (alleen of het veld is ingevuld; de domeinen zijn hier niet te openen): alle zeven ingevuld met een https-adres: M001 (nl.navimow.com), M004 en M005 (dezelfde pagina op nl.mova.tech), M006 (eufy.com/nl), M008 (nl.dreametech.com), M010 (husqvarna.com/nl), M011 (gardena.com/nl).
+- **Zonder inloggen:** `rmk/v1/modellen` geeft 401.
+
+### Om op te letten
+- Het adres van M002 staat op de **Belgische** Navimow-site (be.navimow.com); M001 linkt naar de Nederlandse (nl.navimow.com). Op verzoek zo ingesteld.
+
+### Nog te doen
+- [ ] Publiceren volgens LANCERING.md op jouw teken; daarna de uptimemonitor.
+- [ ] Nieuwe prijzen pas als er bezoekers zijn (zie LANCERING.md).
