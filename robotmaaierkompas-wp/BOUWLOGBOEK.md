@@ -1739,3 +1739,57 @@ De site is live: **17 pagina's gepubliceerd** (de eerste golf), 59 concepten, 1 
 - [ ] Mandy: CDN-cache legen in hPanel.
 - [ ] Mandy: Search Console en Bing (LANCERING.md, stap 5 en 6) en de uptimemonitor (stap 7).
 - [ ] Bij een volgende themaversie: de twee statuscontroles omzetten naar de situatie na de lancering, en de route `/rmk/v1/noindex` weghalen of beveiligen.
+
+## Ronde 26 (9 oktober 2026): hercontrole #66, drie pagina's, page-sitemap en robots.txt
+Alleen controles; **niets gewijzigd**. Niets teruggezet naar concept, geen thema-zip, robots.txt niet aangeraakt.
+
+### 1. #66 "Onderhoud en mesjes vervangen"
+- Stond al sinds ronde 25 in de prullenbak (status `trash`, slug nu `robotmaaier-mesjes-vervangen__trashed`). Niet opnieuw verwijderd.
+- Opnieuw gecontroleerd: er linkt niets naar #66. Niet vanuit de 17 gepubliceerde pagina's (ruw en weergegeven), niet vanuit de header, de footer of het navigatiemenu. Het oude adres /hulp/robotmaaier-mesjes-vervangen/ geeft 404.
+- Stand: 17 gepubliceerd, 59 concepten, 1 in de prullenbak. De andere conceptsjablonen zijn niet aangeraakt.
+
+### 2. Drie pagina's (als browser en als Googlebot)
+- /, /beste-robotmaaier/ en /robotmaaier-zonder-draad/:
+  - HTTP 200, zonder doorverwijzing;
+  - geen X-Robots-Tag-header;
+  - meta robots "index, follow" (plus de max-…-waarden van Yoast);
+  - een canonical naar het eigen adres;
+  - alle drie staan in /page-sitemap.xml.
+
+### 3. /page-sitemap.xml (met cacheparameter, HTTP 200)
+- Precies de 17 gepubliceerde pagina's, zonder concepten of de prullenbakpagina. Vergeleken met de REST-API: identiek. De lijst:
+  - /
+  - /privacy/
+  - /cookies/
+  - /affiliate-melding/
+  - /redactiebeleid/
+  - /colofon/
+  - /contact/
+  - /over-ons/
+  - /over-ons/mandy-van-den-broek/
+  - /hoe-we-beoordelen/
+  - /robotmaaier-kosten/
+  - /robotmaaier-mesjes/
+  - /robotmaaier-zonder-grensdraad/
+  - /robotmaaier-test-consumentenbond/
+  - /robotmaaier-zonder-draad/
+  - /robotmaaier-test-vergelijking/
+  - /beste-robotmaaier/
+
+### 4. /robots.txt?nc=… (HTTP 200, CDN MISS, last-modified 09:46:47 GMT)
+```
+# START YOAST BLOCK
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /wp-json/rmk/
+Disallow: /wp-content/uploads/rmk/
+
+Sitemap: https://robotmaaierkompas.nl/sitemap_index.xml
+# END YOAST BLOCK
+```
+- **Veranderd sinds ronde 25** (een paar minuten eerder; niet door mij):
+  - **erbij:** `Disallow: /wp-admin/` en `Allow: /wp-admin/admin-ajax.php`;
+  - **weg:** `Disallow: /?s=`, `Disallow: /page/*/?s=` en `Disallow: /search/`.
+- Geen `Disallow: /`. `/wp-json/rmk/` en `/wp-content/uploads/rmk/` staan er nog, met één `Sitemap:`-regel naar `sitemap_index.xml`, zonder verwijzing naar wp-sitemap.xml.
+- Op verzoek niets gewijzigd: Mandy regelt robots.txt zelf in Yoast of hPanel.
