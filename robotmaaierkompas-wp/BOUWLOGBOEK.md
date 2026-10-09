@@ -1815,3 +1815,21 @@ Sitemap: https://robotmaaierkompas.nl/sitemap_index.xml
    - Melden wat elke route doet. Routes die alleen bij de bouw nodig waren (zoals `/paginas` en `/seo`) weghalen of achter een extra instelling zetten (bijvoorbeeld `RMK_BOUWMODUS` in wp-config.php).
    - Ook de knoppen in Gereedschap > Robotmaaierkompas en de WP-CLI-commando's (als die er zijn) meenemen.
    - Pas daarna de zip maken en testen.
+
+### Aanvulling voor 1.3.6 (9 oktober 2026)
+Alleen genoteerd; geen zip.
+
+- **(a) Bouwroutes achter `RMK_BOUW_ACTIVE`.** `/rmk/v1/paginas`, `/rmk/v1/seo` en `/rmk/v1/huisstijl`, en hun knoppen in Gereedschap > Robotmaaierkompas, alleen als `define( 'RMK_BOUW_ACTIVE', true );` in wp-config.php staat. **Standaard uit.**
+  - Zonder die constante worden de routes **niet geregistreerd** (niet alleen geweigerd), en de knoppen worden niet getoond.
+  - Een aanroep geeft dan 404 `rest_no_route`.
+- **(b) `/rmk/v1/modellen` en `/rmk/v1/status` blijven:**
+  - uitsluitend voor beheerders (`permission_callback` met `current_user_can( 'manage_options' )`);
+  - nooit gecachet (`Cache-Control: no-store` en `X-LiteSpeed-Cache-Control: no-cache`, zoals nu voor `/wp-json/rmk/`);
+  - zonder mogelijkheid om de indexering (`blog_public`), de publicatiestatus van pagina's, Yoast-instellingen of de sitemap te wijzigen.
+  - `/modellen` slaat alleen de modelgegevens op en leegt de cache; `/status` leest alleen.
+  - Bij het bouwen nalopen welke functies `/modellen` aanroept: `rmk_validate_modellen()` en `rmk_save_modellen()` mogen niets anders schrijven dan de opties `rmk_modellen` en `rmk_modellen_data` en het bestand in `uploads/rmk/`.
+- **(c) Nieuwe test: elke rmk-route geeft zonder inloggen 401 of 404.**
+  - Haal (zonder inloggen) de index `/wp-json/` en, als die bestaat, `/wp-json/rmk/v1` op. Neem daarnaast de bekende lijst mee (`/rmk/v1`, `/status`, `/modellen`, `/noindex`, `/paginas`, `/seo`, `/huisstijl`), zodat ook routes die niet in de index staan getest worden.
+  - Roep elke route aan met GET en POST, zonder inloggegevens en zonder cookies.
+  - Verwacht: 401 (`rest_forbidden` of "Alleen voor beheerders.") of 404 (`rest_no_route`), nooit 200 of een andere code. Geen gegevens in de antwoorden. Na 1.3.6 moeten `/noindex`, en zonder `RMK_BOUW_ACTIVE` ook `/paginas`, `/seo` en `/huisstijl`, 404 geven.
+  - Als script in `tests/` (bijvoorbeeld `tests/rmk-routes-test.py`), te draaien tegen de live site. Een POST zonder inloggen kan niets wijzigen, dus de test is ook live veilig.
