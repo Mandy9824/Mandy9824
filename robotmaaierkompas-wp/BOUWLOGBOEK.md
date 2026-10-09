@@ -1793,3 +1793,25 @@ Sitemap: https://robotmaaierkompas.nl/sitemap_index.xml
   - **weg:** `Disallow: /?s=`, `Disallow: /page/*/?s=` en `Disallow: /search/`.
 - Geen `Disallow: /`. `/wp-json/rmk/` en `/wp-content/uploads/rmk/` staan er nog, met één `Sitemap:`-regel naar `sitemap_index.xml`, zonder verwijzing naar wp-sitemap.xml.
 - Op verzoek niets gewijzigd: Mandy regelt robots.txt zelf in Yoast of hPanel.
+
+## Voor de volgende themaversie (1.3.6)
+**Pas maken bij een echte wijziging aan het thema, of wanneer Mandy erom vraagt.** Nu geen zip gemaakt.
+
+1. **Route `/rmk/v1/noindex` en de bijbehorende knop volledig verwijderen.**
+   - De route (`inc/bouw.php`, in `rest_api_init`) zet `blog_public` op `0`: "Zoekmachines niet laten indexeren" gaat dan weer aan. Daarna leegt hij de LiteSpeed-cache.
+   - Op de live site is dat schadelijk. Haal de route weg en ook de knop of actie in Gereedschap > Robotmaaierkompas die hem aanroept.
+   - Controleer daarna dat `POST /wp-json/rmk/v1/noindex` 404 geeft (`rest_no_route`).
+2. **De twee controles in het statusoverzicht omkeren of vervangen** (`rmk_status_checks()` in `inc/bouw.php`), zodat ze de lancering weerspiegelen:
+   - "Zoekmachines niet laten indexeren staat aan" is nu OK als `blog_public = 0`. Dat moet worden: "Zoekmachines mogen de site indexeren", OK als `blog_public = 1`.
+   - "Niets gepubliceerd" is nu OK bij 0 gepubliceerde pagina's. Vervangen door bijvoorbeeld "De eerste golf is gepubliceerd" (de 17 pagina's uit LANCERING.md hebben status `publish`, en verder niets onverwachts), of weglaten.
+3. **Alle andere beheerroutes die de indexering of publicatie kunnen aanpassen controleren en melden.**
+   - Startpunt, de routes die ik eerder in `inc/bouw.php` en `inc/data.php` zag (allemaal `manage_options`):
+     - `POST /rmk/v1/paginas`: `rmk_build_pages()`, maakt of wijzigt pagina's, en zet de privacypagina;
+     - `POST /rmk/v1/seo`: `rmk_configure_seo()`, past Yoast-instellingen aan (mogelijk ook indexering of sitemaps);
+     - `POST /rmk/v1/huisstijl`: sitepictogram en standaard deelafbeelding;
+     - `POST /rmk/v1/modellen`: modelgegevens en het legen van de cache;
+     - `GET /rmk/v1/status`: alleen lezen.
+   - Per route nagaan of hij `blog_public`, de paginastatus (publiceren of terug naar concept), Yoast-noindex of de sitemap kan veranderen.
+   - Melden wat elke route doet. Routes die alleen bij de bouw nodig waren (zoals `/paginas` en `/seo`) weghalen of achter een extra instelling zetten (bijvoorbeeld `RMK_BOUWMODUS` in wp-config.php).
+   - Ook de knoppen in Gereedschap > Robotmaaierkompas en de WP-CLI-commando's (als die er zijn) meenemen.
+   - Pas daarna de zip maken en testen.
