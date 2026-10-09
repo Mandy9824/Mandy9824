@@ -1676,3 +1676,66 @@ Uitgevoerd volgens `tekstwijzigingen-controle1.md` (secties A tot en met D), met
 ### Nog te doen
 - [ ] Publiceren volgens LANCERING.md op jouw teken; daarna de uptimemonitor.
 - [ ] Nieuwe prijzen pas als er bezoekers zijn (zie LANCERING.md).
+
+## Ronde 25 (9 oktober 2026): live site, #66 naar de prullenbak, robots.txt en sitemaps
+De site is live: **17 pagina's gepubliceerd** (de eerste golf), 59 concepten, 1 in de prullenbak. Niets teruggezet naar concept; geen nieuwe thema-zip.
+
+### 1. Conceptsjabloon #66 "Onderhoud en mesjes vervangen" naar de prullenbak
+- #66 had slug `robotmaaier-mesjes-vervangen` en stond als concept onder #65 `hulp` (pad /hulp/robotmaaier-mesjes-vervangen/). Het is een dubbel onderwerp met de gepubliceerde mesjespagina #236.
+- **Vooraf gecontroleerd: er linkt niets naar #66.** Gezocht op de slug, `?page_id=66` en `?p=66` in:
+  - de ruwe en weergegeven inhoud van de 17 gepubliceerde pagina's;
+  - de aangepaste header en footer;
+  - het navigatiemenu;
+  - de andere concepten;
+  - de openbare homepage.
+  Geen treffers. #66 had geen subpagina's.
+- Via `DELETE /wp/v2/pages/66` zonder `force`: status nu `trash`, dus herstelbaar via Pagina's > Prullenbak. Er is een back-up van de inhoud in de sessie.
+- **Voor en na:** 60 concepten, 17 gepubliceerd → 59 concepten, 17 gepubliceerd, 1 in de prullenbak. De andere conceptsjablonen zijn niet aangeraakt.
+
+### 2. robots.txt en sitemaps
+- **robots.txt**, gewoon en met `?nc=<tijd>`: beide 200, `text/plain`, CDN `MISS`, en precies dezelfde inhoud (**geen verschil**):
+  ```
+  # START YOAST BLOCK
+  User-agent: *
+  Disallow: /wp-json/rmk/
+  Disallow: /wp-content/uploads/rmk/
+  Disallow: /?s=
+  Disallow: /page/*/?s=
+  Disallow: /search/
+
+  Sitemap: https://robotmaaierkompas.nl/sitemap_index.xml
+  # END YOAST BLOCK
+  ```
+  - Geen `Disallow: /`.
+  - Wel `/wp-json/rmk/` en `/wp-content/uploads/rmk/`.
+  - Eén `Sitemap:`-regel, naar `sitemap_index.xml`.
+  - **Geen verwijzing naar wp-sitemap.xml** en geen dubbele of tegenstrijdige regels.
+  - **Niets veranderd**; dat was niet nodig.
+- **(a) Yoast XML-sitemaps staan aan.** `sitemap_index.xml` wordt door Yoast SEO 28.6 gemaakt, en `wp-sitemap.xml` stuurt met een 301 door naar `sitemap_index.xml`.
+- **(b) `sitemap_index.xml`:** geeft 200 (ook met cacheparameter) en verwijst alleen naar `page-sitemap.xml` (lastmod 2026-10-09 09:32).
+  - `page-sitemap.xml` bevat precies de 17 gepubliceerde pagina's, en geen concepten of prullenbakpagina's. Vergeleken met de lijst uit de REST-API: identiek.
+  - `post-sitemap.xml` geeft 200 maar is leeg (0 URL's, 0 gepubliceerde berichten) en staat niet in de index.
+  - `author-sitemap.xml` en `category-sitemap.xml` geven 404.
+- **(c)** Zie robots.txt hierboven: in orde.
+- **LiteSpeed-cache geleegd** via de dataroute: `POST /rmk/v1/modellen` met de huidige gegevens, ongewijzigd teruggezet (inhoud identiek, alleen `opgeslagen` is bijgewerkt).
+  - Daarna gaf de eerste aanvraag op /, /beste-robotmaaier/ en /robotmaaier-zonder-draad/ `x-litespeed-cache: miss`, en de tweede `hit`.
+  - **Bewust niet gebruikt:** de route `/rmk/v1/noindex`. Die leegt ook de cache, maar zet "Zoekmachines niet laten indexeren" weer **aan** (`blog_public = 0`). Op de live site nooit aanroepen.
+- **Mandy:** leeg ook de **CDN-cache in hPanel** (Website > Prestaties > CDN > Cache legen). Bij deze controles gaf de CDN overal `MISS`, maar een volledige leging is het zekerst.
+
+### 3. Controle van drie pagina's (als browser en als Googlebot)
+
+| Pagina | HTTP | X-Robots-Tag | meta robots | canonical | in sitemap |
+|---|---|---|---|---|---|
+| / | 200 | geen | index, follow (+ max-image-preview:large, max-snippet:-1, max-video-preview:-1) | https://robotmaaierkompas.nl/ (zelf) | ja |
+| /beste-robotmaaier/ | 200 | geen | index, follow (idem) | …/beste-robotmaaier/ (zelf) | ja |
+| /robotmaaier-zonder-draad/ | 200 | geen | index, follow (idem) | …/robotmaaier-zonder-draad/ (zelf) | ja |
+
+### Statusoverzicht (Gereedschap > Robotmaaierkompas)
+- "Zoekmachines niet laten indexeren staat aan": **NEE**. Dat is nu juist goed: indexeren staat aan.
+- "Niets gepubliceerd": **NEE** (17 gepubliceerd). Ook dat is goed.
+- Die twee controles zijn nog geformuleerd voor de tijd vóór de lancering. Alle andere controles zijn OK: Yoast 28.6, `RMK_AFFILIATE_ACTIVE` uit, geen affiliatelinks, prijstaak uit.
+
+### Nog te doen
+- [ ] Mandy: CDN-cache legen in hPanel.
+- [ ] Mandy: Search Console en Bing (LANCERING.md, stap 5 en 6) en de uptimemonitor (stap 7).
+- [ ] Bij een volgende themaversie: de twee statuscontroles omzetten naar de situatie na de lancering, en de route `/rmk/v1/noindex` weghalen of beveiligen.
