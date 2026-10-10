@@ -1833,3 +1833,19 @@ Alleen genoteerd; geen zip.
   - Roep elke route aan met GET en POST, zonder inloggegevens en zonder cookies.
   - Verwacht: 401 (`rest_forbidden` of "Alleen voor beheerders.") of 404 (`rest_no_route`), nooit 200 of een andere code. Geen gegevens in de antwoorden. Na 1.3.6 moeten `/noindex`, en zonder `RMK_BOUW_ACTIVE` ook `/paginas`, `/seo` en `/huisstijl`, 404 geven.
   - Als script in `tests/` (bijvoorbeeld `tests/rmk-routes-test.py`), te draaien tegen de live site. Een POST zonder inloggen kan niets wijzigen, dus de test is ook live veilig.
+
+## Ronde 27 (10 oktober 2026): fabrikantpagina M002 naar de Nederlandse Navimow-site
+### Gewijzigd (live)
+- In de live modelgegevens (`rmk/v1/modellen`) staat bij **M002 (Segway Navimow i206 AWD)** `fabrikant_url` nu op `https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower`. Dat is de Nederlandse pagina van de i2 AWD-serie, die de datasessie als bron heeft gebruikt. Eerst stond hier de Belgische pagina `https://be.navimow.com/products/navimow-i2-awd-robot-lawn-mower` (ronde 24). Nu linken M001 en M002 allebei naar nl.navimow.com.
+- Werkwijze: de live gegevens opgehaald, alleen dit ene veld veranderd en het geheel teruggezet. Daarna opnieuw opgehaald en vóór en na vergeleken: het enige verschil is `modellen[1]/fabrikant_url`. De andere velden en modellen (13 in totaal), de prijzen, scores en teksten zijn gelijk gebleven. Bij het opslaan wordt de paginacache zelf geleegd.
+- **Niet gewijzigd:** pagina's, thema, en de lokale themakopie `data/modellen.json` in deze repository. Daar staat bij M002 nog de be-pagina. De site gebruikt de gegevens uit de database, dus dat heeft live geen effect. Geen zip.
+
+### Gecontroleerd
+- **Kaart van M002:** de prijsfuncties van het thema (`rmk_offer_html`, ongewijzigd sinds 1.3.0) gedraaid op de live gegevens van na de wijziging.
+  - 19 oktober (dag 14): "Laagste nieuwe prijs rond 899 euro bij Coolblue, gezien op 5 oktober 2026", met de knop "Bekijk bij Coolblue".
+  - 20 oktober (dag 15, prijs verlopen): alleen de knop **"Bekijk de actuele prijs"**, met de link naar `https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower`.
+- **Live** op /robotmaaier-zonder-draad/ toont de kaart van M002 vandaag nog de Coolblue-prijs van 5 oktober, zoals bedoeld.
+- De Navimow-pagina zelf is vanuit deze omgeving niet te openen (de proxy blokkeert nl.navimow.com). Het adres is overgenomen zoals je het opgaf.
+
+### Om op te letten
+- De lokale themakopie (be-pagina) loopt nu niet gelijk met de live gegevens (nl-pagina). Bij een volgende themaversie of upload van het modelbestand de nl-pagina overnemen, anders komt de be-pagina terug.
