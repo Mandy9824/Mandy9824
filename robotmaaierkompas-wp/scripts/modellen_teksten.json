@@ -105,5 +105,65 @@
       "Maait willekeurig volgens de handleiding",
       "Geen alarm, GPS of geofence"
     ]
+  },
+  "M015": {
+    "beste_voor": "Tuinen tot 1.000 m² met veel obstakels en hellingen, voor wie geen antenne wil",
+    "pluspunten": [
+      "LiDAR met camera en netwerk-RTK, zonder draad",
+      "Helling 55% volgens de handleiding",
+      "4G ingebouwd met pincode, alarm, GPS en geofence-melding",
+      "Optilsensor: het mes stopt volgens de handleiding",
+      "3 jaar garantie op de maaier"
+    ],
+    "minpunten": [
+      "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+      "Werking van netwerk-RTK zonder dekking niet bevestigd",
+      "Alle messen elke 1 tot 2 maanden vervangen (ongeveer 25 euro per set)",
+      "Nog weinig reviews (17 bij één winkel)"
+    ]
+  },
+  "M016": {
+    "beste_voor": "Kleinere tuinen tot 500 m² met hellingen, met 4G en diefstalbeveiliging ingebouwd",
+    "pluspunten": [
+      "RTK met camera, zonder draad",
+      "Helling 45% volgens de fabrikant",
+      "4G ingebouwd met pincode, alarm, GPS en geofence-melding",
+      "Optilsensor: het mes stopt volgens de handleiding",
+      "3 jaar garantie op de maaier"
+    ],
+    "minpunten": [
+      "Alleen tot 500 m²",
+      "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+      "Netwerk-RTK niet overal beschikbaar; dan heb je de antenne uit de doos nodig",
+      "Navimow noemt all-wheel drive bij drie wielen; de handleiding zegt vierwielaandrijving"
+    ]
+  },
+  "M017": {
+    "beste_voor": "Grote tuinen tot 2.000 m² zonder antenne",
+    "pluspunten": [
+      "LiDAR met camera en netwerk-RTK, zonder draad",
+      "Helling 55% volgens de handleiding",
+      "4G ingebouwd"
+    ],
+    "minpunten": [
+      "Alleen op basisniveau uitgezocht: nog geen score",
+      "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+      "Werking van netwerk-RTK zonder dekking niet bevestigd"
+    ]
+  },
+  "M018": {
+    "beste_voor": "Grote of zeer steile tuinen tot 2.000 m²",
+    "pluspunten": [
+      "RTK met drie camera's (360 graden)",
+      "Helling 84% volgens de handleiding",
+      "Vier aangedreven wielen volgens de handleiding",
+      "4G ingebouwd"
+    ],
+    "minpunten": [
+      "Alleen op basisniveau uitgezocht: nog geen score",
+      "Geluidsvermogen 68 dB(A), het hoogste in deze vergelijking",
+      "Connect+ is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+      "Netwerk-RTK niet overal beschikbaar; anders lokale RTK met de antenne uit de doos"
+    ]
   }
 }

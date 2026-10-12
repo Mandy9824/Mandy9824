@@ -48,6 +48,54 @@
       "veld": "verbinding_per_jaar",
       "bronveld": "Extra kosten: abonnement",
       "vast": "geen"
+    },
+    {
+      "model": "M015",
+      "veld": "verbinding_per_jaar",
+      "bronveld": "Extra kosten: 4G",
+      "regex": "daarna ([\\d,]+) euro per jaar"
+    },
+    {
+      "model": "M015",
+      "veld": "gratis_periode_jaren",
+      "bronveld": "Extra kosten: 4G",
+      "regex": "(\\d+) jaar gratis"
+    },
+    {
+      "model": "M016",
+      "veld": "verbinding_per_jaar",
+      "bronveld": "Extra kosten: 4G",
+      "regex": "daarna ([\\d,]+) euro per jaar"
+    },
+    {
+      "model": "M016",
+      "veld": "gratis_periode_jaren",
+      "bronveld": "Extra kosten: 4G",
+      "regex": "(\\d+) jaar gratis"
+    },
+    {
+      "model": "M017",
+      "veld": "verbinding_per_jaar",
+      "bronveld": "Verbinding",
+      "regex": "daarna ([\\d,]+) euro per jaar"
+    },
+    {
+      "model": "M017",
+      "veld": "gratis_periode_jaren",
+      "bronveld": "Verbinding",
+      "regex": "(\\d+) jaar gratis"
+    },
+    {
+      "model": "M018",
+      "veld": "verbinding_per_jaar",
+      "bronveld": "Verbinding",
+      "regex": "daarna ([\\d,]+) euro per jaar"
+    },
+    {
+      "model": "M018",
+      "veld": "gratis_periode_jaren",
+      "bronveld": "Verbinding",
+      "regex": "(\\d+) jaar gratis"
     }
   ],
   "bewust_leeg": {

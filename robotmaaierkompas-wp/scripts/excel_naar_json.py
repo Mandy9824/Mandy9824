@@ -92,6 +92,8 @@ APP_DELEN = {
     "kaart": "app_kaart", "zones": "app_kaart", "no-go": "app_kaart", "kaart/no-go": "app_kaart",
     "schema": "app_schema", "ota": "ota_updates", "knoppen": "bediening_zonder_app",
     "bediening zonder app": "bediening_zonder_app", "slimme-thuiskoppeling": "app_smarthome",
+    # Schrijfwijze sinds M003 (ronde 28): "App: iOS/Android, kaart/no-go, schema, smart home, knoppen, OTA"
+    "app: ios/android": "app_ios_android", "ios/android": "app_ios_android", "smart home": "app_smarthome",
 }
 STATUS_RANG = {"gecontroleerd": 3, "fabrikantclaim": 2, "winkelclaim": 1}
 STATUS_LEEG = ("niet gevonden", "niet geopend")
@@ -373,6 +375,12 @@ def main():
             naam_winkel = verkoper or re.sub(r"\s*\(.*?\)", "", winkel).strip()
             geldig.append({"bedrag": int(round(prijs)), "winkel": naam_winkel, "datum": d, "url": url, "type": soort})
         laagste = min(geldig, key=lambda p: p["bedrag"]) if geldig else None
+        # Geen prijsregel van de fabrikant: de productpagina uit de bronregel "Beschikbaarheid fabrikant" (ronde 28)
+        if not fabrikant_url:
+            for b in mbron:
+                if norm(kolom(b, "Veld")) == "beschikbaarheid fabrikant" and norm(kolom(b, "Status")) == "gecontroleerd":
+                    fabrikant_url = (re.findall(r"https?://[^\s;()]+", str(kolom(b, "Bron") or "")) or [None])[0]
+                    break
         prijsdatums.extend(datum(kolom(p, "Datum")) for p in mprijs if datum(kolom(p, "Datum")))
 
         # Reviews: alleen regels met bron en peildatum
@@ -409,6 +417,10 @@ def main():
             "veiligheid": s_veiligheid(f),
             "geluid": s_geluid(f),
         }
+        # Niveau basis (Opmerking begint met "NIVEAU BASIS"): alleen kernvelden, geen Scores-rij, dus geen score
+        basis = norm(rij.get("opmerking")).startswith("niveau basis")
+        if basis:
+            scores = {k: None for k in scores}
 
         naam = f"{rij.get('merk') or ''} {rij.get('model') or ''}".strip()
         kosten = {k: {"waarde": None, "bron": None, "datum": None} for k in KOSTEN}
@@ -474,6 +486,7 @@ def main():
             "scores": scores,
             "reviews_gelezen": gelezen,
             "beschikbaarheid": None if leeg(rij.get("beschikbaarheid")) else norm(rij.get("beschikbaarheid")),
+            **({"niveau": "basis"} if basis else {}),
             "verbinding": verbinding,
             "reviews": r_uit,
             "ean": None,  # nog niet in het Excel-bestand; nodig voor de Bol-prijstaak

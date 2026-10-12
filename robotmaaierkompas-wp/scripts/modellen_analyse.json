@@ -22,5 +22,17 @@
   },
   "M011": {
     "analyse": "De Gardena Smart Sileno Free 800 krijgt zijn RTK-correctie via een gateway die met een LAN-kabel op je router moet, dus je hebt stabiel internet en een vrije poort nodig. Er is geen abonnement en geen 4G. Hij heeft geen camera: obstakels merkt hij pas na een botsing, en volgens de handleiding maait hij willekeurig. Pincode en optilsensor zijn er wel, een alarm, GPS of geofence niet. Hij past bij kleinere, overzichtelijke tuinen tot 800 m²."
+  },
+  "M015": {
+    "analyse": "De i210 LiDAR Pro combineert LiDAR met een camera en netwerk-RTK, zodat je in principe geen antenne nodig hebt. Hij is bedoeld voor tuinen tot 1.000 m² en haalt volgens de handleiding 55% helling. Alle veiligheidsfuncties zijn aanwezig, inclusief een optilsensor die het mes stopt, en 4G zit erin: het eerste jaar gratis, daarna 29,99 euro per jaar. In onze functiescore staat dit model bovenaan, maar er zijn nog te weinig reviews gelezen voor een betrouwbaarheidsscore."
+  },
+  "M016": {
+    "analyse": "De Navimow i205 AWD is de instap voor kleinere tuinen tot 500 m². Hij gebruikt RTK met camera, haalt volgens de fabrikant 45% helling en heeft 4G ingebouwd met een jaar gratis data. Netwerk-RTK wordt automatisch en gratis ingeschakeld als jouw regio het ondersteunt; anders gebruik je de antenne uit de doos. Optioneel kun je een garage kopen (149 euro) en een antennemontageset (59,99 euro)."
+  },
+  "M017": {
+    "analyse": "De i220 LiDAR Pro is de grotere variant van de i210 Pro, voor tuinen tot 2.000 m². Navigatie met LiDAR en camera, volgens Navimow ook netwerk-RTK, helling 55% en een geluidsvermogen van 59 dB(A). 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
+  },
+  "M018": {
+    "analyse": "De X420 is de zwaardere maaier van Navimow voor tuinen tot 2.000 m². Hij werkt met RTK en drie camera's die 360 graden dekken, en de handleiding noemt een helling van 84% en vier aangedreven wielen. Het geluidsvermogen is 68 dB(A), hoger dan de i-serie. 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
   }
 }

@@ -68,7 +68,7 @@
           "status": "fabrikantclaim"
         },
         "gratis_periode_jaren": {
-          "waarde": 1.0,
+          "waarde": 1,
           "bron": "https://nl.navimow.com/products/navimow-access",
           "datum": "2026-10-05",
           "status": "fabrikantclaim"
@@ -510,7 +510,7 @@
         "prijskwaliteit": null,
         "hellingen": 8,
         "app": 10,
-        "veiligheid": 10.0,
+        "veiligheid": 10,
         "geluid": 6
       },
       "reviews_gelezen": 0,
@@ -565,7 +565,7 @@
         "url": "https://www.coolblue.nl/product/975016/segway-navimow-i206-awd.html",
         "type": "winkel"
       },
-      "fabrikant_url": "https://be.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
       "beste_voor": "Tuinen tot ongeveer 600 m² met hellingen en obstakels, voor wie ingebouwde diefstalbeveiliging belangrijk is",
       "pluspunten": [
         "Netwerk-RTK met camera, zonder draad",
@@ -703,7 +703,7 @@
           "datum": "2026-10-05"
         },
         "antidiefstal": {
-          "waarde": 249.0,
+          "waarde": 249,
           "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module",
           "datum": "2026-10-05",
           "status": "fabrikantclaim"
@@ -720,7 +720,7 @@
           "bron_url": "https://nl.mova.tech/products/mova-robot-lawn-mower-kit"
         },
         "accu_prijs": {
-          "waarde": 79.0,
+          "waarde": 79,
           "bron": "https://nl.mova.tech/products/oplaadbare-lithium-ion-batterij-robotmaaier",
           "datum": "2026-10-05",
           "status": "fabrikantclaim"
@@ -990,7 +990,7 @@
           "datum": "2026-10-05"
         },
         "antidiefstal": {
-          "waarde": 249.0,
+          "waarde": 249,
           "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module",
           "datum": "2026-10-05",
           "status": "fabrikantclaim"
@@ -1007,7 +1007,7 @@
           "bron_url": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module"
         },
         "accu_prijs": {
-          "waarde": 79.0,
+          "waarde": 79,
           "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module",
           "datum": "2026-10-05",
           "status": "fabrikantclaim"
@@ -1568,7 +1568,7 @@
           "datum": null
         }
       },
-      "specs": {},
+      "specs": [],
       "scores": {
         "betrouwbaarheid": null,
         "navigatie": null,
@@ -2095,7 +2095,7 @@
         "prijskwaliteit": null,
         "hellingen": 6,
         "app": 9,
-        "veiligheid": 10.0,
+        "veiligheid": 10,
         "geluid": 6
       },
       "reviews_gelezen": 0,
@@ -2471,7 +2471,7 @@
           "datum": null
         }
       },
-      "specs": {},
+      "specs": [],
       "scores": {
         "betrouwbaarheid": null,
         "navigatie": null,
@@ -2648,7 +2648,7 @@
           "datum": null
         }
       },
-      "specs": {},
+      "specs": [],
       "scores": {
         "betrouwbaarheid": null,
         "navigatie": null,
@@ -2669,6 +2669,825 @@
       "pluspunten": [],
       "minpunten": [],
       "analyse": null
+    },
+    {
+      "id": "M015",
+      "slug": "segway-navimow-i210-lidar-pro",
+      "naam": "Segway Navimow i210 LiDAR Pro",
+      "merk": "Segway Navimow",
+      "model": "i210 LiDAR Pro",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": 0,
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": 29.99,
+          "bron": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10",
+          "status": "fabrikantclaim"
+        },
+        "gratis_periode_jaren": {
+          "waarde": 1,
+          "bron": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10",
+          "status": "fabrikantclaim"
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "LiDAR",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 1000,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "max_helling_pct": {
+          "waarde": 55,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "geluid_dba": {
+          "waarde": 59,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "ip_klasse": {
+          "waarde": "IP66",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "maaibreedte_cm": {
+          "waarde": 22,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "maaihoogte_mm": {
+          "waarde": "20-70",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "gps_tracking": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "mes_stop": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "geofence": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_smarthome": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_rating": {
+          "waarde": 4.51,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "garantie": {
+          "waarde": "3 jaar toestel; 2 jaar accu en voedingsadapter; messen niet (handleiding 6.3)",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": 10,
+        "prijskwaliteit": null,
+        "hellingen": 10,
+        "app": 10,
+        "veiligheid": 10,
+        "geluid": 6
+      },
+      "reviews_gelezen": 0,
+      "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "4G ingebouwd; na het eerste jaar betaald",
+        "extra": "ingebouwd",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-10",
+        "bron": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower"
+      },
+      "reviews": [
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-10",
+          "aantal_totaal": 17,
+          "gemiddelde": 9.1,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
+        }
+      ],
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+      "beste_voor": "Tuinen tot 1.000 m² met veel obstakels en hellingen, voor wie geen antenne wil",
+      "pluspunten": [
+        "LiDAR met camera en netwerk-RTK, zonder draad",
+        "Helling 55% volgens de handleiding",
+        "4G ingebouwd met pincode, alarm, GPS en geofence-melding",
+        "Optilsensor: het mes stopt volgens de handleiding",
+        "3 jaar garantie op de maaier"
+      ],
+      "minpunten": [
+        "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+        "Werking van netwerk-RTK zonder dekking niet bevestigd",
+        "Alle messen elke 1 tot 2 maanden vervangen (ongeveer 25 euro per set)",
+        "Nog weinig reviews (17 bij één winkel)"
+      ],
+      "analyse": "De i210 LiDAR Pro combineert LiDAR met een camera en netwerk-RTK, zodat je in principe geen antenne nodig hebt. Hij is bedoeld voor tuinen tot 1.000 m² en haalt volgens de handleiding 55% helling. Alle veiligheidsfuncties zijn aanwezig, inclusief een optilsensor die het mes stopt, en 4G zit erin: het eerste jaar gratis, daarna 29,99 euro per jaar. In onze functiescore staat dit model bovenaan, maar er zijn nog te weinig reviews gelezen voor een betrouwbaarheidsscore."
+    },
+    {
+      "id": "M016",
+      "slug": "segway-navimow-i205-awd",
+      "naam": "Segway Navimow i205 AWD",
+      "merk": "Segway Navimow",
+      "model": "i205 AWD",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": 0,
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": 29.99,
+          "bron": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+          "datum": "2026-10-10",
+          "status": "fabrikantclaim"
+        },
+        "gratis_periode_jaren": {
+          "waarde": 1,
+          "bron": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+          "datum": "2026-10-10",
+          "status": "fabrikantclaim"
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "RTK+vision",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "zones": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "obstakelontwijking": {
+          "waarde": "ja",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 500,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "max_helling_pct": {
+          "waarde": 45,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "geluid_dba": {
+          "waarde": 59,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "ip_klasse": {
+          "waarde": "IP66",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "maaibreedte_cm": {
+          "waarde": 18,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "maaihoogte_mm": {
+          "waarde": "20-60",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "pincode": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "alarm": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "gps_tracking": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "mes_stop": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "obstakeldetectie": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "geofence": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "app_ios_android": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_kaart": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_schema": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_smarthome": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "bediening_zonder_app": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "ota_updates": {
+          "waarde": 1,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "app_rating": {
+          "waarde": 4.51,
+          "status": "gecontroleerd",
+          "bron": "https://itunes.apple.com/lookup?id=1602205067&country=nl ; https://play.google.com/store/apps/details?id=com.segway.mower&hl=nl&gl=NL",
+          "datum": "2026-10-10"
+        },
+        "garantie": {
+          "waarde": "3 jaar toestel; 2 jaar accu en voedingsadapter; messen niet (handleiding 6.3)",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        },
+        "extra_installatiekosten": {
+          "waarde": 0,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A) ; https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "vierwielaandrijving": {
+          "waarde": null,
+          "status": "tegenstrijdig",
+          "bron": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower ; https://navimow-support.zendesk.com/hc/article_attachments/55054004005401 (Navimow i2 AWD-series User Manual-EU-260109-nl-NL; titelpagina 260109-A)",
+          "datum": "2026-10-10"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": 10,
+        "prijskwaliteit": null,
+        "hellingen": 8,
+        "app": 10,
+        "veiligheid": 10,
+        "geluid": 6
+      },
+      "reviews_gelezen": 0,
+      "beschikbaarheid": "nieuw",
+      "verbinding": {
+        "tekst": "4G ingebouwd; na het eerste jaar betaald",
+        "extra": "ingebouwd",
+        "status": "fabrikantclaim",
+        "datum": "2026-10-10",
+        "bron": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower"
+      },
+      "reviews": [
+        {
+          "bron": "Coolblue",
+          "peildatum": "2026-10-10",
+          "aantal_totaal": 7,
+          "gemiddelde": 9.3,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
+        },
+        {
+          "bron": "Hornbach.nl",
+          "peildatum": "2026-10-10",
+          "aantal_totaal": 4,
+          "gemiddelde": 4.8,
+          "aantal_gelezen": null,
+          "structurele_storingen": null,
+          "installatie_of_gebruiksfouten": null,
+          "gepoold": null,
+          "opmerking": "Gemiddelde op 5; productpagina. Teksten niet gelezen"
+        }
+      ],
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
+      "beste_voor": "Kleinere tuinen tot 500 m² met hellingen, met 4G en diefstalbeveiliging ingebouwd",
+      "pluspunten": [
+        "RTK met camera, zonder draad",
+        "Helling 45% volgens de fabrikant",
+        "4G ingebouwd met pincode, alarm, GPS en geofence-melding",
+        "Optilsensor: het mes stopt volgens de handleiding",
+        "3 jaar garantie op de maaier"
+      ],
+      "minpunten": [
+        "Alleen tot 500 m²",
+        "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+        "Netwerk-RTK niet overal beschikbaar; dan heb je de antenne uit de doos nodig",
+        "Navimow noemt all-wheel drive bij drie wielen; de handleiding zegt vierwielaandrijving"
+      ],
+      "analyse": "De Navimow i205 AWD is de instap voor kleinere tuinen tot 500 m². Hij gebruikt RTK met camera, haalt volgens de fabrikant 45% helling en heeft 4G ingebouwd met een jaar gratis data. Netwerk-RTK wordt automatisch en gratis ingeschakeld als jouw regio het ondersteunt; anders gebruik je de antenne uit de doos. Optioneel kun je een garage kopen (149 euro) en een antennemontageset (59,99 euro)."
+    },
+    {
+      "id": "M017",
+      "slug": "segway-navimow-i220-lidar-pro",
+      "naam": "Segway Navimow i220 LiDAR Pro",
+      "merk": "Segway Navimow",
+      "model": "i220 LiDAR Pro",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": 29.99,
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10",
+          "status": "gecontroleerd"
+        },
+        "gratis_periode_jaren": {
+          "waarde": 1,
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10",
+          "status": "gecontroleerd"
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "LiDAR",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 2000,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        },
+        "max_helling_pct": {
+          "waarde": 55,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A) ; https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+          "datum": "2026-10-10"
+        },
+        "geluid_dba": {
+          "waarde": 59,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)",
+          "datum": "2026-10-10"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "beschikbaarheid": "nieuw",
+      "niveau": "basis",
+      "verbinding": {
+        "tekst": "4G ingebouwd; na het eerste jaar betaald",
+        "extra": "ingebouwd",
+        "status": "gecontroleerd",
+        "datum": "2026-10-10",
+        "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)"
+      },
+      "reviews": [],
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
+      "beste_voor": "Grote tuinen tot 2.000 m² zonder antenne",
+      "pluspunten": [
+        "LiDAR met camera en netwerk-RTK, zonder draad",
+        "Helling 55% volgens de handleiding",
+        "4G ingebouwd"
+      ],
+      "minpunten": [
+        "Alleen op basisniveau uitgezocht: nog geen score",
+        "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+        "Werking van netwerk-RTK zonder dekking niet bevestigd"
+      ],
+      "analyse": "De i220 LiDAR Pro is de grotere variant van de i210 Pro, voor tuinen tot 2.000 m². Navigatie met LiDAR en camera, volgens Navimow ook netwerk-RTK, helling 55% en een geluidsvermogen van 59 dB(A). 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
+    },
+    {
+      "id": "M018",
+      "slug": "segway-navimow-x420",
+      "naam": "Segway Navimow X420",
+      "merk": "Segway Navimow",
+      "model": "X420",
+      "kosten": {
+        "aanschaf": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "installatie": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antidiefstal": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "antenne_gateway": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "messen_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_prijs": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "accu_levensduur_jaren": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "stroom_kwh_per_seizoen": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        },
+        "verbinding_per_jaar": {
+          "waarde": 29.99,
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A)",
+          "datum": "2026-10-12",
+          "status": "gecontroleerd"
+        },
+        "gratis_periode_jaren": {
+          "waarde": 1,
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A)",
+          "datum": "2026-10-12",
+          "status": "gecontroleerd"
+        },
+        "onderhoud_per_jaar": {
+          "waarde": null,
+          "bron": null,
+          "datum": null
+        }
+      },
+      "specs": {
+        "navigatie": {
+          "waarde": "RTK+vision",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A) ; https://nl.navimow.com/products/navimow-x4-robot-lawn-mower",
+          "datum": "2026-10-12"
+        },
+        "begrenzingsdraad": {
+          "waarde": "nee",
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A) ; https://nl.navimow.com/products/navimow-x4-robot-lawn-mower",
+          "datum": "2026-10-12"
+        },
+        "max_tuingrootte_m2": {
+          "waarde": 2000,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A)",
+          "datum": "2026-10-12"
+        },
+        "max_helling_pct": {
+          "waarde": 84,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A) ; https://nl.navimow.com/products/navimow-x4-robot-lawn-mower",
+          "datum": "2026-10-12"
+        },
+        "geluid_dba": {
+          "waarde": 68,
+          "status": "gecontroleerd",
+          "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A)",
+          "datum": "2026-10-12"
+        }
+      },
+      "scores": {
+        "betrouwbaarheid": null,
+        "navigatie": null,
+        "prijskwaliteit": null,
+        "hellingen": null,
+        "app": null,
+        "veiligheid": null,
+        "geluid": null
+      },
+      "reviews_gelezen": 0,
+      "beschikbaarheid": "nieuw",
+      "niveau": "basis",
+      "verbinding": {
+        "tekst": "4G ingebouwd; na het eerste jaar betaald",
+        "extra": "ingebouwd",
+        "status": "gecontroleerd",
+        "datum": "2026-10-12",
+        "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A)"
+      },
+      "reviews": [],
+      "ean": null,
+      "prijs": null,
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-x4-robot-lawn-mower",
+      "beste_voor": "Grote of zeer steile tuinen tot 2.000 m²",
+      "pluspunten": [
+        "RTK met drie camera's (360 graden)",
+        "Helling 84% volgens de handleiding",
+        "Vier aangedreven wielen volgens de handleiding",
+        "4G ingebouwd"
+      ],
+      "minpunten": [
+        "Alleen op basisniveau uitgezocht: nog geen score",
+        "Geluidsvermogen 68 dB(A), het hoogste in deze vergelijking",
+        "Connect+ is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
+        "Netwerk-RTK niet overal beschikbaar; anders lokale RTK met de antenne uit de doos"
+      ],
+      "analyse": "De X420 is de zwaardere maaier van Navimow voor tuinen tot 2.000 m². Hij werkt met RTK en drie camera's die 360 graden dekken, en de handleiding noemt een helling van 84% en vier aangedreven wielen. Het geluidsvermogen is 68 dB(A), hoger dan de i-serie. 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
     }
   ]
 }

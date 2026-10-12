@@ -8,6 +8,10 @@
     { "model": "M004", "bronveld": "Extra kosten: link-module (4G)", "tekst": "Losse link-module", "extra": "module" },
     { "model": "M005", "bronveld": "Extra kosten: link-module, messen, accu", "tekst": "Losse link-module", "extra": "module" },
     { "model": "M008", "bronveld": "Extra kosten: Link-module (4G)", "tekst": "Losse link-module", "extra": "module" },
-    { "model": "M011", "bronveld": "Extra kosten: abonnement", "tekst": "Geen abonnement, geen GPS-tracking", "extra": "geen" }
+    { "model": "M011", "bronveld": "Extra kosten: abonnement", "tekst": "Geen abonnement, geen GPS-tracking", "extra": "geen" },
+    { "model": "M015", "bronveld": "Extra kosten: 4G", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" },
+    { "model": "M016", "bronveld": "Extra kosten: 4G", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" },
+    { "model": "M017", "bronveld": "Verbinding", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" },
+    { "model": "M018", "bronveld": "Verbinding", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" }
   ]
 }

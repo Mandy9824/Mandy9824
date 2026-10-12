@@ -1849,3 +1849,83 @@ Alleen genoteerd; geen zip.
 
 ### Om op te letten
 - De lokale themakopie (be-pagina) loopt nu niet gelijk met de live gegevens (nl-pagina). Bij een volgende themaversie of upload van het modelbestand de nl-pagina overnemen, anders komt de be-pagina terug.
+
+## Ronde 28 (12 oktober 2026): Navimow-modellen M015 tot en met M018, conceptpagina Segway Navimow
+**Niets gepubliceerd**: 17 gepubliceerd (ongewijzigd), 60 concepten (was 59, plus de nieuwe pagina), 0 gepubliceerde berichten. Geen thema-zip.
+
+Aangeleverd: het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (M018 toegevoegd op 12 oktober), `pagina-segway-navimow.md` en `modellen-teksten-navimow.json`.
+
+### 1. Modelgegevens (live, via `rmk/v1/modellen`)
+- **Geüpload: de 13 live modellen ongewijzigd, plus M015, M016, M017 en M018**: 17 modellen. Ook de algemene velden (`gegenereerd`, `algemeen`) zijn ongewijzigd, zodat de datums op de pagina's niet verschuiven.
+- De vier nieuwe modellen komen uit het Excel-bestand via `scripts/excel_naar_json.py` (zelfde regels als altijd: alleen velden met bron en datum, geen Bol).
+  - **M015 Navimow i210 LiDAR Pro:** functiescore **96,4** (navigatie 10, hellingen 10, app 10, veiligheid 10, geluid 6).
+  - **M016 Navimow i205 AWD:** functiescore **92,7**. Beide gelijk aan het blad Scores.
+  - **M017 Navimow i220 LiDAR Pro** en **M018 Navimow X420**: niveau basis, `"niveau": "basis"`, alle scoreonderdelen leeg, dus **geen score**. Alleen de kernvelden (navigatie, draad, oppervlak, helling, geluid, verbinding).
+  - **Prijzen: geen.** Het blad Prijzen heeft geen regels voor M015 tot en met M018, dus er staat ook geen Bol-gegeven in (de hele upload bevat geen "bol").
+  - **Fabrikantpagina** (`fabrikant_url`, voor de knop "Bekijk de actuele prijs"): uit de bronregel "Beschikbaarheid fabrikant" (gecontroleerd):
+    - M015 en M017: `https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower`
+    - M016: `https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower` (dezelfde als M002)
+    - M018: `https://nl.navimow.com/products/navimow-x4-robot-lawn-mower`
+    - M001 en M002 hadden al een nl.navimow.com-pagina (ongewijzigd).
+  - **Teksten** (beste_voor, analyse, plus- en minpunten) uit `modellen-teksten-navimow.json`.
+  - **Verbinding** "4G ingebouwd; na het eerste jaar betaald" (kaartveld "4G"), en de kosten 29,99 euro per jaar na 1 gratis jaar.
+- **Vóór en na vergeleken:** de 13 bestaande modellen zijn identiek; de vier nieuwe staan erin zoals verstuurd (alleen notatieverschil 10.0 tegenover 10).
+- **Weergave van alle 17 gepubliceerde pagina's vóór en na de upload vergeleken** (kaarten, scores, scorecellen, tabelrijen en de volledige tekst): **alles gelijk**.
+  - Hub /beste-robotmaaier/: dezelfde 5 kaarten (i206 AWD 92,7, 410VE NERA 87,3, LiDAX Ultra 1200 80,5, A1 Pro 78,6, Sileno Free 800 60,9).
+  - Pagina 1 /robotmaaier-zonder-draad/: dezelfde 8 kaarten en scoretabel.
+  - **M003 (i210 LiDAR) staat op geen enkele gepubliceerde pagina**; M015 tot en met M018 ook niet.
+- **Scriptaanpassingen** (`scripts/`), zodat een nieuwe run hetzelfde oplevert:
+  - `excel_naar_json.py`:
+    - herkent de veldnaam "App: iOS/Android, …, smart home, …" (anders ontbrak de app-score en kreeg M015 geen score);
+    - neemt de fabrikantpagina uit "Beschikbaarheid fabrikant" als er geen prijsregel van de fabrikant is;
+    - geeft modellen met "NIVEAU BASIS" in de opmerking geen score.
+  - `modellen_teksten.json` en `modellen_analyse.json`: de Navimow-teksten erbij.
+  - `verbinding_toewijzing.json` en `kosten_toewijzing.json`: de regels voor M015 tot en met M018.
+- **Lokale themakopie** `data/modellen.json` (reserve): gelijk aan live. Daarmee staat de nl-pagina van M002 (ronde 27) er nu ook in.
+
+### 2. Conceptpagina segway-navimow-robotmaaier (#264)
+- **Status concept**, hoofdniveau (`/segway-navimow-robotmaaier/`, net als de gepubliceerde pagina's; niet onder het concept /merken/). Titel en metabeschrijving uit de md; kruimelpadtitel "Segway Navimow robotmaaier".
+- Opbouw: patroon pagina-merk (eyebrow "Merk"), met het skelet van de hub. Gebouwd met `scripts/ronde28_bouw.py`, de inhoud staat in `scripts/ronde28/navimow.json`, en `scripts/ronde28_upload.py` maakt of werkt de pagina alleen als concept bij.
+- **Zes productkaarten** in de volgorde van de tekst: i205 AWD (M016), i206 AWD (M002), i210 LiDAR Pro (M015), i220 LiDAR Pro (M017), X420 (M018), i105E (M001). De kop "### …" uit de md is de titel van de kaart (geen dubbele kop).
+  - Het thema vult per kaart de specificatiekaart, Beste voor, analyse, plus- en minpunten en het prijsblok in.
+  - **Scores:** 92,7 / 92,7 / 96,4 / – / – / 75,9.
+  - **M017 en M018: "Niet beoordeeld"**, als vaste cel zonder `data-rmk-score`. Het thema hoeft daarvoor niet te veranderen.
+  - **Prijsblok:** vijf kaarten tonen "Bekijk de actuele prijs" naar de Navimow-pagina. M002 toont tot en met 19 oktober "rond 899 euro bij Coolblue" en daarna ook de knop. Zo laten op verzoek: de regel "geen prijzen van winkels met naam" gaat over de lopende tekst.
+- **Lopende tekst:** geen winkelnamen bij prijzen. Alle bedragen zijn van Navimow (4G, Access+, messen, garage, antenneset).
+- **Interne links:**
+  - in de tekst: Hoe we beoordelen (#scoremodel), de keuzehulp op /robotmaaier-zonder-draad/#keuzehulp, /robotmaaier-mesjes/, /robotmaaier-kosten/ en /robotmaaier-zonder-grensdraad/ (FAQ);
+  - een lijst "Meer lezen" (toegevoegd, de md had er geen) met /beste-robotmaaier/, /robotmaaier-zonder-draad/, /robotmaaier-test-vergelijking/ en /robotmaaier-kosten/;
+  - de modelnamen in beide tabellen linken naar hun kaart.
+- **FAQ:** zes vragen. Daarna "Wat we nog niet weten" met een mailto-link.
+- **Bronnen** per model uit het blad Bronnen (handleidingen, fabrikantpagina's en appwinkels; geen winkels, winkelclaims of Bol), en het scoremodel als eigen methode.
+  - Bij een regel met twee adressen op hetzelfde domein staat "pdf-bijlage" of "supportartikel" in plaats van het lange pad; anders scrolde de pagina op 360 px zijwaarts.
+- Auteursblok als patroon.
+
+### 3. Links vanaf de hub en pagina 1: klaargezet, niet geplaatst
+- **Besluit Mandy:** de hub en pagina 1 zijn gepubliceerd, de Navimow-pagina is een concept. Een link zou nu een 404 geven, dus de links worden nog niet geplaatst.
+- `scripts/ronde28_links.py` voegt toe: "Alle Segway Navimow-modellen die nu nieuw te koop zijn, met kosten: zie Segway Navimow robotmaaier." (link naar /segway-navimow-robotmaaier/):
+  - **/beste-robotmaaier/ (#10):** als eerste regel onder "Meer lezen";
+  - **/robotmaaier-zonder-draad/ (#11):** als alinea direct onder "De modellen een voor een".
+- Getest op kopieën van de live inhoud: precies één ankerpunt, en verder verandert er niets.
+- **Live geweigerd:** "/segway-navimow-robotmaaier/ is niet gepubliceerd". Het script schrijft pas als de pagina gepubliceerd is.
+- De hub en pagina 1 zijn niet aangeraakt (inhoud en wijzigingsdatum gelijk aan vóór deze ronde).
+
+### 4. Controles
+- **Interne links** op de nieuwe pagina: alle 12 adressen geven 200 (zonder inloggen), alle ankers bestaan (6 kaarten, #scoremodel, #verdienmodel, #keuzehulp).
+- **Geen `[`, geen `{{` of invulveld**, geen Bol, geen affiliatelinks (`/ga/`, sponsored). Eén h1.
+- **Browser** (Chromium, de weergegeven conceptinhoud in het live paginaskelet), op 360, 390, 768, 1024 en 1440 px: geen zijwaarts scrollen, geen scriptfouten, 6 kaarten, twee keer "Niet beoordeeld".
+- **Niets gepubliceerd:**
+  - 17 gepubliceerd (dezelfde lijst), 60 concepten, geen statuswijzigingen, 0 berichten;
+  - zonder inloggen geven /segway-navimow-robotmaaier/ en `?page_id=264` 404;
+  - de REST-API zonder inloggen geeft een lege lijst;
+  - de page-sitemap bevat 17 URL's, zonder Navimow-pagina.
+- **paginatekst-navimow.md** (de volledige weergegeven tekst, met kaarten en bronnen) als download aan Mandy gegeven, niet in de repository.
+
+### Om op te letten
+- **Analyse van M002** (bestaande tekst, niet gewijzigd): "In onze functiescore staat dit model bovenaan". Op de Navimow-pagina scoort M015 hoger (96,4), en die analyse zegt hetzelfde. Op de hub en pagina 1 klopt de zin wel, want daar staat M015 niet. Aanpassen kan alleen in de modelgegevens, en dan geldt het voor alle pagina's.
+- **Het nieuwe Excel-bestand heeft nieuwere prijzen (7 oktober) voor de bestaande modellen.** Die zijn niet geüpload: de bestaande modellen moesten ongewijzigd blijven. Live staan nog de prijzen van 5 oktober, die na 19 oktober vervallen.
+- **M002 in het Excel-bestand** heeft geen fabrikantpagina (geen prijsregel van de fabrikant en geen regel "Beschikbaarheid fabrikant"). Wie de modelgegevens opnieuw uit het Excel-bestand maakt, verliest de nl-pagina van M002, tenzij die regel erin komt.
+- **M001 in de kaart:** navigatie "RTK + camera" (bestaande modelgegevens); de tabel in de md zegt "Eigen GNSS-antenne met camera". Niet gewijzigd.
+
+### Nog te doen
+- [ ] Mandy: de conceptpagina #264 nalezen en publiceren op jouw teken. Daarna draai ik `python3 scripts/ronde28_links.py --schrijf` voor de links op de hub en pagina 1, en controleer ik live.
