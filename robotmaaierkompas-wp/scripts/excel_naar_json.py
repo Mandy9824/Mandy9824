@@ -113,6 +113,22 @@ KOSTEN_BRONVELDEN = {
 }
 
 
+# App Store (ronde 29): de bronnenlijsten linken naar de leesbare App Store-pagina, niet naar itunes.apple.com/lookup
+# of /search. Naam in het pad alleen waar die bevestigd is (Bronnen); anders apps.apple.com/nl/app/id<nummer>.
+APPSTORE_NAAM = {"1602205067": "navimow", "6499421624": "movahome"}
+
+
+def app_store(tekst):
+    """Vervangt elk itunes.apple.com-adres (met een eventuele toelichting "(id 123)" erachter) door apps.apple.com."""
+    def vervang(m):
+        nr = re.search(r"[?&]id=(\d+)", m.group(0)) or re.search(r"\bid (\d+)\b", m.group(1) or "")
+        if not nr:
+            return m.group(0)
+        naam = APPSTORE_NAAM.get(nr.group(1))
+        return f"https://apps.apple.com/nl/app/{naam + '/' if naam else ''}id{nr.group(1)}"
+    return re.sub(r"https?://itunes\.apple\.com/(?:&amp;|[^\s;()\"<])*(?:\s*\(([^()]*)\))?", vervang, str(tekst or ""))
+
+
 def norm(s):
     return re.sub(r"\s+", " ", str(s or "").strip().lower())
 
@@ -309,7 +325,7 @@ def main():
         beste = {}
         for b in mbron:
             status = norm(kolom(b, "Status"))
-            regel = {"bron": str(kolom(b, "Bron") or "").strip(), "datum": datum(kolom(b, "Datum")),
+            regel = {"bron": app_store(kolom(b, "Bron")).strip(), "datum": datum(kolom(b, "Datum")),
                      "status": status, "bronwaarde": None if leeg(kolom(b, "Waarde")) else str(kolom(b, "Waarde")),
                      "opmerking": None if leeg(kolom(b, "Opmerking")) else str(kolom(b, "Opmerking"))}
             if "bol.com" in norm(regel["bron"]) or "bol.com" in norm(kolom(b, "Veld")):
@@ -386,7 +402,7 @@ def main():
         # Reviews: alleen regels met bron en peildatum
         r_uit, gelezen, storingen = [], 0, 0
         for r in mrev:
-            bron, d = str(kolom(r, "Bron") or "").strip(), datum(kolom(r, "Peildatum"))
+            bron, d = app_store(kolom(r, "Bron")).strip(), datum(kolom(r, "Peildatum"))
             if not bron or not d:
                 continue
             if "bol" in norm(bron):
@@ -443,7 +459,7 @@ def main():
                 rapport["kosten_niet_gebruikt"].append(f"{mid} verbinding: bronregel ontbreekt of status {st or '-'}")
                 continue
             verbinding = {"tekst": t["tekst"], "extra": t["extra"], "status": st, "datum": datum(kolom(rij_b, "Datum")),
-                          "bron": str(kolom(rij_b, "Bron") or "").split(" ; ")[0].strip()}
+                          "bron": app_store(kolom(rij_b, "Bron")).split(" ; ")[0].strip()}
         if leeg(rij.get("beschikbaarheid")):
             rapport["beschikbaarheid_onbekend"].append(mid)
         # Kostenvelden uit de vaste toewijzing (scripts/kosten_toewijzing.json)
@@ -452,7 +468,7 @@ def main():
                 continue
             rij_b = next((b for b in mbron if norm(kolom(b, "Veld")) == norm(t["bronveld"])), None)
             st = norm(kolom(rij_b, "Status")) if rij_b else ""
-            bron_t, datum_t = (str(kolom(rij_b, "Bron") or "").strip(), datum(kolom(rij_b, "Datum"))) if rij_b else ("", None)
+            bron_t, datum_t = (app_store(kolom(rij_b, "Bron")).strip(), datum(kolom(rij_b, "Datum"))) if rij_b else ("", None)
             if not rij_b or not bron_t or not datum_t or st.startswith(STATUS_LEEG) or st.startswith("tegenstrijdig") \
                     or st.startswith("winkelclaim") or "bol.com" in norm(bron_t):
                 rapport["kosten_niet_gebruikt"].append(f"{mid} {t['veld']}: bronregel ontbreekt of status {st or '-'}")
@@ -475,7 +491,7 @@ def main():
             if not rij_b or not datum(kolom(rij_b, "Datum")):
                 rapport["kosten_niet_gebruikt"].append(f"{mid} {t['veld']}: bronregel '{t['bronveld']}' ontbreekt")
                 continue
-            url_b = str(kolom(rij_b, "Bron") or "").split(" ; ")[0].strip()
+            url_b = app_store(kolom(rij_b, "Bron")).split(" ; ")[0].strip()
             kosten[t["veld"]] = {"waarde": t["waarde"], "bron": t.get("bron") or url_b, "datum": datum(kolom(rij_b, "Datum")), "bron_url": url_b}
             if t.get("toelichting"):
                 kosten[t["veld"]]["toelichting"] = t["toelichting"]

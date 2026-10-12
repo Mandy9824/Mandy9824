@@ -1929,3 +1929,57 @@ Aangeleverd: het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (M018 toegevoegd
 
 ### Nog te doen
 - [ ] Mandy: de conceptpagina #264 nalezen en publiceren op jouw teken. Daarna draai ik `python3 scripts/ronde28_links.py --schrijf` voor de links op de hub en pagina 1, en controleer ik live.
+
+## Ronde 29 (12 oktober 2026): analyse M002, "Waarom deze" op de hub, App Store-links
+**Niets gepubliceerd**: 17 gepubliceerd, 60 concepten (ongewijzigd), 0 berichten. Geen thema-zip. Gebruikt: `scripts/ronde29_upload.py` (proefdraai, daarna `--schrijf`), en voor het concept #264 `ronde28_bouw.py` en `ronde28_upload.py`.
+
+### 1. Analyse M002 (live modelgegevens)
+- "In onze functiescore staat dit model bovenaan." is "In onze functiescore scoort dit model hoog (92,7)." geworden.
+- **Vóór en na vergeleken:** het enige verschil in de 17 modellen is `M002.analyse`; de algemene velden zijn ongewijzigd.
+- **Live zichtbaar:** op de hub, pagina 1 en de Navimow-pagina (#264, ingelogd) staat de nieuwe zin, en de oude nergens meer.
+- `scripts/modellen_analyse.json` is ook aangepast, zodat een nieuwe omzetting uit het Excel-bestand de nieuwe zin houdt. De lokale themakopie `data/modellen.json` is gelijk aan live.
+- **Wel nog "bovenaan":** de analyse van M015 (i210 LiDAR Pro, 96,4) zegt "In onze functiescore staat dit model bovenaan, maar …". Op de Navimow-pagina klopt dat; M015 staat op geen andere pagina. Niet gewijzigd.
+
+### 2. Hub (#10), "Waarom deze" bij de i206 AWD
+- "de hoogste functiescore in onze selectie, helling tot 45%" is "een van de hoogste functiescores in onze selectie, helling tot 45%" geworden (één keer gevonden). De status is "gepubliceerd" gebleven.
+- **Komt de zin elders voor?** Gezocht in de ruwe inhoud van alle 77 pagina's:
+  - de zin met "helling tot 45%" alleen op de hub;
+  - **"de hoogste functiescore in onze selectie"** staat ook op de Navimow-pagina (#264, concept), maar bij de **i210 LiDAR Pro** (M015, 96,4): "Waarom deze: de hoogste functiescore in onze selectie. LiDAR met camera …". Dat klopt daar, dus niet gewijzigd.
+
+### 3. App Store-links in de bronnenlijsten
+- **Vervangen:** alle itunes.apple.com-links (`lookup?id=…` en `search?term=…`) door de App Store-pagina van dezelfde app. Het label is niet veranderd. Op de hub en #264 staat in de linktekst nu "(apps.apple.com)".
+
+  | App | Nieuw adres |
+  |---|---|
+  | Navimow | https://apps.apple.com/nl/app/navimow/id1602205067 |
+  | MOVAhome | https://apps.apple.com/nl/app/movahome/id6499421624 |
+  | Automower Connect | https://apps.apple.com/nl/app/id983601778 |
+  | Dreamehome | https://apps.apple.com/nl/app/id1564419343 |
+  | GARDENA smart system | https://apps.apple.com/nl/app/id971199503 |
+  | Anker eufy | https://apps.apple.com/nl/app/id1424956516 |
+
+  - De naam in het pad staat er alleen bij Navimow en MOVAhome: die adressen staan zo in het Excel-bestand.
+  - apps.apple.com is vanuit de bouwomgeving geblokkeerd, dus de andere namen kon ik niet controleren. Daarom de vorm zonder naam (`/nl/app/id<nummer>`); dat is ook een geldig App Store-adres, en Apple stuurt het door naar de app-pagina.
+- **Per pagina:**
+  - **hub (#10):** 5 links. De twee regels van de i206 AWD met nu hetzelfde adres zijn één regel geworden: "App iOS én Android, App-rating (apps.apple.com)" (34 naar 33 regels);
+  - **pagina 1 (#11):** 6 links;
+  - **Navimow-pagina (#264, concept):** opnieuw gebouwd, alleen de app-regels zijn veranderd (bij M002 ook samengevoegd).
+  - Op de andere 74 pagina's stonden geen itunes-links.
+  - Live (zonder inloggen) staan op de hub en pagina 1 0 itunes-links.
+- **Script:**
+  - `excel_naar_json.py` heeft nu de functie `app_store()`. Die zet elk itunes-adres in de bronnen (specificaties, reviews, verbinding en kosten) om naar apps.apple.com.
+  - Getest op het Excel-bestand: geen itunes-adressen meer, en verder dezelfde uitvoer als ronde 28.
+  - Eén uitzondering: ECOVACS HOME (M009) heeft in het Excel-bestand geen app-nummer en blijft dus staan. M009 wordt overgeslagen (uitverkocht).
+  - `ronde28_bouw.py` gebruikt dezelfde functie.
+- **Gezien, niet gewijzigd:** op pagina 1 hebben de app-bronnen het label **"Handleiding"** in plaats van "Appwinkel" (alle 16 app-regels). Dat was al zo.
+
+### 4. Controles
+- **Weergave van alle 17 gepubliceerde pagina's vóór en na vergeleken:**
+  - hub: dezelfde 5 kaarten in dezelfde volgorde (92,7 / 87,3 / 80,5 / 78,6 / 60,9);
+  - pagina 1: dezelfde 8 kaarten (92,7 / 87,3 / 80,5 / 80,5 / 78,6 / 75,9 / 63,2 / 60,9);
+  - de scorecellen en tabelrijen op de hub, pagina 1 en de vergelijkingspagina zijn gelijk.
+  - De tekst verschilt alleen waar bedoeld. Op / en /over-ons/mandy-van-den-broek/ staat bij de hub en pagina 1 in "Onlangs bijgewerkt" nu "Bijgewerkt op 12 oktober 2026" (automatisch, omdat ze zijn opgeslagen).
+- **M002 heeft nog de fabrikantpagina** `https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower`. Met de prijsfunctie van het thema op de live gegevens:
+  - 19 oktober: "rond 899 euro bij Coolblue";
+  - 20 oktober: alleen "Bekijk de actuele prijs" naar die pagina.
+- **Niets gepubliceerd:** 17 gepubliceerd, 60 concepten, 0 berichten. #264 is nog concept.

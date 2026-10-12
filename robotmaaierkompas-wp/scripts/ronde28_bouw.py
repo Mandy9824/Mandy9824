@@ -17,6 +17,9 @@ from urllib.parse import urlparse
 
 import openpyxl
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from excel_naar_json import app_store  # itunes-adressen -> leesbare App Store-pagina (ronde 29)
+
 MD, XLSX, MODELLEN = sys.argv[1:4]
 UIT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ronde28', 'navimow.json')
 MAANDEN = 'januari februari maart april mei juni juli augustus september oktober november december'.split()
@@ -144,7 +147,7 @@ def kaart(mid, titel):
 def bronnen(mid, rijen):
     groepen = {}
     for r in rijen:
-        veld, bron, datum, status = str(r[1] or '').strip(), str(r[3] or ''), r[4], str(r[5] or '').strip().lower()
+        veld, bron, datum, status = str(r[1] or '').strip(), app_store(r[3]), r[4], str(r[5] or '').strip().lower()
         if 'bol' in (bron + veld).lower() or status.startswith(('winkelclaim', 'niet gevonden', 'niet geopend')):
             continue
         urls = re.findall(r'https?://[^\s;()]+', bron)
