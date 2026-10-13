@@ -2328,3 +2328,36 @@ Geen gegevens in de antwoorden. De bouwroutes geven 404, omdat `RMK_BOUW_ACTIVE`
 - [ ] Mandy: 1.3.7 uploaden; de checklist hierboven bij een nieuwe 401; tijdzone opslaan.
 - [ ] Claude: na de upload de drie stappen hierboven.
 - [ ] Schakelaar en teksten (ronde30_affiliate_teksten.py) pas op Mandy's woord.
+
+## Ronde 34 (13 oktober 2026): na de upload van 1.3.7, eerste ronde via de beheerroute
+
+Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangezet; teksten niet toegepast.
+
+### 1. Controles
+- **Actief thema 1.3.7**; tijdzone van de site nu `Europe/Amsterdam` (de tijden in bol-status zijn mee verschoven: de ronde van 13:15 UTC staat nu als 15:15).
+- **`python3 tests/rmk-routes-test.py --na-136 --na-137`: 0 fouten.**
+  - Alle rmk-routes zonder inloggen 401 (`rest_forbidden`) of, voor noindex/paginas/seo/huisstijl, 404 `rest_no_route`.
+  - GET `/rmk/v1/bol-prijs`: 200 met 0 modellen (schakelaar uit), `Cache-Control: no-store, no-cache, private, max-age=0`, CDN `DYNAMIC` (niet gecachet).
+  - POST `/rmk/v1/bol-ronde` zonder inloggen: 401.
+
+### 2. Eén ronde via POST /rmk/v1/bol-ronde (ingelogd, 19:24:21)
+- **Token: HTTP 401.** De ronde **stopte na 1 verzoek** (het tokenverzoek), zoals bedoeld in 1.3.7: "Gestopt na de eerste tokenfout (Token: HTTP 401). Geen aanbiedingen opgehaald; controleer RMK_BOL_CLIENT_ID en RMK_BOL_CLIENT_SECRET."
+- **Per model:** geen aanbod en geen verkoper opgehaald. Alle 11 (M001, M002, M004, M005, M006, M008, M011, M015-M018) houden de uitkomst van de vorige ronde (15:15): "fout: Token: HTTP 401", niet op de site.
+- Constanten aanwezig: true; affiliate_actief: false; volgende geplande ronde: 21:13.
+- Het antwoord en bol-status bevatten geen sleutels of tokens.
+
+### 3. Geen Bol-regel op de site (schakelaar uit)
+- Alle 18 openbare adressen (home en 17 pagina's), elk twee keer (gewoon en met een extra parameter om de CDN-kopie te omzeilen): HTTP 200, thema 1.3.7.
+- **0 keer** `data-rmk-bol`, `rmk-offer--bol`, "Bekijk bij bol.com", `partner.bol.com`, `media.s-bol.com`, `bolPrijsUrl` of `bol-prijs`. Ook geen advertentie-regel in `<main>`; `rmk-affnote` komt alleen voor als CSS-klasse in de inline stijl.
+
+### Checklist 401 (bijgewerkt; tijdzone en constanten zijn al gecontroleerd)
+1. Staan de waarden tussen **dubbele** aanhalingstekens, zet ze dan tussen **enkele**: binnen dubbele aanhalingstekens vervangt PHP een `$` met wat erop volgt.
+2. Client ID en secret komen uit **hetzelfde, actieve sleutelpaar**, aangemaakt voor de Open API (Marketing Catalog) in het Partnerplatform van het account met de site-ID. Na roteren of een nieuw paar: beide waarden van het nieuwe paar.
+3. Gelijk aan het Partnerplatform: geen spatie, tab of regeleinde vóór of na de waarde binnen de aanhalingstekens; niets weggevallen bij kopiëren.
+4. Om te scheiden of het aan de sleutels of aan de site ligt: laat het onderzoeksvenster (dat de sleutels mag zien) met dezelfde waarden één tokenverzoek doen. Lukt dat daar wel, dan ligt het aan de site; zeg het mij.
+5. Daarna: zeg het, dan start ik één ronde via de beheerroute (of wacht op 21:13) en kijk in bol-status.
+
+### Nog te doen
+- [ ] Mandy: checklist 401.
+- [ ] Claude: daarna één ronde starten en bol-status bekijken.
+- [ ] Schakelaar en teksten pas op Mandy's woord.
