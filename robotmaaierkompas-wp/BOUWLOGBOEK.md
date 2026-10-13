@@ -2203,3 +2203,66 @@ Geen gegevens in de antwoorden. De bouwroutes geven 404, omdat `RMK_BOUW_ACTIVE`
 - [ ] **CDN:** kies uit het voorstel hierboven (eerst meten aanbevolen).
 - [ ] **Schakelaar:** zeggen wanneer `RMK_AFFILIATE_ACTIVE` aan mag. Dan pas ik de teksten toe (`scripts/ronde30_affiliate_teksten.py --schrijf`), en daarna leeg je de CDN.
 - [ ] **Links:** wil je nu de links vanaf de hub en pagina 1 naar de (inmiddels gepubliceerde) Navimow-pagina? Dan draai ik `scripts/ronde28_links.py --schrijf`.
+
+## Ronde 32 (13 oktober 2026): links naar de Navimow-pagina, CDN-meting, eerste Bol-ronde, labels pagina 1
+**Gepubliceerd:** alleen de twee links in stap 1 (op al gepubliceerde pagina's). `RMK_AFFILIATE_ACTIVE` niet aangezet, teksten niet toegepast. Geen thema-zip.
+
+### 1. Links naar /segway-navimow-robotmaaier/ (13:21:38 UTC)
+- `scripts/ronde28_links.py --schrijf`:
+  - **hub (#10):** eerste regel onder "Meer lezen";
+  - **pagina 1 (#11):** alinea direct onder "De modellen een voor een".
+  - Tekst: "Alle Segway Navimow-modellen die nu nieuw te koop zijn, met kosten: zie Segway Navimow robotmaaier." Beide pagina's zijn gepubliceerd gebleven.
+- **Gecontroleerd:**
+  - De ruwe inhoud vóór en na vergeleken: op #10 alleen die ene regel, op #11 die ene alinea (plus stap 4). Titel en meta gelijk.
+  - Openbaar (met cacheparameter): de regel en `href="/segway-navimow-robotmaaier/"` staan op beide pagina's. Het doel geeft 200.
+  - Kaarten, scorecellen en tabelrijen van de hub en pagina 1 zijn gelijk aan ronde 31.
+  - Op / en de auteurspagina verandert alleen de datum in "Onlangs bijgewerkt".
+
+### 4. Pagina 1 (#11) (13:21:44 UTC)
+- `scripts/ronde32_upload.py --schrijf`: de **16 app-bronnen** (App Store en Google Play) hebben nu het label **"Appwinkel"** in plaats van "Handleiding". Verder niets veranderd (gecontroleerd met de omgekeerde vervanging).
+- **"In onze functiescore staat dit model bovenaan":** was al gedaan in ronde 29. De analyse van M002 in de modelgegevens zegt "scoort dit model hoog (92,7)", en op pagina 1 en de hub staat "bovenaan" nergens meer.
+  - Alleen de Navimow-pagina toont het nog, bij **M015** (i210 LiDAR Pro, 96,4). Daar klopt het; niet gewijzigd.
+
+### 2. CDN-meting (13:12-14:12 UTC, elke minuut de hub en pagina 1, alleen lezen; 122 metingen)
+- **Alles HTTP 200.** Hub: 43 keer HIT en 18 keer MISS op de CDN; pagina 1: 40 HIT, 21 MISS.
+  - 13 randservers in Boston, Istanbul, Tokio en San Francisco.
+  - Geen `Cache-Control` op de HTML.
+  - **0 Bol-sporen** en geen Bol-regel (die bestaat nog niet).
+- **Maximale bewaartijd:** de CDN serveerde de HTML tot **`age` 3140 s (52 minuten)** als HIT. Na de bekende wijziging was het maximum 2879 s (48 minuten, kopie van 13:23 nog op 14:11).
+  - Binnen het meetuur is **geen enkele verlooptijd** gezien: de kopieën blijven staan tot ze worden vervangen. De echte bovengrens is dus langer dan 52 minuten en onbekend.
+  - `age` loopt gelijk op met de tijd sinds de pagina opnieuw is opgebouwd (bij LiteSpeed). Het is de leeftijd van de kopie, niet alleen de tijd op de rand.
+- **Gedrag bij de bekende wijziging (13:21:38-13:21:44):**
+  - vanaf de eerste meting erna (13:22:20) gaf **elk antwoord de nieuwe versie** met de link, op alle randservers;
+  - ook servers die om 13:21 nog de oude versie als HIT gaven (bos-edge8, imm-edge5);
+  - **geen enkele keer de oude versie na de wijziging.**
+  - Opslaan in WordPress leegt dus (via LiteSpeed) ook de kopieën op de Hostinger-CDN van die pagina.
+- **Gevolg voor de Bol-prijzen:**
+  - Zonder legen zou een pagina met Bol-regel minstens een uur, waarschijnlijk veel langer, de oude prijs tonen.
+  - Met legen verdwijnt de oude versie wel meteen. De prijsronde roept na elke ronde `litespeed_purge_all` aan. Of dát ook de CDN leegt, is niet gemeten (opslaan van een pagina wel).
+  - **Te controleren bij de eerste geslaagde ronde:** de tijd in de Bol-regel op de openbare pagina moet direct na de ronde de nieuwe tijd zijn. Dat kan ik meten zodra de schakelaar aan staat, of eerder op een testpagina.
+  - **Restrisico:** valt de prijstaak weg (geen cron, geen ronde), dan wordt er niet geleegd, en kan een prijs na 12 uur nog op de CDN staan. Voorstel voor 1.3.7: bij het verlopen van een prijs (12 uur na de ronde) zelf de cache legen met een eenmalige geplande taak. Klein; nog niet gebouwd.
+
+### 3. Eerste Bol-ronde (constanten door Mandy gezet)
+- **`/rmk/v1/bol-status` (ingelogd):** constanten_aanwezig **true**, affiliate_actief **false**.
+- **Eerste ronde: 13:15:06-13:15:07 UTC**, 11 verzoeken.
+  - **Alle 11 modellen "fout: Token: HTTP 401"**: login.bol.com weigert de inloggegevens bij het ophalen van het token. 0 aanbiedingen, 0 verkopers, 0 geen-aanbod.
+  - Er is dus nog niets opgehaald. Het log bevat geen sleutels of tokens.
+- **Volgende ronde:** 19:13 UTC (vier keer per dag). Of er een echte cron staat, is van buiten niet te zien. Deze ronde is gestart door een bezoek (WP-Cron); de meting deed elke minuut een bezoek.
+- **Statusoverzicht:** "Bol-koppeling: constanten aanwezig, Bol-regel verborgen" en "Bol-prijstaak draait": OK.
+- **Geen Bol-regel op de site:** 0 Bol-sporen in alle 122 metingen. Ook na de ronde is de kaart gelijk aan 1.3.5.
+
+### Om op te letten (voor Mandy)
+- **Token 401:** controleer in wp-config.php `RMK_BOL_CLIENT_ID` en `RMK_BOL_CLIENT_SECRET`:
+  - precies zoals in het Partnerplatform (Open API), zonder spaties of regeleinde binnen de aanhalingstekens;
+  - bij een geroteerd secret het **nieuwe** secret.
+  - Daarna draait de volgende ronde (19:13 UTC) vanzelf, of eerder met `wp rmk bol-ronde` (WP-CLI). Ik kijk dan opnieuw in bol-status.
+- **Tijdzone van de site staat op UTC** (Instellingen > Algemeen: geen tijdzone). De Bol-regel zegt "bijgewerkt om HH:MM" in de tijd van de site, dus nu twee uur te vroeg voor Nederland.
+  - **Vóór het aanzetten:** Instellingen > Algemeen > Tijdzone op "Amsterdam" zetten.
+  - Dat verandert ook de tijden in het statusoverzicht en in bol-status. De datums op de pagina's blijven gelijk, op een wijziging rond middernacht na.
+- **Verbetering voor 1.3.7 (klein, nog niet gebouwd):** na een mislukt token stopt de ronde nu niet. Hij probeert per model opnieuw een token (11 keer per ronde). Beter: na de eerste tokenfout stoppen.
+
+### Nog te doen
+- [ ] Mandy: Client ID en secret in wp-config.php controleren (401); de tijdzone op Amsterdam zetten.
+- [ ] Claude: na de volgende ronde bol-status bekijken (aanbiedingen, verkopers, fouten).
+- [ ] Bij de eerste geslaagde ronde met de schakelaar aan: meten of de CDN de nieuwe prijs meteen toont.
+- [ ] Besluit over 1.3.7: cache legen bij het verlopen van een prijs; stoppen na een tokenfout.
