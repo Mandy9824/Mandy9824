@@ -2395,3 +2395,28 @@ Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangez
 ### Nog te doen
 - [ ] Mandy: besluit over de schakelaar. Bij aan: tegelijk `scripts/ronde30_affiliate_teksten.py --schrijf` en de CDN-meting uit ronde 32 (prijs direct zichtbaar).
 - [ ] Ter info: M004, M015 en M016 hebben nu geen aanbod bij bol.com; met de schakelaar aan krijgen die kaarten geen Bol-regel.
+
+## Ronde 36 (13-14 oktober 2026): activering voorbereid, controle van de geplande Bol-rondes
+
+Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangezet; teksten niet toegepast; geen script met `--schrijf` gedraaid.
+
+### 1. Activering voorbereid (niet uitgevoerd)
+- **`scripts/affiliate_teksten_lib.py`** (nieuw): alle oude en nieuwe teksten op één plek, plus zoeken/vervangen en schrijven.
+  - Nieuwe teksten letterlijk uit tekstwijzigingen-affiliate-live.md (automatisch vergeleken: alle paginateksten komen overeen; het md-bestand staat niet in de repository).
+  - Oude teksten zoals ze nu live staan (#81 eerste alinea, #82 punt "Winkels en affiliatenetwerken", #83 tabelrij letterlijk overgenomen).
+  - Elke stap zoekt zijn tekst; niet precies één keer gevonden → melding en **niets geschreven**. Al toegepast → "al gedaan" (nogmaals draaien verandert niets).
+- **`scripts/ronde30_affiliate_teksten.py`** (herschreven): punten 1-8 uit het md-bestand (#81, #77, #80, #76, footer, #82, #83, advertentie-tekst).
+  - Proefdraai nu: **geen meldingen**, alle 8 "Was"-teksten precies één keer gevonden; thema 1.3.7; advertentie-tekst nu leeg.
+  - Met `--schrijf`: eerst een volledige kopie van de zeven teksten en de instelling in `backups/` (niet in git), dan alleen `content` sturen (pagina's houden hun status), en per pagina controleren dat de inhoud is zoals bedoeld.
+- **`scripts/ronde30_affiliate_terug.py`** (nieuw): zet de oude teksten terug en maakt de advertentie-tekst leeg; vervangt alleen de nieuwe tekststukken, andere wijzigingen blijven. Noodgeval: `--backup <kopie>` zet de volledige inhoud uit de kopie terug.
+  - Proefdraai nu: alles "al gedaan" (de oude teksten staan er).
+  - **Heen-en-terugtest in het geheugen** op de live inhoud: aanzetten en daarna terugdraaien geeft **exact** de huidige inhoud van alle zeven teksten (ook de links naar de affiliate-melding); twee keer aanzetten of twee keer terugdraaien verandert niets.
+- **`scripts/bol_regel_controle.py`** (nieuw, alleen lezen): per model de uitkomst van de laatste ronde, of de Bol-regel met de schakelaar aan zichtbaar zou zijn, wat de publieke prijsroute geeft, op welke pagina's de kaart staat en waar nu een Bol-regel staat. Van elke gevonden link alleen de **vorm** (`https://partner.bol.com/click/click?p=2&t=url&s=<SITE_ID>&f=api&url=https://www.bol.com/nl/nl/p/…&name=<modelnaam>&subid=<paginaslug>`), plus `rel="sponsored nofollow"` en de bronregel. **Volgt geen link**; de site-ID wordt nooit getoond.
+  - Getest op de 1.3.7-weergave uit ronde 33 (6 regels, alle vormen goed) en op een foute link (verkeerde subid en url-host worden gemeld).
+  - Live nu (schakelaar uit): **0 Bol-regels op 18 adressen, prijsroute leeg, geen fouten.** Met de schakelaar aan zouden er Bol-regels komen bij M001, M002, M005, M006, M008, M011, M017, M018; niet bij M004, M015, M016 (geen aanbod).
+
+### Volgorde bij het aanzetten (pas op Mandy's woord)
+1. Mandy: `define( 'RMK_AFFILIATE_ACTIVE', true );` in wp-config.php.
+2. Claude: `python3 scripts/ronde30_affiliate_teksten.py` (proefdraai, geen meldingen?) en dan `--schrijf`.
+3. LiteSpeed-cache en CDN legen; `python3 scripts/bol_regel_controle.py` (verwacht: Bol-regels precies op de kaarten van de 8 modellen met aanbod, alle links in de juiste vorm, 0 fouten).
+4. **Terug:** Mandy haalt de regel `RMK_AFFILIATE_ACTIVE` weg; Claude draait `python3 scripts/ronde30_affiliate_terug.py --schrijf`; cache legen; controle opnieuw (0 Bol-regels).
