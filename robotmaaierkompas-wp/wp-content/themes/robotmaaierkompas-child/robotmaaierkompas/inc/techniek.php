@@ -179,6 +179,19 @@ add_action( 'rest_api_init', function () {
 // /wp-json/rmk/ is alleen voor beheerders: ook de naamruimte-index (/rmk/v1) en de routelijst in /wp-json/ niet.
 add_filter( 'rest_pre_dispatch', function ( $result, $server, $request ) {
 	$route = $request->get_route();
+	if ( 0 === strpos( $route, '/rmk/' ) && '/rmk/v1' !== rtrim( $route, '/' ) ) {
+		// 1.3.6: een route die niet (meer) bestaat (bijv. /noindex, of /paginas zonder RMK_BOUW_ACTIVE) geeft 404, niet 401.
+		$bestaat = false;
+		foreach ( array_keys( $server->get_routes( 'rmk/v1' ) ) as $r ) {
+			if ( preg_match( '@^' . $r . '$@i', rtrim( $route, '/' ) ) ) {
+				$bestaat = true;
+				break;
+			}
+		}
+		if ( ! $bestaat ) {
+			return new WP_Error( 'rest_no_route', 'Geen route gevonden die overeenkomt met de URL en aanvraagmethode.', array( 'status' => 404 ) );
+		}
+	}
 	if ( ( '/rmk/v1' === rtrim( $route, '/' ) || 0 === strpos( $route, '/rmk/' ) ) && ! current_user_can( 'manage_options' ) ) {
 		return new WP_Error( 'rest_forbidden', 'Alleen voor beheerders.', array( 'status' => is_user_logged_in() ? 403 : 401 ) );
 	}

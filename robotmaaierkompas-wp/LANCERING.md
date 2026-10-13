@@ -109,3 +109,22 @@ Laat de monitor controleren op status 200 (en, als de dienst dat kan, op een woo
 - Geen meetcode (GA4). Die komt pas als `RMK_GA4_ID` in wp-config.php staat, en laadt alleen na toestemming in de cookiebanner. Pas dan de privacy- en cookiepagina aan.
 - Header en footer houden het tijdelijke menu. Bij golf 2 kies je in de site-editor "Aanpassingen wissen", zodra de sectiepagina's gevuld en gepubliceerd zijn.
 - HSTS is optioneel (hPanel).
+
+## Bol-koppeling aanzetten (thema 1.3.6)
+In deze volgorde. Tot en met stap 5 verandert er voor bezoekers niets: zonder `RMK_AFFILIATE_ACTIVE` geen Bol-regel.
+
+1. **Thema 1.3.6 uploaden en activeren** (Weergave > Thema's > Nieuw thema > Thema uploaden, "Vervangen door geüploade versie").
+2. **Sleutels in wp-config.php** (hPanel > Bestandsbeheer, boven de regel "That's all, stop editing"):
+   ```php
+   define( 'RMK_BOL_CLIENT_ID', '…' );
+   define( 'RMK_BOL_CLIENT_SECRET', '…' );
+   define( 'RMK_BOL_SITE_ID', '1549381' );
+   ```
+   Roteer eerst het secret in het Partnerplatform: het stond in een chatbericht (Logboek rij 136). Zet de sleutels nergens anders neer.
+3. **Echte cron** (WP-Cron draait alleen bij bezoek). Kies één van de twee in hPanel > Geavanceerd > Cron-taken, elke 15 minuten:
+   - `wget -q -O /dev/null "https://robotmaaierkompas.nl/wp-cron.php?doing_wp_cron"` en in wp-config.php `define( 'DISABLE_WP_CRON', true );`, of
+   - elke 6 uur `wp --path=<map van WordPress> rmk bol-ronde` (als WP-CLI beschikbaar is).
+4. **Claude:** `python3 scripts/ronde30_upload.py <omzetting.json> --schrijf` (zet het blok "bol" in de modelgegevens) en `python3 tests/rmk-routes-test.py --na-136`.
+5. **Controleren:** Gereedschap > Robotmaaierkompas ("Bol-koppeling: constanten aanwezig", "Bol-prijstaak draait") en, ingelogd, `/wp-json/rmk/v1/bol-status` (uitkomst per model).
+6. **Schakelaar aan:** `define( 'RMK_AFFILIATE_ACTIVE', true );` in wp-config.php. Op hetzelfde moment draait Claude `python3 scripts/ronde30_affiliate_teksten.py --schrijf` (teksten uit tekstwijzigingen-affiliate-live.md). Leeg daarna de LiteSpeed- en de CDN-cache.
+7. **Uitzetten kan altijd:** de regel `RMK_AFFILIATE_ACTIVE` weghalen. Dan verdwijnen Bol-regel, -foto en advertentie-regel meteen (na het legen van de cache).

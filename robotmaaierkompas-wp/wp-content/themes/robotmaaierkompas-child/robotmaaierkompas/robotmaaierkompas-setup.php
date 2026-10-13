@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'RMK_DIR', __DIR__ );
 define( 'RMK_URL', get_stylesheet_directory_uri() . '/robotmaaierkompas' );
-define( 'RMK_VER', '1.3.5' );
+define( 'RMK_VER', '1.3.6' );
 
 /* ------------------------------------------------------------------------
  * 1. CSS en JS + configuratie voor rmk.js

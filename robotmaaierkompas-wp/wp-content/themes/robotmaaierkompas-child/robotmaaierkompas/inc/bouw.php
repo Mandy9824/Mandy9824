@@ -3,13 +3,28 @@
  * robotmaaierkompas.nl — bouwhulpmiddelen (alleen voor beheerders)
  *
  * Gereedschap > Robotmaaierkompas in wp-admin, of via WP-CLI:
- *   wp rmk status                     controles van stap 0 (indexering, permalinks, HTTPS, fonts, data, cron)
- *   wp rmk paginas --user=<auteur>    paginastructuur als concepten (data/paginas.json); overschrijft niets
- *   wp rmk seo                        Yoast SEO instellen
+ *   wp rmk status                     controles (indexering, eerste golf, permalinks, HTTPS, fonts, data, Bol)
+ *   wp rmk paginas --user=<auteur>    paginastructuur als concepten (data/paginas.json); overschrijft niets  (*)
+ *   wp rmk seo                        Yoast SEO instellen                                                    (*)
+ * (*) 1.3.6: de bouwacties (paginas, seo, huisstijl: knoppen, REST-routes en WP-CLI) bestaan alleen met
+ *     define( 'RMK_BOUW_ACTIVE', true ); in wp-config.php. Standaard uit: de routes worden dan niet geregistreerd (404).
+ * De route /rmk/v1/noindex en de bijbehorende knop zijn in 1.3.6 verwijderd.
  * Er wordt nooit iets gepubliceerd.
  */
 
 defined( 'ABSPATH' ) || exit;
+
+/** Bouwacties (paginastructuur, Yoast, huisstijl) alleen met RMK_BOUW_ACTIVE in wp-config.php. Standaard uit. */
+function rmk_bouw_actief() {
+	return defined( 'RMK_BOUW_ACTIVE' ) && true === RMK_BOUW_ACTIVE;
+}
+
+/** De eerste golf (LANCERING.md, ronde 25/26): deze 17 pagina's horen gepubliceerd te zijn. */
+function rmk_eerste_golf() {
+	return array( 'home', 'privacy', 'cookies', 'affiliate-melding', 'redactiebeleid', 'colofon', 'contact', 'over-ons', 'mandy-van-den-broek',
+		'hoe-we-beoordelen', 'robotmaaier-kosten', 'robotmaaier-mesjes', 'robotmaaier-zonder-grensdraad', 'robotmaaier-test-consumentenbond',
+		'robotmaaier-zonder-draad', 'robotmaaier-test-vergelijking', 'beste-robotmaaier' );
+}
 
 function rmk_pattern_content( $slug ) {
 	$p = WP_Block_Patterns_Registry::get_instance()->get_registered( 'robotmaaierkompas/' . $slug );
@@ -208,7 +223,7 @@ function rmk_status_checks() {
 	$add  = function ( $ok, $label, $info = '' ) use ( &$c ) {
 		$c[] = array( 'ok' => $ok, 'label' => $label, 'info' => $info );
 	};
-	$add( '0' === (string) get_option( 'blog_public' ), 'Zoekmachines niet laten indexeren staat aan', 'Pas op de lanceerdatum bewust uitzetten.' );
+	$add( '1' === (string) get_option( 'blog_public' ), 'Zoekmachines mogen de site indexeren', '1' === (string) get_option( 'blog_public' ) ? 'aan' : 'UIT: "Zoekmachines niet laten indexeren" staat aan (Instellingen > Lezen)' );
 	$add( '/%postname%/' === get_option( 'permalink_structure' ), 'Permalinks op berichtnaam', (string) get_option( 'permalink_structure' ) );
 	$add( 0 === strpos( home_url(), 'https://' ) && 0 === strpos( site_url(), 'https://' ), 'Site- en WordPress-adres gebruiken HTTPS', home_url() );
 	$add( is_ssl() || ( defined( 'WP_CLI' ) && WP_CLI ), 'Deze verbinding is HTTPS', is_ssl() ? 'ja' : ( defined( 'WP_CLI' ) && WP_CLI ? 'via WP-CLI niet te zien' : 'nee' ) );
@@ -220,10 +235,25 @@ function rmk_status_checks() {
 	$data = rmk_models_data();
 	$saved = get_option( 'rmk_modellen' );
 	$add( ! empty( $data['modellen'] ), 'Modelbestand aanwezig', ( $saved ? 'via de API opgeslagen op ' . wp_date( 'j-n-Y H:i', $saved['opgeslagen'] ) : 'uit het thema' ) . ( isset( $data['gegenereerd'] ) ? ', gegenereerd ' . $data['gegenereerd'] . ', ' . count( $data['modellen'] ) . ' modellen' : '' ) );
-	$pub = (int) wp_count_posts( 'page' )->publish + (int) wp_count_posts( 'post' )->publish;
-	$add( 0 === $pub, 'Niets gepubliceerd', $pub . ' gepubliceerd' );
-	$next = wp_next_scheduled( RMK_BOL_HOOK );
-	$add( ! rmk_bol_enabled() && ! $next, 'Prijstaak uitgeschakeld (voorlopig geen Bol-gegevens)', rmk_bol_enabled() ? 'STAAT AAN' : ( $next ? 'nog ingepland' : 'uit' ) );
+	$golf  = rmk_eerste_golf();
+	$niet  = array();
+	foreach ( $golf as $slug ) {
+		$p = get_posts( array( 'post_type' => 'page', 'name' => $slug, 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids' ) );
+		if ( ! $p ) {
+			$niet[] = $slug;
+		}
+	}
+	$pub = (int) wp_count_posts( 'page' )->publish;
+	$add( ! $niet, 'De eerste golf is gepubliceerd', $niet ? 'niet gepubliceerd: ' . implode( ', ', $niet ) : count( $golf ) . ' van ' . count( $golf ) . ' (in totaal ' . $pub . ' gepubliceerde pagina\'s, ' . (int) wp_count_posts( 'post' )->publish . ' berichten)' );
+	// Bol (1.3.6): alleen of de constanten er zijn, nooit hun waarden.
+	$bol  = rmk_bol_geconfigureerd();
+	$next = wp_next_scheduled( RMK_BOL_RONDE_HOOK );
+	$hist = (array) get_option( RMK_BOL_LOG_OPTION, array() );
+	$add( true, 'Bol-koppeling', $bol ? 'constanten aanwezig' . ( rmk_affiliate_actief() ? ', Bol-regel zichtbaar' : ', Bol-regel verborgen (RMK_AFFILIATE_ACTIVE uit)' ) : 'uit: RMK_BOL_CLIENT_ID, RMK_BOL_CLIENT_SECRET of RMK_BOL_SITE_ID ontbreekt (geen Bol-regel)' );
+	if ( $bol ) {
+		$laatste = $hist ? (int) $hist[0]['start'] : 0;
+		$add( $laatste && time() - $laatste < 7 * HOUR_IN_SECONDS, 'Bol-prijstaak draait (laatste ronde minder dan 7 uur geleden)', ( $laatste ? 'laatste ronde ' . wp_date( 'j-n H:i', $laatste ) : 'nog geen ronde' ) . ( $next ? ', volgende ' . wp_date( 'j-n H:i', $next ) : '' ) . '. Te oud: stel een echte cron in (wp rmk bol-ronde).' );
+	}
 	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
 	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
 	$add( ! rmk_affiliate_actief(), 'Affiliate-melding uit (RMK_AFFILIATE_ACTIVE)', rmk_affiliate_actief() ? 'STAAT AAN: de regel "Advertentie: …" wordt getoond' : 'uit: de regel "Advertentie: …" wordt niet getoond' );
@@ -252,7 +282,7 @@ function rmk_admin_page() {
 		return;
 	}
 	$result = null;
-	if ( isset( $_POST['rmk_actie'] ) && check_admin_referer( 'rmk_bouw' ) ) {
+	if ( rmk_bouw_actief() && isset( $_POST['rmk_actie'] ) && check_admin_referer( 'rmk_bouw' ) ) {
 		$actie = sanitize_key( $_POST['rmk_actie'] );
 		if ( 'paginas' === $actie ) {
 			$r      = rmk_build_pages( get_current_user_id() );
@@ -273,7 +303,12 @@ function rmk_admin_page() {
 	foreach ( rmk_status_checks() as $c ) {
 		echo '<tr><td style="width:2rem">' . ( $c['ok'] ? '✅' : '⚠️' ) . '</td><td>' . esc_html( $c['label'] ) . '</td><td>' . esc_html( $c['info'] ) . '</td></tr>';
 	}
-	echo '</tbody></table><h2>Acties</h2><form method="post">';
+	echo '</tbody></table>';
+	if ( ! rmk_bouw_actief() ) {
+		echo '<p class="description">Bouwacties (paginastructuur, Yoast, huisstijl) staan uit. Alleen nodig bij de bouw: define( \'RMK_BOUW_ACTIVE\', true ); in wp-config.php.</p></div>';
+		return;
+	}
+	echo '<h2>Acties</h2><form method="post">';
 	wp_nonce_field( 'rmk_bouw' );
 	echo '<p><button class="button button-primary" name="rmk_actie" value="paginas">Paginastructuur als concepten aanmaken</button> <span class="description">Jij wordt de auteur. Bestaande pagina\'s blijven ongemoeid. Er wordt niets gepubliceerd.</span></p>';
 	echo '<p><button class="button" name="rmk_actie" value="seo">Yoast SEO instellen</button></p>';
@@ -282,11 +317,11 @@ function rmk_admin_page() {
 
 /* ------------------------------------------------------------------ REST (beheerders, ook met een toepassingswachtwoord)
  * GET  /wp-json/rmk/v1/status
- * POST /wp-json/rmk/v1/noindex   zet "Zoekmachines niet laten indexeren" AAN (kan het niet uitzetten)
  * POST /wp-json/rmk/v1/paginas   paginastructuur als concepten (huidige gebruiker is auteur)
  * POST /wp-json/rmk/v1/seo       Yoast instellen; persoon = huidige gebruiker
  * POST /wp-json/rmk/v1/huisstijl sitepictogram en standaard og:image (afwerkpakket)
- * Er is bewust geen route om te publiceren of de indexering uit te zetten. */
+ * /paginas, /seo en /huisstijl bestaan alleen met RMK_BOUW_ACTIVE (1.3.6). /noindex is verwijderd (1.3.6).
+ * Er is bewust geen route om te publiceren of de indexering te veranderen. */
 add_action( 'rest_api_init', function () {
 	$admin = function () {
 		return current_user_can( 'manage_options' );
@@ -294,11 +329,9 @@ add_action( 'rest_api_init', function () {
 	register_rest_route( 'rmk/v1', '/status', array( 'methods' => 'GET', 'permission_callback' => $admin, 'callback' => function () {
 		return rest_ensure_response( rmk_status_checks() );
 	} ) );
-	register_rest_route( 'rmk/v1', '/noindex', array( 'methods' => 'POST', 'permission_callback' => $admin, 'callback' => function () {
-		update_option( 'blog_public', '0' );
-		do_action( 'litespeed_purge_all' );
-		return rest_ensure_response( array( 'blog_public' => get_option( 'blog_public' ) ) );
-	} ) );
+	if ( ! rmk_bouw_actief() ) {
+		return; // niet registreren: aanroepen geven 404 rest_no_route
+	}
 	register_rest_route( 'rmk/v1', '/paginas', array( 'methods' => 'POST', 'permission_callback' => $admin, 'callback' => function () {
 		$r = rmk_build_pages( get_current_user_id() );
 		$privacy = get_page_by_path( 'privacy', OBJECT, 'page' );
@@ -366,6 +399,9 @@ function rmk_apply_huisstijl() {
 }
 
 add_action( 'rest_api_init', function () {
+	if ( ! rmk_bouw_actief() ) {
+		return;
+	}
 	register_rest_route( 'rmk/v1', '/huisstijl', array( 'methods' => 'POST', 'permission_callback' => function () { return current_user_can( 'manage_options' ); }, 'callback' => function () {
 		$r = rmk_apply_huisstijl();
 		return is_wp_error( $r ) ? $r : rest_ensure_response( $r );
@@ -379,6 +415,8 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			WP_CLI::log( ( $c['ok'] ? '[ok]   ' : '[let op] ' ) . $c['label'] . ( $c['info'] ? ' — ' . $c['info'] : '' ) );
 		}
 	} );
+}
+if ( defined( 'WP_CLI' ) && WP_CLI && rmk_bouw_actief() ) {
 	WP_CLI::add_command( 'rmk paginas', function () {
 		if ( ! get_current_user_id() ) {
 			WP_CLI::error( 'Geef de auteur mee: --user=<gebruikersnaam>.' );

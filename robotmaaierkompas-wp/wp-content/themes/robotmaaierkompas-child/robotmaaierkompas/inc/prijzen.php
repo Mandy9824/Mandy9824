@@ -104,7 +104,11 @@ function rmk_fill_offers( $html ) {
 		if ( ! preg_match( '#data-model="([A-Za-z0-9-]+)"#', $a[0], $id ) || ! ( $m = rmk_get_model( $id[1] ) ) ) {
 			return $a[0];
 		}
-		$offer = rmk_offer_html( $m );
+		// 1.3.6: Bol-regel onder het prijsblok en de foto van bol.com, alleen bij een geldig Bol-aanbod (inc/bol.php).
+		$offer = rmk_offer_html( $m ) . ( function_exists( 'rmk_bol_regel_html' ) ? rmk_bol_regel_html( $m ) : '' );
+		if ( function_exists( 'rmk_bol_foto' ) && ( $foto = rmk_bol_foto( $m ) ) ) {
+			$m['foto'] = $foto;
+		}
 		$done  = false;
 		$a[0]  = rmk_fill_card( $a[0], $m );
 		return preg_replace_callback( '#<div class="rmk-offer(?: [^"]*)?"[^>]*>(?:(?!</div>).)*</div>#s', function () use ( $offer, &$done ) {
@@ -178,7 +182,8 @@ function rmk_speccard_html( array $m ) {
 			? '<div class="rmk-spec rmk-spec--' . $c[0] . ' is-missing"><dt>' . $c[1] . '</dt><dd><span aria-hidden="true">–</span><span class="rmk-sr">onbekend</span></dd></div>'
 			: '<div class="rmk-spec rmk-spec--' . $c[0] . '"><dt>' . $c[1] . '</dt><dd>' . esc_html( $c[2] ) . '</dd></div>';
 	}
-	$f = isset( $m['foto'] ) && is_array( $m['foto'] ) && ! empty( $m['foto']['url'] ) && rmk_price_url_ok( $m['foto']['url'] ) ? $m['foto'] : null;
+	$f = isset( $m['foto'] ) && is_array( $m['foto'] ) && ! empty( $m['foto']['url'] )
+		&& ( rmk_price_url_ok( $m['foto']['url'] ) || ( 'bol' === ( $m['foto']['bron'] ?? '' ) && function_exists( 'rmk_bol_afbeelding_ok' ) && rmk_bol_afbeelding_ok( $m['foto']['url'] ) ) ) ? $m['foto'] : null;
 	if ( $f ) {
 		$fab    = ! empty( $f['fabrikant'] ) ? $f['fabrikant'] : ( isset( $m['merk'] ) ? $m['merk'] : '' );
 		$w      = ! empty( $f['breedte'] ) ? (int) $f['breedte'] : 800;

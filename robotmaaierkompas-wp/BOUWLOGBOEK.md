@@ -1983,3 +1983,119 @@ Aangeleverd: het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (M018 toegevoegd
   - 19 oktober: "rond 899 euro bij Coolblue";
   - 20 oktober: alleen "Bekijk de actuele prijs" naar die pagina.
 - **Niets gepubliceerd:** 17 gepubliceerd, 60 concepten, 0 berichten. #264 is nog concept.
+
+## Ronde 30 (13 oktober 2026): thema 1.3.6, Bol-koppeling
+**Niets gepubliceerd** (17 gepubliceerd, 60 concepten). Live is alleen de modelgegevens gewijzigd (stap 7, eerste deel). Thema 1.3.6 is gebouwd en getest; **Mandy moet het nog uploaden**. Zip: `robotmaaierkompas-child.zip`, 420 KB, versie 1.3.6.
+
+Bronnen: het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (blad "Bol", Logboek rijen 136-148) en `tekstwijzigingen-affiliate-live.md`. Geen van beide staat in de repository of op de site. **Enige bron voor de vorm van de API en de links: Logboek rijen 137-145.** Besluiten Mandy: f=api (niet TXL), subid = paginaslug, geen Bol-beoordelingen.
+- **Sleutels:** volgens Logboek rij 136 heeft het onderzoeksvenster de sleutels in de chat gekregen. Ze staan niet in het Excel-bestand; ik heb ze nergens gezien of gebruikt. Alle tests gebruiken nep-waarden. Advies uit rij 136: het secret roteren.
+
+### 1. Bol-regel in de productkaart (`inc/bol.php`, nieuw; `inc/prijzen-bol.php` verwijderd)
+- Alleen bij een **geldig Bol-aanbod**, onder het bestaande prijsblok (Coolblue of "Bekijk de actuele prijs" blijft staan):
+  - "**899 euro**. Prijs bij bol.com, bijgewerkt om 14:05." Bij een eerdere dag: "bijgewerkt gisteren om …".
+  - Bij een partner: "…, via een partner van bol.com." Partner = seller.name is niet "bol.com" (Logboek 141).
+  - De knop "Bekijk bij bol.com" met `rel="sponsored nofollow"`.
+  - Eronder: "Je gaat naar bol.com. Bron: bol.com."
+  - Geen beoordelingen: /ratings wordt niet opgehaald.
+- **Geldig betekent:**
+  - 200 van /offers/best met een prijs groter dan 0;
+  - condition NEW, geen voorbestelling, met een verkopernaam en dezelfde EAN;
+  - niet ouder dan 12 uur;
+  - model met EAN en bol-product-URL in de modelgegevens;
+  - de drie Bol-constanten aanwezig **en** `RMK_AFFILIATE_ACTIVE` aan.
+- **Eigen keuze, niet uit het Logboek:** een aanbod dat voorbesteld moet worden (`isPreOrder`) of niet nieuw is, toon ik niet. Zo'n maaier is nu niet nieuw te koop.
+- **Paginacache:** de LiteSpeed-TTL van een pagina met een Bol-regel is nooit langer dan de resterende geldigheid van de prijs (`litespeed_control_set_ttl`).
+
+### 2. Affiliatelink (Logboek 144-145)
+- `https://partner.bol.com/click/click?p=2&t=url&s=<RMK_BOL_SITE_ID>&f=api&url=<bol-product-URL>&name=<modelnaam>&subid=<paginaslug>`
+- **Codering:** de waarden volledig gecodeerd met PHP `rawurlencode`. Dat is gelijk aan Python `quote(waarde, safe="")` uit het Logboek.
+- **Subid:** de slug van de pagina waarop de knop staat; alleen kleine letters, cijfers en koppeltekens.
+- **Getest:** de link van de i206 AWD is gelijk aan die uit het blad Bol, met f=TXL vervangen door f=api en `&subid=robotmaaier-zonder-draad` erachter.
+- `/ga/` blijft voor links die geen Bol zijn; de Bol-knop gaat rechtstreeks naar partner.bol.com.
+
+### 3. Prijstaak
+- **Planning:** vier keer per dag (WP-Cron, eigen schema "rmk_zes_uur"). Handmatig, of als echte cron: `wp rmk bol-ronde`. Stappen voor een echte cron in hPanel: LANCERING.md, "Bol-koppeling aanzetten".
+- **Token** (Logboek 137): POST login.bol.com met Basic base64(id:secret). Hergebruikt tot 30 s voor `expires_in`, bewaard als transient en nooit gelogd. Bij een 401 vernieuwt de taak het token één keer en probeert opnieuw.
+- **Aanbod** (Logboek 138, 141): GET `/products/{ean}/offers/best?country-code=NL&include-seller=true` met Bearer, `Accept: application/json` en `Accept-Language: nl`.
+- **Snelheid:** minstens 0,1 s tussen verzoeken (maximaal 10 per seconde). Bij `x-ratelimit-remaining` 0 of een 429 wacht de taak `x-ratelimit-reset` af en probeert één keer opnieuw.
+- **Uitkomst per model:** ok, geen_aanbod (404 "Unable to find offer"), ongeldig of fout. Bij geen aanbod, een fout of 404 verdwijnt de Bol-regel bij de volgende weergave.
+- **Na elke ronde:** de LiteSpeed-cache wordt geleegd.
+- **Log** (laatste 20 rondes) zonder secrets of tokens: per model de uitkomst, de HTTP-code en title/detail/X-Request-ID uit problem+json.
+- **`/rmk/v1/bol-status`:** alleen voor beheerders, nooit gecachet (alle /wp-json/). Toont per model uitkomst, prijs, verkoper, tijd, geldig tot en of de regel op de site staat. De constanten alleen als ja/nee.
+- **Constanten zonder schakelaar:** de taak draait (zodat bol-status gevuld is), maar de site toont niets.
+- **Zonder constanten:** geen verzoeken, geen taak, geen Bol-regel. Alles zoals in 1.3.5.
+
+### 4. Afbeeldingen
+- Bij een geldig aanbod vervangt de foto van bol.com het beeldvlak van de specificatiekaart:
+  - de oorspronkelijke 550-px-URL op media.s-bol.com, met `width` en `height` en `loading="lazy"`;
+  - "Foto: bol.com";
+  - nooit lokaal opgeslagen.
+- Zonder aanbod blijft de specificatiekaart zonder foto.
+
+### 5. Schakelaar
+- **`RMK_AFFILIATE_ACTIVE` uit (standaard):** geen Bol-regel, geen Bol-foto, geen advertentie-regel. Getest: de kaart is byte voor byte gelijk aan 1.3.5.
+- **Aan:** de advertentie-regel komt één keer per pagina, direct boven de eerste kaart met een Bol-knop (als er nog geen staat).
+  - De tekst is voorlopig de huidige ("Advertentie: via deze knoppen krijgen wij mogelijk een commissie. Dat verandert de score niet.").
+  - Hij is instelbaar via de instelling `rmk_advertentie_tekst`, zodat de tekst uit het md-bestand (punt 8) later zonder nieuwe zip kan.
+- **Teksten uit tekstwijzigingen-affiliate-live.md: niet toegepast.** Klaargezet in `scripts/ronde30_affiliate_teksten.py`.
+  - Proefdraai: alle "Was"-teksten precies één keer gevonden: #81 (eerste alinea, en de alinea over score en volgorde blijft), #77, #80, #76, de footer, #82 en #83.
+  - Letterlijk zoeken vond #77, #80, #76 en de footer niet, omdat "affiliate-melding" daar een link is. Het script zoekt met tags ertussen en houdt die link in de nieuwe tekst.
+  - Punt 8 (advertentie-tekst) kan pas met 1.3.6 actief.
+
+### 6. Lijst voor 1.3.6
+- **`/rmk/v1/noindex` en de knop:** verwijderd.
+- **Statuscontroles omgekeerd:**
+  - "Zoekmachines mogen de site indexeren": OK bij `blog_public = 1`;
+  - "De eerste golf is gepubliceerd": de 17 pagina's van ronde 26.
+  - De oude controle "Prijstaak uitgeschakeld" is vervangen door "Bol-koppeling" en "Bol-prijstaak draait": laatste ronde minder dan 7 uur geleden, anders het advies voor een echte cron.
+- **`RMK_BOUW_ACTIVE`** (standaard uit): /paginas, /seo en /huisstijl worden zonder deze constante niet geregistreerd. Hun knoppen en de WP-CLI-commando's `rmk paginas` en `rmk seo` ook niet.
+- **404 in plaats van 401:** `inc/techniek.php` gaf voor elke /rmk/-route 401, ook voor routes die niet bestaan. Nu geeft een niet-bestaande route 404 `rest_no_route`; bestaande routes geven niet-beheerders nog steeds 401.
+- **`/modellen` en `/status`:** ongewijzigd, alleen voor beheerders en nooit gecachet. `rmk_save_modellen()` schrijft alleen de opties `rmk_modellen` en `rmk_modellen_data`, het bestand in uploads/rmk en leegt de cache.
+- **`tests/rmk-routes-test.py`** (nieuw): elke route met GET en POST, zonder inloggen, moet 401 of 404 geven zonder gegevens. Met `--na-136` moeten de vier verwijderde of uitgeschakelde routes 404 `rest_no_route` geven. Live (1.3.5): 0 fouten (alles 401).
+- **Dataroute:** accepteert nu per model `ean` (8-14 cijfers) en een blok `bol` met alleen `product_url` (www.bol.com) en `afbeelding` (media.s-bol.com). Een Bol-prijs, een Bol-beoordeling of bol.com buiten dat blok wordt geweigerd.
+- **Themabestand `data/modellen.json`:** gelijk aan live, plus het blok "bol". De nl-fabrikantpagina van M002 staat erin.
+
+### 7. Modelgegevens
+- **`scripts/excel_naar_json.py`:**
+  - leest de kolom "Fabrikantpagina (URL)"; die gaat voor, en is hij leeg, dan zoals voorheen;
+  - leest het blad Bol: `ean` en `bol` {product_url, afbeelding {url, breedte, hoogte}} uit de 550-px-URL;
+  - geen prijzen, verkopers of beoordelingen;
+  - gekoppeld: M001, M002, M004, M005, M006, M008, M011, M015, M016, M017, M018. Niet op Bol: M010.
+- **Upload (`scripts/ronde30_upload.py`):** neemt alleen `fabrikant_url`, `ean` en `bol` over in de live gegevens; prijzen, scores, teksten en specificaties blijven zoals live. Een volledige nieuwe omzetting zou ook de prijzen van 7 oktober en de bronvermeldingen veranderen; dat is niet gedaan.
+  - **Nu live:** EAN bij 11 modellen en de fabrikantpagina van M003 (nl.navimow.com i2 LiDAR; M003 staat op geen pagina).
+  - **Het blok "bol" nog niet:** de live dataroute (1.3.5) weigert elke "bol.com". Na de activering van 1.3.6 hetzelfde script opnieuw draaien; het zet "bol" er dan bij.
+  - **Weergave van alle 17 gepubliceerde pagina's vóór en na de upload: identiek.** Hub: 5 kaarten (92,7 / 87,3 / 80,5 / 78,6 / 60,9); pagina 1: 8 kaarten in dezelfde volgorde.
+
+### 8. Tests
+- **`tests/bol-test.php`** (nieuw, `php tests/bol-test.php`): 45 controles met nagebootste antwoorden in de vorm van het Logboek, via `tests/wp-stub.php` (nagebootste WordPress, geen netwerk). **Alles geslaagd.** Getest:
+  - zonder constanten;
+  - met constanten en de schakelaar uit;
+  - schakelaar aan: aanbod van bol zelf, van een partner, geen aanbod (404), een foutmelding (500), een model zonder EAN;
+  - verlopen prijs (11 uur 59 nog zichtbaar, 12 uur en 1 seconde weg);
+  - token hergebruikt, nieuw token 30 s voor afloop, verlopen token (401), 429 met wachten;
+  - de exacte linkvorm, subid alleen kleine letters, cijfers en koppeltekens, maximaal 10 verzoeken per seconde;
+  - geen secrets of tokens in opslag, log of bol-status;
+  - bol-status alleen voor beheerders;
+  - de validatie van de dataroute.
+- **Oude `tests/prijs-test.php` tegen de nieuwe code:** alles geslaagd tot het onderdeel over fotoplaatsvervangers. Dat gebruikt `inc/techniek.php`, die de nagebootste omgeving niet laadt; los van Bol.
+- **Browser** (Chromium):
+  - Opzet: de live pagina's met de 1.3.6-weergave via de echte themafuncties, Bol aan met nagebootste uitkomsten. Pagina 1 heeft 6 Bol-regels en de hub 4. De afbeeldingen van media.s-bol.com (hier geblokkeerd) vervangen door afbeeldingen van dezelfde afmetingen.
+  - Op 360, 390, 768, 1024 en 1440 px: geen zijwaarts scrollen, geen scriptfouten, één h1, één advertentie-regel per pagina met Bol-knoppen, alle foto's geladen.
+- **LCP** (zelfde opzet als ronde 22: mobiel, 150 ms, 1,6 Mbit/s, processor 4× trager, mediaan van 3, statische kopie):
+
+  | Pagina | 1.3.5 | 1.3.6, Bol aan | LCP-element |
+  |---|---|---|---|
+  | Homepage | 1,16 s | 1,16 s | afbeelding `rmk-hero__bg` |
+  | Pagina 1 (zonder draad) | 0,58 s | 0,62 s | H1 |
+  | Pagina 12 (kosten) | 0,37 s | 0,40 s | H1 |
+
+  Binnen de meetruis. De Bol-foto's staan onder de vouw en laden lui. Na het aanzetten opnieuw meten met PageSpeed Insights (met de echte foto's en de serverlatency).
+
+### Om op te letten
+- **CDN van Hostinger:** de cache in hPanel wordt niet automatisch geleegd na een prijsronde. Als de CDN pagina's bewaart, kan een Bol-prijs daar langer staan. Na het aanzetten controleren (header `x-hcdn-cache-status`) en zo nodig de CDN voor HTML uitzetten.
+- **Twijfels uit het blad Bol** (Logboek 147): M004 heeft een serietitel, M018 een titelfout (55% tegenover 84%), en de specificaties van M015/M016 op bol.com wijken af. We tonen alleen prijs en foto, geen Bol-specificaties.
+
+### Nog te doen
+- [ ] Mandy: 1.3.6 uploaden en activeren; daarna de stappen in LANCERING.md, "Bol-koppeling aanzetten" (sleutels, echte cron, controle).
+- [ ] Claude, na de activering: `scripts/ronde30_upload.py … --schrijf` (blok "bol") en `tests/rmk-routes-test.py --na-136`, en live controleren.
+- [ ] Mandy: zeggen wanneer de schakelaar aan mag; dan `scripts/ronde30_affiliate_teksten.py --schrijf`.

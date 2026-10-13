@@ -268,7 +268,7 @@
           "opmerking": "Gemiddelde op 5; marketplace-productpagina. 2 teksten: 1 MediaMarkt NL (meegeteld, neutraal), 1 gesyndiceerd uit MediaMarkt Italië (niet meegeteld)"
         }
       ],
-      "ean": null,
+      "ean": "8720254406855",
       "prijs": null,
       "fabrikant_url": "https://nl.navimow.com/products/navimow-i1-robot-lawn-mower",
       "beste_voor": "Tuinen tot 500 m² met een eigen antenne in plaats van netwerk-RTK",
@@ -281,7 +281,15 @@
         "Diefstalbeveiliging vraagt de losse Access+-module (99,99 euro met een jaar data, daarna 29,90 per jaar)",
         "Helling 30%"
       ],
-      "analyse": "De Navimow i105E gebruikt een eigen GNSS-antenne met een camera en is bedoeld voor tuinen tot 500 m² en 30% helling. Een mobiele verbinding zit er niet in: diefstalbeveiliging vraagt de losse Access+-module (99,99 euro met een jaar data, daarna 29,90 euro per jaar). De fabrikant verkoopt hem nog alleen refurbished, dus controleer de beschikbaarheid voor je kiest."
+      "analyse": "De Navimow i105E gebruikt een eigen GNSS-antenne met een camera en is bedoeld voor tuinen tot 500 m² en 30% helling. Een mobiele verbinding zit er niet in: diefstalbeveiliging vraagt de losse Access+-module (99,99 euro met een jaar data, daarna 29,90 euro per jaar). De fabrikant verkoopt hem nog alleen refurbished, dus controleer de beschikbaarheid voor je kiest.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/segway-navimow-i105e-robotmaaier-500-m-zonder-perimeterdraad-gps-rtk-ai-bediening-via-app-stil-slim-maaien-18-cm-maaibreedte/9300000177752213/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/RqA8W1ZzzpyR/gJr9WKD/550x434.jpg",
+          "breedte": 550,
+          "hoogte": 434
+        }
+      }
     },
     {
       "id": "M002",
@@ -557,7 +565,7 @@
           "opmerking": "Zelfde model, Belgische site; kan overlappen met Gamma.nl; aantal wisselt per snapshot (11 tot 16). 5-10: niet opnieuw gecontroleerd. 5-10: gemarkeerd als niet-onafhankelijk (ander land)"
         }
       ],
-      "ean": null,
+      "ean": "8721264220318",
       "prijs": {
         "bedrag": 899,
         "winkel": "Coolblue",
@@ -579,7 +587,15 @@
         "De fabrikant spreekt zichzelf tegen over de aandrijving (drie of vier wielen)",
         "Nog weinig reviews"
       ],
-      "analyse": "De Navimow i206 AWD combineert netwerk-RTK met een camera, zodat je geen begrenzingsdraad en in veel regio's ook geen antenne nodig hebt. Hij is bedoeld voor tuinen tot ongeveer 600 m² en klimt volgens de fabrikant tot 45%. Diefstalbeveiliging zit erin via ingebouwde 4G, met pincode, alarm, GPS en geofence-melding. Let op: de 4G-service heeft een einddatum en we vonden geen Nederlandse verlengprijs, en netwerk-RTK is niet overal beschikbaar. In onze functiescore scoort dit model hoog (92,7)."
+      "analyse": "De Navimow i206 AWD combineert netwerk-RTK met een camera, zodat je geen begrenzingsdraad en in veel regio's ook geen antenne nodig hebt. Hij is bedoeld voor tuinen tot ongeveer 600 m² en klimt volgens de fabrikant tot 45%. Diefstalbeveiliging zit erin via ingebouwde 4G, met pincode, alarm, GPS en geofence-melding. Let op: de 4G-service heeft een einddatum en we vonden geen Nederlandse verlengprijs, en netwerk-RTK is niet overal beschikbaar. In onze functiescore scoort dit model hoog (92,7).",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/navimow-robotgrasmaaier-i206-600m2-nrtk-vision-awd/9300000251586857/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/qNBopJD3PZry/0YrzBLv/550x424.jpg",
+          "breedte": 550,
+          "hoogte": 424
+        }
+      }
     },
     {
       "id": "M003",
@@ -679,11 +695,12 @@
       "reviews": [],
       "ean": null,
       "prijs": null,
-      "fabrikant_url": null,
+      "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-lidar-robot-lawn-mower",
       "beste_voor": null,
       "pluspunten": [],
       "minpunten": [],
-      "analyse": null
+      "analyse": null,
+      "bol": null
     },
     {
       "id": "M004",
@@ -951,7 +968,7 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: /product-reviews/ uitgesloten in robots.txt"
         }
       ],
-      "ean": null,
+      "ean": "6977973410621",
       "prijs": {
         "bedrag": 699,
         "winkel": "Mova",
@@ -970,7 +987,15 @@
         "Zonder losse link-module (249 euro, 3 jaar service volgens Mova NL) geen GPS-tracking en geen melding buiten de kaart",
         "Rating van de app op Google Play 2,7"
       ],
-      "analyse": "De Mova LiDAX Ultra 800 is de kleinere variant van de 1200: LiDAR met camera, zonder antenne of RTK, voor tuinen tot 800 m² en 45% helling volgens de fabrikant. Ook hier vragen GPS-tracking en een melding buiten de kaart de losse link-module (249 euro, met 3 jaar service volgens Mova NL). De app staat op 2,7 in Google Play, uit ruim 1.100 beoordelingen."
+      "analyse": "De Mova LiDAX Ultra 800 is de kleinere variant van de 1200: LiDAR met camera, zonder antenne of RTK, voor tuinen tot 800 m² en 45% helling volgens de fabrikant. Ook hier vragen GPS-tracking en een melding buiten de kaart de losse link-module (249 euro, met 3 jaar service volgens Mova NL). De app staat op 2,7 in Google Play, uit ruim 1.100 beoordelingen.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/mova-robotmaaier-lidax-ultra-serie-robotmaaier-3d-lidar-ai-tot-800-m-trueguard/9300000262912566/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/q353jkPyYpq0/qjyykGR/550x269.jpg",
+          "breedte": 550,
+          "hoogte": 269
+        }
+      }
     },
     {
       "id": "M005",
@@ -1209,7 +1234,7 @@
         "bron": "https://nl.mova.tech/products/mova-robot-lawn-mower-4g-module"
       },
       "reviews": [],
-      "ean": null,
+      "ean": "6977973410782",
       "prijs": {
         "bedrag": 814,
         "winkel": "Mova",
@@ -1228,7 +1253,15 @@
         "Zonder losse link-module (249 euro, 3 jaar service volgens Mova NL) geen GPS-tracking en geen melding buiten de kaart",
         "Rating van de app op Google Play 2,7"
       ],
-      "analyse": "De Mova LiDAX Ultra 1200 bepaalt zijn plek met LiDAR en een camera, zonder antenne of RTK. Dat maakt de installatie eenvoudig, ook in tuinen met veel obstakels. Volgens de fabrikant haalt hij 1.200 m² en 45% helling. Voor GPS-tracking en een melding buiten de kaart heb je de losse link-module nodig (249 euro, met 3 jaar service volgens Mova NL). De app staat op 2,7 in Google Play, uit ruim 1.100 beoordelingen."
+      "analyse": "De Mova LiDAX Ultra 1200 bepaalt zijn plek met LiDAR en een camera, zonder antenne of RTK. Dat maakt de installatie eenvoudig, ook in tuinen met veel obstakels. Volgens de fabrikant haalt hij 1.200 m² en 45% helling. Voor GPS-tracking en een melding buiten de kaart heb je de losse link-module nodig (249 euro, met 3 jaar service volgens Mova NL). De app staat op 2,7 in Google Play, uit ruim 1.100 beoordelingen.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/mova-lidax-ultra-1200-robotmaaier-3d-lidar-ai-draadloos-1200m-45-helling-ultratrim-meerdere-zones/9300000268371191/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/XJW8WNE5g0Gk/mQZyMZE/550x357.jpg",
+          "breedte": 550,
+          "hoogte": 357
+        }
+      }
     },
     {
       "id": "M006",
@@ -1483,7 +1516,7 @@
           "opmerking": "E15 Solo; gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
         }
       ],
-      "ean": null,
+      "ean": "0194644388737",
       "prijs": {
         "bedrag": 918,
         "winkel": "Coolblue",
@@ -1503,7 +1536,15 @@
         "GPS en bediening zonder wifi vragen een data-abonnement; Europese prijs niet gevonden",
         "66,3 dB(A) geluidsvermogen"
       ],
-      "analyse": "De Eufy E15 Solo werkt met alleen een camera en maait in een systematisch patroon, zonder draad of antenne. Het geluidsvermogen is 66,3 dB(A), het hoogste in onze selectie. Er is geen pincode en geen alarm; GPS en bediening zonder wifi vragen een data-abonnement waarvan we de Europese prijs niet vonden. De documentatie noemt een helling van \"40% (18 graden)\"; die cijfers komen niet overeen, dus rekenen wij met 32,5%."
+      "analyse": "De Eufy E15 Solo werkt met alleen een camera en maait in een systematisch patroon, zonder draad of antenne. Het geluidsvermogen is 66,3 dB(A), het hoogste in onze selectie. Er is geen pincode en geen alarm; GPS en bediening zonder wifi vragen een data-abonnement waarvan we de Europese prijs niet vonden. De documentatie noemt een helling van \"40% (18 graden)\"; die cijfers komen niet overeen, dus rekenen wij met 32,5%.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/eufy-robotgrasmaaier-e15-draadloos-zonder-rtk-geen-signaalproblemen-5-minuten-setup-automatische-mapping-tot-800-m2-obstakelvermijding-ride-on-edge-bediening-via-app/9300000275806803/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/Nq06Gx9OO1qN/KZY6y5r/550x489.jpg",
+          "breedte": 550,
+          "hoogte": 489
+        }
+      }
     },
     {
       "id": "M007",
@@ -1588,7 +1629,8 @@
       "beste_voor": null,
       "pluspunten": [],
       "minpunten": [],
-      "analyse": null
+      "analyse": null,
+      "bol": null
     },
     {
       "id": "M008",
@@ -1845,7 +1887,7 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
         }
       ],
-      "ean": null,
+      "ean": "6977328063366",
       "prijs": {
         "bedrag": 729,
         "winkel": "Coolblue",
@@ -1866,7 +1908,15 @@
         "Zonder module geen GPS-locatie en geen alarm buiten de kaart",
         "De handleiding noemt geen garantieperiode"
       ],
-      "analyse": "De Dreame A1 Pro heeft 3D-LiDAR en een opgegeven oppervlak tot 2.000 m²: het grootste in onze selectie. Hij rijdt systematisch en haalt volgens de fabrikant 45% helling. GPS-locatie en alarm buiten de kaart vragen een losse link-module, in onze selectie de goedkoopste (69 euro voor een jaar, 99,99 euro voor drie jaar). Het geluidsvermogen is 64 dB(A) en de app, die ook voor andere Dreame-apparaten dient, staat op 3,91 in Google Play. De handleiding noemt geen garantieperiode."
+      "analyse": "De Dreame A1 Pro heeft 3D-LiDAR en een opgegeven oppervlak tot 2.000 m²: het grootste in onze selectie. Hij rijdt systematisch en haalt volgens de fabrikant 45% helling. GPS-locatie en alarm buiten de kaart vragen een losse link-module, in onze selectie de goedkoopste (69 euro voor een jaar, 99,99 euro voor drie jaar). Het geluidsvermogen is 64 dB(A) en de app, die ook voor andere Dreame-apparaten dient, staat op 3,91 in Google Play. De handleiding noemt geen garantieperiode.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/dreame-roboticmower-a1-pro-robotgrasmaaier-draadloze-grenzen-u-vormige-route-efficiente-en-nauwkeurige-mapping/9300000225519126/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/xAr1oorKV7Qn/1wvDMmo/550x348.jpg",
+          "breedte": 550,
+          "hoogte": 348
+        }
+      }
     },
     {
       "id": "M010",
@@ -2130,7 +2180,8 @@
         "Helling 30%, aan de rand 20%",
         "IPX5"
       ],
-      "analyse": "De Automower 410VE NERA is gemaakt voor grote tuinen, tot ongeveer 1.500 m² systematisch maaien. Hij gebruikt RTK met een AI-camera en heeft 4G ingebouwd; de correctiedata is gratis. Daar staat tegenover dat de prijs boven de 3.000 euro ligt en dat je mobiele of wifidekking over het hele gazon nodig hebt, anders heb je een referentiestation nodig (adviesprijs 309 euro). De helling is 30%, aan de rand 20%."
+      "analyse": "De Automower 410VE NERA is gemaakt voor grote tuinen, tot ongeveer 1.500 m² systematisch maaien. Hij gebruikt RTK met een AI-camera en heeft 4G ingebouwd; de correctiedata is gratis. Daar staat tegenover dat de prijs boven de 3.000 euro ligt en dat je mobiele of wifidekking over het hele gazon nodig hebt, anders heb je een referentiestation nodig (adviesprijs 309 euro). De helling is 30%, aan de rand 20%.",
+      "bol": null
     },
     {
       "id": "M011",
@@ -2385,7 +2436,7 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: /product-reviews/ uitgesloten in robots.txt"
         }
       ],
-      "ean": null,
+      "ean": "4066407025219",
       "prijs": {
         "bedrag": 1099,
         "winkel": "Coolblue",
@@ -2406,7 +2457,15 @@
         "Maait willekeurig volgens de handleiding",
         "Geen alarm, GPS of geofence"
       ],
-      "analyse": "De Gardena Smart Sileno Free 800 krijgt zijn RTK-correctie via een gateway die met een LAN-kabel op je router moet, dus je hebt stabiel internet en een vrije poort nodig. Er is geen abonnement en geen 4G. Hij heeft geen camera: obstakels merkt hij pas na een botsing, en volgens de handleiding maait hij willekeurig. Pincode en optilsensor zijn er wel, een alarm, GPS of geofence niet. Hij past bij kleinere, overzichtelijke tuinen tot 800 m²."
+      "analyse": "De Gardena Smart Sileno Free 800 krijgt zijn RTK-correctie via een gateway die met een LAN-kabel op je router moet, dus je hebt stabiel internet en een vrije poort nodig. Er is geen abonnement en geen 4G. Hij heeft geen camera: obstakels merkt hij pas na een botsing, en volgens de handleiding maait hij willekeurig. Pincode en optilsensor zijn er wel, een alarm, GPS of geofence niet. Hij past bij kleinere, overzichtelijke tuinen tot 800 m².",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/gardena-smart-sileno-free-800-robotmaaier/9300000222525633/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/xAyKnG1q1Apl/pYm4gn2/550x368.jpg",
+          "breedte": 550,
+          "hoogte": 368
+        }
+      }
     },
     {
       "id": "M012",
@@ -2491,7 +2550,8 @@
       "beste_voor": null,
       "pluspunten": [],
       "minpunten": [],
-      "analyse": null
+      "analyse": null,
+      "bol": null
     },
     {
       "id": "M013",
@@ -2583,7 +2643,8 @@
       "beste_voor": null,
       "pluspunten": [],
       "minpunten": [],
-      "analyse": null
+      "analyse": null,
+      "bol": null
     },
     {
       "id": "M014",
@@ -2668,7 +2729,8 @@
       "beste_voor": null,
       "pluspunten": [],
       "minpunten": [],
-      "analyse": null
+      "analyse": null,
+      "bol": null
     },
     {
       "id": "M015",
@@ -2918,7 +2980,7 @@
           "opmerking": "Gemiddelde op 10; productpagina (JSON-LD). Teksten niet gelezen: robots.txt"
         }
       ],
-      "ean": null,
+      "ean": "8721264220455",
       "prijs": null,
       "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
       "beste_voor": "Tuinen tot 1.000 m² met veel obstakels en hellingen, voor wie geen antenne wil",
@@ -2935,7 +2997,15 @@
         "Alle messen elke 1 tot 2 maanden vervangen (ongeveer 25 euro per set)",
         "Nog weinig reviews (17 bij één winkel)"
       ],
-      "analyse": "De i210 LiDAR Pro combineert LiDAR met een camera en netwerk-RTK, zodat je in principe geen antenne nodig hebt. Hij is bedoeld voor tuinen tot 1.000 m² en haalt volgens de handleiding 55% helling. Alle veiligheidsfuncties zijn aanwezig, inclusief een optilsensor die het mes stopt, en 4G zit erin: het eerste jaar gratis, daarna 29,99 euro per jaar. In onze functiescore staat dit model bovenaan, maar er zijn nog te weinig reviews gelezen voor een betrouwbaarheidsscore."
+      "analyse": "De i210 LiDAR Pro combineert LiDAR met een camera en netwerk-RTK, zodat je in principe geen antenne nodig hebt. Hij is bedoeld voor tuinen tot 1.000 m² en haalt volgens de handleiding 55% helling. Alle veiligheidsfuncties zijn aanwezig, inclusief een optilsensor die het mes stopt, en 4G zit erin: het eerste jaar gratis, daarna 29,99 euro per jaar. In onze functiescore staat dit model bovenaan, maar er zijn nog te weinig reviews gelezen voor een betrouwbaarheidsscore.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/navimow-i210-lidar-pro-robotgrasmaier-1000m2-lidar-vision-awd/9300000251586859/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/3AAKgGvOP33Q/XoDn585/550x550.jpg",
+          "breedte": 550,
+          "hoogte": 550
+        }
+      }
     },
     {
       "id": "M016",
@@ -3202,7 +3272,7 @@
           "opmerking": "Gemiddelde op 5; productpagina. Teksten niet gelezen"
         }
       ],
-      "ean": null,
+      "ean": "8721264220424",
       "prijs": null,
       "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-awd-robot-lawn-mower",
       "beste_voor": "Kleinere tuinen tot 500 m² met hellingen, met 4G en diefstalbeveiliging ingebouwd",
@@ -3219,7 +3289,15 @@
         "Netwerk-RTK niet overal beschikbaar; dan heb je de antenne uit de doos nodig",
         "Navimow noemt all-wheel drive bij drie wielen; de handleiding zegt vierwielaandrijving"
       ],
-      "analyse": "De Navimow i205 AWD is de instap voor kleinere tuinen tot 500 m². Hij gebruikt RTK met camera, haalt volgens de fabrikant 45% helling en heeft 4G ingebouwd met een jaar gratis data. Netwerk-RTK wordt automatisch en gratis ingeschakeld als jouw regio het ondersteunt; anders gebruik je de antenne uit de doos. Optioneel kun je een garage kopen (149 euro) en een antennemontageset (59,99 euro)."
+      "analyse": "De Navimow i205 AWD is de instap voor kleinere tuinen tot 500 m². Hij gebruikt RTK met camera, haalt volgens de fabrikant 45% helling en heeft 4G ingebouwd met een jaar gratis data. Netwerk-RTK wordt automatisch en gratis ingeschakeld als jouw regio het ondersteunt; anders gebruik je de antenne uit de doos. Optioneel kun je een garage kopen (149 euro) en een antennemontageset (59,99 euro).",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/segway-navimow-i205-awd-robotmaaier-nrtk-vision-zonder-grensdraad-zonder-antenne-snelste-eenvoudige-installatie-500m-driewielaandrijving-45-helling-ai-obstakelvermijding-super-stil-59db-3-jaar-garantie/9300000269439068/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/ggZ722wooyrD/Q07YJGY/550x540.jpg",
+          "breedte": 550,
+          "hoogte": 540
+        }
+      }
     },
     {
       "id": "M017",
@@ -3338,7 +3416,7 @@
         "bron": "https://navimow-support.zendesk.com/hc/article_attachments/56063373773593 (EN Navimow i2 LiDAR Pro User Manual-EU-260226-nl-NL; titelpagina 260225-A)"
       },
       "reviews": [],
-      "ean": null,
+      "ean": "8721264220486",
       "prijs": null,
       "fabrikant_url": "https://nl.navimow.com/products/navimow-i2-lidar-pro-robot-lawn-mower",
       "beste_voor": "Grote tuinen tot 2.000 m² zonder antenne",
@@ -3352,7 +3430,15 @@
         "4G is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
         "Werking van netwerk-RTK zonder dekking niet bevestigd"
       ],
-      "analyse": "De i220 LiDAR Pro is de grotere variant van de i210 Pro, voor tuinen tot 2.000 m². Navigatie met LiDAR en camera, volgens Navimow ook netwerk-RTK, helling 55% en een geluidsvermogen van 59 dB(A). 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
+      "analyse": "De i220 LiDAR Pro is de grotere variant van de i210 Pro, voor tuinen tot 2.000 m². Navigatie met LiDAR en camera, volgens Navimow ook netwerk-RTK, helling 55% en een geluidsvermogen van 59 dB(A). 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/segway-navimow-i220-lidar-pro-lidar-nrtk-vision-awd-robotgrasmaaier-zonder-grensdraad-zonder-antenne-navigatie-zonder-satellieten-2000m-45-helling-ai-obstakelvermijding-apple-find-my-super-stil-59db-3-jaar-garantie/9300000266952936/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/n33N1lZ8pRzl/APDAQ9p/550x497.jpg",
+          "breedte": 550,
+          "hoogte": 497
+        }
+      }
     },
     {
       "id": "M018",
@@ -3471,7 +3557,7 @@
         "bron": "https://navimow-support.zendesk.com/hc/article_attachments/55051811601561 (Navimow X4 User Manual-EU-260107_nl-NL; titelpagina 260107-A)"
       },
       "reviews": [],
-      "ean": null,
+      "ean": "8721264221216",
       "prijs": null,
       "fabrikant_url": "https://nl.navimow.com/products/navimow-x4-robot-lawn-mower",
       "beste_voor": "Grote of zeer steile tuinen tot 2.000 m²",
@@ -3487,7 +3573,15 @@
         "Connect+ is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
         "Netwerk-RTK niet overal beschikbaar; anders lokale RTK met de antenne uit de doos"
       ],
-      "analyse": "De X420 is de zwaardere maaier van Navimow voor tuinen tot 2.000 m². Hij werkt met RTK en drie camera's die 360 graden dekken, en de handleiding noemt een helling van 84% en vier aangedreven wielen. Het geluidsvermogen is 68 dB(A), hoger dan de i-serie. 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
+      "analyse": "De X420 is de zwaardere maaier van Navimow voor tuinen tot 2.000 m². Hij werkt met RTK en drie camera's die 360 graden dekken, en de handleiding noemt een helling van 84% en vier aangedreven wielen. Het geluidsvermogen is 68 dB(A), hoger dan de i-serie. 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score.",
+      "bol": {
+        "product_url": "https://www.bol.com/nl/nl/p/segway-navimow-x420e-nrtk-vision-robotgrasmaaier-zonder-grensdraad-zonder-antenne-navigatie-zonder-satellieten-2000m-55-helling-ai-obstakelvermijding-apple-find-my-super-stil-68db-3-jaar-garantie/9300000266952935/",
+        "afbeelding": {
+          "url": "https://media.s-bol.com/4BBYAQLjpw9x/OyYqEKg/550x392.jpg",
+          "breedte": 550,
+          "hoogte": 392
+        }
+      }
     }
   ]
 }

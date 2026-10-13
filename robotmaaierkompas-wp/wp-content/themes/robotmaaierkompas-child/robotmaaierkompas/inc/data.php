@@ -11,6 +11,9 @@
  *   een ingevulde aanschafprijs of bol.com-gegevens (besluit 5 oktober 2026), of meer dan 2 MB.
  * - Toegestaan (besluit 6 oktober 2026): per model één "prijs" {bedrag (hele euro's), winkel, datum, url,
  *   type winkel of fabrikant}; geen Bol en geen marketplace. Zie inc/prijzen.php.
+ * - 1.3.6: per model "ean" (8-14 cijfers) en een blok "bol" met alleen product_url (https://www.bol.com/…) en
+ *   afbeelding {url (https://media.s-bol.com/…), breedte, hoogte}. Geen Bol-prijzen of -beoordelingen in het
+ *   bestand (die haalt de prijstaak zelf op, beoordelingen tonen we niet); "bol.com" buiten dit blok blijft geweigerd.
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -63,12 +66,30 @@ function rmk_validate_modellen( $data ) {
 				$err[] = "Model $i: $lk moet een lijst van hoogstens 8 teksten zijn.";
 			}
 		}
+		if ( isset( $m['ean'] ) && null !== $m['ean'] && ! preg_match( '/^\d{8,14}$/', (string) $m['ean'] ) ) {
+			$err[] = "Model $i: ean moet 8 tot 14 cijfers zijn.";
+		}
+		if ( isset( $m['bol'] ) && null !== $m['bol'] ) {
+			$b = $m['bol'];
+			if ( ! is_array( $b ) || array_diff( array_keys( $b ), array( 'product_url', 'afbeelding' ) ) ) {
+				$err[] = "Model $i: bol mag alleen product_url en afbeelding bevatten (geen prijzen of beoordelingen).";
+			} elseif ( empty( $b['product_url'] ) || ! rmk_bol_product_url_ok( $b['product_url'] ) ) {
+				$err[] = "Model $i: bol.product_url moet een https://www.bol.com-adres zijn.";
+			} elseif ( isset( $b['afbeelding'] ) && null !== $b['afbeelding'] && ( ! is_array( $b['afbeelding'] ) || array_diff( array_keys( $b['afbeelding'] ), array( 'url', 'breedte', 'hoogte' ) )
+				|| empty( $b['afbeelding']['url'] ) || ! rmk_bol_afbeelding_ok( $b['afbeelding']['url'] ) ) ) {
+				$err[] = "Model $i: bol.afbeelding moet een https://media.s-bol.com-adres zijn (url, breedte, hoogte).";
+			}
+		}
 		if ( isset( $m['kosten']['aanschaf']['waarde'] ) && null !== $m['kosten']['aanschaf']['waarde'] ) {
 			$err[] = "Model $i: aanschafprijs is ingevuld (moet leeg blijven).";
 		}
 	}
-	if ( false !== stripos( wp_json_encode( $data ), 'bol.com' ) ) {
-		$err[] = 'Bevat bol.com-gegevens (voorlopig geen Bol-gegevens).';
+	$zonder_bol = $data;
+	foreach ( $zonder_bol['modellen'] as $k => $m ) {
+		unset( $zonder_bol['modellen'][ $k ]['bol'] );
+	}
+	if ( false !== stripos( wp_json_encode( $zonder_bol ), 'bol.com' ) ) {
+		$err[] = 'Bevat bol.com-gegevens buiten het blok "bol" (geen Bol-prijzen, -bronnen of -beoordelingen).';
 	}
 	return $err;
 }

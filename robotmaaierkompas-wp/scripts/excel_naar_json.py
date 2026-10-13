@@ -22,6 +22,11 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
 - Er wordt niets geschat of aangevuld. Alles wat ontbreekt blijft null.
 - Modellen met beschikbaarheid "uitverkocht" of "niet leverbaar" worden overgeslagen.
 - Voorlopig geen Bol-gegevens: bronregels en reviews van bol.com worden overgeslagen.
+- Bol (ronde 30, thema 1.3.6): uit het blad "Bol" per model alleen de EAN ("ean"), de bol-product-URL en de
+  afbeeldings-URL van 550 px ("bol": {product_url, afbeelding: {url, breedte, hoogte}}). Geen prijzen, geen
+  verkoper en geen beoordelingen: prijzen haalt de site zelf op (inc/bol.php), beoordelingen tonen we niet.
+- Fabrikantpagina (ronde 30): uit de kolom "Fabrikantpagina (URL)" in Modellen; is die leeg, dan zoals voorheen
+  uit een prijsregel van de fabrikant of de bronregel "Beschikbaarheid fabrikant".
 - Prijzen (besluit 6 oktober 2026): per model alleen de laagste geldige prijs ("prijs": bedrag in hele euro's,
   winkel, datum, product-URL), uit het blad Prijzen: op voorraad (= nieuw), winkel of fabrikant, geen Bol en geen
   marketplace, niet ouder dan 14 dagen. De site toont hem niet meer na 14 dagen. Aanschaf in de kosten blijft null.
@@ -63,8 +68,9 @@ KOLOMMEN = {
     "Extra installatiekosten (euro, eenmalig)": "extra_installatiekosten", "Opmerking": "opmerking",
     "Mes-stop bij optillen/kantelen (1/0) - alleen informatie": "mes_stop",
     "Beschikbaarheid (nieuw / uitlopend / uitverkocht)": "beschikbaarheid",
+    "Fabrikantpagina (URL)": "fabrikant_pagina",
 }
-NIET_SPEC = {"id", "merk", "model", "generatie", "kandidaat_paginas", "opmerking", "beschikbaarheid"}
+NIET_SPEC = {"id", "merk", "model", "generatie", "kandidaat_paginas", "opmerking", "beschikbaarheid", "fabrikant_pagina"}
 NIET_LEVERBAAR = ("niet leverbaar", "uitverkocht")
 
 # Veldnaam in blad Bronnen (genormaliseerd, kleine letters) -> interne sleutel
@@ -211,6 +217,30 @@ def bron_velden(veld):
     return uit
 
 
+def bol_velden(r, rapport, mid):
+    """EAN en het blok "bol" uit een rij van het blad Bol; geen prijzen, verkoper of beoordelingen."""
+    leeg_ = {"ean": None, "bol": None}
+    if not r:
+        return leeg_
+    ean = re.sub(r"\D", "", str(kolom(r, "EAN") or ""))
+    url = str(kolom(r, "Bol-product-URL") or "").strip()
+    img = str(kolom(r, "Afbeeldings-URL (550") or "").strip()
+    if not ean:
+        rapport.setdefault("bol_niet_gekoppeld", []).append(mid)
+        return leeg_
+    if not (8 <= len(ean) <= 14) or not re.match(r"https://www\.bol\.com/", url):
+        rapport.setdefault("bol_ongeldig", []).append(mid)
+        return leeg_
+    afb = None
+    m = re.match(r"https://media\.s-bol\.com/.+/(\d+)x(\d+)\.(?:jpg|jpeg|png|webp)$", img)
+    if m:
+        afb = {"url": img, "breedte": int(m.group(1)), "hoogte": int(m.group(2))}
+    elif img:
+        rapport.setdefault("bol_afbeelding_ongeldig", []).append(mid)
+    rapport.setdefault("bol_gekoppeld", []).append(mid)
+    return {"ean": ean, "bol": {"product_url": url, "afbeelding": afb}}
+
+
 def niet_leverbaar(*teksten):
     return any(re.search(r"niet\s+leverbaar", str(t or ""), re.I) for t in teksten)
 
@@ -285,6 +315,12 @@ def main():
 
     wb = openpyxl.load_workbook(args.xlsx, data_only=True)
     modellen, bronnen, prijzen, reviews = (blad(wb, n) for n in ("Modellen", "Bronnen", "Prijzen", "Reviews"))
+    bol_blad = {}
+    if "Bol" in wb.sheetnames:
+        for r in blad(wb, "Bol"):
+            mid = str(kolom(r, "Model-ID") or "").strip()
+            if re.fullmatch(r"M\d+", mid):
+                bol_blad[mid] = r
     minimum = 50
     if "Instellingen" in wb.sheetnames:
         for r in wb["Instellingen"].iter_rows(values_only=True):
@@ -392,6 +428,12 @@ def main():
             geldig.append({"bedrag": int(round(prijs)), "winkel": naam_winkel, "datum": d, "url": url, "type": soort})
         laagste = min(geldig, key=lambda p: p["bedrag"]) if geldig else None
         # Geen prijsregel van de fabrikant: de productpagina uit de bronregel "Beschikbaarheid fabrikant" (ronde 28)
+        eigen = str(rij.get("fabrikant_pagina") or "").strip()
+        if eigen:
+            if re.match(r"https://", eigen) and "bol.com" not in eigen.lower():
+                fabrikant_url = eigen  # kolom "Fabrikantpagina (URL)" gaat voor
+            else:
+                rapport.setdefault("fabrikantpagina_ongeldig", []).append(mid)
         if not fabrikant_url:
             for b in mbron:
                 if norm(kolom(b, "Veld")) == "beschikbaarheid fabrikant" and norm(kolom(b, "Status")) == "gecontroleerd":
@@ -505,7 +547,7 @@ def main():
             **({"niveau": "basis"} if basis else {}),
             "verbinding": verbinding,
             "reviews": r_uit,
-            "ean": None,  # nog niet in het Excel-bestand; nodig voor de Bol-prijstaak
+            **bol_velden(bol_blad.get(mid), rapport, mid),
             "prijs": laagste,
             "fabrikant_url": fabrikant_url,
             # Teksten voor de productbox (scripts/modellen_teksten.json, aangeleverd door Mandy, 6 oktober 2026)
