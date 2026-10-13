@@ -2099,3 +2099,107 @@ Bronnen: het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (blad "Bol", Logboek
 - [ ] Mandy: 1.3.6 uploaden en activeren; daarna de stappen in LANCERING.md, "Bol-koppeling aanzetten" (sleutels, echte cron, controle).
 - [ ] Claude, na de activering: `scripts/ronde30_upload.py … --schrijf` (blok "bol") en `tests/rmk-routes-test.py --na-136`, en live controleren.
 - [ ] Mandy: zeggen wanneer de schakelaar aan mag; dan `scripts/ronde30_affiliate_teksten.py --schrijf`.
+
+## Ronde 31 (13 oktober 2026): 1.3.6 live, Bol-blok in de modelgegevens, routetest, CDN
+**Niets gepubliceerd door mij.** Live gewijzigd door mij: alleen de modelgegevens (blok "bol"). `RMK_AFFILIATE_ACTIVE` niet aangezet, teksten niet toegepast.
+
+### 1. Thema 1.3.6 live
+- **Versie:** actief thema `robotmaaierkompas-child` **1.3.6** (REST). Het publieke `style.css` zegt Version 1.3.6, en de pagina's laden `rmk.js?ver=1.3.6`.
+  - De CSS van het thema staat inline in de `<head>` (sinds 1.3.x, voor de LCP). Een apart stylesheet met `?ver=` bestaat daardoor niet.
+- **Weergave van de 17 gepubliceerde pagina's: gelijk aan de meting na ronde 30.**
+  - Hub: 5 kaarten (92,7 / 87,3 / 80,5 / 78,6 / 60,9).
+  - Pagina 1: 8 kaarten in dezelfde volgorde.
+  - Nergens een Bol-regel, -knop of -foto.
+- **Navimow-pagina (#264):** 6 kaarten met dezelfde scores en prijsblokken als in ronde 29, geen Bol.
+
+### Navimow-pagina gepubliceerd (niet door mij)
+- #264 `/segway-navimow-robotmaaier/` is om **12:19:57 gepubliceerd** (revisie 12:19:47), op het account van Mandy. Om 12:1x was hij bij mijn eerste controle nog concept.
+- Deze sessie heb ik geen enkel schrijfverzoek naar een pagina gedaan, alleen naar de modelgegevens (12:20:00).
+- **Inhoud:** gelijk aan ronde 29, op één ding na: de blokeditor heeft het auteursblok-patroon uitgeschreven. Dat gebeurt bij openen en opslaan in de editor.
+- **Openbaar sinds de publicatie:**
+  - HTTP 200, geen noindex, in de page-sitemap (nu 18 URL's);
+  - genoemd op de homepage en de auteurspagina ("Onlangs bijgewerkt"). Daarom verschilt de tekst van die twee pagina's van de eerste meting; kaarten en scores niet.
+- Nu er 18 pagina's gepubliceerd zijn, zegt het statusoverzicht "17 van 17 (in totaal 18 gepubliceerde pagina's)". Dat is correct.
+- **Gevolg:** de links vanaf de hub en pagina 1 naar deze pagina (ronde 28, `scripts/ronde28_links.py`) kunnen nu. **Niet gedaan:** dat is niet gevraagd.
+
+### 2. Blok "bol" in de modelgegevens
+- `scripts/ronde30_upload.py` (proefdraai, daarna `--schrijf`): alleen het veld `bol` bij de 11 gekoppelde modellen veranderd. De rest is gelijk aan vóór de upload (op de notatie 10.0/10 na). Opgeslagen om 12:20.
+
+  | Model | EAN | bol-product-URL (pad) | foto (550 px) |
+  |---|---|---|---|
+  | M001 Navimow i105E | 8720254406855 | …/segway-navimow-i105e-robotmaaier-500-m-…/9300000177752213/ | 550×434 |
+  | M002 Navimow i206 AWD | 8721264220318 | …/navimow-robotgrasmaaier-i206-600m2-nrtk-vision-awd/9300000251586857/ | 550×424 |
+  | M004 Mova LiDAX Ultra 800 | 6977973410621 | …/mova-robotmaaier-lidax-ultra-serie-…/9300000262912566/ | 550×269 |
+  | M005 Mova LiDAX Ultra 1200 | 6977973410782 | …/mova-lidax-ultra-1200-robotmaaier-…/9300000268371191/ | 550×357 |
+  | M006 Eufy E15 Solo | 0194644388737 | …/eufy-robotgrasmaaier-e15-…/9300000275806803/ | 550×489 |
+  | M008 Dreame A1 Pro | 6977328063366 | …/dreame-roboticmower-a1-pro-…/9300000225519126/ | 550×348 |
+  | M011 Gardena Smart Sileno Free 800 | 4066407025219 | …/gardena-smart-sileno-free-800-robotmaaier/9300000222525633/ | 550×368 |
+  | M015 Navimow i210 LiDAR Pro | 8721264220455 | …/navimow-i210-lidar-pro-robotgrasmaier-…/9300000251586859/ | 550×550 |
+  | M016 Navimow i205 AWD | 8721264220424 | …/segway-navimow-i205-awd-robotmaaier-…/9300000269439068/ | 550×540 |
+  | M017 Navimow i220 LiDAR Pro | 8721264220486 | …/segway-navimow-i220-lidar-pro-…/9300000266952936/ | 550×497 |
+  | M018 Navimow X420 | 8721264221216 | …/segway-navimow-x420e-…/9300000266952935/ | 550×392 |
+
+  - Alle 11 gelijk aan het blad Bol: EAN, product-URL en de afbeeldings-URL van 550 px.
+  - **Geen blok "bol":** M003, M007, M010 (niet op Bol), M012, M013 en M014.
+  - Geen Bol-prijzen, -verkopers of -beoordelingen in de gegevens, en "bol.com" komt alleen in het blok "bol" voor.
+- **Na de upload:**
+  - de 17 eerste-golfpagina's: kaarten, scores en volgorde gelijk;
+  - 0 Bol-sporen (`partner.bol.com`, `media.s-bol.com`, `data-rmk-bol`, "Prijs bij bol.com") op de openbare pagina's en in de Navimow-pagina;
+  - `/rmk/v1/bol-status` (ingelogd): constanten_aanwezig **false**, affiliate_actief **false**, geen ronde ingepland, alle 11 modellen "nog niet opgehaald";
+  - statusoverzicht: alles OK, "Bol-koppeling: uit, constanten ontbreken".
+
+### 3. Routetest (`python3 tests/rmk-routes-test.py --na-136`, zonder inloggen): 0 fouten
+| Route | GET | POST |
+|---|---|---|
+| /rmk/v1 | 401 | 401 |
+| /rmk/v1/status | 401 | 401 |
+| /rmk/v1/modellen | 401 | 401 |
+| /rmk/v1/bol-status | 401 | 401 |
+| /rmk/v1/noindex | 404 rest_no_route | 404 rest_no_route |
+| /rmk/v1/paginas | 404 rest_no_route | 404 rest_no_route |
+| /rmk/v1/seo | 404 rest_no_route | 404 rest_no_route |
+| /rmk/v1/huisstijl | 404 rest_no_route | 404 rest_no_route |
+
+Geen gegevens in de antwoorden. De bouwroutes geven 404, omdat `RMK_BOUW_ACTIVE` niet aan staat.
+
+### 4. Hostinger-CDN en de Bol-prijzen (onderzoek; niets aan de site gedaan)
+**Gemeten** (zonder inloggen, 13 oktober 12:22-12:27, elke 10 s de hub):
+- De CDN **cachet de HTML**: `x-hcdn-cache-status: HIT` met `age` tot **292 s**, op randservers in Boston (bos), Istanbul (imm) en Kuala Lumpur (kul). Na 5 minuten nog steeds HIT, dus de bewaartijd is minstens 5 minuten; het maximum is niet gemeten.
+- De HTML-pagina's krijgen **geen Cache-Control-header** van de site. Statische bestanden krijgen `public, max-age=604800`.
+- De REST-API krijgt al `Cache-Control: no-store`, `CDN-Cache-Control: no-store` en `X-LiteSpeed-Cache-Control: no-cache` (sinds 1.3.3).
+- De `litespeed_control_set_ttl` uit 1.3.6 geldt alleen voor LiteSpeed op de server, **niet voor de CDN**. `litespeed_purge_all` na een prijsronde leegt ook alleen LiteSpeed.
+
+**Wat Hostinger erover zegt** (de sites van Hostinger zijn hier geblokkeerd; dit komt uit zoekresultaten en is dus niet zelf nagelezen):
+- De CDN legen kan in hPanel alleen voor de **hele site**: Websites > Prestaties > CDN > "Flush cache"; het werkt binnen seconden. Per URL legen kan alleen in Cache Manager, en dat is de LiteSpeed-cache, niet de CDN.
+- De instellingen zijn **per domein**; een uitzondering per pagina of pad is niet gevonden.
+- Hostinger zegt dat HTML "in het algemeen" niet aan de rand wordt gecachet. Mijn meting laat zien dat het hier wel gebeurt.
+- De Hostinger-API heeft volgens kopieën van de documentatie `DELETE https://developers.hostinger.com/api/hosting/v1/accounts/{username}/websites/{domain}/cache/clear`. Volgens die beschrijving leegt dat de servercache en, als de CDN aan staat, ook de CDN. Niet gecontroleerd tegen de officiële documentatie.
+- Of de CDN `Cache-Control`/`CDN-Cache-Control` van de site volgt, is niet gedocumenteerd gevonden.
+
+**Voorstel** (in deze volgorde):
+1. **Eerst meten, voordat de schakelaar aan gaat** (kan ik doen, alleen lezen): een uur lang elke minuut de hub opvragen om de echte bewaartijd van de CDN te vinden.
+   - **Bewaartijd een paar minuten:** dan is het risico klein. De Bol-regel zegt zelf "bijgewerkt om …", en een prijs staat hooguit enkele minuten langer dan 12 uur.
+2. **Kortere cache voor pagina's met een Bol-regel (thema 1.3.7, klein):** op pagina's met een Bol-regel `Cache-Control: public, max-age=0, s-maxage=600` en `CDN-Cache-Control: max-age=600` meesturen, en op andere pagina's niets veranderen.
+   - Of de Hostinger-CDN dat volgt, testen we na de upload met dezelfde meting.
+   - Volgt de CDN het niet, dan doet het ook geen kwaad.
+3. **Automatisch legen na elke prijsronde (thema 1.3.7):** na `rmk_bol_ronde` de Hostinger-API aanroepen (bovenstaand endpoint).
+   - Daarvoor zijn een **API-token van Hostinger** en de gebruikersnaam van het hostingaccount nodig, als constanten in wp-config.php (`RMK_HOSTINGER_API_TOKEN`, `RMK_HOSTINGER_USERNAME`); nooit in git.
+   - Dat leegt vier keer per dag de hele site-cache. Bij deze kleine site is dat geen probleem; de eerste bezoeker daarna wacht iets langer.
+4. **Werkt geen van beide:** de CDN voor het hele domein uitzetten. Die pagina's kunnen niet als enige buiten de CDN. De afbeeldingen en CSS hebben er dan ook geen baat meer van. De LCP opnieuw meten; LiteSpeed op de server cachet de pagina's nog steeds.
+
+**Stappen voor Mandy in hPanel** (namen volgens de gevonden documentatie; kunnen iets afwijken):
+- **Nu niets.**
+- **Bij het aanzetten van de schakelaar:** Websites > robotmaaierkompas.nl > Prestaties > CDN > "Flush cache" (hele site). Daarna leeg ik de LiteSpeed-cache via de site.
+- **Voor punt 3, alleen als je kiest voor automatisch legen:** in hPanel een API-token aanmaken (Account > API; alleen rechten voor hosting/cache als dat kan) en het token en de gebruikersnaam in wp-config.php zetten. Het token nooit in een chat of e-mail. Dan maak ik 1.3.7.
+- **Voor punt 4:** Prestaties > CDN > CDN uitschakelen (per domein). Zeg het vooraf, dan meet ik de LCP voor en na.
+
+### 5. Nog te doen door Mandy voor de activering (LANCERING.md, "Bol-koppeling aanzetten")
+- [ ] **Secret roteren** in het Bol-Partnerplatform (het stond in een chatbericht, Logboek rij 136).
+- [ ] **Constanten in wp-config.php:** `RMK_BOL_CLIENT_ID`, `RMK_BOL_CLIENT_SECRET`, `RMK_BOL_SITE_ID` (1549381). Nog niet aanwezig (bol-status: constanten_aanwezig false).
+- [ ] **Echte cron** in hPanel (Geavanceerd > Cron-taken), één van de twee:
+  - elke 15 minuten `wget -q -O /dev/null "https://robotmaaierkompas.nl/wp-cron.php?doing_wp_cron"` en `define( 'DISABLE_WP_CRON', true );`, of
+  - elke 6 uur `wp --path=<WordPress-map> rmk bol-ronde`.
+- [ ] Daarna laat je het mij weten. Ik controleer dan `/rmk/v1/bol-status`: de eerste ronde, de uitkomst per model, en dat er nog niets op de site staat.
+- [ ] **CDN:** kies uit het voorstel hierboven (eerst meten aanbevolen).
+- [ ] **Schakelaar:** zeggen wanneer `RMK_AFFILIATE_ACTIVE` aan mag. Dan pas ik de teksten toe (`scripts/ronde30_affiliate_teksten.py --schrijf`), en daarna leeg je de CDN.
+- [ ] **Links:** wil je nu de links vanaf de hub en pagina 1 naar de (inmiddels gepubliceerde) Navimow-pagina? Dan draai ik `scripts/ronde28_links.py --schrijf`.
