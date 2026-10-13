@@ -192,6 +192,10 @@ add_filter( 'rest_pre_dispatch', function ( $result, $server, $request ) {
 			return new WP_Error( 'rest_no_route', 'Geen route gevonden die overeenkomt met de URL en aanvraagmethode.', array( 'status' => 404 ) );
 		}
 	}
+	// 1.3.7: de publieke prijsroute (alleen GET) is de enige rmk-route zonder inloggen; zie inc/bol.php.
+	if ( '/rmk/v1/bol-prijs' === rtrim( $route, '/' ) && 'GET' === $request->get_method() ) {
+		return $result;
+	}
 	if ( ( '/rmk/v1' === rtrim( $route, '/' ) || 0 === strpos( $route, '/rmk/' ) ) && ! current_user_can( 'manage_options' ) ) {
 		return new WP_Error( 'rest_forbidden', 'Alleen voor beheerders.', array( 'status' => is_user_logged_in() ? 403 : 401 ) );
 	}

@@ -2266,3 +2266,65 @@ Geen gegevens in de antwoorden. De bouwroutes geven 404, omdat `RMK_BOUW_ACTIVE`
 - [ ] Claude: na de volgende ronde bol-status bekijken (aanbiedingen, verkopers, fouten).
 - [ ] Bij de eerste geslaagde ronde met de schakelaar aan: meten of de CDN de nieuwe prijs meteen toont.
 - [ ] Besluit over 1.3.7: cache legen bij het verlopen van een prijs; stoppen na een tokenfout.
+
+## Ronde 33 (13 oktober 2026): bol-status na de nieuwe sleutels, thema 1.3.7 (prijs uit een niet-gecachete route)
+
+### 1. Bol-status (ingelogd, 17:13 UTC)
+- **Nog geen ronde na de update.** De laatste ronde is nog die van **13:15 UTC**: 11 verzoeken, alle 11 modellen "fout: Token: HTTP 401", 0 aanbiedingen.
+  - Constanten aanwezig: true; affiliate_actief: false; volgende ronde: "2026-10-13 19:13".
+  - Of de nieuwe sleutels werken, is dus nog niet te zien: er is sinds de update geen token gevraagd.
+- **Tijdzone:** de REST-instellingen geven `timezone` nog leeg, en de tijden in bol-status zijn dezelfde als vóór de wijziging (13:15, 19:13). Met Amsterdam zou dat 15:15 en 21:13 zijn. De nieuwe tijdzone lijkt dus nog niet opgeslagen (of een UTC-verschuiving is gekozen in plaats van de stad).
+
+### Checklist 401 (voor Mandy, zonder aannames over de waarden)
+1. In wp-config.php staan `RMK_BOL_CLIENT_ID` en `RMK_BOL_CLIENT_SECRET` precies zoals in het Partnerplatform (Open API): geen spatie of regeleinde binnen de aanhalingstekens, gewone rechte aanhalingstekens.
+2. Het secret is het **nieuwe** (na het roteren), niet het oude.
+3. De constanten staan boven de regel `/* That's all, stop editing! */` en er staat geen tweede `define` van dezelfde naam.
+4. Na 1.3.7: één ronde starten (POST `/wp-json/rmk/v1/bol-ronde`, ingelogd), of wachten op de volgende geplande ronde. Daarna bol-status bekijken.
+5. Tijdzone: Instellingen > Algemeen > Tijdzone "Amsterdam" kiezen en op **Wijzigingen opslaan** klikken.
+
+### 2. Thema 1.3.7
+- **(a) Prijs niet meer in de HTML.** De Bol-regel in de HTML bevat alleen de knop, de bronregel en een leeg, verborgen prijsvak (`data-rmk-bol-prijs hidden`).
+  - rmk.js haalt bij het laden `GET /wp-json/rmk/v1/bol-prijs?modellen=…` op (één verzoek per pagina, `cache: 'no-store'`, zonder cookies) en vult het vak met textContent: "**X euro**. Prijs bij bol.com, bijgewerkt om HH:MM[, via een partner van bol.com]."
+  - De route is publiek en geeft alleen wat al op de site mag staan: status, model, EAN, prijs, prijs_tekst, verkoper, partner, tijd, tijd_tekst, geldig_tot. Geen links met site-ID, geen tokens, geen sleutels. Maximaal 30 model-ID's (`M` + 3-4 cijfers).
+  - Headers via inc/techniek.php (alle /wp-json/): `Cache-Control: no-store, no-cache, private, max-age=0`, `CDN-Cache-Control: no-store`, `Surrogate-Control: no-store`, LiteSpeed no-cache.
+  - Zonder JavaScript, bij een fout of bij een verlopen prijs (`geldig_tot` voorbij) blijft alleen de knop. Bij "geen aanbod" verdwijnt de hele regel.
+  - Met de schakelaar uit: geen Bol-regel en geen `bolPrijsUrl` in de configuratie; de route geeft dan een lege lijst.
+  - Daarmee is het CDN-probleem uit ronde 32 (HTML > 52 minuten op de CDN) voor de prijs opgelost; een oude HTML-kopie bevat geen prijs meer.
+- **(b) Stoppen na de eerste tokenfout.** De ronde vraagt eerst één token. Mislukt dat, dan stopt de ronde (1 verzoek in plaats van 11), blijft de vorige uitkomst per model staan, en meldt bol-status `gestopt: true` met "Gestopt na de eerste tokenfout (…). Geen aanbiedingen opgehaald; controleer RMK_BOL_CLIENT_ID en RMK_BOL_CLIENT_SECRET." Ook een tokenfout halverwege (vernieuwen) stopt de ronde.
+- **(c) Beheerroute** `POST /wp-json/rmk/v1/bol-ronde`: alleen `manage_options`, nooit gecachet; start één ronde en geeft het rondelog terug (aantallen en melding, geen sleutels).
+- **(d) Routetest** `tests/rmk-routes-test.py`: alle rmk-routes zonder inloggen 401/404 en zonder gegevens, behalve GET bol-prijs: die mag 200 geven, maar alleen met de toegestane velden, zonder verboden tekst (partner.bol.com, secret, token, …) en met no-store in Cache-Control én CDN-Cache-Control. Nieuwe vlag `--na-137` (bol-prijs 200, POST bol-ronde 401). Live op 1.3.6: 0 fouten.
+- Versie 1.3.7 in robotmaaierkompas-setup.php, style.css en README.
+
+### 3. Tests (niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangezet; teksten niet toegepast)
+- **`php tests/bol-test.php`: 59 OK, alles geslaagd.** Nagebootst: bol zelf, partner, geen aanbod, fout (500), verlopen token (vernieuwen), geweigerd token (stopt na 1 verzoek, store blijft), verlopen prijs, schakelaar uit en aan, beheerroute start een ronde, geen prijs in de HTML.
+- **Browser (Chromium, statische kopie van de live pagina's met de 1.3.7-weergave, nagebootste prijsroute), pagina 1:**
+
+  | Scenario | Uitkomst |
+  |---|---|
+  | ok | 5 regels met prijs, M011 "via een partner van bol.com", M005 (fout in de ronde) alleen de knop; 1 verzoek |
+  | geen aanbod M005 | regel M005 verborgen, de rest met prijs |
+  | route geeft 500 | alle 6 alleen de knop, 0 JavaScript-fouten |
+  | prijzen verlopen | alle 6 alleen de knop |
+  | zonder JavaScript | alle 6 alleen de knop |
+  | schakelaar uit | 0 Bol-regels, 0 verzoeken naar de route |
+- **Breedtes 360, 390, 768, 1024, 1440 px** (pagina 1, hub, home, kosten): nergens horizontaal scrollen, 0 fouten; pagina 1 6 regels (5 met prijs), hub 4 (3 met prijs).
+- **LCP** (zelfde opzet als ronde 22/30: mobiel, 150 ms, 1,6 Mbit/s, processor 4× trager, mediaan van 3; prijsroute met 300 ms vertraging):
+
+  | Pagina | 1.3.6, Bol aan | 1.3.7, Bol aan | LCP-element |
+  |---|---|---|---|
+  | Home | 1,16 s | 1,11 s | hero-afbeelding |
+  | Pagina 1 (zonder draad) | 0,47 s | 0,52 s | H1 |
+  | Pagina 12 (kosten) | 0,32 s | 0,31 s | H1 |
+
+  Binnen de meetruis; de prijs komt later binnen maar is nooit het LCP-element.
+- PHP-lint van alle bestanden en `node --check rmk.js`: geen fouten. Zip gecontroleerd: alleen de plaatsaanduiding `'…'` bij de constanten, geen xlsx en geen tekstwijzigingen-md.
+
+### Na de upload van 1.3.7 (Claude)
+1. `python3 tests/rmk-routes-test.py --na-136 --na-137` (verwacht 0 fouten; controleert ook de no-store-headers van bol-prijs op de CDN).
+2. Ingelogd POST `/rmk/v1/bol-ronde`, dan `/rmk/v1/bol-status`: werken de nieuwe sleutels (aanbiedingen, verkopers), of "gestopt na de eerste tokenfout"?
+3. Met de schakelaar nog uit blijft de site gelijk: geen Bol-regel, geen verzoek naar de prijsroute.
+
+### Nog te doen
+- [ ] Mandy: 1.3.7 uploaden; de checklist hierboven bij een nieuwe 401; tijdzone opslaan.
+- [ ] Claude: na de upload de drie stappen hierboven.
+- [ ] Schakelaar en teksten (ronde30_affiliate_teksten.py) pas op Mandy's woord.

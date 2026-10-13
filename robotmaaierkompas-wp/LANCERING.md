@@ -125,6 +125,6 @@ In deze volgorde. Tot en met stap 5 verandert er voor bezoekers niets: zonder `R
    - `wget -q -O /dev/null "https://robotmaaierkompas.nl/wp-cron.php?doing_wp_cron"` en in wp-config.php `define( 'DISABLE_WP_CRON', true );`, of
    - elke 6 uur `wp --path=<map van WordPress> rmk bol-ronde` (als WP-CLI beschikbaar is).
 4. **Claude:** `python3 scripts/ronde30_upload.py <omzetting.json> --schrijf` (zet het blok "bol" in de modelgegevens) en `python3 tests/rmk-routes-test.py --na-136`.
-5. **Controleren:** Gereedschap > Robotmaaierkompas ("Bol-koppeling: constanten aanwezig", "Bol-prijstaak draait") en, ingelogd, `/wp-json/rmk/v1/bol-status` (uitkomst per model).
+5. **Controleren:** Gereedschap > Robotmaaierkompas ("Bol-koppeling: constanten aanwezig", "Bol-prijstaak draait") en, ingelogd, `/wp-json/rmk/v1/bol-status` (uitkomst per model). Vanaf 1.3.7 start een beheerder één ronde direct met POST `/wp-json/rmk/v1/bol-ronde` (ingelogd); na een tokenfout stopt die ronde meteen en zegt bol-status dat.
 6. **Schakelaar aan:** `define( 'RMK_AFFILIATE_ACTIVE', true );` in wp-config.php. Op hetzelfde moment draait Claude `python3 scripts/ronde30_affiliate_teksten.py --schrijf` (teksten uit tekstwijzigingen-affiliate-live.md). Leeg daarna de LiteSpeed- en de CDN-cache.
 7. **Uitzetten kan altijd:** de regel `RMK_AFFILIATE_ACTIVE` weghalen. Dan verdwijnen Bol-regel, -foto en advertentie-regel meteen (na het legen van de cache).

@@ -282,6 +282,36 @@
     });
   }
 
+  /* ======================= 6. BOL-PRIJS (1.3.7) =======================
+     De HTML bevat alleen de knop en een leeg prijsvak (data-rmk-bol-prijs). De prijs komt uit /rmk/v1/bol-prijs
+     (nooit gecachet) en wordt met textContent ingevuld. Geen antwoord, een fout of een verlopen prijs: alleen de knop.
+     "geen_aanbod": de hele Bol-regel weg. */
+  (function () {
+    var regels = $$('[data-rmk-bol-model]');
+    if (!regels.length || !CFG.bolPrijsUrl || !window.fetch) return;
+    var ids = regels.map(function (r) { return r.getAttribute('data-rmk-bol-model'); }).filter(function (id, i, a) { return /^M\d{3,4}$/.test(id) && a.indexOf(id) === i; });
+    if (!ids.length) return;
+    var url = CFG.bolPrijsUrl + (CFG.bolPrijsUrl.indexOf('?') < 0 ? '?' : '&') + 'modellen=' + encodeURIComponent(ids.join(','));
+    fetch(url, { cache: 'no-store', credentials: 'omit', headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        var lijst = d && d.modellen ? d.modellen : {};
+        regels.forEach(function (regel) {
+          var p = lijst[regel.getAttribute('data-rmk-bol-model')], vak = $('[data-rmk-bol-prijs]', regel);
+          if (!p) return;
+          if (p.status === 'geen_aanbod') { regel.hidden = true; return; }
+          if (p.status !== 'ok' || !vak || !p.prijs_tekst || !p.tijd_tekst || !(Date.parse(p.geldig_tot) > Date.now())) return;
+          var b = document.createElement('strong');
+          b.textContent = p.prijs_tekst + ' euro';
+          vak.textContent = '';
+          vak.appendChild(b);
+          vak.appendChild(document.createTextNode('. Prijs bij bol.com, ' + p.tijd_tekst + (p.partner ? ', via een partner van bol.com' : '') + '.'));
+          vak.hidden = false;
+        });
+      })
+      .catch(function () { /* alleen de knop */ });
+  })();
+
   window.rmkScore = computeScore;   /* voor tests en eigen scripts */
   window.rmkFormatScore = fmtScore;
 })();

@@ -1,6 +1,6 @@
 <?php
 /**
- * Test van de Bol-koppeling (thema 1.3.6, inc/bol.php) met NAGEBOOTSTE antwoorden, zonder netwerk en zonder sleutels.
+ * Test van de Bol-koppeling (thema 1.3.6 en 1.3.7, inc/bol.php) met NAGEBOOTSTE antwoorden, zonder netwerk en zonder sleutels.
  * De vorm van de antwoorden en de link volgt het Logboek van robotmaaierkompas_modeldata_v1.xlsx (rijen 137-145).
  * Draaien: php tests/bol-test.php        (geen WordPress nodig: tests/wp-stub.php)
  */
@@ -33,6 +33,9 @@ function probleem( $code, $title, $detail ) { // application/problem+json (Logbo
 add_filter( 'pre_http_request', function ( $pre, $args, $url ) {
 	$GLOBALS['api']['verzoeken'][] = array( 't' => microtime( true ), 'url' => $url, 'args' => $args );
 	if ( 0 === strpos( $url, 'https://login.bol.com/token' ) ) { // Logboek 137
+		if ( ! empty( $GLOBALS['api']['token_weiger'] ) ) {
+			return json_antw( 401, array( 'error' => 'invalid_client' ) );
+		}
 		$GLOBALS['api']['tokens']++;
 		return json_antw( 200, array( 'access_token' => 'tok-' . $GLOBALS['api']['tokens'], 'token_type' => 'Bearer', 'expires_in' => 599, 'scope' => 'affiliate' ) );
 	}
@@ -60,6 +63,9 @@ $EAN = array( 'M002' => '8721264220318', 'M011' => '4066407025219', 'M004' => '6
 $m002 = rmk_get_model( 'M002' );
 $m011 = rmk_get_model( 'M011' );
 $m004 = rmk_get_model( 'M004' );
+function bolregel( $html ) { // alleen de Bol-regel uit een kaart
+	return preg_match( '#<div class="rmk-offer rmk-offer--stack rmk-offer--bol".*?</div>#s', $html, $m ) ? $m[0] : '';
+}
 function kaart( $id ) { // productkaart zoals op de hub en pagina 1
 	$m = rmk_get_model( $id );
 	$a = 'p-' . $m['slug'];
@@ -93,6 +99,8 @@ $v     = $GLOBALS['api']['verzoeken'];
 t( 'Ronde draait wel (voor /bol-status): 1 token + 11 aanbiedingen', 12 === count( $v ) && 1 === $GLOBALS['api']['tokens'], count( $v ) . ' verzoeken' );
 t( 'Paginacache geleegd na de ronde', ( $GLOBALS['wp_acties']['litespeed_purge_all'] ?? 0 ) === $purge + 1 );
 t( 'Geen Bol-regel en geen Bol-foto (schakelaar uit)', rmk_fill_offers( kaart( 'M002' ) ) === $kaart_135 );
+t( '1.3.7: prijsroute geeft niets met de schakelaar uit', array() === (array) rmk_bol_prijzen_publiek( 'M002,M011' )['modellen'] );
+t( '1.3.7: rmk.js krijgt geen adres van de prijsroute met de schakelaar uit', ! isset( apply_filters( 'rmk_config', array() )['bolPrijsUrl'] ) );
 t( 'Geen advertentie-regel (schakelaar uit)', apply_filters( 'the_content', rmk_fill_offers( kaart( 'M002' ) ) ) === $kaart_135 );
 // Vorm van de verzoeken (Logboek 137, 138, 141)
 $tok = $v[0];
@@ -127,7 +135,15 @@ define( 'RMK_AFFILIATE_ACTIVE', true );
 $k2 = rmk_fill_offers( kaart( 'M002' ) );
 $verwacht = 'https://partner.bol.com/click/click?p=2&t=url&s=1549381&f=api&url=https%3A%2F%2Fwww.bol.com%2Fnl%2Fnl%2Fp%2Fnavimow-robotgrasmaaier-i206-600m2-nrtk-vision-awd%2F9300000251586857%2F&name=Segway%20Navimow%20i206%20AWD&subid=robotmaaier-zonder-draad';
 t( 'Affiliatelink exact (Logboek 144: p,t,s,f,url,name; f=api; subid = paginaslug)', false !== strpos( $k2, 'href="' . esc_url( $verwacht ) . '"' ), $k2 );
-t( 'Bol zelf: "899 euro. Prijs bij bol.com, bijgewerkt om 10:00." zonder partnertekst', false !== strpos( $k2, '<strong>899 euro</strong>. Prijs bij bol.com, bijgewerkt om 10:00.</span>' ) && false === strpos( $k2, 'via een partner' ) );
+t( '1.3.7: geen prijs en geen tijd in de HTML, wel een leeg prijsvak', '' !== bolregel( $k2 ) && false === strpos( bolregel( $k2 ), '899' ) && false === strpos( $k2, 'bijgewerkt om' ) && false === strpos( $k2, 'Prijs bij bol.com' )
+	&& false !== strpos( $k2, '<div class="rmk-offer rmk-offer--stack rmk-offer--bol" data-rmk-bol data-rmk-bol-model="M002"><span class="rmk-offer__line" data-rmk-bol-prijs hidden></span>' ) );
+$pr = rmk_bol_prijzen_publiek( 'M002,M011,M004,M005,M010,X1,M002' );
+$p2 = $pr['modellen']->M002;
+t( 'Prijsroute, bol zelf: 899, "bijgewerkt om 10:00", verkoper bol.com, geen partner, EAN', 'ok' === $p2['status'] && '899' === $p2['prijs_tekst'] && 'bijgewerkt om 10:00' === $p2['tijd_tekst'] && 'bol.com' === $p2['verkoper'] && false === $p2['partner'] && $EAN['M002'] === $p2['ean'] );
+t( 'Prijsroute geeft alleen toegestane velden (geen link, geen secrets, geen beoordelingen)', array() === array_diff( array_keys( $p2 ), array( 'status', 'model', 'ean', 'prijs', 'prijs_tekst', 'verkoper', 'partner', 'tijd', 'tijd_tekst', 'geldig_tot' ) )
+	&& false === strpos( json_encode( $pr ), 'test-' ) && false === strpos( json_encode( $pr ), 'tok-' ) );
+t( 'Prijsroute: ongeldige en dubbele ID\'s genegeerd, model zonder EAN (M010) en fout (M005) niet genoemd', array( 'M002', 'M011', 'M004' ) === array_keys( (array) $pr['modellen'] ) );
+t( '1.3.7: rmk.js krijgt het adres van de prijsroute', 'https://robotmaaierkompas.nl/wp-json/rmk/v1/bol-prijs' === apply_filters( 'rmk_config', array() )['bolPrijsUrl'] );
 t( 'Knop "Bekijk bij bol.com" met rel="sponsored nofollow"', (bool) preg_match( '#<a class="rmk-btn rmk-btn--primary" href="[^"]+" rel="sponsored nofollow" data-rmk-bol-link>Bekijk bij bol.com</a>#', $k2 ) );
 t( 'Eronder: "Je gaat naar bol.com. Bron: bol.com."', false !== strpos( $k2, '<span class="rmk-offer__src">Je gaat naar bol.com. Bron: bol.com.</span>' ) );
 t( 'Geen Bol-beoordelingen', ! preg_match( '/beoordel|sterren|rating|4,2/i', $k2 ) );
@@ -135,11 +151,11 @@ t( 'Bestaand prijsblok blijft (Coolblue of "Bekijk de actuele prijs") en staat e
 t( 'Foto van bol.com: oorspronkelijke URL 550 px, met "Foto: bol.com"', false !== strpos( $k2, 'src="' . $m002['bol']['afbeelding']['url'] . '"' ) && false !== strpos( $k2, '550x424.jpg' )
 	&& false !== strpos( $k2, 'width="550" height="424"' ) && false !== strpos( $k2, '>Foto: bol.com</figcaption>' ) && false !== strpos( $k2, 'rmk-speccard--photo' ) );
 $k11 = rmk_fill_offers( kaart( 'M011' ) );
-t( 'Partner: "1.049,95 euro. Prijs bij bol.com, bijgewerkt om 10:00, via een partner van bol.com."', false !== strpos( $k11, '<strong>1.049,95 euro</strong>. Prijs bij bol.com, bijgewerkt om 10:00, via een partner van bol.com.' ) );
+t( 'Partner: prijsroute 1.049,95 met partner = ja; HTML zonder prijs', true === $pr['modellen']->M011['partner'] && '1.049,95' === $pr['modellen']->M011['prijs_tekst'] && 'JGStore.nl' === $pr['modellen']->M011['verkoper'] && false === strpos( bolregel( $k11 ), '1.049' ) );
 $k4 = rmk_fill_offers( kaart( 'M004' ) );
-t( 'Geen aanbod (404): geen Bol-regel, specificatiekaart zonder foto', false === strpos( $k4, 'data-rmk-bol' ) && false === strpos( $k4, 'speccard--photo' ) && false !== strpos( $k4, 'rmk-speccard' ) );
+t( 'Geen aanbod (404): geen Bol-regel, specificatiekaart zonder foto; prijsroute "geen_aanbod"', false === strpos( $k4, 'data-rmk-bol' ) && false === strpos( $k4, 'speccard--photo' ) && false !== strpos( $k4, 'rmk-speccard' ) && 'geen_aanbod' === $pr['modellen']->M004['status'] );
 $k5 = rmk_fill_offers( kaart( 'M005' ) );
-t( 'Foutmelding (500): geen Bol-regel', false === strpos( $k5, 'data-rmk-bol' ) );
+t( 'Foutmelding (500): alleen de knop (leeg prijsvak, geen foto), prijsroute noemt het model niet', false !== strpos( $k5, 'data-rmk-bol-link>Bekijk bij bol.com</a>' ) && false !== strpos( $k5, 'data-rmk-bol-prijs hidden></span>' ) && false === strpos( $k5, 'speccard--photo' ) && ! isset( $pr['modellen']->M005 ) );
 $k10 = rmk_fill_offers( kaart( 'M010' ) );
 t( 'Model zonder EAN (M010): geen Bol-regel', false === strpos( $k10, 'data-rmk-bol' ) );
 $pagina = apply_filters( 'the_content', '<p>Intro</p>' . kaart( 'M004' ) . $k2 . $k11 );
@@ -147,15 +163,24 @@ t( 'Advertentie-regel één keer, direct boven de eerste kaart met een Bol-knop'
 $GLOBALS['wp_post']['slug'] = 'Beste_Robotmaaier!';
 t( 'subid: alleen kleine letters, cijfers en koppeltekens', false !== strpos( rmk_fill_offers( kaart( 'M002' ) ), 'subid=besterobotmaaier"' ) );
 $GLOBALS['wp_post']['slug'] = 'robotmaaier-zonder-draad';
+do_action( 'rest_api_init' );
+$rp = $GLOBALS['wp_routes']['rmk/v1/bol-prijs'];
+$rr = $GLOBALS['wp_routes']['rmk/v1/bol-ronde'];
+$GLOBALS['wp_admin'] = false;
+t( 'Route bol-prijs: GET, publiek (de enige zonder inloggen)', 'GET' === $rp['methods'] && true === call_user_func( $rp['permission_callback'] ) );
+t( 'Route bol-ronde: POST, alleen beheerders', 'POST' === $rr['methods'] && ! call_user_func( $rr['permission_callback'] ) );
+$GLOBALS['wp_admin'] = true;
+t( 'Route bol-prijs geeft hetzelfde als de functie', json_encode( call_user_func( $rp['callback'], new WP_REST_Request( array( 'modellen' => 'M002,M011,M004' ) ) ) ) === json_encode( rmk_bol_prijzen_publiek( 'M002,M011,M004' ) ) );
 t( 'Paginacache: TTL niet langer dan de geldigheid van de prijs', isset( $GLOBALS['wp_acties_args']['litespeed_control_set_ttl'] ) && end( $GLOBALS['wp_acties_args']['litespeed_control_set_ttl'] )[0] <= 12 * 3600 );
 
 /* ---------------------------------------------------------------- D. verlopen prijs */
 echo "\nD. Verlopen prijs (12 uur)\n";
 $GLOBALS['nu'] += 11 * 3600 + 59 * 60;
-t( 'Na 11 uur 59: Bol-regel staat er nog ("bijgewerkt om 10:00")', false !== strpos( rmk_fill_offers( kaart( 'M002' ) ), 'bijgewerkt om 10:00' ) );
+t( 'Na 11 uur 59: prijsroute geeft de prijs nog ("bijgewerkt om 10:00")', 'bijgewerkt om 10:00' === ( rmk_bol_prijzen_publiek( 'M002' )['modellen']->M002['tijd_tekst'] ?? '' ) );
 $GLOBALS['nu'] += 61;
 $k = rmk_fill_offers( kaart( 'M002' ) );
-t( 'Na 12 uur en 1 seconde: Bol-regel en Bol-foto weg, kaart gelijk aan 1.3.5', false === strpos( $k, 'data-rmk-bol' ) && false === strpos( $k, 's-bol.com' ) && $k === $kaart_135 );
+t( 'Na 12 uur en 1 seconde: prijsroute noemt M002 niet meer; kaart toont alleen de knop, geen Bol-foto', ! isset( rmk_bol_prijzen_publiek( 'M002' )['modellen']->M002 )
+	&& false !== strpos( $k, 'data-rmk-bol-link' ) && false === strpos( $k, 's-bol.com' ) && false === strpos( bolregel( $k ), '899' ) );
 
 /* ---------------------------------------------------------------- E. token hergebruiken en verlopen token */
 echo "\nE. Token\n";
@@ -182,7 +207,7 @@ $GLOBALS['api']['token_ongeldig'] = array();
 echo "\nF. Aanbod verdwijnt\n";
 aanbod( array() );
 rmk_bol_ronde();
-t( 'Volgende ronde zonder aanbod (404): Bol-regel meteen weg', false === strpos( rmk_fill_offers( kaart( 'M002' ) ), 'data-rmk-bol' ) );
+t( 'Volgende ronde zonder aanbod (404): Bol-regel weg en prijsroute "geen_aanbod"', false === strpos( rmk_fill_offers( kaart( 'M002' ) ), 'data-rmk-bol' ) && 'geen_aanbod' === rmk_bol_prijzen_publiek( 'M002' )['modellen']->M002['status'] );
 aanbod( array( $EAN['M002'] => array( 0, 'bol.com' ) ) );
 rmk_bol_ronde();
 t( '200 zonder geldige prijs: status ongeldig, geen Bol-regel', 'ongeldig' === get_option( RMK_BOL_AANBOD_OPTION )['M002']['status'] && false === strpos( rmk_fill_offers( kaart( 'M002' ) ), 'data-rmk-bol' ) );
@@ -201,6 +226,23 @@ aanbod( array( $EAN['M002'] => array( 899, 'bol.com' ) ) );
 $t0 = microtime( true );
 rmk_bol_ronde();
 t( '429: wacht x-ratelimit-reset (1 s) en probeert één keer opnieuw', 'ok' === get_option( RMK_BOL_AANBOD_OPTION )['M002']['status'] && microtime( true ) - $t0 >= 1.0 );
+
+/* ---------------------------------------------------------------- H. 1.3.7: stoppen na de eerste tokenfout, beheerroute */
+echo "\nH. Tokenfout en beheerroute (1.3.7)\n";
+$voor = get_option( RMK_BOL_AANBOD_OPTION );
+$GLOBALS['wp_trans'] = array();
+$GLOBALS['api']['token_weiger'] = true;
+aanbod( array( $EAN['M002'] => array( 899, 'bol.com' ) ) );
+$log = rmk_bol_ronde();
+t( 'Token geweigerd (401): ronde stopt na 1 verzoek, geen verzoeken per model', 1 === count( $GLOBALS['api']['verzoeken'] ) && 1 === $log['verzoeken'] && true === $log['gestopt'], json_encode( $log ) );
+t( 'Melding in de log: gestopt na de eerste tokenfout (zonder sleutels)', false !== strpos( $log['melding'], 'Gestopt na de eerste tokenfout' ) && false !== strpos( $log['melding'], 'HTTP 401' ) && false === strpos( json_encode( $log ), 'test-geheim' ) );
+t( 'Opgeslagen uitkomsten blijven staan', get_option( RMK_BOL_AANBOD_OPTION ) === $voor );
+$st = rmk_bol_status();
+t( 'bol-status toont gestopt en de melding', true === $st['laatste_ronde']['gestopt'] && false !== strpos( $st['laatste_ronde']['melding'], 'tokenfout' ) );
+$GLOBALS['api']['token_weiger'] = false;
+$GLOBALS['wp_admin'] = true;
+$res = call_user_func( $GLOBALS['wp_routes']['rmk/v1/bol-ronde']['callback'] );
+t( 'Beheerroute bol-ronde start één ronde en geeft de log terug', isset( $res['ok'] ) && 1 === $res['ok'] && false === $res['gestopt'] && 'ok' === get_option( RMK_BOL_AANBOD_OPTION )['M002']['status'] );
 
 /* ---------------------------------------------------------------- G. dataroute */
 echo "\nG. Dataroute (validatie)\n";

@@ -88,7 +88,7 @@ Alle tekst/achtergrond-paren ≥ 4,5:1, focusring, klikdoelen ≥ 44 px, `prefer
 | Bestand | Doel |
 |---|---|
 | `inc/score.php` | Scoremodel v1.0 server-side, gelijk aan `rmk.js` (getest in `tests/score-test.php`). |
-| `inc/bol.php` | Bol-partnerkoppeling (1.3.6): prijstaak 4× per dag (max. 10 verzoeken/s, token hergebruikt), prijs 12 uur geldig, Bol-regel en -foto alleen met de drie Bol-constanten én `RMK_AFFILIATE_ACTIVE`, affiliatelink `partner.bol.com/click/click?p=2&t=url&s=…&f=api&url=…&name=…&subid=<paginaslug>`, beheerroute `/rmk/v1/bol-status`. |
+| `inc/bol.php` | Bol-partnerkoppeling (1.3.6): prijstaak 4× per dag (max. 10 verzoeken/s, token hergebruikt), prijs 12 uur geldig, Bol-regel en -foto alleen met de drie Bol-constanten én `RMK_AFFILIATE_ACTIVE`, affiliatelink `partner.bol.com/click/click?p=2&t=url&s=…&f=api&url=…&name=…&subid=<paginaslug>`, beheerroute `/rmk/v1/bol-status`. 1.3.7: prijs niet in de HTML maar via de publieke route `/rmk/v1/bol-prijs` (nooit gecachet, ingevuld door `rmk.js`), ronde stopt na de eerste tokenfout, `POST /rmk/v1/bol-ronde` (beheerders) start een ronde. |
 | `inc/affiliate-redirect.php` | `/ga/[winkel]/[model]/` met kliktelling (zonder persoonsgegevens), noindex, 302. |
 | `inc/techniek.php` | Meetcode pas na toestemming, schema-afspraken voor Yoast (Article/Person/BreadcrumbList, nooit Product/Review), WebP, noindex-vangnet. |
 | `inc/bouw.php` | Gereedschap > Robotmaaierkompas: controles, paginastructuur als concepten, Yoast instellen (ook via `wp rmk …`). |

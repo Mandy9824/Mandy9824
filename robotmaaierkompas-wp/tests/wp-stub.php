@@ -80,6 +80,9 @@ function get_post_field( $f, $id ) { return 'post_name' === $f ? $GLOBALS['wp_po
 function current_user_can() { return $GLOBALS['wp_admin'] ?? false; }
 function register_rest_route( $ns, $r, $a ) { $GLOBALS['wp_routes'][ $ns . $r ] = $a; }
 function rest_ensure_response( $d ) { return $d; }
+function rest_url( $p = '' ) { return 'https://robotmaaierkompas.nl/wp-json/' . ltrim( $p, '/' ); }
+function __return_true() { return true; }
+class WP_REST_Request { public $p = array(); function __construct( $p = array() ) { $this->p = $p; } function get_param( $k ) { return $this->p[ $k ] ?? null; } }
 function wp_upload_dir() { return array( 'basedir' => sys_get_temp_dir(), 'baseurl' => 'https://example.test/uploads' ); }
 function trailingslashit( $s ) { return rtrim( $s, '/' ) . '/'; }
 function is_wp_error( $x ) { return $x instanceof WP_Error; }
