@@ -2361,3 +2361,37 @@ Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangez
 - [ ] Mandy: checklist 401.
 - [ ] Claude: daarna één ronde starten en bol-status bekijken.
 - [ ] Schakelaar en teksten pas op Mandy's woord.
+
+## Ronde 35 (13 oktober 2026): eerste geslaagde Bol-ronde
+
+Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangezet; teksten niet toegepast.
+
+### 1. Ronde via POST /rmk/v1/bol-ronde (ingelogd, 19:29:59-19:30:03)
+- **Token geslaagd.** 12 verzoeken (1 token + 11 aanbiedingen), niet gestopt, geen melding.
+- **8 met aanbod, 3 zonder aanbod, 0 ongeldig, 0 fout.** Geldig tot 14 oktober 07:29/07:30 (12 uur).
+
+  | Model | Uitkomst | Prijs | Verkoper |
+  |---|---|---|---|
+  | M001 Segway Navimow i105E | aanbod | 799 | bol.com |
+  | M002 Segway Navimow i206 AWD | aanbod | 899 | bol.com |
+  | M004 Mova LiDAX Ultra 800 | geen aanbod (404 "Unable to find offer") | – | – |
+  | M005 Mova LiDAX Ultra 1200 | aanbod | 763 | bol.com |
+  | M006 Eufy E15 Solo | aanbod | 824 | bol.com |
+  | M008 Dreame A1 Pro | aanbod | 719 | bol.com |
+  | M011 Gardena Smart Sileno Free 800 | aanbod | 799,99 | JGStore.nl (partner van bol.com) |
+  | M015 Segway Navimow i210 LiDAR Pro | geen aanbod (404) | – | – |
+  | M016 Segway Navimow i205 AWD | geen aanbod (404) | – | – |
+  | M017 Segway Navimow i220 LiDAR Pro | aanbod | 2.439 | bol.com |
+  | M018 Segway Navimow X420 | aanbod | 2.906 | bol.com |
+
+- Alle modellen `op_de_site: false` (schakelaar uit). Constanten aanwezig; affiliate_actief false; volgende geplande ronde 21:13.
+- Antwoord en bol-status bevatten geen sleutels of tokens.
+
+### 2. Niets op de site
+- 18 openbare adressen, elk twee keer (gewoon en langs de CDN-kopie): **0** Bol-regels, knoppen, `partner.bol.com`, `media.s-bol.com`, `bolPrijsUrl`, prijsteksten of verkopersnamen; geen advertentie-regel in `<main>`.
+- Publieke prijsroute GET `/rmk/v1/bol-prijs`: 200 met **0 modellen** (schakelaar uit), no-store, CDN `DYNAMIC`.
+- Routetest `--na-136 --na-137`: 0 fouten.
+
+### Nog te doen
+- [ ] Mandy: besluit over de schakelaar. Bij aan: tegelijk `scripts/ronde30_affiliate_teksten.py --schrijf` en de CDN-meting uit ronde 32 (prijs direct zichtbaar).
+- [ ] Ter info: M004, M015 en M016 hebben nu geen aanbod bij bol.com; met de schakelaar aan krijgen die kaarten geen Bol-regel.
