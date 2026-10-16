@@ -2420,3 +2420,37 @@ Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangez
 2. Claude: `python3 scripts/ronde30_affiliate_teksten.py` (proefdraai, geen meldingen?) en dan `--schrijf`.
 3. LiteSpeed-cache en CDN legen; `python3 scripts/bol_regel_controle.py` (verwacht: Bol-regels precies op de kaarten van de 8 modellen met aanbod, alle links in de juiste vorm, 0 fouten).
 4. **Terug:** Mandy haalt de regel `RMK_AFFILIATE_ACTIVE` weg; Claude draait `python3 scripts/ronde30_affiliate_terug.py --schrijf`; cache legen; controle opnieuw (0 Bol-regels).
+
+### 2. Controle geplande rondes (uitgevoerd vrijdag 16 oktober, 21:23)
+- **De geplande controles van 13 en 14 oktober (21:45, 03:45, 09:45) zijn niet op tijd uitgevoerd**: deze werksessie lag stil en kreeg ze pas op 16 oktober 21:22. Tussenstanden zijn daardoor niet vastgelegd.
+- **bol-status bij aankomst (21:23:00):** laatste ronde nog steeds de handmatige van **13 oktober 19:29:59-19:30:03**; volgende ronde "**13 oktober 21:13**", dus ruim drie dagen te laat. Statusoverzicht: "Bol-prijstaak draait (laatste ronde minder dan 7 uur geleden)": **niet OK**.
+- **Conclusie: de rondes van 13 oktober 21:13 en alle daarna (14, 15 en 16 oktober, vier per dag) zijn overgeslagen.** De prijzen waren vanaf 14 oktober 07:30 verlopen (met de schakelaar aan hadden de kaarten alleen de knop getoond).
+  - Waarschijnlijke oorzaak: WP-Cron start alleen als een bezoek PHP laat draaien. De pagina's komen uit de LiteSpeed-cache en de CDN, dus gewone bezoeken starten de taak niet (of `DISABLE_WP_CRON` staat aan zonder echte cron). Van buiten niet te onderscheiden.
+- **Na een aanroep van `wp-cron.php` (21:23)** startte de achterstallige ronde meteen: **21:23:21-21:23:22, 12 verzoeken, token geslaagd, 8 aanbod, 3 geen aanbod, 0 fout**; volgende ronde 17 oktober 03:13. Die aanroep is precies wat de cron in hPanel moet doen.
+
+  | Model | Prijs | Verkoper | Verschil met 13-10 |
+  |---|---|---|---|
+  | M001 Segway Navimow i105E | 799 | bol.com | gelijk |
+  | M002 Segway Navimow i206 AWD | 899 | bol.com | gelijk |
+  | M004 Mova LiDAX Ultra 800 | geen aanbod | – | gelijk |
+  | M005 Mova LiDAX Ultra 1200 | 763 | bol.com | gelijk |
+  | M006 Eufy E15 Solo | 814 | Startbuy.eu (partner) | was 824 bij bol.com |
+  | M008 Dreame A1 Pro | 719 | bol.com | gelijk |
+  | M011 Gardena Smart Sileno Free 800 | 633 | bol.com | was 799,99 bij JGStore.nl (partner) |
+  | M015 Segway Navimow i210 LiDAR Pro | geen aanbod | – | gelijk |
+  | M016 Segway Navimow i205 AWD | geen aanbod | – | gelijk |
+  | M017 Segway Navimow i220 LiDAR Pro | 2.379 | bol.com | was 2.439 |
+  | M018 Segway Navimow X420 | 2.759 | bol.com | was 2.906 |
+
+- **Niets van Bol op de site:** `scripts/bol_regel_controle.py`: schakelaar uit, 0 Bol-regels op 18 openbare adressen, publieke prijsroute leeg, geen fouten; alle modellen `op_de_site: false`.
+
+### Wat Mandy met de cron moet doen (vóór het aanzetten)
+1. hPanel > Geavanceerd > **Cron-taken**, een nieuwe taak **elke 15 minuten** (LANCERING.md stap 3), één van beide:
+   - `wget -q -O /dev/null "https://robotmaaierkompas.nl/wp-cron.php?doing_wp_cron"`, en in wp-config.php `define( 'DISABLE_WP_CRON', true );` (zodat bezoeken het niet meer hoeven te doen); of
+   - elke 6 uur `wp --path=<map van WordPress> rmk bol-ronde` (als WP-CLI beschikbaar is).
+2. Staat `DISABLE_WP_CRON` al in wp-config.php zonder zo'n taak, dan is dat de oorzaak: de taak toevoegen.
+3. Daarna controleer ik na twee geplande rondes (bijvoorbeeld 03:13 en 09:13) of bol-status ze laat zien en het statusoverzicht weer OK is.
+
+### Nog te doen
+- [ ] Mandy: echte cron in hPanel.
+- [ ] Claude: daarna twee rondes controleren. De schakelaar pas aan als de rondes vanzelf draaien.
