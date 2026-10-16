@@ -2454,3 +2454,12 @@ Tijden in Amsterdamse tijd. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangez
 ### Nog te doen
 - [ ] Mandy: echte cron in hPanel.
 - [ ] Claude: daarna twee rondes controleren. De schakelaar pas aan als de rondes vanzelf draaien.
+
+## Ronde 37 (16-17 oktober 2026): rondes na het corrigeren van de cron
+
+Tijden in Amsterdamse tijd. Mandy: cron in hPanel elke 15 minuten op `wp-cron.php`, `DISABLE_WP_CRON` gezet. Niets gepubliceerd; RMK_AFFILIATE_ACTIVE niet aangezet; teksten niet toegepast.
+
+### Eerste lezing (16 oktober 21:47)
+- **Nog geen geplande ronde na het instellen van de cron.** Laatste ronde is nog die van **21:23:21** (door mijn aanroep van `wp-cron.php` in ronde 36, niet door de cron): 8 aanbod, 3 geen aanbod, 0 fout. Volgende geplande ronde: **17 oktober 03:13**.
+- Statusoverzicht "Bol-prijstaak draait": OK. (Kleine onvolkomenheid in het thema: de info-tekst zegt ook bij OK "Te oud: stel een echte cron in"; alleen tekst, niet aangepast.)
+- Controles ingepland om 03:35 en 09:35, zonder zelf een ronde te starten of `wp-cron.php` aan te roepen.
