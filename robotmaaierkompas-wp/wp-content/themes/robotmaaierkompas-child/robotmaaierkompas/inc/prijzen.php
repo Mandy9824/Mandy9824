@@ -144,8 +144,9 @@ add_action( 'rmk_prijzen_verloop', function () {
 } );
 
 /* ------------------------------------------------------------------ Productbox: specificatiekaart, Beste voor, plus- en minpunten (1.3.2)
- * Pakket "specificatiekaart" (Claude Design, v1.3): zonder foto een kaart met merk, model en vijf kenmerken;
- * met foto dezelfde kaart met de foto en "Foto: (fabrikant)". Naam en score staan alleen in de kaart.
+ * Pakket "specificatiekaart" (Claude Design, v1.3): met foto de foto, "Foto: (fabrikant)" en de kenmerken; zonder foto
+ * (1.3.8) alleen de kenmerken. Laadt de foto van bol.com niet, dan haalt rmk.js het fotovak weg (zelfde kaart als zonder foto).
+ * Naam en score staan in de kop van de productbox.
  * Beste voor, pluspunten en minpunten komen uit modellen.json (velden beste_voor, pluspunten, minpunten). */
 
 function rmk_nl_number( $v ) {
@@ -162,7 +163,8 @@ function rmk_card_specs( array $m ) {
 	$map = array( 'rtk+vision' => 'RTK + camera', 'vision' => 'camera', 'lidar' => 'LiDAR', 'rtk' => 'RTK', 'gnss' => 'GNSS', 'draad' => 'draad', 'lidar+vision' => 'LiDAR + camera' );
 	$nav = null === $nav ? null : ( isset( $map[ strtolower( $nav ) ] ) ? $map[ strtolower( $nav ) ] : $nav );
 	$ver = isset( $m['verbinding']['extra'] ) ? $m['verbinding']['extra'] : null;
-	$ver = array( 'ingebouwd' => '4G', 'module' => 'module', 'geen' => 'geen' )[ $ver ] ?? null;
+	// 1.3.8: ook wifi en Bluetooth; een onbekende waarde geeft null (de chip wordt dan niet getoond).
+	$ver = array( 'ingebouwd' => '4G', 'module' => 'module', 'geen' => 'geen', 'wifi' => 'Wifi', 'bluetooth' => 'Bluetooth' )[ strtolower( (string) $ver ) ] ?? null;
 	$opp = $sv( 'max_tuingrootte_m2' );
 	$hel = $sv( 'max_helling_pct' );
 	$gel = $sv( 'geluid_dba' );
@@ -178,6 +180,9 @@ function rmk_card_specs( array $m ) {
 function rmk_speccard_html( array $m ) {
 	$specs = '';
 	foreach ( rmk_card_specs( $m ) as $c ) {
+		if ( 'verbinding' === $c[0] && null === $c[2] ) {
+			continue; // 1.3.8: verbinding onbekend: geen chip in plaats van een streepje
+		}
 		$specs .= null === $c[2]
 			? '<div class="rmk-spec rmk-spec--' . $c[0] . ' is-missing"><dt>' . $c[1] . '</dt><dd><span aria-hidden="true">–</span><span class="rmk-sr">onbekend</span></dd></div>'
 			: '<div class="rmk-spec rmk-spec--' . $c[0] . '"><dt>' . $c[1] . '</dt><dd>' . esc_html( $c[2] ) . '</dd></div>';
@@ -188,15 +193,12 @@ function rmk_speccard_html( array $m ) {
 		$fab    = ! empty( $f['fabrikant'] ) ? $f['fabrikant'] : ( isset( $m['merk'] ) ? $m['merk'] : '' );
 		$w      = ! empty( $f['breedte'] ) ? (int) $f['breedte'] : 800;
 		$h      = ! empty( $f['hoogte'] ) ? (int) $f['hoogte'] : 600;
-		$visual = '<div class="rmk-speccard__visual"><img src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
+		$visual = '<div class="rmk-speccard__visual"><img data-rmk-foto src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
 			. '<figcaption class="rmk-speccard__caption">Foto: ' . esc_html( $fab ) . '</figcaption>';
 		$cls    = 'rmk-speccard rmk-speccard--photo';
 	} else {
-		$merk   = isset( $m['merk'] ) ? $m['merk'] : '';
-		$model  = isset( $m['model'] ) && $m['model'] ? $m['model'] : $m['naam'];
-		$visual = '<div class="rmk-speccard__visual" aria-hidden="true"><p class="rmk-speccard__brand">' . esc_html( $merk ) . '</p><p class="rmk-speccard__model">' . esc_html( $model ) . '</p></div>'
-			. '<figcaption class="rmk-speccard__caption">Geen productfoto beschikbaar</figcaption>';
-		$cls    = 'rmk-speccard';
+		// 1.3.8: zonder foto geen beeldvlak en geen "Geen productfoto beschikbaar"; alleen de kenmerken.
+		return '<div class="rmk-speccard rmk-speccard--specs"><dl class="rmk-speccard__specs" aria-label="Belangrijkste kenmerken">' . $specs . '</dl></div>';
 	}
 	return '<div class="' . $cls . '"><figure class="rmk-speccard__figure">' . $visual . '</figure><dl class="rmk-speccard__specs" aria-label="Belangrijkste kenmerken">' . $specs . '</dl></div>';
 }

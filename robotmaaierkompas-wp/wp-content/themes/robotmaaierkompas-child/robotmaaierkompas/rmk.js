@@ -312,6 +312,29 @@
       .catch(function () { /* alleen de knop */ });
   })();
 
+  /* ======================= 7. PRODUCTFOTO LAADT NIET (1.3.8) =======================
+     Laadt de foto in de specificatiekaart niet (bijvoorbeeld van bol.com), dan gaat het hele fotovak weg, met
+     "Foto: bol.com": geen alt-tekst in een grijs vak. De kaart wordt dezelfde als zonder foto (alleen de kenmerken).
+     Zonder JavaScript blijft het gewone gedrag. */
+  (function () {
+    if (!document.addEventListener) return;
+    function weg(img) {
+      var kaart = img.closest('.rmk-speccard--photo'), fig = img.closest('.rmk-speccard__figure');
+      if (!kaart || !fig) return;
+      fig.parentNode.removeChild(fig);
+      kaart.classList.remove('rmk-speccard--photo');
+      kaart.classList.add('rmk-speccard--specs');
+    }
+    document.addEventListener('error', function (e) {
+      var t = e.target;
+      if (t && t.tagName === 'IMG' && t.hasAttribute('data-rmk-foto')) weg(t);
+    }, true);
+    /* Al mislukt vóór dit script liep (defer): */
+    $$('img[data-rmk-foto]').forEach(function (img) {
+      if (img.complete && !img.naturalWidth && img.currentSrc !== '') weg(img);
+    });
+  })();
+
   window.rmkScore = computeScore;   /* voor tests en eigen scripts */
   window.rmkFormatScore = fmtScore;
 })();

@@ -252,7 +252,9 @@ function rmk_status_checks() {
 	$add( true, 'Bol-koppeling', $bol ? 'constanten aanwezig' . ( rmk_affiliate_actief() ? ', Bol-regel zichtbaar' : ', Bol-regel verborgen (RMK_AFFILIATE_ACTIVE uit)' ) : 'uit: RMK_BOL_CLIENT_ID, RMK_BOL_CLIENT_SECRET of RMK_BOL_SITE_ID ontbreekt (geen Bol-regel)' );
 	if ( $bol ) {
 		$laatste = $hist ? (int) $hist[0]['start'] : 0;
-		$add( $laatste && time() - $laatste < 7 * HOUR_IN_SECONDS, 'Bol-prijstaak draait (laatste ronde minder dan 7 uur geleden)', ( $laatste ? 'laatste ronde ' . wp_date( 'j-n H:i', $laatste ) : 'nog geen ronde' ) . ( $next ? ', volgende ' . wp_date( 'j-n H:i', $next ) : '' ) . '. Te oud: stel een echte cron in (wp rmk bol-ronde).' );
+		$vers    = $laatste && time() - $laatste < 7 * HOUR_IN_SECONDS;
+		// 1.3.8: "Te oud: …" alleen als de controle mislukt.
+		$add( $vers, 'Bol-prijstaak draait (laatste ronde minder dan 7 uur geleden)', ( $laatste ? 'laatste ronde ' . wp_date( 'j-n H:i', $laatste ) : 'nog geen ronde' ) . ( $next ? ', volgende ' . wp_date( 'j-n H:i', $next ) : '' ) . ( $vers ? '.' : '. Te oud: stel een echte cron in (wp rmk bol-ronde).' ) );
 	}
 	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
 	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
