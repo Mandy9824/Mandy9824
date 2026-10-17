@@ -1,17 +1,95 @@
 {
-  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12.",
+  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen).",
   "toewijzingen": [
-    { "model": "M002", "bronveld": "4G", "tekst": "4G ingebouwd, met einddatum", "extra": "ingebouwd" },
-    { "model": "M010", "bronveld": "Extra kosten: verbinding (4G/EPOS)", "tekst": "4G ingebouwd; correctiedata gratis", "extra": "ingebouwd" },
-    { "model": "M006", "bronveld": "Extra kosten: data-abonnement (4G)", "tekst": "4G ingebouwd; abonnement na proefperiode", "extra": "ingebouwd" },
-    { "model": "M001", "bronveld": "Extra kosten: 4G (Access+)", "tekst": "Losse module (Access+)", "extra": "module" },
-    { "model": "M004", "bronveld": "Extra kosten: link-module (4G)", "tekst": "Losse link-module", "extra": "module" },
-    { "model": "M005", "bronveld": "Extra kosten: link-module, messen, accu", "tekst": "Losse link-module", "extra": "module" },
-    { "model": "M008", "bronveld": "Extra kosten: Link-module (4G)", "tekst": "Losse link-module", "extra": "module" },
-    { "model": "M011", "bronveld": "Extra kosten: abonnement", "tekst": "Geen abonnement, geen GPS-tracking", "extra": "geen" },
-    { "model": "M015", "bronveld": "Extra kosten: 4G", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" },
-    { "model": "M016", "bronveld": "Extra kosten: 4G", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" },
-    { "model": "M017", "bronveld": "Verbinding", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" },
-    { "model": "M018", "bronveld": "Verbinding", "tekst": "4G ingebouwd; na het eerste jaar betaald", "extra": "ingebouwd" }
+    {
+      "model": "M002",
+      "bronveld": "4G",
+      "tekst": "4G ingebouwd, met einddatum",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M010",
+      "bronveld": "Extra kosten: verbinding (4G/EPOS)",
+      "tekst": "4G ingebouwd; correctiedata gratis",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M006",
+      "bronveld": "Extra kosten: data-abonnement (4G)",
+      "tekst": "4G ingebouwd; abonnement na proefperiode",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M001",
+      "bronveld": "Extra kosten: 4G (Access+)",
+      "tekst": "Losse module (Access+)",
+      "extra": "module"
+    },
+    {
+      "model": "M004",
+      "bronveld": "Extra kosten: link-module (4G)",
+      "tekst": "Losse link-module",
+      "extra": "module"
+    },
+    {
+      "model": "M005",
+      "bronveld": "Extra kosten: link-module, messen, accu",
+      "tekst": "Losse link-module",
+      "extra": "module"
+    },
+    {
+      "model": "M008",
+      "bronveld": "Extra kosten: Link-module (4G)",
+      "tekst": "Losse link-module",
+      "extra": "module"
+    },
+    {
+      "model": "M011",
+      "bronveld": "Extra kosten: abonnement",
+      "tekst": "Geen abonnement, geen GPS-tracking",
+      "extra": "geen"
+    },
+    {
+      "model": "M015",
+      "bronveld": "Extra kosten: 4G",
+      "tekst": "4G ingebouwd; na het eerste jaar betaald",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M016",
+      "bronveld": "Extra kosten: 4G",
+      "tekst": "4G ingebouwd; na het eerste jaar betaald",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M017",
+      "bronveld": "Verbinding",
+      "tekst": "4G ingebouwd; na het eerste jaar betaald",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M018",
+      "bronveld": "Verbinding",
+      "tekst": "4G ingebouwd; na het eerste jaar betaald",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M020",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "Wifi",
+      "extra": "wifi"
+    },
+    {
+      "model": "M022",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "Wifi",
+      "extra": "wifi"
+    },
+    {
+      "model": "M021",
+      "bronveld": "Extra kosten: abonnement / Connect Kit",
+      "tekst": "Bluetooth",
+      "extra": "bluetooth"
+    }
   ]
 }

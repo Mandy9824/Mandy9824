@@ -2627,3 +2627,41 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 - Mesjespagina, alinea onder "Husqvarna robotmaaier mesjes": "Voor andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA …" noemt de 310E NERA niet.
 - Hub-FAQ "Zijn dit alle robotmaaiers?": "Modellen met begrenzingsdraad, zoals de Husqvarna Automower 105 en 305 …, voegen we toe." De 105 is niet meer leverbaar en de 305 staat nu op de Husqvarna-pagina.
 - Specificatiekaart van M020, M021, M022: "Verbinding –" (geen regel in `verbinding_toewijzing.json`); de md-tabel noemt wifi/Bluetooth. Kan in de toewijzing worden aangevuld.
+
+## Ronde 44 (17 oktober 2026): tekstwijzigingen na de Husqvarna-pagina (zonder thema-zip)
+Bron: `tekstwijzigingen-husqvarna-ronde.md` met aanvulling (niet in de repository). Alles via de WordPress-API en de dataroute.
+
+### Kopieën vooraf (niet in git)
+- `backups/ronde44-paginas-voor-20261017-175607.json` (pagina's 10, 11, 18, 20, 236, 264), `backups/ronde44-modellen-voor-20261017-175607.json`, `backups/ronde44-teksten-voor-20261017-175748.json`.
+
+### Teksten (`scripts/ronde44_teksten.py`): elke "Was"-tekst precies één keer gevonden
+- **A** hub #10, FAQ: "… zoals de Husqvarna Automower 305 (zie de pagina Husqvarna robotmaaier) en de Gardena Sileno Minimo …".
+- **B** mesjes #236: "Voor de Automower 305E en 310E NERA noemt …".
+- **C1** kosten #18, Yoast-metabeschrijving: "… Meer dan tien modellen, met bron en datum."
+- **C2** "Bij de modellen die wij hebben uitgezocht". "acht" kwam verder nergens op de kostenpagina voor.
+- **C3** drie rijen vóór Gardena in "Verbinding en antidiefstal" (Navimow i205/i210/i220/X420, Husqvarna 305E en 310E NERA, Husqvarna 305 met draad).
+- **C4** punt na de 410VE NERA onder "Antenne, gateway of dekking".
+- Husqvarna-concept #20 (blijft concept): "… dan is de 305 met draad het meest vergelijkbare model met draad in ons overzicht". Ook in `scripts/ronde43/husqvarna.json`.
+- Statussen ongewijzigd (#10, #18, #236 publish; #20 draft).
+- **"Automower 105"** staat op geen enkele gepubliceerde pagina meer (alleen nog op het Husqvarna-concept, bewust).
+
+### Modelgegevens (`scripts/ronde44_data.py`, dataroute)
+- **D** verbinding M020 "Wifi" (extra wifi), M022 "Wifi" (wifi), M021 "Bluetooth" (bluetooth). Toewijzing in `scripts/verbinding_toewijzing.json`, die `excel_naar_json.py` gebruikt (docstring bijgewerkt); een volgende upload maakt het niet meer leeg.
+- M010: alleen het minpunt "IPX5" weg (ook in `scripts/modellen_teksten.json`). Verder niets aan M010.
+- Het script controleert dat alleen deze velden veranderen; alle andere modellen en algemene velden gelijk.
+- **Beperking:** de chip "Verbinding" op de kaarten van M020-M022 toont nog "–". Het thema (`rmk_card_specs()` in `inc/prijzen.php`) kent alleen ingebouwd/module/geen. Zonder thema-zip niet op te lossen. **Voor 1.3.8:** `wifi` → "Wifi" en `bluetooth` → "Bluetooth" in die mapping.
+
+### Controles
+- Momentopname van alle 18 openbare pagina's vóór en na: **kaarten, scores en volgorde overal gelijk.** Tekstverschillen alleen waar verwacht: hub (A + kaart M010 zonder IPX5), pagina 1 (kaart M010), kosten, mesjes, en op home en de auteurspagina de lijst "recent bijgewerkt" (de kostenpagina staat nu bovenaan).
+- 390 en 1440 px (hub, pagina 1, kosten, mesjes, Navimow, Husqvarna-concept in de omhulling van de hub): geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". De enige invoervelden zijn de bestaande tuinkeuzehulp (hub, pagina 1) en kostencalculator. Husqvarna-concept: 87,3 / 69,5 / 69,5 / 52,7 ongewijzigd, IPX5 weg, verbinding nog [4G, –, –, –] (zie beperking).
+- LiteSpeed geleegd via de dataroute. **Mandy: CDN-cache legen.**
+
+### Klaargezet, niet gedraaid: `scripts/ronde44_links.py`
+- Pas draaien als Mandy meldt dat husqvarna-robotmaaier gepubliceerd is (weigert anders). Vervangt `scripts/ronde43_links.py` (het mesjes-anker daarvan klopt niet meer na B; gemarkeerd als niet meer draaien).
+- Zes regels: hub "Meer lezen", pagina 1, mesjespagina, kosten **C5**, Navimow "Meer lezen" ("Husqvarna robotmaaier: de Automower-modellen vergeleken."), Husqvarna "Meer lezen" ("Segway Navimow robotmaaier: alle modellen die nu nieuw te koop zijn."). Alle ankers komen nu precies één keer voor.
+- Gebruik: `python3 scripts/ronde44_links.py` (proef), daarna `--schrijf`; dan links controleren, cache legen.
+
+### Open punten (niet gedaan)
+- Navimow-pagina #264, "Meer lezen": "Robotmaaier zonder draad: acht modellen vergeleken." (pagina 1 heeft nu meer modellen).
+- Mesjespagina #236: de alinea "Voor andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA hebben we de mesjes nog niet uitgezocht" noemt de 310E NERA niet (de zin onder "Wat we nog niet weten" wel).
+- Thema 1.3.8: verbindingschip wifi/bluetooth (zie boven).

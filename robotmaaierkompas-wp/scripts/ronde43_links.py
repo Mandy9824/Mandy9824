@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# VERVANGEN door scripts/ronde44_links.py (ronde 44): het mesjes-anker hieronder klopt niet meer na sectie B. Niet meer draaien.
 """Ronde 43, KLAARGEZET: links naar /husqvarna-robotmaaier/. Pas draaien na het bericht van Mandy.
 
 Weigert zolang de pagina husqvarna-robotmaaier niet gepubliceerd is.
