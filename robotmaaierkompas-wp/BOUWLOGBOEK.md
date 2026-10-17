@@ -2557,3 +2557,24 @@ Bron: tekstwijzigingen-navimow-op-pagina1-en-hub.md (Mandy, 17 oktober; niet in 
 
 ### Open punt (niet in het md, niet gedaan)
 - De bronnenlijsten van pagina 1 en de hub bevatten per model bronnen; voor M015 en M016 staan daar nog geen bronnen (wel op de Navimow-pagina). Overnemen kan, op Mandy's woord.
+
+## Ronde 41 (17 oktober 2026): bronnen M015/M016, Husqvarna 305E NERA op de mesjespagina
+
+Uitgevoerd met `scripts/ronde41_bronnen_mesjes.py` (proefdraai zonder meldingen, daarna `--schrijf`), zonder thema-zip. Kopie vooraf: `backups/ronde41-voor-20261017-125109.json` (niet in git). #10, #11 en #236 bleven gepubliceerd; inhoud telkens zoals bedoeld. LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen.**
+
+### 1. Bronnen M015 en M016 (overgenomen van de Navimow-pagina #264, 5 regels per model)
+- **Hub (#10):** blok "Segway Navimow i210 LiDAR Pro" (kop + 5 bronnen) direct na het i206-blok, net als op #264. M016 staat niet op de hub (geen kaart), dus geen bronnen van M016 op de hub.
+- **Pagina 1 (#11):** die bronnenlijst is één platte lijst met de modelnaam vóór elke regel (niet per model gegroepeerd zoals #264). Om de rest niet te veranderen: 10 regels ("Segway Navimow i210 LiDAR Pro: …" en daarna "Segway Navimow i205 AWD: …") direct na de laatste i206-regel, zodat de Navimow-bronnen bij elkaar staan.
+- Geen dubbele regels (live gecontroleerd: hub 38 bronnen, pagina 1 60 bronnen, 0 dubbel).
+
+### 2. Mesjespagina (#236)
+- Tabel: rij "Husqvarna Automower 305E NERA | Endurance 26,99 euro of Classic 22,99 euro (het aantal messen per verpakking is niet bevestigd) | hoofdschijf elke 3 tot 6 weken | niet berekend: het aantal per schijf is onbekend" direct onder de 410VE NERA.
+- Onder "Husqvarna robotmaaier mesjes", na de bestaande alinea: "Voor de Automower 305E NERA noemt Husqvarna Endurance-messen (26,99 euro) en Classic-messen (22,99 euro); de messen van de hoofdschijf gaan volgens Husqvarna 3 tot 6 weken mee."
+- **Klopt niet meer (niet gewijzigd, op Mandy's woord):** de bestaande alinea eindigt met "Voor andere Husqvarna-modellen hebben we de mesjes nog niet uitgezocht." Die staat nu direct boven de nieuwe alinea over de 305E NERA. Voorstel: "Voor andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA hebben we de mesjes nog niet uitgezocht." Elders noemt de pagina alleen de 410VE NERA in de bronnenlijst (twee regels); voor de 305E NERA staat daar nog geen bron.
+- Live: 390 en 1440 px zonder horizontale scroll, 0 JavaScript-fouten, geen "[" of "{".
+
+### Voor thema 1.3.8
+- (a) De regel "Geen productfoto beschikbaar" (en het placeholder-vak met de modelnaam) weghalen.
+- (b) Als de Bol-foto niet laadt: het fotovak verbergen en alleen de specificatiekaart tonen (geen alt-tekst in een grijs vak; zie ronde 39).
+- (c) Statusoverzicht "Bol-prijstaak draait": de tekst "Te oud: stel een echte cron in (wp rmk bol-ronde)." alleen tonen als de controle mislukt; bij OK alleen laatste en volgende ronde.
+- (d) E-mail naar de beheerder als de prijstaak langer dan acht uur niet heeft gedraaid (één keer per storing, niet bij elke paginaweergave; bijvoorbeeld via een dagelijkse controle die naar `laatste_ronde.start` kijkt).
