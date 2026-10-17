@@ -2480,3 +2480,21 @@ Tijden in Amsterdamse tijd. Mandy: cron in hPanel elke 15 minuten op `wp-cron.ph
 - bol-status nu: laatste ronde **09:15** (8 aanbod, 3 geen aanbod, 0 fout, 12 verzoeken), volgende 15:13; statusoverzicht OK. Dit klopt met de vastgelegde lezingen van 03:36 (ronde **03:15**) en 09:36 (ronde **09:15**).
 - bol-status bewaart alleen de laatste ronde; de ronde van 03:15 is bevestigd via de lezing van 03:36. Tussen 03:15 en 09:15 was geen andere ronde gepland, dus niets overgeslagen.
 - Per model ongewijzigd (zie controle 2). `scripts/bol_regel_controle.py`: 0 Bol-regels op 18 adressen, prijsroute leeg, geen fouten.
+
+## Ronde 38 (17 oktober 2026): schakelaar aan, controle vóór de teksten (gestopt bij afwijking)
+
+Tijden in Amsterdamse tijd. Mandy: `RMK_AFFILIATE_ACTIVE` aan. Stap 2 (teksten) en stap 3 **niet** uitgevoerd; niets geschreven op de site.
+
+### 1. Controle per model (12:24)
+- **Afwijking:** `scripts/bol_regel_controle.py` op de gewone adressen: schakelaar **aan**, publieke prijsroute geeft de prijzen, maar **0 Bol-regels** op 18 adressen → 8 fouten (kaarten van M001, M002, M005, M006, M008, M011, M017, M018 zonder Bol-regel).
+- **Oorzaak:** de pagina's komen nog uit de **LiteSpeed-cache** van vóór het aanzetten (`x-litespeed-cache: hit`, geen `data-rmk-bol`, geen `bolPrijsUrl`). Dezelfde pagina met een extra parameter (`?rmkvers=…`, `x-litespeed-cache: miss`) heeft wél 6 Bol-regels en de advertentie-regel. De cache is na het aanzetten niet geleegd (LANCERING stap 6).
+- **Verse weergave (alleen lezen, met extra parameter, links niet gevolgd): alles goed, 0 fouten.**
+  - **14 Bol-regels**: precies op de kaarten van de 8 modellen met aanbod (hub 4, pagina 1 6, Navimow-pagina 4). **M004, M015, M016 geen Bol-regel.**
+  - Elke link: `https://partner.bol.com/click/click?p=2&t=url&s=<SITE_ID>&f=api&url=https://www.bol.com/nl/nl/p/…&name=<modelnaam>&subid=<paginaslug>`, overal dezelfde (numerieke) site-ID, `rel="sponsored nofollow"`, bronregel "Je gaat naar bol.com. Bron: bol.com.".
+  - **Prijs uit de route** (1 verzoek naar `/rmk/v1/bol-prijs` per pagina), bijvoorbeeld "899 euro. Prijs bij bol.com, bijgewerkt om 09:15."; **M006: "814 euro. Prijs bij bol.com, bijgewerkt om 09:15, via een partner van bol.com."**
+  - Advertentie-regel boven de eerste Bol-knop: nog de standaardtekst van het thema ("Advertentie: via deze knoppen krijgen wij mogelijk een commissie. …"); de tekst uit het md-bestand komt pas met stap 2.
+  - 390 en 1440 px: geen horizontaal scrollen, 0 JavaScript-fouten. Foto's: `img` met de oorspronkelijke URL op media.s-bol.com; laden kon niet in de sandbox (die host is daar geblokkeerd), dus de foto zelf is niet visueel gecontroleerd.
+
+### Wat nodig is om verder te gaan
+1. Mandy (of na akkoord ik): **LiteSpeed-cache legen** (LiteSpeed Cache > Alles legen) en **CDN legen** (hPanel > Prestaties > CDN > Cache legen).
+2. Daarna opnieuw `scripts/bol_regel_controle.py` op de gewone adressen (verwacht: 14 Bol-regels, 0 fouten), en pas dan stap 2 (teksten) en stap 3.
