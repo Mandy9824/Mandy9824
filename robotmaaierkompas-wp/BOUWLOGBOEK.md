@@ -2578,3 +2578,16 @@ Uitgevoerd met `scripts/ronde41_bronnen_mesjes.py` (proefdraai zonder meldingen,
 - (b) Als de Bol-foto niet laadt: het fotovak verbergen en alleen de specificatiekaart tonen (geen alt-tekst in een grijs vak; zie ronde 39).
 - (c) Statusoverzicht "Bol-prijstaak draait": de tekst "Te oud: stel een echte cron in (wp rmk bol-ronde)." alleen tonen als de controle mislukt; bij OK alleen laatste en volgende ronde.
 - (d) E-mail naar de beheerder als de prijstaak langer dan acht uur niet heeft gedraaid (één keer per storing, niet bij elke paginaweergave; bijvoorbeeld via een dagelijkse controle die naar `laatste_ronde.start` kijkt).
+
+## Ronde 42 (17 oktober 2026): mesjespagina, 305E NERA afgemaakt
+
+Uitgevoerd met `scripts/ronde42_mesjes_305e.py` (proefdraai zonder meldingen, daarna `--schrijf`). Kopie vooraf: `backups/ronde42-voor-20261017-130310.json` (niet in git). #236 bleef gepubliceerd; inhoud zoals bedoeld. LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen.** Het nieuwe Excel-bestand (17 oktober) is alleen gelezen en staat niet in de repository.
+
+- **Zin vervangen:** "Voor andere Husqvarna-modellen hebben we de mesjes nog niet uitgezocht." → "Voor andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA hebben we de mesjes nog niet uitgezocht."
+- **Bronnen (3 regels, direct na de twee 410VE NERA-regels), uit het blad Bronnen, M020, veld "Extra kosten: messen", 17 oktober 2026:**
+  - "Husqvarna Automower 305E NERA: Endurance-messen, prijs" (husqvarna.com, endurance-blades, fits-to 970819612), Fabrikant;
+  - "Husqvarna Automower 305E NERA: Classic-messen, prijs" (husqvarna.com, classic-blades, fits-to 970819612), Fabrikant;
+  - "Husqvarna Automower 305E NERA: vervangtermijn messen" (Gebruiksaanwijzing Automower 305E/310E NERA NL, 2866-001, par. 7.1), Handleiding.
+  - Live: 14 bronnen, 0 dubbel.
+- **Nog een zin die alleen van de 410VE NERA uitgaat (niet gewijzigd):** onder "Wat we nog niet weten": "De mesjes van Gardena en andere Husqvarna-modellen: die hebben we nog niet uitgezocht." Voorstel: "De mesjes van Gardena en van andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA: die hebben we nog niet uitgezocht." De overige zinnen met 410VE NERA gaan echt over dat model (alinea en tabelrij).
+- Ter info uit het Excel-bestand (niet toegepast): bij de 305E NERA zitten 6 reservemessen in de doos, en de handleiding noemt ook de EdgeCut-schijf (9 tot 12 weken).
