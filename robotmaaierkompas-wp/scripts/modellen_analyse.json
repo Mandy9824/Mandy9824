@@ -34,5 +34,14 @@
   },
   "M018": {
     "analyse": "De X420 is de zwaardere maaier van Navimow voor tuinen tot 2.000 m². Hij werkt met RTK en drie camera's die 360 graden dekken, en de handleiding noemt een helling van 84% en vier aangedreven wielen. Het geluidsvermogen is 68 dB(A), hoger dan de i-serie. 4G zit erin, het eerste jaar gratis en daarna 29,99 euro per jaar. We hebben dit model op basisniveau uitgezocht, zonder score."
+  },
+  "M020": {
+    "analyse": "De Automower 305E NERA werkt zonder begrenzingsdraad: hij navigeert met EPOS, een RTK-systeem van Husqvarna via wifi, voor tuinen tot 900 m² die systematisch worden gemaaid. Er is geen abonnement, want de positiecorrectie en de app zijn gratis, maar het hele gazon moet wifi-dekking hebben. Zonder wifi heb je een Connect Kit of een referentiestation nodig. Hij heeft geen camera, dus geen obstakelontwijking. De helling is 30%."
+  },
+  "M022": {
+    "analyse": "De Automower 310E NERA is de grotere variant van de 305E NERA, voor tuinen tot 1.500 m² (1.000 m² bij onregelmatig maaien) en met een werktijd tot 24 uur per dag. Dezelfde techniek: RTK (EPOS) via wifi zonder begrenzingsdraad, geen camera en geen abonnement. Het hele gazon moet wifi-dekking hebben; zonder wifi heb je een Connect Kit (209 euro) of een referentiestation (309 euro) nodig. Een garage kost 209 of 249 euro, afhankelijk van de variant."
+  },
+  "M021": {
+    "analyse": "De Automower 305 met begrenzingsdraad is bedoeld voor tuinen tot 600 m². Je legt zelf een draad aan, die niet in de doos zit: de installatieset Small kost 94,99 euro, de Medium 154,99 euro en de Large 239 euro. De helling is volgens de handleiding 40% (15% langs de draad) en het geluid 58 dB(A). De app werkt alleen via Bluetooth, en GPS-positie, alarm en GeoFence vragen een Connect Kit van 329 euro die een dealer moet inbouwen."
   }
 }

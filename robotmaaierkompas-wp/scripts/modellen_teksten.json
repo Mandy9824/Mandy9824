@@ -165,5 +165,50 @@
       "Connect+ is na het eerste jaar 29,99 euro per jaar (fabrikantclaim)",
       "Netwerk-RTK niet overal beschikbaar; anders lokale RTK met de antenne uit de doos"
     ]
+  },
+  "M020": {
+    "beste_voor": "Tuinen tot 900 m² zonder begrenzingsdraad, met wifi-dekking over het hele gazon",
+    "pluspunten": [
+      "Zonder begrenzingsdraad, met RTK (EPOS) via wifi",
+      "Geen abonnement: de positiecorrectie en de app zijn gratis",
+      "Pincode en alarm",
+      "2 jaar garantie volgens de handleiding"
+    ],
+    "minpunten": [
+      "Wifi-dekking over het hele gazon nodig; anders een Connect Kit (209 euro, alleen via een dealer) of referentiestation (309 euro)",
+      "Geen camera: geen obstakelontwijking",
+      "Helling 30%",
+      "Geen GPS-tracking; GeoFence-melding alleen binnen wifi-bereik"
+    ]
+  },
+  "M022": {
+    "beste_voor": "Grote tuinen tot 1.500 m² zonder begrenzingsdraad, met wifi-dekking over het hele gazon",
+    "pluspunten": [
+      "Zonder begrenzingsdraad, met RTK (EPOS) via wifi",
+      "Tot 1.500 m² systematisch (1.000 m² onregelmatig) en tot 24 uur per dag",
+      "Geen abonnement: de positiecorrectie en de app zijn gratis",
+      "Pincode en alarm"
+    ],
+    "minpunten": [
+      "Wifi-dekking over het hele gazon nodig; anders een Connect Kit (209 euro, alleen via een dealer) of referentiestation (309 euro)",
+      "Geen camera: geen obstakelontwijking",
+      "Helling 30%",
+      "In vier van de twintig gelezen reviews (vertaald, niet in de score) stopt de maaier als het satellietsignaal wegvalt"
+    ]
+  },
+  "M021": {
+    "beste_voor": "Kleine tuinen tot 600 m² voor wie een begrenzingsdraad beter past dan wifi",
+    "pluspunten": [
+      "Met begrenzingsdraad: onafhankelijk van satellieten en wifi",
+      "Helling 40% volgens de handleiding (15% langs de draad)",
+      "Geen abonnement",
+      "58 dB(A), het laagste geluid in onze Husqvarna-selectie"
+    ],
+    "minpunten": [
+      "Draad en krammen zitten niet in de doos: de installatieset kost 94,99 euro (Small), 154,99 euro (Medium) of 239 euro (Large)",
+      "App alleen via Bluetooth, zonder kaart met zones",
+      "GPS, alarm en GeoFence vragen een Connect Kit van 329 euro die een dealer inbouwt",
+      "Firmware-updates alleen via de dealer"
+    ]
   }
 }

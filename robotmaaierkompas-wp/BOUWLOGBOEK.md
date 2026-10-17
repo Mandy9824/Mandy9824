@@ -2591,3 +2591,39 @@ Uitgevoerd met `scripts/ronde42_mesjes_305e.py` (proefdraai zonder meldingen, da
   - Live: 14 bronnen, 0 dubbel.
 - **Nog een zin die alleen van de 410VE NERA uitgaat (niet gewijzigd):** onder "Wat we nog niet weten": "De mesjes van Gardena en andere Husqvarna-modellen: die hebben we nog niet uitgezocht." Voorstel: "De mesjes van Gardena en van andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA: die hebben we nog niet uitgezocht." De overige zinnen met 410VE NERA gaan echt over dat model (alinea en tabelrij).
 - Ter info uit het Excel-bestand (niet toegepast): bij de 305E NERA zitten 6 reservemessen in de doos, en de handleiding noemt ook de EdgeCut-schijf (9 tot 12 weken).
+
+## Ronde 43 (17 oktober 2026): Husqvarna-modellen, conceptpagina husqvarna-robotmaaier
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-husqvarna-robotmaaier.md`, `modellen-teksten-husqvarna.json`. Gepubliceerd is alleen de wijziging op de mesjespagina (stap 4).
+
+### 1. Modelgegevens (dataroute, `scripts/ronde43_upload.py`)
+- **De 17 live modellen en de algemene velden ongewijzigd** (ook M010 met zijn teksten); erbij: M019, M020, M021, M022 (21 modellen). Kopie vooraf: `backups/modellen-voor-ronde43.json` (niet in git).
+- M020 (305E NERA), M021 (305, met draad) en M022 (310E NERA) uit `excel_naar_json.py`, met fabrikantpagina (husqvarna.com/nl/…) en de teksten uit `modellen-teksten-husqvarna.json` (toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`). Geen EAN, geen Bol, geen prijs.
+- **Omzetter gerepareerd:** de veldnaam "App: kaart/no-go, schema, …" (M020) werd niet herkend, waardoor M020 geen app-score kreeg. Nu herkend; functiescores (berekend met de themacode): **M020 69,5, M022 69,5, M021 52,7**, M010 ongewijzigd 87,3 (gelijk aan de md).
+- **M019 (Automower 105):** de omzetter slaat niet-leverbare modellen over; daarom als leeg record (zoals M013): naam, slug, beschikbaarheid "niet leverbaar", fabrikantpagina = de Husqvarna-ondersteuningspagina "Niet meer leverbaar". Geen specificaties, scores, prijs of teksten.
+- **Controle:** alle 18 openbare pagina's vóór en na de upload vergeleken (kaarten, scores, volledige tekst): **geen enkel verschil**. Volgorde en scores van hub, pagina 1 en Navimow-pagina ongewijzigd. M019 staat op geen enkele pagina als kaart of gegeven. (De hub-FAQ noemt al "Husqvarna Automower 105 en 305 … voegen we toe": bestaande tekst, zie open punten.)
+- Live opgeslagen M019 `specs` als `[]` in plaats van `{}` (PHP); onschuldig.
+
+### 2. Conceptpagina husqvarna-robotmaaier (id 20, concept)
+- Gebouwd met `scripts/ronde43_bouw.py` (afgeleid van ronde 28, patroon pagina-merk), inhoud in `scripts/ronde43/husqvarna.json`, op de site gezet met `scripts/ronde43_pagina.py` (alleen als concept).
+- Er bestond al een concept met deze slug (id 20): het lege sjabloon "[Merknaam] robotmaaiers …" van 6 oktober. Dat is bijgewerkt; de oude versie staat als revisie 147 in WordPress.
+- Vier kaarten in de volgorde van de md: 410VE NERA 87,3 · 310E NERA 69,5 · 305E NERA 69,5 · 305 (met draad) 52,7. **Geen Bol-regel** en geen advertentie-regel. M020, M021, M022: knop "Bekijk de actuele prijs" naar de fabrikantpagina. M010 toont nog "rond 3.049 euro bij Husqvarna, gezien op 5 oktober" met "Bekijk bij Husqvarna" (fabrikantprijs, zoals op hub en pagina 1; na 14 dagen vanzelf "Bekijk de actuele prijs").
+- Bronnen per model uit het blad Bronnen (handleidingen, husqvarna.com, appwinkels; geen winkels, geen "niet gevonden"): 410VE 7, 310E 13, 305E 15, 305 13 regels.
+- Controle (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll (de modellentabel schuift binnen haar vak), 0 JavaScript-fouten, geen "[", "]", "{" of invulveld, alle ankers bestaan; interne links (/, hub, pagina 1, zonder-grensdraad, test-vergelijking, kosten, mesjes, hoe-we-beoordelen, auteur) allemaal HTTP 200.
+- **Download:** `paginatekst-husqvarna.md` (volledige weergegeven tekst; niet in de repository).
+
+### 3. Links naar de nieuwe pagina: klaargezet, niet gedraaid
+- `scripts/ronde43_links.py`: hub "Meer lezen" (na de Navimow-regel), pagina 1 onder "De modellen een voor een" (na de Navimow-zin), mesjespagina onder "Husqvarna robotmaaier mesjes": "Welke Automower past bij welke tuin? Zie Husqvarna robotmaaier." Weigert zolang de pagina geen status publish heeft (getest). Alle drie ankers komen nu precies één keer voor.
+
+### 4. Mesjespagina (#236), gepubliceerd (`scripts/ronde43_mesjes.py`)
+- "Wat we nog niet weten": "… andere Husqvarna-modellen dan de 410VE NERA, 305E NERA en 310E NERA: die hebben we nog niet uitgezocht."
+- Tabelrij: "Husqvarna Automower 305E en 310E NERA".
+- Kopie: `backups/ronde43-mesjes-voor-20261017-133245.json`. Live gecontroleerd; 390/1440 px zonder scroll, geen "[" of "{". LiteSpeed geleegd via de dataroute. **Mandy: CDN-cache legen.**
+
+### Controles
+- Routetest `--na-136 --na-137`: 0 fouten. Bol-controle: 14 Bol-regels, 0 fouten (ongewijzigd).
+
+### Open punten (niet gedaan)
+- Mesjespagina, alinea onder "Husqvarna robotmaaier mesjes": "Voor andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA …" noemt de 310E NERA niet.
+- Hub-FAQ "Zijn dit alle robotmaaiers?": "Modellen met begrenzingsdraad, zoals de Husqvarna Automower 105 en 305 …, voegen we toe." De 105 is niet meer leverbaar en de 305 staat nu op de Husqvarna-pagina.
+- Specificatiekaart van M020, M021, M022: "Verbinding –" (geen regel in `verbinding_toewijzing.json`); de md-tabel noemt wifi/Bluetooth. Kan in de toewijzing worden aangevuld.

@@ -100,6 +100,8 @@ APP_DELEN = {
     "bediening zonder app": "bediening_zonder_app", "slimme-thuiskoppeling": "app_smarthome",
     # Schrijfwijze sinds M003 (ronde 28): "App: iOS/Android, kaart/no-go, schema, smart home, knoppen, OTA"
     "app: ios/android": "app_ios_android", "ios/android": "app_ios_android", "smart home": "app_smarthome",
+    # Schrijfwijze bij M020 (ronde 43): "App: kaart/no-go, schema, smart home, bediening zonder app, OTA"
+    "app: kaart/no-go": "app_kaart", "app: kaart": "app_kaart",
 }
 STATUS_RANG = {"gecontroleerd": 3, "fabrikantclaim": 2, "winkelclaim": 1}
 STATUS_LEEG = ("niet gevonden", "niet geopend")
