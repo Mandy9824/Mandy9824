@@ -2468,3 +2468,10 @@ Tijden in Amsterdamse tijd. Mandy: cron in hPanel elke 15 minuten op `wp-cron.ph
 - **Geplande ronde vanzelf gedraaid: 03:15:02-03:15:04** (gepland 03:13; de cron van elk kwartier pakte hem op). Niet door mij gestart; geen `wp-cron.php` aangeroepen.
 - 12 verzoeken, token geslaagd, **8 aanbod, 3 geen aanbod, 0 fout**, niet gestopt. Volgende: 09:13.
 - Per model gelijk aan 16-10 21:23: M001 799, M002 899, M005 763, M008 719, M011 633, M017 2.379, M018 2.759 (bol.com); M006 814 (Startbuy.eu, partner); M004, M015, M016 geen aanbod.
+
+### Controle 2 (17 oktober 09:36, op tijd) en conclusie
+- **Geplande ronde vanzelf gedraaid: 09:15:03-09:15:04** (gepland 09:13). Niet door mij gestart; geen `wp-cron.php` aangeroepen. 12 verzoeken, token geslaagd, **8 aanbod, 3 geen aanbod, 0 fout**. Volgende: 15:13. Statusoverzicht "Bol-prijstaak draait": OK.
+- **Twee geplande rondes achter elkaar vanzelf gedraaid: 03:15 en 09:15**, elk ongeveer 2 minuten na het geplande tijdstip (de cron draait elk kwartier). Geen ronde overgeslagen; beide controles op tijd uitgevoerd.
+- **Per model in beide rondes gelijk** (ook gelijk aan 16-10 21:23): M001 799, M002 899, M005 763, M008 719, M011 633, M017 2.379, M018 2.759 bij bol.com; M006 814 bij Startbuy.eu (partner); M004, M015, M016 geen aanbod. Geen verschillen.
+- **Niets van Bol op de site:** `scripts/bol_regel_controle.py`: schakelaar uit, 0 Bol-regels op 18 openbare adressen, publieke prijsroute leeg, geen fouten.
+- De cron werkt. Volgende stap (alleen op Mandy's woord): de schakelaar aan en de teksten toepassen volgens de volgorde in ronde 36.
