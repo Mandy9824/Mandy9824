@@ -2498,3 +2498,29 @@ Tijden in Amsterdamse tijd. Mandy: `RMK_AFFILIATE_ACTIVE` aan. Stap 2 (teksten) 
 ### Wat nodig is om verder te gaan
 1. Mandy (of na akkoord ik): **LiteSpeed-cache legen** (LiteSpeed Cache > Alles legen) en **CDN legen** (hPanel > Prestaties > CDN > Cache legen).
 2. Daarna opnieuw `scripts/bol_regel_controle.py` op de gewone adressen (verwacht: 14 Bol-regels, 0 fouten), en pas dan stap 2 (teksten) en stap 3.
+
+## Ronde 39 (17 oktober 2026): Bol-regels live, affiliateteksten toegepast
+
+Tijden in Amsterdamse tijd. Mandy: LiteSpeed- en CDN-cache geleegd na het aanzetten van `RMK_AFFILIATE_ACTIVE`.
+
+### 1. Controle per model op de gewone adressen (12:35, zonder cache-omzeiling)
+- `scripts/bol_regel_controle.py`: **14 Bol-regels, 0 fouten**: hub 4, pagina 1 6, Navimow-pagina 4, precies op de kaarten van M001, M002, M005, M006, M008, M011, M017, M018. **M004, M015, M016 geen Bol-regel.**
+- Elke link `https://partner.bol.com/click/click?p=2&t=url&s=<SITE_ID>&f=api&url=https://www.bol.com/nl/nl/p/…&name=<modelnaam>&subid=<paginaslug>`, één numerieke site-ID, `rel="sponsored nofollow"`, bronregel aanwezig. Links niet gevolgd.
+
+### 2. Affiliateteksten (12:36)
+- `scripts/ronde30_affiliate_teksten.py` proefdraai: **geen meldingen**. Daarna `--schrijf`:
+  - #76, #77, #80, #81, #82, #83 opgeslagen (status publish blijft publish; inhoud telkens zoals bedoeld), footer opgeslagen, `rmk_advertentie_tekst` = "Advertentie: via deze knoppen naar bol.com krijgen wij mogelijk een commissie. Dat verandert de score niet."
+  - Kopie van de oude teksten: `backups/affiliate-voor-20261017-103623.json` (niet in git, alleen in deze werkomgeving; `ronde30_affiliate_terug.py` werkt ook zonder deze kopie).
+- **Controle op alle 18 adressen** (tekst zonder HTML, verse weergave én gewone adressen):
+  - "Op dit moment verdienen we niets": **0 keer**, op geen enkele pagina.
+  - Nieuwe footer ("Wij kunnen een commissie ontvangen bij aankopen via links naar bol.com.") op **18 van 18**.
+  - Nieuwe zinnen op hun pagina: affiliate-melding (eerste alinea en slotalinea), over-ons, colofon, hoe-we-beoordelen ("…volgt de score, niet de commissie."), privacy (cookie van bol.com), cookies (rij "Cookies van bol.com na een klik").
+  - Advertentie-regel met de nieuwe tekst en bronvermelding "Je gaat naar bol.com. Bron: bol.com." op de 3 pagina's met Bol-regels (hub, pagina 1, Navimow).
+
+### 3. Na het opslaan
+- Mandy moet de **caches opnieuw legen** (LiteSpeed en CDN), omdat de footer op elke pagina staat.
+- Gewone adressen direct na het opslaan (12:37, nog vóór dat legen): alle 18 HTTP 200, LiteSpeed `miss`, CDN `MISS`, overal de nieuwe teksten en 0 oude zinnen (het opslaan van de footer leegde kennelijk de LiteSpeed-cache al). Bol-controle: 14 regels, 0 fouten. Routetest `--na-136 --na-137`: **0 fouten**.
+- **Niets ging mis; het terugdraaiscript is niet gebruikt.**
+
+### Voor de volgende themaversie
+- **Productfoto van bol.com laadt niet:** het fotovak verbergen en alleen de specificatiekaart tonen. Dus geen alt-tekst in een grijs vak (zoals in de schermafbeeldingen van ronde 38, waar media.s-bol.com geblokkeerd was). Bijvoorbeeld met `onerror` op de `img` (of een kleine listener in rmk.js) die het hele fotoblok inclusief "Foto: bol.com" weghaalt; zonder JavaScript blijft het gewone gedrag.
