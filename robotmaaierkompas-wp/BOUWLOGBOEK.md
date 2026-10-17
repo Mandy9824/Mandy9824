@@ -2463,3 +2463,8 @@ Tijden in Amsterdamse tijd. Mandy: cron in hPanel elke 15 minuten op `wp-cron.ph
 - **Nog geen geplande ronde na het instellen van de cron.** Laatste ronde is nog die van **21:23:21** (door mijn aanroep van `wp-cron.php` in ronde 36, niet door de cron): 8 aanbod, 3 geen aanbod, 0 fout. Volgende geplande ronde: **17 oktober 03:13**.
 - Statusoverzicht "Bol-prijstaak draait": OK. (Kleine onvolkomenheid in het thema: de info-tekst zegt ook bij OK "Te oud: stel een echte cron in"; alleen tekst, niet aangepast.)
 - Controles ingepland om 03:35 en 09:35, zonder zelf een ronde te starten of `wp-cron.php` aan te roepen.
+
+### Controle 1 (17 oktober 03:36, op tijd)
+- **Geplande ronde vanzelf gedraaid: 03:15:02-03:15:04** (gepland 03:13; de cron van elk kwartier pakte hem op). Niet door mij gestart; geen `wp-cron.php` aangeroepen.
+- 12 verzoeken, token geslaagd, **8 aanbod, 3 geen aanbod, 0 fout**, niet gestopt. Volgende: 09:13.
+- Per model gelijk aan 16-10 21:23: M001 799, M002 899, M005 763, M008 719, M011 633, M017 2.379, M018 2.759 (bol.com); M006 814 (Startbuy.eu, partner); M004, M015, M016 geen aanbod.
