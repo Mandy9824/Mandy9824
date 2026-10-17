@@ -2524,3 +2524,36 @@ Tijden in Amsterdamse tijd. Mandy: LiteSpeed- en CDN-cache geleegd na het aanzet
 
 ### Voor de volgende themaversie
 - **Productfoto van bol.com laadt niet:** het fotovak verbergen en alleen de specificatiekaart tonen. Dus geen alt-tekst in een grijs vak (zoals in de schermafbeeldingen van ronde 38, waar media.s-bol.com geblokkeerd was). Bijvoorbeeld met `onerror` op de `img` (of een kleine listener in rmk.js) die het hele fotoblok inclusief "Foto: bol.com" weghaalt; zonder JavaScript blijft het gewone gedrag.
+
+## Ronde 40 (17 oktober 2026): nieuwe Navimow-modellen op pagina 1 en de hub
+
+Bron: tekstwijzigingen-navimow-op-pagina1-en-hub.md (Mandy, 17 oktober; niet in de repository). Uitgevoerd met `scripts/ronde40_navimow_p1_hub.py` via de WordPress-API en de dataroute, zonder thema-zip. Pagina's bleven gepubliceerd.
+
+### Kopieën
+- `backups/pagina10-11-voor-20261017-110533.json` en `backups/ronde40-voor-20261017-112010.json` (inhoud, status en meta van #10 en #11 vóór de wijziging; niet in git, alleen in deze werkomgeving).
+
+### A. Pagina 1 (#11)
+- Metabeschrijving: "Acht robotmaaiers…" → "Tien robotmaaiers…".
+- "acht" → "tien" op 2 plekken: korte antwoord ("We vergeleken tien modellen…") en kop "Vergelijking van de tien modellen". De zinnen "De volledige vergelijking van acht modellen" en "de acht modellen" uit het md staan niet op pagina 1.
+- "Welke past bij jouw tuin?": rij "Tuin tot ongeveer 1.000 m² met veel obstakels | Segway Navimow i210 LiDAR Pro | LiDAR met camera en netwerk-RTK, helling 55% volgens de handleiding" direct onder de eerste rij.
+- Scoretabel: `[rmk_scoretabel modellen="M015,M002,M016,M010,M005,M004,M008,M001,M006,M011"]`. Kaarten M015 (vóór) en M016 (na) de i206, hetzelfde kaartskelet als op de Navimow-pagina; het thema vult analyse, plus- en minpunten en de knop.
+- "Hoogste functiescore" bij M002: komt op pagina 1 niet voor; niets te vervangen. De kaart van M015 zegt "In onze functiescore staat dit model bovenaan" (uit de modelgegevens).
+
+### B. Hub (#10)
+- Metabeschrijving "Vijf keuzes…" → "Zes keuzes…"; korte antwoord "vijf modellen" → "zes modellen".
+- "In een oogopslag": rij "Tuin tot ongeveer 1.000 m² met veel obstakels, zonder antenne | Segway Navimow i210 LiDAR Pro | 96,4" onder de eerste rij; de modelnaam linkt, net als de andere rijen, naar de kaart (`#p-segway-navimow-i210-lidar-pro`).
+- Na de i206-kaart: H3 "Tuin tot 1.000 m² met veel obstakels: Segway Navimow i210 LiDAR Pro", kaart M015, "Waarom deze:" zoals in het md.
+- "Alle acht modellen naast elkaar" → "Alle tien modellen naast elkaar". **Extra (zelfde verwijzing naar pagina 1):** in "Meer lezen" "Robotmaaier zonder draad: de acht modellen vergeleken." → "de tien modellen vergeleken.".
+- Niet gewijzigd: "Waarom deze" bij de i206 ("een van de hoogste functiescores in onze selectie"); klopt nog (92,7, tweede plaats).
+
+### C. Controle (live, na het legen van LiteSpeed via de dataroute)
+- **Pagina 1**, 10 kaarten en scoretabel in deze volgorde: i210 LiDAR Pro 96,4 · i206 AWD 92,7 · i205 AWD 92,7 · Husqvarna 410VE NERA 87,3 · Mova 1200 80,5 · Mova 800 80,5 · Dreame A1 Pro 78,6 · i105E 75,9 · Eufy E15 63,2 · Gardena 800 60,9. Klopt met het modelbestand en het md.
+- **Hub**: 6 kaarten (i206, i210 LiDAR Pro, Husqvarna, Mova 1200, Dreame, Gardena); tabel "In een oogopslag" met de nieuwe rij als tweede.
+- Alle kaarten tonen "Functiescore: wat deze maaier kan. Hoe we scoren". **M015 en M016: geen Bol-regel**, knop "Bekijk de actuele prijs" naar nl.navimow.com; "Geen productfoto beschikbaar"-vak (geen bol-foto), zoals op de Navimow-pagina.
+- Geen "[", "]" of "{" in de zichtbare tekst; de enige invulvelden zijn die van de bestaande tuingrootte-keuzehulp.
+- 390 en 1440 px: geen horizontale scroll, 0 JavaScript-fouten. Alle 11 interne adressen HTTP 200; alle ankers (#p-…) bestaan.
+- Bol-controle: 14 Bol-regels (hub 4, pagina 1 6, Navimow 4), 0 fouten.
+- **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punt (niet in het md, niet gedaan)
+- De bronnenlijsten van pagina 1 en de hub bevatten per model bronnen; voor M015 en M016 staan daar nog geen bronnen (wel op de Navimow-pagina). Overnemen kan, op Mandy's woord.
