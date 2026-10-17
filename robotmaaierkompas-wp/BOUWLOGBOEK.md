@@ -2475,3 +2475,8 @@ Tijden in Amsterdamse tijd. Mandy: cron in hPanel elke 15 minuten op `wp-cron.ph
 - **Per model in beide rondes gelijk** (ook gelijk aan 16-10 21:23): M001 799, M002 899, M005 763, M008 719, M011 633, M017 2.379, M018 2.759 bij bol.com; M006 814 bij Startbuy.eu (partner); M004, M015, M016 geen aanbod. Geen verschillen.
 - **Niets van Bol op de site:** `scripts/bol_regel_controle.py`: schakelaar uit, 0 Bol-regels op 18 openbare adressen, publieke prijsroute leeg, geen fouten.
 - De cron werkt. Volgende stap (alleen op Mandy's woord): de schakelaar aan en de teksten toepassen volgens de volgorde in ronde 36.
+
+### Herbevestiging op verzoek (17 oktober 12:12)
+- bol-status nu: laatste ronde **09:15** (8 aanbod, 3 geen aanbod, 0 fout, 12 verzoeken), volgende 15:13; statusoverzicht OK. Dit klopt met de vastgelegde lezingen van 03:36 (ronde **03:15**) en 09:36 (ronde **09:15**).
+- bol-status bewaart alleen de laatste ronde; de ronde van 03:15 is bevestigd via de lezing van 03:36. Tussen 03:15 en 09:15 was geen andere ronde gepland, dus niets overgeslagen.
+- Per model ongewijzigd (zie controle 2). `scripts/bol_regel_controle.py`: 0 Bol-regels op 18 adressen, prijsroute leeg, geen fouten.
