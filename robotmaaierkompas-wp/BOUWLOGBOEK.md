@@ -2665,3 +2665,63 @@ Bron: `tekstwijzigingen-husqvarna-ronde.md` met aanvulling (niet in de repositor
 - Navimow-pagina #264, "Meer lezen": "Robotmaaier zonder draad: acht modellen vergeleken." (pagina 1 heeft nu meer modellen).
 - Mesjespagina #236: de alinea "Voor andere Husqvarna-modellen dan de 410VE NERA en de 305E NERA hebben we de mesjes nog niet uitgezocht" noemt de 310E NERA niet (de zin onder "Wat we nog niet weten" wel).
 - Thema 1.3.8: verbindingschip wifi/bluetooth (zie boven).
+
+## Ronde 45 (17-18 oktober 2026): twee teksten, thema 1.3.8 (niet geüpload)
+
+### 1. Teksten (zonder zip, `scripts/ronde45_teksten.py`): beide "Was"-teksten precies één keer gevonden
+- Navimow-pagina #264, "Meer lezen": "Robotmaaier zonder draad: tien modellen vergeleken."
+- Mesjespagina #236: "Voor andere Husqvarna-modellen dan de 410VE NERA, 305E NERA en 310E NERA hebben we de mesjes nog niet uitgezocht."
+- Kopie: `backups/ronde45-teksten-voor-20261017-180528.json` (niet in git). Beide bleven gepubliceerd; inhoud zoals bedoeld. LiteSpeed geleegd via de dataroute. **Mandy: CDN-cache legen.**
+
+### 2. Thema 1.3.8 (`robotmaaierkompas-child.zip`, klaar om te uploaden)
+Alleen deze wijzigingen; `inc/bol.php`, de schakelaar en de teksten zijn niet aangeraakt.
+- **(a) Chip "Verbinding"** (`rmk_card_specs`/`rmk_speccard_html`, inc/prijzen.php): kent nu ook `wifi` → "Wifi" en `bluetooth` → "Bluetooth". Onbekende of lege waarde: geen chip (geen streepje). De andere vier kenmerken houden hun streepje als ze onbekend zijn.
+- **(b) Fotovak:**
+  - zonder foto geen beeldvlak met merk/model en geen "Geen productfoto beschikbaar" meer; de kaart is dan alleen de kenmerken (`rmk-speccard--specs`). Op smalle schermen staan die onder de naam (CSS, `order: 1` onder 48rem);
+  - laadt de foto (bol.com) niet, dan haalt rmk.js (blok 7) het hele fotovak met "Foto: bol.com" weg en wordt het dezelfde kaart. Zonder JavaScript blijft het oude gedrag;
+  - patronen productbox, productbox-zonder-prijs en kop-aan-kop: zelfde opbouw (zonder beeldvlak).
+- **(c) Statusoverzicht** (inc/bouw.php): "Te oud: stel een echte cron in (wp rmk bol-ronde)." alleen als de controle mislukt; bij OK alleen laatste en volgende ronde.
+- **(d) E-mail bij een storing** (nieuw `inc/bol-bewaking.php`):
+  - wp_mail naar `admin_email` als de laatste geslaagde Bol-ronde ouder is dan 8 uur. Geslaagd = niet gestopt én voor minstens één model een antwoord van bol.com (ok, geen aanbod of ongeldig);
+  - één e-mail per storing (sleutel: de laatste geslaagde ronde); na een geslaagde ronde is de storing voorbij. Mislukt wp_mail, dan probeert de volgende controle het opnieuw;
+  - inhoud: tijd van de laatste geslaagde ronde, de laatste ronde (gestopt of niet), de laatste fout sinds die geslaagde ronde, de volgende geplande ronde (met "al voorbij: de cron lijkt niet te draaien" als die meer dan 15 minuten voorbij is) en wat te controleren. Waarden van de drie Bol-constanten en tokens worden er altijd uit gefilterd;
+  - controle elk uur (eigen taak `rmk_bol_bewaking`) en, omdat juist de cron kan stilliggen, hooguit één keer per uur aan het einde van een verzoek (automatisch geladen optie, geen extra query);
+  - leest alleen het rondelog en luistert naar `rmk_bol_na_ronde`; bewaart de laatste geslaagde ronde ook los (`rmk_bol_laatst_geslaagd`), want het log houdt 20 rondes;
+  - zonder de Bol-constanten: niets (geen taak, geen opties, geen mail).
+- **(e) Lijst "voor 1.3.8"** (ronde 39 en 41): valt volledig onder (a)-(d).
+- Versie 1.3.8 in style.css en robotmaaierkompas-setup.php; README noemt `inc/bol-bewaking.php`. Zip (niet in git, zoals eerder; als download gegeven): 114 bestanden, zelfde opbouw als 1.3.7 (zonder patterns-bron) plus `inc/bol-bewaking.php`; alleen de plaatsaanduiding `'…'` bij de constanten. SHA-256 `f984bdaa906af9ab7fd2ac48ff16637e6e350e2a1d57162ac60c65c1c90b5321`.
+
+### 3. Tests (niets gepubliceerd)
+- **Nagebootst:** `php tests/bewaking-test.php`: 28 OK. Bevat: geen mail binnen 8 uur, één mail na 8 uur, geen tweede bij dezelfde storing (5 uur, ook via de reserve), nieuwe storing geeft weer één mail, mislukte wp_mail, nooit geslaagd, geen secrets in de mail, chip Wifi/Bluetooth/onbekend, kaart zonder foto, data-rmk-foto op de bol-foto.
+- `php tests/bewaking-test.php zonder`: zonder Bol-constanten geen mail, geen taken, **geen enkele optie veranderd**.
+- `php tests/status-test.php`: 3 OK (en `zonder`: geen regel over de prijstaak).
+- `php tests/bol-test.php`: 59 OK (ongewijzigd).
+- `php tests/score-test.php`: alles OK behalve "modellen.json: geen prijslijsten, geen aanschaf en geen bol.com". Die faalde in 1.3.7 al (de lokale themakopie `data/modellen.json`), los van deze ronde.
+- PHP-lint van alle bestanden en `node --check rmk.js`: geen fouten.
+- **Browser** (Chromium): de 18 openbare pagina's en het Husqvarna-concept. Live HTML van 1.3.7 naast dezelfde HTML met de kaarten, inline-CSS en rmk.js van 1.3.8 (gegenereerd met de themafuncties op de live modelgegevens). 390 en 1440 px; op hub, pagina 1, Navimow en Husqvarna ook met een bol-foto die niet laadt. 93 weergaven:
+  - **kaarten, scores, volgorde en alle tabellen op elke pagina gelijk aan 1.3.7**;
+  - 1.3.8: nergens horizontaal scrollen, 0 JavaScript-fouten, geen "[", "{", "Geen productfoto" of "Verbinding –"; geen kapotte afbeelding zichtbaar;
+  - 1.3.7 ter vergelijking: "Geen productfoto beschikbaar" 2× (hub), 4× (pagina 1), 2× (Navimow), 4× (Husqvarna); "Verbinding –" 3× op Husqvarna; bij een foto die niet laadt 4-6 kapotte afbeeldingen met alt-tekst;
+  - Husqvarna-concept 1.3.8: 410VE 4G, 310E Wifi, 305E Wifi, 305 Bluetooth;
+  - foto laadt: fotovak blijft met "Foto: bol.com"; foto faalt: vak weg, kenmerken onder de naam (390 px), links (1440 px);
+  - zonder JavaScript: fotovakken blijven staan (zoals 1.3.7), geen "Geen productfoto".
+- **LCP** (mobiel, 150 ms, 1,6 Mbit/s, processor 4× trager, mediaan van 3; bol-foto's nagebootst, prijsroute +300 ms):
+
+  | Pagina | 1.3.7 | 1.3.8 | LCP-element |
+  |---|---|---|---|
+  | Home | 1,53 s | 1,48 s | hero-afbeelding |
+  | Pagina 1 (zonder draad) | 0,45 s | 0,52 s | H1 |
+  | Pagina 12 (kosten) | 0,35 s | 0,27 s | H1 |
+
+  Binnen de meetruis.
+
+### Na de upload van 1.3.8 (Claude)
+1. `python3 tests/rmk-routes-test.py --na-136 --na-137` (verwacht 0 fouten).
+2. Statusoverzicht: regel "Bol-prijstaak draait" zonder "Te oud" (als de laatste ronde vers is).
+3. Momentopname van alle pagina's: kaarten, scores en volgorde gelijk aan nu; Husqvarna-kaarten (na publicatie) met Wifi/Bluetooth.
+4. `wp cron event list` of bol-status: taak `rmk_bol_bewaking` elk uur gepland.
+
+### Nog te doen
+- [ ] Mandy: 1.3.8 uploaden (Weergave > Thema's > Nieuw thema > Uploaden, bestaand thema vervangen), daarna LiteSpeed en CDN legen.
+- [ ] Claude: de vier stappen hierboven.
+- [ ] Links naar de Husqvarna-pagina: `scripts/ronde44_links.py` zodra die pagina gepubliceerd is.
