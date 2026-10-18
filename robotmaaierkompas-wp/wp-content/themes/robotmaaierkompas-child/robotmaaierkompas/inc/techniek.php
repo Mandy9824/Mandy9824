@@ -242,3 +242,12 @@ add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', function ( $ids ) {
  * blokthema's wijst naar een element dat in onze templates niet bestaat; die zetten we uit. */
 remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link' );
 remove_action( 'wp_footer', 'the_block_template_skip_link' );
+
+/* ------------------------------------------------------------------ Verificatie Daisycon (1.3.9)
+ * Meta-tag voor de aanmelding bij Daisycon, alleen op de homepage en gewoon in de HTML (de crawler voert geen
+ * JavaScript uit). Geen meetcode: er wordt niets geladen of opgeslagen, dus geen toestemming nodig. */
+add_action( 'wp_head', function () {
+	if ( is_front_page() ) {
+		echo '<meta name="cadaf37aec93644" content="4cd8b4a935262a58027e392efdf18882" />' . "\n";
+	}
+}, 1 );

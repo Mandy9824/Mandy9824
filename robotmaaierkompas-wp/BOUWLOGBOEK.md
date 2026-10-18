@@ -2769,3 +2769,13 @@ Mandy heeft 1.3.8 geüpload, de caches geleegd en /husqvarna-robotmaaier/ (#20) 
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /husqvarna-robotmaaier/.
 - [ ] Optioneel: met WP Crontrol nagaan dat `rmk_bol_bewaking` elk uur gepland staat.
+
+## Ronde 47 (18 oktober 2026): thema 1.3.9, verificatietag Daisycon (niet geüpload)
+- Mandy wil zich aanmelden bij Daisycon; daarvoor moet `<meta name="cadaf37aec93644" content="4cd8b4a935262a58027e392efdf18882" />` in de `<head>` van de homepage.
+- Kan niet zonder thema: er is geen plugin voor eigen head-code (alleen LiteSpeed en Yoast actief) en Yoast kent alleen verificatie voor Google, Bing, Baidu, Yandex en Pinterest.
+- **1.3.9:** in `inc/techniek.php` een `wp_head`-hook (prioriteit 1) die de tag alleen op de homepage (`is_front_page()`) gewoon in de HTML zet, niet via JavaScript of de cookiebanner (de crawler voert geen JavaScript uit; het is geen meetcode). Versie 1.3.9 in style.css en robotmaaierkompas-setup.php. Verder niets gewijzigd.
+- Getest: op de homepage precies de tag, op andere pagina's niets. bol-, score-, bewaking- en statustest: alles geslaagd. Zip: 114 bestanden, SHA-256 `15c3ae21d00a67f6c957414b5dcc391d65713927a1d40e9b1ed64844a382413e`.
+
+### Na de upload (Mandy)
+- 1.3.9 uploaden (bestaand thema vervangen), LiteSpeed en CDN legen, dan bij Daisycon op "verifiëren" klikken.
+- Claude kan daarna controleren dat de tag in de bron van https://robotmaaierkompas.nl/ staat.
