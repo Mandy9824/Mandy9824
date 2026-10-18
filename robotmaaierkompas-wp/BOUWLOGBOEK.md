@@ -2725,3 +2725,47 @@ Alleen deze wijzigingen; `inc/bol.php`, de schakelaar en de teksten zijn niet aa
 - [ ] Mandy: 1.3.8 uploaden (Weergave > Thema's > Nieuw thema > Uploaden, bestaand thema vervangen), daarna LiteSpeed en CDN legen.
 - [ ] Claude: de vier stappen hierboven.
 - [ ] Links naar de Husqvarna-pagina: `scripts/ronde44_links.py` zodra die pagina gepubliceerd is.
+
+## Ronde 46 (18 oktober 2026): na de upload van 1.3.8, Husqvarna-pagina gepubliceerd, links gezet
+
+Mandy heeft 1.3.8 geüpload, de caches geleegd en /husqvarna-robotmaaier/ (#20) gepubliceerd.
+
+### 1. Controles na de upload
+- **1.3.8 actief:** de pagina's laden `rmk.js?ver=1.3.8`.
+- **Statusoverzicht** (`/rmk/v1/status`): "Bol-prijstaak draait": OK, "laatste ronde 18-10 09:15, volgende 18-10 15:13." **zonder "Te oud"**. Die ronde slaagde (9 ok, 2 geen aanbod, 0 fout), dus de bewaking hoort geen e-mail te sturen. De uurtaak `rmk_bol_bewaking` is via de routes niet te zien (geen WP-CLI hier). Controle kan via WP Crontrol of `wp cron event list`.
+- **Routetest** `--na-136 --na-137` zonder inloggen: 0 fouten.
+- **Husqvarna-pagina:** kaarten 410VE NERA 87,3 · 310E NERA 69,5 · 305E NERA 69,5 · 305 (met draad) 52,7. Verbinding: 4G, Wifi, Wifi, Bluetooth. Nergens "Verbinding –".
+- **Fotovak:**
+  - live: alleen kaarten met een geldig Bol-aanbod krijgen een fotovak. Op hub, pagina 1 en de Navimow-pagina stuurt de server 5 tot 7 bol-foto's mee; de Husqvarna-pagina heeft er geen;
+  - in deze testomgeving is media.s-bol.com geblokkeerd. Daar haalde rmk.js alle fotovakken weg: 0 kapotte afbeeldingen en 0 alt-teksten in een grijs vak op alle 19 pagina's. Zo is (b) ook live getest;
+  - nergens meer "Geen productfoto beschikbaar";
+  - schakelaar uit (nagebootst met de themacode op de live modelgegevens): geen enkel fotovak, alle 17 kaarten alleen kenmerken. Schakelaar aan: alleen het model met een geldig aanbod krijgt een fotovak; modellen zonder aanbod alleen kenmerken.
+
+### 2. Links (`scripts/ronde44_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde44-links-voor-20261018-083826.json` (niet in git). Alle zes pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd, en live elk precies één keer gevonden (HTTP 200):
+  - hub #10, "Meer lezen": "Alle Husqvarna Automower-modellen die nu nieuw te koop zijn, met kosten: zie Husqvarna robotmaaier." → /husqvarna-robotmaaier/;
+  - pagina 1 #11, "De modellen een voor een": dezelfde zin;
+  - mesjespagina #236: "Welke Automower past bij welke tuin? Zie Husqvarna robotmaaier.";
+  - kostenpagina #18 (C5), achter het punt over de 305E en 310E NERA: "Meer over de Automower-modellen lees je op Husqvarna robotmaaier.";
+  - Navimow-pagina #264, "Meer lezen": "Husqvarna robotmaaier: de Automower-modellen vergeleken.";
+  - Husqvarna-pagina #20, "Meer lezen": "Segway Navimow robotmaaier: alle modellen die nu nieuw te koop zijn." → /segway-navimow-robotmaaier/.
+- Alle 18 interne adressen in de inhoud van de 19 pagina's: HTTP 200.
+- Tekstverschillen vóór/na: alleen deze zes zinnen, de datums "bijgewerkt op 18 oktober" (automatisch) en de lijsten "Onlangs bijgewerkt" op home en de auteurspagina.
+
+### 3. `tests/score-test.php`
+- Controle vervangen door "modellen.json: geen prijslijsten, geen aanschaf, geen beoordelingen en geen opgeslagen afbeeldingen; wel EAN's, productlinks en afbeeldings-URL's van bol.com".
+  - Per model met een blok "bol" alleen `product_url` (https://www.bol.com/nl/nl/p/…) en `afbeelding` {url (https://media.s-bol.com/…jpg), breedte, hoogte}, met een EAN van 8 of 13 cijfers.
+  - "bol.com" verder nergens buiten dat blok; geen `data:image`; geen `prijzen`; aanschaf leeg.
+- Uitkomst: OK (11 modellen met bol-blok), **alle tests geslaagd**. Het thema is niet gewijzigd.
+
+### 4. Alle 19 openbare adressen (home en 18 pagina's, nu met /husqvarna-robotmaaier/)
+- HTTP 200; **kaarten, scores en volgorde gelijk aan vóór de links** (en aan ronde 44 voor de 18 oude adressen).
+- 390 en 1440 px (38 weergaven): geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}", geen "Geen productfoto", geen "Verbinding –".
+- Invulvelden alleen de bestaande hulpmiddelen: tuinkeuzehulp (hub, pagina 1, zonder-grensdraad, test-vergelijking), filter (test-vergelijking) en kostencalculator.
+- Routetest zonder inloggen: 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/husqvarna-robotmaaier/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /husqvarna-robotmaaier/.
+- [ ] Optioneel: met WP Crontrol nagaan dat `rmk_bol_bewaking` elk uur gepland staat.

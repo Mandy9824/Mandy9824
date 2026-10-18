@@ -98,7 +98,25 @@ $r = isset( $byid['M002'] ) ? rmk_compute_score( $byid['M002']['scores'], $byid[
 check( 'modellen.json: M002 functiescore 92,7', $r && 'functie' === $r['kind'] && '92,7' === rmk_format_score( $r['value'] ), $r ? rmk_format_score( $r['value'] ) . ' ' . $r['kind'] : 'M002 ontbreekt' );
 check( 'modellen.json: M009 (uitverkocht) staat er niet in', ! isset( $byid['M009'] ) );
 check( 'modellen.json: geen niet-leverbare modellen', ! array_filter( $data['modellen'], function ( $m ) { return in_array( $m['beschikbaarheid'], array( 'uitverkocht', 'niet leverbaar' ), true ); } ) );
-check( 'modellen.json: geen prijslijsten, geen aanschaf en geen bol.com', false === stripos( json_encode( $data ), 'bol.com' ) && ! array_filter( $data['modellen'], function ( $m ) { return isset( $m['prijzen'] ) || null !== $m['kosten']['aanschaf']['waarde']; } ) );
+// Sinds 1.3.6 staan per model in het blok "bol" alleen EAN, productlink en afbeeldings-URL; prijzen komen uit de API.
+$zonder_bol = $data;
+foreach ( $zonder_bol['modellen'] as &$zb ) { unset( $zb['bol'] ); }
+unset( $zb );
+$met_bol = array_filter( $data['modellen'], function ( $m ) { return ! empty( $m['bol'] ); } );
+$bol_fout = array();
+foreach ( $met_bol as $m ) {
+	$a = $m['bol']['afbeelding'] ?? array();
+	if ( array_diff( array_keys( $m['bol'] ), array( 'product_url', 'afbeelding' ) ) || array_diff( array_keys( $a ), array( 'url', 'breedte', 'hoogte' ) ) ) { $bol_fout[] = $m['id'] . ' (extra velden, bijvoorbeeld beoordelingen of een bestand)'; }
+	if ( ! preg_match( '/^\d{8}(\d{5})?$/', (string) ( $m['ean'] ?? '' ) ) ) { $bol_fout[] = $m['id'] . ' (EAN)'; }
+	if ( 0 !== strpos( (string) ( $m['bol']['product_url'] ?? '' ), 'https://www.bol.com/nl/nl/p/' ) ) { $bol_fout[] = $m['id'] . ' (productlink)'; }
+	if ( ! preg_match( '#^https://media\.s-bol\.com/[^"\s]+\.(jpg|jpeg|png|webp)$#i', (string) ( $a['url'] ?? '' ) ) ) { $bol_fout[] = $m['id'] . ' (afbeeldings-URL)'; }
+}
+check( 'modellen.json: geen prijslijsten, geen aanschaf, geen beoordelingen en geen opgeslagen afbeeldingen; wel EAN\'s, productlinks en afbeeldings-URL\'s van bol.com',
+	$met_bol && ! $bol_fout
+	&& false === stripos( json_encode( $zonder_bol ), 'bol.com' ) // bol.com alleen in het blok "bol"
+	&& false === stripos( json_encode( $data ), 'data:image' )
+	&& ! array_filter( $data['modellen'], function ( $m ) { return isset( $m['prijzen'] ) || null !== $m['kosten']['aanschaf']['waarde']; } ),
+	$bol_fout ? implode( ', ', $bol_fout ) : count( $met_bol ) . ' modellen met bol-blok' );
 check( 'modellen.json: prijzen alleen van winkel of fabrikant, hele euro\'s', ! array_filter( $data['modellen'], function ( $m ) { return ! empty( $m['prijs'] ) && ( ! in_array( $m['prijs']['type'], array( 'winkel', 'fabrikant' ), true ) || ! is_int( $m['prijs']['bedrag'] ) ); } ) );
 $rows = array();
 foreach ( $byid as $id => $m ) { $rows[] = array( 'id' => $id, 'score' => rmk_model_score( $m ) ); }
