@@ -2821,3 +2821,21 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 ### Nog te doen
 - [ ] Mandy: CDN legen; de Gardena-pagina nalezen en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde48_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 49 (19 oktober 2026): testpagina en pagina 1, link naar de hub (zonder thema-zip)
+
+Uitgevoerd met `scripts/ronde49_teksten.py` (proefdraai zonder meldingen, daarna `--schrijf`). Kopie vooraf: `backups/ronde49-teksten-voor-20261019-183940.json` (inhoud en status van #11 en #13, niet in git). Beide pagina's bleven gepubliceerd; inhoud zoals bedoeld. LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen.**
+
+### 1. Testpagina /robotmaaier-test-consumentenbond/ (#13)
+- Nieuwe H2 "Wat is de beste robotmaaier volgens de Consumentenbond?" (id `wat-is-de-beste-robotmaaier-volgens-de-c`, zelfde vorm als de andere koppen) met de alinea uit de opdracht, aan het einde van de tekst, direct vóór "Veelgestelde vragen"; "beste robotmaaier" → /beste-robotmaaier/.
+- **Kop met dezelfde strekking bestond al:** "Wat vonden we bij de Consumentenbond?" (zelfde bevinding van 5 oktober: alleen tests van gewone grasmaaiers), en in de FAQ "Heeft de Consumentenbond een robotmaaier test?". Niet gewijzigd; de nieuwe tekst herhaalt die bevinding deels.
+
+### 2. Pagina 1 /robotmaaier-zonder-draad/ (#11)
+- Het kopje heet precies "De nadelen van een robotmaaier zonder draad". Na de opsomming: "Wil je ook weten wat laboratoria meten? Lees dan wat de Consumentenbond, Test-Aankoop en de Stiftung Warentest publiceren op robotmaaier test." met "robotmaaier test" → /robotmaaier-test-consumentenbond/.
+
+### 3. Hub /beste-robotmaaier/ (#10): alleen gecontroleerd, niet gewijzigd
+- **Er is geen sectie "Onafhankelijke tests"** (ook niet in de weergegeven pagina). De enige link naar /robotmaaier-test-consumentenbond/ staat onder "Meer lezen": linktekst "Robotmaaier test" (met hoofdletter, als begin van het punt), gevolgd door ": wat Test-Aankoop en Stiftung Warentest publiek hebben."
+
+### Controles
+- Momentopname van alle 19 openbare adressen vóór en na: kaarten, scores en volgorde overal gelijk. Tekstverschillen alleen de twee nieuwe teksten, de datums "bijgewerkt/nagekeken op 19 oktober" (automatisch) en de lijsten "Onlangs bijgewerkt" op home en de auteurspagina.
+- #13, #11 en de hub op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1); op #13 geen. De nieuwe kop staat direct boven "Veelgestelde vragen"; beide nieuwe links werken (HTTP 200).
