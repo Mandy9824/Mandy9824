@@ -209,5 +209,51 @@
       "GPS, alarm en GeoFence vragen een Connect Kit van 329 euro die een dealer inbouwt",
       "Firmware-updates alleen via de dealer"
     ]
+  },
+  "M023": {
+    "beste_voor": "Kleine tuinen tot 250 m² met een eenvoudige vorm, met de draad in de doos",
+    "pluspunten": [
+      "Begrenzingsdraad (150 m), krammen, stekkers en klemmen zitten in de doos: geen extra installatiekosten",
+      "Geen abonnement",
+      "Pincode",
+      "3 jaar garantie na registratie (accu uitgezonderd)"
+    ],
+    "minpunten": [
+      "Alleen pincode: geen alarm, GPS of geofence-melding",
+      "App alleen via Bluetooth (ongeveer 10 m), zonder kaart",
+      "Firmware-updates via een USB-kabel naar een pc",
+      "Helling 25% (10% langs de draad)",
+      "Uitlopend: Gardena verkoopt hem niet meer zelf"
+    ]
+  },
+  "M024": {
+    "beste_voor": "Tuinen tot 500 m² met een eenvoudige vorm, met de draad in de doos",
+    "pluspunten": [
+      "Begrenzingsdraad (150 m), krammen, stekkers en klemmen zitten in de doos: geen extra installatiekosten",
+      "Geen abonnement",
+      "Tot 500 m²",
+      "Pincode"
+    ],
+    "minpunten": [
+      "Alleen pincode: geen alarm, GPS of geofence-melding",
+      "App alleen via Bluetooth (ongeveer 10 m), zonder kaart",
+      "Voor 500 m² is 150 m draad niet altijd genoeg: de handleiding laat maximaal 300 m toe; extra draad kost 38,19 euro per 50 m",
+      "Uitlopend: bij een enkele winkel nog nieuw te koop"
+    ]
+  },
+  "M025": {
+    "beste_voor": "Kleine tuinen tot 250 m² met hellingen tot 35%",
+    "pluspunten": [
+      "Helling 35%, meer dan de Minimo",
+      "Begrenzingsdraad (150 m) en krammen in de doos: geen extra installatiekosten",
+      "Display met toetsen op het toestel",
+      "Pincode en tijdslot"
+    ],
+    "minpunten": [
+      "Geen alarm, GPS of geofence-melding",
+      "Uitlopend: Gardena noemt hem een voorgaand model",
+      "Specificaties alleen nog in een gearchiveerde Gardena-pagina",
+      "Weinig reviews gevonden: geen enkele Nederlandse winkel toont reviews"
+    ]
   }
 }

@@ -2779,3 +2779,45 @@ Mandy heeft 1.3.8 geüpload, de caches geleegd en /husqvarna-robotmaaier/ (#20) 
 ### Na de upload (Mandy)
 - 1.3.9 uploaden (bestaand thema vervangen), LiteSpeed en CDN legen, dan bij Daisycon op "verifiëren" klikken.
 - Claude kan daarna controleren dat de tag in de bron van https://robotmaaierkompas.nl/ staat.
+
+## Ronde 48 (19 oktober 2026): Gardena-modellen M023-M025, conceptpagina gardena-robotmaaier
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-gardena-robotmaaier.md`, `modellen-teksten-gardena.json`. **Niets gepubliceerd.**
+
+### 1. Modelgegevens (dataroute, `scripts/ronde48_upload.py`)
+- **De 21 live modellen en de algemene velden ongewijzigd** (ook M011 met zijn teksten en Bol-blok); erbij: M023, M024, M025 (24 modellen). Kopie vooraf: `backups/modellen-voor-ronde48.json` (niet in git).
+- M023 (Sileno Minimo 250), M024 (Minimo 500) en M025 (City 250) uit `excel_naar_json.py`, beschikbaarheid "uitlopend", met fabrikantpagina (gardena.com/nl/…) en de teksten uit `modellen-teksten-gardena.json` (toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`; het script controleert dat ze gelijk zijn). Geen EAN, geen Bol, geen prijs.
+- Functiescores (themacode `inc/score.php`): **M025 44,5, M023 40,9, M024 40,9**, M011 ongewijzigd 60,9 (gelijk aan de md).
+- **Controle:** alle 19 openbare adressen vóór en na de upload (Chromium, na rmk.js): **kaarten, scores, volgorde en zichtbare tekst overal gelijk**; Bol-links per pagina gelijk. M023-M025 staan op geen enkele openbare pagina (geen "Kandidaat voor pagina" in de xlsx). M011 op hub en pagina 1: eigen teksten en Bol-regel ("Bekijk bij bol.com") ongewijzigd.
+
+### 2. Conceptpagina gardena-robotmaaier (id 21, concept)
+- Gebouwd met `scripts/ronde48_bouw.py` (afgeleid van ronde 43, patroon pagina-merk), inhoud in `scripts/ronde48/gardena.json`, op de site gezet met `scripts/ronde48_pagina.py` (alleen als concept).
+- Er bestond al een concept met deze slug (id 21): het lege sjabloon "Gardena robotmaaier" van 6 oktober. Dat is bijgewerkt; de oude versie staat als revisie in WordPress en in `backups/ronde48-pagina21-voor.json` (niet in git).
+- **Volgorde kaarten volgens de tabel** (zoals de instructie zegt): Free 800 60,9 · City 250 44,5 · Minimo 250 40,9 · Minimo 500 40,9. In de md stond de Minimo 500 vóór de 250 onder "De modellen een voor een"; het script zet de blokken (kop, kaart, "Waarom deze") in de volgorde van `modellen:`.
+- M023-M025: **geen Bol-regel**, alleen "Bekijk de actuele prijs" naar de fabrikantpagina. M011: prijsblok van het thema (Bol-regel uit de prijstaak, subid gardena-robotmaaier).
+- Bronnen per model uit het blad Bronnen (handleidingen, gardena.com, appwinkels; geen winkels, geen "niet gevonden"): Free 800 4, City 250 11, Minimo 250 11, Minimo 500 10 regels. De gearchiveerde Gardena-pagina van de City 250 (web.archive.org) heeft het label "Fabrikant (archief)" ("gardena.com, gearchiveerd"). Kop per model = de kaarttitel.
+- "Meer lezen" zoals bij Husqvarna (hub, pagina 1, vergelijken, kosten, mesjes); Husqvarna en Navimow komen via het linkscript.
+- Controle (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll, 0 JavaScript-fouten (alleen de geblokkeerde bol-foto in deze omgeving), geen "[", "]", "{", "}" of invulveld, alle ankers bestaan; interne links (/, auteur, hoe-we-beoordelen#scoremodel, zonder-grensdraad, mesjes, kosten, hub, pagina 1, test-vergelijking) allemaal HTTP 200.
+- **Download:** `paginatekst-gardena.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository).
+
+### 3. Links naar de nieuwe pagina: klaargezet, niet gedraaid (`scripts/ronde48_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de Husqvarna-regel): "Alle Gardena Sileno-modellen, met beschikbaarheid en kosten: zie Gardena robotmaaier."
+- Navimow- en Husqvarna-pagina, "Meer lezen": "Gardena robotmaaier: de Sileno-modellen vergeleken."
+- Gardena-pagina, "Meer lezen": "Husqvarna robotmaaier: de Automower-modellen vergeleken." en "Segway Navimow robotmaaier: alle modellen die nu nieuw te koop zijn."
+- **Mesjespagina: geen regel**: er is geen Gardena-gedeelte (Gardena staat alleen onder "Wat we nog niet weten").
+- Weigert zolang #21 geen status publish heeft (getest). Alle vijf ankers komen nu precies één keer voor.
+- Gebruik: `python3 scripts/ronde48_links.py` (proef), daarna `--schrijf`; dan links controleren, cache legen.
+
+### Controles
+- Routetest `--na-136 --na-137`: 0 fouten. Bol-controle: 17 Bol-regels op 19 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan, op Mandy's woord)
+- **Geluid City 250:** de kaart toont "56 dB" (xlsx: gemeten LWA 56), de tabel in de md "58 dB(A)" met de zin "Het geluid is het gegarandeerde geluidsvermogen (LWA)" (gegarandeerd 58). Eén van beide aanpassen.
+- **Winkelprijs bij de Free 800:** de kaart toont (zoals op hub en pagina 1) "Laagste nieuwe prijs rond 1.099 euro bij Coolblue, gezien op 5 oktober 2026 / Bekijk bij Coolblue". De md zegt "geen prijzen van winkels met naam". Die regel komt uit de modelgegevens en verdwijnt vanzelf na 14 dagen; niet gewijzigd omdat M011 ongewijzigd moest blijven.
+- Verbindingschip: M023-M025 hebben geen regel in `verbinding_toewijzing.json`, dus geen chip (de md-tabel noemt "Alleen Bluetooth" en "Display met toetsen"). Kan worden aangevuld zoals bij Husqvarna.
+- Modelnamen in de data volgen de xlsx ("Gardena SILENO minimo 250"); op de pagina staan de kaarttitels uit de md ("Gardena Sileno Minimo 250").
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de Gardena-pagina nalezen en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde48_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.

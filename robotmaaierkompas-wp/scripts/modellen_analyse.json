@@ -43,5 +43,14 @@
   },
   "M021": {
     "analyse": "De Automower 305 met begrenzingsdraad is bedoeld voor tuinen tot 600 m². Je legt zelf een draad aan, die niet in de doos zit: de installatieset Small kost 94,99 euro, de Medium 154,99 euro en de Large 239 euro. De helling is volgens de handleiding 40% (15% langs de draad) en het geluid 58 dB(A). De app werkt alleen via Bluetooth, en GPS-positie, alarm en GeoFence vragen een Connect Kit van 329 euro die een dealer moet inbouwen."
+  },
+  "M023": {
+    "analyse": "De Gardena Sileno Minimo 250 is een draadmodel voor tuinen tot 250 m². De grensdraad (150 m) zit met krammen, stekkers en klemmen in de doos, dus er zijn geen extra installatiekosten, en er is geen abonnement. Daar staat tegenover dat de beveiliging beperkt is tot een pincode en dat de app alleen via Bluetooth werkt, met een bereik van ongeveer tien meter en zonder kaart. De helling is 25% (10% langs de draad). Het model loopt uit: Gardena verkoopt hem niet meer zelf en winkels noemen hem niet meer leverbaar."
+  },
+  "M024": {
+    "analyse": "De Gardena Sileno Minimo 500 is de grotere variant van de Minimo 250, voor tuinen tot 500 m². De functies en de beveiliging zijn volgens de handleiding gelijk: een pincode, een app via Bluetooth zonder kaart en updates via een USB-kabel naar de pc. In de doos zit 150 m grensdraad; de handleiding laat maximaal 300 m toe en extra draad kost 38,19 euro per 50 m of 87,49 euro per 150 m. Gardena noemt geen draadlengte per tuingrootte. Het model loopt uit en is nog bij een enkele winkel nieuw te koop."
+  },
+  "M025": {
+    "analyse": "De Gardena Sileno City 250 is een draadmodel voor tuinen tot 250 m² met een helling tot 35%, meer dan de Minimo's. Hij heeft een display met toetsen en een pincode met tijdslot, maar geen alarm. In de doos zit 150 m grensdraad met 200 krammen, dus er zijn geen extra installatiekosten. Gardena noemt het een voorgaand model en verkoopt het niet meer: de huidige productpagina toont geen specificaties, dus we hebben ze uit een gearchiveerde versie van die pagina gehaald."
   }
 }
