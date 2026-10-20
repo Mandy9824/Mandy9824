@@ -2839,3 +2839,30 @@ Uitgevoerd met `scripts/ronde49_teksten.py` (proefdraai zonder meldingen, daarna
 ### Controles
 - Momentopname van alle 19 openbare adressen vóór en na: kaarten, scores en volgorde overal gelijk. Tekstverschillen alleen de twee nieuwe teksten, de datums "bijgewerkt/nagekeken op 19 oktober" (automatisch) en de lijsten "Onlangs bijgewerkt" op home en de auteurspagina.
 - #13, #11 en de hub op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1); op #13 geen. De nieuwe kop staat direct boven "Veelgestelde vragen"; beide nieuwe links werken (HTTP 200).
+
+## Ronde 50 (20 oktober 2026): mesjespagina (Automower messen) en testpagina, zonder thema-zip
+
+Bron: `tekstwijzigingen-mesjes-testpagina.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (20 oktober, blad Bronnen tot rij 584; alleen gelezen, niet in de repository). Het bestand van 19 oktober stopte bij rij 545; daarom eerst om het nieuwe bestand gevraagd. Uitgevoerd met `scripts/ronde50_teksten.py <xlsx>` (proefdraai, daarna `--schrijf`). Kopie vooraf: `backups/ronde50-teksten-voor-20261020-133754.json` (inhoud en status van #10, #13, #20, #236; niet in git). Alle "Was"-teksten precies één keer gevonden. Alle vier pagina's bleven gepubliceerd; inhoud zoals bedoeld. LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen.**
+
+### A. Testpagina (#13)
+- Toegevoegd na "…kunnen we dus niet noemen.": "Websites en nieuwsberichten verwijzen soms naar een robotmaaiertest van de Consumentenbond; wat daar precies in staat en hoe actueel het is, kunnen we niet nagaan."
+- **Verwijderd:** de kop "Wat vonden we bij de Consumentenbond?" (id `wat-vonden-we-bij-de-consumentenbond`) en de alinea eronder: "Bij onze controle op 5 oktober 2026 zagen we op consumentenbond.nl alleen testen van gewone grasmaaiers (accu, snoer en hand). Websites en nieuwsberichten verwijzen soms naar een robotmaaiertest van de Consumentenbond; wat daar precies in staat en hoe actueel het is, kunnen we niet nagaan. We nemen daarom geen uitspraken over wat de Consumentenbond over robotmaaiers zegt. Zoek je een Nederlandse test, kijk dan zelf op hun website of vraag het hen."
+- **Gevolg (niet in het md, wel nodig):** de vaste inhoudsopgave "In deze gids" linkte naar de verwijderde kop. Die regel is weg, en de nieuwe kop "Wat is de beste robotmaaier volgens de Consumentenbond?" staat er nu achteraan (die ontbrak sinds ronde 49). Alle vijf links van de inhoudsopgave wijzen naar een bestaande kop.
+- FAQ "Heeft de Consumentenbond een robotmaaier test?" ongewijzigd.
+
+### B. Hub (#10), "Meer lezen"
+- "Robotmaaier test: wat de Consumentenbond, Test-Aankoop en Stiftung Warentest publiek hebben." (link op "Robotmaaier test" zoals voorheen).
+
+### C. Mesjespagina (#236)
+1. Tabelrij Husqvarna 305E en 310E NERA: "Endurance 26,99 euro voor 6 of Classic 22,99 euro voor 9".
+2. Nieuwe sectie "Automower messen: Endurance of Classic?" (id `automower-messen-endurance-of-classic`) tussen "Husqvarna robotmaaier mesjes" en "Zo houd je de kosten laag": alinea, tabel (6 rijen), twee alinea's, letterlijk uit het md. Rekensommen nagerekend (26,99/6 = 4,50 … 579/300 = 1,93; 4,50/2 = 2,25). Ook in de inhoudsopgave, tussen "Husqvarna robotmaaier mesjes" en "Zo houd je de kosten laag".
+   - **Bronnen** (rijen 546-554, per adres één regel, direct na de drie 305E NERA-regels, chip "Fabrikant", geraadpleegd op 19 oktober 2026): Endurance, Classic, Endurance HSS en de twee Enhance-pagina's (`automower-enhance-hss-blades`, `enhance-hss-mes`). Het md noemt alleen de Endurance- en Classic-pagina's, maar de alinea "Welke messen passen?" (Endurance HSS, Enhance HSS, HSS+) steunt op de andere drie; die staan in dezelfde rijen. Husqvarna.com was vanuit deze omgeving niet bereikbaar, dus de twee Enhance-adressen heten allebei "Enhance HSS- en HSS+-messen" met de paginanaam erachter (niet geraden welke HSS en welke HSS+ is).
+   - Geen dubbele regels: de bestaande 305E NERA-regels wijzen naar dezelfde Endurance- en Classic-pagina's met `?fits-to=970819612` (andere adressen, eigen onderwerp); die zijn blijven staan.
+3. "Wat we nog niet weten": "… dan de 410VE NERA, 305E NERA, 310E NERA en 305: die hebben we nog niet uitgezocht."
+
+### D. Husqvarna-pagina (#20), FAQ "Wat kosten Automower-mesjes?"
+- "Het verschil tussen Endurance en Classic lees je bij Automower messen op robotmaaier mesjes." met "Automower messen" → `/robotmaaier-mesjes/#automower-messen-endurance-of-classic` (anker bestaat live).
+
+### Controles
+- Momentopname van alle 19 openbare adressen vóór en na: **kaarten, scores en volgorde overal gelijk**. Tekstverschillen alleen de wijzigingen hierboven, de datums "bijgewerkt/nagekeken op 20 oktober" en de lijsten "Onlangs bijgewerkt" op home en de auteurspagina.
+- #13, hub, mesjes en Husqvarna op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp op de hub. Alle ankers bestaan (behalve het bestaande `#cookie-instellingen` in de voettekst, dat via JavaScript werkt). Geen dubbele bronnen op de mesjespagina.
