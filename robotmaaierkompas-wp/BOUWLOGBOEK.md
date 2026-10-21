@@ -2866,3 +2866,27 @@ Bron: `tekstwijzigingen-mesjes-testpagina.md` en het nieuwste `robotmaaierkompas
 ### Controles
 - Momentopname van alle 19 openbare adressen vóór en na: **kaarten, scores en volgorde overal gelijk**. Tekstverschillen alleen de wijzigingen hierboven, de datums "bijgewerkt/nagekeken op 20 oktober" en de lijsten "Onlangs bijgewerkt" op home en de auteurspagina.
 - #13, hub, mesjes en Husqvarna op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp op de hub. Alle ankers bestaan (behalve het bestaande `#cookie-instellingen` in de voettekst, dat via JavaScript werkt). Geen dubbele bronnen op de mesjespagina.
+
+## Ronde 51 (21 oktober 2026): Gardena-pagina gepubliceerd, links gezet
+
+Mandy heeft /gardena-robotmaaier/ (#21) gepubliceerd.
+
+### Links (`scripts/ronde48_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde48-links-voor-20261021-124011.json` (niet in git). Alle vijf pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd, en live gecontroleerd:
+  - hub #10, "Meer lezen", na de Husqvarna-regel: "Alle Gardena Sileno-modellen, met beschikbaarheid en kosten: zie Gardena robotmaaier.";
+  - pagina 1 #11, "De modellen een voor een": dezelfde zin;
+  - Navimow-pagina #264 en Husqvarna-pagina #20, "Meer lezen": "Gardena robotmaaier: de Sileno-modellen vergeleken.";
+  - Gardena-pagina #21, "Meer lezen": "Husqvarna robotmaaier: de Automower-modellen vergeleken." en "Segway Navimow robotmaaier: alle modellen die nu nieuw te koop zijn."
+- Mesjespagina: geen regel (geen Gardena-gedeelte, zie ronde 48).
+
+### Controles
+- Momentopname van alle 20 openbare adressen (nu met /gardena-robotmaaier/) vóór en na: **kaarten, scores en volgorde overal gelijk**, Bol-links per pagina gelijk. Tekstverschillen alleen de zes zinnen, de datums en de lijsten "Onlangs bijgewerkt" (home, auteurspagina).
+- Gardena-pagina live: Free 800 60,9 · City 250 44,5 · Minimo 250 40,9 · Minimo 500 40,9.
+- De vijf gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1).
+- Alle 19 interne adressen in de inhoud: HTTP 200. Bol-controle: 18 Bol-regels op 20 adressen, 0 fouten.
+- Open punt uit ronde 48 vervallen: de M011-kaart toont niet meer "rond 1.099 euro bij Coolblue" (prijs ouder dan 14 dagen). Nog open: geluid City 250 (kaart 56 dB, tabel 58 dB(A)) en de verbindingschip van M023-M025.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/gardena-robotmaaier/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /gardena-robotmaaier/.
