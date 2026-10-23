@@ -32,6 +32,8 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
   marketplace, niet ouder dan 14 dagen. De site toont hem niet meer na 14 dagen. Aanschaf in de kosten blijft null.
 - Verbinding (chip in de specificatiekaart en vergelijkingstabel): uit scripts/verbinding_toewijzing.json, met een
   bronregel in Bronnen. Ronde 44: M020 en M022 "Wifi" (extra wifi), M021 "Bluetooth" (extra bluetooth).
+  Ronde 52: M023 en M024 "Bluetooth" (extra bluetooth, bronveld "App: iOS/Android, …"); M025 bewust zonder regel
+  (geen chip).
 - Teksten voor de productbox (beste_voor, pluspunten, minpunten) komen uit scripts/modellen_teksten.json,
   de analyse per model uit scripts/modellen_analyse.json.
   Opmerkingen uit Bronnen gaan ook niet mee (die kunnen prijzen en interne notities bevatten).

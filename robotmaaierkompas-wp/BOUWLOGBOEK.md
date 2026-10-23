@@ -2890,3 +2890,49 @@ Mandy heeft /gardena-robotmaaier/ (#21) gepubliceerd.
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /gardena-robotmaaier/.
+
+## Ronde 52 (23 oktober 2026): M025-M045 (Stihl, Cramer), Gardena 58 dB(A) en Bluetooth, conceptpagina stihl-robotmaaier
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-stihl-robotmaaier.md`, `modellen-teksten-stihl.json`. (Het verzoek van 21 oktober kwam zonder nieuw Excel-bestand; toen niets gedaan.) **Niets gepubliceerd.**
+
+### 1. Modelgegevens (dataroute, `scripts/ronde52_upload.py`)
+- **M001-M022 en de algemene velden ongewijzigd** (het script weigert als er meer verandert). Kopie vooraf: `backups/modellen-voor-ronde52.json` (niet in git). 44 modellen live.
+- **M025:** alleen `specs.geluid_dba` 56 → 58 (gegarandeerd, datum 21 oktober). Score blijft 44,5.
+- **M026-M045** nieuw uit `excel_naar_json.py`, met fabrikantpagina (stihl.nl / cramertools.com). Geen EAN, Bol of prijs. M026 en M027 met de teksten uit `modellen-teksten-stihl.json` (toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`).
+  - Scores (themacode): **M026 50,5, M027 55,0** (gelijk aan de md); M028-M045 geen score.
+  - **M035:** extra installatiekosten leeg (bronstatus tegenstrijdig; ook `kosten.installatie` leeg).
+  - Beschikbaarheid leeg in de xlsx bij M036-M040 en M042-M045.
+  - Voor M028-M045 neemt de omzetter oppervlak en navigatie niet over: hun bronregel heet "Kernvelden: navigatie / draad / oppervlak / helling / geluid / verbinding", een veldnaam die de omzetter niet kent. Op de site niet zichtbaar (geen kaarten); de Stihl-tabel is tekst uit de md.
+- **Controle:** alle 20 openbare adressen vóór en na de upload: kaarten, scores, volgorde en Bol-links overal gelijk. Enige tekstverschil: de Gardena-pagina (City 250 "56 dB" → "58 dB"; Minimo 250 en 500 "Verbinding Bluetooth"). "Stihl", "iMOW", "Cramer" en "AiConic" komen op geen enkele openbare pagina voor.
+
+### 2. Verbinding M023/M024
+- `scripts/verbinding_toewijzing.json`: M023 en M024 "Bluetooth" (extra bluetooth), bronveld "App: iOS/Android, kaart/no-go, schema, smart home, knoppen, OTA" (gecontroleerd, 18 oktober, handleiding SILENO minimo). M025 bewust zonder regel. Docstring van `scripts/excel_naar_json.py` bijgewerkt.
+- Live: Gardena-kaarten Free 800 "Verbinding geen", Minimo 250 en 500 "Verbinding Bluetooth", City 250 geen chip. **Nergens "Verbinding –".** Kaart City 250 "Geluid 58 dB", tabel "58 dB(A)".
+
+### 3. Conceptpagina stihl-robotmaaier (id 22, concept)
+- Gebouwd met `scripts/ronde52_bouw.py` (afgeleid van ronde 48, patroon pagina-merk), inhoud in `scripts/ronde52/stihl.json`, op de site gezet met `scripts/ronde52_pagina.py`. Het lege sjabloon "Stihl robotmaaier" van 6 oktober (id 22) is bijgewerkt; oude versie als revisie en in `backups/ronde52-pagina22-voor.json` (niet in git).
+- Yoast-metabeschrijving zoals Mandy opgaf: "Bestaat er een Stihl robotmaaier zonder draad? Alle iMOW-modellen vergeleken op oppervlak, helling, verbinding en kosten, met bron en datum." (wijkt af van de md).
+- Kaarten alleen M027 (55,0) en M026 (50,5), in die volgorde; **geen Bol-regel**, knop "Bekijk de actuele prijs" naar stihl.nl. M028-M034 alleen in de tabel. In de tabellen linken alleen "iMOW 3" en "iMOW 3 EVO" naar hun kaart.
+- Bronnen uit het blad Bronnen (handleidingen op ssc.stihl.com, stihl.nl, appwinkels; geen winkels, geen "niet gevonden"), ook voor de tabelmodellen M028-M034 (anders stonden hun gegevens zonder bron): M027 12, M026 16, M028-M029 4, M030-M034 3 regels. Het API-adres van Stihl (adobeioruntime.net, geeft data in plaats van een pagina) is weggelaten.
+- Extra tekstlinks: "robotmaaier zonder draad" (korte antwoord en FAQ) → /robotmaaier-zonder-draad/.
+- Controle (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan; interne links allemaal HTTP 200 (behalve het eigen adres, dat als concept nog 404 geeft).
+- **Download:** `paginatekst-stihl.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository).
+
+### 4. Links: klaargezet, niet gedraaid (`scripts/ronde52_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de Gardena-regel): "Alle Stihl iMOW-modellen vergeleken: zie Stihl robotmaaier."
+- Navimow-, Husqvarna- en Gardena-pagina, "Meer lezen": "Stihl robotmaaier: de iMOW-modellen vergeleken."
+- Stihl-pagina, "Meer lezen": Husqvarna ("de Automower-modellen vergeleken") en Gardena ("de Sileno-modellen vergeleken").
+- Weigert zolang #22 geen status publish heeft (getest). Alle zes ankers komen nu precies één keer voor.
+
+### Controles
+- Routetest `--na-136 --na-137`: 0 fouten. Bol-controle: 18 Bol-regels op 20 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Stihl-kaarten hebben geen verbindingschip (geen regel in `verbinding_toewijzing.json` voor M026/M027).
+- Omzetter: veldnaam "Kernvelden: …" (M028-M045) herkennen als bron voor navigatie, oppervlak, helling en geluid, als die modellen later een kaart krijgen.
+- Beschikbaarheid M036-M040 en M042-M045 leeg.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de Stihl-pagina nalezen en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde52_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.

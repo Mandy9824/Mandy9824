@@ -255,5 +255,39 @@
       "Specificaties alleen nog in een gearchiveerde Gardena-pagina",
       "Weinig reviews gevonden: geen enkele Nederlandse winkel toont reviews"
     ]
+  },
+  "M026": {
+    "beste_voor": "Tuinen tot 500 m² met een eenvoudige vorm, voor wie een draad geen bezwaar is",
+    "pluspunten": [
+      "Updates over de lucht en wifi met Bluetooth",
+      "Alarm",
+      "Helling 40% volgens de handleiding",
+      "Geen abonnement",
+      "Garantie 24 maanden, plus 1 jaar bij registratie"
+    ],
+    "minpunten": [
+      "De draad zit niet in de doos: installatiekit 87 euro",
+      "Geen eigen pincode: ontgrendelen met een toetsencombinatie op het display",
+      "Geen mobiele verbinding, geen GPS",
+      "App-rating 2,5 in Google Play, zonder kaart met zones",
+      "Obstakelsensoren remmen af, maar de maaier raakt het obstakel toch"
+    ]
+  },
+  "M027": {
+    "beste_voor": "Tuinen tot 500 m² met hellingen tot 45%, met mobiele verbinding en GPS-positie",
+    "pluspunten": [
+      "Mobiele verbinding (eSIM, LTE-M) en GPS-positie volgens de handleiding",
+      "Helling 45% volgens de handleiding",
+      "Alarm",
+      "Updates over de lucht",
+      "Elektrische maaihoogte via de app"
+    ],
+    "minpunten": [
+      "De draad zit niet in de doos: installatiekit 87 euro",
+      "Kosten en looptijd van de mobiele verbinding niet gevonden",
+      "De vergelijkingstabel van Stihl NL zegt bij dit model \"mobiel: nee\"",
+      "Geen eigen pincode",
+      "App-rating 2,5 in Google Play, zonder kaart met zones"
+    ]
   }
 }
