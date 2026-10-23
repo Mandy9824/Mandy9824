@@ -2936,3 +2936,12 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 ### Nog te doen
 - [ ] Mandy: CDN legen; de Stihl-pagina nalezen en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde52_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 53 (23 oktober 2026): Stihl-concept, kolom "Meer info" in de modellentabel
+
+Uitgevoerd met `scripts/ronde53_meer_info.py` (proefdraai, daarna `--schrijf`). Kopie vooraf: `backups/ronde53-pagina22-voor-20261023-192634.json` (niet in git). #22 bleef concept; inhoud zoals bedoeld. LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd).
+
+- De live inhoud van #22 week af van `scripts/ronde52/stihl.json`: het auteursblok is in de editor omgezet van patroonverwijzing naar uitgeschreven HTML (revisies 320 en 321, 23 oktober). Het script bouwt op de live inhoud; die wijziging is blijven staan.
+- Tabel "De Stihl iMOW-modellen naast elkaar": laatste kolom "Meer info", per rij `<a href="{fabrikant_url}" rel="noopener">Bekijk bij Stihl</a>` (geen sponsored of nofollow; zo ook in de weergegeven HTML). **Alle negen modellen (M026-M034) hebben een fabrikant_url**; die adressen komen uit de live modelgegevens (stihl.nl/nl/p/…). Verder niets gewijzigd (het script controleert dat alleen deze tabel verandert).
+- Controle (weergegeven inhoud in de omhulling van de hub): 390 en 1440 px zonder horizontale scroll van de pagina, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, ankers in orde. De tabel (8 kolommen, 1.049 px breed) schuift binnen haar vak (`overflow-x: auto`): op 390 px in een vak van 349 px, op 1440 px in een vak van 958 px (daar dus ook een klein stukje schuiven).
+- `scripts/ronde52/stihl.json` is niet bijgewerkt: opnieuw bouwen met `ronde52_bouw.py` zou de kolom en het omgezette auteursblok weghalen.
