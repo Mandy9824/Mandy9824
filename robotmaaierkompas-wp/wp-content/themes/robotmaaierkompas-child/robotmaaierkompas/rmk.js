@@ -282,56 +282,96 @@
     });
   }
 
-  /* ======================= 6. BOL-PRIJS (1.3.7) =======================
-     De HTML bevat alleen de knop en een leeg prijsvak (data-rmk-bol-prijs). De prijs komt uit /rmk/v1/bol-prijs
-     (nooit gecachet) en wordt met textContent ingevuld. Geen antwoord, een fout of een verlopen prijs: alleen de knop.
-     "geen_aanbod": de hele Bol-regel weg. */
+  /* Fotovak weg (1.3.8): zelfde kaart als zonder foto (alleen de kenmerken). */
+  function fotoWeg(img) {
+    var kaart = img.closest('.rmk-speccard--photo'), fig = img.closest('.rmk-speccard__figure');
+    if (!kaart || !fig) return;
+    fig.parentNode.removeChild(fig);
+    kaart.classList.remove('rmk-speccard--photo');
+    kaart.classList.add('rmk-speccard--specs');
+  }
+
+  /* ======================= 6. BOL- EN COOLBLUE-PRIJS (1.3.7, 1.3.10) =======================
+     De HTML bevat alleen de knop en een leeg prijsvak (data-rmk-bol-prijs, data-rmk-cb-prijs). De prijzen komen uit
+     /rmk/v1/bol-prijs (nooit gecachet) en worden met textContent ingevuld. Bol: geen antwoord, een fout of een verlopen
+     prijs: alleen de knop; "geen_aanbod": de hele Bol-regel weg. Coolblue (1.3.10): staat het model niet (meer) geldig
+     in het antwoord, dan gaan de Coolblue-regel en een foto van Coolblue weg; zonder antwoord blijft alleen de knop.
+     Staan beide regels met een prijs in één kaart, dan komt de laagste prijs bovenaan (bij gelijke prijs Bol). */
   (function () {
-    var regels = $$('[data-rmk-bol-model]');
-    if (!regels.length || !CFG.bolPrijsUrl || !window.fetch) return;
-    var ids = regels.map(function (r) { return r.getAttribute('data-rmk-bol-model'); }).filter(function (id, i, a) { return /^M\d{3,4}$/.test(id) && a.indexOf(id) === i; });
+    var bolRegels = $$('[data-rmk-bol-model]'), cbRegels = $$('[data-rmk-cb-model]');
+    if ((!bolRegels.length && !cbRegels.length) || !CFG.bolPrijsUrl || !window.fetch) return;
+    var ids = bolRegels.map(function (r) { return r.getAttribute('data-rmk-bol-model'); })
+      .concat(cbRegels.map(function (r) { return r.getAttribute('data-rmk-cb-model'); }))
+      .filter(function (id, i, a) { return /^M\d{3,4}$/.test(id) && a.indexOf(id) === i; });
     if (!ids.length) return;
+    var TZ = 'Europe/Amsterdam';
+    var dag = function (d) { return d.toLocaleDateString('nl-NL', { timeZone: TZ, year: 'numeric', month: 'numeric', day: 'numeric' }); };
+    function tijdTekst(iso) {   /* zoals rmk_bol_tijd(): "bijgewerkt om 14:05", "gisteren om …", "op 24-10 om …" */
+      var t = new Date(iso); if (isNaN(t)) return '';
+      var uur = t.toLocaleTimeString('nl-NL', { timeZone: TZ, hour: '2-digit', minute: '2-digit' });
+      var nu = new Date(), gister = new Date(nu.getTime() - 864e5);
+      if (dag(t) === dag(nu)) return 'bijgewerkt om ' + uur;
+      if (dag(t) === dag(gister)) return 'bijgewerkt gisteren om ' + uur;
+      return 'bijgewerkt op ' + t.toLocaleDateString('nl-NL', { timeZone: TZ, day: 'numeric', month: 'numeric' }) + ' om ' + uur;
+    }
+    function bedrag(p) { return Math.round(p) === p ? nl(p, 0) : p.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function vul(vak, prijsTekst, rest) {
+      var b = document.createElement('strong');
+      b.textContent = prijsTekst + ' euro';
+      vak.textContent = '';
+      vak.appendChild(b);
+      vak.appendChild(document.createTextNode(rest));
+      vak.hidden = false;
+    }
+    function cbWeg(regel) {
+      var kaart = regel.closest('article');
+      regel.parentNode.removeChild(regel);
+      if (kaart) $$('img[data-rmk-foto-bron="coolblue"]', kaart).forEach(fotoWeg);
+    }
     var url = CFG.bolPrijsUrl + (CFG.bolPrijsUrl.indexOf('?') < 0 ? '?' : '&') + 'modellen=' + encodeURIComponent(ids.join(','));
     fetch(url, { cache: 'no-store', credentials: 'omit', headers: { Accept: 'application/json' } })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
-        var lijst = d && d.modellen ? d.modellen : {};
-        regels.forEach(function (regel) {
+        if (!d) return;
+        var lijst = d.modellen || {}, cb = d.coolblue || {};
+        bolRegels.forEach(function (regel) {
           var p = lijst[regel.getAttribute('data-rmk-bol-model')], vak = $('[data-rmk-bol-prijs]', regel);
           if (!p) return;
           if (p.status === 'geen_aanbod') { regel.hidden = true; return; }
           if (p.status !== 'ok' || !vak || !p.prijs_tekst || !p.tijd_tekst || !(Date.parse(p.geldig_tot) > Date.now())) return;
-          var b = document.createElement('strong');
-          b.textContent = p.prijs_tekst + ' euro';
-          vak.textContent = '';
-          vak.appendChild(b);
-          vak.appendChild(document.createTextNode('. Prijs bij bol.com, ' + p.tijd_tekst + (p.partner ? ', via een partner van bol.com' : '') + '.'));
-          vak.hidden = false;
+          vul(vak, p.prijs_tekst, '. Prijs bij bol.com, ' + p.tijd_tekst + (p.partner ? ', via een partner van bol.com' : '') + '.');
+          regel.setAttribute('data-rmk-prijs', p.prijs);
+        });
+        cbRegels.forEach(function (regel) {
+          var id = regel.getAttribute('data-rmk-cb-model'), p = cb[id], vak = $('[data-rmk-cb-prijs]', regel);
+          if (!p || p.model !== id || p.winkel !== 'Coolblue' || !(p.prijs > 0) || !vak || !tijdTekst(p.tijdstip)) { cbWeg(regel); return; }
+          vul(vak, bedrag(p.prijs), '. Prijs bij Coolblue, ' + tijdTekst(p.tijdstip) + '.');
+          regel.setAttribute('data-rmk-prijs', p.prijs);
+        });
+        /* Laagste prijs bovenaan: alleen als beide regels in dezelfde kaart een prijs hebben. */
+        $$('[data-rmk-cb-model][data-rmk-prijs]').forEach(function (c) {
+          var b = c.parentNode && $('[data-rmk-bol-model][data-rmk-prijs]', c.parentNode);
+          if (b && !b.hidden && parseFloat(c.getAttribute('data-rmk-prijs')) < parseFloat(b.getAttribute('data-rmk-prijs'))) {
+            b.parentNode.insertBefore(c, b);
+          }
         });
       })
-      .catch(function () { /* alleen de knop */ });
+      .catch(function () { /* alleen de knoppen */ });
   })();
 
   /* ======================= 7. PRODUCTFOTO LAADT NIET (1.3.8) =======================
-     Laadt de foto in de specificatiekaart niet (bijvoorbeeld van bol.com), dan gaat het hele fotovak weg, met
-     "Foto: bol.com": geen alt-tekst in een grijs vak. De kaart wordt dezelfde als zonder foto (alleen de kenmerken).
+     Laadt de foto in de specificatiekaart niet (van bol.com of Coolblue), dan gaat het hele fotovak weg, met
+     "Foto: …": geen alt-tekst in een grijs vak. De kaart wordt dezelfde als zonder foto (alleen de kenmerken).
      Zonder JavaScript blijft het gewone gedrag. */
   (function () {
     if (!document.addEventListener) return;
-    function weg(img) {
-      var kaart = img.closest('.rmk-speccard--photo'), fig = img.closest('.rmk-speccard__figure');
-      if (!kaart || !fig) return;
-      fig.parentNode.removeChild(fig);
-      kaart.classList.remove('rmk-speccard--photo');
-      kaart.classList.add('rmk-speccard--specs');
-    }
     document.addEventListener('error', function (e) {
       var t = e.target;
-      if (t && t.tagName === 'IMG' && t.hasAttribute('data-rmk-foto')) weg(t);
+      if (t && t.tagName === 'IMG' && t.hasAttribute('data-rmk-foto')) fotoWeg(t);
     }, true);
     /* Al mislukt vóór dit script liep (defer): */
     $$('img[data-rmk-foto]').forEach(function (img) {
-      if (img.complete && !img.naturalWidth && img.currentSrc !== '') weg(img);
+      if (img.complete && !img.naturalWidth && img.currentSrc !== '') fotoWeg(img);
     });
   })();
 

@@ -105,8 +105,13 @@ function rmk_fill_offers( $html ) {
 			return $a[0];
 		}
 		// 1.3.6: Bol-regel onder het prijsblok en de foto van bol.com, alleen bij een geldig Bol-aanbod (inc/bol.php).
-		$offer = rmk_offer_html( $m ) . ( function_exists( 'rmk_bol_regel_html' ) ? rmk_bol_regel_html( $m ) : '' );
+		// 1.3.10: daaronder de Coolblue-regel (inc/coolblue.php); zonder JavaScript staat Bol dus eerst. Geen Bol-foto maar
+		// wel een geldige Coolblue-regel: de foto van Coolblue.
+		$offer = rmk_offer_html( $m ) . ( function_exists( 'rmk_bol_regel_html' ) ? rmk_bol_regel_html( $m ) : '' )
+			. ( function_exists( 'rmk_coolblue_regel_html' ) ? rmk_coolblue_regel_html( $m ) : '' );
 		if ( function_exists( 'rmk_bol_foto' ) && ( $foto = rmk_bol_foto( $m ) ) ) {
+			$m['foto'] = $foto;
+		} elseif ( function_exists( 'rmk_coolblue_foto' ) && ( $foto = rmk_coolblue_foto( $m ) ) ) {
 			$m['foto'] = $foto;
 		}
 		$done  = false;
@@ -193,7 +198,8 @@ function rmk_speccard_html( array $m ) {
 		$fab    = ! empty( $f['fabrikant'] ) ? $f['fabrikant'] : ( isset( $m['merk'] ) ? $m['merk'] : '' );
 		$w      = ! empty( $f['breedte'] ) ? (int) $f['breedte'] : 800;
 		$h      = ! empty( $f['hoogte'] ) ? (int) $f['hoogte'] : 600;
-		$visual = '<div class="rmk-speccard__visual"><img data-rmk-foto src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
+		$bron   = 'coolblue' === ( $f['bron'] ?? '' ) ? ' data-rmk-foto-bron="coolblue"' : ''; // 1.3.10: rmk.js haalt hem weg als Coolblue niet meer geldig is
+		$visual = '<div class="rmk-speccard__visual"><img data-rmk-foto' . $bron . ' src="' . esc_url( $f['url'] ) . '" alt="' . esc_attr( $m['naam'] . ', productfoto' ) . '" width="' . $w . '" height="' . $h . '" loading="lazy" decoding="async"></div>'
 			. '<figcaption class="rmk-speccard__caption">Foto: ' . esc_html( $fab ) . '</figcaption>';
 		$cls    = 'rmk-speccard rmk-speccard--photo';
 	} else {

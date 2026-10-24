@@ -80,6 +80,18 @@ function rmk_validate_modellen( $data ) {
 				$err[] = "Model $i: bol.afbeelding moet een https://media.s-bol.com-adres zijn (url, breedte, hoogte).";
 			}
 		}
+		// 1.3.10: blok "coolblue" (blad Coolblue): alleen merchant_product_id en product_url (https://www.coolblue.nl/…).
+		// Geen prijzen, voorraad of afbeeldingen: die haalt de nachtelijke feedtaak zelf op (inc/coolblue.php).
+		if ( isset( $m['coolblue'] ) && null !== $m['coolblue'] ) {
+			$c = $m['coolblue'];
+			if ( ! is_array( $c ) || array_diff( array_keys( $c ), array( 'merchant_product_id', 'product_url' ) ) ) {
+				$err[] = "Model $i: coolblue mag alleen merchant_product_id en product_url bevatten.";
+			} elseif ( ! isset( $c['merchant_product_id'] ) || ! preg_match( '/^\d{1,12}$/', (string) $c['merchant_product_id'] ) ) {
+				$err[] = "Model $i: coolblue.merchant_product_id moet 1 tot 12 cijfers zijn.";
+			} elseif ( isset( $c['product_url'] ) && ( ! is_string( $c['product_url'] ) || ! preg_match( '#^https://www\.coolblue\.nl/#', $c['product_url'] ) ) ) {
+				$err[] = "Model $i: coolblue.product_url moet een https://www.coolblue.nl-adres zijn.";
+			}
+		}
 		if ( isset( $m['kosten']['aanschaf']['waarde'] ) && null !== $m['kosten']['aanschaf']['waarde'] ) {
 			$err[] = "Model $i: aanschafprijs is ingevuld (moet leeg blijven).";
 		}

@@ -438,9 +438,14 @@ function rmk_bol_prijs_data( array $m ) {
 	return null;
 }
 
-/** Antwoord van GET /rmk/v1/bol-prijs?modellen=M001,M002 (maximaal 30 model-ID's). */
+/**
+ * Antwoord van GET /rmk/v1/bol-prijs?modellen=M001,M002 (maximaal 30 model-ID's).
+ * 1.3.10: met RMK_COOLBLUE_ACTIVE ook "coolblue": per model alleen model, prijs, tijdstip en winkel (inc/coolblue.php).
+ * Zonder die schakelaar is het antwoord gelijk aan 1.3.9.
+ */
 function rmk_bol_prijzen_publiek( $ids ) {
 	$uit = array();
+	$cb  = array();
 	foreach ( array_slice( array_unique( array_filter( array_map( 'trim', explode( ',', (string) $ids ) ) ) ), 0, 30 ) as $id ) {
 		if ( ! preg_match( '/^M\d{3,4}$/', $id ) || ! ( $m = rmk_get_model( $id ) ) ) {
 			continue;
@@ -449,8 +454,15 @@ function rmk_bol_prijzen_publiek( $ids ) {
 		if ( $d ) {
 			$uit[ $id ] = $d;
 		}
+		if ( function_exists( 'rmk_coolblue_prijs_data' ) && ( $c = rmk_coolblue_prijs_data( $m ) ) ) {
+			$cb[ $id ] = $c;
+		}
 	}
-	return array( 'bron' => 'bol.com', 'modellen' => (object) $uit );
+	$antwoord = array( 'bron' => 'bol.com', 'modellen' => (object) $uit );
+	if ( function_exists( 'rmk_coolblue_zichtbaar' ) && rmk_coolblue_zichtbaar() ) {
+		$antwoord['coolblue'] = (object) $cb;
+	}
+	return $antwoord;
 }
 
 /** Foto van bol.com (550 px, oorspronkelijke URL) voor de specificatiekaart, alleen bij een geldig aanbod. */
@@ -465,12 +477,20 @@ function rmk_bol_foto( array $m ) {
 	return array( 'url' => $f['url'], 'fabrikant' => 'bol.com', 'breedte' => (int) ( $f['breedte'] ?? 550 ), 'hoogte' => (int) ( $f['hoogte'] ?? 550 ), 'bron' => 'bol' );
 }
 
-/* Advertentie-regel: met RMK_AFFILIATE_ACTIVE aan één keer per pagina boven de eerste Bol-knop, als er nog geen staat. */
+/* Advertentie-regel: met RMK_AFFILIATE_ACTIVE aan één keer per pagina boven de eerste Bol-knop, als er nog geen staat.
+ * 1.3.10: met RMK_COOLBLUE_ACTIVE ook boven de eerste Coolblue-knop (wat het eerst komt). */
 add_filter( 'the_content', function ( $html ) {
-	if ( ! rmk_bol_zichtbaar() || false === strpos( (string) $html, 'data-rmk-bol' ) ) {
+	$plekken = array();
+	if ( rmk_bol_zichtbaar() && false !== strpos( (string) $html, 'data-rmk-bol' ) ) {
+		$plekken[] = strpos( $html, 'data-rmk-bol' );
+	}
+	if ( function_exists( 'rmk_coolblue_zichtbaar' ) && rmk_coolblue_zichtbaar() && false !== strpos( (string) $html, 'data-rmk-cb' ) ) {
+		$plekken[] = strpos( $html, 'data-rmk-cb' );
+	}
+	if ( ! $plekken ) {
 		return $html;
 	}
-	$pos = strpos( $html, 'data-rmk-bol' );
+	$pos = min( $plekken );
 	if ( false !== strpos( substr( $html, 0, $pos ), 'rmk-affnote' ) ) {
 		return $html;
 	}
@@ -536,9 +556,9 @@ function rmk_bol_status() {
 	);
 }
 
-/* rmk.js krijgt het adres van de prijsroute alleen als de Bol-regel zichtbaar mag zijn. */
+/* rmk.js krijgt het adres van de prijsroute alleen als de Bol-regel (1.3.10: of de Coolblue-regel) zichtbaar mag zijn. */
 add_filter( 'rmk_config', function ( $c ) {
-	if ( rmk_bol_zichtbaar() ) {
+	if ( rmk_bol_zichtbaar() || ( function_exists( 'rmk_coolblue_zichtbaar' ) && rmk_coolblue_zichtbaar() ) ) {
 		$c['bolPrijsUrl'] = rest_url( 'rmk/v1/bol-prijs' );
 	}
 	return $c;

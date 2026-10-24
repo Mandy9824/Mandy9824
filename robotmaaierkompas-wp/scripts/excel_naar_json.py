@@ -25,6 +25,9 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
 - Bol (ronde 30, thema 1.3.6): uit het blad "Bol" per model alleen de EAN ("ean"), de bol-product-URL en de
   afbeeldings-URL van 550 px ("bol": {product_url, afbeelding: {url, breedte, hoogte}}). Geen prijzen, geen
   verkoper en geen beoordelingen: prijzen haalt de site zelf op (inc/bol.php), beoordelingen tonen we niet.
+- Coolblue (ronde 55, thema 1.3.10): uit het blad "Coolblue" per model alleen merchant_product_id en de productpagina
+  ("coolblue": {merchant_product_id, product_url}); alleen bij modellen in dat blad (anders geen sleutel "coolblue").
+  Geen prijzen, voorraad of afbeeldingen: die haalt de nachtelijke feedtaak van de site zelf op (inc/coolblue.php).
 - Fabrikantpagina (ronde 30): uit de kolom "Fabrikantpagina (URL)" in Modellen; is die leeg, dan zoals voorheen
   uit een prijsregel van de fabrikant of de bronregel "Beschikbaarheid fabrikant".
 - Prijzen (besluit 6 oktober 2026): per model alleen de laagste geldige prijs ("prijs": bedrag in hele euro's,
@@ -247,6 +250,20 @@ def bol_velden(r, rapport, mid):
     return {"ean": ean, "bol": {"product_url": url, "afbeelding": afb}}
 
 
+def coolblue_velden(r, rapport, mid):
+    """Het blok "coolblue" uit een rij van het blad Coolblue: merchant_product_id en productpagina; leeg = geen sleutel."""
+    if not r:
+        return {}
+    pid = str(kolom(r, "merchant_product_id") or "").strip()
+    pid = pid[:-2] if re.fullmatch(r"\d+\.0", pid) else pid  # Excel kan het als getal opslaan
+    url = str(kolom(r, "merchant_deep_link") or "").strip()
+    if not re.fullmatch(r"\d{1,12}", pid) or not re.match(r"https://www\.coolblue\.nl/", url):
+        rapport.setdefault("coolblue_ongeldig", []).append(mid)
+        return {}
+    rapport.setdefault("coolblue_gekoppeld", []).append(mid)
+    return {"coolblue": {"merchant_product_id": pid, "product_url": url}}
+
+
 def niet_leverbaar(*teksten):
     return any(re.search(r"niet\s+leverbaar", str(t or ""), re.I) for t in teksten)
 
@@ -327,6 +344,12 @@ def main():
             mid = str(kolom(r, "Model-ID") or "").strip()
             if re.fullmatch(r"M\d+", mid):
                 bol_blad[mid] = r
+    coolblue_blad = {}
+    if "Coolblue" in wb.sheetnames:
+        for r in blad(wb, "Coolblue"):
+            mid = str(kolom(r, "Model-ID") or "").strip()
+            if re.fullmatch(r"M\d+", mid):
+                coolblue_blad[mid] = r
     minimum = 50
     if "Instellingen" in wb.sheetnames:
         for r in wb["Instellingen"].iter_rows(values_only=True):
@@ -554,6 +577,7 @@ def main():
             "verbinding": verbinding,
             "reviews": r_uit,
             **bol_velden(bol_blad.get(mid), rapport, mid),
+            **coolblue_velden(coolblue_blad.get(mid), rapport, mid),
             "prijs": laagste,
             "fabrikant_url": fabrikant_url,
             # Teksten voor de productbox (scripts/modellen_teksten.json, aangeleverd door Mandy, 6 oktober 2026)

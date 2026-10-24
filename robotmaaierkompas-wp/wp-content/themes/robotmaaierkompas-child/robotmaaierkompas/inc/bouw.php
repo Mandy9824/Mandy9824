@@ -256,6 +256,19 @@ function rmk_status_checks() {
 		// 1.3.8: "Te oud: …" alleen als de controle mislukt.
 		$add( $vers, 'Bol-prijstaak draait (laatste ronde minder dan 7 uur geleden)', ( $laatste ? 'laatste ronde ' . wp_date( 'j-n H:i', $laatste ) : 'nog geen ronde' ) . ( $next ? ', volgende ' . wp_date( 'j-n H:i', $next ) : '' ) . ( $vers ? '.' : '. Te oud: stel een echte cron in (wp rmk bol-ronde).' ) );
 	}
+	// Coolblue (1.3.10): alleen of de constanten er zijn, nooit hun waarden (de feed-URL bevat een sleutel).
+	if ( function_exists( 'rmk_coolblue_geconfigureerd' ) ) {
+		$cb = rmk_coolblue_geconfigureerd();
+		$add( true, 'Coolblue-koppeling', $cb ? 'constanten aanwezig' . ( rmk_coolblue_zichtbaar() ? ', Coolblue-regel zichtbaar' : ', Coolblue-regel verborgen (RMK_COOLBLUE_ACTIVE uit)' ) : 'uit: RMK_COOLBLUE_FEED_URL, RMK_COOLBLUE_AWMID of RMK_COOLBLUE_AWAFFID ontbreekt (geen Coolblue-regel)' );
+		if ( $cb ) {
+			$feed    = (array) get_option( RMK_CB_STORE_OPTION, array() );
+			$cbhist  = (array) get_option( RMK_CB_LOG_OPTION, array() );
+			$cbnext  = wp_next_scheduled( RMK_CB_RONDE_HOOK );
+			list( $cbvers, $cbreden ) = rmk_coolblue_feed_vers( $feed );
+			$add( $cbvers, 'Coolblue-feed vers (opgehaald in 26 uur, veranderd in 48 uur)', ( ! empty( $feed['opgehaald'] ) ? 'opgehaald ' . wp_date( 'j-n H:i', (int) $feed['opgehaald'] ) . ', ' . (int) $feed['rijen'] . ' producten, ' . count( (array) $feed['producten'] ) . ' van ons' : 'nog geen feed' )
+				. ( $cbhist && empty( $cbhist[0]['gelukt'] ) ? '; laatste ronde mislukt: ' . rtrim( (string) $cbhist[0]['melding'], '.' ) : '' ) . ( $cbnext ? ', volgende ' . wp_date( 'j-n H:i', $cbnext ) : '' ) . ( $cbvers ? '.' : '. ' . ucfirst( $cbreden ) . '.' ) );
+		}
+	}
 	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
 	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
 	$add( ! rmk_affiliate_actief(), 'Affiliate-melding uit (RMK_AFFILIATE_ACTIVE)', rmk_affiliate_actief() ? 'STAAT AAN: de regel "Advertentie: …" wordt getoond' : 'uit: de regel "Advertentie: …" wordt niet getoond' );
