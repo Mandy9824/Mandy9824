@@ -2945,3 +2945,29 @@ Uitgevoerd met `scripts/ronde53_meer_info.py` (proefdraai, daarna `--schrijf`). 
 - Tabel "De Stihl iMOW-modellen naast elkaar": laatste kolom "Meer info", per rij `<a href="{fabrikant_url}" rel="noopener">Bekijk bij Stihl</a>` (geen sponsored of nofollow; zo ook in de weergegeven HTML). **Alle negen modellen (M026-M034) hebben een fabrikant_url**; die adressen komen uit de live modelgegevens (stihl.nl/nl/p/…). Verder niets gewijzigd (het script controleert dat alleen deze tabel verandert).
 - Controle (weergegeven inhoud in de omhulling van de hub): 390 en 1440 px zonder horizontale scroll van de pagina, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, ankers in orde. De tabel (8 kolommen, 1.049 px breed) schuift binnen haar vak (`overflow-x: auto`): op 390 px in een vak van 349 px, op 1440 px in een vak van 958 px (daar dus ook een klein stukje schuiven).
 - `scripts/ronde52/stihl.json` is niet bijgewerkt: opnieuw bouwen met `ronde52_bouw.py` zou de kolom en het omgezette auteursblok weghalen.
+
+## Ronde 54 (24 oktober 2026): Stihl-pagina gepubliceerd, links gezet
+
+Mandy heeft /stihl-robotmaaier/ (#22) gepubliceerd.
+
+### Links (`scripts/ronde52_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Er stond nog geen enkele regel (geen eerdere, half gelukte poging). Kopie: `backups/ronde52-links-voor-20261024-150439.json` (niet in git). Alle zes pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd, en live gecontroleerd:
+  - hub #10 ("Meer lezen") en pagina 1 #11 ("De modellen een voor een"), na de Gardena-regel: "Alle Stihl iMOW-modellen vergeleken: zie Stihl robotmaaier.";
+  - Navimow #264, Husqvarna #20 en Gardena #21, "Meer lezen": "Stihl robotmaaier: de iMOW-modellen vergeleken.";
+  - Stihl #22, "Meer lezen": "Husqvarna robotmaaier: de Automower-modellen vergeleken." en "Gardena robotmaaier: de Sileno-modellen vergeleken."
+
+### Controles
+- Momentopname van alle 21 openbare adressen (nu met /stihl-robotmaaier/) vóór en na: **kaarten, scores en volgorde overal gelijk**, Bol-links per pagina gelijk. Tekstverschillen alleen de acht zinnen, de datums en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- Stihl-pagina live: iMOW 3 EVO 55,0 · iMOW 3 50,5; geen Bol-regel.
+- De zes gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1).
+- Alle 20 interne adressen in de inhoud: HTTP 200. Bol-controle: 18 Bol-regels op 21 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen**, daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/stihl-robotmaaier/.
+
+### Kolom "Meer info" (ronde 53) staat niet op de gepubliceerde pagina
+- Revisies van #22: 321 (23-10 21:12, auteursblok omgezet), **322 (21:26, ronde 53: kolom "Meer info")**, **323 (21:41): precies gelijk aan 321**, dus zonder de kolom; 328 (24-10, de links van nu). Waarschijnlijk is in een editortab die nog de versie van vóór ronde 53 had, opgeslagen of gepubliceerd.
+- Niet teruggezet (gepubliceerde pagina, niet gevraagd in deze ronde). Terugzetten kan met `scripts/ronde53_meer_info.py` na een kleine aanpassing (het weigert nu omdat #22 geen concept meer is), op Mandy's woord.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /stihl-robotmaaier/.
+- [ ] Mandy: beslissen of de kolom "Meer info" terug moet; daarbij de pagina eerst in de editor herladen.
