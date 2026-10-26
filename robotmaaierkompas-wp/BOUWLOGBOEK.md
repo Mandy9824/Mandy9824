@@ -3128,3 +3128,17 @@ Mandy heeft /worx-robotmaaier/ (#24) gepubliceerd. De live inhoud wijkt alleen a
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /worx-robotmaaier/.
+
+## Ronde 62 (26 oktober 2026): Husqvarna-pagina, GPS-sectie en drie vragen (zonder thema-zip)
+
+Uitgevoerd met `scripts/ronde62_husqvarna.py` (proefdraai zonder meldingen, daarna `--schrijf`). Kopieën vooraf: `backups/ronde62-husqvarna-voor-20261026-144600.json` en `-144744.json` (inhoud en status van #20, niet in git). #20 bleef gepubliceerd; inhoud zoals bedoeld.
+
+- **Nieuwe sectie** "Husqvarna robotmaaier met GPS: welke Automower heeft het?" (id `husqvarna-robotmaaier-met-gps-welke-automower-heeft-het`) met de alinea uit de opdracht, direct vóór "Waar op te letten". **Let op:** die kop bestaat precies één keer, maar staat op deze pagina **ná** de veelgestelde vragen. De sectie staat dus tussen de FAQ en "Waar op te letten", zoals de opdracht letterlijk vraagt (de terugvaloptie "vóór de veelgestelde vragen" gold alleen als de kop anders heette). Moet ze vóór de FAQ, dan is dat een kleine verschuiving.
+- **Veelgestelde vragen:** drie vragen achteraan toegevoegd (na "Is de Automower 105 nog te koop?"): "Welke Husqvarna Automower heeft GPS?", "Is er een Husqvarna robotmaaier zonder draad?", "Waar kan ik een Husqvarna Automower kopen?", met de antwoorden uit de opdracht.
+- **Inhoudsopgave:** de pagina heeft er geen; niets toegevoegd.
+
+### Controles
+- Momentopname van alle 22 openbare adressen vóór en na: **kaarten, scores en volgorde overal gelijk** (Husqvarna: 410VE NERA 87,3 · 310E NERA 69,5 · 305E NERA 69,5 · 305 52,7), Bol- en Coolblue-links gelijk. Tekstverschillen alleen de nieuwe sectie en vragen en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- #20 op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}", geen invulveld.
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 16 Bol-regels op 22 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
