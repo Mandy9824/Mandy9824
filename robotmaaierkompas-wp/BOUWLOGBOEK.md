@@ -3020,3 +3020,15 @@ Punt 9 (geen prijs, geen foto, eerst Bol, clickref = paginaslug) botst met de op
 3. **Echte cron** in hPanel voor de nacht: `wp --path=<pad> rmk coolblue-ronde` (of de bestaande wp-cron.php-aanroep elke 15 minuten laten staan).
 4. Daarna doet Claude: routetest `--na-1310`; `POST /rmk/v1/coolblue-ronde` (één ronde) en `/rmk/v1/coolblue-status` controleren; `scripts/ronde55_coolblue_data.py --schrijf` (blok coolblue in de modelgegevens).
 5. **"Coolblue aan"** (Mandy beslist): `define( 'RMK_COOLBLUE_ACTIVE', true );` in wp-config.php en tegelijk `scripts/ronde55_coolblue_teksten.py --schrijf`; dan LiteSpeed en CDN legen en de pagina's controleren.
+
+## Ronde 56 (26 oktober 2026): 1.3.10 live, eerste Coolblue-ronde: fatale fout, thema 1.3.11
+
+Mandy heeft 1.3.10 geüpload en de vier Coolblue-constanten (ook `RMK_COOLBLUE_ACTIVE`) in wp-config.php gezet.
+- Live: `rmk.js?ver=1.3.10`; statusoverzicht "Coolblue-koppeling: constanten aanwezig, Coolblue-regel zichtbaar"; routetest `--na-136 --na-137 --na-1310`: **0 fouten** (`/coolblue-ronde` en `/coolblue-status` 401 zonder inloggen; `/bol-prijs` met leeg deel coolblue, no-store).
+- **Eerste ronde (`POST /rmk/v1/coolblue-ronde`): HTTP 500, "Call to undefined function wp_tempnam()"** (inc/coolblue.php regel 287). `wp_tempnam()` staat in wp-admin/includes/file.php en bestaat niet bij REST, cron of een bezoek; de test bootste de functie na, daarom zag de test het niet. Gevolg: de ronde (ook de reserve bij een bezoek) brak af en liet het slot 15 minuten staan; geen feed opgehaald. Op de site niets zichtbaar (het blok coolblue staat nog niet in de modelgegevens).
+- **1.3.11** (alleen inc/coolblue.php, versienummer, test): tijdelijk bestand met `tempnam( get_temp_dir(), … )`; `set_time_limit( 300 )`; vangnet (`register_shutdown_function`): breekt een ronde af, dan wordt het slot vrijgegeven en komt "Ronde afgebroken: …" (zonder adres of sleutel) in het log. De test definieert `wp_tempnam` niet meer en controleert het vangnet. coolblue-test 87 OK (+16 uit, +7 zonder); bol 59, bewaking 28, status 3, score 20 OK. Zip 115 bestanden, SHA-256 `fb8f1bfafc823962b132e2099fec1fbfc24afc95fd321faf834956dcd7f2bfcf`.
+- Open vragen aan Mandy: staat in wp-config.php de echte feed-URL (in haar bericht stond `'https://…'`)? Mogen de Coolblue-teksten tegelijk met het blok coolblue live?
+
+### Nog te doen
+- [ ] Mandy: 1.3.11 uploaden, LiteSpeed en CDN legen.
+- [ ] Claude: één ronde via de beheerroute (het oude slot vervalt uiterlijk 15 minuten na 13:15), status controleren; daarna, op Mandy's woord, `scripts/ronde55_coolblue_data.py --schrijf` en `scripts/ronde55_coolblue_teksten.py --schrijf` tegelijk.
