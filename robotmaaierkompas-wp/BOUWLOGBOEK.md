@@ -3049,3 +3049,20 @@ Mandy heeft 1.3.10 geüpload en de vier Coolblue-constanten (ook `RMK_COOLBLUE_A
 - Live thema 1.3.12. Ronde via de beheerroute (2,0 s): "Geen gzip-bestand en geen CSV met merchant_product_id; het antwoord begint met: "Advertiser ID,Advertiser Name,Primary Region,Membership Status,Datafeed Format,F…"". **De URL in wp-config.php is de feedlijst van Awin** (overzicht van adverteerders en feeds), niet de download van de Coolblue-productfeed. Logboek 319 noemt die lijst ("Product Feed List Download").
 - Het thema werkt zoals bedoeld (geen fout, geen secret in de melding, vorige toestand ongewijzigd; niets op de site).
 - Mandy moet de **download-URL van de Coolblue NL-productfeed** zetten: in Awin via Toolbox > Create-a-Feed (Coolblue NL, CSV, gzip, met de kolommen merchant_product_id, search_price, in_stock, merchant_image_url, merchant_deep_link). Herkenbaar aan `/datafeed/download/` en (volgens het voorbeeldbestand, kolom data_feed_id) `fid/95886`; niet `/datafeed/list/`.
+
+## Ronde 59 (26 oktober 2026): Coolblue live
+
+Mandy heeft de download-URL van de Coolblue NL-productfeed in wp-config.php gezet en gaf akkoord: **"ja, Coolblue live"**.
+
+- Ronde (beheerroute): gzip, **2.324 producten**, feed vers.
+- `scripts/ronde55_coolblue_data.py --schrijf`: blok coolblue bij M002, M006, M007, M008, M011, M015, M018; verder niets veranderd (gecontroleerd). Kopie: `backups/modellen-voor-ronde55.json` (niet in git). M052-M058 overgeslagen (niet live).
+- Tweede ronde: **6 van de 7 gevonden en op voorraad**: M006 950, M007 1.249, M008 729, M011 1.129, M015 1.599, M018 2.499 euro. **M002 (975016, Navimow i206 AWD) staat niet in de feed**: geen Coolblue-regel (verschijnt vanzelf als hij terugkomt).
+- `scripts/ronde55_coolblue_teksten.py --schrijf` (md-versie `tekstwijzigingen-coolblue-affiliate_1.md`): #76, #77, #80, #81 (+ slotalinea), #82, #83 (rij Coolblue en Awin), footer en de advertentie-tekst; alle pagina's bleven gepubliceerd, inhoud zoals bedoeld. Kopie: `backups/coolblue-teksten-voor-20261026-133546.json`. Terugdraaien: `scripts/ronde55_coolblue_terug.py --schrijf`.
+- LiteSpeed geleegd via de dataroute.
+
+### Controles (live)
+- Momentopname alle 21 openbare adressen vóór en na: **kaarten, scores en volgorde overal gelijk, Bol-links per pagina gelijk**. Tekstverschillen alleen: de Coolblue-teksten (#76, #77, #80, #81, #82, #83, footer), de advertentie-regel en de Coolblue-regels op hub (M015, M008, M011), pagina 1 (M015, M008, M006, M011), Navimow (M015, M018) en Gardena (M011), steeds "… euro. Prijs bij Coolblue, bijgewerkt om 14:35.", "Bekijk bij Coolblue", "Je gaat naar Coolblue. Bron: Coolblue."
+- Links (alleen gelezen, niet gevolgd): alle in de vorm `https://www.awin1.com/cread.php?awinmid=85161&awinaffid=3126598&clickref=<model-slug>&ued=https%3A%2F%2Fwww.coolblue.nl%2Fproduct%2F…`, `rel="sponsored nofollow"`, clickref bijv. `m011-gardena-robotmaaier`.
+- Hub, pagina 1, Navimow, Gardena en affiliate-melding op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[" of "{"; invulvelden alleen de bestaande tuinkeuzehulp.
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten (`/bol-prijs`: 11 Bol-modellen, 6 Coolblue, no-store). Bol-controle: 16 Bol-regels op 21 adressen, 0 fouten (per pagina gelijk aan vóór).
+- **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), want de footer en de teksten staan op alle pagina's.
