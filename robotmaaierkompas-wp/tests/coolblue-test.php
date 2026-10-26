@@ -30,7 +30,8 @@ if ( 'aan' === $MODUS ) {
 
 // Aanvullingen op de stub (alleen wat inc/coolblue.php gebruikt)
 function wp_remote_get( $url, $args = array() ) { return wp_remote_request( $url, $args + array( 'method' => 'GET' ) ); }
-function wp_tempnam( $p = '' ) { return tempnam( sys_get_temp_dir(), 'rmkcb' ); }
+function get_temp_dir() { return sys_get_temp_dir() . '/'; } // zoals WordPress (wp-includes); wp_tempnam() bestaat NIET buiten wp-admin
+function register_shutdown_function_test() {}
 $GLOBALS['mails'] = array();
 function wp_mail( $aan, $onderwerp, $tekst ) { $GLOBALS['mails'][] = compact( 'aan', 'onderwerp', 'tekst' ); return true; }
 $GLOBALS['wp_options']['admin_email'] = 'beheer@example.test';
@@ -290,6 +291,17 @@ $l      = rmk_coolblue_ronde();
 t( 'tweede ronde stopt meteen ("Er draait al een ronde")', 'Er draait al een ronde.' === $GLOBALS['feed']['tweede']['melding'] && false === $GLOBALS['feed']['tweede']['gelukt'] );
 t( 'één download, eerste ronde gelukt, één logregel erbij', 1 === $GLOBALS['feed']['verzoeken'] && $l['gelukt'] && $aantal + 1 === count( get_option( RMK_CB_LOG_OPTION ) ) );
 t( 'slot weer vrij na de ronde', false === get_transient( RMK_CB_LOCK_KEY ) );
+
+echo "\nG2. Vangnet als een ronde afbreekt (1.3.11)\n";
+set_transient( RMK_CB_LOCK_KEY, 1, 900 );
+$GLOBALS['rmk_cb_lopend'] = array( 'start' => $GLOBALS['nu'], 'eind' => null, 'aanleiding' => 'taak', 'gelukt' => false, 'melding' => '' );
+$aantal = count( get_option( RMK_CB_LOG_OPTION ) );
+rmk_coolblue_vangnet();
+$eerste = get_option( RMK_CB_LOG_OPTION )[0];
+t( 'afgebroken ronde: slot vrij en "Ronde afgebroken" in het log', false === get_transient( RMK_CB_LOCK_KEY ) && $aantal + 1 === count( get_option( RMK_CB_LOG_OPTION ) ) && 0 === strpos( $eerste['melding'], 'Ronde afgebroken' ) );
+rmk_coolblue_vangnet();
+t( 'na een gewone ronde doet het vangnet niets', $aantal + 1 === count( get_option( RMK_CB_LOG_OPTION ) ) );
+t( 'geen wp_tempnam nodig (bestaat niet buiten wp-admin)', ! function_exists( 'wp_tempnam' ) );
 
 echo "\nH. Reserve als de nachtelijke taak niet draait\n";
 $GLOBALS['nu'] += 26 * $H;

@@ -284,7 +284,8 @@ function rmk_coolblue_lezen( $stroom, array $gezocht ) {
 
 /** Downloadt de feed naar een tijdelijk bestand. Geeft het pad of een WP_Error (zonder de URL). */
 function rmk_coolblue_downloaden() {
-	$tmp = wp_tempnam( 'rmk-coolblue' );
+	// 1.3.11: wp_tempnam() staat in wp-admin/includes/file.php en bestaat niet bij cron, REST of een bezoek.
+	$tmp = @tempnam( get_temp_dir(), 'rmk-coolblue' );
 	if ( ! $tmp ) {
 		return new WP_Error( 'rmk_cb_tmp', 'Geen tijdelijk bestand.' );
 	}
@@ -319,6 +320,13 @@ function rmk_coolblue_ronde( $aanleiding = 'taak' ) {
 		return $log; // niet in het log: de lopende ronde schrijft zelf
 	}
 	set_transient( RMK_CB_LOCK_KEY, 1, 15 * MINUTE_IN_SECONDS );
+	// 1.3.11: genoeg tijd voor download en uitpakken, en een vangnet als de ronde toch afbreekt (tijdslimiet, geheugen,
+	// fatale fout): dan wordt het slot vrijgegeven en komt de ronde met de foutmelding (zonder secrets) in het log.
+	if ( function_exists( 'set_time_limit' ) ) {
+		@set_time_limit( 300 );
+	}
+	$GLOBALS['rmk_cb_lopend'] = $log;
+	register_shutdown_function( 'rmk_coolblue_vangnet' );
 	$gezocht = rmk_coolblue_modellen();
 	$gz      = rmk_coolblue_downloaden();
 	$uitkomst = is_wp_error( $gz ) ? $gz : rmk_coolblue_uitpakken( $gz );
@@ -360,6 +368,7 @@ function rmk_coolblue_ronde( $aanleiding = 'taak' ) {
 		$log['hash_veranderd'] = ! $zelfde;
 		$log['niet_in_feed']   = array_values( array_diff( array_values( $gezocht ), array_keys( $per ) ) );
 	}
+	unset( $GLOBALS['rmk_cb_lopend'] );
 	delete_transient( RMK_CB_LOCK_KEY );
 	$log['eind'] = rmk_coolblue_nu();
 	$hist        = (array) get_option( RMK_CB_LOG_OPTION, array() );
@@ -367,6 +376,23 @@ function rmk_coolblue_ronde( $aanleiding = 'taak' ) {
 	update_option( RMK_CB_LOG_OPTION, array_slice( $hist, 0, 20 ), false );
 	do_action( 'rmk_coolblue_na_ronde', $log );
 	return $log;
+}
+
+/** Vangnet (1.3.11): brak een ronde af zonder af te ronden, dan het slot vrijgeven en de fout loggen. */
+function rmk_coolblue_vangnet() {
+	if ( empty( $GLOBALS['rmk_cb_lopend'] ) ) {
+		return;
+	}
+	$log = $GLOBALS['rmk_cb_lopend'];
+	unset( $GLOBALS['rmk_cb_lopend'] );
+	$e              = error_get_last();
+	$log['eind']    = rmk_coolblue_nu();
+	$log['melding'] = 'Ronde afgebroken' . ( $e && in_array( $e['type'], array( E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR ), true )
+		? ': ' . rmk_coolblue_zonder_secrets( substr( preg_replace( '#\s+in\s+/\S+#', '', (string) $e['message'] ), 0, 200 ) ) : '' ) . '.';
+	delete_transient( RMK_CB_LOCK_KEY );
+	$hist = (array) get_option( RMK_CB_LOG_OPTION, array() );
+	array_unshift( $hist, $log );
+	update_option( RMK_CB_LOG_OPTION, array_slice( $hist, 0, 20 ), false );
 }
 
 /* ------------------------------------------------------------------ versheid en weergave */
