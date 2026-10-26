@@ -268,7 +268,7 @@ $gevallen = array(
 	'lege gzip (0 bytes)'       => array( '', 200, null, 'Leeg' ),
 	'gzip zonder inhoud'        => array( gzencode( '' ), 200, null, 'leeg' ),
 	'gzip met alleen de kop'    => array( gzencode( $KOP . "\n" ), 200, null, 'zonder producten' ),
-	'geen gzip (HTML)'          => array( '<html>Fout</html>', 200, null, 'Geen gzip' ),
+	'geen gzip (HTML)'          => array( '<!DOCTYPE html><html><body>Fout bij ' . FEED_URL . '</body></html>', 200, null, 'het antwoord begint met: "<!DOCTYPE html>' ),
 	'kolommen ontbreken'        => array( gzencode( "a,b\n1,2\n" ), 200, null, 'Kolommen ontbreken' ),
 	'HTTP 500'                  => array( '', 500, null, 'HTTP 500' ),
 	'HTTP 403'                  => array( '', 403, null, 'HTTP 403' ),
@@ -280,6 +280,12 @@ foreach ( $gevallen as $naam => $g ) {
 	t( $naam . ': ronde mislukt met melding', false === $l['gelukt'] && false !== stripos( $l['melding'], $g[3] ), $l['melding'] );
 	t( $naam . ': vorige feed onveranderd, geen secret in de melding', $voor === get_option( RMK_CB_STORE_OPTION ) && false === strpos( $l['melding'], 'GEHEIM' ) && false === strpos( $l['melding'], 'productdata' ) );
 }
+feed( feed_csv( array( '975016' => array( 'search_price' => '889' ) ) ) ); // CSV zonder gzip (1.3.12)
+$l = rmk_coolblue_ronde();
+t( 'CSV zonder gzip met onze kolommen: gelezen, gemeld als niet gecomprimeerd', $l['gelukt'] && 'niet gecomprimeerd' === $l['bestand'] && 889.0 === get_option( RMK_CB_STORE_OPTION )['producten']['M002']['prijs'] && hash( 'sha256', feed_csv( array( '975016' => array( 'search_price' => '889' ) ) ) ) === get_option( RMK_CB_STORE_OPTION )['hash'] );
+feed( gzencode( feed_csv() ) );
+rmk_coolblue_ronde();
+$voor = get_option( RMK_CB_STORE_OPTION );
 t( 'na de fouten: regel blijft zolang de vorige feed vers is', '' !== cbregel( rmk_fill_offers( kaart( 'M002' ) ) ) );
 t( 'geen secret in opties, log of transients', opties_zonder_secret() );
 
@@ -298,9 +304,10 @@ $GLOBALS['rmk_cb_lopend'] = array( 'start' => $GLOBALS['nu'], 'eind' => null, 'a
 $aantal = count( get_option( RMK_CB_LOG_OPTION ) );
 rmk_coolblue_vangnet();
 $eerste = get_option( RMK_CB_LOG_OPTION )[0];
-t( 'afgebroken ronde: slot vrij en "Ronde afgebroken" in het log', false === get_transient( RMK_CB_LOCK_KEY ) && $aantal + 1 === count( get_option( RMK_CB_LOG_OPTION ) ) && 0 === strpos( $eerste['melding'], 'Ronde afgebroken' ) );
+t( 'afgebroken ronde: slot vrij en "Ronde afgebroken" bovenaan in het log', false === get_transient( RMK_CB_LOCK_KEY ) && 0 === strpos( $eerste['melding'], 'Ronde afgebroken' ) && 'taak' === $eerste['aanleiding'] );
+update_option( RMK_CB_LOG_OPTION, array_merge( array( array( 'start' => 1, 'gelukt' => true, 'melding' => '' ) ), get_option( RMK_CB_LOG_OPTION ) ) );
 rmk_coolblue_vangnet();
-t( 'na een gewone ronde doet het vangnet niets', $aantal + 1 === count( get_option( RMK_CB_LOG_OPTION ) ) );
+t( 'na een gewone ronde doet het vangnet niets', 1 === get_option( RMK_CB_LOG_OPTION )[0]['start'] );
 t( 'geen wp_tempnam nodig (bestaat niet buiten wp-admin)', ! function_exists( 'wp_tempnam' ) );
 
 echo "\nH. Reserve als de nachtelijke taak niet draait\n";

@@ -3032,3 +3032,14 @@ Mandy heeft 1.3.10 geüpload en de vier Coolblue-constanten (ook `RMK_COOLBLUE_A
 ### Nog te doen
 - [ ] Mandy: 1.3.11 uploaden, LiteSpeed en CDN legen.
 - [ ] Claude: één ronde via de beheerroute (het oude slot vervalt uiterlijk 15 minuten na 13:15), status controleren; daarna, op Mandy's woord, `scripts/ronde55_coolblue_data.py --schrijf` en `scripts/ronde55_coolblue_teksten.py --schrijf` tegelijk.
+
+## Ronde 57 (26 oktober 2026): 1.3.11 live, feed-URL gezet, ronde: "Geen gzip-bestand", thema 1.3.12
+
+- In mijn instructie stond `'https://…'` als plaatsaanduiding zonder te zeggen dat daar de echte Awin-download-URL moest komen; Mandy had die letterlijk overgenomen. Toegelicht hoe ze de URL in Awin vindt (Toolbox > Create-a-Feed, Coolblue NL, CSV, gzip); Mandy heeft hem gezet en 1.3.11 geüpload.
+- Live: thema 1.3.11. Ronde via de beheerroute: 2,3 s, HTTP 200 van Awin, maar **"Geen gzip-bestand."**: het antwoord begon niet met de gzip-kop. Mogelijk een feed zonder compressie (CSV), onderweg uitgepakt, of een foutpagina. Niets op de site veranderd (blok coolblue nog niet in de modelgegevens).
+- **1.3.12** (inc/coolblue.php, versienummer, test): geen gzip maar wel een CSV waarvan de kopregel merchant_product_id bevat: lezen zoals hij is (hash over de inhoud, log `bestand: "niet gecomprimeerd"`); anders de melding met de eerste 80 tekens van het antwoord, zonder adressen of sleutels. coolblue-test 88 OK (+16 uit, +7 zonder); bol, bewaking, status, score OK. Zip 115 bestanden, SHA-256 `43315439b0dde6b67d813c9ae97fc0d0067161b879a3f37037c9f225fe8425bd`.
+- Tekstscript bijgewerkt naar `tekstwijzigingen-coolblue-affiliate_1.md` (slotalinea #81 met de zin over de productfeed); proefdraai zonder meldingen, niet gedraaid.
+
+### Nog te doen
+- [ ] Mandy: 1.3.12 uploaden, cache legen.
+- [ ] Claude: ronde, status; daarna blok coolblue + teksten tegelijk.

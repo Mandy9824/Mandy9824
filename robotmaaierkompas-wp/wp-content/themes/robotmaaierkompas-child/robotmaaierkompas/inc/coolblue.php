@@ -184,8 +184,33 @@ function rmk_coolblue_uitpakken( $gz ) {
 		return new WP_Error( 'rmk_cb_leeg', 'Leeg bestand (geen gzip-gegevens).' );
 	}
 	if ( "\x1f\x8b" !== $kop ) {
+		// 1.3.12: geen gzip. Is het al een CSV met onze kolommen (feed zonder compressie, of onderweg uitgepakt), dan lezen we
+		// hem zoals hij is; anders een melding met het begin van het antwoord, zonder adressen of sleutels.
+		rewind( $in );
+		$begin = (string) fread( $in, 4096 );
+		$regel = strtolower( strtok( $begin, "\n" ) );
+		if ( false !== strpos( $regel, 'merchant_product_id' ) && false !== strpos( $regel, ',' ) ) {
+			rewind( $in );
+			$uit  = fopen( 'php://temp/maxmemory:' . ( 2 * MB_IN_BYTES ), 'w+b' );
+			$hash = hash_init( 'sha256' );
+			$n    = 0;
+			while ( ! feof( $in ) && false !== ( $blok = fread( $in, 65536 ) ) ) {
+				$n += strlen( $blok );
+				if ( $n > RMK_CB_MAX_BYTES ) {
+					fclose( $in );
+					fclose( $uit );
+					return new WP_Error( 'rmk_cb_groot', 'Feed groter dan 50 MB.' );
+				}
+				hash_update( $hash, $blok );
+				fwrite( $uit, $blok );
+			}
+			fclose( $in );
+			rewind( $uit );
+			return array( $uit, hash_final( $hash ), $n, 'niet gecomprimeerd' );
+		}
 		fclose( $in );
-		return new WP_Error( 'rmk_cb_geen_gzip', 'Geen gzip-bestand.' );
+		$kort = trim( preg_replace( '/\s+/', ' ', preg_replace( '/[^\x20-\x7E\xC0-\xFF]/', ' ', substr( $begin, 0, 80 ) ) ) );
+		return new WP_Error( 'rmk_cb_geen_gzip', 'Geen gzip-bestand en geen CSV met merchant_product_id; het antwoord begint met: "' . rmk_coolblue_zonder_secrets( $kort ) . '".' );
 	}
 	rewind( $in );
 	$z    = inflate_init( ZLIB_ENCODING_GZIP );
@@ -335,6 +360,7 @@ function rmk_coolblue_ronde( $aanleiding = 'taak' ) {
 	}
 	if ( ! is_wp_error( $uitkomst ) ) {
 		list( $stroom, $hash, $bytes ) = $uitkomst;
+		$log['bestand'] = $uitkomst[3] ?? 'gzip';
 		$gelezen = rmk_coolblue_lezen( $stroom, $gezocht );
 		fclose( $stroom );
 		if ( is_wp_error( $gelezen ) ) {
