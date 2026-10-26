@@ -2971,3 +2971,52 @@ Mandy heeft /stihl-robotmaaier/ (#22) gepubliceerd.
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /stihl-robotmaaier/.
 - [ ] Mandy: beslissen of de kolom "Meer info" terug moet; daarbij de pagina eerst in de editor herladen.
+
+## Ronde 55 (24-26 oktober 2026): thema 1.3.10, Coolblue via de Awin-feed (niet geüpload)
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (met het blad Coolblue; alleen gelezen, niet in de repository), `coolblue-feed-robotmaaiers.csv` (voorbeeld van de Awin-feed, 15 robotmaaiers; niet in de repository) en `tekstwijzigingen-coolblue-affiliate.md`. Awin en Coolblue zijn vanuit deze omgeving niet bereikbaar: gebouwd op het voorbeeldbestand en het Logboek (rijen 316-328), getest met nagebootste antwoorden. **Geen enkele affiliatelink gevolgd of aangeklikt. Niets gepubliceerd, niets op de site veranderd.**
+
+### Versienummer: 1.3.10 (niet 1.3.9)
+1.3.9 (Daisycon-tag, ronde 47) draait al live. Met hetzelfde nummer laadt de site `rmk.js?ver=1.3.9` en blijven browser en CDN de oude JavaScript geven. Daarom 1.3.10 (style.css en `RMK_VER`).
+
+### Afwijking van tekstwijzigingen-coolblue-affiliate.md punt 9
+Punt 9 (geen prijs, geen foto, eerst Bol, clickref = paginaslug) botst met de opdracht van deze ronde (prijs uit de feed, foto van Coolblue, laagste prijs bovenaan, clickref = model-ID + slug). De opdracht is gevolgd; het tekstscript past alleen punt 1-8 toe.
+
+### Thema (nieuw `inc/coolblue.php`, aanpassingen in bol.php, prijzen.php, data.php, bouw.php, rmk.js, functions.php)
+- **Constanten** (wp-config.php): `RMK_COOLBLUE_FEED_URL` (geheim), `RMK_COOLBLUE_AWMID` (85161), `RMK_COOLBLUE_AWAFFID` (3126598) en de schakelaar `RMK_COOLBLUE_ACTIVE` (standaard uit; los van `RMK_AFFILIATE_ACTIVE`). Zonder de eerste drie: geen taak, geen verzoek, niets anders. Met de drie maar zonder schakelaar: de taak draait (status zichtbaar), op de site verandert niets.
+- **Nachtelijke taak** 04:20 (WP-Cron, dagelijks) + `wp rmk coolblue-ronde` voor een echte cron. **Reserve:** is er 25 uur geen ronde gestart, dan start hooguit één keer per uur een ronde aan het einde van een verzoek, nadat het antwoord al verstuurd is (`litespeed_finish_request`/`fastcgi_finish_request`). Slot (transient, 15 minuten): een tweede ronde tijdens het ophalen stopt meteen.
+- **Ophalen en lezen:** download naar een tijdelijk bestand (max. 50 MB), uitpakken met PHP (inflate, met controle op het einde van de gzip-stroom: afgebroken of beschadigd = fout), regel voor regel lezen (`fgetcsv`), alleen producten waarvan merchant_product_id in het blok `coolblue` van de modelgegevens staat (= blad Coolblue). Per product bewaard: prijs (search_price), voorraad (in_stock), merchant_image_url, merchant_deep_link; per feed: tijdstip van ophalen, SHA-256 van het **uitgepakte** bestand (de gzip-kop bevat een tijdstempel, dus een hash van het gecomprimeerde bestand zou ook bij gelijke inhoud veranderen), en sinds wanneer die hash gelijk is. De feed zelf wordt niet bewaard; het tijdelijke bestand wordt verwijderd. Bij een fout blijft de vorige feed staan. Log zonder feed-URL of sleutel (ook niet in foutmeldingen van de verbinding).
+- **Versheid:** Coolblue-regel alleen als het product in de laatste feed staat met in_stock 1 en prijs > 0, de feed in de laatste 26 uur is opgehaald én de hash in de laatste 48 uur is veranderd.
+- **Kaart:** onder de Bol-regel: knop "Bekijk bij Coolblue" (`rel="sponsored nofollow"`), eronder "Je gaat naar Coolblue. Bron: Coolblue.", leeg prijsvak. Link (Logboek 327): `https://www.awin1.com/cread.php?awinmid=85161&awinaffid=3126598&clickref=<model-slug>&ued=<merchant_deep_link gecodeerd>`; clickref model-ID + paginaslug, kleine letters, letters/cijfers/koppeltekens, max. 50 tekens (bijv. `m002-beste-robotmaaier`). Geen beoordelingen, korting of verzendteksten. LiteSpeed bewaart de pagina niet langer dan de feed vers is.
+- **Prijs** via de bestaande publieke route `/rmk/v1/bol-prijs` (nooit gecachet): nieuw deel `coolblue` met per model alleen `model`, `prijs`, `tijdstip`, `winkel`. Zonder schakelaar is het antwoord gelijk aan 1.3.9. Zo blijft dit de enige rmk-route die zonder inloggen gegevens geeft.
+- **rmk.js:** vult de Coolblue-prijs ("899 euro. Prijs bij Coolblue, bijgewerkt om 04:20."), haalt de regel (en een Coolblue-foto) weg als de route het model niet geldig teruggeeft, en zet bij twee prijzen de laagste bovenaan (gelijk: Bol eerst). Zonder JavaScript: Bol eerst, geen prijs.
+- **Advertentie-regel** ook boven de eerste Coolblue-knop (de tekst komt uit de instelling, zie het tekstscript).
+- **Foto:** geldige Bol-foto blijft; anders bij een geldige Coolblue-regel merchant_image_url (originele URL van coolblue.bynder.com, nooit lokaal) met "Foto: Coolblue"; laadt hij niet, dan verdwijnt het fotovak.
+- **Beheer:** `POST /rmk/v1/coolblue-ronde` en `GET /rmk/v1/coolblue-status` (alleen beheerders, nooit gecachet). Statusoverzicht: regels "Coolblue-koppeling" en "Coolblue-feed vers". **Bewaking:** één e-mail per storing (feed niet opgehaald in 26 uur, of 48 uur dezelfde hash), elk uur en via de reserve; zonder secrets.
+- **Dataroute** (`inc/data.php`): blok `coolblue` alleen met merchant_product_id (cijfers) en product_url (https://www.coolblue.nl/…).
+- **Zip:** `robotmaaierkompas-child.zip`, 115 bestanden (1.3.9 + `inc/coolblue.php`), SHA-256 `8154dce14ab5cadbd305862e08f9f4f04e5e5f5cd1ca7e76b3d38235e152b3e7`. Geen sleutel, xlsx of csv erin.
+
+### Scripts (klaargezet, niet gedraaid)
+- `scripts/excel_naar_json.py` leest nu het blad Coolblue (blok `coolblue`, alleen bij modellen in dat blad). Gekoppeld: M002, M006, M007, M008, M011, M015, M018 (live) en M052-M058 (nog niet live).
+- `scripts/ronde55_coolblue_data.py <omzetting.json> [--schrijf]`: zet alleen het blok `coolblue` bij de zeven live modellen; weigert als het thema ouder is dan 1.3.10 of als er meer verandert.
+- `scripts/ronde55_coolblue_teksten.py [--schrijf]` met `coolblue_teksten_lib.py`: punt 1-8 van het md (#81, #77, #80, #76, footer, #82, #83, instelling advertentie-tekst). Proefdraai: alle "Was"-teksten precies één keer gevonden. Weigert zolang het thema ouder is dan 1.3.10 of het statusoverzicht geen "Coolblue-regel zichtbaar" meldt. Kopie vooraf in backups/. Terugdraaien: `scripts/ronde55_coolblue_terug.py [--schrijf] [--backup <kopie>]`.
+
+### Tests (zonder netwerk naar Awin/Coolblue)
+- `php tests/coolblue-test.php <coolblue-feed-robotmaaiers.csv>`: **84 OK**. Voorbeeldbestand (15 rijen, 5 van onze modellen in de testgegevens); model aanwezig, afwezig, uit voorraad, prijs veranderd, prijs 0; verouderd (zelfde inhoud, andere compressie: zelfde hash; na 49 uur geen regel; één e-mail, niet opnieuw; nieuwe inhoud: storing voorbij); feed ouder dan 26 uur; kapotte gzip (afgebroken en beschadigd), lege gzip, gzip zonder inhoud, alleen kopregel, geen gzip, kolommen ontbreken, HTTP 500/403, verbindingsfout met de URL in de melding (vorige feed blijft, geen sleutel in log, opties of e-mail); tweede ronde tijdens het ophalen; reserve na 26 uur, niet binnen het uur; samen met Bol (Bol eerst, Bol-foto blijft); dataroute; beheerroutes; geen nieuwe publieke route. Met `uit` (constanten zonder schakelaar): 16 OK. Met `zonder`: 7 OK, **geen enkele optie veranderd**, route gelijk aan 1.3.9.
+- Bestaande tests: bol 59, bewaking 28 (+4 zonder), status 3 (+1 zonder), score 20: alles OK. Routetest tegen de live site: 0 fouten (de Coolblue-routes geven daar nog 404; na de upload met `--na-1310`: 401).
+- **Hele pagina's (PHP, kaartfilters van het thema, live inhoud van alle 21 openbare pagina's, live modelgegevens + blok coolblue, Bol aan):** zonder Coolblue-constanten en met constanten zonder schakelaar **byte voor byte gelijk aan 1.3.9**. Met Coolblue aan: scores, scorecellen en volgorde gelijk; alleen 13 Coolblue-regels erbij (hub 4, pagina 1 5, Navimow 3, Gardena 1), steeds onder de Bol-regel; Bol-foto's blijven.
+- **Browser** (Chromium, live HTML 1.3.9 naast dezelfde HTML met de Coolblue-regels en rmk.js van 1.3.10; prijsroute nagebootst: Bol-deel live, Coolblue-deel uit de feed): hub, pagina 1, Navimow, Gardena en een hubvariant met Coolblue-foto, 390 en 1440 px, scenario's feed / Coolblue goedkoper / model ontbreekt in de route / zonder JavaScript / foto laadt / foto laadt niet: **46 weergaven, 0 problemen**: geen horizontale scroll, 0 JavaScript-fouten, geen "[" of "{", alleen de bestaande invulvelden, scores en volgorde gelijk aan de live pagina, geen enkel verzoek naar awin1.com, coolblue.nl of partner.bol.com. Laagste prijs steeds bovenaan (0 fouten); zonder JavaScript Bol eerst zonder prijs; ontbreekt het model in de route, dan verdwijnen regel en foto.
+- **LCP** (mobiel, 150 ms, 1,6 Mbit/s, CPU 4×, prijsroute +300 ms, mediaan van 3): home 1,45 → 1,42 s (hero-afbeelding), pagina 1 1,25 → 1,15 s, pagina 12 (kosten) 1,08 → 1,12 s (kopafbeelding). Binnen de meetruis.
+
+### Wat Mandy moet doen
+1. **Thema 1.3.10 uploaden** (Weergave > Thema's > Nieuw thema > Uploaden, bestaand thema vervangen), daarna LiteSpeed en CDN legen. Zonder de nieuwe constanten verandert er niets.
+2. **In wp-config.php** (boven "That's all, stop editing"), nog zonder schakelaar:
+   ```php
+   define( 'RMK_COOLBLUE_FEED_URL', 'https://…' );   // de feed-URL uit Awin (Toolbox > Create-a-Feed), gzip-CSV; bevat je sleutel, nooit delen
+   define( 'RMK_COOLBLUE_AWMID', 85161 );
+   define( 'RMK_COOLBLUE_AWAFFID', 3126598 );
+   ```
+   De feed-URL moet de kolommen merchant_product_id, search_price, in_stock, merchant_image_url en merchant_deep_link bevatten (zoals het voorbeeldbestand) en gzip-gecomprimeerd zijn.
+3. **Echte cron** in hPanel voor de nacht: `wp --path=<pad> rmk coolblue-ronde` (of de bestaande wp-cron.php-aanroep elke 15 minuten laten staan).
+4. Daarna doet Claude: routetest `--na-1310`; `POST /rmk/v1/coolblue-ronde` (één ronde) en `/rmk/v1/coolblue-status` controleren; `scripts/ronde55_coolblue_data.py --schrijf` (blok coolblue in de modelgegevens).
+5. **"Coolblue aan"** (Mandy beslist): `define( 'RMK_COOLBLUE_ACTIVE', true );` in wp-config.php en tegelijk `scripts/ronde55_coolblue_teksten.py --schrijf`; dan LiteSpeed en CDN legen en de pagina's controleren.
