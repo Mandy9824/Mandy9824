@@ -3183,3 +3183,22 @@ Aangeleverd: `pagina-mova-dreame-robotmaaier.md` en het nieuwste `robotmaaierkom
 ### Nog te doen
 - [ ] Mandy: CDN legen; de Mova/Dreame-pagina nalezen en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde63_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 64 (26 oktober 2026): Mova/Dreame-concept, groep en merken (zonder thema-zip)
+
+Uitgevoerd met `scripts/ronde64_mova_dreame.py` (proefdraai zonder meldingen, daarna `--schrijf`). **Kopie vooraf:** `backups/ronde64-pagina351-voor-20261026-172429.json` (inhoud, status en meta van #351, niet in git). #351 bleef concept; inhoud zoals bedoeld; metabeschrijving ongewijzigd. **Niets gepubliceerd.**
+
+- **Live inhoud wijkt af van `scripts/ronde63/mova-dreame.json`:** het auteursblok is in de editor omgezet van patroonverwijzing naar uitgeschreven HTML (revisie 352, 17:10), net als bij Stihl en Worx. Het script bouwt op de live inhoud; die wijziging is blijven staan. Opnieuw bouwen met `ronde63_bouw.py` zou deze ronde weghalen.
+- Elk anker precies één keer gevonden; de nieuwe teksten stonden er nog niet.
+1. Direct na de alinea "Het korte antwoord.": "**Mova en Dreame: één groep, twee merken.** Mova is een merk van de Dreame-groep. … eigen modellen, apps en garantie." (rechte aanhalingstekens rond "Dreame Mova"; WordPress toont ze gekruld).
+2. Veelgestelde vragen, vooraan: "Is Mova hetzelfde als Dreame?" en "Wat is een Dreame Mova LiDAX Ultra 1200?" met de antwoorden uit de opdracht (nu 7 vragen).
+3. Bronnen: nieuw kopje "Mova en Dreame" tussen de Dreame A1 Pro-bronnen en "Scoremodel", met "Persbericht van Mova en Dreame (Business Wire, 21 oktober 2024)" → https://www.businesswire.com/news/home/20241021856800/de, chip "Persbericht". **Geen "geraadpleegd op"-datum:** businesswire.com was vanuit deze omgeving niet bereikbaar, dus de link is niet geopend of gecontroleerd.
+
+### Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan. Kaarten en scores gelijk aan ronde 63: **Mova LiDAX Ultra 800 80,5 · Ultra 1200 80,5 · Dreame A1 Pro 78,6**, prijsregels gelijk.
+- Momentopname van alle 22 openbare adressen: geen enkel verschil (kaarten, scores, volgorde, winkel-links, tekst).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de Mova/Dreame-pagina nalezen (ook of de Business Wire-link werkt) en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde63_links.py --schrijf` (ankers raken deze ronde niet), daarna links en pagina's controleren en de cache legen.
