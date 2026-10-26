@@ -99,6 +99,9 @@ BRONVELDEN = {
     "extra installatiekosten": "extra_installatiekosten",
     "zones en passages": "zones", "passages": "zones", "obstakels": "obstakelontwijking", "detectie": "obstakeldetectie",
     "draad": "begrenzingsdraad", "ota": "ota_updates", "geofence": "geofence",
+    # Ronde 60: "IP / maaibreedte / maaihoogte", "Kernvelden: navigatie / draad / oppervlak / …" en
+    # "Veiligheid (pincode, alarm, GPS, geofence, mes-stop, detectie)"
+    "ip": "ip_klasse", "oppervlak": "max_tuingrootte_m2", "gps": "gps_tracking", "mes-stop": "mes_stop",
 }
 # Delen na een veldnaam die met "App" begint, gaan over de app (bijv. "App: kaart, zones, schema")
 APP_DELEN = {
@@ -213,8 +216,11 @@ def kolom(rij, *namen):
 
 
 def bron_velden(veld):
-    """'Max. tuingrootte, helling, aandrijving' -> sleutels. Toelichting tussen haakjes telt niet mee."""
-    v = norm(re.sub(r"\(.*?\)", "", str(veld or "")))
+    """'Max. tuingrootte, helling, aandrijving' -> sleutels. Toelichting tussen haakjes telt niet mee,
+    behalve bij "Veiligheid (pincode, alarm, …)": daar staan de velden tussen de haakjes (ronde 60)."""
+    m = re.fullmatch(r"\s*veiligheid\s*\((.*)\)\s*", str(veld or ""), re.I)
+    v = norm(m.group(1) if m else re.sub(r"\(.*?\)", "", str(veld or "")))
+    v = re.sub(r"^kernvelden:\s*", "", v)
     if v in BRONVELDEN or v in KOSTEN_BRONVELDEN:
         return [BRONVELDEN.get(v) or KOSTEN_BRONVELDEN.get(v)]
     delen = [norm(d) for d in re.split(r",| en | / ", v) if norm(d)]

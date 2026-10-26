@@ -3066,3 +3066,44 @@ Mandy heeft de download-URL van de Coolblue NL-productfeed in wp-config.php geze
 - Hub, pagina 1, Navimow, Gardena en affiliate-melding op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[" of "{"; invulvelden alleen de bestaande tuinkeuzehulp.
 - Routetest `--na-136 --na-137 --na-1310`: 0 fouten (`/bol-prijs`: 11 Bol-modellen, 6 Coolblue, no-store). Bol-controle: 16 Bol-regels op 21 adressen, 0 fouten (per pagina gelijk aan vóór).
 - **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), want de footer en de teksten staan op alle pagina's.
+
+## Ronde 60 (26 oktober 2026): M046-M058 en M007, conceptpagina worx-robotmaaier
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-worx-robotmaaier.md`, `modellen-teksten-worx.json`. **Niets gepubliceerd.**
+
+### 1. Modelgegevens (dataroute, `scripts/ronde60_upload.py`)
+- **De 43 andere live modellen en de algemene velden ongewijzigd** (het script weigert als er meer verandert; de xlsx wijkt bij bestaande modellen op veel plekken af van live, dat is bewust niet overgenomen). Kopie vooraf: `backups/modellen-voor-ronde60.json` (niet in git). **57 modellen live.**
+- **M007 (Eufy E18):** stond live leeg (alleen het blok coolblue); nu de kernvelden uit de xlsx (niveau basis), beschikbaarheid nieuw, fabrikantpagina eufy.com. Naam, slug, coolblue, kosten en scores gelijk; geen score.
+- **M046-M058** nieuw uit `excel_naar_json.py`, met fabrikantpagina. Geen EAN, Bol of prijs. M046 en M047 met de teksten uit `modellen-teksten-worx.json` (toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`). M052-M058 met het blok coolblue uit het blad Coolblue (zichtbaar pas als ze een kaart krijgen).
+- **Omzetter aangevuld** (`excel_naar_json.py`, `bron_velden`): "Veiligheid (pincode, alarm, GPS, geofence, mes-stop, detectie)" (de velden staan tussen de haakjes), "IP / …", en "Kernvelden: navigatie / draad / oppervlak / …" (open punt uit ronde 52). Zonder die aanvulling kreeg M047 geen veiligheid en dus geen score, en M046 geen IP-klasse. Effect op bestaande modellen alleen in de omzetting (M028-M045 krijgen oppervlak en navigatie, M035 veiligheid en IP); live niet doorgevoerd, want bestaande modellen bleven ongewijzigd.
+- Functiescores (themacode `inc/score.php`): **M046 72,3, M047 72,3** (gelijk aan de md). M007 en M048-M058 geen score (M053 en M056 missen het onderdeel app). Bestaande scores ongewijzigd (M001 75,9 … M027 55,0).
+- **Controle:** momentopname van alle 21 openbare adressen vóór en na (Chromium, na rmk.js): **kaarten, scores, volgorde, Bol- en Coolblue-links én zichtbare tekst overal gelijk**. "Worx", "Landroid", "Eufy E18", "C15", "RockNeo", "A3000", "max 1200", "free 1500" en `data-model` van M007/M046-M058 komen op geen enkele openbare pagina voor.
+
+### 2. Conceptpagina worx-robotmaaier (id 24, concept)
+- Gebouwd met `scripts/ronde60_bouw.py` (afgeleid van ronde 52, patroon pagina-merk), inhoud in `scripts/ronde60/worx.json`, op de site gezet met `scripts/ronde60_pagina.py`. Het lege sjabloon "Worx robotmaaier" van 6 oktober (id 24) is bijgewerkt; oude versie als revisie 151 en in `backups/ronde60-pagina24-voor.json` (niet in git).
+- **Bovenliggende pagina:** het sjabloon hing onder #19 (/merken/); nu bovenaan, zoals Stihl, dus straks /worx-robotmaaier/ (het linkscript gaat daarvan uit).
+- Yoast-metabeschrijving uit de md: "Welke Worx Landroid past bij jouw tuin? Vision Cloud WR303E, WR365E, WR312E en WR342E plus de modellen met draad vergeleken op oppervlak, helling en kosten."
+- Kaarten alleen M046 en M047, in die volgorde, beide 72,3. **Geen Bol- of Coolblue-regel** (Worx staat in geen van beide bladen), alleen "Bekijk de actuele prijs" naar eu.worx.com. M048-M051 alleen in de tabel; in de tabellen linken alleen WR303E en WR365E naar hun kaart.
+- Bronnen uit het blad Bronnen (eu.worx.com "Fabrikant", de pdf op storage.onpage.it "Handleiding", manualslib.com "Handleiding (kopie op manualslib.com)", appwinkels; geen Amazon of "niet gevonden"): M046 8, M047 6, M048-M049 2, M050-M051 1 regel(s).
+- "Meer lezen": beste, zonder draad, vergelijken, kosten, zonder grensdraad (geen mesjes: geen Worx-mesjes op die pagina). Navimow, Husqvarna, Gardena en Stihl komen via het linkscript.
+- Controle (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll, 0 JavaScript-fouten, geen verzoek naar bol.com/awin/coolblue, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan; interne links (/, auteur, hoe-we-beoordelen, kosten, hub, zonder draad, vergelijken, zonder grensdraad) allemaal HTTP 200.
+- **Download:** `paginatekst-worx.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository).
+
+### 3. Links: klaargezet, niet gedraaid (`scripts/ronde60_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de Stihl-regel): "Alle Worx Landroid-modellen vergeleken: zie Worx robotmaaier."
+- Navimow-, Husqvarna-, Gardena- en Stihl-pagina, "Meer lezen": "Worx robotmaaier: de Landroid-modellen vergeleken."
+- Worx-pagina, "Meer lezen": Segway Navimow, Husqvarna, Gardena en Stihl (zelfde teksten als op de andere merkpagina's).
+- Weigert zolang #24 geen status publish heeft (getest). Alle zeven ankers komen nu precies één keer voor (proef zonder die controle).
+
+### Controles
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 16 Bol-regels op 21 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Worx-kaarten hebben geen verbindingschip (geen regel in `verbinding_toewijzing.json` voor M046/M047); de kaart toont "Geluid 57 dB", de tabel "57 dB(A) gegarandeerd".
+- M057 (RockNeo Q110): de fabrikantpagina in de xlsx is een coolblue.nl-adres (geen Roborock-pagina gevonden). Zo geüpload; niet zichtbaar zolang er geen kaart is.
+- M053 en M056: onderdeel app ontbreekt in de omzetting (geen score); nakijken als ze een kaart krijgen.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de Worx-pagina nalezen en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde60_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.

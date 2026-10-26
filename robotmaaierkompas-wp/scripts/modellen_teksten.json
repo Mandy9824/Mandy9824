@@ -289,5 +289,39 @@
       "Geen eigen pincode",
       "App-rating 2,5 in Google Play, zonder kaart met zones"
     ]
+  },
+  "M046": {
+    "beste_voor": "Kleine tuinen tot 300 m² zonder begrenzingsdraad, zonder antenne",
+    "pluspunten": [
+      "RTK via de cloud met camera: geen draad, antenne of basisstation",
+      "Volgens Worx geen abonnement: de RTK-cloudservice is levenslang gratis",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht",
+      "Pincode, en de messen stoppen bij optillen",
+      "Bediening ook zonder app mogelijk"
+    ],
+    "minpunten": [
+      "Alleen tot 300 m²",
+      "App-rating 2,64 in Google Play",
+      "GPS-tracking en geofence alleen met de losse module Find My Landroid (149 euro)",
+      "Alleen een Engelse handleiding; geluid uit een kopie van de conformiteitsverklaring",
+      "Geen alarm genoemd"
+    ]
+  },
+  "M047": {
+    "beste_voor": "Tuinen tot 650 m² zonder begrenzingsdraad, zonder antenne",
+    "pluspunten": [
+      "RTK via de cloud met camera: geen draad, antenne of basisstation",
+      "Volgens Worx geen abonnement: de RTK-cloudservice is levenslang gratis",
+      "Tot 650 m²",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht",
+      "Pincode, en de messen stoppen bij optillen"
+    ],
+    "minpunten": [
+      "App-rating 2,64 in Google Play",
+      "GPS-tracking en geofence alleen met de losse module Find My Landroid (149 euro)",
+      "Alleen een Engelse handleiding, geen officiële download gevonden; geluid uit een kopie van de conformiteitsverklaring",
+      "Geen reviews gevonden",
+      "Bij zwakke wifi bij het laadstation is een RadioLink nodig (optioneel)"
+    ]
   }
 }

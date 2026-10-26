@@ -58,5 +58,11 @@
   },
   "M027": {
     "analyse": "De Stihl iMOW 3 EVO heeft dezelfde basis als de iMOW 3, voor tuinen tot 500 m², maar haalt 45% helling en heeft volgens de handleiding een mobiele verbinding (eSIM, LTE-M) naast wifi en Bluetooth, met GPS-positie. Wat die mobiele verbinding kost en hoe lang ze loopt, hebben we niet gevonden, en de vergelijkingstabel van Stihl NL zegt bij dit model dat er geen mobiele verbinding is. De draad zit niet in de doos: de installatiekit kost 87 euro."
+  },
+  "M046": {
+    "analyse": "De Worx Landroid Vision Cloud WR303E is de kleinste draadloze Landroid, voor tuinen tot 300 m² en een helling tot 30%. Hij krijgt zijn satellietcorrectie via de cloud, dus er is geen draad, antenne of basisstation nodig, en volgens Worx is de RTK-cloudservice levenslang gratis. Alleen het laadstation heeft 2,4 GHz-wifi nodig. In de app maak je kaarten, zones en no-go-gebieden. Er is een pincode en de messen stoppen bij optillen, maar GPS-tracking en een geofence-melding vragen de losse module Find My Landroid (149 euro). De app staat op 2,64 van de 5 in Google Play."
+  },
+  "M047": {
+    "analyse": "De Worx Landroid Vision Cloud WR365E heeft dezelfde techniek als de WR303E, voor tuinen tot 650 m² en een helling tot 30%. Hij gebruikt RTK via de cloud met een camera, zonder draad, antenne of basisstation, en volgens Worx is de cloudservice levenslang gratis. Alleen het laadstation heeft wifi nodig; bij een zwak signaal is een RadioLink beschikbaar. Pincode en mes-stop bij optillen zijn aanwezig, GPS-tracking en een geofence-melding vragen de losse module Find My Landroid (149 euro). We vonden geen reviews en geen Nederlandse handleiding."
   }
 }
