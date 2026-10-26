@@ -3043,3 +3043,9 @@ Mandy heeft 1.3.10 geüpload en de vier Coolblue-constanten (ook `RMK_COOLBLUE_A
 ### Nog te doen
 - [ ] Mandy: 1.3.12 uploaden, cache legen.
 - [ ] Claude: ronde, status; daarna blok coolblue + teksten tegelijk.
+
+## Ronde 58 (26 oktober 2026): 1.3.12 live, feed-URL is de feedlijst
+
+- Live thema 1.3.12. Ronde via de beheerroute (2,0 s): "Geen gzip-bestand en geen CSV met merchant_product_id; het antwoord begint met: "Advertiser ID,Advertiser Name,Primary Region,Membership Status,Datafeed Format,F…"". **De URL in wp-config.php is de feedlijst van Awin** (overzicht van adverteerders en feeds), niet de download van de Coolblue-productfeed. Logboek 319 noemt die lijst ("Product Feed List Download").
+- Het thema werkt zoals bedoeld (geen fout, geen secret in de melding, vorige toestand ongewijzigd; niets op de site).
+- Mandy moet de **download-URL van de Coolblue NL-productfeed** zetten: in Awin via Toolbox > Create-a-Feed (Coolblue NL, CSV, gzip, met de kolommen merchant_product_id, search_price, in_stock, merchant_image_url, merchant_deep_link). Herkenbaar aan `/datafeed/download/` en (volgens het voorbeeldbestand, kolom data_feed_id) `fid/95886`; niet `/datafeed/list/`.
