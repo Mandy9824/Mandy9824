@@ -3251,3 +3251,59 @@ Mandy: "check de pagina en zet alles correct erin, 100% compleet".
 
 ### Nog te doen
 - [ ] Mandy: editortabs van #351 sluiten/herladen; CDN legen; Search Console: indexering aanvragen voor /mova-dreame-robotmaaier/.
+
+## Ronde 67 (26 oktober 2026): M007, M050-M064 met Bol-blok, conceptpagina eufy-robotmaaier (zonder thema-zip)
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-eufy-robotmaaier.md`, `modellen-teksten-eufy.json`. **Niets gepubliceerd.**
+
+### 1. Modelgegevens (dataroute, `scripts/ronde67_upload.py`)
+- **De 47 andere live modellen (M001-M049 zonder M007) en de algemene velden ongewijzigd** (het script weigert als er meer verandert). Kopie vooraf: `backups/modellen-voor-ronde67.json` (niet in git). **63 modellen live.**
+- **M007 en M050-M058** (stonden al live) vervangen door de omzetting: nu met EAN en blok `bol` (productlink, afbeelding 550 px) uit het blad Bol, fabrikantpagina, en M007/M052/M053 met de teksten uit `modellen-teksten-eufy.json` (toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`). Id, slug, naam en blok coolblue gelijk (gecontroleerd). M007, M052, M054, M055, M057 en M058 zijn geen niveau basis meer; M057 heeft nu de Roborock-pagina als fabrikantpagina.
+- **M059-M064** (Mova LiDAX Ultra 1600, Ultra 1000/1600/2000 AWD, ViAX 250, ViAX 500) nieuw, niveau basis, fabrikantpagina nl.mova.tech; geen EAN, Bol, Coolblue of prijs.
+- **Omzetter aangevuld** (`excel_naar_json.py`): veldnamen "Navigatie / draad / zones / no-go / schema", "Zones / no-go / schema", "App iOS/Android / …", "App / knoppen / OTA / smart home" en "Slimme-thuiskoppeling". Zonder die aanvulling kregen M007, M052, M053 en M055-M058 geen bron voor app iOS/Android, kaart en schema, en dus geen app-score. "App" als eerste deel = de kolom "App iOS én Android" (waarde 1 in Modellen; de Scores van het Excel-bestand rekenen er ook mee).
+- Functiescores (themacode): **M006 63,2 (ongewijzigd), M007 63,2, M052 62,3, M053 62,3** (gelijk aan md en blad Scores). Verder M054 46,4, M055 60,9, M056 84,1, M057 84,1 (gelijk aan het blad Scores; nergens zichtbaar). M058 geen score (alarm leeg door bronstatus; Excel 79,5). M050, M051, M059-M064 geen score.
+- **Controle:** momentopname van alle 23 openbare adressen vóór en na de upload (Chromium, na rmk.js): **kaarten, scores, volgorde, Bol- en Coolblue-links en zichtbare tekst overal gelijk**; geen `data-model` en geen naam van de nieuwe modellen op een openbare pagina.
+- **Bol-ronde** (beheerroute) direct na de upload, zodat de nieuwe EAN's een uitkomst hebben (anders staat de knop er zonder prijs): ok 16, geen aanbod 5, fout 0. Nieuw met aanbod (nieuw, geen pre-order): M007 1.238,72 (bol.com), M050 368,44, M052 819 (Anker Direct, partner), M054 799, M055 1.013, M056 799, M057 1.099. **Geen aanbod: M051, M053, M058** (dus geen Bol-regel). Bestaand: M004 en M016 geen aanbod; **M005 heeft weer aanbod** (partner), daardoor staat er nu een Bol-regel bij M005 op /beste-robotmaaier/, /robotmaaier-zonder-draad/ en /mova-dreame-robotmaaier/. Dat komt door de markt, niet door de modelgegevens (M005 ongewijzigd). Kaarten, scores en volgorde bleven ook na de ronde overal gelijk.
+
+### 2. Tekst van pagina-eufy-robotmaaier.md tegen het Excel-bestand
+- **Oppervlak, helling, geluid, verbinding en score per model: geen afwijkingen.** E15 Solo 800 m², E18 1.200 m², C15 en C15 Solo 500 m²; helling alle vier 32,5% (tegenstrijdig, laagste waarde); geluid 66,3 / 66,3 / 58,2 / 58,2 dB(A) (LWA); 4G ingebouwd bij E15/E18, losse 4G-module van 99 euro bij de C15; 63,2 / 63,2 / 62,3 / 62,3. Ook garantie, pincode/kinderslot, alarm, mes-stop bij de C15, app-rating (Google Play 4,12 en 4,07 ≈ 4,1) en databundel kloppen.
+- **Gemeld, niet aangepast:**
+  1. "Bij de C15 moet er wifi bij het gazon zijn" (en minpunt "Wifi bij het gazon nodig" bij M052/M053): geen bronregel van Eufy; alleen Coolblue-klantreviews ("wifi nodig", "wifi 2,4 GHz nodig").
+  2. "C15 Solo: de goedkoopste route in de reeks": het blad Prijzen heeft geen prijzen voor M007, M052 en M053 (alleen M006); niet te controleren.
+  3. "De extra installatiekosten zijn nul": alleen M006 heeft een bronregel. M007, M052 en M053 hebben 0 in Modellen (uitleg in Opmerking) maar geen bronregel, dus geen installatiekosten in hun modelgegevens.
+  4. EAN M052: blad Bol 0194644319335 (bol-titel "eufy Robotgrasmaaier C15", volgens de opmerking met garage); de kolom Generatie noemt voor de eufy-bundel EAN 194644333072. De Bol-regel van M052 wijst naar het product van het blad Bol.
+  5. M053 heeft twee bronregels GPS-tracking (24-10 "1" en 26-10 "0 (was 1)", beide fabrikantclaim). De site toont de waarde uit Modellen (0), maar als bron en datum de eerste regel (24-10).
+
+### 3. Conceptpagina eufy-robotmaaier (id 366, concept)
+- Er bestond geen pagina met deze slug of met "Eufy" in de titel (ook niet in de prullenbak): **nieuw concept**, bovenaan (geen bovenliggende pagina).
+- Gebouwd met `scripts/ronde67_bouw.py` (afgeleid van ronde 63, patroon pagina-merk), inhoud in `scripts/ronde67/eufy.json`, op de site gezet met `scripts/ronde67_pagina.py`.
+- **Yoast-metabeschrijving uit de md** (live gecontroleerd): "Eufy robotmaaier: welke past bij jouw tuin? E15 Solo, E18, C15 en C15 Solo vergeleken op oppervlak, helling, 4G, GPS en kosten, met bron en datum." Kruimelpad "Eufy robotmaaier".
+- Kaarten M006, M007, M052, M053 in die volgorde: **63,2 · 63,2 · 62,3 · 62,3**. Prijsblok van het thema:
+  - M006: Bol-regel (879 euro) en Coolblue-regel (950 euro); M007: Bol (1.238,72) en Coolblue (1.249); M052: Bol (819, via een partner); **M053: geen Bol-regel** (geen aanbod). Alle vier "Bekijk de actuele prijs" naar eufy.com. clickref `m006-eufy-robotmaaier`, subid `eufy-robotmaaier`.
+  - **Coolblue M052/M053:** staan in de modelgegevens, maar de laatste feedronde (ronde 59) was vóór hun blok coolblue; nu "niet in de feed", dus geen regel. Na de nachtelijke ronde (04:20) verschijnen ze vanzelf als ze op voorraad zijn.
+- In de tabellen linken E15 Solo, E18, C15 met garage en C15 Solo naar hun kaart. Tekstlinks: Hoe we beoordelen (#scoremodel), robotmaaier zonder grensdraad, robotmaaier kosten, mailto. "Meer lezen": beste, zonder draad, vergelijken, kosten, mesjes en **Worx** (al gepubliceerd; staat in de lijst interne links van de md). Navimow en Mova/Dreame komen via het linkscript (opdracht).
+- Bronnen uit het blad Bronnen: handleidingen (pdf's op salesforce-knowledge-download.s3…amazonaws.com en de User Guide-pagina's op service.eufy.com), eufy.com en service.eufy.com ("Fabrikant"), appwinkels. Weggelaten: Coolblue, Amazon, x-kom (Poolse winkel), Bol, de rijen "niet gevonden"/winkelclaim, en de EU-conformiteitsverklaring van de C15 (pdf 000038406; noemt geen geluidswaarde). M006 9, M007 5, M052 12, M053 10 regels.
+
+### 4. Links: klaargezet, niet gedraaid (`scripts/ronde67_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de Mova/Dreame-regel): "Alle Eufy-robotmaaiers vergeleken: zie Eufy robotmaaier."
+- Navimow-, Husqvarna-, Gardena-, Stihl-, Worx- en Mova/Dreame-pagina, "Meer lezen": "Eufy robotmaaier: de E15, E18 en C15 vergeleken."
+- Eufy-pagina, "Meer lezen" (na Worx): Segway Navimow ("alle modellen die nu nieuw te koop zijn") en Mova of Dreame ("de LiDAR-modellen vergeleken").
+- Weigert zolang #366 geen status publish heeft (getest, ook met `--schrijf`). Met `--proef-concept`: alle negen ankers precies één keer gevonden, geen meldingen.
+
+### 5. Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll (de modellentabel schuift op 390 px binnen haar vak, 785 px in 349 px), 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan, geen verzoek naar bol.com/awin/coolblue. (In de console alleen bol-foto's van media.s-bol.com die vanuit deze omgeving niet laden.)
+- Alle tekst uit de md staat op de weergegeven pagina (automatisch nagelopen: 0 ontbrekend).
+- Interne links (/, auteur, hoe-we-beoordelen, kosten, hub, zonder draad, vergelijken, zonder grensdraad, mesjes, Worx; en voor het linkscript Navimow en Mova/Dreame): allemaal HTTP 200; het eigen adres geeft als concept 404.
+- Momentopname van alle 23 openbare adressen na het aanmaken van het concept: geen verschil met na de Bol-ronde.
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 20 Bol-regels op 23 adressen (+3: M005), 0 fouten.
+- **Download:** `paginatekst-eufy.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Verbindingschip: de kaart van M006 toont "Verbinding 4G", M007, M052 en M053 hebben geen chip (geen regel in `scripts/verbinding_toewijzing.json`). Op de Eufy-pagina dus ongelijk.
+- De vijf meldingen bij punt 2.
+- M058: geen score (alarm leeg door bronstatus), het Excel-bestand rekent 79,5. Niet zichtbaar.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de Eufy-pagina nalezen (ook de meldingen bij punt 2) en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde67_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.

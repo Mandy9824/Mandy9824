@@ -64,5 +64,14 @@
   },
   "M047": {
     "analyse": "De Worx Landroid Vision Cloud WR365E heeft dezelfde techniek als de WR303E, voor tuinen tot 650 m² en een helling tot 30%. Hij gebruikt RTK via de cloud met een camera, zonder draad, antenne of basisstation, en volgens Worx is de cloudservice levenslang gratis. Alleen het laadstation heeft wifi nodig; bij een zwak signaal is een RadioLink beschikbaar. Pincode en mes-stop bij optillen zijn aanwezig, GPS-tracking en een geofence-melding vragen de losse module Find My Landroid (149 euro). We vonden geen reviews en geen Nederlandse handleiding."
+  },
+  "M007": {
+    "analyse": "De Eufy E18 is de grootste Eufy in onze selectie, voor tuinen tot 1.200 m². Hij navigeert met een camera, zonder draad, antenne of RTK, en heeft net als de E15 een 4G-module en GPS in de maaier, zodat bij diefstal de locatie via het mobiele netwerk wordt doorgestuurd. Je krijgt eerst gratis proefdata en moet daarna een databundel nemen. Een pincode en een diefstalalarm ontbreken. De helling is 32,5%, ook al noemt Eufy 18 graden soms 40%."
+  },
+  "M052": {
+    "analyse": "De Eufy C15 met garage is dezelfde maaier als de C15 Solo, met een garage erbij, voor tuinen tot 500 m². Hij navigeert met een camera, zonder draad of antenne, is met 58,2 dB(A) stiller dan de E15 en E18, en heeft 2 jaar garantie (messen uitgezonderd). GPS en 4G zijn een losse module van 99 euro met 2 jaar gratis data; zonder die module noemt Eufy de locatie in de app niet. Er is geen pincode en geen alarm."
+  },
+  "M053": {
+    "analyse": "De Eufy C15 Solo is de maaier zonder garage, voor tuinen tot 500 m² en een helling van 32,5%. Hij gebruikt een camera, zonder draad of antenne, en is met 58,2 dB(A) stiller dan de E15 en E18. De app heet Anker eufy en heeft een kaart met zones. GPS en 4G zijn een losse module van 99 euro met 2 jaar gratis data. Er is geen pincode en geen diefstalalarm, wel stopt het mes bij optillen volgens Eufy."
   }
 }

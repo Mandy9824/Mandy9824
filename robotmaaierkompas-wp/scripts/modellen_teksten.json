@@ -323,5 +323,56 @@
       "Geen reviews gevonden",
       "Bij zwakke wifi bij het laadstation is een RadioLink nodig (optioneel)"
     ]
+  },
+  "M007": {
+    "beste_voor": "Tuinen tot 1.200 m² zonder begrenzingsdraad, met 4G en GPS ingebouwd",
+    "pluspunten": [
+      "Camera-navigatie zonder draad, antenne of RTK",
+      "4G en GPS-locatie bij diefstal ingebouwd in de maaier",
+      "Tot 1.200 m²",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht",
+      "2 jaar garantie"
+    ],
+    "minpunten": [
+      "Geen pincode en geen diefstalalarm",
+      "Na de gratis proefdata een betaalde databundel; Nederlandse prijs niet gevonden",
+      "Geluidsvermogen 66,3 dB(A), hoog",
+      "Helling 32,5% (Eufy noemt 18° ook als 40%)",
+      "Weinig reviews: geen betrouwbaarheidsscore"
+    ]
+  },
+  "M052": {
+    "beste_voor": "Kleine tuinen tot 500 m² zonder begrenzingsdraad, met garage",
+    "pluspunten": [
+      "Camera-navigatie zonder draad, antenne of RTK",
+      "Garage meegeleverd",
+      "Stiller dan de E15 en E18: 58,2 dB(A)",
+      "Het mes stopt bij optillen volgens Eufy",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht"
+    ],
+    "minpunten": [
+      "Alleen tot 500 m²",
+      "GPS en 4G vragen de losse module van 99 euro; daarna een data-abonnement, Nederlandse prijs niet gevonden",
+      "Geen pincode en geen diefstalalarm",
+      "Wifi bij het gazon nodig",
+      "Helling 32,5%"
+    ]
+  },
+  "M053": {
+    "beste_voor": "Kleine tuinen tot 500 m² zonder begrenzingsdraad",
+    "pluspunten": [
+      "Camera-navigatie zonder draad, antenne of RTK",
+      "Stiller dan de E15 en E18: 58,2 dB(A)",
+      "Het mes stopt bij optillen volgens Eufy",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht",
+      "2 jaar garantie"
+    ],
+    "minpunten": [
+      "Alleen tot 500 m²",
+      "GPS en 4G vragen de losse module van 99 euro; daarna een data-abonnement, Nederlandse prijs niet gevonden",
+      "Geen pincode en geen diefstalalarm",
+      "Wifi bij het gazon nodig",
+      "Helling 32,5%"
+    ]
   }
 }

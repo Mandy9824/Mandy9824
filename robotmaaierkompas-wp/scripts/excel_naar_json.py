@@ -102,6 +102,8 @@ BRONVELDEN = {
     # Ronde 60: "IP / maaibreedte / maaihoogte", "Kernvelden: navigatie / draad / oppervlak / …" en
     # "Veiligheid (pincode, alarm, GPS, geofence, mes-stop, detectie)"
     "ip": "ip_klasse", "oppervlak": "max_tuingrootte_m2", "gps": "gps_tracking", "mes-stop": "mes_stop",
+    # Ronde 67: "Navigatie / draad / zones / no-go / schema" en "Zones / no-go / schema" (no-go en schema zijn app-velden)
+    "no-go": "app_kaart", "schema": "app_schema", "slimme-thuiskoppeling": "app_smarthome",
 }
 # Delen na een veldnaam die met "App" begint, gaan over de app (bijv. "App: kaart, zones, schema")
 APP_DELEN = {
@@ -112,6 +114,9 @@ APP_DELEN = {
     "app: ios/android": "app_ios_android", "ios/android": "app_ios_android", "smart home": "app_smarthome",
     # Schrijfwijze bij M020 (ronde 43): "App: kaart/no-go, schema, smart home, bediening zonder app, OTA"
     "app: kaart/no-go": "app_kaart", "app: kaart": "app_kaart",
+    # Ronde 67: "App iOS/Android / bediening zonder app / OTA …" en "App / knoppen / OTA / smart home" (M007, M052-M058);
+    # "App" als eerste deel = de kolom "App iOS én Android"
+    "app ios/android": "app_ios_android", "app": "app_ios_android",
 }
 STATUS_RANG = {"gecontroleerd": 3, "fabrikantclaim": 2, "winkelclaim": 1}
 STATUS_LEEG = ("niet gevonden", "niet geopend")
