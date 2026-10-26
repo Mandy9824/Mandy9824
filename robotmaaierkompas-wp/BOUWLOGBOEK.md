@@ -3202,3 +3202,29 @@ Uitgevoerd met `scripts/ronde64_mova_dreame.py` (proefdraai zonder meldingen, da
 ### Nog te doen
 - [ ] Mandy: CDN legen; de Mova/Dreame-pagina nalezen (ook of de Business Wire-link werkt) en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde63_links.py --schrijf` (ankers raken deze ronde niet), daarna links en pagina's controleren en de cache legen.
+
+## Ronde 65 (26 oktober 2026): Mova/Dreame-pagina gepubliceerd, links gezet; ronde 64 niet meegepubliceerd
+
+Mandy heeft /mova-dreame-robotmaaier/ (#351) gepubliceerd (metabeschrijving zoals gezet, geen bovenliggende pagina).
+
+### Ronde 64 staat niet op de gepubliceerde pagina
+- Revisies van #351: 352 (17:10, auteursblok omgezet), **353 (ronde 64: alinea "één groep, twee merken", twee vragen, bron Business Wire)**, **354 (publicatie): precies gelijk aan 352** en aan de kopie `backups/ronde64-pagina351-voor-20261026-172429.json`. Waarschijnlijk is gepubliceerd vanuit een editortab die nog de versie van vóór ronde 64 had (net als bij Stihl, ronde 54).
+- Niet teruggezet (gepubliceerde pagina, niet gevraagd). Terugzetten kan met `scripts/ronde64_mova_dreame.py` na een kleine aanpassing (het weigert nu omdat #351 geen concept meer is); de ankers staan er nog. Op Mandy's woord, en eerst de pagina in de editor herladen.
+
+### Links (`scripts/ronde63_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Er stond nog geen enkele Mova/Dreame-link. Kopie: `backups/ronde63-links-voor-20261026-173128.json` (niet in git). Alle acht pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd, en live gecontroleerd:
+  - hub #10 ("Meer lezen") en pagina 1 #11 ("De modellen een voor een"), na de Worx-regel: "Mova en Dreame: de LiDAR-robotmaaiers vergeleken, zie Mova of Dreame robotmaaier.";
+  - Navimow #264, Husqvarna #20, Gardena #21, Stihl #22 en Worx #24, "Meer lezen": "Mova of Dreame robotmaaier: de LiDAR-modellen vergeleken.";
+  - Mova/Dreame #351, "Meer lezen": Segway Navimow ("alle modellen die nu nieuw te koop zijn") en Worx ("de Landroid-modellen vergeleken").
+
+### Controles
+- Momentopname van alle 23 openbare adressen (nu met /mova-dreame-robotmaaier/) vóór en na: **kaarten, scores en volgorde overal gelijk**, Bol- en Coolblue-links per pagina gelijk. Tekstverschillen alleen de tien nieuwe regels en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- Mova/Dreame-pagina live: Mova LiDAX Ultra 800 80,5 · Ultra 1200 80,5 · Dreame A1 Pro 78,6.
+- De acht gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}", alle ankers bestaan. Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1). (In de console alleen bol-foto's van media.s-bol.com die vanuit deze omgeving niet laden.)
+- Alle 16 interne adressen in de inhoud: HTTP 200. Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 17 Bol-regels op 23 adressen (+1: M008 op de Mova/Dreame-pagina), 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/mova-dreame-robotmaaier/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /mova-dreame-robotmaaier/.
+- [ ] Mandy: beslissen of ronde 64 (alinea, twee vragen, bron) alsnog op de pagina moet; daarbij de pagina eerst in de editor herladen.
