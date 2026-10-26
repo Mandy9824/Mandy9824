@@ -3228,3 +3228,26 @@ Mandy heeft /mova-dreame-robotmaaier/ (#351) gepubliceerd (metabeschrijving zoal
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /mova-dreame-robotmaaier/.
 - [ ] Mandy: beslissen of ronde 64 (alinea, twee vragen, bron) alsnog op de pagina moet; daarbij de pagina eerst in de editor herladen.
+
+## Ronde 66 (26 oktober 2026): Mova/Dreame-pagina (gepubliceerd) compleet gemaakt
+
+Mandy: "check de pagina en zet alles correct erin, 100% compleet".
+
+### Wat er mis was
+- Revisie **363** (18:36, na het linkscript van ronde 65) is opnieuw opgeslagen vanuit een editortab met de oude versie: precies gelijk aan de publicatieversie 354. Daardoor ontbraken op #351 **ronde 64** (alinea, twee vragen, bron Business Wire) én de twee regels onder "Meer lezen" (Navimow, Worx). In 363 zaten geen bewuste wijzigingen (titel en inhoud gelijk aan 354). De regels op de zeven andere pagina's stonden er nog.
+
+### Hersteld (pagina bleef gepubliceerd)
+1. `scripts/ronde64_mova_dreame.py --gepubliceerd --schrijf` (nieuwe optie: ook op een gepubliceerde pagina, status blijft gelijk). Kopie: `backups/ronde64-pagina351-voor-20261026-173840.json`. Alinea, twee vragen vooraan, bron "Mova en Dreame" vóór Scoremodel: elk anker precies één keer.
+2. `scripts/ronde65_mova_links_herstel.py --schrijf`: alleen op #351 de regels Segway Navimow en Worx onder "Meer lezen". Kopie: `backups/ronde65-pagina351-voor-20261026-173957.json`.
+- **Live inhoud is nu precies revisie 353 (ronde 64) plus de twee regels**; metabeschrijving ongewijzigd.
+
+### Controle op volledigheid (live, openbaar adres)
+- Elke tekst uit `pagina-mova-dreame-robotmaaier.md` (alinea's, tabelcellen, lijstpunten, koppen), plus ronde 64 en de links: aanwezig.
+- Veelgestelde vragen (opengeklapt): **7 vragen, tekst en volgorde precies** zoals md + ronde 64 (de twee nieuwe vooraan).
+- Alle interne links uit de md-instructie staan erop: /beste-robotmaaier/, /robotmaaier-zonder-draad/, /robotmaaier-zonder-grensdraad/, /robotmaaier-test-vergelijking/, /robotmaaier-kosten/, /robotmaaier-mesjes/, /segway-navimow-robotmaaier/, /worx-robotmaaier/, /hoe-we-beoordelen/. Business Wire-link aanwezig (niet geopend: vanuit deze omgeving niet bereikbaar).
+- 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, ankers in orde. Kaarten 80,5 · 80,5 · 78,6.
+- Momentopname alle 23 openbare adressen: kaarten, scores, volgorde en winkel-links gelijk; tekstverschil alleen op /mova-dreame-robotmaaier/ (de herstelde teksten).
+- LiteSpeed geleegd via de dataroute. **Mandy: CDN-cache legen**, en **sluit of herlaad alle open editortabs van deze pagina** vóór ze opnieuw op Opslaan/Bijwerken drukt; anders gaat dit weer verloren.
+
+### Nog te doen
+- [ ] Mandy: editortabs van #351 sluiten/herladen; CDN legen; Search Console: indexering aanvragen voor /mova-dreame-robotmaaier/.

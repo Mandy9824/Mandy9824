@@ -5,15 +5,17 @@
 3. Bronnen: eigen kopje "Mova en Dreame" met het persbericht (Business Wire, 21 oktober 2024), vóór het kopje Scoremodel.
 Werkt op de live inhoud (het auteursblok is in de editor omgezet; scripts/ronde63/mova-dreame.json is dus niet de bron).
 Elk anker moet precies één keer voorkomen en de nieuwe teksten mogen er nog niet staan; anders schrijft het script niets.
-Weigert als #351 geen concept is. Met --schrijf: eerst een kopie in backups/, dan opslaan (blijft concept),
+Weigert als #351 geen concept is, behalve met --gepubliceerd (ronde 65: de pagina is gepubliceerd zonder deze ronde;
+dan blijft ze gepubliceerd). Met --schrijf: eerst een kopie in backups/, dan opslaan (status blijft gelijk),
 LiteSpeed legen via de dataroute (modelgegevens ongewijzigd).
-Gebruik:  python3 scripts/ronde64_mova_dreame.py [--schrijf]
+Gebruik:  python3 scripts/ronde64_mova_dreame.py [--gepubliceerd] [--schrijf]
 """
 import json, os, re, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from affiliate_teksten_lib import api
 
 SCHRIJF = '--schrijf' in sys.argv
+TOEGESTAAN = ('draft', 'publish') if '--gepubliceerd' in sys.argv else ('draft',)
 PID = 351
 ALINEA = ('<p><strong>Mova en Dreame: één groep, twee merken.</strong> Mova is een merk van de Dreame-groep. '
           'De LiDAX Ultra-modellen zijn van Mova, de A1 Pro is van Dreame zelf. Winkels en prijsvergelijkers schrijven een '
@@ -39,8 +41,8 @@ BRON = ('<!-- wp:html -->\n<div class="rmk-container rmk-column"><h3 style="font
         '</ol>\n<!-- /wp:html --></div>\n<!-- /wp:group -->\n\n')
 
 p = api(f'wp/v2/pages/{PID}?context=edit')
-if p['status'] != 'draft' or p['slug'] != 'mova-dreame-robotmaaier':
-    sys.exit(f'#{PID} is {p["slug"]} met status {p["status"]}, geen concept mova-dreame-robotmaaier. Niets gewijzigd.')
+if p['status'] not in TOEGESTAAN or p['slug'] != 'mova-dreame-robotmaaier':
+    sys.exit(f'#{PID} is {p["slug"]} met status {p["status"]}; verwacht {TOEGESTAAN}. Niets gewijzigd.')
 raw = oud = p['content']['raw']
 meld = []
 for t in ('één groep, twee merken', VRAGEN[0][0], VRAGEN[1][0], 'businesswire.com'):
@@ -74,7 +76,7 @@ os.makedirs('backups', exist_ok=True)
 pad = f'backups/ronde64-pagina351-voor-{time.strftime("%Y%m%d-%H%M%S")}.json'
 json.dump({k: p[k] for k in ('id', 'status', 'slug', 'parent', 'title', 'content', 'meta')}, open(pad, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print('Kopie:', pad)
-api(f'wp/v2/pages/{PID}', {'content': raw, 'status': 'draft'})
+api(f'wp/v2/pages/{PID}', {'content': raw})
 q = api(f'wp/v2/pages/{PID}?context=edit')
 print(f'#{PID} opgeslagen; status {q["status"]} (was {p["status"]}); inhoud zoals bedoeld: {q["content"]["raw"] == raw}; '
       f'metabeschrijving ongewijzigd: {q["meta"].get("_yoast_wpseo_metadesc") == p["meta"].get("_yoast_wpseo_metadesc")}')
