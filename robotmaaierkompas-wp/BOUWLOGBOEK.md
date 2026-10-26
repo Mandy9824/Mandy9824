@@ -3107,3 +3107,24 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 ### Nog te doen
 - [ ] Mandy: CDN legen; de Worx-pagina nalezen en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde60_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 61 (26 oktober 2026): Worx-pagina gepubliceerd, links gezet
+
+Mandy heeft /worx-robotmaaier/ (#24) gepubliceerd. De live inhoud wijkt alleen af van `scripts/ronde60/worx.json` in het auteursblok (in de editor omgezet van patroonverwijzing naar uitgeschreven HTML, revisie 341, net als bij Stihl); verder gelijk, metabeschrijving zoals gezet.
+
+### Links (`scripts/ronde60_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Er stond nog geen enkele Worx-link. Kopie: `backups/ronde60-links-voor-20261026-143943.json` (niet in git). Alle zeven pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd, en live gecontroleerd:
+  - hub #10 ("Meer lezen") en pagina 1 #11 ("De modellen een voor een"), na de Stihl-regel: "Alle Worx Landroid-modellen vergeleken: zie Worx robotmaaier.";
+  - Navimow #264, Husqvarna #20, Gardena #21 en Stihl #22, "Meer lezen": "Worx robotmaaier: de Landroid-modellen vergeleken.";
+  - Worx #24, "Meer lezen": Segway Navimow ("alle modellen die nu nieuw te koop zijn"), Husqvarna, Gardena en Stihl.
+
+### Controles
+- Momentopname van alle 22 openbare adressen (nu met /worx-robotmaaier/) vóór en na: **kaarten, scores en volgorde overal gelijk**, Bol- en Coolblue-links per pagina gelijk. Tekstverschillen alleen de nieuwe zinnen, de datums "bijgewerkt/nagekeken op 26 oktober" (automatisch) en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- Worx-pagina live: WR303E 72,3 · WR365E 72,3; geen Bol- of Coolblue-regel.
+- De zeven gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}". Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1).
+- Alle 15 interne adressen in de inhoud: HTTP 200. Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 16 Bol-regels op 22 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/worx-robotmaaier/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /worx-robotmaaier/.
