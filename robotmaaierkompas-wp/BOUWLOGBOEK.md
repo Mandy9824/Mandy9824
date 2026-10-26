@@ -3142,3 +3142,44 @@ Uitgevoerd met `scripts/ronde62_husqvarna.py` (proefdraai zonder meldingen, daar
 - #20 op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{" of "}", geen invulveld.
 - Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 16 Bol-regels op 22 adressen, 0 fouten.
 - LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+## Ronde 63 (26 oktober 2026): Husqvarna-sectie verplaatst, conceptpagina mova-dreame-robotmaaier (zonder thema-zip)
+
+Aangeleverd: `pagina-mova-dreame-robotmaaier.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository). **Niets gepubliceerd.** Modelgegevens niet gewijzigd.
+
+### 1. Husqvarna-pagina (#20, gepubliceerd): sectie GPS verplaatst
+- `scripts/ronde63_husqvarna.py` (proefdraai zonder meldingen, daarna `--schrijf`). **Kopie vooraf:** `backups/ronde63-husqvarna-voor-20261026-150122.json` (inhoud en status van #20, niet in git).
+- De sectie "Husqvarna robotmaaier met GPS: welke Automower heeft het?" (uit ronde 62) staat nu direct vóór de kop "Veelgestelde vragen" (dus na "Meer lezen"). Het script controleert dat alleen de volgorde verandert (zelfde tekens, zelfde blokken). #20 bleef gepubliceerd; inhoud zoals bedoeld.
+- Live: kopvolgorde … Wat met de Automower 105? · Meer lezen · **Husqvarna robotmaaier met GPS** · Veelgestelde vragen · Waar op te letten · Wat we nog niet weten · Bronnen. Momentopname van alle 22 openbare adressen vóór en na: enige verschil de plaats van deze sectie; kaarten, scores, volgorde, Bol- en Coolblue-links overal gelijk.
+
+### 2. Conceptpagina mova-dreame-robotmaaier (id 351, concept)
+- **Er bestond geen concept met deze slug** (ook niet in de prullenbak; geen pagina met "Mova" of "Dreame" in de titel). Daarom een nieuw concept, bovenaan (geen bovenliggende pagina).
+- Gebouwd met `scripts/ronde63_bouw.py` (afgeleid van ronde 60, patroon pagina-merk), inhoud in `scripts/ronde63/mova-dreame.json`, op de site gezet met `scripts/ronde63_pagina.py`.
+- **Yoast-metabeschrijving uit de md:** "Mova of Dreame robotmaaier? LiDAX Ultra 800 en 1200 en Dreame A1 Pro vergeleken op LiDAR, oppervlak, link-module, garantie en kosten, met bron en datum." (live gecontroleerd). Kruimelpad "Mova of Dreame robotmaaier".
+- Kaarten M004, M005, M008 in die volgorde, met de teksten die al in de modelgegevens staan: **80,5 · 80,5 · 78,6** (gelijk aan de md en aan hub/pagina 1). Prijsblok van het thema:
+  - M004 en M005: alleen "Bekijk de actuele prijs" (nl.mova.tech). De prijstaak geeft voor beide nu geen Bol-aanbod; ook op hub en pagina 1 heeft M005 op dit moment geen Bol-regel. Geen van beide staat in het blad Coolblue.
+  - M008: Bol-regel (719 euro) en Coolblue-regel (729 euro), clickref `m008-mova-dreame-robotmaaier`, met de advertentie-regel en "Foto: bol.com".
+- In de tabellen linken de drie modelnamen naar hun kaart. Tekstlinks: Hoe we beoordelen (#scoremodel), robotmaaier zonder grensdraad, robotmaaier kosten, mailto. "Meer lezen": beste, zonder draad, vergelijken, kosten, mesjes; Navimow en Worx komen via het linkscript (zoals gevraagd).
+- Bronnen uit het blad Bronnen: handleidingen (pdf's van Mova en Dreame op cdn.shopify.com), nl.mova.tech, us.mova.tech, nl./ee.dreametech.com ("Fabrikant"), appwinkels. Weggelaten: winkels (o.a. de datasheet op media.hornbach.de, MediaMarkt, alza, agrieuro), Bol en de rijen "niet gevonden". M004 10, M005 8, M008 8 regels.
+- **Let op:** de zin "Dreame NL verkoopt een verlenging van een jaar voor 79 euro" heeft geen bronregel op de pagina: de enige rij (M008 Garantie, nl.dreametech.com/products/a1-pr…) heeft status "niet gevonden" en valt dus weg.
+
+### 3. Links: klaargezet, niet gedraaid (`scripts/ronde63_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de Worx-regel): "Mova en Dreame: de LiDAR-robotmaaiers vergeleken, zie Mova of Dreame robotmaaier."
+- Navimow-, Husqvarna-, Gardena-, Stihl- en Worx-pagina, "Meer lezen": "Mova of Dreame robotmaaier: de LiDAR-modellen vergeleken."
+- Mova/Dreame-pagina, "Meer lezen": Segway Navimow ("alle modellen die nu nieuw te koop zijn") en Worx ("de Landroid-modellen vergeleken").
+- Weigert zolang #351 geen status publish heeft (getest, ook met `--schrijf`). Met `--proef-concept` (alleen lezen): alle acht ankers precies één keer gevonden, geen meldingen.
+
+### Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, 390 en 1440 px): geen horizontale scroll (de modellentabel schuift op 390 px binnen haar vak, 905 px in 349 px), 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan, geen verzoek naar bol.com/awin/coolblue. Interne links (/, auteur, hoe-we-beoordelen met #scoremodel en #verdienmodel, zonder grensdraad, kosten, hub, zonder draad, vergelijken, mesjes; en voor het linkscript Navimow en Worx) allemaal HTTP 200; het eigen adres geeft als concept 404.
+- Momentopname van alle 22 openbare adressen na het aanmaken van het concept: geen enkel verschil (kaarten, scores, volgorde, winkel-links, tekst). "Mova of Dreame" en "mova-dreame" komen op geen openbare pagina voor.
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 16 Bol-regels op 22 adressen, 0 fouten.
+- **Download:** `paginatekst-mova-dreame.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Bronregel voor de Dreame-garantieverlenging (79 euro) ontbreekt, zie boven.
+- M004/M005 tonen geen Bol-regel zolang de prijstaak geen aanbod vindt (vanzelf terug zodra bol.com weer aanbod heeft).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de Mova/Dreame-pagina nalezen en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde63_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
