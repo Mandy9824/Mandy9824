@@ -3486,3 +3486,37 @@ Mandy: /robotmaaier-kleine-tuin/ (#16) is gepubliceerd (slug en metabeschrijving
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /robotmaaier-kleine-tuin/; editortabs van #16 sluiten/herladen vóór opnieuw opslaan.
 - [ ] Open uit ronde 71: teksten M004/M005 (app-rating 2,7), verbindingschips Roborock/Worx/Eufy, de vijf tekstmeldingen.
+
+## Ronde 73 (31 oktober 2026): app-rating 2,9 in de teksten van M004/M005, drie verbindingschips, vier tekstwijzigingen op de kleine-tuinpagina (zonder thema-zip)
+
+**Kopieën vooraf** (niet in git): `backups/ronde73-pagina16-voor-20261031-172530.json` (inhoud, status en meta van #16) en `backups/modellen-voor-ronde73.json`. Elke plek is vooraf geteld: alles kwam precies één keer voor, dus er waren geen meldingen.
+
+### 1. Modelgegevens (`scripts/ronde73_modellen.py`, dataroute)
+- **M004 en M005:** in de minpunten "Rating van de app op Google Play 2,7" → "2,9", en in de analyse "De app staat op 2,7 in Google Play" → "2,9" (in `scripts/modellen_teksten.json` en `modellen_analyse.json`). Per model stond 2,7 precies één keer in de minpunten en één keer in de analyse, niet in de pluspunten. Niet aangepast: "uit ruim 1.100 beoordelingen" in dezelfde zin (het aantal beoordelingen bij 2,9 staat niet in het Excel-bestand).
+- **Verbinding** (`scripts/verbinding_toewijzing.json`, omzetting met `excel_naar_json.py`): M056 "module" ("Losse 4G-module", bronveld "Verborgen kosten"), M053 "module" ("Losse 4G-module", bronveld "Verborgen kosten"), M046 "wifi" ("Wifi", bronveld "Extra kosten: abonnement / verbinding"). Elk bronveld heeft precies één regel, alle drie met status fabrikantclaim.
+- Alleen die velden zijn geüpload; het script weigert als er meer verandert (gecontroleerd). LiteSpeed is daarbij geleegd.
+- **Kaarten op openbare pagina's die nog geen verbindingschip hebben:** Eufy E18 (M007) en C15 met garage (M052) op de Eufy-pagina; Worx WR365E (M047) op de Worx-pagina; Stihl iMOW 3 EVO (M027) en iMOW 3 (M026) op de Stihl-pagina; Gardena Sileno city 250 (M025, bewust zonder chip sinds ronde 52) op de Gardena-pagina. Daarnaast hebben deze modellen met een score geen verbinding, maar staan ze op geen openbare kaart: M003, M035, M054, M055, M057, M058.
+
+### 2. Kleine-tuinpagina (#16, `scripts/ronde73_kleine_tuin.py`), met de hand
+- (a) Betrouwbaarheid: "De Roborock Q105 heeft nog helemaal geen reviews." → "Voor zeven van de twaalf modellen hebben we geen reviews gevonden, waaronder de Roborock Q105 en de Stihl iMOW 3 EVO."
+- (b) "95 tot 239 euro" → "94,99 tot 239 euro".
+- (c) 4G en GPS: "… Mova ViAX en Eufy C15 is het een losse module" → "… Mova ViAX, Eufy C15 en Worx WR303E (149 euro) is het een losse module".
+- (d) Keuzetabel, rij "Tuin tot 500 m² met hellingen tot 45%": "Navimow i205 AWD of Roborock RockNeo Q105 (zonder draad), of Stihl iMOW 3 EVO (met draad)".
+- Status, slug, titel en metabeschrijving zijn gelijk gebleven; de inhoud is zoals bedoeld en live gecontroleerd (elke nieuwe tekst één keer).
+- **Let op: deze teksten zijn met de hand gewijzigd en staan niet in `pagina-robotmaaier-kleine-tuin.md` of `scripts/ronde71/kleine-tuin.json`. De pagina is dus niet uit de md opnieuw te bouwen:** `ronde71_bouw.py` + `ronde71_pagina.py` zouden ronde 73, de links van ronde 72 en het uitgeschreven auteursblok weghalen. Wijzigen alleen nog via de API met gerichte vervangingen en een kopie vooraf (zoals bij de Mova-pagina, besluit ronde 70).
+
+### 3. Controles
+- Momentopname van alle 25 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk.** Tekstverschillen:
+  - de vier zinnen op de kleine-tuinpagina;
+  - de M004/M005-teksten (2,9) op /beste-robotmaaier/, /robotmaaier-zonder-draad/ en /mova-dreame-robotmaaier/;
+  - de nieuwe chips (kleine-tuinpagina; Worx-pagina "Wifi" bij de WR303E; Eufy-pagina "module" bij de C15 Solo);
+  - de volgorde in "Onlangs bijgewerkt" (home).
+- Kleine-tuinpagina, chips: Navimow 4G, 4G; Roborock Q105 **module**; ViAX 500 module; Worx WR303E **Wifi**; ViAX 250 module; Eufy C15 Solo **module**.
+- M004/M005 noemen nu op elke kaart twee keer 2,9 en geen 2,7: hub /beste-robotmaaier/ (alleen M005; M004 staat daar niet als kaart), pagina 1 /robotmaaier-zonder-draad/ (M004 en M005) en de Mova-pagina (M004 en M005).
+- De zes gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle ankers bestaan, 0 JavaScript-fouten. Invulvelden: geen op de kleine-tuinpagina.
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 25 Bol-regels op 25 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (bij de upload, na de paginawijziging). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; editortabs van #16, de Mova-pagina, de hub en pagina 1 sluiten of herladen vóór opnieuw opslaan.
+- [ ] Open: de verbindingschips hierboven.
