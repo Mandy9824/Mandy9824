@@ -3620,3 +3620,31 @@ Kopie vooraf: `backups/footer-methode-voor-20261031-183008.json` (#76 en de foot
 - Chromium 390 en 1440 px (home, methode, beste, affiliate-melding, Worx): HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, voettekst en link zichtbaar (wit op de donkere footer), sectie en inhoudsregel aanwezig, geen verzoek naar Amazon.
 - LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd opgeslagen, gecontroleerd).
 - **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), want de footer staat op alle pagina's.
+
+## Ronde 77 (31 oktober 2026): versiesecties samengevoegd, "(concept tot bevriezing)" uit de paginatekst (met de hand, zonder thema-zip)
+
+**Deze teksten zijn met de hand gewijzigd** (via `scripts/ronde77_versies_scoremodel.py`, niet uit een md van Mandy): ze staan in geen enkel bron- of patroonbestand en een nieuwe paginabouw uit de oude scripts zet de oude tekst terug. Kopie van alle 14 pagina's vooraf: `backups/versies-scoremodel-voor-20261031-183523.json` (terugzetten: `scripts/ronde77_versies_scoremodel.py --terug <kopie> --schrijf`). Elke zoektekst precies zo vaak gevonden als verwacht; alle pagina's bleven gepubliceerd, inhoud zoals bedoeld.
+
+### 1. Methodepagina (#76)
+- Oude sectie "Versies" (kop en sectie, id `versies`) weg. In "Versie en wijzigingen" blijven de kop en de tekst van ronde 76; eronder een lijst:
+  - "5 oktober 2026: eerste concept, zeven onderdelen met vaste gewichten. Voor het bevriezen aangepast: … (de volledige tekst van de oude eerste regel). Voor het bevriezen vervangen we de trappen in de schalen voor helling, geluid, betrouwbaarheid en app-rating door vloeiende schalen. Dat noteren we hier." (de oude tweede regel, letterlijk, toegevoegd aan de concept-regel)
+  - "oktober 2026: v1.0."
+- "Op deze pagina": de link "Versies" weg; één link naar de versiesectie ("Versie en wijzigingen"). Geen andere pagina linkte naar `#versies`.
+- Eyebrow bovenaan: "Scoremodel v1.0".
+- **Open vraag aan Mandy:** de zin "Voor het bevriezen vervangen we de trappen … door vloeiende schalen" was een voornemen. Als v1.0 nu vaststaat zonder die vloeiende schalen, klopt die zin niet meer; ik heb hem niet aangepast.
+
+### 2. "Scoremodel v1.0 (concept tot bevriezing)" in de paginatekst: 15 plekken op 14 pagina's
+- Bronnenlijst-regel (link naar /hoe-we-beoordelen/#scoremodel) → "Scoremodel v1.0", 1× op elk van: beste-robotmaaier, robotmaaier-zonder-draad, robotmaaier-test-vergelijking, robotmaaier-zonder-grensdraad, robotmaaier-kosten, robotmaaier-kleine-tuin, husqvarna-, gardena-, stihl-, worx-, segway-navimow-, mova-dreame- en eufy-robotmaaier (13×). Die regel is zelf al de link naar de methode; er is geen "Hoe we scoren"-link bijgezet.
+- Tabelbijschrift robotmaaier-test-vergelijking: "Voorlopige functiescores volgens scoremodel v1.0 (concept tot bevriezing). …" → "…volgens scoremodel v1.0. …" (1×; geen link in dat bijschrift, dus geen toegevoegd).
+- Eyebrow #76 (1×, zie boven).
+- Geen concepten of andere pagina's met deze tekst.
+
+### Blijft staan tot thema 1.3.14 (themacode, niet in de paginatekst)
+- `inc/score.php`: scoreblok-voet "Scoremodel v1.0 (concept tot bevriezing)" (regel 205) en het bijschrift van de scoretabel "Scores volgens scoremodel v1.0 (concept tot bevriezing)…" (regel 262). Live nog zichtbaar: 1× op robotmaaier-zonder-draad (bijschrift scoretabel).
+- Patronen met dezelfde tekst: `patterns/scoreblok.php`, `scoreblok-voorlopig.php`, `scoretabel.php`, `vergelijkingstabel.php`, `bronnenlijst.php`, `pagina-methode.php` (en `patterns-bron/`), plus `data/modellen.json` ("scoremodel") en het commentaar in rmk.js.
+- **Mee in 1.3.14:** deze plekken en `patterns/footer.php` (al bijgewerkt in ronde 76).
+
+### 3. Controles
+- Momentopname van alle 25 adressen vóór en na: kaarten, scores, volgorde en alle affiliatelinks gelijk; geen nieuwe "[" in de tekst. Verschillen alleen de bedoelde teksten, plus: het automatische blok "Onlangs bijgewerkt" op de homepage en de auteurspagina toont nu deze pagina's, en de datum "bijgewerkt op" van de 14 pagina's is nu 31 oktober 2026 (automatisch uit de wijzigingsdatum, `inc/redactie.php`).
+- Chromium 390 en 1440 px (de 14 gewijzigde pagina's en de homepage): HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[" of invulveld (de invoervelden zijn de bestaande filters, keuzehulp en calculator), scores en volgorde gelijk, geen verzoek naar Amazon.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
