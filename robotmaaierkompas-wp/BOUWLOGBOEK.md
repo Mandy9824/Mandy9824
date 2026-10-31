@@ -3352,3 +3352,31 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 ### Nog te doen
 - [ ] Mandy: CDN legen; de vernieuwde Mova-pagina nalezen (ook de meldingen bij punt 2); editortabs van #351 sluiten/herladen vóór opslaan.
 - [ ] Mandy: Search Console: indexering opnieuw aanvragen voor /mova-dreame-robotmaaier/.
+
+## Ronde 69 (31 oktober 2026): verbindingschip M059-M064, drie tekstwijzigingen Mova-pagina, Eufy-linkscript (zonder thema-zip)
+
+**Kopie vooraf:** `backups/ronde69-pagina351-voor-20261031-131832.json` (live inhoud gelijk aan `scripts/ronde68/mova.json`) en vlak voor de tekstwijziging `backups/ronde69-tekst-pagina351-voor-20261031-132145.json` (niet in git).
+
+### 1. Verbinding op de kaarten (`scripts/verbinding_toewijzing.json`, `scripts/ronde69_verbinding.py`)
+- Vier toewijzingen erbij, alle met bronveld "Verbinding / 4G" (precies één bronregel per model, gecontroleerd, 26 oktober, handleiding NL): **M059 en M060 `ingebouwd`** (chip "4G"; teksten "4G ingebouwd; na het eerste jaar betaald" en "… na 3 jaar betaald"), **M063 en M064 `module`** ("Losse link-module").
+- Omzetting opnieuw (`excel_naar_json.py`, ongewijzigd); alleen het veld `verbinding` van deze vier geüpload. Het script weigert als er iets anders verandert (gecontroleerd: alle andere velden en modellen en de algemene velden gelijk). Kopie: `backups/modellen-voor-ronde69.json`.
+- Momentopname alle 24 openbare adressen vóór en na: alleen op /mova-dreame-robotmaaier/ vier chips erbij (1600 en 1000 AWD "Verbinding 4G", ViAX 500 en 250 "Verbinding module"); verder overal gelijk.
+
+### 2-4. Tekst Mova-pagina (#351, `scripts/ronde69_mova_tekst.py`)
+Elke oude tekst precies één keer gevonden; status, slug, titel en meta ongewijzigd.
+- Garantie: "Voor de andere modellen hebben we dat niet gecontroleerd." → "Bij de LiDAX Ultra 1600, de LiDAX Ultra 1000 AWD en de ViAX 500: 3 jaar hoofdeenheid, laadstation, adapter en motoren; 2 jaar accu en LiDAR; messen geen garantie (Mova aftersales-beleid NL). Bij de ViAX 250: 3 jaar hoofdeenheid, laadstation, adapter en motoren; 2 jaar accu; messen geen garantie (Mova aftersales-beleid NL)." (letterlijk uit Modellen/Bronnen, rij Garantie).
+- Wat we nog niet weten: de zin over de ViAX 500 vervangen door de zin met de ViAX 500 (6 bij Coolblue) en de LiDAX Ultra 800 (5 bij MediaMarkt NL).
+- Het korte antwoord: "acht" → "minstens acht".
+- **Let op:** opnieuw bouwen met `scripts/ronde68_bouw.py` uit de md zet deze drie zinnen terug.
+
+### 5. Eufy-linkscript (`scripts/ronde67_links.py`)
+- Stap voor #351 eruit (de link staat er sinds ronde 68). Proefdraai: 8 regels toe te voegen, geen meldingen. **Niet gedraaid.**
+
+### Controles
+- Mova-pagina op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, ankers in orde (behalve de bestaande footerknop #cookie-instellingen). Kaarten en scores: 87,3 · 87,3 · 80,5 · 80,5 · 78,6 · 75,9 · 68,6.
+- Momentopname alle 24 adressen na de tekstwijziging: alleen de drie zinnen op de Mova-pagina anders; kaarten, scores, volgorde en winkel-links overal gelijk. Bol-controle: 23 Bol-regels op 24 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; editortabs van #351 sluiten/herladen vóór opslaan.
+- [ ] Claude, op Mandy's woord: `scripts/ronde67_links.py --schrijf` (Eufy-links).

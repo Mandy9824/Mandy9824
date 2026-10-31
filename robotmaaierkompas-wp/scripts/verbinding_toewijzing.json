@@ -1,5 +1,5 @@
 {
-  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen). Ronde 52: M023 en M024 (Gardena Sileno Minimo) 'Bluetooth' (GARDENA Bluetooth App); M025 bewust zonder regel, dus zonder chip.",
+  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen). Ronde 52: M023 en M024 (Gardena Sileno Minimo) 'Bluetooth' (GARDENA Bluetooth App); M025 bewust zonder regel, dus zonder chip. Ronde 69: M059 en M060 'ingebouwd' (chip 4G), M063 en M064 'module' (bronveld 'Verbinding / 4G').",
   "toewijzingen": [
     {
       "model": "M002",
@@ -102,6 +102,30 @@
       "bronveld": "App: iOS/Android, kaart/no-go, schema, smart home, knoppen, OTA",
       "tekst": "Bluetooth",
       "extra": "bluetooth"
+    },
+    {
+      "model": "M059",
+      "bronveld": "Verbinding / 4G",
+      "tekst": "4G ingebouwd; na het eerste jaar betaald",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M060",
+      "bronveld": "Verbinding / 4G",
+      "tekst": "4G ingebouwd; na 3 jaar betaald",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M063",
+      "bronveld": "Verbinding / 4G",
+      "tekst": "Losse link-module",
+      "extra": "module"
+    },
+    {
+      "model": "M064",
+      "bronveld": "Verbinding / 4G",
+      "tekst": "Losse link-module",
+      "extra": "module"
     }
   ]
 }

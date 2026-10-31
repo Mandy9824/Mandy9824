@@ -3,7 +3,7 @@
 Weigert zolang eufy-robotmaaier (#366) geen status publish heeft.
 1. Hub (#10), "Meer lezen": regel na de Mova/Dreame-regel: "Alle Eufy-robotmaaiers vergeleken: zie Eufy robotmaaier."
 2. Pagina 1 (#11), onder "De modellen een voor een": dezelfde zin na de Mova/Dreame-zin.
-3. Navimow- (#264), Husqvarna- (#20), Gardena- (#21), Stihl- (#22), Worx- (#24) en Mova/Dreame-pagina (#351),
+3. Navimow- (#264), Husqvarna- (#20), Gardena- (#21), Stihl- (#22), Worx-pagina (#24) (de Mova/Dreame-pagina #351 niet meer: die link staat er sinds ronde 68 al),
    "Meer lezen": "Eufy robotmaaier: de E15, E18 en C15 vergeleken."
 4. Eufy-pagina (#366), "Meer lezen" (na de Worx-regel): Segway Navimow en Mova of Dreame, met dezelfde teksten als op
    de andere merkpagina's.
@@ -36,7 +36,6 @@ STAPPEN = [
     (21, MOVA_ML, MOVA_ML[:-5] + EML, 'Gardena-pagina, Meer lezen', '/eufy-robotmaaier/'),
     (22, MOVA_ML, MOVA_ML[:-5] + EML, 'Stihl-pagina, Meer lezen', '/eufy-robotmaaier/'),
     (24, MOVA_ML, MOVA_ML[:-5] + EML, 'Worx-pagina, Meer lezen', '/eufy-robotmaaier/'),
-    (351, WORX_ML, WORX_ML[:-5] + EML, 'Mova/Dreame-pagina, Meer lezen', '/eufy-robotmaaier/'),
     (PID_NIEUW, WORX_ML, WORX_ML[:-5] + f'<li>{NL}: alle modellen die nu nieuw te koop zijn.</li>' + MOVA_ML,
      'Eufy-pagina, Meer lezen', '/segway-navimow-robotmaaier/'),
 ]
