@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Ronde 68: nieuwe inhoud voor de gepubliceerde pagina /mova-dreame-robotmaaier/ (#351) uit pagina-mova-robotmaaier-v2.md
+"""NIET MEER GEBRUIKEN (besluit ronde 70): de Mova-pagina (#351) wordt nooit opnieuw met dit script gebouwd, alleen
+nog via de API gewijzigd (gerichte vervangingen met kopie vooraf). Opnieuw bouwen zou ronde 69 en latere wijzigingen weghalen.
+
+Ronde 68: nieuwe inhoud voor de gepubliceerde pagina /mova-dreame-robotmaaier/ (#351) uit pagina-mova-robotmaaier-v2.md
 (afgeleid van ronde63_bouw.py).
 
 Gebruik:  python3 scripts/ronde68_bouw.py pagina-mova-robotmaaier-v2.md robotmaaierkompas_modeldata_v1.xlsx modellen.json live351.html

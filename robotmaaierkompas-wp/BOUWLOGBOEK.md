@@ -3380,3 +3380,28 @@ Elke oude tekst precies één keer gevonden; status, slug, titel en meta ongewij
 ### Nog te doen
 - [ ] Mandy: CDN legen; editortabs van #351 sluiten/herladen vóór opslaan.
 - [ ] Claude, op Mandy's woord: `scripts/ronde67_links.py --schrijf` (Eufy-links).
+
+## Ronde 70 (31 oktober 2026): Eufy-links gezet (zonder thema-zip)
+
+Mandy: /eufy-robotmaaier/ (#366) is gepubliceerd.
+
+### Links (`scripts/ronde67_links.py`, zonder de stap voor #351)
+- Proefdraai zonder meldingen, daarna `--schrijf`. Kopie: `backups/ronde67-links-voor-20261031-133127.json` (niet in git). Alle acht pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd en live gecontroleerd (openbare HTML, elke Eufy-link **precies één keer**):
+  - hub #10 ("Meer lezen") en pagina 1 #11: "Alle Eufy-robotmaaiers vergeleken: zie Eufy robotmaaier.";
+  - Navimow #264, Husqvarna #20, Gardena #21, Stihl #22 en Worx #24, "Meer lezen": "Eufy robotmaaier: de E15, E18 en C15 vergeleken.";
+  - Eufy #366, "Meer lezen": Segway Navimow en Mova of Dreame.
+  - Mova/Dreame #351 had de Eufy-link al (ronde 68): ook daar precies één keer.
+- Alle 23 interne adressen in de inhoud van de 24 openbare pagina's: HTTP 200.
+
+### Controles
+- Momentopname alle 24 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen alleen de nieuwe regels, plus (automatisch, uit de wijzigingsdatum) "bijgewerkt op 31 oktober 2026" en "Laatst nagekeken op 31 oktober 2026" op de acht gewijzigde pagina's, en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- Alle 24 adressen op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten (alleen bol-foto's van media.s-bol.com die vanuit deze omgeving niet laden), geen "[", "]", "{", "}", alle ankers bestaan (behalve de footerknop #cookie-instellingen, JavaScript). Invoervelden alleen de bestaande hulpmiddelen: tuinkeuzehulp (hub, pagina 1, zonder grensdraad), filter (pagina 2), calculator (kosten).
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 23 Bol-regels op 24 adressen, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Besluit: Mova-pagina nooit opnieuw bouwen
+- **De Mova-pagina /mova-dreame-robotmaaier/ (#351) mag nooit opnieuw met `scripts/ronde68_bouw.py` gebouwd worden.** Wijzigen alleen via de API: gerichte vervangingen (elk anker precies één keer), met een kopie vooraf, zoals `scripts/ronde69_mova_tekst.py`. Opnieuw bouwen zou o.a. de drie zinnen van ronde 69 weghalen. Dit staat ook bovenaan `scripts/ronde68_bouw.py`.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /eufy-robotmaaier/.
