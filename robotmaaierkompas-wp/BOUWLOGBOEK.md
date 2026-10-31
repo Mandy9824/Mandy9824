@@ -3648,3 +3648,63 @@ Kopie vooraf: `backups/footer-methode-voor-20261031-183008.json` (#76 en de foot
 - Momentopname van alle 25 adressen vóór en na: kaarten, scores, volgorde en alle affiliatelinks gelijk; geen nieuwe "[" in de tekst. Verschillen alleen de bedoelde teksten, plus: het automatische blok "Onlangs bijgewerkt" op de homepage en de auteurspagina toont nu deze pagina's, en de datum "bijgewerkt op" van de 14 pagina's is nu 31 oktober 2026 (automatisch uit de wijzigingsdatum, `inc/redactie.php`).
 - Chromium 390 en 1440 px (de 14 gewijzigde pagina's en de homepage): HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[" of invulveld (de invoervelden zijn de bestaande filters, keuzehulp en calculator), scores en volgorde gelijk, geen verzoek naar Amazon.
 - LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+## Ronde 78 (31 oktober 2026): nieuwe topmodellen op pagina 1 en de hub, MET DE HAND gewijzigd (zonder thema-zip), zonder M058
+
+Aangeleverd: `tekstwijzigingen-pagina1-hub-nieuwe-modellen.md`, `modellen-teksten-ecovacs.json` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alle drie alleen gelezen, **niet in de repository**).
+
+**Let op: pagina 1 (#11) en de hub (#10) zijn in deze ronde met de hand gewijzigd** (gerichte vervangingen via de API met `scripts/ronde78_p1_hub.py`, niet uit een md gebouwd). Ze zijn niet uit een md of bouwscript opnieuw te bouwen zonder deze wijzigingen (en eerdere links) kwijt te raken. Wijzigen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+**Kopieën vooraf** (niet in git): `backups/ronde78-pagina11-10-voor-20261031-184319.json` (eerste kopie, vóór alles), `backups/ronde78-voor-20261031-185524.json` (vlak vóór het schrijven; gelijk aan de eerste) en `backups/modellen-voor-ronde78-20261031-184741.json`.
+Naamgeving: deze sessie begon op de stand van ronde 67; rondes 68-77 stonden al op de remote tak. Eerst bijgewerkt, daarna verder als ronde 78.
+
+### 1. M058-teksten (dataroute, `scripts/ronde78_m058_teksten.py`)
+- `modellen-teksten-ecovacs.json` toegevoegd aan `scripts/modellen_teksten.json` (beste_voor, plus- en minpunten) en `modellen_analyse.json` (analyse). Omzetting met `excel_naar_json.py` (ongewijzigd): voor M058 verschillen alleen die vier velden met live. **Alleen die vier velden van M058 zijn geüpload**; de andere 63 modellen, de andere velden van M058 en de algemene velden zijn gelijk gebleven (het script weigert anders; na de upload gecontroleerd).
+- Momentopname van de 25 openbare adressen vóór en na: geen verschil (M058 staat op geen enkele openbare pagina).
+
+### 2. M058 heeft op de site geen score: besluit Mandy
+- Excel (blad Scores) geeft M058 **79,5** met Veiligheid 3,75, dus alarm = 0. In het blad Bronnen heeft Alarm voor M058 de status **"niet gevonden"**. De omzetter maakt daar null van, dus heeft Veiligheid geen waarde, en met 4 van 7 onderdelen is er **geen functiescore** (themacode). Het nieuwe Excel-bestand verandert dat niet.
+- Gevolg als M058 was geplaatst: onderaan de scoretabel van pagina 1 met "–", kaart "Geen score", terwijl de hub 79,5 noemt en de analyse zegt "In onze functiescore krijgt hij 79,5".
+- **Besluit Mandy:** alles toepassen behalve M058; hub "zeven" in plaats van "acht", pagina 1 "vierentwintig" in plaats van "vijfentwintig". De M058-teksten blijven (onzichtbaar) in de modelgegevens.
+
+### 3. Pagina 1 (#11, /robotmaaier-zonder-draad/)
+- A1 metabeschrijving: "Tien robotmaaiers …" → "Meer dan twintig robotmaaiers …".
+- A2 "tien" → "vierentwintig" op de **enige twee plekken**: het korte antwoord ("We vergeleken vierentwintig modellen …") en de kop "Vergelijking van de vierentwintig modellen". Verder komt "tien" niet voor op pagina 1.
+- A3 scoretabel, 24 modellen: `M015,M002,M016,M010,M059,M060,M056,M057,M005,M004,M008,M001,M064,M046,M047,M020,M022,M063,M006,M007,M052,M053,M011,M055` (op functiescore; bij gelijke score op ID; de bestaande tien in hun volgorde). Live: 96,4 · 92,7 · 92,7 · 87,3 · 87,3 · 87,3 · 84,1 · 84,1 · 80,5 · 80,5 · 78,6 · 75,9 · 75,9 · 72,3 · 72,3 · 69,5 · 69,5 · 68,6 · 63,2 · 63,2 · 62,3 · 62,3 · 60,9 · 60,9.
+  - **"uitlopend" bij M001: op pagina 1 staat nu geen aantekening "uitlopend"** (niet in de tabel en niet op de kaart; de analyse zegt "verkoopt hem nog alleen refurbished"). Niets toegevoegd.
+- A4 "Welke past bij jouw tuin?" (drie kolommen; de derde cel is de tekst van Mandy): Steile tuin (80% helling volgens Mova) | Mova LiDAX Ultra 1000 AWD | "80% helling, vierwielaandrijving en 4G ingebouwd met 3 jaar gratis service volgens Mova"; Tuin tot 1.600 m² met 4G en GPS ingebouwd | Mova LiDAX Ultra 1600 | "Tot 1.600 m² en 45% helling, 4G en GPS ingebouwd met 1 jaar gratis service volgens Mova"; Kleine tuin tot 600 m² | Zie Robotmaaier kleine tuin (link) | "Twaalf modellen tot 600 m² vergeleken, van de Mova ViAX 250 tot de Navimow i206 AWD". Rij "Grote tuin tot 3.000 m²" (M058) weggelaten.
+- A5 kaarten M059, M060 en M056 direct na M010 (skelet van de Mova-pagina #351 en de kleine-tuinpagina #16). M058-kaart weggelaten.
+- A6 onder de tabel (na de alinea "De volgorde volgt de functiescore …"): "Per merk vergelijken we de modellen uitgebreider op Segway Navimow, Husqvarna, Gardena, Stihl, Worx, Mova en Dreame en Eufy." met zeven links. **Gemeld:** de zin stond er niet, maar **alle zeven merklinks stonden al op pagina 1**, in de regels onder "De modellen een voor een". Ze staan er nu dus twee keer.
+
+### 4. Hub (#10, /beste-robotmaaier/)
+- B1 metabeschrijving: "Zes keuzes …" → "Zeven keuzes …". B2 korte antwoord: "zes modellen" → "zeven modellen".
+- B3 "In een oogopslag": rij "Steile tuin (80% helling volgens Mova) | Mova LiDAX Ultra 1000 AWD | 87,3" na Husqvarna (87,3, gelijke score, op ID). De modelnaam linkt, net als de andere rijen, naar de kaart. **Gemeld:** de bestaande tabel staat niet helemaal op score (i206 92,7 vóór i210 96,4); niet veranderd. Rij Ecovacs weggelaten.
+- B4 na het Husqvarna-onderdeel: H3 "Steile tuin: Mova LiDAX Ultra 1000 AWD", kaart M060, "Waarom deze" uit de md. Onderdeel Ecovacs weggelaten.
+- B5 **"zes keuzes" staat niet in de inhoud van de hub** (alleen "Zes keuzes" in de metabeschrijving, zie B1). "Alle tien modellen naast elkaar" → "Alle vierentwintig modellen naast elkaar". **Extra (zelfde verwijzing naar pagina 1, zoals in ronde 40):** in "Meer lezen" "de tien modellen vergeleken" → "de vierentwintig modellen vergeleken".
+
+### 5. Gegevens in de tekst tegen het Excel-bestand
+- Alle scores in de md en in de tabellen gelijk aan het blad Scores en aan de themacode, **behalve M058** (zie punt 2).
+- M060: 80% (38,7°), vierwielaandrijving, 4G 3 jaar gratis, 66 dB(A), 1.000 m². M059: 1.600 m², 45%, 4G en GPS ingebouwd, 1 jaar gratis. Kleine tuin: 12 modellen tot 600 m², kleinste ViAX 250 (250 m²), grootste i206 AWD (600 m²). M058 (teksten): 3.000 m², 50% (fabrikantclaim), 62 dB(A), app 4,33, pincode, kantknipper, egels, garantie 3/2 jaar, geen smart home, 0 reviews, GPS/4G alleen met module. **Geen afwijkingen, behalve:**
+  1. M058-analyse "In onze functiescore krijgt hij 79,5": klopt met Excel, maar de site berekent geen score (punt 2). Zichtbaar zodra M058 een kaart krijgt.
+  2. "De grootste draadloze maaier in onze selectie" (hub-tekst en analyse M058): in het Excel-bestand staan ook Cramer AiConic 3 (3.000 m²) en AiConic 5/8/12 (5.000-12.000 m², RTK+vision, zonder draad), met beschikbaarheid "niet bevestigd". Klopt alleen voor de modellen die nieuw te koop zijn of op de site staan.
+
+### 6. Controles
+- Momentopname van de 25 openbare adressen vóór en na: **op de andere 23 pagina's zijn kaarten, scores, volgorde, winkel-links en tekst gelijk gebleven.** Verschillen alleen op de hub en pagina 1 (de bedoelde wijzigingen) en in het automatische blok "Onlangs bijgewerkt" (home, auteurspagina).
+- Hub: 7 kaarten 92,7 · 96,4 · 87,3 · 87,3 · 80,5 · 78,6 · 60,9. Pagina 1: 13 kaarten. Nergens "M058", "Ecovacs", "tien", "zes", "acht" of "vijfentwintig" in de inhoud van #10 en #11.
+- Winkelregels per kaart (hub en pagina 1, 20 kaarten): Coolblue alleen bij `op_de_site` in de Coolblue-status; Amazon alleen bij `knop: true`, href exact `https://www.amazon.nl/dp/<ASIN>?tag=robotmaaier-21`, `rel="sponsored nofollow"`, als laatste regel: **0 fouten**. Nieuw: M059 Amazon-knop; M056 Bol (799, partner) en Coolblue; M060 alleen "Bekijk de actuele prijs". Bol-controle: **26 Bol-regels op 25 adressen (+1: M056 op pagina 1), 0 fouten.** Geen link gevolgd of aangeklikt; geen verzoek naar Amazon.
+- Chromium op 390 en 1440 px (hub, pagina 1): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", invoervelden alleen de bestaande tuinkeuzehulp, 0 JavaScript-fouten (in de console alleen bol-foto's van media.s-bol.com, die in de test geblokkeerd zijn). Hub: alle ankers bestaan.
+- **Gevonden, niet opgelost:** in de scoretabel van pagina 1 zet het thema bij elke rij een link "Details" naar `#p-<slug>`. Bij de **11 modellen die alleen in de tabel staan** (M057, M064, M046, M047, M020, M022, M063, M007, M052, M053, M055) bestaat dat anker niet, dus de link doet niets. Oplossen kan met kaarten voor die modellen, of in de themacode ("Details" alleen als de kaart op de pagina staat, voor 1.3.14).
+- Ook gezien: bij M055 (Gardena SILENO free 1500) is "Beste voor" leeg (geen tekst in de modelgegevens). Het bijschrift van de scoretabel zegt nog "(concept tot bevriezing)" (themacode, gaat mee in 1.3.14, zie ronde 77).
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Beide pagina's: status publish, slug ongewijzigd.
+- LiteSpeed geleegd via de dataroute (bij de M058-upload en na de paginawijziging; modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### M058 later toevoegen (open)
+Zodra de alarmbron van M058 is vastgelegd en de score op de site zichtbaar is (79,5): in een nieuwe ronde, via de API met gerichte vervangingen:
+- hub: "zeven" → "acht" (metabeschrijving en korte antwoord), rij "Grote tuin tot 3.000 m² | Ecovacs GOAT A3000 LiDAR Pro | 79,5" na Mova 1200, onderdeel "Grote tuin tot 3.000 m²: Ecovacs GOAT A3000 LiDAR Pro" met kaart en "Waarom deze" uit de md, na het Mova 1200-onderdeel;
+- pagina 1: "vierentwintig" → "vijfentwintig" (korte antwoord, kop, en op de hub "Alle … modellen naast elkaar" en "Meer lezen"), M058 tussen M004 en M008 in de scoretabel, rij "Grote tuin tot 3.000 m²" (derde cel nog aan te leveren), kaart vóór M008.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; editortabs van #10 en #11 sluiten of herladen vóór opnieuw opslaan.
+- [ ] Mandy: alarmbron M058 vastleggen; daarna M058 toevoegen (zie hierboven).
+- [ ] Mandy: besluit over de "Details"-links naar modellen zonder kaart op pagina 1.
+- [ ] Open: bronnenlijsten van pagina 1 en de hub hebben nog geen bronnen voor de nieuwe modellen (niet in de md).

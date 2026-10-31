@@ -471,5 +471,21 @@
       "Nog geen reviews gevonden",
       "Geen officiële prijs voor de 4G-module gevonden"
     ]
+  },
+  "M058": {
+    "beste_voor": "Grote tuinen tot 3.000 m² zonder draad, met obstakelherkenning en hellingen tot 50%",
+    "pluspunten": [
+      "LiDAR (360 graden en 3D) met AI-camera, zonder draad of antenne",
+      "Tot 3.000 m² en helling 50% volgens Ecovacs",
+      "Herkent obstakels, ook egels, en wijkt ze uit",
+      "Pincode, kaart met zones en no-go-gebieden, ingebouwde kantknipper",
+      "3 jaar garantie op het apparaat, 2 jaar op de accu"
+    ],
+    "minpunten": [
+      "Luider: 62 dB(A)",
+      "GPS en 4G alleen met een losse module; geen diefstalalarm genoemd",
+      "Geen koppeling met slimme thuissystemen genoemd",
+      "Nog geen onafhankelijke reviews gelezen: geen betrouwbaarheidsscore"
+    ]
   }
 }
