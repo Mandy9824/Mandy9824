@@ -3462,3 +3462,27 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 ### Nog te doen
 - [ ] Mandy: CDN legen; de kleine-tuinpagina nalezen (ook de meldingen bij punt 2) en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde71_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 72 (31 oktober 2026): kleine-tuinpagina gepubliceerd, links gezet
+
+Mandy: /robotmaaier-kleine-tuin/ (#16) is gepubliceerd (slug en metabeschrijving zoals gezet, geen bovenliggende pagina).
+
+- **Gepubliceerde inhoud vergeleken met `scripts/ronde71/kleine-tuin.json`:** het enige verschil is het auteursblok, dat in de editor is omgezet van patroonverwijzing naar uitgeschreven HTML (revisie 380), net als bij Stihl, Worx en Mova. Verder gelijk; de metabeschrijving is gelijk. Opnieuw bouwen met `ronde71_bouw.py` zou de links hieronder weghalen.
+
+### Links (`scripts/ronde71_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde71-links-voor-20261031-170022.json` (niet in git). Alle tien pagina's bleven gepubliceerd; de inhoud is zoals bedoeld.
+- Toegevoegd en live gecontroleerd (openbare HTML):
+  - hub #10 ("Meer lezen") en pagina 1 #11: "Op zoek naar een robotmaaier voor een kleine tuin? Zie Robotmaaier kleine tuin.";
+  - Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351 en Eufy #366, "Meer lezen": "Robotmaaier voor een kleine tuin: twaalf modellen tot 600 m²." Op elke pagina staat de link naar /robotmaaier-kleine-tuin/ **precies één keer**;
+  - kleine-tuinpagina #16, "Meer lezen": Segway Navimow, Mova of Dreame, Worx, Eufy, Stihl, Husqvarna (elk één keer).
+
+### Controles
+- Momentopname van alle 25 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen zijn alleen de nieuwe regels en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- Kleine-tuinpagina live: 92,7 · 92,7 · 84,1 · 75,9 · 72,3 · 68,6 · 62,3.
+- De tien gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle ankers bestaan, 0 JavaScript-fouten (in de console alleen bol-foto's van media.s-bol.com, die in de test geblokkeerd zijn).
+- De interne adressen (14) en de nieuwe pagina: HTTP 200. Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 25 Bol-regels op 25 adressen (+2 op de nieuwe pagina: M002 en M056), 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /robotmaaier-kleine-tuin/; editortabs van #16 sluiten/herladen vóór opnieuw opslaan.
+- [ ] Open uit ronde 71: teksten M004/M005 (app-rating 2,7), verbindingschips Roborock/Worx/Eufy, de vijf tekstmeldingen.
