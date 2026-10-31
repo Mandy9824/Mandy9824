@@ -85,5 +85,11 @@
   },
   "M064": {
     "analyse": "De Mova ViAX 500 is de kleine Mova met LiDAR en camera's, voor tuinen tot 500 m² en een helling tot 40%. Hij werkt zonder draad of antenne en is stil (57 dB(A)). GPS en een melding buiten de kaart vragen de losse Link-module, en je ontgrendelt hem met twee keer OK in plaats van een eigen pincode. Bij Coolblue staan 6 reviews met een gemiddelde van 8,7 van 10; wij hebben er vijf gelezen en geen enkele noemt een storing. Dat is te weinig voor een betrouwbaarheidsscore."
+  },
+  "M056": {
+    "analyse": "De Roborock RockNeo Q105 is voor tuinen tot 500 m² en navigeert met RTK via een meegeleverd referentiestation, aangevuld met een camera, zonder draad. Volgens het helpcentrum van Roborock haalt hij 45% helling. Er is een pincode, een alarm en het mes stopt bij optillen, en de app werkt met Alexa, Google Home en Siri. GPS-tracking kan alleen met de optionele 4G-module (1 jaar gratis data); een officiële prijs hebben we niet gevonden. Bij Coolblue staan nog geen reviews. In onze functiescore krijgt hij 84,1."
+  },
+  "M057": {
+    "analyse": "De Roborock RockNeo Q110 is de grotere variant van de Q105, voor tuinen tot 1.000 m². Hij gebruikt dezelfde techniek: RTK met een meegeleverd referentiestation en een camera, zonder draad, en een helling tot 45% volgens het helpcentrum van Roborock. Pincode, alarm en een mes-stop bij optillen zijn aanwezig, GPS-tracking vraagt de optionele 4G-module. In onze functiescore krijgt hij 84,1, gelijk aan de Q105."
   }
 }

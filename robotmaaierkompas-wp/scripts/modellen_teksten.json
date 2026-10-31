@@ -439,5 +439,37 @@
       "Helling 40%",
       "App-rating 2,9 in Google Play"
     ]
+  },
+  "M056": {
+    "beste_voor": "Tuinen tot 500 m² met hellingen tot 45%, zonder draad",
+    "pluspunten": [
+      "RTK met meegeleverd referentiestation en camera, zonder draad",
+      "Helling 45% volgens het helpcentrum van Roborock",
+      "Pincode, alarm en een mes dat stopt bij optillen",
+      "Werkt met Alexa, Google Home en Siri; ook met knoppen te bedienen",
+      "2 jaar garantie op apparaat en accu"
+    ],
+    "minpunten": [
+      "GPS-tracking alleen met de optionele 4G-module",
+      "Alarm gaat af buiten de omheining, maar geen melding in de app",
+      "App-rating 4,47 in Google Play, maar nog geen reviews bij Coolblue",
+      "Geen officiële prijs voor de 4G-module gevonden"
+    ]
+  },
+  "M057": {
+    "beste_voor": "Tuinen tot 1.000 m² met hellingen tot 45%, zonder draad",
+    "pluspunten": [
+      "RTK met meegeleverd referentiestation en camera, zonder draad",
+      "Helling 45% volgens het helpcentrum van Roborock",
+      "Pincode, alarm en een mes dat stopt bij optillen",
+      "Werkt met Alexa, Google Home en Siri",
+      "2 jaar garantie op apparaat en accu"
+    ],
+    "minpunten": [
+      "GPS-tracking alleen met de optionele 4G-module",
+      "Alarm gaat af buiten de omheining, maar geen melding in de app",
+      "Nog geen reviews gevonden",
+      "Geen officiële prijs voor de 4G-module gevonden"
+    ]
   }
 }

@@ -3405,3 +3405,60 @@ Mandy: /eufy-robotmaaier/ (#366) is gepubliceerd.
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /eufy-robotmaaier/.
+
+## Ronde 71 (31 oktober 2026): Roborock-teksten, M065, kleine wijzigingen in de modelgegevens, conceptpagina robotmaaier-kleine-tuin (zonder thema-zip)
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-robotmaaier-kleine-tuin.md`, `modellen-teksten-roborock.json`. **Niets gepubliceerd.**
+
+**Let op, naamgeving:** deze sessie begon op de stand van ronde 67 en noemde haar scripts eerst "ronde68_*". Rondes 68-70 (andere sessie, klaar om 13:36, vóór deze sessie) stonden al op de remote tak; ze liepen dus niet tegelijk. Mijn scripts heten nu `ronde71_*`. Bij het bijwerken van de tak werden drie nog niet vastgelegde scripts overschreven door de gelijknamige bestanden van ronde 68. Ik heb ze opnieuw gemaakt (zelfde inhoud); `ronde71_bouw.py` levert byte voor byte de inhoud die op #16 staat (gecontroleerd). De kopieën staan lokaal nog onder de oude naam: `backups/modellen-voor-ronde68.json` (modelgegevens vóór deze ronde) en `backups/ronde68-pagina16-voor.json` (niet in git).
+
+### 1. Modelgegevens (dataroute, `scripts/ronde71_upload.py`)
+- Omzetting met `excel_naar_json.py` (ongewijzigd) na het toevoegen van de Roborock-teksten aan `scripts/modellen_teksten.json` en `modellen_analyse.json`. Het script neemt **alleen** dit over en weigert als er meer verandert:
+  - **M056 en M057:** beste_voor, pluspunten, minpunten en analyse uit `modellen-teksten-roborock.json` (verder was de omzetting al gelijk aan live).
+  - **M061 en M062:** vierwielaandrijving leeg → "ja" (gecontroleerd, 31-10, nl.mova.tech en de handleiding).
+  - **M004 en M005:** app-rating 2,7 → 2,9 (alleen de waarde; bron, status en datum ongewijzigd).
+  - **M065 (Mova ViAX 300):** de omzetter slaat uitverkochte modellen over, dus als leeg record zoals M019 (ronde 43): naam, slug `mova-viax-300`, beschikbaarheid "uitverkocht", fabrikantpagina uit de kolom Fabrikantpagina (de pdf-handleiding ViAX 250/300). Geen specificaties, scores, prijs, EAN of teksten. Live slaat PHP `specs` op als `[]` (zoals bij M019); onschuldig.
+- **Niet overgenomen** (de omzetting wijkt ook voor veel andere modellen af: o.a. appwinkel-adressen in de bron, prijs, beschikbaarheid M036-M045, M019 valt eruit). **64 modellen live.**
+- Scores: de app-rating telt pas mee vanaf 4,0, dus 2,9 verandert niets; M061/M062 hebben geen score (basis).
+- **Controle:** momentopname (nieuw: `scripts/momentopname.js`, Chromium na rmk.js) van alle 24 openbare adressen vóór en na: **kaarten, scores, volgorde, winkel-links en zichtbare tekst overal gelijk.** "ViAX 300"/"mova-viax-300" komt op geen enkele openbare pagina voor.
+- **Let op:** de teksten van M004 en M005 zeggen nog "Rating van de app op Google Play 2,7" (minpunt) en "De app staat op 2,7 in Google Play" (analyse); zichtbaar op /beste-robotmaaier/, /robotmaaier-zonder-draad/ en /mova-dreame-robotmaaier/. Niet aangepast (opdracht: niets anders wijzigen).
+
+### 2. Tekst van pagina-robotmaaier-kleine-tuin.md tegen de bladen Kleine tuin, Modellen en Scores
+- **Geen afwijkingen** in oppervlak, helling, geluid, 4G/GPS en score per model (alle twaalf rijen), en de twaalf modellen zijn precies de twaalf van het blad Kleine tuin (acht zonder draad, vier met). Ook kloppen: 149 euro Find My Landroid (M046), 99 euro Eufy-module, app 2,64 (M046), draadkits Stihl 87/229 euro, Husqvarna 239 euro als bovengrens, i105E en Sileno-modellen als niet opgenomen (uitlopend).
+- **Gemeld, niet aangepast:**
+  1. "De Roborock Q105 heeft nog helemaal geen reviews": volgens Modellen heeft ook de **Stihl iMOW 3 EVO** geen productreviews bij NL-winkels, en de ViAX 250 geen onafhankelijke. In het blad Scores hebben zeven van de twaalf 0 gelezen reviews. De zin klopt voor de Roborock, maar noemt hem als enige.
+  2. "Bij de Husqvarna 305 kost een set 95 tot 239 euro": in Modellen staat 94,99 (Small); 95 is afgerond.
+  3. "4G en GPS: … bij de Roborock Q105, Mova ViAX en Eufy C15 is het een losse module": de Worx WR303E ook (Find My Landroid, 149 euro; staat wel in de tabel).
+  4. Keuzetabel "Tuin tot 500 m² met hellingen tot 45%": de Stihl iMOW 3 EVO (met draad) voldoet ook; staat wel bij Hellingen.
+  5. Het blad Kleine tuin noemt bij "niet opgenomen" ook M065 ViAX 300 (uitverkocht) en M013 Zoef Robot Teun (beschikbaarheid niet onderzocht); de pagina noemt alleen uitlopende/uitverkochte voorbeelden.
+
+### 3. Conceptpagina robotmaaier-kleine-tuin (#16, concept)
+- Er stond een leeg concept met deze slug (#16, sitestructuur 6 oktober, alleen het toplijstpatroon met invulvelden, één revisie): **bijgewerkt**, geen bovenliggende pagina. Kopie vooraf (lokaal).
+- Gebouwd met `scripts/ronde71_bouw.py` (afgeleid van ronde 67), inhoud in `scripts/ronde71/kleine-tuin.json`, gezet met `scripts/ronde71_pagina.py`. Opmaak van pagina-merk met bovenschrift "Kopersgids" (het patroon pagina-kopersgids heeft een smalle kolom met vaste inhoudsopgave; past niet bij de tabel met zeven kolommen en de kaarten).
+- **Yoast-metabeschrijving uit de md** (live gecontroleerd), kruimelpad "Robotmaaier kleine tuin".
+- Kaarten M016, M002, M056, M064, M046, M063, M053 in die volgorde: **92,7 · 92,7 · 84,1 · 75,9 · 72,3 · 68,6 · 62,3**. M052, M027, M021, M026, M050 alleen in de tabel. Prijsblok van het thema (Bol/Coolblue volgens prijstaken en schakelaars, anders "Bekijk de actuele prijs"); in de inhoud geen winkellinks of prijzen.
+- Eerste tabel: de zeven modelnamen met een kaart linken naar hun kaart. Tekstlinks: Hoe we beoordelen (#scoremodel), mailto. "Meer lezen": beste, zonder draad, zonder grensdraad, kosten; de merkpagina's komen via het linkscript.
+- Bronnen voor alle twaalf modellen uit het blad Bronnen (handleidingen, fabrikantpagina's, appwinkels; geen winkels, winkelclaims, "niet gevonden" of Bol).
+
+### 4. Links: klaargezet, niet gedraaid (`scripts/ronde71_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de Eufy-regel): "Op zoek naar een robotmaaier voor een kleine tuin? Zie Robotmaaier kleine tuin."
+- Navimow-, Husqvarna-, Gardena-, Stihl-, Worx-, Mova/Dreame- en Eufy-pagina, "Meer lezen", laatste regel: "Robotmaaier voor een kleine tuin: twaalf modellen tot 600 m²."
+- Kleine-tuinpagina, "Meer lezen": Segway Navimow, Mova of Dreame, Worx, Eufy, Stihl, Husqvarna (Roborock heeft geen merkpagina).
+- Weigert zolang #16 geen status publish heeft (getest). Met `--proef-concept` (alleen lezen): alle tien ankers precies één keer, geen meldingen.
+
+### 5. Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, `scripts/ronde71_controle.js`), 390 en 1440 px: geen horizontale scroll (modellentabel schuift op 390 px binnen haar vak, 861 px in 349 px), 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan, geen verzoek naar winkels.
+- Alle tekst uit de md staat op de pagina (verschillen alleen hoofdletters via CSS in tabelkoppen en gekrulde apostrofs).
+- Interne links (/, auteur, hoe-we-beoordelen met #scoremodel/#verdienmodel, hub, zonder draad, zonder grensdraad, kosten; voor het linkscript de zeven merkpagina's): HTTP 200; het eigen adres geeft als concept 404.
+- Momentopname alle 24 openbare adressen na het concept: geen verschil. Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 23 Bol-regels op 24 adressen, 0 fouten.
+- **Download:** `paginatekst-kleine-tuin.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository; gemaakt met `scripts/paginatekst.js`).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Verbindingschip: op de kleine-tuinpagina hebben de Roborock Q105, Worx WR303E en Eufy C15 Solo geen chip (geen regel in `scripts/verbinding_toewijzing.json`); Navimow "4G", ViAX "module".
+- M004/M005-teksten noemen nog app-rating 2,7 (zie punt 1).
+- De vijf meldingen bij punt 2.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de kleine-tuinpagina nalezen (ook de meldingen bij punt 2) en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde71_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
