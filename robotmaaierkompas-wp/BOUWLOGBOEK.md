@@ -3578,3 +3578,19 @@ M050 staat op dit moment op geen enkele kaart van een openbare pagina.
 - [ ] Mandy: 1.3.13 uploaden; `RMK_AMAZON_TAG` zetten.
 - [ ] Claude: `ronde74_amazon_data.py --schrijf` na Mandy's akkoord; status controleren.
 - [ ] Mandy: "Amazon aan" melden → schakelaar + `ronde74_amazon_teksten.py --schrijf` tegelijk, cache legen, controle.
+
+## Ronde 75 (31 oktober 2026): 1.3.13 live, Amazon aan
+
+Mandy heeft 1.3.13 geüpload en `RMK_AMAZON_TAG` en `RMK_AMAZON_ACTIVE` in wp-config.php gezet. Vooraf gecontroleerd (alleen lezen): actief thema 1.3.13, `rmk.js?ver=1.3.12` (zoals bedoeld), statusoverzicht "Amazon-knop: tag aanwezig, Amazon-knop zichtbaar (0 modellen …)", geen Amazon-knop op de site. Haar bericht zei niet letterlijk "Amazon aan"; gevraagd en bevestigd: **"Ja, Amazon aan"**.
+
+- Momentopname van alle 25 openbare adressen vooraf.
+- `scripts/ronde74_amazon_teksten.py --schrijf`: #76, #77, #80, #81 (eerste zin + slotalinea "Als Amazon-partner …"), #82, #83 (rij "Cookies van Amazon na een klik"), footer en de advertentie-tekst. Alle "Was"-teksten precies één keer gevonden; pagina's bleven gepubliceerd, inhoud zoals bedoeld. Kopie: `backups/amazon-teksten-voor-20261031-181335.json`. Terugdraaien: `scripts/ronde74_amazon_terug.py --schrijf`.
+- `scripts/ronde74_amazon_data.py --schrijf`: blok amazon bij 16 modellen, knop bij 12 (M004, M005, M007, M008, M016, M018, M046, M048, M052, M059, M063, M064); M050 knop false. Verder niets veranderd (gecontroleerd). Kopie: `backups/modellen-voor-ronde74.json`. Het opslaan via de dataroute heeft de LiteSpeed-cache geleegd.
+
+### Controles (live, niets aangeklikt)
+- Momentopname na: **21 Amazon-knoppen** (beste 2, zonder draad 4, kleine tuin 4, Mova/Dreame 6, Eufy 2, Navimow 2, Worx 1), alle in de vorm `https://www.amazon.nl/dp/<ASIN>?tag=robotmaaier-21` met de juiste ASIN, `rel="sponsored nofollow"`, steeds de laatste regel van de kaart; geen knop bij M050. Kaarten, scores en Bol-/Coolblue-regels per pagina gelijk aan vooraf (tijdstip van de prijs buiten beschouwing). Eén advertentie-regel per pagina met kaarten, met de nieuwe tekst. Footer met Amazon op alle 25 adressen; teksten op #76, #77, #80, #81, #82, #83 aanwezig.
+- Links met "amazon" zonder `rel="sponsored nofollow"`: alleen bronlinks naar handleidingen van Eufy op `…s3.us-west-2.amazonaws.com` (geen affiliatelinks, stonden er al).
+- Chromium, 9 pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, knoppen zichtbaar en als laatste regel (ook na rmk.js), **geen enkel verzoek naar Amazon**. Enige mislukte verzoeken: foto's van media.s-bol.com (vanuit deze omgeving niet bereikbaar; geen fout van de site).
+
+### Nog te doen
+- [ ] Mandy: **CDN-cache legen** (hPanel > Prestaties > CDN), want de footer en de teksten staan op alle pagina's.
