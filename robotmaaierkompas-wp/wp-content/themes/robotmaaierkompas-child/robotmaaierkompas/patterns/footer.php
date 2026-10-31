@@ -30,7 +30,7 @@
     </nav>
   </div>
   <div class="rmk-container rmk-footer__bottom">
-    <span>© robotmaaierkompas.nl · Scoremodel v1.0 (concept tot bevriezing)</span>
+    <span>© robotmaaierkompas.nl · Scoremodel v1.0 · <a href="/hoe-we-beoordelen/">Hoe we scoren</a></span>
     <nav aria-label="Juridisch" style="display: flex; flex-wrap: wrap; gap: 8px 20px">
       <a href="/privacy/">Privacy</a><a href="/cookies/">Cookies</a><a href="/affiliate-melding/">Affiliate-melding</a><a href="/colofon/">Colofon</a><a href="#cookie-instellingen">Cookie-instellingen</a>
     </nav>

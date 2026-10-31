@@ -3594,3 +3594,29 @@ Mandy heeft 1.3.13 geüpload en `RMK_AMAZON_TAG` en `RMK_AMAZON_ACTIVE` in wp-co
 
 ### Nog te doen
 - [ ] Mandy: **CDN-cache legen** (hPanel > Prestaties > CDN), want de footer en de teksten staan op alle pagina's.
+
+## Ronde 76 (31 oktober 2026): controle affiliate-ID's, voettekst, "Versie en wijzigingen" op de methodepagina (zonder thema-zip)
+
+### 1. Affiliate-ID's (alleen gelezen; geen link gevolgd of aangeklikt)
+Alle 25 openbare adressen (page-sitemap), alle `<a href>`:
+- **partner.bol.com: 25 links**, overal s=1549381, f=api, p=2, t=url. Geen directe bol.com-links.
+- **awin1.com: 15 links**, overal awinmid=85161, awinaffid=3126598. Geen directe Coolblue-links.
+- **amazon.nl: 21 links**, overal tag=robotmaaier-21, vorm `https://www.amazon.nl/dp/<ASIN>?tag=robotmaaier-21` zonder andere parameters. Geen amzn.to of andere Amazon-domeinen.
+- Geen enkele afwijkende waarde, geen Bol-, Awin- of Amazon-link zonder die parameters, geen andere netwerken (Daisycon e.d.) in links. Ook buiten links (tekst, JSON in de pagina) komen alleen deze waarden voor.
+- **Code (repository):** geen andere Site_ID, awinaffid/awinmid of tag dan hierboven; het thema bevat geen ID's in code (ze komen uit wp-config.php), alleen in commentaar/README en tests. De Daisycon-verificatiemetatag (ronde 47, alleen op de homepage) is geen affiliate-ID.
+- **Modelgegevens (live):** geen affiliatelinks, tags of Site-ID's. Wel bron-URL's met "amazon": de Eufy-handleidingen op `…s3.us-west-2.amazonaws.com` (geen Amazon-winkel), de reviewbron "Amazon.nl" (tekst) en bij M046 (vierwielaandrijving) de bron `https://www.amazon.nl/dp/B0FVG36W3Z` zonder tag. Die verschijnt niet als link op een openbare pagina (gecontroleerd: alle 21 Amazon-links hebben de tag).
+- Optie `rmk_affiliate_links` (/ga/-redirect): leeg ("Geen affiliatelinks ingesteld").
+
+### 2. Voettekst
+De live voettekst staat in het **aangepaste template-onderdeel "footer"** (database, inhoud), dus nu aangepast: "© robotmaaierkompas.nl · Scoremodel v1.0 · Hoe we scoren", met "Hoe we scoren" als link naar /hoe-we-beoordelen/ (`scripts/ronde76_footer_methode.py`). Op alle 25 adressen aanwezig.
+Dezelfde oude tekst stond ook in het themapatroon `patterns/footer.php` (reserve; live niet gebruikt zolang het aangepaste onderdeel bestaat). In de repository bijgewerkt: **gaat mee in de eerstvolgende themaversie (1.3.14)**; er is nu geen zip gemaakt.
+Niet veranderd (buiten de opdracht): "Scoremodel v1.0 (concept tot bevriezing)" staat nog in het scoreblok en de tabelbijschriften (`inc/score.php`, patronen), op 14 openbare pagina's, en in de eyebrow van het methodepatroon.
+
+### 3. Methodepagina (#76, /hoe-we-beoordelen/)
+Kopie vooraf: `backups/footer-methode-voor-20261031-183008.json` (#76 en de footer; terugzetten: `scripts/ronde76_footer_methode.py --terug <kopie> --schrijf`). Na de sectie "Versies" (het laatste inhoudsblok, vóór auteursblok en "Fouten en correcties") de sectie **"Versie en wijzigingen"** (id `versie-en-wijzigingen`) met de tekst van Mandy, en een regel in "Op deze pagina". Pagina bleef gepubliceerd. Let op: de bestaande sectie "Versies" (v1.0 (concept), 5 oktober 2026, met de geplande aanpassingen) staat er nog; beide naast elkaar.
+
+### 4. Controles
+- Momentopname van alle 25 adressen vóór en na: enige verschil de voettekst (en op #76 de nieuwe sectie en de inhoudsregel).
+- Chromium 390 en 1440 px (home, methode, beste, affiliate-melding, Worx): HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, voettekst en link zichtbaar (wit op de donkere footer), sectie en inhoudsregel aanwezig, geen verzoek naar Amazon.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd opgeslagen, gecontroleerd).
+- **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), want de footer staat op alle pagina's.
