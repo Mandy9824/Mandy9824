@@ -9,6 +9,9 @@ defined( 'ABSPATH' ) || exit;
 
 define( 'RMK_DIR', __DIR__ );
 define( 'RMK_URL', get_stylesheet_directory_uri() . '/robotmaaierkompas' );
+// RMK_VER is de cache-versie van rmk.js en de CSS (?ver=…), niet de themaversie (die staat in style.css). Alleen ophogen
+// als rmk.js of de CSS verandert. 1.3.13 (Amazon-knop) veranderde die niet; zo blijft elke pagina zonder de
+// Amazon-constanten byte voor byte gelijk aan 1.3.12.
 define( 'RMK_VER', '1.3.12' );
 
 /* ------------------------------------------------------------------------

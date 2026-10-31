@@ -478,7 +478,8 @@ function rmk_bol_foto( array $m ) {
 }
 
 /* Advertentie-regel: met RMK_AFFILIATE_ACTIVE aan één keer per pagina boven de eerste Bol-knop, als er nog geen staat.
- * 1.3.10: met RMK_COOLBLUE_ACTIVE ook boven de eerste Coolblue-knop (wat het eerst komt). */
+ * 1.3.10: met RMK_COOLBLUE_ACTIVE ook boven de eerste Coolblue-knop (wat het eerst komt).
+ * 1.3.13: met RMK_AMAZON_ACTIVE ook boven de eerste Amazon-knop. */
 add_filter( 'the_content', function ( $html ) {
 	$plekken = array();
 	if ( rmk_bol_zichtbaar() && false !== strpos( (string) $html, 'data-rmk-bol' ) ) {
@@ -486,6 +487,9 @@ add_filter( 'the_content', function ( $html ) {
 	}
 	if ( function_exists( 'rmk_coolblue_zichtbaar' ) && rmk_coolblue_zichtbaar() && false !== strpos( (string) $html, 'data-rmk-cb' ) ) {
 		$plekken[] = strpos( $html, 'data-rmk-cb' );
+	}
+	if ( function_exists( 'rmk_amazon_zichtbaar' ) && rmk_amazon_zichtbaar() && false !== strpos( (string) $html, 'data-rmk-amazon' ) ) {
+		$plekken[] = strpos( $html, 'data-rmk-amazon' );
 	}
 	if ( ! $plekken ) {
 		return $html;

@@ -28,6 +28,10 @@ Regels (BLAUWDRUK hoofdstuk 8, 23 t/m 34 en de bouwopdracht):
 - Coolblue (ronde 55, thema 1.3.10): uit het blad "Coolblue" per model alleen merchant_product_id en de productpagina
   ("coolblue": {merchant_product_id, product_url}); alleen bij modellen in dat blad (anders geen sleutel "coolblue").
   Geen prijzen, voorraad of afbeeldingen: die haalt de nachtelijke feedtaak van de site zelf op (inc/coolblue.php).
+- Amazon (ronde 74, thema 1.3.13): uit het blad "Amazon" per model alleen de ASIN en of er een knop mag komen
+  ("amazon": {asin, knop}); knop is true alleen bij "Knop: ja" in de kolom "Knop (ja/nee) en reden". Geen ASIN = geen
+  sleutel "amazon". Geen titels, verkopers, prijzen, beoordelingen of afbeeldingen van Amazon.
+  Uitgesloten (AMAZON_UITGESLOTEN): M050 krijgt knop false, ook met "Knop: ja" (standaardaanbieding bij een partner).
 - Fabrikantpagina (ronde 30): uit de kolom "Fabrikantpagina (URL)" in Modellen; is die leeg, dan zoals voorheen
   uit een prijsregel van de fabrikant of de bronregel "Beschikbaarheid fabrikant".
 - Prijzen (besluit 6 oktober 2026): per model alleen de laagste geldige prijs ("prijs": bedrag in hele euro's,
@@ -275,6 +279,30 @@ def coolblue_velden(r, rapport, mid):
     return {"coolblue": {"merchant_product_id": pid, "product_url": url}}
 
 
+# Modellen zonder Amazon-knop, ook met "Knop: ja" in het blad Amazon (zelfde lijst als rmk_amazon_uitgesloten() in
+# inc/amazon.php). M050 (Worx WR165E): bij de hercontrole van 31-10-2026 verkocht een partner (Nesk®) de
+# standaardaanbieding in plaats van Amazon zelf.
+AMAZON_UITGESLOTEN = {"M050": "standaardaanbieding bij een partner (Nesk®) in plaats van Amazon zelf (hercontrole 31-10-2026)"}
+
+
+def amazon_velden(r, rapport, mid):
+    """Het blok "amazon" uit een rij van het blad Amazon: ASIN en knop (true/false); geen ASIN = geen sleutel."""
+    if not r:
+        return {}
+    asin = str(kolom(r, "ASIN") or "").strip()
+    if not asin:
+        return {}
+    if not re.fullmatch(r"[A-Z0-9]{10}", asin):
+        rapport.setdefault("amazon_ongeldig", []).append(mid)
+        return {}
+    knop = bool(re.match(r"\s*knop\s*:\s*ja\b", str(kolom(r, "Knop") or ""), re.I))
+    if knop and mid in AMAZON_UITGESLOTEN:
+        rapport.setdefault("amazon_uitgesloten", []).append(f"{mid}: {AMAZON_UITGESLOTEN[mid]}")
+        knop = False
+    rapport.setdefault("amazon_knop" if knop else "amazon_zonder_knop", []).append(mid)
+    return {"amazon": {"asin": asin, "knop": knop}}
+
+
 def niet_leverbaar(*teksten):
     return any(re.search(r"niet\s+leverbaar", str(t or ""), re.I) for t in teksten)
 
@@ -361,6 +389,12 @@ def main():
             mid = str(kolom(r, "Model-ID") or "").strip()
             if re.fullmatch(r"M\d+", mid):
                 coolblue_blad[mid] = r
+    amazon_blad = {}
+    if "Amazon" in wb.sheetnames:
+        for r in blad(wb, "Amazon"):
+            mid = str(kolom(r, "Model-ID") or "").strip()
+            if re.fullmatch(r"M\d+", mid):
+                amazon_blad[mid] = r
     minimum = 50
     if "Instellingen" in wb.sheetnames:
         for r in wb["Instellingen"].iter_rows(values_only=True):
@@ -589,6 +623,7 @@ def main():
             "reviews": r_uit,
             **bol_velden(bol_blad.get(mid), rapport, mid),
             **coolblue_velden(coolblue_blad.get(mid), rapport, mid),
+            **amazon_velden(amazon_blad.get(mid), rapport, mid),
             "prijs": laagste,
             "fabrikant_url": fabrikant_url,
             # Teksten voor de productbox (scripts/modellen_teksten.json, aangeleverd door Mandy, 6 oktober 2026)

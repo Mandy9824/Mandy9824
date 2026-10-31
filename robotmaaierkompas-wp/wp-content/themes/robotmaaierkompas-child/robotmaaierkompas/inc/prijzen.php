@@ -107,8 +107,10 @@ function rmk_fill_offers( $html ) {
 		// 1.3.6: Bol-regel onder het prijsblok en de foto van bol.com, alleen bij een geldig Bol-aanbod (inc/bol.php).
 		// 1.3.10: daaronder de Coolblue-regel (inc/coolblue.php); zonder JavaScript staat Bol dus eerst. Geen Bol-foto maar
 		// wel een geldige Coolblue-regel: de foto van Coolblue.
+		// 1.3.13: daaronder de Amazon-knop (inc/amazon.php), een statische link; rmk.js verplaatst hem nooit.
 		$offer = rmk_offer_html( $m ) . ( function_exists( 'rmk_bol_regel_html' ) ? rmk_bol_regel_html( $m ) : '' )
-			. ( function_exists( 'rmk_coolblue_regel_html' ) ? rmk_coolblue_regel_html( $m ) : '' );
+			. ( function_exists( 'rmk_coolblue_regel_html' ) ? rmk_coolblue_regel_html( $m ) : '' )
+			. ( function_exists( 'rmk_amazon_regel_html' ) ? rmk_amazon_regel_html( $m ) : '' );
 		if ( function_exists( 'rmk_bol_foto' ) && ( $foto = rmk_bol_foto( $m ) ) ) {
 			$m['foto'] = $foto;
 		} elseif ( function_exists( 'rmk_coolblue_foto' ) && ( $foto = rmk_coolblue_foto( $m ) ) ) {

@@ -92,6 +92,18 @@ function rmk_validate_modellen( $data ) {
 				$err[] = "Model $i: coolblue.product_url moet een https://www.coolblue.nl-adres zijn.";
 			}
 		}
+		// 1.3.13: blok "amazon" (blad Amazon): alleen asin (10 tekens, hoofdletters en cijfers) en knop (true/false).
+		// Geen prijzen, titels, verkopers, beoordelingen of afbeeldingen van Amazon.
+		if ( isset( $m['amazon'] ) && null !== $m['amazon'] ) {
+			$a = $m['amazon'];
+			if ( ! is_array( $a ) || array_diff( array_keys( $a ), array( 'asin', 'knop' ) ) ) {
+				$err[] = "Model $i: amazon mag alleen asin en knop bevatten.";
+			} elseif ( ! isset( $a['asin'] ) || ! is_string( $a['asin'] ) || ! preg_match( '/^[A-Z0-9]{10}$/', $a['asin'] ) ) {
+				$err[] = "Model $i: amazon.asin moet 10 tekens zijn (hoofdletters en cijfers).";
+			} elseif ( ! isset( $a['knop'] ) || ! is_bool( $a['knop'] ) ) {
+				$err[] = "Model $i: amazon.knop moet true of false zijn.";
+			}
+		}
 		if ( isset( $m['kosten']['aanschaf']['waarde'] ) && null !== $m['kosten']['aanschaf']['waarde'] ) {
 			$err[] = "Model $i: aanschafprijs is ingevuld (moet leeg blijven).";
 		}

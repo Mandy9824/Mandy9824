@@ -269,6 +269,10 @@ function rmk_status_checks() {
 				. ( $cbhist && empty( $cbhist[0]['gelukt'] ) ? '; laatste ronde mislukt: ' . rtrim( (string) $cbhist[0]['melding'], '.' ) : '' ) . ( $cbnext ? ', volgende ' . wp_date( 'j-n H:i', $cbnext ) : '' ) . ( $cbvers ? '.' : '. ' . ucfirst( $cbreden ) . '.' ) );
 		}
 	}
+	// Amazon (1.3.13): alleen als een van de twee constanten er staat (zonder: statusoverzicht gelijk aan 1.3.12).
+	if ( function_exists( 'rmk_amazon_status_tekst' ) && ( defined( 'RMK_AMAZON_TAG' ) || defined( 'RMK_AMAZON_ACTIVE' ) ) ) {
+		$add( true, 'Amazon-knop', rmk_amazon_status_tekst() );
+	}
 	$links = array_filter( (array) get_option( RMK_LINKS_OPTION, array() ) );
 	$add( ! $links, 'Geen affiliatelinks ingesteld', $links ? count( $links ) . ' winkels met links' : '' );
 	$add( ! rmk_affiliate_actief(), 'Affiliate-melding uit (RMK_AFFILIATE_ACTIVE)', rmk_affiliate_actief() ? 'STAAT AAN: de regel "Advertentie: …" wordt getoond' : 'uit: de regel "Advertentie: …" wordt niet getoond' );

@@ -3520,3 +3520,61 @@ Mandy: /robotmaaier-kleine-tuin/ (#16) is gepubliceerd (slug en metabeschrijving
 ### Nog te doen
 - [ ] Mandy: CDN legen; editortabs van #16, de Mova-pagina, de hub en pagina 1 sluiten of herladen vóór opnieuw opslaan.
 - [ ] Open: de verbindingschips hierboven.
+
+## Ronde 74 (31 oktober 2026): thema 1.3.13, Amazon-knop (niet geüpload), tekstscript klaargezet
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (blad Amazon; alleen gelezen, **niet in de repository**) en `tekstwijzigingen-amazon-affiliate.md` (niet in de repository). **Niets gepubliceerd, niets op de site veranderd.** Van de live site alleen gelezen (GET): paginainhoud, modelgegevens, `/rmk/v1/bol-status`, `/rmk/v1/coolblue-status`, openbare pagina's en de prijsroute. **Geen enkele affiliatelink gevolgd of aangeklikt; er is geen enkel verzoek naar Amazon gedaan** (alleen de vorm van de links is gecontroleerd).
+
+### Versienummer: 1.3.13
+Live draait 1.3.12 (`rmk.js?ver=1.3.12`), dus het eerstvolgende nummer is 1.3.13 (style.css). **`RMK_VER` blijft bewust 1.3.12**: dat is de cache-versie van rmk.js en de CSS (`?ver=…`), en die veranderen in deze ronde niet. Met 1.3.13 als `RMK_VER` zou elke pagina een ander `?ver=` krijgen en dus niet byte voor byte gelijk zijn zonder de Amazon-constanten. Opmerking staat bij de definitie in `robotmaaierkompas-setup.php`; hoog `RMK_VER` pas op als rmk.js of de CSS verandert.
+
+### M050 uitgesloten (Worx Landroid S WR165E, ASIN B0913J9BTB)
+In het blad Amazon staat M050 op "Knop: ja", maar bij de hercontrole van 31-10 (kolom I) verkoopt nu een **partner (Nesk®, verzending door Amazon)** de standaardaanbieding; bij de eerste controle die dag was dat Amazon zelf. Op Mandy's aanwijzing krijgt M050 **geen** Amazon-knop. Dit staat op drie plekken vast:
+- in het thema: `rmk_amazon_uitgesloten()` in `inc/amazon.php` (M050 met reden; ook met knop true in de modelgegevens geen knop; weghalen kan alleen met een nieuwe themaversie);
+- in de omzetter: `AMAZON_UITGESLOTEN` in `scripts/excel_naar_json.py` zet knop op false en meldt het in het rapport (`amazon_uitgesloten`);
+- in het datascript: `scripts/ronde74_amazon_data.py` zet voor M050 knop altijd op false.
+M050 staat op dit moment op geen enkele kaart van een openbare pagina.
+
+### Thema (nieuw `inc/amazon.php`; kleine aanpassingen in prijzen.php, bol.php, data.php, bouw.php, functions.php)
+- **Constanten** (wp-config.php, geen geheimen): `RMK_AMAZON_TAG` (`robotmaaier-21`) en de schakelaar `RMK_AMAZON_ACTIVE` (standaard uit; los van `RMK_AFFILIATE_ACTIVE` en `RMK_COOLBLUE_ACTIVE`). Zonder een van de twee, of met een tag die niet op `-21` eindigt of andere tekens bevat: nergens een knop, en alle pagina's zijn byte voor byte gelijk aan 1.3.12.
+- **Knop op de productkaart:** alleen bij een model met blok `amazon` = `{ "asin": "<10 tekens A-Z/0-9>", "knop": true }` en niet uitgesloten. HTML: `<div class="rmk-offer rmk-offer--stack rmk-offer--amazon" data-rmk-amazon="M004"><a class="rmk-btn rmk-btn--primary" href="https://www.amazon.nl/dp/B0GD2CXRNY?tag=robotmaaier-21" rel="sponsored nofollow">Bekijk bij Amazon</a><span class="rmk-offer__src">Je gaat naar Amazon.nl. Prijs, beschikbaarheid en verkoper bekijk je daar.</span></div>`. De link is exact `https://www.amazon.nl/dp/<ASIN>?tag=<tag>`: geen andere parameters, geen verkorte link (`esc_attr`, niet `esc_url`, zodat er niets aan verandert; ASIN en tag zijn streng gecontroleerd).
+- **Altijd onder de Bol- en Coolblue-regel:** in `rmk_fill_offers()` (prijzen.php) als laatste. Een statische link: rmk.js raakt hem niet (rmk.js zet alleen Coolblue vóór Bol bij een lagere prijs). Werkt zonder JavaScript. Geen prijs, foto, beoordelingen, doorgestreepte prijs of korting; geen API, feed, taak of verzoek naar Amazon. Bestaande CSS (`rmk-offer--stack`), dus geen CSS-wijziging.
+- **Advertentie-regel** (bol.php): komt boven de eerste knop, nu ook als dat een Amazon-knop is. Gevolg op de live pagina's met de schakelaar aan: de regel schuift op de kleine-tuin-, Mova/Dreame- en Navimow-pagina naar de eerste kaart met een Amazon-knop, en verschijnt nieuw op de Worx-pagina (daar staat nu geen Bol- of Coolblue-knop). De tekst komt uit de instelling; daarom moet het tekstscript tegelijk met de schakelaar draaien (punt 8: "… naar bol.com, Coolblue en Amazon …").
+- **Dataroute** (data.php): blok `amazon` alleen met `asin` (10 tekens, hoofdletters/cijfers) en `knop` (true/false); extra velden (prijs, afbeelding), ongeldige ASIN of knop als tekst worden geweigerd.
+- **Statusoverzicht** (bouw.php): regel "Amazon-knop" alleen als een van de twee constanten bestaat ("uit: …", "tag aanwezig, Amazon-knop verborgen (RMK_AMAZON_ACTIVE uit)" of "tag aanwezig, Amazon-knop zichtbaar (n modellen met een knop …)"). Zonder constanten is ook het statusoverzicht gelijk aan 1.3.12.
+- **Ongewijzigd:** rmk.js, CSS, `/rmk/v1/bol-prijs`, de configuratie van rmk.js, Bol- en Coolblue-code.
+- **Zip:** `robotmaaierkompas-child.zip`, 116 bestanden (1.3.12 + `inc/amazon.php`), SHA-256 `d933f250849dc9f2a8c7d86331da10ecb64dbd3a1435dab14d081d1fc454cbfa`. Geen xlsx, md van Mandy of sleutel erin.
+
+### Modelgegevens en scripts (klaargezet, niet gedraaid met --schrijf)
+- `scripts/excel_naar_json.py` leest nu het blad Amazon: blok `amazon` {asin, knop} alleen bij een ASIN; knop true alleen bij "Knop: ja". Uitkomst: **knop bij 12 modellen** M004, M005, M007, M008, M016, M018, M046, M048, M052, M059, M063, M064; ASIN zonder knop: M011, M051, M054 ("Knop: nee") en M050 (uitgesloten). Geen titels, verkopers of datums uit het blad overgenomen.
+- `scripts/ronde74_amazon_data.py <omzetting.json> [--schrijf]`: zet alleen het blok `amazon` bij de 16 live modellen met een ASIN; weigert als er meer verandert of als het thema ouder is dan 1.3.13. Kopie vooraf `backups/modellen-voor-ronde74.json`. **Proefdraai tegen live:** 16 blokken, 12 met knop, 0 overgeslagen, verder alles ongewijzigd. Mag na de upload van 1.3.13 al draaien (zonder schakelaar verandert er niets).
+- `scripts/ronde74_amazon_teksten.py [--schrijf]` met `scripts/amazon_teksten_lib.py`: punten 1-8 van het md (#81 eerste zin + slotalinea "Als Amazon-partner …", #77, #80, #76, footer, #82, #83 rij "Cookies van Amazon na een klik", instelling advertentie-tekst). **Proefdraai tegen live: alle "Was"-teksten precies één keer gevonden** (geen meldingen; geen tags binnen de vervangen stukken). Weigert `--schrijf` zolang het thema ouder is dan 1.3.13 of het statusoverzicht geen "Amazon-knop zichtbaar" meldt, en bij elke tekstmelding. Kopie vooraf in `backups/amazon-teksten-voor-<tijd>.json`.
+- Terugdraaien: `scripts/ronde74_amazon_terug.py [--schrijf] [--backup <kopie>]` (per tekststuk terug naar de Coolblue-teksten, of in nood de volledige kopie). Offline getest op de live stand: aanzetten en daarna terugdraaien geeft exact de huidige inhoud; twee keer aanzetten meldt "al gedaan".
+- Punt 9 van het md (de knop) zit in het thema, niet in het tekstscript.
+
+### Tests (nagebootste gegevens, geen netwerk naar Amazon)
+- `php tests/amazon-test.php [aan|uit|zonder|tagfout]`: **aan 46 OK, uit 20 OK, zonder 19 OK, tagfout 20 OK**. Nagebootst: M004 (ASIN, knop ja), M008 (ASIN, knop ja, met Bol- en Coolblue-regel), M002 (geen ASIN), M011 (knop nee), M050 (knop ja in het blad, uitgesloten). Gecontroleerd: knop alleen bij M004 en M008; href exact; alleen de parameter `tag`; `rel="sponsored nofollow"`; tekst en regel eronder; geen prijs/foto/korting/beoordeling; volgorde Bol, Coolblue, Amazon (Amazon als laatste); scorecellen gelijk; advertentie-regel; ongeldige ASIN's en knop als tekst geven geen knop; dataroute; prijsroute en rmk.js-configuratie gelijk aan 1.3.12; **0 HTTP-verzoeken**; geen ingeplande taak. In uit/zonder/tagfout: kaarten en pagina-inhoud byte voor byte gelijk aan 1.3.12.
+- Bestaande tests: bol, bewaking, status en score OK. (prijs-, prijs-modellen- en redactie-test verwachten invoerbestanden en falen zonder argumenten op dezelfde manier als vóór deze ronde; coolblue-test vraagt het Awin-voorbeeldbestand, dat er niet is.)
+- **Hele pagina's** (`tests/amazon-paginas.php` + `tests/amazon-paginas-vergelijk.py`; live inhoud van alle 25 gepubliceerde pagina's, live modelgegevens, Bol- en Coolblue-stand uit de beheerroutes): **212 OK**. 1.3.13 zonder Amazon-constanten en met `RMK_AMAZON_TAG` zonder schakelaar: **alle 25 pagina's byte voor byte gelijk aan 1.3.12** (ook met het blok amazon in de modelgegevens). Met de schakelaar aan: **21 Amazon-knoppen op 7 pagina's** (beste-robotmaaier 2, zonder draad 4, kleine tuin 4, Mova/Dreame 6, Eufy 2, Navimow 2, Worx 1), elk met de juiste ASIN en als laatste regel; volgorde van de kaarten, scores en Bol- en Coolblue-regels gelijk; verder alleen de advertentie-regel (zie boven). Gardena, Husqvarna en Stihl: geen knop (geen model met "Knop: ja").
+- **Browser** (Chromium; de live HTML van 1.3.12 naast dezelfde HTML met de Amazon-regels uit de paginatest; prijsroute live, Bol- en Coolblue-foto's vervangen door vlakke beelden van dezelfde maat omdat die hosts hier niet bereikbaar zijn): 7 pagina's × 390 en 1440 px × oud / aan / aan zonder JavaScript: **686 OK, 0 fouten**. Geen horizontale scroll, 0 JavaScript-fouten, geen "[" of "{{", aantal knoppen per pagina klopt, href exact, knop zichtbaar binnen de kaart en de laatste regel (ook na rmk.js), geen afbeelding in de regel, geen knop bij M050; scores, volgorde en de Bol-, Coolblue- en prijsregels (na rmk.js) gelijk aan de live pagina; **geen enkel verzoek naar Amazon**. Niets aangeklikt.
+- **LCP** (mobiel 390 px, DPR 3, 150 ms, 1,6 Mbit/s, CPU 4×, prijsroute +300 ms, mediaan van 3, lokale testserver met dezelfde bestanden voor oud en nieuw): beste 1,04 → 1,04 s; zonder draad 2,46 → 2,47 s (kopafbeelding, bij DPR 3 de grootste variant; gelijk in beide); kleine tuin 1,01 → 1,02; Mova/Dreame 1,01 → 0,98; Eufy 1,07 → 0,99; Navimow 0,99 → 1,00; Worx 1,07 → 1,01 s. LCP-element telkens hetzelfde; verschillen −80 tot +16 ms, binnen de meetruis.
+
+### Wat Mandy moet doen
+1. **Thema 1.3.13 uploaden** (Weergave > Thema's > Nieuw thema > Uploaden, bestaand thema vervangen). Zonder de nieuwe constanten verandert er niets (ook geen nieuwe `?ver=`), dus cache legen is niet nodig.
+2. Daarna doet Claude (op Mandy's woord): `scripts/ronde74_amazon_data.py --schrijf` (blok amazon in de modelgegevens; zonder schakelaar onzichtbaar).
+3. **In wp-config.php** (boven "That's all, stop editing"), eerst alleen de tag (geen geheim):
+   ```php
+   define( 'RMK_AMAZON_TAG', 'robotmaaier-21' );
+   ```
+   Het statusoverzicht toont dan "Amazon-knop: tag aanwezig, Amazon-knop verborgen (RMK_AMAZON_ACTIVE uit)".
+4. **"Amazon aan"** (Mandy beslist en meldt het): op hetzelfde moment
+   ```php
+   define( 'RMK_AMAZON_ACTIVE', true );
+   ```
+   in wp-config.php, en Claude draait `scripts/ronde74_amazon_teksten.py --schrijf`. Daarna LiteSpeed en CDN legen (de footer staat op alle pagina's) en de pagina's controleren.
+5. **Uitzetten kan altijd:** de regel `RMK_AMAZON_ACTIVE` weghalen (knoppen weg na het legen van de cache) en `scripts/ronde74_amazon_terug.py --schrijf` (teksten terug).
+
+### Nog te doen
+- [ ] Mandy: 1.3.13 uploaden; `RMK_AMAZON_TAG` zetten.
+- [ ] Claude: `ronde74_amazon_data.py --schrijf` na Mandy's akkoord; status controleren.
+- [ ] Mandy: "Amazon aan" melden → schakelaar + `ronde74_amazon_teksten.py --schrijf` tegelijk, cache legen, controle.
