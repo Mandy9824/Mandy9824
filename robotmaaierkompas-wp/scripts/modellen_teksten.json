@@ -374,5 +374,70 @@
       "Wifi bij het gazon nodig",
       "Helling 32,5%"
     ]
+  },
+  "M059": {
+    "beste_voor": "Tuinen tot 1.600 m² zonder draad, met 4G en GPS ingebouwd en een lage geluidsproductie",
+    "pluspunten": [
+      "LiDAR, zonder draad, antenne of basisstation",
+      "4G en GPS ingebouwd, met een melding in de app als de maaier de kaart verlaat",
+      "Helling 45% volgens Mova",
+      "Stil: 57 dB(A)",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht"
+    ],
+    "minpunten": [
+      "Na het eerste jaar gratis 4G-service betaal je; de prijs hebben we niet gevonden",
+      "App-rating 2,9 in Google Play",
+      "Of het mes bij optillen stopt, noemt de handleiding niet",
+      "Nog geen onafhankelijke reviews"
+    ]
+  },
+  "M060": {
+    "beste_voor": "Tuinen tot 1.000 m² met steile stukken, met 4G en GPS ingebouwd",
+    "pluspunten": [
+      "Helling 80% volgens Mova, met vierwielaandrijving",
+      "LiDAR, zonder draad, antenne of basisstation",
+      "4G en GPS ingebouwd, 3 jaar gratis service",
+      "Melding in de app als de maaier de kaart verlaat",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht"
+    ],
+    "minpunten": [
+      "Luider: 66 dB(A)",
+      "Na de 3 jaar gratis 4G-service betaal je; de prijs hebben we niet gevonden",
+      "App-rating 2,9 in Google Play",
+      "Nog geen onafhankelijke reviews"
+    ]
+  },
+  "M063": {
+    "beste_voor": "Kleine tuinen tot 250 m² zonder draad, met camera's",
+    "pluspunten": [
+      "Camera-navigatie zonder draad of antenne",
+      "Stil: 57 dB(A)",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht",
+      "Alarm bij optillen"
+    ],
+    "minpunten": [
+      "Alleen tot 250 m²",
+      "Alleen camera's, geen LiDAR",
+      "GPS en een melding buiten de kaart alleen met de losse Link-module",
+      "Geen eigen pincode: ontgrendelen met twee keer OK",
+      "Geen onafhankelijke reviews gevonden"
+    ]
+  },
+  "M064": {
+    "beste_voor": "Kleine tuinen tot 500 m² met obstakels, zonder draad",
+    "pluspunten": [
+      "LiDAR met camera's, zonder draad of antenne",
+      "Stil: 57 dB(A)",
+      "Kaart, zones en no-go-gebieden in de app, updates over de lucht",
+      "Alarm bij optillen",
+      "6 reviews bij Coolblue (gemiddeld 8,7 van 10), geen storingen genoemd"
+    ],
+    "minpunten": [
+      "Alleen tot 500 m²",
+      "GPS en een melding buiten de kaart alleen met de losse Link-module",
+      "Geen eigen pincode: ontgrendelen met twee keer OK",
+      "Helling 40%",
+      "App-rating 2,9 in Google Play"
+    ]
   }
 }

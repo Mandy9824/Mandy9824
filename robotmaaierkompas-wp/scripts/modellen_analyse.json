@@ -73,5 +73,17 @@
   },
   "M053": {
     "analyse": "De Eufy C15 Solo is de maaier zonder garage, voor tuinen tot 500 m² en een helling van 32,5%. Hij gebruikt een camera, zonder draad of antenne, en is met 58,2 dB(A) stiller dan de E15 en E18. De app heet Anker eufy en heeft een kaart met zones. GPS en 4G zijn een losse module van 99 euro met 2 jaar gratis data. Er is geen pincode en geen diefstalalarm, wel stopt het mes bij optillen volgens Eufy."
+  },
+  "M059": {
+    "analyse": "De Mova LiDAX Ultra 1600 is voor tuinen tot 1.600 m² en haalt volgens Mova 45% helling. Hij navigeert met LiDAR, dus zonder draad of antenne, en heeft 4G en GPS ingebouwd met 1 jaar gratis service; je krijgt een melding in de app als hij de kaart verlaat. Het geluidsvermogen is 57 dB(A). De prijs van de service na het eerste jaar hebben we niet gevonden en de MOVAhome-app staat op 2,9 in Google Play. In onze functiescore deelt hij de hoogste plek van de Mova-modellen (87,3) met de 1000 AWD."
+  },
+  "M060": {
+    "analyse": "De Mova LiDAX Ultra 1000 AWD is voor tuinen tot 1.000 m² met steile stukken: Mova noemt 80% helling, met vierwielaandrijving. Hij navigeert met LiDAR, zonder draad of antenne, en heeft 4G en GPS ingebouwd met 3 jaar gratis service. Het geluidsvermogen is 66 dB(A), luider dan de niet-AWD-modellen. De prijs van de service na de 3 jaar hebben we niet gevonden en de MOVAhome-app staat op 2,9 in Google Play. In onze functiescore deelt hij de hoogste plek van de Mova-modellen (87,3)."
+  },
+  "M063": {
+    "analyse": "De Mova ViAX 250 is de kleinste Mova, voor tuinen tot 250 m² en een helling tot 40%. Hij navigeert met alleen camera's, zonder LiDAR, draad of antenne, en is stil (57 dB(A)). GPS en een melding buiten de kaart vragen de losse Link-module, en je ontgrendelt hem met twee keer OK. We vonden geen onafhankelijke reviews: de enige review op Amazon komt uit Italië en telt niet mee."
+  },
+  "M064": {
+    "analyse": "De Mova ViAX 500 is de kleine Mova met LiDAR en camera's, voor tuinen tot 500 m² en een helling tot 40%. Hij werkt zonder draad of antenne en is stil (57 dB(A)). GPS en een melding buiten de kaart vragen de losse Link-module, en je ontgrendelt hem met twee keer OK in plaats van een eigen pincode. Bij Coolblue staan 6 reviews met een gemiddelde van 8,7 van 10; wij hebben er vijf gelezen en geen enkele noemt een storing. Dat is te weinig voor een betrouwbaarheidsscore."
   }
 }

@@ -3307,3 +3307,48 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, nie
 ### Nog te doen
 - [ ] Mandy: CDN legen; de Eufy-pagina nalezen (ook de meldingen bij punt 2) en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde67_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 68 (31 oktober 2026): M059-M064 met teksten, Mova-pagina vervangen door versie 2 (zonder thema-zip)
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, niet in de repository), `pagina-mova-robotmaaier-v2.md`, `modellen-teksten-mova.json`.
+
+### 1. Modelgegevens (dataroute, `scripts/ronde68_upload.py`)
+- Omzetting met `excel_naar_json.py` (ongewijzigd). **M001-M058 en de algemene velden ongewijzigd** (het script weigert anders); de omzetting van het nieuwe Excel-bestand wijkt voor veel bestaande modellen af (specs, prijs, beschikbaarheid; M019 valt eruit), maar die zijn bewust niet overgenomen. Kopie vooraf: `backups/modellen-voor-ronde68.json` (niet in git). **63 modellen live.**
+- **M059-M064** vervangen door de omzetting; id, slug, naam en fabrikantpagina (nl.mova.tech) gelijk. M059, M060, M063 en M064 zijn geen niveau basis meer en hebben de teksten uit `modellen-teksten-mova.json` (toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`). M061 en M062 ongewijzigd (basis).
+- **Blok bol:** geen van M059-M064 staat in het blad Bol (en niet in Coolblue): geen EAN, Bol, Coolblue of prijs. De Bol-blokken van de bestaande modellen bleven zoals ze waren.
+- Functiescores (themacode): **M059 87,3 · M060 87,3 · M064 75,9 · M063 68,6**; M004 80,5, M005 80,5, M008 78,6 ongewijzigd. Gelijk aan het blad Scores en de md. M061/M062 geen score.
+- **Controle:** momentopname van alle 24 openbare adressen (Eufy-pagina is inmiddels gepubliceerd) vóór en na: kaarten, scores, volgorde, Bol- en Coolblue-links en zichtbare tekst **overal gelijk**; geen openbare pagina noemde de nieuwe modellen.
+
+### 2. Tekst van pagina-mova-robotmaaier-v2.md tegen het Excel-bestand
+- **Oppervlak, helling, geluid, 4G en score per model: geen afwijkingen** (alle negen rijen van de tabel, ook M061/M062 en de link-moduleprijzen 249 euro en 69/99,99 euro).
+- **Gemeld, niet aangepast:**
+  1. App-rating: de tekst zegt "MOVAhome-app 2,9 in Google Play"; voor M004 en M005 staat in Modellen en Bronnen **2,7** (5 oktober), voor M059-M064 2,90 (31 oktober). Zelfde app, andere peildatum.
+  2. Garantie: "Voor de andere modellen hebben we dat niet gecontroleerd" klopt niet meer: het Excel-bestand heeft voor M059, M060, M063 en M064 garantie met status gecontroleerd (Mova-aftersalesbeleid; bij de ViAX 250 zonder LiDAR).
+  3. "Alleen de ViAX 500 heeft onafhankelijke reviews": M004 heeft in Reviews 5 gelezen reviews van MediaMarkt NL (blad Scores: 5 gelezen).
+  4. "Mova verkoopt in Nederland acht robotmaaiers": de Opmerking bij M063 noemt een ViAX 300 bij Coolblue; die staat niet in het Excel-bestand. Niet te controleren.
+  5. M061 heeft in Modellen geen waarde voor vierwielaandrijving (alleen in de Opmerking: AWD met 4 naafmotoren); de tabel noemt "vierwielaandrijving". Inhoudelijk gelijk, maar zonder veld.
+
+### 3. Pagina /mova-dreame-robotmaaier/ (#351) vervangen
+- **Kopie vooraf:** `backups/ronde68-pagina351-voor-20261031-130824.json` en `-131014.json` (inhoud, status, meta; niet in git). Laatste wijziging vóór deze ronde: 26 oktober 18:39 (revisie 365); er stond dus geen latere editorversie.
+- Gebouwd met `scripts/ronde68_bouw.py` (afgeleid van ronde 63, patroon pagina-merk), inhoud in `scripts/ronde68/mova.json`, gezet met `scripts/ronde68_pagina.py`. **Status publish, slug en ouder gelijk**; titel uit de md; **Yoast-metabeschrijving uit de md** (live gecontroleerd); kruimeltitel "Mova of Dreame robotmaaier" behouden.
+- Kaarten M059, M060, M004, M005, M008, M064, M063 in die volgorde: **87,3 · 87,3 · 80,5 · 80,5 · 78,6 · 75,9 · 68,6**. M061 en M062 alleen in de tabel (zonder kaartlink), hun bronnen wel in de bronnenlijst.
+- Behouden van de live pagina: "Meer lezen" (met Navimow en Worx), de bron "Mova en Dreame" (Business Wire) en het uitgeschreven auteursblok. **Toegevoegd onder "Meer lezen": Eufy robotmaaier** (staat in de lijst interne links van de md, pagina is gepubliceerd).
+- Prijsblok van het thema: M005 Bol-regel (949 euro, partner), M008 Bol (719) en Coolblue (729); M004 (geen Bol-aanbod) en de nieuwe modellen alleen "Bekijk de actuele prijs".
+- Links van andere pagina's naar deze pagina staan er nog (Worx, Stihl, Gardena, Husqvarna, Navimow, hub, pagina 1).
+
+### 4. Controles
+- 390 en 1440 px: HTTP 200, geen horizontale scroll (de modellentabel schuift op 390 px binnen haar vak, 833 px in 349 px), 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan (behalve de bestaande footerknop #cookie-instellingen, JavaScript).
+- Alle tekst uit de md staat op de weergegeven pagina (automatisch nagelopen: 0 ontbrekend). Alle 12 interne adressen in de inhoud: HTTP 200.
+- Momentopname alle 24 openbare adressen na de vervanging: kaarten, scores, volgorde en winkel-links overal gelijk; tekstverschil alleen op deze pagina en de nieuwe titel in "Onlangs bijgewerkt" (home, auteurspagina).
+- Bol-controle: 23 Bol-regels op 24 adressen, 0 fouten. Routetest `--na-136 --na-137 --na-1310`: 0 fouten.
+- **Download:** `paginatekst-mova.md` (volledige weergegeven tekst, FAQ opengeklapt; in `backups/`, niet in de repository).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Verbindingschip: M004, M005 en M008 tonen "Verbinding module", M059, M060, M063 en M064 geen chip (geen regel in `scripts/verbinding_toewijzing.json`).
+- `scripts/ronde67_links.py` (Eufy-links, nog niet gedraaid) meldt nu "#351: link staat er al"; vóór `--schrijf` de stap voor #351 eruit halen.
+- De vijf meldingen bij punt 2.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de vernieuwde Mova-pagina nalezen (ook de meldingen bij punt 2); editortabs van #351 sluiten/herladen vóór opslaan.
+- [ ] Mandy: Search Console: indexering opnieuw aanvragen voor /mova-dreame-robotmaaier/.
