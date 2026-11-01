@@ -3899,3 +3899,31 @@ Mandy: /robotmaaier-grote-tuin/ (#15) is gepubliceerd (titel, slug en metabeschr
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /robotmaaier-grote-tuin/; editortabs van #15 sluiten of herladen vóór opnieuw opslaan.
 - [ ] Open uit ronde 82: de meldingen bij punt 1 (M003, AiConic 2, keuzetabel, X420 4G) en de verbindingschips van M057/M058.
+
+## Ronde 84 (1 november 2026): grote-tuinpagina MET DE HAND gewijzigd, verbinding M057/M058 (zonder thema-zip)
+
+**Let op: /robotmaaier-grote-tuin/ (#15) is in deze ronde met de hand gewijzigd** (gerichte vervangingen en een toevoeging via de API met `scripts/ronde84_grote_tuin.py`, niets uit de md gebouwd). Niet opnieuw bouwen met `ronde82_bouw.py`: dan gaan deze wijzigingen en de links van ronde 83 verloren. Wijzigen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+**Kopieën vooraf** (niet in git): `backups/ronde84-pagina15-voor-20261101-125706.json` (eerst, vóór alles), `backups/ronde84-pagina15-schrijf-20261101-125919.json` (vlak vóór het schrijven; gelijk) en `backups/modellen-voor-ronde84-20261101-125923.json`.
+
+### Wijzigingen op #15 (proefdraai zonder meldingen; elke zoektekst het verwachte aantal keren gevonden)
+1. Tabel "Modellen zonder score": rij **Cramer AiConic 2 | 2.000 m² | 45% | RTK met camera | niet bekend | 4G, Bluetooth en wifi** achteraan (na de Worx WR342E). Klopt met Modellen/Bronnen (M035: RTKVision, 2.000 m², 45%, geen geluidswaarde, "Connectivity 4G, BLE & WiFi").
+   - "zes" → "zeven" in het korte antwoord en in "Wat we nog niet weten" (elk 1×). **De tekst onder de tabel bevat geen "zes"** ("Deze modellen hebben we op basisniveau uitgezocht: zonder score."): niet gewijzigd.
+   - Yoast-metabeschrijving: "… en zes zonder score …" → "… en zeven zonder score …" (live gecontroleerd in de HTML).
+2. Keuzetabel: "Tuin van 1.500 tot 1.600 m²" + Husqvarna Automower 310E NERA; "Robotmaaier voor 2.000 m²" + "de Worx Landroid 4WD WR342E" (in het bestaande deel "zonder score ook …", dus zonder extra "(zonder score)"); "4G en GPS ingebouwd" + Navimow X420.
+3. FAQ "Welke grote maaier heeft 4G ingebouwd?": "de Navimow X420" na de i210 en i220 Pro.
+4. "LiDAR en netwerk-RTK" → "LiDAR met camera en netwerk-RTK (volgens Navimow)" (2×: i210 Pro en i220 Pro).
+- **Gemeld:** "De zeven modellen zonder score hebben we alleen op basisniveau uitgezocht": M035 is in Excel niet als niveau basis gemarkeerd; er is breder gezocht, maar zonder handleiding blijven geluid en veiligheid leeg en is er geen score. Beschikbaarheid M035: via dealers (Lozeman "op voorraad", winkelclaim). M035 heeft geen bronnenblok op de pagina (niet gevraagd).
+
+### Verbinding M057 en M058 (dataroute, `scripts/ronde84_verbinding.py`)
+- In `scripts/verbinding_toewijzing.json` (ook in `_uitleg`): M057 en M058 `module`, "Losse 4G-module", bronveld "Verborgen kosten". Per model **precies één** bronregel (M057: fabrikantclaim, 24-10, garden-support.roborock.com; M058: fabrikantclaim, 26-10, EU-handleiding Ecovacs). Omgezet met `excel_naar_json.py` uit het nieuwste Excel-bestand.
+- **Alleen `verbinding` van deze twee geüpload**; andere velden, modellen en algemene velden gelijk (gecontroleerd; het script weigert anders).
+- Chip "Verbinding module" nu op de grote-tuinpagina (Q110 en A3000) en op de Ecovacs-kaart van de hub en pagina 1.
+
+### Controles
+- Momentopname van alle 26 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen alleen de bedoelde regels op #15 en de volgorde in "Onlangs bijgewerkt" (home). Grote-tuinpagina: 96,4 · 87,3 · 87,3 · 87,3 · 84,1 · 79,5 · 78,6.
+- 390 en 1440 px (grote tuin, hub, pagina 1): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle ankers bestaan, geen invulveld op #15 (hub/pagina 1 alleen de tuinkeuzehulp), geen JavaScript-fouten van de site (alleen in de test geblokkeerde bol-foto's).
+- LiteSpeed geleegd via de dataroute (modelgegevens daarna ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #15 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog open
+- M003 Navimow i210 LiDAR (92,7 in Excel) staat nog niet op de pagina (ronde 82, melding 1).
