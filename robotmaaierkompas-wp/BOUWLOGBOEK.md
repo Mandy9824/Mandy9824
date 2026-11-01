@@ -3708,3 +3708,57 @@ Zodra de alarmbron van M058 is vastgelegd en de score op de site zichtbaar is (7
 - [ ] Mandy: alarmbron M058 vastleggen; daarna M058 toevoegen (zie hierboven).
 - [ ] Mandy: besluit over de "Details"-links naar modellen zonder kaart op pagina 1.
 - [ ] Open: bronnenlijsten van pagina 1 en de hub hebben nog geen bronnen voor de nieuwe modellen (niet in de md).
+
+## Ronde 79 (1 november 2026): M058 met score, pagina 1 en de hub MET DE HAND gewijzigd, M055 "Beste voor", bronnen (zonder thema-zip)
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). Opdracht van Mandy in zes punten.
+
+**Let op: pagina 1 (#11) en de hub (#10) zijn ook in deze ronde met de hand gewijzigd** (gerichte vervangingen en toevoegingen via de API met `scripts/ronde79_p1_hub.py`, niets uit een md gebouwd). Ze zijn niet opnieuw te bouwen uit een md of bouwscript zonder rondes 78 en 79 en eerdere links kwijt te raken. Wijzigen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+**Kopieën vooraf** (niet in git): `backups/ronde79-pagina11-10-voor-20261101-090900.json` (eerst, vóór alles), `backups/ronde79-voor-20261101-091422.json` (vlak vóór het schrijven; gelijk), `backups/modellen-voor-ronde79-m058-20261101-091031.json` en `backups/modellen-voor-ronde79-m055-20261101-091057.json`.
+
+### 1. M058: alarmstatus (dataroute, `scripts/ronde79_modellen.py --stap m058`)
+- Nieuw Excel-bestand: Alarm M058 = 0, status **gecontroleerd** (31-10-2026; was "niet gevonden"). In de omzetting verschillen voor M058 alleen `specs.alarm` en `scores.veiligheid` (null → 3,75). **Alleen die twee zijn geüpload**; de andere 63 modellen, de andere velden en de algemene velden zijn gelijk gebleven (het script weigert anders).
+- **M058 heeft nu functiescore 79,5** in de live gegevens (onafgerond 79,545; themacode), gelijk aan het blad Scores. Daarom zijn stap 2-4 uitgevoerd.
+
+### 2. Pagina 1 (#11)
+- Scoretabel: M058 na M004, vóór M008 (25 modellen). Live: … 80,5 · 80,5 · **79,5** · 78,6 …
+- Kaart M058 (skelet zoals `ronde71_bouw.py`) direct vóór de kaart van M008. Pagina 1: 14 kaarten.
+- "Welke past bij jouw tuin?": rij "Grote tuin tot 3.000 m² | Ecovacs GOAT A3000 LiDAR Pro | Tot 3.000 m² en 50% helling volgens Ecovacs, met LiDAR zonder draad", na de rij "Tuin tot 1.600 m²" (dus vóór "Kleine tuin", zoals in de oorspronkelijke md).
+- "vierentwintig" → "vijfentwintig": korte antwoord en kop "Vergelijking van de vijfentwintig modellen" (elk 1×). Op pagina 1 staat geen "Meer lezen"; "Alle … modellen naast elkaar" en "Meer lezen" staan op de hub (zie 3).
+- De zin met de zeven merklinks onder de tabel (ronde 78) is weg; op die plek staat nu: "De Navimow i105E loopt uit: controleer de beschikbaarheid voor je kiest." (M001 heeft in Excel beschikbaarheid "uitlopend"). De regels onder "De modellen een voor een" zijn ongewijzigd.
+
+### 3. Hub (#10)
+- Metabeschrijving "Zeven keuzes …" → "Acht keuzes …"; korte antwoord "zeven modellen" → "acht modellen".
+- "Alle vierentwintig modellen naast elkaar" → "Alle vijfentwintig …"; "Meer lezen": "de vierentwintig modellen vergeleken" → "de vijfentwintig …".
+- Tabel "In een oogopslag": rij "Grote tuin tot 3.000 m² | Ecovacs GOAT A3000 LiDAR Pro (link naar de kaart) | 79,5", en de tabel staat nu **op functiescore**: i210 LiDAR Pro 96,4 · i206 AWD 92,7 · Husqvarna 410VE NERA 87,3 · Mova LiDAX Ultra 1000 AWD 87,3 · Mova LiDAX Ultra 1200 80,5 · Ecovacs 79,5 · Dreame A1 Pro 78,6 · Gardena Free 800 60,9 (gelijke score: volgorde ongewijzigd).
+- Onderdeel "Grote tuin tot 3.000 m²: Ecovacs GOAT A3000 LiDAR Pro" (H3, kaart, "Waarom deze" van Mandy). **Plaats:** "na de Mova LiDAX Ultra 1000 AWD, op volgorde van score" → na het Mova 1200-onderdeel (80,5) en vóór Dreame (78,6), dus na M060 en op score. De volgorde van de onderdelen zelf is niet aangepast: i206 (92,7) staat nog vóór i210 (96,4), anders dan in de tabel.
+- "de grootste draadloze maaier met een score in onze selectie": klopt met het Excel-bestand (de Cramer AiConic-modellen van 3.000-12.000 m² hebben geen score).
+
+### 4. M055 "Beste voor" (dataroute, `scripts/ronde79_modellen.py --stap m055`)
+- "Tuinen tot 1.500 m² zonder begrenzingsdraad, met RTK via een gateway op je router". Alleen dit veld is gewijzigd, ook in `scripts/modellen_teksten.json` (zodat een volgende omzetting het houdt). Zichtbaar in de scoretabel van pagina 1.
+
+### 5. Bronnen (uit het blad Bronnen van het nieuwe Excel-bestand)
+- Regels met dezelfde regels als de merkpagina's (`soort()`/`bronnen()` uit `ronde71_bouw.py`, Gardena zoals `ronde48_bouw.py`), aangevuld voor Ecovacs: ecovacs.com en help.ecovacs.com = Fabrikant, de pdf op site-static.ecovacs.com = Handleiding. Overgeslagen: winkels (Coolblue, Amazon, Hornbach, x-kom, testfreaks), Bol, de EU-conformiteitsverklaring van de C15 en rijen met status winkelclaim, niet gevonden of niet geopend.
+- **Pagina 1** (platte lijst, "Modelnaam: " voor elke regel, zoals de bestaande regels), vóór de regel "Scoremodel v1.0": **133 regels**. Per model: M059 5, M060 5, M056 12, M057 12, M058 5, M064 5, M046 8, M047 6, M020 20, M022 18, M063 5, M007 5, M052 12, M053 10, M055 5. Geen dubbele regels op de pagina.
+- **Hub** (kop + lijst per model, zoals de bestaande blokken): M060 (5 regels) na het Husqvarna-blok, M058 (5 regels) na het Mova 1200-blok.
+- **Gemeld:**
+  - Op de hub staan de app-rating-regels van de MOVAhome-app (App Store en Google Play) nu onder Mova 1200 én onder M060: zelfde link en tekst, ander model. Dat is zo op alle pagina's met bronnen per model (Mova, kleine tuin, Eufy, Husqvarna); binnen één model zijn er geen dubbele regels.
+  - M020/M022 krijgen 20/18 regels; op de Husqvarna-pagina staan er 15/13 (het blad Bronnen is sindsdien aangevuld).
+  - De bronnen van de modellen die al op pagina 1 stonden zijn niet bijgewerkt.
+
+### 6. Controles
+- Momentopname van alle 25 openbare adressen vóór en na: **op de andere 23 pagina's zijn kaarten, scores, volgorde, winkel-links en tekst gelijk gebleven** (home en auteurspagina alleen "Bijgewerkt op 1 november 2026" in het blok "Onlangs bijgewerkt").
+- Winkelregels per kaart (pagina 1 en hub): Coolblue alleen bij `op_de_site`, Amazon alleen bij `knop: true` (exacte link, `rel="sponsored nofollow"`, laatste regel): **0 fouten**. M058: Coolblue-regel (in de feed), geen Bol-regel (geen aanbod), geen Amazon-knop. Bol-controle: 26 Bol-regels op 25 adressen, 0 fouten. Geen link gevolgd of aangeklikt.
+- Chromium 390 en 1440 px (pagina 1, hub): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", invoervelden alleen de bestaande tuinkeuzehulp, geen JavaScript-fouten van de site (alleen bol-foto's van media.s-bol.com, geblokkeerd in de test). Hub: alle ankers bestaan. Pagina 1: de 11 "Details"-links naar modellen zonder kaart werken nog niet (zie 1.3.14 a).
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Beide pagina's: status publish, slug ongewijzigd.
+- LiteSpeed geleegd via de dataroute (bij beide uploads en na de paginawijziging; modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Thema 1.3.14: te doen (lijst voor de volgende themaversie)
+- (a) **Scoretabel, link "Details"** (`inc/score.php`, `[rmk_scoretabel]`): alleen tonen als de kaart van het model op de pagina staat. Anders een link naar de merkpagina van het model: Segway Navimow → /segway-navimow-robotmaaier/, Husqvarna → /husqvarna-robotmaaier/, Gardena → /gardena-robotmaaier/, Stihl → /stihl-robotmaaier/, Worx → /worx-robotmaaier/, Mova en Dreame → /mova-dreame-robotmaaier/, Eufy → /eufy-robotmaaier/. **Geen link voor Roborock en Ecovacs** (geen merkpagina). Nu op pagina 1: 11 rijen zonder kaart (M057, M064, M046, M047, M020, M022, M063, M007, M052, M053, M055).
+- (b) **"Scoremodel v1.0 (concept tot bevriezing)" → "Scoremodel v1.0"** in het scoreblok (`inc/score.php` regel 205), en zie ronde 77 voor de andere plekken (bijschrift scoretabel regel 262, patronen, `data/modellen.json`, commentaar in rmk.js).
+- (c) **`patterns/footer.php` met de nieuwe tekst** ("© robotmaaierkompas.nl · Scoremodel v1.0 · Hoe we scoren"; in de repository al bijgewerkt in ronde 76, nog niet in een zip).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; editortabs van #10 en #11 sluiten of herladen vóór opnieuw opslaan.
+- [ ] Thema 1.3.14 (lijst hierboven).
