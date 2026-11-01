@@ -3927,3 +3927,10 @@ Mandy: /robotmaaier-grote-tuin/ (#15) is gepubliceerd (titel, slug en metabeschr
 
 ### Nog open
 - M003 Navimow i210 LiDAR (92,7 in Excel) staat nog niet op de pagina (ronde 82, melding 1).
+
+## Ronde 85 (1 november 2026): één zin op de grote-tuinpagina MET DE HAND gewijzigd (zonder thema-zip)
+
+- `scripts/ronde85_grote_tuin.py` (gerichte vervanging via de API; #15 is met de hand gewijzigd, niet opnieuw bouwen). Kopie vooraf: `backups/ronde85-pagina15-voor-20261101-131215.json` (niet in git).
+- "Wat we nog niet weten": "De zeven modellen zonder score hebben we alleen op basisniveau uitgezocht." (precies 1× gevonden) → "Zes van de zeven modellen zonder score hebben we op basisniveau uitgezocht; de Cramer AiConic 2 is breder uitgezocht, maar zonder handleiding is er geen score." (melding uit ronde 84).
+- Status bleef publish; inhoud zoals bedoeld; metabeschrijving ongewijzigd. Live HTML: nieuwe zin 1×, oude zin 0×.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #15 herladen vóór opnieuw opslaan.
