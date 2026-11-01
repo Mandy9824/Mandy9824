@@ -11,7 +11,7 @@ from affiliate_teksten_lib import api
 def pas_toe(pid, stappen, schrijf, naam, meta=None, titel=None):
     p = api(f'wp/v2/pages/{pid}?context=edit')
     os.makedirs('backups', exist_ok=True)
-    pad = f'backups/{"" if naam.startswith("r89") else "ronde88-"}{naam}-pagina{pid}-voor-{time.strftime("%Y%m%d-%H%M%S")}.json'
+    pad = f'backups/{"" if naam.startswith(("r89", "r90")) else "ronde88-"}{naam}-pagina{pid}-voor-{time.strftime("%Y%m%d-%H%M%S")}.json'
     json.dump({k: p[k] for k in ('id', 'status', 'slug', 'parent', 'title', 'content', 'meta', 'modified')},
               open(pad, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print(f'#{pid} {p["slug"]} ({p["status"]}, gewijzigd {p["modified"]}); kopie: {pad}')

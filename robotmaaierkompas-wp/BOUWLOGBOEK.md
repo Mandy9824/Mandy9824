@@ -4080,3 +4080,16 @@ Kopieën vooraf (niet in git, `backups/`): `ronde88-husqvarna-faq-pagina20-voor-
 
 ### Thema: te doen voor de volgende themaversie
 - **"Uitlopend" bij M010 in de scoretabel tonen** (`inc/score.php`, `[rmk_scoretabel]`): een aanduiding achter de modelnaam uit het veld `beschikbaarheid` (= "uitlopend"); geldt dan ook voor M001 en de Gardena-draadmodellen als die in een scoretabel staan.
+
+## Ronde 90 (1 november 2026): drie gerichte wijzigingen MET DE HAND (zonder thema-zip)
+
+**Let op: pagina 1 (#11), de grote-tuinpagina (#15) en de Gardena-pagina (#21) zijn met de hand gewijzigd en mogen NIET opnieuw uit een md of bouwscript gebouwd worden.** `scripts/ronde90_paginas.py` (via `scripts/ronde88_lib.py`): kopie vooraf `backups/r90-pagina{11,15,21}-voor-20261101-1624*.json` (niet in git); proefdraai zonder meldingen, elke zoektekst precies 1×; status publish gebleven, inhoud zoals bedoeld.
+
+1. **Pagina 1:** kaart M070 (450V NERA) verplaatst naar direct na M069 (430V NERA). Kaartvolgorde live: i210 LiDAR Pro 96,4 · 430V 96,4 · 450V 94,5 · i206 92,7 · i205 92,7 · 410VE 87,3 …; de scoretabel stond al op score (ongewijzigd).
+2. **Grote tuin, korte antwoord:** "elf robotmaaiers zonder draad …" → "veertien …". **"zes zonder score" komt niet voor:** het korte antwoord zegt al "plus zeven zonder score" (sinds ronde 84); niets aan veranderd.
+3. **Gardena, korte antwoord:** "kaart, zones en GPS alleen met een losse smart Gateway" → "kaart en zones alleen met een losse smart Gateway; GPS heeft hij ook dan niet".
+
+### Controles
+- Momentopname alle 26 adressen vóór/na: scores en winkel-links overal gelijk; verschillen alleen de kaartvolgorde op pagina 1, de twee zinnen en "Onlangs bijgewerkt" (home, auteurspagina).
+- De drie pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", geen JavaScript-fouten, ankers in orde (behalve de bestaande footerknop #cookie-instellingen), interne links HTTP 200; invulvelden alleen de tuinkeuzehulp op pagina 1.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #11, #15 en #21 herladen vóór opnieuw opslaan.
