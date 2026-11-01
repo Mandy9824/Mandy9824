@@ -115,5 +115,11 @@
   },
   "M072": {
     "analyse": "De Gardena smart SILENO sense 600 is de grotere variant van de sense 400, voor tuinen tot 600 m² en een helling tot 25%. De techniek is gelijk: RTK met een AI-camera, zonder draad, en GPS via een gratis ingebouwde simkaart. Er is een pincode en de app (4,49) heeft kaart, zones en no-go-gebieden; een diefstalalarm noemt Gardena niet. Het geluidsvermogen is 55 dB(A). In onze functiescore krijgt hij 78,6. Eén gelezen review, na ongeveer een uur gebruik, meldde dat de maaier overal tegenaan reed."
+  },
+  "M054": {
+    "analyse": "De Gardena smart SILENO max 1200 is een draadmodel voor tuinen tot 1.200 m² en een helling tot 30% (de handleiding noemt 35%, de productpagina 30%; we nemen de laagste waarde). Er is een pincode en het geluidsvermogen is 57 dB(A). Kaart, zones en volgen werken alleen met een losse smart Gateway; met alleen de Bluetooth-app zijn die functies niet beschikbaar. Een diefstalalarm en GPS noemt Gardena standaard niet. In de doos zit volgens Gardena 200 meter begrenzingsdraad."
+  },
+  "M055": {
+    "analyse": "De Gardena smart SILENO free 1500 is voor tuinen tot 1.500 m² en een helling tot 30%. Hij navigeert met RTK via een gateway die met een LAN-kabel op je router moet, zonder begrenzingsdraad en zonder camera. Er is een pincode en het geluidsvermogen is 57 dB(A). De maaier heeft geen 4G, dus geen GPS-tracking buiten de tuin, en een diefstalalarm noemt Gardena niet. In onze functiescore krijgt hij 60,9, gelijk aan de free 800."
   }
 }

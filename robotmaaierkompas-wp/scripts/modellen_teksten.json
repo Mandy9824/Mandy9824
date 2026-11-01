@@ -489,7 +489,21 @@
     ]
   },
   "M055": {
-    "beste_voor": "Tuinen tot 1.500 m² zonder begrenzingsdraad, met RTK via een gateway op je router"
+    "beste_voor": "Tuinen tot 1.500 m² zonder begrenzingsdraad, met RTK via een gateway op je router",
+    "pluspunten": [
+      "RTK zonder begrenzingsdraad, tot 1.500 m²",
+      "Pincode",
+      "Stil: 57 dB(A)",
+      "Gateway zit volgens de meeste bronnen in de doos",
+      "App-rating 4,48, koppeling met slimme thuissystemen"
+    ],
+    "minpunten": [
+      "Geen camera: obstakels merkt hij pas na een botsing",
+      "Internet en een vrije LAN-poort op je router nodig",
+      "Geen GPS-tracking en geen diefstalalarm",
+      "Helling 30%",
+      "Geen onafhankelijke reviews gelezen: geen betrouwbaarheidsscore"
+    ]
   },
   "M066": {
     "beste_voor": "Tuinen tot 800 m² zonder grensdraad, met wifi-dekking over het hele gazon, hellingen tot 40% en een AI-camera die obstakels ontwijkt",
@@ -603,6 +617,22 @@
       "Mobiele dekking over het hele gazon nodig",
       "Geen GeoFence-melding genoemd",
       "In één gelezen review (korte gebruiksduur) reed de maaier tegen obstakels"
+    ]
+  },
+  "M054": {
+    "beste_voor": "Tuinen tot 1.200 m² met begrenzingsdraad, voor wie een eenvoudige maaier met de draad in de doos zoekt",
+    "pluspunten": [
+      "Tot 1.200 m² met begrenzingsdraad",
+      "Pincode",
+      "Stil: 57 dB(A)",
+      "Geen abonnement",
+      "3 jaar garantie na registratie"
+    ],
+    "minpunten": [
+      "Kaart, zones en volgen alleen met een losse smart Gateway; GPS dan pas mogelijk",
+      "Geen diefstalalarm",
+      "Helling 30%",
+      "Geen onafhankelijke reviews gelezen: geen betrouwbaarheidsscore"
     ]
   }
 }

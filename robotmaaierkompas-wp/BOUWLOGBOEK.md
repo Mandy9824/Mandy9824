@@ -3999,3 +3999,57 @@ Aangeleverd: `pagina-husqvarna-robotmaaier-v2.md`, `modellen-teksten-husqvarna-2
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; editortabs van #20 sluiten of herladen vóór opnieuw opslaan; Search Console: indexering opnieuw aanvragen voor /husqvarna-robotmaaier/.
+
+## Ronde 88 (1 november 2026): verbindingschips M066-M072, teksten M054/M055, Gardena-pagina vervangen, vijf pagina's MET DE HAND gewijzigd (zonder thema-zip)
+
+Aangeleverd: `pagina-gardena-robotmaaier-v2.md`, `modellen-teksten-gardena-2026.json`, `tekstwijzigingen-nieuwe-modellen-overig.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alle vier alleen gelezen, **niet in de repository**).
+
+**Let op: alle vijf pagina's zijn in deze ronde met de hand gewijzigd en mogen NIET opnieuw uit een md of bouwscript gebouwd worden:** Husqvarna (#20), Gardena (#21, vervangen), pagina 1 (#11), hub (#10), kleine tuin (#16), grote tuin (#15). Latere wijzigingen alleen via de API, met gerichte vervangingen en een kopie vooraf (`scripts/ronde88_lib.py`). `scripts/ronde88_gardena_bouw.py`/`ronde88_gardena_pagina.py` staan er alleen ter verantwoording.
+
+Kopieën vooraf (niet in git, `backups/`): `ronde88-husqvarna-faq-pagina20-voor-20261101-154637.json`, `ronde88-gardena-pagina21-voor-*.json` en `ronde88-pagina21-voor-20261101-155036.json`, `ronde88-pagina1-pagina11-voor-20261101-155440.json`, `ronde88-hub-pagina10-voor-20261101-155443.json`, `ronde88-kleine-tuin-pagina16-voor-20261101-155446.json`, `ronde88-grote-tuin-pagina15-voor-20261101-155449.json`, `modellen-voor-ronde88-verbinding-20261101-154743.json`, `modellen-voor-ronde88-teksten-*.json`.
+
+### 1. Husqvarna-pagina (#20), FAQ "Welke Husqvarna Automower heeft GPS?"
+- `scripts/ronde88_husqvarna_faq.py`: "Bij de andere modellen is er geen GPS zonder losse Connect Kit." → "Ook de uitlopende 410VE NERA heeft GPS-tracking standaard. Bij de andere modellen is er geen GPS zonder losse Connect Kit." (precies 1×; live inhoud was vooraf gelijk aan `scripts/ronde87/husqvarna.json`).
+
+### 2. Verbindingschips (`scripts/verbinding_toewijzing.json`, `scripts/ronde88_verbinding.py`)
+- Per model **precies één** bronregel (gecontroleerd), alleen het veld `verbinding` geüpload; de rest gelijk:
+  - M069, M070 `ingebouwd` (chip 4G), "4G ingebouwd; volgens Husqvarna NL 10 jaar gratis", bronveld "Verborgen kosten: 4G-datapakket" (fabrikantclaim, 1-11, KA-01298). Niet "Extra kosten: verbinding / abonnement": die regel heeft status niet gevonden.
+  - M066, M067, M068 `wifi`, "Wifi", bronveld "Extra kosten: verbinding / abonnement" (fabrikantclaim, 1-11).
+  - M071, M072 `ingebouwd` (chip 4G), "4G ingebouwd; gratis simkaart", bronveld "Extra kosten: verbinding / abonnement" (fabrikantclaim, 1-11, ingebouwde SIM).
+- Live op /husqvarna-robotmaaier/: 430V/450V/410VE 4G, R6V/308V/312V/310E/305E Wifi, 305 Bluetooth.
+
+### 3. Teksten M054 en M055 (`scripts/ronde88_gardena_teksten.py`)
+- `modellen-teksten-gardena-2026.json` in `scripts/modellen_teksten.json` en `modellen_analyse.json`; beste_voor, pluspunten, minpunten en analyse van M054 en M055 geüpload (M055 beste_voor was al gelijk). Andere velden en modellen gelijk (gecontroleerd).
+- Momentopname alle 26 adressen na stap 1-3: enige verschil de FAQ-zin op #20; kaarten, scores, volgorde en winkel-links overal gelijk.
+
+### 4. Gardena-pagina (#21)
+**Tekst tegen het Excel-bestand:** oppervlak, helling, geluid, navigatie, beschikbaarheid en score van de acht modellen kloppen (Modellen, Scores, themacode: 78,6 · 78,6 · 60,9 · 60,9 · 46,4 · 44,5 · 40,9 · 40,9). Ook in orde: draad in de doos 150/200 m, extra draad 38,19/87,49, messen 21,79 (4-7 weken), garage 214,99, 3 jaar garantie (accu uitgesloten), geen alarm, Bluetooth ~10 m en USB-firmware bij de minimo's. **Gemeld, niet aangepast:**
+1. City 250, geluid: het bijschrift zegt "gemeten geluidsvermogen (LWA)"; bij de city 250 is 58 dB(A) de **gegarandeerde** waarde (gemeten 56).
+2. City 250, kolom Verbinding "Display met toetsen": hij heeft ook de GARDENA Bluetooth App (App iOS/Android = 1, ~10 m).
+3. Max 1200: "kaart, zones en GPS alleen met een losse smart Gateway" (korte antwoord) en minpunt "GPS dan pas mogelijk": Excel heeft GPS-tracking 0 en noemt met de Gateway alleen kaart, no-go en realtime volgen in de tuin; geen GPS-tracking.
+4. FAQ minimo "Gardena verkoopt hem zelf niet meer": Excel zegt "niet op voorraad in de Gardena NL-webshop (wel nog vermeld)".
+5. M055 minpunt "Geen onafhankelijke reviews gelezen": blad Reviews heeft 2 gelezen Coolblue-reviews (meegeteld). M072: 1 gelezen (Coolblue).
+**Vervangen** (`scripts/ronde88_gardena_bouw.py`, inhoud `scripts/ronde88/gardena.json`, gezet met `scripts/ronde88_gardena_pagina.py`): de versie met vier modellen (Free 800, City 250, Minimo 250/500) en metabeschrijving "… Sileno Free 800, Minimo 250 en 500 en City 250 vergeleken, met draad, app, kosten en beschikbaarheid."; laatste wijziging daarvoor 1-11 13:48 (linkscript). Status publish, slug, ouder en kruimeltitel gelijk; titel en **metabeschrijving uit de md** (live gecontroleerd). Behouden: "Meer lezen" (alle merk- en tuinlinks) en het uitgeschreven auteursblok. Kaarten M072, M071, M055, M011, M054, M025, M024, M023. Bronnen uit het blad Bronnen (gardena.com, Gardena-handleidingen op content.tdr.dss.husqvarnagroup.net, de gearchiveerde city-pagina als "Fabrikant (archief)", appwinkels): 4 · 4 · 5 · 4 · 6 · 11 · 10 · 11 regels. Links van 7 andere pagina's naar /gardena-robotmaaier/ staan er nog.
+
+### 5. Pagina 1, hub, kleine en grote tuin (`scripts/ronde88_paginas.py`, proefdraai zonder meldingen, elke zoektekst precies 1×)
+- **A, pagina 1 (#11):** "vijfentwintig" → "tweeëndertig" (korte antwoord, kop); scoretabel +M066-M072 (32 rijen, live op score: 96,4 · 96,4 · 94,5 · 92,7 …; gelijke score in volgorde van de lijst = op ID); rij "Zeer grote tuin (tot 7.500 m²) …" onderaan de keuzetabel; kaart M069 na M015 en M070 na M016 (pagina 1: 16 kaarten).
+- **B, hub (#10):** kop, kaart (M069), "Waarom deze" (zonder "Hij loopt uit") en de tabelrij (96,4, na de i210 LiDAR Pro) van de 430V NERA in plaats van de 410VE; "vijfentwintig" → "tweeëndertig" (2×); **ook** het bronnenblok van de 410VE vervangen door dat van de 430V (regels van de Husqvarna-pagina), zodat de hub geen bronnen van een model zonder kaart toont.
+- **C, kleine tuin (#16):** titel en H1 "12" → "15", metabeschrijving "Twaalf" → "Vijftien", korte antwoord "vijftien … elf zonder draad en vier met begrenzingsdraad", kop "De vijftien modellen naast elkaar" (anker-id `de-twaalf-modellen-naast-elkaar` ongewijzigd), rijen Aspire R6V (na i206), sense 600 en 400 (na Q105), twee rijen in de keuzetabel, FAQ "elf van de vijftien", FAQ stilste: "De Gardena Sileno sense 400 en 600 (55 dB(A))." vóór de bestaande zin.
+- **D, grote tuin (#15):** rijen 430V en 450V na de i210 LiDAR Pro, 312V na de 410VE, "(loopt uit)" achter de 410VE in de tabel; sectie "Robotmaaier voor 5.000 m² en meer" vóór "Draadloos bij een grote tuin"; korte antwoord vervangen; kaart M069 na M015 (na diens "Waarom deze"); "Husqvarna 430V NERA" in de rij "4G en GPS ingebouwd".
+- **Niet uitgevoerd, gemeld:**
+  1. A3 "uitlopend" bij M010 in de scoretabel: de shortcode toont de naam uit de modelgegevens, een aantekening kan alleen met een themawijziging (zip) of door de naam te veranderen (zou op alle pagina's zichtbaar zijn). De zin onder de tabel noemt de 410VE al als uitlopend.
+  2. D4 "Tuin van 1.500 tot 1.600 m²": de cel is "Mova LiDAX Ultra 1600, Husqvarna Automower 410VE NERA, Husqvarna Automower 310E NERA of Gardena Sileno Free 1500" (310E sinds ronde 84); de vervanging zou 310E en Ultra 1600 dubbel noemen. Ongewijzigd.
+- **Keuzes, graag nakijken:** A5 "M070 na M016" letterlijk uitgevoerd: de 450V (94,5) staat nu na de i205 (92,7), dus niet op score. D1 de 430V na de i210 (gelijke score, op ID), niet erboven. Hub: situatie "Grote tuin tot ongeveer 1.500 m², systematisch maaien" (rij en kop) ongewijzigd, terwijl de 430V tot 4.800 m² gaat. M069 heeft op pagina 1 en de grote-tuinpagina geen "Waarom deze" (niet aangeleverd).
+- **Niet aangepast, klopt niet meer:** kleine tuin: "Voor zeven van de twaalf modellen hebben we geen reviews gevonden" (aantal van vijftien niet zeker), korte antwoord en FAQ "beste" (R6V 84,5 boven Q105 84,1), keuzerij "Stil: 57 dB(A)", keuzerij/FAQ "4G en GPS zonder losse module" (sense heeft een ingebouwde simkaart), FAQ "kleinste" (onveranderd juist). Grote tuin: "elf robotmaaiers … met een score" in korte antwoord en metabeschrijving (nu veertien), FAQ 4G zonder 430V/450V. Pagina 1 keuzetabel en de "Meer lezen"-regel op negen pagina's: "twaalf modellen tot 600 m²". Pagina 1 en grote tuin: geen bronnen voor de nieuwe modellen.
+
+### 6. Controles
+- Momentopname alle 26 adressen vóór/na: verschillen **alleen** op #20, #21, #11, #10, #16, #15 (de bedoelde wijzigingen) en "Onlangs bijgewerkt" (home, auteurspagina). Op alle andere pagina's kaarten, scores, volgorde, winkel-links en tekst gelijk.
+- Zes pagina's op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", geen JavaScript-fouten van de site (op de hub alleen in de test geblokkeerde bol-foto's), ankers in orde (behalve de bestaande footerknop #cookie-instellingen); invulvelden alleen de tuinkeuzehulp (hub, pagina 1). Alle interne links HTTP 200; geen link van een pagina naar een anker dat niet meer bestaat.
+- Winkelregels (`scripts/ronde88_winkelregels.py`): 77 kaarten op 26 adressen, Coolblue alleen bij `op_de_site`, Amazon alleen bij `knop: true` met de exacte link: **0 fouten**. Bol-controle: **31 Bol-regels** op 26 adressen (+2: M055 en M054 op de Gardena-pagina), 0 fouten. Routetest: 0 fouten.
+- Gardena-pagina: alle tekst uit de md staat erop. Verbindingschips: sense 4G, free 800 "geen", minimo's Bluetooth; **free 1500, max 1200 en city 250 zonder chip** (open punt).
+- **Download:** `paginatekst-gardena.md` (in `backups/`, niet in de repository).
+- LiteSpeed geleegd via de dataroute (na alle paginawijzigingen; modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; editortabs van #20, #21, #11, #10, #16 en #15 sluiten of herladen vóór opnieuw opslaan; Search Console: indexering opnieuw aanvragen voor /gardena-robotmaaier/.
+- [ ] Mandy: besluiten over de meldingen bij punt 4 en 5.

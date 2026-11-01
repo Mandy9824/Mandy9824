@@ -1,5 +1,5 @@
 {
-  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen). Ronde 52: M023 en M024 (Gardena Sileno Minimo) 'Bluetooth' (GARDENA Bluetooth App); M025 bewust zonder regel, dus zonder chip. Ronde 69: M059 en M060 'ingebouwd' (chip 4G), M063 en M064 'module' (bronveld 'Verbinding / 4G'). Ronde 73: M056 en M053 'module' (bronveld 'Verborgen kosten', optionele 4G-module), M046 'wifi' (bronveld 'Extra kosten: abonnement / verbinding'). Ronde 80: M007 'ingebouwd' (chip 4G; bronveld 'Verborgen kosten', 4G-module met simkaart in de maaier), M052 'module' (bronveld 'Verborgen kosten', optionele 4G-module van 99 euro), M047 'wifi' (bronveld 'Extra kosten: abonnement / verbinding'). Ronde 84: M057 (Roborock RockNeo Q110) en M058 (Ecovacs GOAT A3000 LiDAR Pro) 'module' (bronveld 'Verborgen kosten', optionele 4G-module).",
+  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen). Ronde 52: M023 en M024 (Gardena Sileno Minimo) 'Bluetooth' (GARDENA Bluetooth App); M025 bewust zonder regel, dus zonder chip. Ronde 69: M059 en M060 'ingebouwd' (chip 4G), M063 en M064 'module' (bronveld 'Verbinding / 4G'). Ronde 73: M056 en M053 'module' (bronveld 'Verborgen kosten', optionele 4G-module), M046 'wifi' (bronveld 'Extra kosten: abonnement / verbinding'). Ronde 80: M007 'ingebouwd' (chip 4G; bronveld 'Verborgen kosten', 4G-module met simkaart in de maaier), M052 'module' (bronveld 'Verborgen kosten', optionele 4G-module van 99 euro), M047 'wifi' (bronveld 'Extra kosten: abonnement / verbinding'). Ronde 84: M057 (Roborock RockNeo Q110) en M058 (Ecovacs GOAT A3000 LiDAR Pro) 'module' (bronveld 'Verborgen kosten', optionele 4G-module). Ronde 88: M069 en M070 (Husqvarna 430V/450V NERA) 'ingebouwd' (chip 4G; bronveld 'Verborgen kosten: 4G-datapakket', want 'Extra kosten: verbinding / abonnement' heeft status niet gevonden), M066, M067 en M068 (308V, 312V, Aspire R6V) 'wifi' (bronveld 'Extra kosten: verbinding / abonnement'), M071 en M072 (Gardena SILENO sense 400/600) 'ingebouwd' (chip 4G; bronveld 'Extra kosten: verbinding / abonnement', ingebouwde simkaart).",
   "toewijzingen": [
     {
       "model": "M002",
@@ -174,6 +174,48 @@
       "bronveld": "Verborgen kosten",
       "tekst": "Losse 4G-module",
       "extra": "module"
+    },
+    {
+      "model": "M069",
+      "bronveld": "Verborgen kosten: 4G-datapakket",
+      "tekst": "4G ingebouwd; volgens Husqvarna NL 10 jaar gratis",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M070",
+      "bronveld": "Verborgen kosten: 4G-datapakket",
+      "tekst": "4G ingebouwd; volgens Husqvarna NL 10 jaar gratis",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M066",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "Wifi",
+      "extra": "wifi"
+    },
+    {
+      "model": "M067",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "Wifi",
+      "extra": "wifi"
+    },
+    {
+      "model": "M068",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "Wifi",
+      "extra": "wifi"
+    },
+    {
+      "model": "M071",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "4G ingebouwd; gratis simkaart",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M072",
+      "bronveld": "Extra kosten: verbinding / abonnement",
+      "tekst": "4G ingebouwd; gratis simkaart",
+      "extra": "ingebouwd"
     }
   ]
 }
