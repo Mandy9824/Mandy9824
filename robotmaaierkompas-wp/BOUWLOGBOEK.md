@@ -3876,3 +3876,26 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` en `pagina-robotmaai
 ### Nog te doen
 - [ ] Mandy: CDN legen; de grote-tuinpagina nalezen (ook de meldingen bij punt 1) en publiceren.
 - [ ] Claude: na Mandy's bericht `scripts/ronde82_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 83 (1 november 2026): grote-tuinpagina gepubliceerd, links gezet
+
+Mandy: /robotmaaier-grote-tuin/ (#15) is gepubliceerd (titel, slug en metabeschrijving zoals gezet, geen bovenliggende pagina).
+
+- **Gepubliceerde inhoud vergeleken met `scripts/ronde82/grote-tuin.json`:** het enige verschil is het auteursblok, dat in de editor is omgezet van patroonverwijzing naar uitgeschreven HTML (revisie 422), net als bij de andere pagina's. Opnieuw bouwen met `ronde82_bouw.py` zou de links hieronder weghalen.
+
+### Links (`scripts/ronde82_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde82-links-voor-20261101-124801.json` (niet in git). Alle elf pagina's bleven gepubliceerd; de inhoud is zoals bedoeld.
+- Toegevoegd en live gecontroleerd (openbare HTML):
+  - hub #10 ("Meer lezen") en pagina 1 #11: "Op zoek naar een robotmaaier voor een grote tuin? Zie Robotmaaier grote tuin.";
+  - kleine-tuinpagina #16 en Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351, Eufy #366, "Meer lezen": "Robotmaaier voor een grote tuin: modellen van 1.000 tot 3.000 m²." Op elke pagina staat de link naar /robotmaaier-grote-tuin/ **precies één keer**;
+  - grote-tuinpagina #15, "Meer lezen": Segway Navimow, Mova of Dreame, Husqvarna, Eufy, Gardena, Worx, Stihl en Robotmaaier voor een kleine tuin (elk één keer; Stihl staat er twee keer, want ook de tekstlink onder "Met draad").
+
+### Controles
+- Momentopname van alle 26 openbare adressen (nu met /robotmaaier-grote-tuin/) vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen: de nieuwe regels, de volgorde in "Onlangs bijgewerkt" (home) en op de acht merk- en kleine-tuinpagina's de datum "bijgewerkt op" / "Laatst nagekeken op" (31 oktober → 1 november: het thema toont de wijzigingsdatum).
+- Grote-tuinpagina live: 96,4 · 87,3 · 87,3 · 87,3 · 84,1 · 79,5 · 78,6.
+- De elf gewijzigde pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle ankers bestaan, geen JavaScript-fouten van de site (alleen bol-foto's van media.s-bol.com, in de test geblokkeerd). Invoervelden alleen de bestaande tuinkeuzehulp (hub, pagina 1).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/robotmaaier-grote-tuin/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen voor /robotmaaier-grote-tuin/; editortabs van #15 sluiten of herladen vóór opnieuw opslaan.
+- [ ] Open uit ronde 82: de meldingen bij punt 1 (M003, AiConic 2, keuzetabel, X420 4G) en de verbindingschips van M057/M058.
