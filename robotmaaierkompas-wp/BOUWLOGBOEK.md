@@ -4053,3 +4053,30 @@ Kopieën vooraf (niet in git, `backups/`): `ronde88-husqvarna-faq-pagina20-voor-
 ### Nog te doen
 - [ ] Mandy: CDN legen; editortabs van #20, #21, #11, #10, #16 en #15 sluiten of herladen vóór opnieuw opslaan; Search Console: indexering opnieuw aanvragen voor /gardena-robotmaaier/.
 - [ ] Mandy: besluiten over de meldingen bij punt 4 en 5.
+
+## Ronde 89 (1 november 2026): elf pagina's MET DE HAND gewijzigd, teksten M054/M055, chips M025/M054 (zonder thema-zip)
+
+**Let op: deze pagina's zijn met de hand gewijzigd en mogen NIET opnieuw uit een md of bouwscript gebouwd worden:** Gardena (#21), pagina 1 (#11), hub (#10), kleine tuin (#16), grote tuin (#15), Husqvarna (#20), Navimow (#264), Stihl (#22), Worx (#24), Mova/Dreame (#351), Eufy (#366). Gerichte vervangingen met `scripts/ronde89_paginas.py` (via `scripts/ronde88_lib.py`): kopie vooraf per pagina in `backups/r89-pagina<id>-voor-20261101-1616*.json` (niet in git); proefdraai zonder meldingen, elke zoektekst precies 1×; alle pagina's bleven gepubliceerd, inhoud zoals bedoeld.
+
+### Paginawijzigingen
+1. **Gardena (#21):** (a) voetnoot geluid (gegarandeerde waarde bij de city 250); (b) city 250 "Display met toetsen en Bluetooth-app"; (c) Smart Gateway: "kaart en zones … GPS-tracking heeft hij ook met die gateway niet"; (d) korte antwoord "Gardena heeft ze niet op voorraad of noemt ze een voorgaand model" en FAQ minimo "Gardena heeft hem niet op voorraad …". **Niet gevraagd, nog zo:** het korte antwoord zegt nog "bij de max 1200 werken kaart, zones en GPS alleen met een losse smart Gateway".
+2. **Pagina 1 (#11):** "Twaalf modellen tot 600 m² vergeleken" → "Vijftien …" (keuzetabel). **Gemeld:** de opdracht noemt "twaalf" met kleine letter; dat komt 0× voor, met hoofdletter 1×; die is vervangen. **Scoretabel niet gewijzigd:** de shortcode sorteert zelf op score; live staat de 450V (94,5) al boven de i206 en i205 (92,7). Wat níet op score staat zijn de **kaarten** (M070 na de i205, zoals in ronde 88 letterlijk uitgevoerd); niet verplaatst (niet gevraagd).
+3. **Hub (#10):** tabelrij en kop van het onderdeel: situatie "Grote tot zeer grote tuin (tot 4.800 m²)" (de kop was "Grote tuin, systematisch maaien: …", de rij "Grote tuin tot ongeveer 1.500 m², systematisch maaien").
+4. **Kleine tuin (#16):** "Voor de meeste modellen hebben we geen reviews gevonden, …".
+5. **Grote tuin (#15):** **alleen de Yoast-metabeschrijving** ("Veertien modellen met score en zeven zonder score …", live gecontroleerd). **Gemeld:** "elf modellen met score" staat niet in het korte antwoord; daar staat "elf robotmaaiers zonder draad die nu nieuw te koop zijn en een score hebben" (niet gewijzigd).
+6. **"Meer lezen" kleine tuin "vijftien modellen tot 600 m²"** op acht pagina's (elk 1×): Navimow, Husqvarna, Gardena, Stihl, Worx, Mova/Dreame, Eufy en grote tuin. Hub en pagina 1 hebben een andere zin.
+7. **Husqvarna (#20):** (a) kosten: Connect Kit 209 euro en EPOS RS1 309 euro voor de 308V/312V/R6V (tekst van Mandy; de opmerking over de RS1-pagina "geschikt voor" staat niet in het blad Bronnen); (b) "Wat we nog niet weten": "… wat een dealer rekent voor het inbouwen van de Connect Kit of het referentiestation".
+
+### Modelgegevens (`scripts/ronde89_modellen.py`, dataroute; alleen deze velden, de rest gelijk, gecontroleerd)
+- **M054** analyse ("Kaart en zones werken alleen met een losse smart Gateway; … en GPS-tracking zit er ook met die gateway niet bij.") en minpunt ("Kaart en zones alleen met een losse smart Gateway; GPS-tracking ook met die gateway niet"); **M055** minpunt "Weinig reviews gelezen (2 bij Coolblue): geen betrouwbaarheidsscore". Ook in `scripts/modellen_teksten.json` en `modellen_analyse.json`.
+- **Chips** (`scripts/verbinding_toewijzing.json`): M025 en M054 `bluetooth`, bronveld "App: iOS/Android, kaart/no-go, schema, smart home, knoppen, OTA" (elk precies 1 regel, gecontroleerd, zoals M023/M024). M055 had al geen chip en geen regel: niets veranderd. Live op de Gardena-pagina: sense 4G · 4G, free 1500 geen chip, free 800 "geen", max 1200 · city 250 · minimo 500 · minimo 250 Bluetooth.
+- Kopie: `backups/modellen-voor-ronde89-20261101-161510.json`.
+
+### Controles
+- Momentopname alle 26 adressen vóór/na: **kaarten, scores, volgorde en winkel-links overal gelijk**; alleen de bedoelde tekstverschillen en "Onlangs bijgewerkt" (home, auteurspagina).
+- Elf pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200, ankers in orde (behalve de bestaande footerknop #cookie-instellingen); invulvelden alleen de tuinkeuzehulp (hub, pagina 1); JavaScript-meldingen alleen de in de test geblokkeerde bol-foto's (media.s-bol.com).
+- Winkelregels: 77 kaarten, 0 fouten; Bol-controle 31 regels, 0 fouten.
+- LiteSpeed geleegd via de dataroute (modelgegevens daarna ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van deze elf pagina's herladen vóór opnieuw opslaan.
+
+### Thema: te doen voor de volgende themaversie
+- **"Uitlopend" bij M010 in de scoretabel tonen** (`inc/score.php`, `[rmk_scoretabel]`): een aanduiding achter de modelnaam uit het veld `beschikbaarheid` (= "uitlopend"); geldt dan ook voor M001 en de Gardena-draadmodellen als die in een scoretabel staan.
