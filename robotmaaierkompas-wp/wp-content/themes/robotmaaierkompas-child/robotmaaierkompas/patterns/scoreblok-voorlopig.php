@@ -26,6 +26,6 @@
     <li class="rmk-part" data-key="geluid" data-value="[0–10]"><span class="rmk-part__label">Geluid <small>5%</small></span><span class="rmk-part__val">[0–10]</span><div class="rmk-bar" role="img" aria-label="[0–10] van 10"><i style="width:0%"></i></div></li>
   </ul>
   <p class="rmk-small" data-out="note"></p>
-  <div class="rmk-score__foot"><span>Bijgewerkt op [datum]</span><span>Scoremodel v1.0 (concept tot bevriezing)</span><a href="/hoe-we-beoordelen/#scoremodel">Hoe we scoren</a></div>
+  <div class="rmk-score__foot"><span>Bijgewerkt op [datum]</span><span>Scoremodel v1.0</span><a href="/hoe-we-beoordelen/#scoremodel">Hoe we scoren</a></div>
 </section>
 <!-- /wp:html -->

@@ -3762,3 +3762,59 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **n
 ### Nog te doen
 - [ ] Mandy: CDN legen; editortabs van #10 en #11 sluiten of herladen vóór opnieuw opslaan.
 - [ ] Thema 1.3.14 (lijst hierboven).
+
+## Ronde 80 (1 november 2026): thema 1.3.14 (niet geüpload), verbinding M007/M052/M047
+
+**Niets gepubliceerd; het thema is niet geüpload.** Op de site is alleen het veld `verbinding` van drie modellen gezet (dataroute, op Mandy's opdracht). Live draait nog 1.3.13 (`rmk.js?ver=1.3.12`).
+
+### Thema 1.3.14 (alleen deze wijzigingen)
+- **(a) Link "Details" in de scoretabel** (`inc/score.php`, `[rmk_scoretabel]`): nieuwe functies `rmk_details_link()` en `rmk_merkpaginas()` (filter `rmk_merkpaginas`).
+  - Staat de kaart van het model (`id="p-<slug>"`) in de inhoud van dezelfde pagina (`get_post_field('post_content', get_the_ID())`): "Details" naar `#p-<slug>`, zoals voorheen.
+  - Anders: "**Merkpagina**" naar de merkpagina (Segway Navimow, Husqvarna, Gardena, Stihl, Worx, Mova en Dreame, Eufy; veld `merk`).
+  - Merken zonder merkpagina (Roborock, Ecovacs, Cramer, Mammotion, Zoef Robot, Bosch): een lege cel, zodat de kolommen gelijk blijven.
+  - **Linktekst "Merkpagina":** gekozen omdat "Details" voor een link naar een andere pagina misleidend is. Wil Mandy een andere tekst, dan is dat één regel.
+- **(b) "Scoremodel v1.0 (concept tot bevriezing)" → "Scoremodel v1.0"**, op alle 14 plekken in het thema:
+  - scoreblok-voet en bijschrift van de scoretabel (`inc/score.php`; de bestaande link "Hoe we scoren" blijft);
+  - patronen `scoreblok`, `scoreblok-voorlopig`, `scoretabel`, `vergelijkingstabel`, `bronnenlijst`, `pagina-methode`;
+  - `patterns-bron/` (niet in de zip), met in `c-footer.html` dezelfde voettekst als `patterns/footer.php`;
+  - `README.md`, `data/modellen.json` ("scoremodel": "v1.0") en een commentaarregel in `rmk.js`.
+- **(c) `patterns/footer.php`** met de nieuwe tekst ("© robotmaaierkompas.nl · Scoremodel v1.0 · Hoe we scoren"; al sinds ronde 76 in de repository).
+- `style.css` Version 1.3.14. **`RMK_VER` blijft 1.3.12**: in rmk.js veranderde alleen een commentaarregel en de CSS niet. Met een nieuwe `?ver=` zou elke pagina anders zijn (opmerking in `robotmaaierkompas-setup.php`).
+- **Ongewijzigd:** Bol-, Coolblue- en Amazon-logica (`bol.php`, `coolblue.php`, `amazon.php`, `prijzen.php`), de schakelaars, de CSS, de werking van rmk.js en de routes.
+- Niet in het thema: het veld `scoremodel` in de **live modelgegevens** zegt nog "v1.0 (concept tot bevriezing)". Het wordt nergens getoond en is niet aangepast (modelgegevens, geen thema).
+- **Zip:** `robotmaaierkompas-child.zip`, 116 bestanden, SHA-256 `9df89e30c6ed2e3931e5e13d50efd3d9cff1bde05c4afca338832f8c05c57a58`. Geen xlsx, md van Mandy, kopieën of `patterns-bron` erin.
+
+### Verbinding M007, M052, M047 (dataroute, `scripts/ronde80_verbinding.py`)
+- In `scripts/verbinding_toewijzing.json` (ook in `_uitleg`), omgezet met `excel_naar_json.py` uit het nieuwste Excel-bestand. Per bronveld is gecontroleerd dat er **precies één regel** in het blad Bronnen staat:
+  - **M007** `ingebouwd` (chip 4G), "4G ingebouwd; databundel na gratis proefdata", bronveld "Verborgen kosten" (gecontroleerd, 26-10, handleiding E15/E18). De Opmerking in Modellen zegt "4G-module met simkaart ingebouwd … geen losse module nodig".
+  - **M052** `module`, "Losse 4G-module", bronveld "Verborgen kosten" (fabrikantclaim, 26-10: optionele 4G-module 99,00 euro). Bedragen staan niet in de chiptekst (regel van dit bestand; zoals M053).
+  - **M047** `wifi`, "Wifi", bronveld "Extra kosten: abonnement / verbinding" (fabrikantclaim, 24-10: wifi bij het laadstation; zoals M046).
+- **Alleen `verbinding` van deze drie geüpload**; de andere velden en modellen en de algemene velden zijn gelijk gebleven (het script weigert anders). Kopie: `backups/modellen-voor-ronde80-20261101-093041.json`.
+- Opmerking: het bronveld van M007 begint met een omschrijving vóór de URL ("eufy Robot Lawn Mower … User Guide (EN): https://…"). Het thema gebruikt alleen `extra` (de chip) en toont de bron niet.
+- **Momentopname van de 25 adressen vóór en na:** alleen nieuwe chips: Worx-pagina "Verbinding Wifi" (WR365E), Eufy-pagina "Verbinding 4G" (E18) en "Verbinding module" (C15 met garage). Kaarten, scores, volgorde en winkel-links overal gelijk. Opslaan via de dataroute heeft LiteSpeed geleegd.
+
+### Tests
+- **Hele pagina's** (nieuw: `tests/thema-paginas.php` + `tests/thema-paginas-vergelijk.py`):
+  - Invoer: live inhoud van de 25 gepubliceerde pagina's, live modelgegevens, Bol- en Coolblue-stand.
+  - Anders dan de test van ronde 74 voert deze ook de shortcodes van het thema uit (`rmk_scoretabel`, `rmk_scoreblok`). Daarvoor kent `tests/wp-stub.php` nu `add_shortcode`/`do_shortcode` en `get_post_field('post_content')`.
+  - **Zonder constanten of schakelaars én met alles aan zoals live:** 24 van de 25 pagina's **byte voor byte gelijk** aan 1.3.13; 0 HTTP-verzoeken.
+  - /robotmaaier-zonder-draad/ is **precies** de oude pagina, met alleen het bijschrift (zonder "(concept tot bevriezing)") en de Details-cellen anders. Daarmee zijn scores, volgorde en Bol-/Coolblue-/Amazon-regels gelijk.
+  - Details-cellen: 14 naar de kaart, 10 naar een merkpagina (Mova ViAX 500 en 250, Worx WR303E en WR365E, Husqvarna 305E en 310E NERA, Eufy E18, C15 met garage en C15 Solo, Gardena SILENO free 1500), 1 zonder link (Roborock RockNeo Q110).
+- Bestaande tests: score, bol, bewaking, status OK; amazon-test aan/uit/zonder/tagfout OK.
+- **Browser** (Chromium; de live HTML van pagina 1 als 1.3.13 naast dezelfde HTML met de wijzigingen van 1.3.14, de rest van de site live; niets aangeklikt), 390 en 1440 px, met en zonder JavaScript:
+  - geen horizontale scroll, geen "[", "]", "{", "}", geen JavaScript-fouten;
+  - invoervelden alleen de bestaande tuinkeuzehulp;
+  - 25 rijen met volgorde en scores gelijk, kaartscores gelijk, 18 winkelregels gelijk;
+  - **dode ankers 11 → 0**; alle links in de cellen zichtbaar binnen de breedte.
+  - Zonder JavaScript laden beide versies één Coolblue-productfoto (coolblue.bynder.com, kaart M058). Geen link of tracking, en gelijk aan 1.3.13.
+- **LCP** (390 px, DPR 3, 150 ms, 1,6 Mbit/s, CPU 4×, mediaan van 3): 1,66 s → 1,65 s, binnen de meetruis. LCP-element ongewijzigd.
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten.
+
+### Wat Mandy moet doen
+1. **Thema 1.3.14 uploaden:** Weergave > Thema's > Nieuw thema > Thema uploaden > `robotmaaierkompas-child.zip` > "Vervang huidige met geüploade". wp-config.php hoeft niet te veranderen (geen nieuwe constanten).
+2. Daarna **LiteSpeed en CDN legen** (hPanel > Prestaties > CDN), zodat pagina 1 de nieuwe Details-links en het nieuwe bijschrift toont. Claude kan LiteSpeed via de dataroute legen en daarna pagina 1 en alle 25 adressen controleren.
+3. **Nu al: CDN legen** voor de nieuwe verbindingschips op de Worx- en Eufy-pagina.
+4. Optioneel: een andere linktekst dan "Merkpagina" kiezen.
+
+### Nog te doen
+- [ ] Mandy: 1.3.14 uploaden, LiteSpeed en CDN legen; daarna controle door Claude.

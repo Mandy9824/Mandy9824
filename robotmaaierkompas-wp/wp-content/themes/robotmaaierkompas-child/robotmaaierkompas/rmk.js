@@ -1,6 +1,6 @@
 /* robotmaaierkompas.nl — rmk.js (v1.1)
    Afhankelijkheidsvrij, laden met `defer`. Onderdelen:
-   1. Scoremodel v1.0 (concept tot bevriezing): eindscore / functiescore / geen score, dynamisch label
+   1. Scoremodel v1.0: eindscore / functiescore / geen score, dynamisch label
    2. Vergelijkingsfilter   3. Kostencalculator   4. Tuingrootte-keuzehulp   5. Cookiebanner
    Instellingen kunnen worden overschreven via window.rmkConfig (zie robotmaaierkompas-setup.php). */
 (function () {

@@ -50,7 +50,21 @@ function do_action( $h, ...$a ) {
 		}
 	}
 }
-function add_shortcode() {}
+// Shortcodes (1.3.14): opgeslagen, zodat tests/thema-paginas.php ze kan uitvoeren. Andere tests roepen do_shortcode niet aan.
+function add_shortcode( $tag = '', $cb = null ) { if ( $tag && $cb ) { $GLOBALS['wp_shortcodes'][ $tag ] = $cb; } }
+function shortcode_parse_atts_stub( $s ) {
+	$a = array();
+	preg_match_all( '/([a-z_]+)="([^"]*)"/', (string) $s, $m, PREG_SET_ORDER );
+	foreach ( $m as $x ) { $a[ $x[1] ] = $x[2]; }
+	return $a;
+}
+function do_shortcode( $html ) {
+	return preg_replace_callback( '/\[([a-z_]+)((?:\s+[a-z_]+="[^"]*")*)\s*\]/', function ( $m ) {
+		$cb = $GLOBALS['wp_shortcodes'][ $m[1] ] ?? null;
+		return $cb ? call_user_func( $cb, shortcode_parse_atts_stub( $m[2] ) ) : $m[0];
+	}, (string) $html );
+}
+function shortcode_atts( $d, $a ) { return array_merge( $d, array_intersect_key( (array) $a, $d ) ); }
 function register_setting() {}
 function get_option( $k, $d = false ) { return array_key_exists( $k, $GLOBALS['wp_options'] ) ? $GLOBALS['wp_options'][ $k ] : $d; }
 function update_option( $k, $v, $al = null ) { $GLOBALS['wp_options'][ $k ] = $v; return true; }
@@ -76,7 +90,7 @@ function sanitize_html_class( $c ) { return preg_replace( '/[^A-Za-z0-9_-]/', ''
 function mysql2date( $f, $d ) { return ( new DateTimeImmutable( $d ) )->format( $f ); }
 function get_the_ID() { return $GLOBALS['wp_post']['id']; }
 function get_queried_object_id() { return $GLOBALS['wp_post']['id']; }
-function get_post_field( $f, $id ) { return 'post_name' === $f ? $GLOBALS['wp_post']['slug'] : ''; }
+function get_post_field( $f, $id ) { return 'post_name' === $f ? $GLOBALS['wp_post']['slug'] : ( 'post_content' === $f ? ( $GLOBALS['wp_post']['content'] ?? '' ) : '' ); }
 function current_user_can() { return $GLOBALS['wp_admin'] ?? false; }
 function register_rest_route( $ns, $r, $a ) { $GLOBALS['wp_routes'][ $ns . $r ] = $a; }
 function rest_ensure_response( $d ) { return $d; }

@@ -202,7 +202,7 @@ function rmk_render_scoreblok( array $values, $reviews, $id_suffix, $updated = '
 		$h    .= '<div class="rmk-bar" role="img" aria-label="' . esc_attr( $bar_aria ) . '"><i style="width:' . esc_attr( $empty ? 0 : $v * 10 ) . '%"></i></div></li>';
 	}
 	$h .= '</ul><p class="rmk-small" data-out="note">' . esc_html( rmk_score_notes( $r ) ) . '</p>';
-	$h .= '<div class="rmk-score__foot"><span>' . ( $updated ? 'Bijgewerkt op ' . esc_html( $updated ) : '' ) . '</span><span>Scoremodel v1.0 (concept tot bevriezing)</span><a href="/hoe-we-beoordelen/#scoremodel">Hoe we scoren</a></div></section>';
+	$h .= '<div class="rmk-score__foot"><span>' . ( $updated ? 'Bijgewerkt op ' . esc_html( $updated ) : '' ) . '</span><span>Scoremodel v1.0</span><a href="/hoe-we-beoordelen/#scoremodel">Hoe we scoren</a></div></section>';
 	return $h;
 }
 
@@ -220,6 +220,36 @@ function rmk_render_scorecell( array $values, $reviews, $with_label = true ) {
 	return '<div class="rmk-scorecell" data-rmk-score data-ssr="1" data-kind="' . esc_attr( $r['kind'] ) . '" data-total="' . esc_attr( null === $r['value'] ? '' : $r['value'] ) . '" data-scores="' . esc_attr( implode( '; ', $pairs ) ) . '">'
 		. '<div class="' . esc_attr( $minis ) . '"><b data-out="total">' . esc_html( rmk_format_score( $r['value'] ) ) . '</b><small data-out="kind">' . esc_html( $kind ) . '</small></div>'
 		. ( $with_label ? '<p class="rmk-scorenote" data-out="label"' . ( $r['label'] ? '' : ' hidden' ) . '>' . rmk_score_label_html( $r['label'] ) . '</p>' : '' ) . '</div>';
+}
+
+/* ------------------------------------------------------------------ link "Details" in de scoretabel (1.3.14) */
+
+/** Merkpagina per merk (veld "merk" in de modelgegevens). Merken zonder merkpagina: geen link. */
+function rmk_merkpaginas() {
+	return apply_filters( 'rmk_merkpaginas', array(
+		'Segway Navimow' => '/segway-navimow-robotmaaier/',
+		'Husqvarna'      => '/husqvarna-robotmaaier/',
+		'Gardena'        => '/gardena-robotmaaier/',
+		'Stihl'          => '/stihl-robotmaaier/',
+		'Worx'           => '/worx-robotmaaier/',
+		'Mova'           => '/mova-dreame-robotmaaier/',
+		'Dreame'         => '/mova-dreame-robotmaaier/',
+		'Eufy'           => '/eufy-robotmaaier/',
+	) );
+}
+
+/**
+ * Inhoud van de cel "Details": staat de kaart van het model (id="p-<slug>") op dezelfde pagina, dan "Details" naar die
+ * kaart; anders "Merkpagina" naar de merkpagina; heeft het merk geen merkpagina (Roborock, Ecovacs, Cramer, …), dan niets.
+ */
+function rmk_details_link( array $m, $inhoud ) {
+	$slug = isset( $m['slug'] ) ? (string) $m['slug'] : '';
+	if ( '' !== $slug && preg_match( '/\sid="p-' . preg_quote( $slug, '/' ) . '"/', (string) $inhoud ) ) {
+		return '<a href="#p-' . esc_attr( $slug ) . '">Details</a>';
+	}
+	$paginas = rmk_merkpaginas();
+	$merk    = isset( $m['merk'] ) ? (string) $m['merk'] : '';
+	return isset( $paginas[ $merk ] ) ? '<a href="' . esc_url( $paginas[ $merk ] ) . '">Merkpagina</a>' : '';
 }
 
 /* ------------------------------------------------------------------ shortcodes */
@@ -248,6 +278,7 @@ add_shortcode( 'rmk_scoretabel', function ( $atts ) {
 	$show_best = (bool) array_filter( $items, function ( $it ) { return ! empty( $it['m']['beste_voor'] ); } );
 	$rows      = '';
 	$n     = 0;
+	$inhoud    = (string) get_post_field( 'post_content', get_the_ID() ); // de pagina waarop de tabel staat (1.3.14)
 	foreach ( $items as $it ) {
 		$m     = $it['m'];
 		$rank  = null === $it['score']['value'] ? '–' : (string) ( ++$n );
@@ -257,9 +288,9 @@ add_shortcode( 'rmk_scoretabel', function ( $atts ) {
 			. '<th scope="row" class="c-model">' . esc_html( $m['naam'] ) . '</th>' . $best
 			. '<td class="is-num c-score">' . rmk_render_scorecell( $m['scores'], $m['reviews_gelezen'], false ) . '</td>'
 			. '<td class="is-num c-price" data-label="Laagste nieuwe prijs">' . $price . '</td>'
-			. '<td class="c-go"><a href="#p-' . esc_attr( $m['slug'] ) . '">Details</a></td></tr>';
+			. '<td class="c-go">' . rmk_details_link( $m, $inhoud ) . '</td></tr>';
 	}
-	return '<div class="rmk-tablewrap"><table class="rmk-table rmk-table--cards"><caption>Scores volgens scoremodel v1.0 (concept tot bevriezing). Volgorde op de onafgeronde score. Modellen zonder score staan onderaan.</caption>'
+	return '<div class="rmk-tablewrap"><table class="rmk-table rmk-table--cards"><caption>Scores volgens scoremodel v1.0. Volgorde op de onafgeronde score. Modellen zonder score staan onderaan.</caption>'
 		. '<thead><tr><th scope="col">#</th><th scope="col">Model</th>' . ( $show_best ? '<th scope="col">Beste voor</th>' : '' ) . '<th scope="col" class="is-num">Score</th><th scope="col" class="is-num">Laagste nieuwe prijs</th><th scope="col"><span class="rmk-sr">Details</span></th></tr></thead>'
 		. '<tbody>' . $rows . '</tbody></table></div>'
 		. ( function_exists( 'rmk_price_date_line' ) ? rmk_price_date_line( wp_list_pluck( $items, 'm' ) ) : '' )

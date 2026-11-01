@@ -54,7 +54,7 @@
     </div>
     <div class="rmk-tablewrap" role="region" aria-labelledby="res" tabindex="0">
       <table class="rmk-table rmk-table--sticky" style="min-width: 920px">
-        <caption>Score volgens scoremodel v1.0 (concept tot bevriezing). Prijs: laagste nieuwe prijs van een winkel of de fabrikant, hoogstens 14 dagen oud; de datum staat onder de tabel.</caption>
+        <caption>Score volgens scoremodel v1.0. Prijs: laagste nieuwe prijs van een winkel of de fabrikant, hoogstens 14 dagen oud; de datum staat onder de tabel.</caption>
         <thead><tr><th scope="col">Model</th><th scope="col" class="is-num">Score</th><th scope="col">Navigatie</th><th scope="col">Capaciteit</th><th scope="col">Helling</th><th scope="col">Geluid</th><th scope="col">Doorgang</th><th scope="col" class="is-num">Laagste nieuwe prijs</th></tr></thead>
         <tbody>
           <!-- Eén rij per model. data-nav: draad | rtk | camera. data-capacity, data-slope, data-price: alleen getallen of leeg. -->

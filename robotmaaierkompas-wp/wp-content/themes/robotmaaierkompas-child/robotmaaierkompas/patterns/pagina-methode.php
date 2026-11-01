@@ -15,7 +15,7 @@
 <div class="rmk-container rmk-column rmk-column--narrow">
   <nav class="rmk-crumbs" aria-label="Kruimelpad" style="padding-top: 16px"><ol><li><a href="/">Home</a></li><li aria-current="page">Hoe we beoordelen</li></ol></nav>
   <header class="rmk-pagehead" style="max-width: 48rem">
-    <p class="rmk-eyebrow">Scoremodel v1.0 (concept tot bevriezing)</p>
+    <p class="rmk-eyebrow">Scoremodel v1.0</p>
     <h1>Hoe we robotmaaiers beoordelen, en wat we niet doen</h1>
     <p class="rmk-lead">We testen robotmaaiers niet zelf. We verzamelen specificaties, lezen gebruikersreviews en rekenen met een openbaar scoremodel. Op deze pagina staat precies hoe.</p>
   </header>

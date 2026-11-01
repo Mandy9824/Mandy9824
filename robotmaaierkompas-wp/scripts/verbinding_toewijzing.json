@@ -1,5 +1,5 @@
 {
-  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen). Ronde 52: M023 en M024 (Gardena Sileno Minimo) 'Bluetooth' (GARDENA Bluetooth App); M025 bewust zonder regel, dus zonder chip. Ronde 69: M059 en M060 'ingebouwd' (chip 4G), M063 en M064 'module' (bronveld 'Verbinding / 4G'). Ronde 73: M056 en M053 'module' (bronveld 'Verborgen kosten', optionele 4G-module), M046 'wifi' (bronveld 'Extra kosten: abonnement / verbinding').",
+  "_uitleg": "Korte omschrijving van verbinding en diefstalbeveiliging per model voor de vergelijkingstabel (pagina 2), met de bronregel uit blad Bronnen waarop hij steunt. 'extra' is de filtercategorie: 'geen' = de fabrikant bevestigt dat er geen losse module en geen abonnement nodig is; 'module' = losse module nodig voor GPS en diefstalbeveiliging; 'ingebouwd' = 4G ingebouwd, maar kosten na een periode onbekend of niet uitgesloten. Geen bedragen: prijzen staan op pagina 12. Sinds ronde 44 ook 'wifi' en 'bluetooth' (Husqvarna 305E/310E NERA en 305): de chip toont die pas vanaf thema 1.3.8 (1.3.7 kent alleen ingebouwd, module en geen). Ronde 52: M023 en M024 (Gardena Sileno Minimo) 'Bluetooth' (GARDENA Bluetooth App); M025 bewust zonder regel, dus zonder chip. Ronde 69: M059 en M060 'ingebouwd' (chip 4G), M063 en M064 'module' (bronveld 'Verbinding / 4G'). Ronde 73: M056 en M053 'module' (bronveld 'Verborgen kosten', optionele 4G-module), M046 'wifi' (bronveld 'Extra kosten: abonnement / verbinding'). Ronde 80: M007 'ingebouwd' (chip 4G; bronveld 'Verborgen kosten', 4G-module met simkaart in de maaier), M052 'module' (bronveld 'Verborgen kosten', optionele 4G-module van 99 euro), M047 'wifi' (bronveld 'Extra kosten: abonnement / verbinding').",
   "toewijzingen": [
     {
       "model": "M002",
@@ -144,6 +144,24 @@
       "bronveld": "Verborgen kosten",
       "tekst": "Losse 4G-module",
       "extra": "module"
+    },
+    {
+      "model": "M007",
+      "bronveld": "Verborgen kosten",
+      "tekst": "4G ingebouwd; databundel na gratis proefdata",
+      "extra": "ingebouwd"
+    },
+    {
+      "model": "M052",
+      "bronveld": "Verborgen kosten",
+      "tekst": "Losse 4G-module",
+      "extra": "module"
+    },
+    {
+      "model": "M047",
+      "bronveld": "Extra kosten: abonnement / verbinding",
+      "tekst": "Wifi",
+      "extra": "wifi"
     }
   ]
 }

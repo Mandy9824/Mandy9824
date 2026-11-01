@@ -10,7 +10,7 @@
 <!-- wp:html -->
 <div class="rmk-tablewrap">
   <table class="rmk-table rmk-table--cards">
-    <caption>Scores volgens scoremodel v1.0 (concept tot bevriezing). "Laagste nieuwe prijs" komt uit modellen.json (winkel of fabrikant, hoogstens 14 dagen oud); de datum staat onder de tabel.</caption>
+    <caption>Scores volgens scoremodel v1.0. "Laagste nieuwe prijs" komt uit modellen.json (winkel of fabrikant, hoogstens 14 dagen oud); de datum staat onder de tabel.</caption>
     <thead><tr><th scope="col">#</th><th scope="col">Model</th><th scope="col">Beste voor</th><th scope="col" class="is-num">Score</th><th scope="col" class="is-num">Laagste nieuwe prijs</th><th scope="col"><span class="rmk-sr">Details</span></th></tr></thead>
     <tbody>
       <!-- Eén rij per model. De score wordt berekend uit data-scores (zelfde waarden als in het scoreblok). -->

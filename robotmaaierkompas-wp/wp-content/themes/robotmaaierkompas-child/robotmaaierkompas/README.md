@@ -1,6 +1,6 @@
 # robotmaaierkompas.nl — ontwerp naar WordPress
 
-Versie 1.1 · scoremodel v1.0 (concept tot bevriezing)
+Versie 1.1 · scoremodel v1.0
 
 ## Wat zit erin
 
@@ -22,7 +22,7 @@ Versie 1.1 · scoremodel v1.0 (concept tot bevriezing)
 4. Maak `data/modellen.json` met `scripts/excel_naar_json.py` uit het modelbestand (alleen velden met bron en datum).
 5. Zet `header` en `footer` in je template-parts; plaats `cookiebanner` één keer in de footer-template.
 
-## Scoremodel v1.0 (concept tot bevriezing)
+## Scoremodel v1.0
 
 | Onderdeel | Gewicht | Sleutel in de HTML |
 |---|---|---|
