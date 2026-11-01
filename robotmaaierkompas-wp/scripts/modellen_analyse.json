@@ -94,5 +94,26 @@
   },
   "M058": {
     "analyse": "De Ecovacs GOAT A3000 LiDAR Pro is de grootste draadloze maaier in onze selectie, voor tuinen tot 3.000 m² en een helling tot 50% volgens Ecovacs. Hij navigeert met twee LiDAR-systemen en een AI-camera, zonder draad of antenne, en herkent obstakels, ook egels. De app (4,33) heeft een kaart met zones en no-go-gebieden, er is een pincode en een kantknipper zit ingebouwd. Het geluidsvermogen is 62 dB(A). GPS en 4G vragen een losse module en een diefstalalarm wordt niet genoemd. In onze functiescore krijgt hij 79,5."
+  },
+  "M066": {
+    "analyse": "De Husqvarna Automower 308V is voor tuinen tot 800 m² en haalt volgens Husqvarna 40% helling. Hij navigeert met EPOS, een RTK-systeem met correctiegegevens via wifi, aangevuld met een AI-camera die obstakels herkent, zonder begrenzingsdraad. Er is een pincode, een alarm en een GeoFence-melding in de app, en de app werkt met Alexa en Google Home. GPS en 4G vragen een losse Connect Kit. Het geluidsvermogen is 62 dB(A). In onze functiescore krijgt hij 84,5."
+  },
+  "M067": {
+    "analyse": "De Husqvarna Automower 312V is voor tuinen tot 1.200 m² en heeft dezelfde techniek als de 308V: RTK via wifi, een AI-camera, geen begrenzingsdraad, een pincode, alarm en een GeoFence-melding in de app. GPS en 4G vragen een losse Connect Kit. Het geluidsvermogen is 62 dB(A) en de helling 40% volgens Husqvarna. In onze functiescore krijgt hij 84,5."
+  },
+  "M068": {
+    "analyse": "De Husqvarna Automower Aspire R6V is de kleinste Automower met een AI-camera, voor tuinen tot 600 m² en een helling tot 40% volgens Husqvarna. Hij werkt met EPOS via wifi, zonder begrenzingsdraad, en heeft een pincode, alarm en een GeoFence-melding in de app. GPS en 4G vragen een losse Connect Kit. Het geluidsvermogen is 62 dB(A). In onze functiescore krijgt hij 84,5."
+  },
+  "M069": {
+    "analyse": "De Husqvarna Automower 430V NERA is de hoogst scorende Automower in onze selectie (96,4). Hij is voor tuinen tot 4.800 m² (3.200 m² bij onregelmatig maaien), haalt 50% helling volgens Husqvarna en is met 55 dB(A) stil. Hij navigeert met EPOS en een AI-camera, zonder draad, en heeft 4G en GPS ingebouwd: volgens het ondersteuningsartikel van Husqvarna NL is die verbinding 10 jaar gratis. Husqvarna NL verkoopt hem alleen via dealers."
+  },
+  "M070": {
+    "analyse": "De Husqvarna Automower 450V NERA is de grootste Automower in onze selectie, voor tuinen tot 7.500 m² en een helling tot 50% volgens Husqvarna. De techniek is gelijk aan die van de 430V NERA: EPOS met een AI-camera, zonder draad, en 4G en GPS ingebouwd, volgens Husqvarna NL 10 jaar gratis. Het geluidsvermogen is 58 dB(A). In onze functiescore krijgt hij 94,5."
+  },
+  "M071": {
+    "analyse": "De Gardena smart SILENO sense 400 is voor tuinen tot 400 m² en een helling tot 25%. Hij navigeert met RTK en een AI-camera, zonder begrenzingsdraad, en heeft een gratis ingebouwde simkaart waarmee hij te volgen is. Er is een pincode en de app (4,49) heeft kaart, zones en no-go-gebieden; een diefstalalarm noemt Gardena niet. Het geluidsvermogen is 55 dB(A). In onze functiescore krijgt hij 78,6."
+  },
+  "M072": {
+    "analyse": "De Gardena smart SILENO sense 600 is de grotere variant van de sense 400, voor tuinen tot 600 m² en een helling tot 25%. De techniek is gelijk: RTK met een AI-camera, zonder draad, en GPS via een gratis ingebouwde simkaart. Er is een pincode en de app (4,49) heeft kaart, zones en no-go-gebieden; een diefstalalarm noemt Gardena niet. Het geluidsvermogen is 55 dB(A). In onze functiescore krijgt hij 78,6. Eén gelezen review, na ongeveer een uur gebruik, meldde dat de maaier overal tegenaan reed."
   }
 }

@@ -490,5 +490,119 @@
   },
   "M055": {
     "beste_voor": "Tuinen tot 1.500 m² zonder begrenzingsdraad, met RTK via een gateway op je router"
+  },
+  "M066": {
+    "beste_voor": "Tuinen tot 800 m² zonder grensdraad, met wifi-dekking over het hele gazon, hellingen tot 40% en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "Helling 40% volgens Husqvarna",
+      "Pincode, alarm en een GeoFence-melding in de app",
+      "Kaart, zones en no-go-gebieden in de app, koppeling met Alexa en Google Home, updates over de lucht",
+      "2 jaar garantie"
+    ],
+    "minpunten": [
+      "Wifi over het hele gazon nodig",
+      "GPS en 4G alleen met een losse Connect Kit",
+      "Luider: 62 dB(A)",
+      "Geen onafhankelijke reviews gevonden"
+    ]
+  },
+  "M067": {
+    "beste_voor": "Tuinen tot 1.200 m² zonder grensdraad, met wifi-dekking over het hele gazon, hellingen tot 40% en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "Tot 1.200 m² en helling 40% volgens Husqvarna",
+      "Pincode, alarm en een GeoFence-melding in de app",
+      "Kaart, zones en no-go-gebieden in de app, koppeling met Alexa en Google Home, updates over de lucht",
+      "2 jaar garantie"
+    ],
+    "minpunten": [
+      "Wifi over het hele gazon nodig",
+      "GPS en 4G alleen met een losse Connect Kit",
+      "Luider: 62 dB(A)",
+      "Geen onafhankelijke reviews gevonden"
+    ]
+  },
+  "M068": {
+    "beste_voor": "Tuinen tot 600 m² zonder grensdraad, met wifi-dekking over het hele gazon, hellingen tot 40% en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "Helling 40% volgens Husqvarna",
+      "Pincode, alarm en een GeoFence-melding in de app",
+      "Kaart, zones en no-go-gebieden in de app, koppeling met Alexa en Google Home, updates over de lucht",
+      "2 jaar garantie"
+    ],
+    "minpunten": [
+      "Alleen tot 600 m²",
+      "Wifi over het hele gazon nodig",
+      "GPS en 4G alleen met een losse Connect Kit",
+      "Luider: 62 dB(A)",
+      "Geen onafhankelijke reviews gevonden"
+    ]
+  },
+  "M069": {
+    "beste_voor": "Tuinen tot 4.800 m² zonder grensdraad, met hellingen tot 50%, 4G en GPS ingebouwd en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "Tot 4.800 m² en helling 50% volgens Husqvarna",
+      "4G en GPS ingebouwd, volgens Husqvarna NL 10 jaar gratis",
+      "Stil: 55 dB(A)",
+      "Pincode, alarm, GeoFence-melding en koppeling met Alexa en Google Home"
+    ],
+    "minpunten": [
+      "Bij Husqvarna NL alleen via een dealer te koop",
+      "Wat de 4G kost na 10 jaar is niet gevonden",
+      "Geen onafhankelijke reviews gevonden",
+      "Mes-stop bij optillen niet expliciet genoemd"
+    ]
+  },
+  "M070": {
+    "beste_voor": "Tuinen tot 7.500 m² zonder grensdraad, met hellingen tot 50%, 4G en GPS ingebouwd en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "Tot 7.500 m² en helling 50% volgens Husqvarna",
+      "4G en GPS ingebouwd, volgens Husqvarna NL 10 jaar gratis",
+      "58 dB(A)",
+      "Pincode, alarm, GeoFence-melding en koppeling met Alexa en Google Home"
+    ],
+    "minpunten": [
+      "Wat de 4G kost na 10 jaar is niet gevonden",
+      "Geen onafhankelijke reviews gevonden",
+      "Mes-stop bij optillen niet expliciet genoemd"
+    ]
+  },
+  "M071": {
+    "beste_voor": "Tuinen tot 400 m² zonder grensdraad, met mobiele dekking over het hele gazon, hellingen tot 25% en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "GPS-tracking via een gratis ingebouwde simkaart",
+      "Stil: 55 dB(A)",
+      "Pincode, kaart, zones en no-go-gebieden in de app (4,49), koppeling met slimme thuissystemen",
+      "3 jaar garantie na registratie"
+    ],
+    "minpunten": [
+      "Alleen tot 400 m² en helling 25%",
+      "Geen diefstalalarm",
+      "Mobiele dekking over het hele gazon nodig",
+      "Geen GeoFence-melding genoemd",
+      "Accu-voorwaarden niet op de productpagina"
+    ]
+  },
+  "M072": {
+    "beste_voor": "Tuinen tot 600 m² zonder grensdraad, met mobiele dekking over het hele gazon, hellingen tot 25% en een AI-camera die obstakels ontwijkt",
+    "pluspunten": [
+      "RTK met AI-camera, zonder begrenzingsdraad",
+      "GPS-tracking via een gratis ingebouwde simkaart",
+      "Stil: 55 dB(A)",
+      "Pincode, kaart, zones en no-go-gebieden in de app (4,49), koppeling met slimme thuissystemen",
+      "3 jaar garantie na registratie"
+    ],
+    "minpunten": [
+      "Alleen tot 600 m² en helling 25%",
+      "Geen diefstalalarm",
+      "Mobiele dekking over het hele gazon nodig",
+      "Geen GeoFence-melding genoemd",
+      "In één gelezen review (korte gebruiksduur) reed de maaier tegen obstakels"
+    ]
   }
 }

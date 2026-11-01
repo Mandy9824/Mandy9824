@@ -3953,3 +3953,49 @@ Mandy: /robotmaaier-grote-tuin/ (#15) is gepubliceerd (titel, slug en metabeschr
 
 ### Open
 - M010 in Excel en de modelgegevens op "uitlopend" zetten (met bronregel), als Mandy dat wil; nu staat het alleen in de paginatekst.
+
+## Ronde 87 (1 november 2026): M066-M072 en M010 uitlopend, Husqvarna-pagina vervangen door versie 2, MET DE HAND (zonder thema-zip)
+
+Aangeleverd: `pagina-husqvarna-robotmaaier-v2.md`, `modellen-teksten-husqvarna-2026.json` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alle drie alleen gelezen, **niet in de repository**).
+
+**Let op: /husqvarna-robotmaaier/ (#20) is in deze ronde met de hand vervangen en mag NIET opnieuw uit de md gebouwd worden** (ook niet met `scripts/ronde87_bouw.py`/`ronde87_pagina.py`; die staan er alleen ter verantwoording). Latere wijzigingen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+### 1. Modelgegevens (dataroute, `scripts/ronde87_upload.py`)
+- Teksten uit `modellen-teksten-husqvarna-2026.json` (M066-M072) toegevoegd aan `scripts/modellen_teksten.json` en `modellen_analyse.json`; omzetting met `excel_naar_json.py` (ongewijzigd).
+- **M066-M072 nieuw** (Husqvarna Automower 308V, 312V, Aspire R6V, 430V NERA, 450V NERA; Gardena smart SILENO sense 400 en 600), volledig niveau, met fabrikantpagina uit de kolom Fabrikantpagina en de teksten. **Geen blok bol**: geen van de zeven staat in het blad Bol (ook niet in Coolblue of Amazon; het script controleert dat). Geen EAN, prijs of verbinding.
+- **M010: alleen beschikbaarheid "nieuw" → "uitlopend"** (blad Modellen en Bronnen, 1-11, gecontroleerd). Het thema toont het veld niet.
+- **M054 en M055 stonden al live** (ronde 67); niets aan gedaan. Uit het Excel-bestand ontbreekt live alleen nog **M009 Ecovacs GOAT O1200 LiDAR Pro** (uitverkocht, geen fabrikantpagina; de omzetter slaat uitverkochte modellen over): niet toegevoegd.
+- Alle 63 andere live modellen, de andere velden van M010 en de algemene velden ongewijzigd (gecontroleerd; het script weigert anders). Kopie: `backups/modellen-voor-ronde87-20261101-153339.json`. **71 modellen live.**
+- Functiescores (themacode): **M069 96,4 · M070 94,5 · M066/M067/M068 84,5 · M071/M072 78,6** (gelijk aan het blad Scores en de md). Scores van alle 64 bestaande modellen gelijk (vóór/na vergeleken).
+- Momentopname van alle 26 openbare adressen vóór en na de upload: **geen verschillen** (de nieuwe modellen staan nergens; niet op pagina 1, de hub of de tuinpagina's).
+
+### 2. Tekst van pagina-husqvarna-robotmaaier-v2.md tegen het Excel-bestand
+- **Oppervlak, helling, geluid, verbinding en score van de negen modellen: geen afwijkingen** (Modellen, Bronnen, Scores). Ook in orde: acht modellen plus de uitlopende 410VE, geofence-melding bij de V-modellen (1-11 0 → 1), 4G 10 jaar gratis (KA-01298), Connect Kit 329 euro bij de 305, 209/309 euro bij 305E/310E, draadset 94,99/154,99/239, messen 26,99/22,99, garage 209/249, 4 van 20 reviews met satellietverlies (310E), 430V bij Husqvarna NL alleen via de dealer, 105 niet meer leverbaar.
+- **Gemeld, niet aangepast:**
+  1. Connect Kit voor de V-modellen: de md zegt "Voor de V-modellen hebben we de prijs niet gevonden" (kosten) en "wat de Connect Kit voor de V-modellen kost" (Wat we nog niet weten). Bronnen M066-M068: **209 euro adviesprijs** (fabrikantclaim; kit 541 07 58-01 past op Aspire R6V/308V/312V, gelezen 17-10 bij M020, "prijs niet opnieuw gecontroleerd").
+  2. FAQ "Welke Husqvarna Automower heeft GPS?": "Bij de andere modellen is er geen GPS zonder losse Connect Kit", maar de 410VE NERA (ook op de pagina) heeft 4G en GPS ingebouwd (de GPS-sectie noemt dat wel).
+
+### 3. Pagina /husqvarna-robotmaaier/ (#20) vervangen
+- **Kopie vooraf:** `backups/ronde87-pagina20-voor-20261101-153559.json` en `-153806.json` (inhoud, status, meta; niet in git). Laatste wijziging vóór deze ronde: 1 november 15:16 (ronde 86); geen latere editorversie.
+- **Vervangen:** de versie met vier modellen (410VE, 310E, 305E, 305), metabeschrijving "… 305, 305E NERA, 310E NERA en 410VE NERA vergeleken, met de kosten voor wifi, Connect Kit, draad en messen.", de handmatige wijzigingen van ronde 62/63 (GPS-sectie, drie vragen) en 86 (410VE-zin); die staan in de nieuwe versie.
+- Gebouwd met `scripts/ronde87_bouw.py` (van ronde 82/68), inhoud `scripts/ronde87/husqvarna.json`, gezet met `scripts/ronde87_pagina.py`. **Status publish, slug en ouder gelijk**; titel en **Yoast-metabeschrijving uit de md** (live gecontroleerd); kruimeltitel "Husqvarna robotmaaier" behouden.
+- Kaarten M069, M070, M010, M068, M066, M067, M022, M020, M021: **96,4 · 94,5 · 87,3 · 84,5 · 84,5 · 84,5 · 69,5 · 69,5 · 52,7**. Alleen "Bekijk de actuele prijs" naar husqvarna.com (geen winkelregels). De GPS-sectie staat nu waar de md haar zet (na "Zonder draad", vóór de kosten).
+- Behouden: "Meer lezen" van de live pagina (alle merk- en tuinlinks) plus **"Robotmaaier zonder grensdraad"** (staat in de lijst interne links van de md; tekst als op #16), en het uitgeschreven auteursblok.
+- Bronnen uit het blad Bronnen: M069 6, M070 6, M010 13, M068 6, M066 6, M067 6, M022 18, M020 20, M021 18 regels (husqvarna.com, appwinkels).
+- Links van andere pagina's naar /husqvarna-robotmaaier/ staan er nog (hub, pagina 1, kleine en grote tuin, Navimow, Gardena, Stihl, Worx, kosten, mesjes); geen link naar een anker op deze pagina.
+
+### 4. Controles
+- 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan (behalve de bestaande footerknop #cookie-instellingen, JavaScript), geen verzoek naar winkels. Alle 18 interne adressen HTTP 200; anker #automower-messen-endurance-of-classic bestaat op de mesjespagina.
+- Alle tekst uit de md staat op de pagina (alleen gekrulde aanhalingstekens anders).
+- Momentopname alle 26 openbare adressen vóór/na: **kaarten, scores, volgorde en winkel-links op alle andere pagina's gelijk**; tekstverschil alleen op #20 en de volgorde in "Onlangs bijgewerkt" (home, auteurspagina).
+- Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Bol-controle: 29 Bol-regels op 26 adressen, 0 fouten.
+- **Download:** `paginatekst-husqvarna.md` (volledige weergegeven tekst, FAQ opengeklapt; in `backups/`, niet in de repository).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Open punten (niet gedaan)
+- Verbindingschip: de vijf nieuwe Husqvarna-kaarten hebben geen chip (geen regel in `scripts/verbinding_toewijzing.json`); 410VE, 310E, 305E en 305 wel.
+- De twee meldingen bij punt 2; M009 (zie punt 1).
+- M071/M072 (Gardena sense) staan in de modelgegevens met teksten, maar op geen pagina.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; editortabs van #20 sluiten of herladen vóór opnieuw opslaan; Search Console: indexering opnieuw aanvragen voor /husqvarna-robotmaaier/.
