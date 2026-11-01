@@ -3934,3 +3934,22 @@ Mandy: /robotmaaier-grote-tuin/ (#15) is gepubliceerd (titel, slug en metabeschr
 - "Wat we nog niet weten": "De zeven modellen zonder score hebben we alleen op basisniveau uitgezocht." (precies 1× gevonden) → "Zes van de zeven modellen zonder score hebben we op basisniveau uitgezocht; de Cramer AiConic 2 is breder uitgezocht, maar zonder handleiding is er geen score." (melding uit ronde 84).
 - Status bleef publish; inhoud zoals bedoeld; metabeschrijving ongewijzigd. Live HTML: nieuwe zin 1×, oude zin 0×.
 - LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #15 herladen vóór opnieuw opslaan.
+
+## Ronde 86 (1 november 2026): uitlopende Husqvarna Automower 410VE NERA (M010), vier pagina's MET DE HAND gewijzigd (zonder thema-zip)
+
+**Let op: de Husqvarna-pagina (#20), pagina 1 (#11), de hub (#10) en de grote-tuinpagina (#15) zijn met de hand gewijzigd** (gerichte toevoegingen via de API met `scripts/ronde86_410ve.py`). Niet opnieuw bouwen uit een md of bouwscript; wijzigen alleen met gerichte vervangingen en een kopie vooraf.
+
+- Kopie vooraf van alle vier pagina's: `backups/ronde86-voor-20261101-141453.json` (niet in git; de schrijfdraai maakte nog een kopie, gelijk). Proefdraai zonder meldingen: elke plek precies één keer.
+- Aanleiding (Mandy): Husqvarna NL toont de 410VE NERA alleen nog als ondersteuningspagina; een dealer had hem op 1 november nog op voorraad. **Niet gecontroleerd** vanuit deze omgeving en **niet in de modelgegevens** gezet (beschikbaarheid M010 live/Excel nog "nieuw").
+1. **#20** onder de modellentabel ("De Husqvarna Automower-modellen naast elkaar"), na het bijschrift: "De Automower 410VE NERA loopt uit: Husqvarna NL toont hem alleen nog als ondersteuningspagina en een dealer had hem op 1 november nog op voorraad. Controleer de beschikbaarheid voor je kiest." **Keuze:** de pagina heeft twee tabellen (ook de keuzetabel "Welke Automower past bij jouw tuin?"); de zin staat onder de modellentabel, net als de i105E-zin op pagina 1.
+2. **#11:** "De Navimow i105E loopt uit: …" → "De Navimow i105E en de Husqvarna Automower 410VE NERA lopen uit: controleer de beschikbaarheid voor je kiest."
+3. **#10:** "Waarom deze" van de Husqvarna-keuze + "Hij loopt uit: controleer de beschikbaarheid."
+4. **#15:** "Waarom deze" bij de 410VE NERA + dezelfde zin; "Wat we nog niet weten" + punt "De Husqvarna Automower 410VE NERA loopt uit."
+
+### Controles
+- Momentopname van alle 26 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de vijf bedoelde regels en de volgorde in "Onlangs bijgewerkt" (home).
+- De vier pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle ankers bestaan, geen JavaScript-fouten van de site (alleen in de test geblokkeerde bol-foto's). Invoervelden alleen de tuinkeuzehulp (hub, pagina 1).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van deze vier pagina's herladen vóór opnieuw opslaan.
+
+### Open
+- M010 in Excel en de modelgegevens op "uitlopend" zetten (met bronregel), als Mandy dat wil; nu staat het alleen in de paginatekst.
