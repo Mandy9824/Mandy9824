@@ -3818,3 +3818,17 @@ Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **n
 
 ### Nog te doen
 - [ ] Mandy: 1.3.14 uploaden, LiteSpeed en CDN legen; daarna controle door Claude.
+
+## Ronde 81 (1 november 2026): 1.3.14 live, controle
+
+Mandy heeft 1.3.14 geüpload en de LiteSpeed- en CDN-cache geleegd. Live: style.css Version 1.3.14, `rmk.js?ver=1.3.12` (zoals bedoeld). Alleen gelezen; niets gewijzigd.
+
+- **Momentopname van de 25 openbare adressen** tegen de stand vlak vóór de upload (na de verbindingschips van ronde 80): **één verschil, alleen op /robotmaaier-zonder-draad/**: het bijschrift "Scores volgens scoremodel v1.0. …" (zonder "(concept tot bevriezing)") en de tekst "Merkpagina". Kaarten, scores, volgorde en winkel-links op alle 25 adressen gelijk.
+- **"concept tot bevriezing"** komt op geen van de 25 adressen meer voor.
+- **Scoretabel pagina 1 (live):** 25 rijen; 14 × "Details" (alle naar een kaart die op de pagina staat), 10 × "Merkpagina" (eufy, gardena, husqvarna, mova-dreame, worx; alle HTTP 200), 1 lege cel (Roborock RockNeo Q110). Geen dode ankers meer (was 11).
+- Chromium 390 en 1440 px (pagina 1, hub, Worx, Eufy, home): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", geen dode ankers, geen verzoek naar winkels. Invoervelden alleen de bestaande tuinkeuzehulp. Console alleen bol-foto's van media.s-bol.com (in de test geblokkeerd).
+- **LCP live**, pagina 1 (390 px, DPR 3, 150 ms, 1,6 Mbit/s, CPU 4×): 2,12 / 2,37 / 2,59 s, mediaan **2,37 s**. Ronde 74 mat 2,46 s met dezelfde instellingen. Deze meting is inclusief de serverresponstijd en dus niet te vergelijken met de lokale test van ronde 80 (1,65 s).
+- Bol-controle: 26 Bol-regels op 25 adressen, 0 fouten. Routetest `--na-136 --na-137 --na-1310`: 0 fouten. Statusoverzicht in orde.
+
+### Nog te doen
+- Niets open uit 1.3.14.
