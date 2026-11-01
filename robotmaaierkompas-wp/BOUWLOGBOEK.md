@@ -3832,3 +3832,47 @@ Mandy heeft 1.3.14 geüpload en de LiteSpeed- en CDN-cache geleegd. Live: style.
 
 ### Nog te doen
 - Niets open uit 1.3.14.
+
+## Ronde 82 (1 november 2026): conceptpagina robotmaaier-grote-tuin, linkscript klaargezet (zonder thema-zip)
+
+Aangeleverd: nieuwste `robotmaaierkompas_modeldata_v1.xlsx` en `pagina-robotmaaier-grote-tuin.md` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd**; modelgegevens niet gewijzigd.
+
+### 1. Tekst van pagina-robotmaaier-grote-tuin.md tegen de bladen Modellen en Scores
+- **Geen afwijkingen** in oppervlak, helling, geluid, 4G/GPS en score bij de elf modellen met score (M015, M059, M060, M010, M057, M005, M058, M008, M022, M007, M055) en de zes zonder score (M017, M018, M061, M062, M048, M049). Ook gecontroleerd en in orde: met-draadlijst (Stihl iMOW 4-7 EVO, Cramer RM1000-RM2700, Worx L1000, Gardena Sileno max 1200 met 46,4), "prijs boven de 3.000 euro" (M010, laagste 3.049 in Prijzen), Dreame-module goedkoper dan Mova (69/99,99 tegen 249 euro, Bronnen), Q110 zonder reviews, satellietklachten 310E NERA (blad Reviews, vertaald, niet meegeteld), minimum 50 reviews (Instellingen; het hoogste aantal gelezen is 10).
+- **Gemeld, niet aangepast:**
+  1. **M003 Segway Navimow i210 LiDAR** (zonder Pro): in Excel 1.000 m², 45%, 59 dB(A), 4G ingebouwd, beschikbaarheid nieuw, **functiescore 92,7**. Hoort volgens de definitie van de pagina ("nu nieuw te koop en een score") bij de modellen met score en bij "Robotmaaier voor 1.000 m²" ("drie scoremodellen" zouden er vier zijn). Live heeft M003 geen volledige score (alleen geluid) en staat op geen enkele pagina (al gemeld in ronde 22); de Opmerking zegt dat Navimow NL hem niet verkoopt, alleen bol.com (7-10).
+  2. **M035 Cramer AiConic 2:** zonder draad, 2.000 m², beschikbaarheid nieuw, geen score. Staat niet bij de zes zonder score en niet bij 2.000 m². (AiConic 1, 3, 5, 8 en 12 hebben "niet bevestigd", zoals de FAQ zegt.)
+  3. Keuzetabel, "Tuin van 1.500 tot 1.600 m²": de Husqvarna 310E NERA (1.500 m², 69,5) ontbreekt, en de Mova 1600 AWD (zonder score). "Robotmaaier voor 2.000 m²": de Worx WR342E staat wel in de tekst onder dat kopje en in de FAQ, niet in de keuzetabel.
+  4. "Welke grote maaier heeft 4G ingebouwd?" en de rij "4G en GPS ingebouwd": de Navimow X420 heeft ook 4G ingebouwd (tabel zonder score: "4G ingebouwd"). In "Waar je op moet letten" valt hij onder "de grote Navimow".
+  5. Navigatie M015/M017 "LiDAR en netwerk-RTK": zo staat het op de Navimow-productpagina; de handleiding noemt LiDAR met camera en GNSS, en kolom F = LiDAR (zie Opmerking).
+
+### 2. Conceptpagina robotmaaier-grote-tuin (#15, concept)
+- Er stond een leeg concept met deze slug (#15, sitestructuur 6 oktober, toplijstpatroon met invulvelden, één revisie): **bijgewerkt**, geen bovenliggende pagina. Kopie vooraf: `backups/ronde82-pagina15-voor.json` (lokaal, niet in git; het oude concept staat ook als revisie in WordPress).
+- Gebouwd met `scripts/ronde82_bouw.py` (afgeleid van `ronde71_bouw.py`), inhoud in `scripts/ronde82/grote-tuin.json`, gezet met `scripts/ronde82_pagina.py`. Opmaak als de kleine-tuinpagina (pagina-merk, bovenschrift "Kopersgids"). Titel uit de md.
+- **Yoast-metabeschrijving uit de md** (live gecontroleerd), kruimelpad "Robotmaaier grote tuin".
+- Kaarten M015, M060, M059, M010, M057, M058, M008 in die volgorde: **96,4 · 87,3 · 87,3 · 87,3 · 84,1 · 79,5 · 78,6** (gelijk aan md en blad Scores). Prijsblok van het thema (Bol/Coolblue/Amazon volgens prijstaken en schakelaars, anders "Bekijk de actuele prijs"); in de inhoud geen winkellinks of prijzen. Op het moment van controleren: 3 Bol-, 4 Coolblue- en 2 Amazon-regels.
+- Modellentabellen: alleen de zeven namen met een kaart linken naar hun kaart (exacte celtekst; anders zou "Mova LiDAX Ultra 1600 AWD" naar de kaart van de Ultra 1600 linken). Tekstlinks: Hoe we beoordelen (#scoremodel), Stihl-pagina en robotmaaier kosten (onder "Met draad"), mailto. "Meer lezen": beste, zonder draad, kosten.
+- Bronnen voor de zeventien modellen in de tabellen, uit het blad Bronnen (regels als ronde 71/79; Gardena, Ecovacs en Dreame als fabrikant; Gardena-handleiding op content.tdr.dss.husqvarnagroup.net). Geen winkels, winkelclaims, "niet gevonden", "niet geopend" of Bol. De met-draadmodellen (alleen in lopende tekst) hebben geen bronnenblok. Scoremodel-regel "Scoremodel v1.0" (zonder "concept tot bevriezing", ronde 77).
+
+### 3. Links: klaargezet, niet gedraaid (`scripts/ronde82_links.py`)
+- Hub "Meer lezen" en pagina 1 (na de kleine-tuinzin): "Op zoek naar een robotmaaier voor een grote tuin? Zie Robotmaaier grote tuin." (gerichte vervanging; #10/#11 niet opnieuw bouwen).
+- Kleine-tuinpagina en de Navimow-, Husqvarna-, Gardena-, Stihl-, Worx-, Mova/Dreame- en Eufy-pagina, "Meer lezen", laatste regel: "Robotmaaier voor een grote tuin: modellen van 1.000 tot 3.000 m²."
+- Grote-tuinpagina, "Meer lezen": Segway Navimow, Mova of Dreame, Husqvarna, Eufy, Gardena, Worx, Stihl (teksten zoals op de andere pagina's) en Robotmaaier voor een kleine tuin. Roborock en Ecovacs hebben geen merkpagina.
+- Weigert zolang #15 geen status publish heeft (getest zonder `--schrijf`). Met `--proef-concept` (alleen lezen): alle elf ankers precies één keer, geen meldingen.
+
+### 4. Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, `scripts/ronde82_controle.js`), 390 en 1440 px: geen horizontale scroll (tabellen schuiven op 390 px binnen hun vak: 895 en 700 px in 349 px), 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan, geen verzoek naar winkels.
+- Alle tekst uit de md staat op de weergegeven pagina (automatisch nagelopen: 0 ontbrekend).
+- Interne links (/, auteur, hoe-we-beoordelen met #scoremodel/#verdienmodel, Stihl, kosten, hub, zonder draad; voor het linkscript de kleine-tuinpagina en de zeven merkpagina's): HTTP 200; het eigen adres geeft als concept 404.
+- Momentopname van alle 25 openbare adressen vóór en na het concept: **geen verschillen** (kaarten, scores, volgorde, winkel-links, tekst).
+- **Download:** `paginatekst-grote-tuin.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository; `scripts/paginatekst.js`).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+- Niet gedraaid deze ronde: routetest en Bol-controle (geen thema- of datawijziging).
+
+### Open punten (niet gedaan)
+- Verbindingschip: de kaarten van de Roborock Q110 (M057) en Ecovacs A3000 (M058) hebben geen chip (geen regel in `scripts/verbinding_toewijzing.json`); de andere vijf wel.
+- De vijf meldingen bij punt 1 (vooral M003).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de grote-tuinpagina nalezen (ook de meldingen bij punt 1) en publiceren.
+- [ ] Claude: na Mandy's bericht `scripts/ronde82_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
