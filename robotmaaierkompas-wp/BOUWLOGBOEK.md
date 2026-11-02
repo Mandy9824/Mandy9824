@@ -4093,3 +4093,17 @@ Kopieën vooraf (niet in git, `backups/`): `ronde88-husqvarna-faq-pagina20-voor-
 - Momentopname alle 26 adressen vóór/na: scores en winkel-links overal gelijk; verschillen alleen de kaartvolgorde op pagina 1, de twee zinnen en "Onlangs bijgewerkt" (home, auteurspagina).
 - De drie pagina's op 390 en 1440 px: HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", geen JavaScript-fouten, ankers in orde (behalve de bestaande footerknop #cookie-instellingen), interne links HTTP 200; invulvelden alleen de tuinkeuzehulp op pagina 1.
 - LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #11, #15 en #21 herladen vóór opnieuw opslaan.
+
+## Ronde 91 (2 november 2026): metabeschrijving Stihl-pagina (zonder thema-zip)
+
+Mandy: alleen de Yoast-metabeschrijving van /stihl-robotmaaier/ (#22, gepubliceerd) vervangen. Uitgevoerd met `scripts/ronde91_stihl_meta.py` (proefdraai, daarna `--schrijf`).
+
+- Kopie vooraf: `backups/ronde91-pagina22-voor-20261102-083811.json` (id, status, titel, inhoud, meta; niet in git).
+- **Oud:** "Bestaat er een Stihl robotmaaier zonder draad? Alle iMOW-modellen vergeleken op oppervlak, helling, verbinding en kosten, met bron en datum."
+- **Nieuw** (135 tekens): "Geen draadloze Stihl, wel negen iMOW-modellen met draad: installatiekit 87 of 229 euro, 4G bij de EVO. Welke past bij 500 tot 5.000 m²?"
+- Status bleef publish; inhoud en titel ongewijzigd (gecontroleerd). De cijfers in de tekst zijn Mandy's tekst; niet opnieuw tegen het Excel-bestand gecontroleerd.
+- **Live HTML gecontroleerd** (openbaar adres, met en zonder cache-omzeiling): `<meta name="description">` en `og:description` staan precies op de nieuwe tekst.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd teruggestuurd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; eventueel in Search Console indexering aanvragen voor /stihl-robotmaaier/.
