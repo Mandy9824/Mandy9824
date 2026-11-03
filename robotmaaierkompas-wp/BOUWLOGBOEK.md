@@ -4189,3 +4189,29 @@ Mandy: /husqvarna-of-gardena-robotmaaier/ (#461) is gepubliceerd (titel, slug en
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen; editortabs van #10, #11, #20, #21 en #461 sluiten of herladen vóór opnieuw opslaan.
 - [ ] Open uit ronde 93: de zeven tekstmeldingen en concept #26 `husqvarna-vs-gardena`.
+
+## Ronde 95 (3 november 2026): Husqvarna-of-Gardena-pagina MET DE HAND gewijzigd, tekst M055, concept #26 naar de prullenbak (zonder thema-zip)
+
+**Let op: /husqvarna-of-gardena-robotmaaier/ (#461) is in deze ronde met de hand gewijzigd en mag NIET opnieuw uit de md of met `scripts/ronde93_bouw.py` gebouwd worden** (dan gaan deze wijzigingen en de links van ronde 94 verloren). Latere wijzigingen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+Uitgevoerd met `scripts/ronde95.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`. Kopieën vooraf (niet in git): `backups/ronde88-r95-pagina461-voor-20261103-121223.json` (de naam begint door de bibliotheek met "ronde88-"), `backups/modellen-voor-ronde95-20261103-121225.json`, `backups/r95-pagina26-voor-*.json`.
+
+### Pagina #461 (elke zoektekst precies 1×; status publish gebleven, inhoud zoals bedoeld)
+1. Tabel "in één oogopslag": Diefstalalarm/Gardena "Niet genoemd" → "Nee volgens de productpagina's van Gardena" (gezocht mét de rij, want "Niet genoemd" staat 2× op de pagina); App/Gardena → "Gardena smart system 4,49 (sense en free); Bluetooth-app 4,37 (minimo, city en max)"; Garantie/Husqvarna → "2 jaar op de maaier en de accu, onder voorwaarden"; Garantie/Gardena → "3 jaar na registratie (bevestigd bij de minimo's en de sense-modellen); de accuvoorwaarden verschillen per model".
+2. Korte antwoord: "geeft bij de modellen waar we dat bevestigden 3 jaar garantie na registratie".
+3. Keuzetabel "Tot 1.500 m²", Husqvarna: "…, zonder camera, of de uitlopende 410VE NERA (87,3, met camera)".
+4. Bullets Alarm en Garantie vervangen zoals opgegeven.
+5. FAQ GPS (410VE, Connect Kit 209 euro, 305 met andere kit 329 euro), FAQ diefstalalarm, FAQ garantie vervangen zoals opgegeven.
+- Punt 8: "Gardena is een merk van de Husqvarna Group" ongewijzigd (bron volgt in het blad Bronnen).
+- **Gemeld, niet gewijzigd:** keuzetabel rij "Een alarm", Gardena-cel staat nog op "Niet genoemd". In de kaartteksten (analyse M071, M072, M055) staat nog "een diefstalalarm noemt Gardena niet".
+
+### Modelgegevens M055 (dataroute)
+- Pluspunt "App-rating 4,48, koppeling met slimme thuissystemen" → "4,49". **4,48 kwam verder nergens voor** in de modelgegevens (alle velden van alle 71 modellen nagelopen) en in `scripts/modellen_analyse.json` niet; in `scripts/modellen_teksten.json` 1× (M055), daar ook aangepast. Alleen dit veld veranderd (gecontroleerd); live na upload gelijk aan bedoeld.
+
+### Concept #26 husqvarna-vs-gardena
+- Gecontroleerd: geen link naar `husqvarna-vs-gardena`, `?page_id=26` of `?p=26` in de inhoud van de 27 gepubliceerde pagina's en ook niet in hun openbare HTML (menu, footer). **Naar de prullenbak** (status trash, terug te zetten in WordPress); kopie vooraf in backups/.
+
+### Controles
+- Momentopname van alle 27 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen op #461 (de bedoelde zinnen) en op /gardena-robotmaaier/ (kaart M055: 4,48 → 4,49; de kaart staat ook op #461).
+- #461 op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, ankers in orde (behalve de bestaande footerknop #cookie-instellingen), interne links HTTP 200. Kaarten 96,4 · 84,5 · 84,5 · 78,6 · 78,6 · 60,9. Alle nieuwe teksten 1× in de openbare HTML.
+- LiteSpeed geleegd via de dataroute (de upload van M055). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #461 sluiten of herladen vóór opnieuw opslaan.
