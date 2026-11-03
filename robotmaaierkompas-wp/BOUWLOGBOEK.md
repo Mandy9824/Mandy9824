@@ -4166,3 +4166,26 @@ Aangeleverd: `pagina-husqvarna-of-gardena.md` en het nieuwste `robotmaaierkompas
 ### Nog te doen
 - [ ] Mandy: CDN legen; de pagina nalezen (ook de zeven meldingen bij punt 1) en publiceren; besluiten over concept #26.
 - [ ] Claude: na Mandy's bericht `scripts/ronde93_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 94 (3 november 2026): Husqvarna-of-Gardena-pagina gepubliceerd, links gezet
+
+Mandy: /husqvarna-of-gardena-robotmaaier/ (#461) is gepubliceerd (titel, slug en metabeschrijving zoals gezet, geen bovenliggende pagina; één revisie, 462, 13:00).
+
+- **Gepubliceerde inhoud vergeleken met `scripts/ronde93/husqvarna-of-gardena.json`:** het enige verschil is het auteursblok, dat in de editor is omgezet van patroonverwijzing naar uitgeschreven HTML, net als bij de andere pagina's. Opnieuw bouwen met `ronde93_bouw.py` zou de links hieronder weghalen.
+
+### Links (`scripts/ronde93_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde93-links-voor-20261103-120450.json` (niet in git). Alle vijf pagina's bleven gepubliceerd; de inhoud is zoals bedoeld.
+- Toegevoegd en live gecontroleerd (openbare HTML):
+  - Husqvarna #20 en Gardena #21, "Meer lezen", laatste regel: "Husqvarna of Gardena robotmaaier? De twee merken vergeleken.";
+  - hub #10 ("Meer lezen", na de grote-tuinregel) en pagina 1 #11 (na de grote-tuinzin): dezelfde zin;
+  - #461, "Meer lezen" (na Stihl): Husqvarna, Gardena, kleine tuin, grote tuin.
+
+### Controles
+- Momentopname van alle 27 openbare adressen (nu met /husqvarna-of-gardena-robotmaaier/) vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen alleen de nieuwe regels, de datum "bijgewerkt op" / "Laatst nagekeken op" op de vier gewijzigde oudere pagina's (1 → 3 november; het thema toont de wijzigingsdatum) en "Onlangs bijgewerkt" (home).
+- Nieuwe pagina live: 96,4 · 84,5 · 84,5 · 78,6 · 78,6 · 60,9; free 1500 met Bol en Coolblue, de andere vijf "Bekijk de actuele prijs".
+- De vijf gewijzigde pagina's op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200, ankers in orde (behalve de bestaande footerknop #cookie-instellingen), geen JavaScript-fouten van de site (op de hub alleen de in de test geblokkeerde bol-foto's); invulvelden alleen de tuinkeuzehulp (hub, pagina 1).
+- LiteSpeed geleegd via de dataroute (door het linkscript; modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/husqvarna-of-gardena-robotmaaier/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen; editortabs van #10, #11, #20, #21 en #461 sluiten of herladen vóór opnieuw opslaan.
+- [ ] Open uit ronde 93: de zeven tekstmeldingen en concept #26 `husqvarna-vs-gardena`.
