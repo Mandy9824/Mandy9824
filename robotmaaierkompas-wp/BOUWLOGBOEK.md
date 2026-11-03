@@ -4107,3 +4107,17 @@ Mandy: alleen de Yoast-metabeschrijving van /stihl-robotmaaier/ (#22, gepublicee
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; eventueel in Search Console indexering aanvragen voor /stihl-robotmaaier/.
+
+## Ronde 92 (3 november 2026): metabeschrijving Stihl-pagina opnieuw aangepast (zonder thema-zip)
+
+Mandy: alleen de Yoast-metabeschrijving van /stihl-robotmaaier/ (#22, gepubliceerd) vervangen ("4G bij de EVO" → "mobiel bij 3 EVO en 4 EVO"). Uitgevoerd met `scripts/ronde92_stihl_meta.py` (proefdraai, daarna `--schrijf`; weigert als de huidige tekst afwijkt van de verwachte).
+
+- Kopie vooraf: `backups/ronde92-pagina22-voor-20261103-113719.json` (id, status, titel, inhoud, meta; niet in git).
+- **Oud** (uit ronde 91): "Geen draadloze Stihl, wel negen iMOW-modellen met draad: installatiekit 87 of 229 euro, 4G bij de EVO. Welke past bij 500 tot 5.000 m²?"
+- **Nieuw:** "Geen draadloze Stihl, wel negen iMOW-modellen met draad: installatiekit 87 of 229 euro, mobiel bij 3 EVO en 4 EVO. Welke past bij 500 tot 5.000 m²?"
+- Status bleef publish; inhoud en titel ongewijzigd (gecontroleerd). Mandy's tekst; niet opnieuw tegen het Excel-bestand gecontroleerd.
+- **Live HTML gecontroleerd** (openbaar adres, HTTP 200, met en zonder cachebreker): `<meta name="description">` en `<meta property="og:description">` staan precies op de nieuwe tekst.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd teruggestuurd en daarna gelijk gecontroleerd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; eventueel in Search Console indexering aanvragen voor /stihl-robotmaaier/.
