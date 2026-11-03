@@ -4121,3 +4121,48 @@ Mandy: alleen de Yoast-metabeschrijving van /stihl-robotmaaier/ (#22, gepublicee
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; eventueel in Search Console indexering aanvragen voor /stihl-robotmaaier/.
+
+## Ronde 93 (3 november 2026): conceptpagina husqvarna-of-gardena-robotmaaier, linkscript klaargezet (zonder thema-zip)
+
+Aangeleverd: `pagina-husqvarna-of-gardena.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd**; modelgegevens niet gewijzigd.
+
+**Let op, stand van de tak:** deze sessie begon op ronde 67; de rondes 68-92 stonden al op de remote tak en zijn eerst binnengehaald (fast-forward). Alles hieronder bouwt op ronde 92.
+
+### 1. Tekst van pagina-husqvarna-of-gardena.md tegen de bladen Modellen en Scores (en Bronnen, Instellingen)
+- **Geen afwijkingen** in oppervlak (Husqvarna 600-7.500 m², Gardena 250-1.500 m²), helling (30-50% en 25-35%), geluid (55-62 en 55-58 dB(A); 308V/312V/R6V 62, 430V en sense 55), camera (308V, 312V, R6V, 410VE, 430V, 450V; sense 400/600), GPS (430V, 450V, 410VE; sense 400/600), alarm (alle Husqvarna 1, alle Gardena 0), pincode (alle 1), app-rating (Automower Connect 4,39 Google Play; smart system 4,49), garantie (2 jaar, accu 2 jaar; 3 jaar na registratie), zonder draad (alle Husqvarna behalve 305; sense/free tegen max/city/minimo) en de **score per model** (M069 96,4 · M070 94,5 · M066/M067/M068 84,5 · M010 87,3 · M020/M022 69,5 · M021 52,7 · M071/M072 78,6 · M011/M055 60,9 · M054 46,4 · M025 44,5 · M023/M024 40,9).
+- **Aantallen:** 17 modellen met functiescore in Scores (9 Husqvarna, 8 Gardena; de uitverkochte Automower 105, M019, heeft geen gegevens) = "17 modellen" in de metabeschrijving. Ook in orde: Connect Kit 209 euro en RS1 309 euro (Bronnen M066-M068, 1-11), 4G 10 jaar gratis (KA-01298), draadset 305 94,99-239 euro, 150 m draad in de doos bij minimo/city, uitlopend 410VE/minimo/city, minimum 50 reviews (Instellingen), reviews op merksites niet meegeteld (TestFreaks, vertaald).
+- **Gemeld, niet aangepast:**
+  1. **Alarm Gardena "Niet genoemd"** (tabel, keuzetabel, "Waar Husqvarna beter in is", FAQ): de Gardena-productpagina's zeggen uitdrukkelijk **"Alarm: Nee"** (M011, M025, M054, M055, M071, M072); de handleiding van de max 1200 (M054) noemt in een algemene veiligheidszin wel "het ingebouwde alarm" (meerderheid 0). "Bij geen van de Gardena-modellen noemt Gardena er een" klopt dus strikt niet; "geen alarm" zou beter bij de gegevens passen.
+  2. **App Gardena "Gardena smart system, 4,49"**: geldt voor sense en free (M011, M055, M071, M072). De minimo 250/500, city 250 en max 1200 (zonder Gateway) werken met de **GARDENA Bluetooth App, 4,37** (App Store NL). Bij Husqvarna staat "in Google Play", bij Gardena is 4,49 de App Store NL-waarde (Google Play 4,52).
+  3. **FAQ "Heeft Gardena of Husqvarna GPS?"**: "de kleinere Husqvarna-modellen alleen met een losse Connect Kit": de uitlopende 410VE NERA (1.500 m²) heeft 4G/GPS ingebouwd (de tabel noemt hem wel), en voor de 305 is het een andere kit van 329 euro (M021) in plaats van 209.
+  4. **Keuzetabel "Tot 1.500 m²"**: Husqvarna 310E NERA (69,5); de uitlopende 410VE NERA (1.500 m², camera, 87,3) staat er niet bij.
+  5. **Garantie:** Husqvarna is in Excel ook "2 jaar consument (voorwaarden: registratie en onderhoud volgens handleiding)"; de pagina noemt alleen bij Gardena "na registratie". "De accu valt buiten de gewone voorwaarden" staat zo bij minimo, city, max 1200 en free 1500 ("accu uitgesloten"); bij sense 400/600 "accu-voorwaarden niet op de productpagina", bij de free 800 komt de garantie uit een zoekresultaat ("voorwaarden niet zelf gelezen"). Dat laatste past ook niet bij "Alle waarden volgens de handleidingen en productpagina's".
+  6. **"Gardena is een merk van de Husqvarna Group"** (FAQ) en "horen bij dezelfde groep" (korte antwoord): geen bronregel in het Excel-bestand (alleen de Gardena-handleidingen op content.tdr.dss.husqvarnagroup.net en husqvarnagroup.com bij de beeldrechten in Logboek).
+  7. **Kaarttekst M055** (modelgegevens, niet de md): pluspunt "App-rating 4,48"; Excel sinds de verversing van 1-11: 4,49 (de pagina zegt 4,49).
+
+### 2. Conceptpagina husqvarna-of-gardena-robotmaaier (#461, concept)
+- Er bestond geen pagina met deze slug (ook niet in de prullenbak): **nieuw concept**, geen bovenliggende pagina. **Niet aangeraakt:** het oude lege sjabloonconcept #26 `husqvarna-vs-gardena` ("Kop-aan-kop" met invulvelden, sitestructuur); zelfde onderwerp, andere slug. Mandy: weggooien of laten staan?
+- Gebouwd met `scripts/ronde93_bouw.py` (van `ronde88_gardena_bouw.py`/`ronde82_bouw.py`), inhoud `scripts/ronde93/husqvarna-of-gardena.json`, gezet met `scripts/ronde93_pagina.py`. Opmaak als de kopersgidsen (patroon pagina-merk) met het bovenschrift **"Vergelijking"**; kruimelpad "Husqvarna of Gardena robotmaaier"; auteursblok als patroonverwijzing.
+- **Yoast-metabeschrijving uit de md** (live gecontroleerd): "Husqvarna Automower of Gardena Sileno? Zo verschillen ze in navigatie, GPS, alarm, geluid en garantie, met onze functiescores voor 17 modellen."
+- Kaarten M069, M068, M067, M072, M071, M055 in die volgorde: **96,4 · 84,5 · 84,5 · 78,6 · 78,6 · 60,9** (gelijk aan md en Scores). Prijsblok van het thema: bij de vijf Husqvarna/sense-kaarten alleen "Bekijk de actuele prijs" (fabrikant; niet bij Bol, Coolblue of Amazon), bij de free 1500 ook Bol (1.013 euro) en Coolblue (1.909 euro). In de inhoud geen winkellinks of prijzen.
+- Keuzetabel: Aspire R6V, 312V, 430V NERA, Sileno sense 600 en Sileno free 1500 (2×) linken naar hun kaart. Tekstlinks: Hoe we beoordelen (#scoremodel), mailto. "Meer lezen": beste, zonder draad, kosten, mesjes, Stihl (uit de lijst interne links van de md); Husqvarna, Gardena, kleine en grote tuin via het linkscript (opdracht). Het lege eerste kopvak van de eerste tabel is zoals in de md.
+- Bronnen uit het blad Bronnen voor de zes kaarten en de tien modellen die de tekst verder bij naam noemt (450V, 308V, 410VE, 310E, 305; free 800, max 1200, city 250, minimo 250/500): 6 · 8 · 8 · 4 · 4 · 5 en 6 · 8 · 13 · 18 · 18 · 4 · 6 · 11 · 11 · 10 regels. De 305E NERA (niet bij naam genoemd) heeft geen bronnenblok.
+
+### 3. Links: klaargezet, niet gedraaid (`scripts/ronde93_links.py`)
+- Husqvarna #20 en Gardena #21, "Meer lezen", laatste regel (na grote tuin): "**Husqvarna of Gardena robotmaaier**? De twee merken vergeleken." (tekst Mandy, link op de paginanaam).
+- Hub #10 ("Meer lezen", na de grote-tuinregel) en pagina 1 #11 (na de grote-tuinzin): dezelfde zin (hiervoor gaf de opdracht geen eigen tekst).
+- Nieuwe pagina #461, "Meer lezen" (na Stihl): Husqvarna, Gardena, kleine tuin ("vijftien modellen tot 600 m²"), grote tuin, met de teksten van de andere pagina's.
+- Weigert zolang #461 geen status publish heeft (getest zonder opties). Met `--proef-concept` (alleen lezen): alle vijf ankers precies één keer, geen meldingen.
+
+### 4. Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, `scripts/ronde93_controle.js`), 390 en 1440 px: geen horizontale scroll (eerste tabel schuift op 390 px binnen haar vak, 509 px in 349 px), 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan, geen verzoek naar winkels.
+- Alle tekst uit de md staat op de weergegeven pagina (162 stukken, 0 ontbrekend).
+- Interne links (/, auteur, hoe-we-beoordelen met #scoremodel/#verdienmodel, hub, zonder draad, kosten, mesjes, Stihl; voor het linkscript Husqvarna, Gardena, kleine en grote tuin): HTTP 200; het eigen adres geeft als concept 404.
+- Momentopname van alle 26 openbare adressen vóór en na het concept: **geen verschillen** (kaarten, scores, volgorde, winkel-links, tekst).
+- **Download:** `paginatekst-husqvarna-of-gardena.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository; `scripts/paginatekst.js`).
+- LiteSpeed geleegd via de dataroute (kopie `backups/modellen-voor-ronde93-20261103-115716.json`; modelgegevens daarna ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+- Niet gedraaid: routetest en Bol-controle (geen thema- of datawijziging).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de pagina nalezen (ook de zeven meldingen bij punt 1) en publiceren; besluiten over concept #26.
+- [ ] Claude: na Mandy's bericht `scripts/ronde93_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
