@@ -4407,3 +4407,27 @@ Aangeleverd: `pagina-robotmaaier-diefstal-verzekering.md`, `pagina-robotmaaier-e
 ### Nog te doen
 - [ ] Mandy: CDN legen; beide pagina's nalezen (ook de meldingen bij punt 1) en publiceren; besluiten over de kopen-pagina en de oude sjablonen #43, #57, #58, #59, #61.
 - [ ] Claude: na Mandy's bericht `scripts/ronde100_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 101 (4 november 2026): diefstal- en egelpagina gepubliceerd, links gezet
+
+Mandy: /robotmaaier-diefstal-verzekering/ (#489) en /robotmaaier-egels/ (#490) zijn gepubliceerd (slug, metabeschrijving en ouder zoals gezet).
+
+- **Gepubliceerde inhoud vergeleken met `scripts/ronde100/*.json`:** het enige verschil is het auteursblok, dat de editor van patroonverwijzing naar uitgeschreven HTML heeft omgezet (zoals bij de andere pagina's). Opnieuw bouwen met `ronde100_bouw.py` zou de links hieronder weghalen.
+
+### Links (`scripts/ronde100_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde100-links-voor-20261104-170316.json` (niet in git). Alle twaalf pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd en live gecontroleerd (openbare HTML):
+  - hub #10 (Meer lezen) en pagina 1 #11, na de Eufy-regel: "Robotmaaier gestolen? Zie Diefstalbeveiliging, GPS en verzekering." en "Robotmaaier en egels: advies, regels en welke maaiers egels noemen.";
+  - "Meer lezen", laatste regel, op Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351, Eufy #366 en RTK #470: de diefstalzin;
+  - #489 en #490, "Meer lezen": de andere nieuwe pagina, RTK en de zeven merkpagina's.
+- Kopen-pagina: niets (bestaat niet, zie ronde 100).
+
+### Controles
+- Momentopname van alle 30 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen alleen de nieuwe regels en "Onlangs bijgewerkt" (home).
+- De twaalf gewijzigde pagina's op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200; alleen de bestaande footerknop #cookie-instellingen als anker en de in de test geblokkeerde productfoto's (bol/Coolblue) als fout. Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1).
+- Kaarten live: diefstal 96,4 · 96,4 · 87,3 · 92,7 · 78,6; egels 79,5 · 72,3 · 62,3 · 96,4 · 92,7.
+- LiteSpeed geleegd via de dataroute (door het linkscript; modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/robotmaaier-diefstal-verzekering/ en https://robotmaaierkompas.nl/robotmaaier-egels/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen; editortabs van de twaalf pagina's sluiten of herladen vóór opnieuw opslaan.
+- [ ] Open uit ronde 100: de tekstmeldingen, de kopen-pagina en de oude sjablonen #43, #57, #58, #59, #61.
