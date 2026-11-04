@@ -4293,3 +4293,26 @@ Aangeleverd: `pagina-robotmaaier-rtk-lidar-camera.md` en het nieuwste `robotmaai
 ### Nog te doen
 - [ ] Mandy: CDN legen; de pagina nalezen (ook de twaalf meldingen bij punt 2) en publiceren; besluiten over de oude sjablonen #35-#38.
 - [ ] Claude: na Mandy's bericht `scripts/ronde97_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 98 (4 november 2026): RTK-LiDAR-camerapagina gepubliceerd, links gezet
+
+Mandy: /robotmaaier-rtk-lidar-camera/ (#470) is gepubliceerd (titel, slug en metabeschrijving zoals gezet, geen bovenliggende pagina; één revisie, 471, 10:34).
+
+- **Gepubliceerde inhoud vergeleken met `scripts/ronde97/rtk-lidar-camera.json`:** het enige verschil is het auteursblok, dat de editor van patroonverwijzing naar uitgeschreven HTML heeft omgezet (zoals bij de andere pagina's). Opnieuw bouwen met `ronde97_bouw.py` zou de links hieronder weghalen.
+
+### Links (`scripts/ronde97_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde97-links-voor-20261104-093733.json` (niet in git). Alle dertien pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd en live gecontroleerd (openbare HTML):
+  - pagina 1 #11 (na "Meer over RTK of begrenzingsdraad …") en zonder grensdraad #17 (na de drie technieken): "Hoe werkt zonder draad? Zie RTK, LiDAR of camera.";
+  - "Meer lezen", laatste regel, op Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351, Eufy #366, kleine tuin #16, grote tuin #15 en Husqvarna of Gardena #461: "RTK, LiDAR of camera: hoe navigeert een robotmaaier zonder draad?";
+  - #470, "Meer lezen": pagina 1, zonder grensdraad, de zeven merkpagina's, kleine en grote tuin.
+
+### Controles
+- Momentopname van alle 28 openbare adressen (nu met /robotmaaier-rtk-lidar-camera/) vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen alleen de nieuwe regels, de datum "bijgewerkt op" / "Laatst nagekeken op" (→ 4 november) op de twaalf gewijzigde oudere pagina's, en "Onlangs bijgewerkt" (home, auteurspagina).
+- Nieuwe pagina live: 96,4 · 87,3 · 84,1 · 62,3 · 87,3 · 79,5.
+- De dertien gewijzigde pagina's op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200, ankers in orde (behalve de bestaande footerknop #cookie-instellingen). De enige "fouten" en winkelverzoeken zijn de in de test geblokkeerde bol-foto's van media.s-bol.com (#470, Navimow, Eufy). Invulvelden alleen de bestaande tuinkeuzehulp (pagina 1, zonder grensdraad).
+- LiteSpeed geleegd via de dataroute (door het linkscript; modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN), daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/robotmaaier-rtk-lidar-camera/.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console: indexering aanvragen; editortabs van de dertien pagina's sluiten of herladen vóór opnieuw opslaan.
+- [ ] Open uit ronde 97: de twaalf tekstmeldingen en de oude sjablonen #35-#38.
