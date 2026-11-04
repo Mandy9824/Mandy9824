@@ -4264,7 +4264,7 @@ Aangeleverd: `pagina-robotmaaier-rtk-lidar-camera.md` en het nieuwste `robotmaai
   10. **GPS via 4G "Navimow"** (praktijk): de i105E heeft geen 4G (Access+ los); Gardena sense (GPS 1 via ingebouwde sim) ontbreekt in die opsomming (staat wel in de keuzetabel). "Mova AWD": alleen de 1000 AWD heeft GPS 1; 1600/2000 AWD zijn niveau basis (4G ingebouwd volgens de opmerking bij de 1600 AWD).
   11. **"Mova … LiDAR; zonder antenne of basisstation"** (merkenlijst): de Mova ViAX 250 is camera, geen LiDAR (de tabel zegt dat wel goed).
   12. **"Navimow noemt het 'aandrijving op alle wielen'"** bij i205/i206: die woorden staan in Excel bij de i210/i220 LiDAR Pro; bij de i205 "Driewielaandrijving"/"all-wielaandrijving", bij de i206 "3 AWD". De strekking (drie wielen, handleiding vierwielaandrijving, tegenstrijdig) klopt.
-- "Meer dan dertig modellen": 72 modellen in Modellen, waarvan 47 met een functiescore; klopt.
+- "Meer dan dertig modellen": 72 modellen in Modellen, waarvan 41 met een functiescore in Scores; klopt.
 
 ### 3. Conceptpagina robotmaaier-rtk-lidar-camera (#470, concept)
 - Er bestond geen pagina met deze slug (ook niet in de prullenbak): **nieuw concept**, geen bovenliggende pagina.
