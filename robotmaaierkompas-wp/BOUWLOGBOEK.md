@@ -4237,3 +4237,59 @@ Uitgevoerd met `scripts/ronde96.py` (via `scripts/ronde88_lib.py`): proefdraai, 
 ### Nog te doen
 - [ ] Mandy: CDN legen.
 - [ ] Mandy: beslissen of de minpunten "Geen diefstalalarm" (M071, M072) en "Geen GPS-tracking en geen diefstalalarm" (M055) ook anders moeten.
+
+## Ronde 97 (4 november 2026): minpunten M071, M072, M055; conceptpagina robotmaaier-rtk-lidar-camera, linkscript klaargezet (zonder thema-zip)
+
+Aangeleverd: `pagina-robotmaaier-rtk-lidar-camera.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd.**
+
+### 1. Modelgegevens (dataroute, `scripts/ronde97_minpunten.py`): alleen het veld minpunten
+- Proefdraai zonder meldingen, daarna `--schrijf`. **Kopie vooraf:** `backups/modellen-voor-ronde97-20261104-092156.json` (niet in git).
+- M071 en M072: "Geen diefstalalarm" → "Geen diefstalalarm volgens de productpagina's van Gardena"; M055: "Geen GPS-tracking en geen diefstalalarm" → "Geen GPS-tracking; geen diefstalalarm volgens de productpagina's van Gardena". Elk precies 1× als heel minpunt.
+- Het script weigert bij elk ander verschil: alleen `minpunten` van deze drie veranderd (gecontroleerd), algemene velden gelijk; live na upload gelijk aan bedoeld, 71 modellen. Hetzelfde in `scripts/modellen_teksten.json` (daarna gelijk aan live).
+- **Niet gewijzigd (niet gevraagd), wel vergelijkbaar:** M054 (max 1200) "Geen diefstalalarm"; M007, M052, M053 "Geen pincode en geen diefstalalarm"; M058 "…; geen diefstalalarm genoemd".
+- Kaarten bijgewerkt op /gardena-robotmaaier/ en /husqvarna-of-gardena-robotmaaier/ (de enige openbare pagina's met deze drie kaarten).
+
+### 2. Tekst van pagina-robotmaaier-rtk-lidar-camera.md tegen het Excel-bestand (Modellen, Scores, Overzicht, Reviews, Instellingen)
+- **Klopt:** navigatie per genoemd model (RTK: i205/i206/X420, Husqvarna 305E/310E/V-modellen/430V/450V, Gardena free en sense, Worx Vision Cloud, Roborock Q105/Q110; LiDAR: Mova LiDAX Ultra, Dreame A1 Pro, Ecovacs A3000, ViAX 500 met camera's, i210/i220 LiDAR Pro; camera: Eufy C15/E15/E18, ViAX 250); geen camera en obstakel pas na botsing bij 305E, 310E, free; Connect Kit 209 en RS1 309 euro; 430V/450V 4G ingebouwd; Gardena free gateway met LAN-kabel; sense gratis ingebouwde sim; Worx cloud-RTK levenslang gratis, wifi alleen bij het laadstation; Roborock referentiestation in de doos; helling Mova AWD 80%, X420 en WR342E 84%, gewone modellen 25-55%; geluid Mova AWD 66, X420 68; i205/i206 tegenstrijdig AWD (geen 4WD-bonus); scores M015 96,4 · M059 87,3 · M056 84,1 · M053 62,3 · M060 87,3 · M058 79,5 · M069 96,4; oppervlak van de zes kaarten; minimum 50 reviews.
+- **Gemeld, niet aangepast:**
+  1. **M058 "de grootste draadloze maaier met een score (3.000 m²)"**: klopt niet. Husqvarna 430V NERA (4.800 m², 96,4) en 450V NERA (7.500 m², 94,5) zijn ook draadloos en hebben een score. Wel de grootste met LiDAR.
+  2. **4WD "luider" en FAQ "66 tot 68 dB(A)"**: voor de Worx WR342E staat geen geluidswaarde in Modellen; de opmerking noemt 55,4/55,7 gemeten en 57/58 gegarandeerd voor de reeks, zonder koppeling per type (dus juist niet luider). Bij X420 en WR342E is de kolom Vierwielaandrijving leeg (niveau basis); alleen de opmerkingen noemen vierwielaandrijving.
+  3. **"Een stille maaier"**: de Gardena sense 400 en 600 hebben ook 55 dB(A) (zelfde als de 430V); ze staan er niet bij.
+  4. **M015 "de hoogste functiescore (96,4)"**: gedeeld met de Husqvarna 430V NERA (96,4; de FAQ noemt dat wel).
+  5. **Navimow "anders gebruik je de antenne uit de doos"** (ook FAQ antenne): geldt voor i205, i206 en X420; de i210/i220 LiDAR Pro hebben geen antenne in de doos (Overzicht: "Network RTK, geen antenne in de doos"), en de uitlopende i105E heeft geen netwerk-RTK (alleen antenne).
+  6. **"LiDAR en camera niet" (korte antwoord) en "LiDAR en camera hebben dat bezwaar niet" (praktijk)**: bij de Eufy C15 (M052/M053) zegt de handleiding "Reliable 2.4G or 5G Wi-Fi coverage" bij het gazon (Overzicht: "wifi bij het gazon"). Voor navigatie geldt het voor LiDAR wel; voor de app vragen Mova, Dreame, Ecovacs en Roborock wifi.
+  7. **Reviews 310E NERA**: Excel zegt "satelliet-/verbindingsverlies of slechte GPS-dekking onder bomen in 4 teksten" (20 gelezen, niet meegeteld). Dat de maaier dan "stopt" staat er niet zo.
+  8. **Praktijk "Gardena free … moet je het hele gazon kunnen bereiken"**: Excel noemt bij de free "thuisinternet + LAN-poort; GNSS-signaal" (gateway-bereik circa 100 m in de opmerking), geen dekking over het hele gazon. Die eis staat juist bij de sense ("mobiele dekking over het hele gazon"), die in deze opsomming ontbreekt.
+  9. **Husqvarna "Zonder wifi heb je een Connect Kit (209 euro) of een referentiestation (309 euro) nodig"**: geldt voor 305E, 310E, 308V, 312V, R6V; bij de 430V/450V (4G) alleen een referentiestation als er geen mobiele of wifi-dekking is (prijs voor die modellen niet in Excel).
+  10. **GPS via 4G "Navimow"** (praktijk): de i105E heeft geen 4G (Access+ los); Gardena sense (GPS 1 via ingebouwde sim) ontbreekt in die opsomming (staat wel in de keuzetabel). "Mova AWD": alleen de 1000 AWD heeft GPS 1; 1600/2000 AWD zijn niveau basis (4G ingebouwd volgens de opmerking bij de 1600 AWD).
+  11. **"Mova … LiDAR; zonder antenne of basisstation"** (merkenlijst): de Mova ViAX 250 is camera, geen LiDAR (de tabel zegt dat wel goed).
+  12. **"Navimow noemt het 'aandrijving op alle wielen'"** bij i205/i206: die woorden staan in Excel bij de i210/i220 LiDAR Pro; bij de i205 "Driewielaandrijving"/"all-wielaandrijving", bij de i206 "3 AWD". De strekking (drie wielen, handleiding vierwielaandrijving, tegenstrijdig) klopt.
+- "Meer dan dertig modellen": 72 modellen in Modellen, waarvan 47 met een functiescore; klopt.
+
+### 3. Conceptpagina robotmaaier-rtk-lidar-camera (#470, concept)
+- Er bestond geen pagina met deze slug (ook niet in de prullenbak): **nieuw concept**, geen bovenliggende pagina.
+- **Oude lege sjablonen over hetzelfde onderwerp (niet verplaatst, niet aangeraakt):** #35 `rtk-of-begrenzingsdraad` ("RTK of begrenzingsdraad"), #36 `gps-vision-lidar-robotmaaier` ("GPS, vision en LiDAR bij robotmaaiers"), #37 `rtk-antenne-robotmaaier` ("Wat is een RTK-antenne"), #38 `robotmaaier-4wd-of-2wd` ("4WD of 2WD robotmaaier"); alle vier concept onder #27 Kopersgids, met de lege sjablooninhoud ("Een robotmaaier kiezen in 5 stappen", "[Naam auteur]", "[datum]"). Verwant: #48 `robotmaaier-gps-bomen` en #43 `robotmaaier-abonnement-4g` (ook leeg).
+- Gebouwd met `scripts/ronde97_bouw.py` (van `ronde93_bouw.py`), inhoud `scripts/ronde97/rtk-lidar-camera.json`, gezet met `scripts/ronde97_pagina.py`. Opmaak als de kopersgidsen (patroon pagina-merk) met bovenschrift **"Uitleg"**; kruimelpad en Yoast-kruimeltitel "RTK, LiDAR of camera"; auteursblok als patroonverwijzing.
+- **Yoast-metabeschrijving uit de md** (live gecontroleerd): "RTK, LiDAR of camera? Zo navigeert een robotmaaier zonder draad, met 4WD erbij en voorbeelden uit onze vergelijking van meer dan dertig modellen."
+- Kaarten M015, M059, M056, M053, M060, M058 in die volgorde: **96,4 · 87,3 · 84,1 · 62,3 · 87,3 · 79,5**, met de teksten uit de modelgegevens. Prijsblok van het thema: M015 Bol en Coolblue, M059 Amazon, M056 Coolblue en Bol, M053 Coolblue, M058 Coolblue, M060 alleen "Bekijk de actuele prijs"; alle zes ook de fabrikant. In de inhoud geen winkellinks of prijzen.
+- Geen modellinks in de tabellen (cellen noemen merken en reeksen). Tekstlink: mailto. "Meer lezen": beste, kosten, Husqvarna of Gardena; de rest via het linkscript (opdracht).
+- Bronnen uit het blad Bronnen voor de zes kaarten (5 · 5 · 13 · 11 · 5 · 5 regels) en de modellen die de tekst bij typenaam noemt: i205, i206, X420, i220 LiDAR Pro, 305E, 310E, 430V, 450V, WR342E, Q110, LiDAX Ultra 1600/2000 AWD, ViAX 250, ViAX 500, Dreame A1 Pro, Eufy C15, E15, E18 (5 · 5 · 3 · 2 · 20 · 18 · 6 · 6 · 2 · 13 · 2 · 2 · 5 · 5 · 8 · 13 · 9 · 6).
+
+### 4. Links: klaargezet, niet gedraaid (`scripts/ronde97_links.py`)
+- Pagina 1 #11, direct na "Meer over RTK of begrenzingsdraad lees je op de pagina …", en zonder grensdraad #17, direct na de lijst met de drie technieken: "Hoe werkt zonder draad? Zie **RTK, LiDAR of camera**."
+- "Meer lezen", laatste regel, op Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351, Eufy #366, kleine tuin #16, grote tuin #15 en Husqvarna of Gardena #461: "**RTK, LiDAR of camera**: hoe navigeert een robotmaaier zonder draad?" De hub #10 niet (niet gevraagd).
+- #470, "Meer lezen" (na Husqvarna of Gardena): pagina 1, zonder grensdraad, de zeven merkpagina's, kleine en grote tuin, met de teksten van de andere pagina's.
+- Weigert zolang #470 geen status publish heeft (getest zonder opties). Met `--proef-concept` (alleen lezen): alle 13 ankers precies één keer, geen meldingen.
+
+### 5. Controles
+- Concept (weergegeven inhoud in de omhulling van de hub, `scripts/ronde97_controle.js`), 390 en 1440 px: geen horizontale scroll (eerste tabel schuift op 390 px binnen haar vak, 682 px in 349 px), 0 JavaScript-fouten van de site, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan. Op 1440 px alleen het verzoek naar de bol-foto (media.s-bol.com), die vanuit deze omgeving niet laadt.
+- Alle tekst uit de md staat op de weergegeven pagina (99 stukken, 0 ontbrekend).
+- Interne links (/, auteur, hoe-we-beoordelen met #scoremodel/#verdienmodel, hub, kosten, Husqvarna of Gardena; voor het linkscript pagina 1, zonder grensdraad, de zeven merkpagina's, kleine en grote tuin): HTTP 200; het eigen adres geeft als concept 404.
+- Momentopname van alle 27 openbare adressen vóór (vóór stap 1) en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de nieuwe minpunten op /gardena-robotmaaier/ en /husqvarna-of-gardena-robotmaaier/. Die twee op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen scroll, 0 JS-fouten, geen haken, geen invulveld; alleen de bestaande footerknop #cookie-instellingen als anker.
+- **Download:** `paginatekst-rtk-lidar-camera.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository; `scripts/paginatekst.js`).
+- LiteSpeed geleegd via de dataroute (upload stap 1 en nogmaals na het concept; kopie `backups/modellen-voor-ronde97-leeg-20261104-092858.json`, modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+- Niet gedraaid: routetest en Bol-controle (geen thema- of winkelwijziging).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de pagina nalezen (ook de twaalf meldingen bij punt 2) en publiceren; besluiten over de oude sjablonen #35-#38.
+- [ ] Claude: na Mandy's bericht `scripts/ronde97_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
