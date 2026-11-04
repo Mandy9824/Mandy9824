@@ -4352,3 +4352,58 @@ Uitgevoerd met `scripts/ronde99.py` (via `scripts/ronde88_lib.py`): proefdraai z
 ### Nog te doen
 - [ ] Mandy: CDN legen.
 - [ ] Mandy: beslissen over het minpunt van M022 en de analyse van M008 (zie B).
+
+## Ronde 100 (4 november 2026): conceptpagina's robotmaaier-diefstal-verzekering en robotmaaier-egels, linkscript klaargezet (zonder thema-zip)
+
+Aangeleverd: `pagina-robotmaaier-diefstal-verzekering.md`, `pagina-robotmaaier-egels.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd.** Modelgegevens niet gewijzigd.
+
+### 1. Tekst tegen het Excel-bestand
+**Diefstalpagina** (beveiligingstabel tegen Modellen kolommen Pincode/Alarm/GPS-tracking/Geofence-melding en Scores; verzekering en politie tegen het blad "Diefstal en verzekering").
+- **Klopt:** alle 18 rijen van de beveiligingstabel (pincode, alarm, GPS, geofence per model gelijk aan Modellen; alle genoemde modellen hebben een score); de modulekosten (Connect Kit 209 en 329, Mova Link 249, Dreame 69 of 99,99, Eufy 99, Worx Find My Landroid 149); Navimow 1 jaar + 29,99 (i205, i210 LiDAR Pro), Mova 1600 1 jaar en 1000 AWD 3 jaar, Husqvarna 430V/450V 10 jaar (KA-01298), Gardena sense gratis sim, Eufy proefdata; de vijf verzekeraars (bij naam, tuinbepaling, eigen risico, Univé dagwaarde en Buitenshuisdekking); geen eis tot vastzetten of afgesloten tuin; politie.nl (DigiD of bureau, "overige diefstal"); NOS 10-08-2023; Husqvarna KA-01421 en de fabrikantclaim.
+- **Gemeld, niet aangepast:**
+  1. "Waarom deze" i210 LiDAR Pro: "de hoogste functiescore (96,4)" is gedeeld met de Husqvarna 430V NERA (96,4), die op deze pagina ook een kaart heeft.
+  2. Tabel: de Navimow i105E (M001, uitlopend, score 75,9: pincode ja, alarm/GPS/geofence alleen met Access+ 99,99 euro) ontbreekt, terwijl de toelichting zegt "voor de modellen waarvan we de beveiliging hebben uitgezocht en een score hebben". Ook de uitverkochte i210 LiDAR (M003, alle vier) en Ecovacs O1200 (M009) staan er niet in.
+  3. 305E en 310E NERA "GPS standaard: Nee": de Connect Kit (209 euro) past volgens Bronnen ook op deze twee (zelfde artikel); de tabel noemt hem alleen bij 308V/312V/R6V.
+  4. "Navimow 1 jaar, daarna 29,99 euro": voor de i206 AWD zegt Excel "prijs na het eerste jaar niet bevestigd voor NL" (deels gedekt door "Wat we nog niet weten").
+  5. "De AWD-modellen 3 jaar" en FAQ "de Mova LiDAX Ultra 1600 en AWD-modellen" (GPS standaard): alleen de 1000 AWD (M060) is uitgezocht en heeft een score; 1600 AWD en 2000 AWD zijn niveau basis (opmerking: 4G ingebouwd, 3 jaar gratis), zonder pincode/alarm/geofence.
+  6. "Bij een schade vragen verzekeraars meestal bewijs van eigendom, waarde en leeftijd, en aangifte": in Excel alleen bij Interpolis en Centraal Beheer (beide Achmea); ANWB en NN "niet nagezocht", Univé "niets op deze pagina's".
+  7. "Het Verbond van Verzekeraars heeft geen standpunt": Excel zegt "op de gevonden pagina's geen standpunt" (status niet gevonden).
+  8. "Braaksporen alleen bij bijgebouwen en bergingen": Excel noemt ook opslag elders en een garage op een ander adres (Interpolis/CB), kelder, garagebox en gemeenschappelijke ruimte (ANWB). Klein.
+  9. Eigen risico: All Risk bij Centraal Beheer (altijd 100 euro) en Interpolis (100 euro bij zelf veroorzaakt, 0 bij diefstal) niet genoemd. Klein.
+
+**Egelpagina** (fabrikanten tegen blad Egels kolom "Dierenherkenning (fabrikant)", nachtpauze en bewoording; adviezen en regels tegen (a) en (c)).
+- **Klopt:** Egelbescherming (16-04-2026), Zoogdiervereniging/Zodion (659 eigenaren, 1 op 30, lage rand onder 4,5 cm, intrekbare messen), Egelwerkgroep Amsterdam-Noord, Dierenbescherming en Vogelbescherming; NOS april 2026; motie-Kostić (Waals verbod 18:00-9:00, aangenomen, verzoek); art. 431 Sr; Rijksoverheid-route; geen APV gevonden. Fabrikantentabel: Ecovacs A3000, Worx Vision Cloud (FiatLux) en draadmodellen ("Save the Hedgehogs"), Eufy C15 met garage vs. C15 Solo/E15/E18, Husqvarna 430V/450V en de merkbrede persvragen, Navimow "Diervriendelijk" zonder nachtpauze, Mova, Roborock "Diervriendelijk", Gardena/Stihl/Cramer/Dreame, handleidingwaarschuwingen Gardena en Husqvarna; "Tips voor een egelvriendelijke tuin" bij 305, 305E, 310E.
+- **Gemeld, niet aangepast:**
+  1. "De Tweede Kamer nam in juni 2026 een motie aan": Excel heeft 16-06-2026 als datum van indienen; dat hij is aangenomen staat er (gegevensmagazijn), de datum van de stemming niet.
+  2. Zoogdiervereniging: Excel noemt ook "voor de biodiversiteit het beste: geen robotmaaier"; staat niet in de tabel.
+  3. Ter info: de Navimow-handleidingen i205/i206 noemen BioLife-zones (no-go) voor o.a. egels; volgens de regel van Mandy blijft Navimow "ja, kleine dieren".
+  4. Cramer AiConic 8 en RM1500/2000/2700 zijn "niet geopend" (Too many requests; "Overnemen van serie: Mandy beslist"); de tekst zegt "enkele Cramer-modellen hebben we niet onderzocht".
+
+### 2. Conceptpagina's (#489 en #490, concept)
+- Geen pagina's met deze slugs (ook niet in de prullenbak): **twee nieuwe concepten**, geen bovenliggende pagina.
+- **Oude lege sjablonen over deze onderwerpen (niet verplaatst, niet aangeraakt):** #57 `robotmaaier-diefstal` ("Diefstalbeveiliging en GPS-tracking"), #61 `robotmaaier-verzekering` ("Robotmaaier verzekeren"), #58 `robotmaaier-egels-huisdieren` ("Robotmaaier en egels, huisdieren en kinderen"), #59 `robotmaaier-nacht` ("Robotmaaier 's nachts: regels en overlast"), #43 `robotmaaier-abonnement-4g` ("Robotmaaier met abonnement of 4G"). Alle vijf concept onder #27 Kopersgids, met de lege sjablooninhoud ("Een robotmaaier kiezen in 5 stappen", "[Naam auteur]", "[datum]"); geen link ernaar in de inhoud of openbare HTML van de 28 gepubliceerde pagina's.
+- **De kopen-pagina bestaat niet:** /robotmaaier-kopen-waar-op-letten/ (in beide md's als interne link) geeft 404; geen pagina met die slug, ook niet als concept of in de prullenbak (verwant: leeg sjabloon #28 `hoe-kies-je-een-robotmaaier`). Er staat nergens een link naar.
+- Gebouwd met `scripts/ronde100_bouw.py` (van `ronde97_bouw.py`; nieuw: genummerde lijsten, bronnen uit de rijen "Onderzoek …"), inhoud `scripts/ronde100/diefstal-verzekering.json` en `egels.json`, gezet met `scripts/ronde100_pagina.py`. Opmaak als de kopersgidsen (patroon pagina-merk) met bovenschrift **"Uitleg"**; auteursblok als patroonverwijzing.
+- **Yoast** (live gecontroleerd): metabeschrijvingen uit de md; kruimeltitel "Diefstal, GPS en verzekering" en "Robotmaaier en egels".
+- Kaarten diefstal: M015, M069, M059, M016, M071 = **96,4 · 96,4 · 87,3 · 92,7 · 78,6**; egels: M058, M046, M052, M069, M016 = **79,5 · 72,3 · 62,3 · 96,4 · 92,7**. Teksten en prijsblok uit de modelgegevens (Bol, Coolblue, Amazon volgens prijstaken en schakelaars, verder "Bekijk de actuele prijs"); in de inhoud geen winkellinks of prijzen. Geen modellinks in de tabellen.
+- Tekstlinks: robotmaaier kosten (diefstal), mailto. "Meer lezen": beste, zonder draad (+ kosten bij diefstal); de rest via het linkscript.
+- **Bronnen** uit het blad Bronnen, veld begint met "Onderzoek diefstal" resp. "Onderzoek egels": per adres één regel (titel, domein, datum, chip Verzekeraar/Brancheorganisatie/Officieel/Nieuws/Fabrikant/Organisatie), geen dubbele adressen: **17** en **12** regels, plus het scoremodel. Bij een rij met meer adressen krijgt het eerste adres de datum van de rij. **Weggelaten:** "Onderzoek diefstal: gemeenten" en "Onderzoek egels: APV / huurders" (geen adres, alleen "Zoekmachine"), "Onderzoek egels: gemeente Groningen" (status niet geopend, niet zelf gelezen, niet in de tekst) en het OData-adres van het gegevensmagazijn bij de motie (API-adres; de motie-pdf staat er wel). Geen bronnen per model (niet gevraagd).
+- Let op: het eerlijkheidsblok is het vaste patroon ("handleidingen, fabrikantpagina's en winkelinformatie"); op deze pagina's komen ook verzekeraars, organisaties en overheid aan bod.
+
+### 3. Links: klaargezet, niet gedraaid (`scripts/ronde100_links.py`)
+- Hub #10 ("Meer lezen") en pagina 1 #11 ("De modellen een voor een"), direct na de Eufy-regel: "Robotmaaier gestolen? Zie **Diefstalbeveiliging, GPS en verzekering**." en "**Robotmaaier en egels**: advies, regels en welke maaiers egels noemen." **Kopen-pagina: niets (bestaat niet).**
+- "Meer lezen", laatste regel, op Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351, Eufy #366 en RTK #470: de diefstalzin.
+- #489 en #490, "Meer lezen": de andere nieuwe pagina, RTK, en de zeven merkpagina's (teksten als op de andere pagina's).
+- Weigert zolang #489 of #490 geen status publish heeft (getest zonder opties). Met `--proef-concept` (alleen lezen): alle 12 ankers precies één keer, geen meldingen.
+
+### 4. Controles
+- Concepten (weergegeven inhoud in de omhulling van de hub, `scripts/ronde97_controle.js`), 390 en 1440 px: geen horizontale scroll (de tabellen schuiven op 390 px binnen hun vak), 0 JavaScript-fouten van de site, geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan. Enige geblokkeerde verzoek: de productfoto van M058 op coolblue.bynder.com (afbeelding, geen link), egelpagina 1440 px.
+- Alle tekst uit de md staat op de weergegeven pagina (156 en 84 stukken, 0 ontbrekend).
+- Interne links (/, auteur, hoe-we-beoordelen met #scoremodel/#verdienmodel, kosten, hub, zonder draad; voor het linkscript RTK en de zeven merkpagina's): HTTP 200; de eigen adressen geven als concept 404; /robotmaaier-kopen-waar-op-letten/ 404 (bestaat niet).
+- Momentopname van alle 28 openbare adressen vóór en na het aanmaken van de concepten (`scripts/momentopname.js`): **geen verschillen** (kaarten, scores, volgorde, winkel-links, tekst).
+- **Downloads** (niet in de repository): `paginatekst-robotmaaier-diefstal-verzekering.md` en `paginatekst-robotmaaier-egels.md` (volledige weergegeven tekst, FAQ opengeklapt; `scripts/paginatekst.js`).
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN).
+
+### Nog te doen
+- [ ] Mandy: CDN legen; beide pagina's nalezen (ook de meldingen bij punt 1) en publiceren; besluiten over de kopen-pagina en de oude sjablonen #43, #57, #58, #59, #61.
+- [ ] Claude: na Mandy's bericht `scripts/ronde100_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
