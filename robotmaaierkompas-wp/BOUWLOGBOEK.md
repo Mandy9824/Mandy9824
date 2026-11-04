@@ -4316,3 +4316,39 @@ Mandy: /robotmaaier-rtk-lidar-camera/ (#470) is gepubliceerd (titel, slug en met
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen; editortabs van de dertien pagina's sluiten of herladen vóór opnieuw opslaan.
 - [ ] Open uit ronde 97: de twaalf tekstmeldingen en de oude sjablonen #35-#38.
+
+## Ronde 99 (4 november 2026): RTK-pagina, Ecovacs "grootste", 310E-reviews MET DE HAND gewijzigd; sjablonen #35-#38 naar de prullenbak (zonder thema-zip)
+
+**Let op: /robotmaaier-rtk-lidar-camera/ (#470), /beste-robotmaaier/ (#10), /robotmaaier-grote-tuin/ (#15) en /husqvarna-robotmaaier/ (#20) zijn in deze ronde met de hand gewijzigd en mogen NIET opnieuw uit de md of met een bouwscript gebouwd worden.** Latere wijzigingen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+Uitgevoerd met `scripts/ronde99.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`. Elke zoektekst precies 1×; alle pagina's bleven gepubliceerd; inhoud zoals bedoeld. Kopieën vooraf (niet in git): `backups/ronde88-r99-pagina{470,10,15,20}-voor-20261104-12495x.json`, `backups/modellen-voor-ronde99-20261104-125002.json`, `backups/r99-pagina{35..38}-voor-*.json`.
+
+### A. #470 /robotmaaier-rtk-lidar-camera/
+1. Korte antwoord: "de Mova LiDAX Ultra-modellen, de Mova ViAX 500, de Ecovacs-modellen en de Dreame A1 Pro met LiDAR".
+2. Praktijk: "via wifi, een gateway of mobiele dekking (… Gardena free en sense)"; reviews 310E "problemen door satelliet- of verbindingsverlies" plus de zin over geen satellietsignaal / wifi bij het gazon (Eufy C15).
+3. 4WD-alinea en FAQ 4WD/AWD: Mova AWD 66 en X420 68 dB(A); WR342E geluid onbekend.
+4. Keuzetabel "Een stille maaier": 430V en Gardena sense 400/600 (55), Mova niet-4WD (57).
+5. Waarom deze i210: "(96,4, gedeeld met de Husqvarna Automower 430V NERA)".
+6. Navimow-bullet: "(bij de i205, i206 en X420; de LiDAR Pro-modellen hebben geen antenne nodig)"; FAQ antenne aangepast.
+7. Waarom deze Ecovacs: "een van de grootste draadloze maaiers met een score (3.000 m²; alleen de Husqvarna 430V en 450V zijn groter)"; Husqvarna-bullet begint met "Bij de 308V, 312V, Aspire R6V, 305E en 310E: Zonder wifi …" (letterlijk, met hoofdletter Z na de dubbele punt, zoals opgegeven).
+
+### B. Zoekopdrachten op alle 28 gepubliceerde pagina's en in de modelgegevens
+1. **"grootste draadloze maaier" bij de Ecovacs** → "een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²)":
+   - #10 hub, Waarom deze Ecovacs: "…in onze selectie (3.000 m²): 50% helling volgens Ecovacs, met LiDAR zonder draad."
+   - #15 grote tuin, "Robotmaaier voor 3.000 m²": "De Ecovacs GOAT A3000 LiDAR Pro (79,5) is een van de grootste …"; Waarom deze Ecovacs; FAQ "Wat is de grootste robotmaaier zonder draad?" met het opgegeven antwoord (450V, 430V, Ecovacs, Cramer AiConic).
+   - #470: zie A7 (eigen tekst van Mandy).
+   - Modelgegevens M058 analyse: "is een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²), met een helling tot 50% volgens Ecovacs." Alleen dat veld veranderd (gecontroleerd), ook in `scripts/modellen_analyse.json`. Zichtbaar in de kaart op /beste-robotmaaier/, /robotmaaier-zonder-draad/, /robotmaaier-grote-tuin/ en #470. In beste_voor, plus- en minpunten en `modellen_teksten.json` kwam het niet voor.
+2. **"stopt als hij het satellietsignaal kwijtraakt"** → "problemen door satelliet- of verbindingsverlies": #20 Husqvarna ("Waar op te letten") en #470 (A2). Verder nergens op de pagina's.
+- **Gemeld, niet gewijzigd (andere bewoording, niet gegokt):** minpunt M022 (310E NERA, live en `modellen_teksten.json`): "In vier van de twintig gelezen reviews (vertaald, niet in de score) stopt de maaier als het satellietsignaal wegvalt". Analyse M008 (Dreame A1 Pro): "opgegeven oppervlak tot 2.000 m²: het grootste in onze selectie" (klopt niet meer: 430V, 450V, Ecovacs zijn groter).
+
+### C. Sjablonen
+- #35 `rtk-of-begrenzingsdraad`, #36 `gps-vision-lidar-robotmaaier`, #37 `rtk-antenne-robotmaaier`, #38 `robotmaaier-4wd-of-2wd`: geen link (slug, `?page_id=` of `?p=`) in de inhoud of de openbare HTML (menu, footer) van de 28 gepubliceerde pagina's. **Naar de prullenbak** (status trash, terug te zetten in WordPress).
+
+### Controles
+- Momentopname van alle 28 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de bedoelde zinnen (ook in de kaart M058 op vier pagina's), de datum "bijgewerkt op" op de gewijzigde pagina's en "Onlangs bijgewerkt" (home, auteurspagina). De oude zinnen staan op geen van de vijf pagina's meer.
+- #470, #10, #15, #20 op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", interne links HTTP 200; alleen de bestaande footerknop #cookie-instellingen als anker; de enige fouten/winkelverzoeken zijn de geblokkeerde bol-foto's (media.s-bol.com); invulvelden alleen de tuinkeuzehulp op de hub.
+- LiteSpeed geleegd via de dataroute (upload M058). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #470, #10, #15 en #20 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog te doen
+- [ ] Mandy: CDN legen.
+- [ ] Mandy: beslissen over het minpunt van M022 en de analyse van M008 (zie B).
