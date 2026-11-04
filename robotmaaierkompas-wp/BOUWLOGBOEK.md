@@ -4215,3 +4215,25 @@ Uitgevoerd met `scripts/ronde95.py` (via `scripts/ronde88_lib.py`): proefdraai z
 - Momentopname van alle 27 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen op #461 (de bedoelde zinnen) en op /gardena-robotmaaier/ (kaart M055: 4,48 → 4,49; de kaart staat ook op #461).
 - #461 op 390 en 1440 px: HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, ankers in orde (behalve de bestaande footerknop #cookie-instellingen), interne links HTTP 200. Kaarten 96,4 · 84,5 · 84,5 · 78,6 · 78,6 · 60,9. Alle nieuwe teksten 1× in de openbare HTML.
 - LiteSpeed geleegd via de dataroute (de upload van M055). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #461 sluiten of herladen vóór opnieuw opslaan.
+
+## Ronde 96 (4 november 2026): keuzetabel "Een alarm" en kaartteksten M071, M072, M055 (zonder thema-zip)
+
+Uitgevoerd met `scripts/ronde96.py` (via `scripts/ronde88_lib.py`): proefdraai, daarna `--schrijf`. Kopieën vooraf (niet in git): `backups/ronde68-pagina461-voor-20261103-185300.json` en `backups/ronde68-modellen-voor-20261103-185300.json` (eerste poging, gisteren afgebroken vóór er iets werd geschreven), `backups/ronde88-r96-pagina461-voor-20261104-090212.json`, `backups/modellen-voor-ronde96-20261104-090214.json`. #461 blijft met de hand gewijzigd (zie ronde 95): niet opnieuw bouwen.
+
+### 1. Pagina #461 /husqvarna-of-gardena-robotmaaier/
+- Keuzetabel, rij "Een alarm": Gardena-cel "Niet genoemd" → "Nee volgens de productpagina's van Gardena" (gezocht mét de rij, precies 1×). Status publish gebleven, inhoud zoals bedoeld.
+
+### 2. Modelgegevens (dataroute, alleen analyse en minpunten)
+- **Analyse M071, M072, M055:** "een diefstalalarm noemt Gardena niet" (elk precies 1×) → "volgens de productpagina's van Gardena heeft hij geen diefstalalarm". De zoektekst kwam bij geen ander model voor. Alleen het veld analyse van deze drie veranderd (gecontroleerd); live na upload gelijk aan bedoeld, 71 modellen.
+- **Minpunten niet gewijzigd (gemeld, niet gegokt):** "Geen diefstalalarm genoemd" staat bij geen van de drie. Er staat: M071 en M072 "Geen diefstalalarm", M055 "Geen GPS-tracking en geen diefstalalarm".
+- **Repository:** de analyse staat in `scripts/modellen_analyse.json` (daar 3× aangepast, gelijk aan live). In `scripts/modellen_teksten.json` (beste_voor, plus- en minpunten) kwam geen van beide zoekteksten voor: ongewijzigd.
+- **Kaarten bijgewerkt op:** /gardena-robotmaaier/ (sense 600, sense 400, free 1500) en /husqvarna-of-gardena-robotmaaier/ (dezelfde drie). Op geen andere openbare pagina staat de tekst.
+
+### Controles
+- Momentopname van alle 28 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**. Tekstverschillen alleen de bedoelde zinnen op de twee pagina's hierboven en de datum "bijgewerkt op 4 november 2026" (#461, home, auteurspagina's).
+- #461 en /gardena-robotmaaier/ op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, 0 JavaScript-fouten, geen "[", "]", "{", "}", geen invulveld, interne links HTTP 200, ankers in orde (behalve de bestaande footerknop #cookie-instellingen). Kaarten #461 96,4 · 84,5 · 84,5 · 78,6 · 78,6 · 60,9; Gardena 78,6 · 78,6 · 60,9 · 60,9 · 46,4 · 44,5 · 40,9 · 40,9.
+- LiteSpeed geleegd via de dataroute (upload en daarna nogmaals). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #461 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog te doen
+- [ ] Mandy: CDN legen.
+- [ ] Mandy: beslissen of de minpunten "Geen diefstalalarm" (M071, M072) en "Geen GPS-tracking en geen diefstalalarm" (M055) ook anders moeten.
