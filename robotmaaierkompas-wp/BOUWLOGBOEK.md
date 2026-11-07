@@ -4520,3 +4520,35 @@ Mandy: /robotmaaier-kopen-waar-op-letten/ (#508) is gepubliceerd (één revisie,
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console; editortabs van de 16 pagina's sluiten of herladen vóór opnieuw opslaan.
 - [ ] Open uit ronde 102: B1 (motie), M008, FAQ GPS op #489, de meldingen bij D3; eventueel de kopen-pagina uitbreiden.
+
+## Ronde 104 (7 november 2026): kopen-, egel- en diefstalpagina MET DE HAND gewijzigd, teksten M008 (zonder thema-zip)
+
+**Let op: /robotmaaier-kopen-waar-op-letten/ (#508), /robotmaaier-egels/ (#490) en /robotmaaier-diefstal-verzekering/ (#489) zijn met de hand gewijzigd en mogen NIET opnieuw uit de md of met een bouwscript gebouwd worden** (#508 wijkt nu af van `scripts/ronde102/kopen-waar-op-letten.json`). Latere wijzigingen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+Uitgevoerd met `scripts/ronde104.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`. Elke zoektekst precies 1×; pagina's bleven gepubliceerd; inhoud zoals bedoeld. Kopieën vooraf (niet in git): `backups/ronde88-r104-pagina{508,490,489}-voor-20261107-1556*.json`, `backups/modellen-voor-ronde104-20261107-155807.json`.
+
+### A. Kopen-pagina #508
+1-7. Rij 1 (met een score), rij 4 (geen satellietsignaal; Eufy C15 wifi voor de app), rij 5 (Navimow i205/i210 LiDAR Pro, i206 einddatum, Mova 1000 AWD; losse modules plus Navimow i105E Access+ en Husqvarna Connect Kit), rij 8 (Gardena sense/free 4,49, Bluetooth-app 4,37), rij 9 (garantie "meestal", Dreame), stap 1 (Stihl iMOW 7/7 EVO, Cramer AiConic 5/8/12), FAQ abonnement (Eufy proefdata 7 dagen): zoals opgegeven.
+8. Vóór "Waar je minder op moet vertrouwen": "Drie voorbeelden" (lijst van drie, links naar kleine tuin, zonder draad, grote tuin) en "Waar koop je een robotmaaier?" (alinea). Cijfers gecontroleerd tegen Modellen/Scores: ViAX 500 LiDAR 500 m² 75,9; Ultra 1200 80,5 en 1600 87,3, beide 45%; Mova AWD 80%; 430V 4.800 m² 96,4; iMOW 7 5.000 m². Verkoop: Husqvarna 430V "InStoreOnly" (via dealer), Stihl "verkoop via dealers (geen eigen webshopvoorraad)", Cramer via dealers (Bronnen).
+- Ter info: de eufy-FAQ noemt 7 dagen proefdata; de handleiding zegt "binnen een maand opwaarderen".
+
+### B. Egelpagina #490
+1. Korte antwoord: "…(stand april 2026); een motie van de Tweede Kamer, ingediend op 16 juni 2026 en volgens het gegevensmagazijn aangenomen, vraagt om overleg met de provincies." ("wel" valt weg met de oude bijzin.)
+2. Motie-Kostić: "… (tussen 18:00 en 9:00). Hij is ingediend op 16 juni 2026 en volgens het gegevensmagazijn van de Tweede Kamer aangenomen; het is een verzoek en geen regel." Geen verdere aanpassing nodig: de zin heeft met "Hij is" een onderwerp en een hoofdletter.
+
+### C. Diefstalpagina #489
+- FAQ GPS: "de Mova LiDAX Ultra 1600 en 1000 AWD".
+
+### D. Modelgegevens M008 (dataroute)
+- Analyse: ": het grootste in onze selectie" weg ("… tot 2.000 m². Hij rijdt …") en "staat op 3,87 in Google Play"; minpunt "App-rating 3,87 (…)". 3,87 is de Google Play-waarde van de verversing van 1-11 (Bronnen). Alleen analyse en minpunten van M008 veranderd (gecontroleerd), 71 modellen, live gelijk aan bedoeld; ook in `modellen_teksten.json` en `modellen_analyse.json`.
+- **Kaart bijgewerkt op:** /beste-robotmaaier/, /robotmaaier-zonder-draad/, /robotmaaier-grote-tuin/, /mova-dreame-robotmaaier/ (op /robotmaaier-test-vergelijking/ alleen de scorecel, geen kaarttekst).
+- **Gemeld, niet gewijzigd (paginatekst, niet gevraagd):** hub #10, "Waarom deze" Dreame A1 Pro: "het grootste opgegeven oppervlak (2.000 m²) … de app staat op 3,91 in Google Play." Komt op geen andere pagina voor.
+
+### Controles
+- Momentopname van alle 31 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de bedoelde zinnen, de kaarttekst M008 op de vier pagina's, de datum "bijgewerkt op" en "Onlangs bijgewerkt".
+- #508, #490, #489 en de vier pagina's met de M008-kaart plus /robotmaaier-test-vergelijking/ op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200; alleen #cookie-instellingen als anker; als "fout" alleen googletagmanager.com en de geblokkeerde productfoto's. Invulvelden alleen de bestaande tuinkeuzehulp (hub, pagina 1) en de filters van de vergelijkingstabel.
+- LiteSpeed geleegd via de dataroute (upload M008, na de paginawijzigingen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #508, #490, #489 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog te doen
+- [ ] Mandy: CDN legen.
+- [ ] Mandy: beslissen over de Dreame-zin op de hub (3,91, "grootste opgegeven oppervlak").
