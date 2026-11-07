@@ -4431,3 +4431,74 @@ Mandy: /robotmaaier-diefstal-verzekering/ (#489) en /robotmaaier-egels/ (#490) z
 ### Nog te doen
 - [ ] Mandy: CDN legen; Search Console: indexering aanvragen; editortabs van de twaalf pagina's sluiten of herladen vóór opnieuw opslaan.
 - [ ] Open uit ronde 100: de tekstmeldingen, de kopen-pagina en de oude sjablonen #43, #57, #58, #59, #61.
+
+## Ronde 102 (7 november 2026): diefstal-, egel- en RTK-pagina MET DE HAND gewijzigd, M022, sjablonen naar de prullenbak, conceptpagina robotmaaier-kopen-waar-op-letten, linkscript klaargezet (zonder thema-zip)
+
+**Let op: /robotmaaier-diefstal-verzekering/ (#489), /robotmaaier-egels/ (#490) en /robotmaaier-rtk-lidar-camera/ (#470) zijn in deze ronde met de hand gewijzigd en mogen NIET opnieuw uit de md of met een bouwscript gebouwd worden.** Latere wijzigingen alleen via de API, met gerichte vervangingen en een kopie vooraf.
+
+Aangeleverd: `pagina-robotmaaier-kopen-waar-op-letten.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd.**
+
+**Stand van de tak:** deze sessie begon op ronde 67; de rondes 68-101 stonden al op de remote tak en zijn eerst binnengehaald (fast-forward).
+
+Uitgevoerd met `scripts/ronde102.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`. Elke zoektekst precies 1×; de drie pagina's bleven gepubliceerd; inhoud zoals bedoeld. Kopieën vooraf (niet in git): `backups/ronde88-r102-pagina{489,490,470}-voor-20261107-0912*.json`, `backups/modellen-voor-ronde102-20261107-091224.json`, `backups/r102-pagina{57,61,58,59,43}-voor-*.json`.
+
+### A. Diefstalpagina #489
+1. Waarom deze i210: "de hoogste functiescore (96,4, gedeeld met de Husqvarna Automower 430V NERA)".
+2. Beveiligingstabel: laatste rij "Navimow i105E (loopt uit) | Ja | Nee | Nee | Nee"; direct onder de tabel (vóór "Alle waarden …") de zin over de Connect Kit bij 305E en 310E NERA.
+3. Wat kost GPS volgen?: Navimow i205 en i210 LiDAR Pro … (i206 einddatum, verlenging niet bevestigd); Mova 1600 1 jaar en de Mova LiDAX Ultra 1000 AWD 3 jaar (1600 en 2000 AWD alleen basisniveau).
+4. "Interpolis en Centraal Beheer vragen op verzoek bewijs van eigendom …".
+5. "Het Verbond van Verzekeraars heeft op de pagina's die we vonden geen standpunt …".
+6. Braaksporen: "… bijgebouwen, bergingen, opslag elders, een garage op een ander adres, een kelder of een garagebox".
+7. **"de AWD-modellen" kwam maar 1× voor** (in punt 3, daar vervangen). **Niet gewijzigd:** de FAQ "Welke robotmaaier heeft GPS?" zegt "de Mova LiDAX Ultra 1600 en AWD-modellen" (zonder "de" vóór AWD, dus niet de opgegeven tekst).
+- Ter info: de i105E-rij zegt bij Alarm en GPS "Nee"; volgens Excel kan het wel met Access+ (99,99 euro); andere rijen schrijven dan "Nee, alleen met …".
+
+### B. Egelpagina #490
+2. Zoogdiervereniging, advies: "Voor de biodiversiteit is het volgens de Zoogdiervereniging het beste geen robotmaaier te gebruiken." toegevoegd.
+3. Navimow-rij (dierenherkenning): "; de handleidingen noemen ook BioLife-zones (no-go) voor onder andere egels" toegevoegd.
+1. **Niet gewijzigd (gemeld):** "In juni 2026 aangenomen" staat nergens (0×); het korte antwoord zegt "de Tweede Kamer nam in juni 2026 wel een motie aan". "Volgens het gegevensmagazijn van de Tweede Kamer is hij aangenomen" staat 1×, maar letterlijk vervangen geeft "… 9:00). ingediend op 16 juni 2026 en … aangenomen; …" (zin zonder onderwerp en hoofdletter). Voorstel klaar in het script (`--met-voorstellen`, niet gedraaid): "Hij is ingediend op 16 juni 2026 en volgens het gegevensmagazijn van de Tweede Kamer aangenomen;".
+
+### C. Sjablonen #57, #61, #58, #59, #43
+- `robotmaaier-diefstal`, `robotmaaier-verzekering`, `robotmaaier-egels-huisdieren`, `robotmaaier-nacht`, `robotmaaier-abonnement-4g`: geen link (slug als heel pad, `?page_id=` of `?p=`) in de inhoud of de openbare HTML (menu, footer) van de 30 gepubliceerde pagina's. **Naar de prullenbak** (status trash, terug te zetten in WordPress).
+
+### D1. Modelgegevens (dataroute)
+- **M022** minpunt → "In vier van de twintig gelezen reviews (vertaald, niet in de score) worden problemen door satelliet- of verbindingsverlies genoemd". Alleen dat veld veranderd (gecontroleerd), 71 modellen, live gelijk aan bedoeld; ook in `scripts/modellen_teksten.json`. In `modellen_analyse.json` stond de zin niet. Zichtbaar op /husqvarna-robotmaaier/.
+- **M008 niet gewijzigd (gemeld):** de analyse is "… een opgegeven oppervlak tot 2.000 m²: het grootste in onze selectie." Letterlijk vervangen geeft "tot 2.000 m²: tot 2.000 m²". Voorstel (`--met-voorstellen`, niet gedraaid): ": het grootste in onze selectie" weghalen. Ter info: analyse en minpunt van M008 noemen app-rating 3,91; Excel nu 3,87.
+
+### D2. RTK-pagina #470
+- Husqvarna-bullet: "Bij de 308V, 312V, Aspire R6V, 305E en 310E: zonder wifi …" (kleine letter).
+
+### D3. Tekst van pagina-robotmaaier-kopen-waar-op-letten.md tegen het Excel-bestand
+- **Klopt:** helling (25% minimo 250/500 en sense 400/600; 84% X420 en WR342E; Mova AWD 80%); draadset 305 (Small 94,99 / Medium 154,99 / Large 239), Stihl Installatiekit 1 87 en 2 Plus 229, draad in de doos bij minimo en city; Mova 800/1200 module 249, Dreame 69/99,99, Eufy C15 99, Worx 149; Mova 1600 1 jaar, 1000 AWD 3 jaar, 430V/450V 10 jaar; beveiliging (Eufy geen pincode en alarm, Gardena geen alarm, Husqvarna alarm); geluid 55 (430V, sense) tot 68 (X420), Mova AWD 66; app-ratings Stihl 2,42, Worx 2,64, Mova 3,08, Dreame 3,87, Eufy 4,01, Husqvarna 4,39, Roborock 4,49, Navimow 4,51; uitlopend i105E, 410VE, minimo, city; messen (Navimow 1-2 maanden, 25 euro; Husqvarna 3-6 weken, Endurance 26,99, Classic 22,99; Gardena 4-7 weken, 21,79 per 9); 72 modellen ("meer dan zeventig"); reviews uit andere landen tellen niet (Leesmij), minimum 50.
+- **Gemeld, niet aangepast:**
+  1. "Modellen in ons overzicht van 250 tot 7.500 m²": Modellen heeft ook Cramer AiConic 8 en 12 (8.000 en 12.000 m², niet bevestigd, basis). Met score klopt 250-7.500.
+  2. "Voor boven 3.000 m² zijn er de Husqvarna 430V en 450V NERA": ook Stihl iMOW 7 en 7 EVO (5.000 m², met draad, nieuw, basis) en Cramer AiConic 5/8/12 (niet bevestigd). Met score klopt het.
+  3. Rij 4 "LiDAR en camera volgens de fabrikanten niet": de handleiding van de Eufy C15 (camera) vraagt wifi-dekking bij het gazon (zelfde melding als ronde 97).
+  4. 4G Navimow "1 jaar (daarna 29,99)": geldt voor i205 en i210 LiDAR Pro; bij de i206 einddatum, prijs na het eerste jaar niet bevestigd; de i105E heeft geen 4G ingebouwd (Access+ 99,99 euro, 1 jaar data, daarna 29,90 per jaar) en staat niet bij de losse modules. "Mova AWD 3 jaar": alleen de 1000 AWD is uitgezocht. Ook niet bij de losse modules: Husqvarna Connect Kit 209 (308V, 312V, R6V, 305E, 310E) en 329 euro (305).
+  5. FAQ abonnement "een gratis periode (1 tot 10 jaar)": de Eufy E15/E18 hebben alleen proefdata (eufy-FAQ: 7 dagen); de module van de C15 2 jaar.
+  6. App "Gardena … 4,49": geldt voor sense en free (smart system); minimo, city en max werken met de Bluetooth-app, 4,37.
+  7. Garantie "2 tot 3 jaar": Cramer AiConic 2 "3+2 jaar" (na registratie en onderhoud); Dreame A1 Pro: geen fabrieksgarantie in de handleiding (Dreame NL verkoopt +1 jaar); Ecovacs O1200 niet gevonden (uitverkocht).
+
+### D4. Conceptpagina robotmaaier-kopen-waar-op-letten (#508, concept)
+- Bestond niet (ook niet in de prullenbak; zie ronde 100): **nieuw concept**, geen bovenliggende pagina. Gebouwd met `scripts/ronde102_bouw.py` (van `ronde100_bouw.py`/`ronde97_bouw.py`), inhoud `scripts/ronde102/kopen-waar-op-letten.json`, gezet met `scripts/ronde102_pagina.py`.
+- Opmaak als de kopersgidsen (patroon pagina-merk) met bovenschrift **"Kopersgids"**; kruimelpad en Yoast-kruimeltitel "Robotmaaier kopen"; eerlijkheidsblok, FAQ (5 vragen) en auteursblok als patroon. **Geen productkaarten**, geen winkelnamen of winkellinks.
+- **Yoast-metabeschrijving uit de md** (live gecontroleerd).
+- Tekstlinks (allemaal naar gepubliceerde pagina's): kosten (2×), kleine en grote tuin (3×), RTK (2×), zonder draad (2×), mesjes, Husqvarna of Gardena, Navimow, Stihl, Worx, Mova en Dreame, Eufy, beste, mailto. "Meer lezen": beste en zonder draad; de rest via het linkscript.
+- **Bronnen per onderwerp** van de checklist (blad Bronnen; alleen fabrikant, handleiding, appwinkel; geen winkels, winkelclaims, "niet gevonden", "niet geopend", "tegenstrijdig" of Bol): oppervlak en helling 15, draad en installatie 23, 4G/GPS/modules 20, beveiliging 20, geluid 4, app-ratings 19, garantie en beschikbaarheid 22, messen 20; plus het scoremodel.
+
+### D5. Links: klaargezet, niet gedraaid (`scripts/ronde102_links.py`)
+- Hub #10 ("Meer lezen") en pagina 1 #11, direct na de egelregel: "Wat moet je weten voor je koopt? Zie **Robotmaaier kopen: waar let je op?**"
+- Dezelfde zin als laatste regel onder "Meer lezen" op Navimow #264, Husqvarna #20, Gardena #21, Stihl #22, Worx #24, Mova/Dreame #351, Eufy #366, kleine tuin #16, grote tuin #15, Husqvarna of Gardena #461, RTK #470, diefstal #489 en egels #490.
+- #508, "Meer lezen": de 15 pagina's uit de md-lijst die er nog niet staan (zonder grensdraad, kleine en grote tuin, RTK, Husqvarna of Gardena, kosten, mesjes, de zeven merkpagina's, Hoe we beoordelen), met de teksten van de andere pagina's.
+- Weigert zolang #508 geen status publish heeft (getest). Met `--proef-concept`: alle ankers en elk blok "Meer lezen" precies één keer, geen meldingen.
+
+### Controles
+- Momentopname van alle 30 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de bedoelde zinnen (#489, #490, #470, minpunt M022 op /husqvarna-robotmaaier/) en de datum "bijgewerkt op" (→ 7 november; home, auteurspagina).
+- #489, #490, #470, #20 op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", geen invulveld, interne links HTTP 200; alleen de bestaande footerknop #cookie-instellingen als anker en de geblokkeerde productfoto's als fout. Kaarten diefstal 96,4 · 96,4 · 87,3 · 92,7 · 78,6.
+- Concept #508 (weergegeven inhoud in de omhulling van de hub, `scripts/ronde97_controle.js`), 390 en 1440 px: geen horizontale scroll (de tabel schuift op 390 px binnen haar vak, 490 px in 349 px), geen "[", "]", "{", "}", geen invulveld, alle ankers bestaan, geen verzoek naar winkels. De enige "fout" is googletagmanager.com (vanuit deze omgeving niet bereikbaar). Alle 18 interne links HTTP 200. Alle tekst uit de md staat op de pagina (57 stukken; tabelkoppen in hoofdletters door de CSS).
+- **Download:** `paginatekst-robotmaaier-kopen-waar-op-letten.md` (volledige weergegeven tekst, FAQ opengeklapt; niet in de repository; `scripts/paginatekst.js`).
+- LiteSpeed geleegd via de dataroute (upload M022 en nogmaals na het concept; kopie `backups/modellen-voor-ronde102-leeg-20261107-092136.json`, modelgegevens daarna ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #470, #489 en #490 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; de kopen-pagina nalezen (ook de meldingen bij D3) en publiceren.
+- [ ] Mandy: beslissen over B1 (motie) en M008 (zie voorstellen); en de FAQ GPS op #489 ("1600 en AWD-modellen").
+- [ ] Claude: na Mandy's bericht `scripts/ronde102_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
