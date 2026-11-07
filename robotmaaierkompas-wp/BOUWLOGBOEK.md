@@ -4552,3 +4552,15 @@ Uitgevoerd met `scripts/ronde104.py` (via `scripts/ronde88_lib.py`): proefdraai 
 ### Nog te doen
 - [ ] Mandy: CDN legen.
 - [ ] Mandy: beslissen over de Dreame-zin op de hub (3,91, "grootste opgegeven oppervlak").
+
+## Ronde 105 (7 november 2026): hub en kopen-pagina MET DE HAND gewijzigd (zonder thema-zip)
+
+**Let op: /beste-robotmaaier/ (#10) en /robotmaaier-kopen-waar-op-letten/ (#508) zijn met de hand gewijzigd en mogen NIET opnieuw uit een md of bouwscript gebouwd worden.** Uitgevoerd met `scripts/ronde105.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`; elke zoektekst precies 1×; status publish gebleven, inhoud zoals bedoeld. Kopieën vooraf (niet in git): `backups/ronde88-r105-pagina{10,508}-voor-20261107-1625*.json`.
+
+1. **Zoekopdracht** op alle 31 gepubliceerde pagina's (inhoud zonder de productkaarten) naar "het grootste opgegeven oppervlak" en "3,91": alleen gevonden op de **hub #10**, "Waarom deze" bij de Dreame A1 Pro (beide in dezelfde alinea, elk 1×). Vervangen: "een opgegeven oppervlak tot 2.000 m²" en "de app staat op 3,87 in Google Play". Op geen andere pagina gevonden.
+2. **Kopen-pagina #508**, FAQ "Heeft een robotmaaier een abonnement nodig?": "… alleen proefdata van 7 dagen volgens de FAQ van Eufy".
+
+### Controles
+- Momentopname van alle 31 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de twee bedoelde zinnen en "Onlangs bijgewerkt" (home).
+- #10 en #508 op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200; alleen #cookie-instellingen als anker; als "fout" alleen googletagmanager.com en de geblokkeerde productfoto's; invulvelden alleen de tuinkeuzehulp op de hub.
+- LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #10 en #508 sluiten of herladen vóór opnieuw opslaan.
