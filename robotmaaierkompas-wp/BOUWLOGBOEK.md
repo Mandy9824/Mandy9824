@@ -4502,3 +4502,21 @@ Uitgevoerd met `scripts/ronde102.py` (via `scripts/ronde88_lib.py`): proefdraai 
 - [ ] Mandy: CDN legen; de kopen-pagina nalezen (ook de meldingen bij D3) en publiceren.
 - [ ] Mandy: beslissen over B1 (motie) en M008 (zie voorstellen); en de FAQ GPS op #489 ("1600 en AWD-modellen").
 - [ ] Claude: na Mandy's bericht `scripts/ronde102_links.py --schrijf`, daarna links en pagina's controleren en de cache legen.
+
+## Ronde 103 (7 november 2026): kopen-pagina gepubliceerd, links gezet
+
+Mandy: /robotmaaier-kopen-waar-op-letten/ (#508) is gepubliceerd (één revisie, 509, 10:28). **Gepubliceerde inhoud, titel en metabeschrijving precies gelijk aan `scripts/ronde102/kopen-waar-op-letten.json`** (auteursblok deze keer niet omgezet).
+
+### Links (`scripts/ronde102_links.py`): proefdraai zonder meldingen, daarna `--schrijf`
+- Kopie: `backups/ronde102-links-voor-20261107-093044.json` (niet in git). Alle 16 pagina's bleven gepubliceerd; inhoud zoals bedoeld.
+- Toegevoegd: hub #10 (Meer lezen) en pagina 1 #11, na de egelregel, en als laatste regel onder "Meer lezen" op Navimow, Husqvarna, Gardena, Stihl, Worx, Mova/Dreame, Eufy, kleine tuin, grote tuin, Husqvarna of Gardena, RTK, diefstal en egels: "Wat moet je weten voor je koopt? Zie Robotmaaier kopen: waar let je op?"; #508 "Meer lezen": de 15 overige pagina's uit de md.
+
+### Controles
+- Momentopname van alle 31 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de nieuwe regels, de datum "bijgewerkt op" (→ 7 november) en "Onlangs bijgewerkt" (home).
+- De 16 pagina's op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200; alleen de bestaande footerknop #cookie-instellingen als anker; als "fout" alleen googletagmanager.com en de in de test geblokkeerde productfoto's. Invulvelden alleen de tuinkeuzehulp (hub, pagina 1).
+- LiteSpeed geleegd via de dataroute (door het linkscript; modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen**, daarna in Search Console indexering aanvragen voor https://robotmaaierkompas.nl/robotmaaier-kopen-waar-op-letten/.
+- Lengte (woorden zonder bronnen): kopen 1.226; ter vergelijking diefstal 2.693, egels 2.412, RTK 2.954, kleine tuin 2.866, grote tuin 3.434, kosten 1.316, zonder grensdraad 871.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; Search Console; editortabs van de 16 pagina's sluiten of herladen vóór opnieuw opslaan.
+- [ ] Open uit ronde 102: B1 (motie), M008, FAQ GPS op #489, de meldingen bij D3; eventueel de kopen-pagina uitbreiden.
