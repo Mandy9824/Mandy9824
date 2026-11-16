@@ -1,38 +1,40 @@
 #!/usr/bin/env python3
 """Ronde 106: conceptpagina robotmaaier-helling uit pagina-robotmaaier-helling.md bouwen (afgeleid van
-ronde97_bouw.py en ronde102_bouw.py).
+ronde97_bouw.py en ronde102_bouw.py). Tweede bouw (16 november, md versie 2 en Excel-bestand).
 
-Gebruik:  python3 scripts/ronde106_bouw.py pagina-robotmaaier-helling.md modellen.json
+Gebruik:  python3 scripts/ronde106_bouw.py pagina-robotmaaier-helling.md robotmaaierkompas_modeldata_v1.xlsx modellen.json
 Schrijft scripts/ronde106/helling.json (titel, slug, inhoud, meta, kaarten). Schrijft niets naar de site.
 modellen.json: de live modelgegevens (rmk/v1/modellen), voor slug, naam, scores en bronnen.
 
 - Opmaak als de grote-tuinpagina: patroon pagina-merk met het bovenschrift "Kopersgids"; kruimelpad en
   Yoast-kruimeltitel "Robotmaaier helling".
-- Productkaarten M015, M060, M069, M058, M057, M002 in die volgorde (instructie en kop "modellen:" in de md). In de
-  hoofdtekst van de md staat de Mova (M060) vóór de Navimow i210 (M015): het blok van de i210 (### kop, kaart,
-  "Waarom deze") wordt naar voren gehaald. De ### kop wordt de titel van de kaart (geen dubbele kop). Het thema vult
+- Productkaarten M060, M015, M069, M058, M057, M002 in die volgorde (instructie, kop "modellen:" en hoofdtekst van
+  de md zijn gelijk; het script stopt als dat niet zo is). De ### kop wordt de titel van de kaart (geen dubbele kop). Het thema vult
   specificatiekaart, teksten en het prijsblok (Bol, Coolblue, Amazon volgens prijstaken en schakelaars, anders
   "Bekijk de actuele prijs"). Geen winkellinks of prijzen in de inhoud.
 - Tekst verder letterlijk uit de md; afwijkingen tegen de modelgegevens worden gemeld, niet aangepast.
-- Bronnen per model: het Excel-bestand (blad Bronnen) was in ronde 106 niet aangeleverd. De bronnen komen daarom
-  uit de live modelgegevens (velden max. helling, oppervlak, geluid, vierwielaandrijving), met dezelfde
-  filterregels als ronde 97 (alleen fabrikant, handleiding, appwinkel; geen winkels, winkelclaims, "niet gevonden",
-  "niet geopend", "tegenstrijdig" of Bol).
+- Bronnen per model uit het blad Bronnen, alleen de velden die de pagina gebruikt (VELDPAT: helling, oppervlak,
+  geluid, aandrijving, navigatie, verbinding/4G, kernvelden). Filterregels als ronde 97/102: alleen fabrikant,
+  handleiding, appwinkel; geen winkels, winkelclaims, "niet gevonden", "niet geopend", "tegenstrijdig" of Bol.
 - "Meer lezen": de pagina's uit de lijst interne links van de md die niet al in de tekst gelinkt zijn.
 - Metabeschrijving uit de md.
 """
 import datetime as dt, html, json, os, re, sys
 from urllib.parse import urlparse
 
-MD, MODELLEN = sys.argv[1:3]
+import openpyxl
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from excel_naar_json import app_store  # itunes-adressen -> leesbare App Store-pagina (ronde 29)
+
+MD, XLSX, MODELLEN = sys.argv[1:4]
 UIT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ronde106', 'helling.json')
 MAANDEN = 'januari februari maart april mei juni juli augustus september oktober november december'.split()
 KRUIMEL = 'Robotmaaier helling'
-KAARTEN = ['M015', 'M060', 'M069', 'M058', 'M057', 'M002']
+KAARTEN = ['M060', 'M015', 'M069', 'M058', 'M057', 'M002']
 # Verder in de tabellen bij typenaam genoemd met 45% of meer (bronnen, geen kaart)
-TABEL_MODELLEN = ['M070', 'M016', 'M059', 'M056', 'M004', 'M005', 'M008', 'M018', 'M049', 'M061', 'M062', 'M017', 'M027']
-VELDEN = [('max_helling_pct', 'max. helling'), ('max_tuingrootte_m2', 'oppervlak'), ('geluid_dba', 'geluid'),
-          ('vierwielaandrijving', 'vierwielaandrijving')]
+TABEL_MODELLEN = ['M070', 'M016', 'M059', 'M056', 'M004', 'M005', 'M008', 'M018', 'M049', 'M061', 'M062', 'M017', 'M027', 'M029', 'M031', 'M032', 'M034']
+VELDPAT = r'helling|tuingrootte|geluid|vierwiel|aandrijving|kernvelden|^navigatie|verbinding|^4g|link-module|network rtk'
 A = lambda u, t: f'<a href="{u}">{t}</a>'
 LINKS = [  # (tekst in de md, met link) — elke tekst precies 1x
     ('Hoe we scoren: zie Hoe we beoordelen.', f'Hoe we scoren: zie {A("/hoe-we-beoordelen/", "Hoe we beoordelen")}.'),
@@ -65,14 +67,6 @@ d = dt.date.fromisoformat(fm['bijgewerkt'])
 datum_nl = f'{d.day} {MAANDEN[d.month - 1]} {d.year}'
 GELINKT = set()
 
-# Kaartblokken in de volgorde van de instructie zetten
-kop_kaarten = '## De modellen met een kaart\n'
-voor, kaartdeel = body.split(kop_kaarten)
-kaartdeel, faqdeel = kaartdeel.split('{{faq}}')
-blokken = {m: b.strip() for b, m in ((b, re.search(r'\{\{productbox model=(M\d+)\}\}', b).group(1))
-                                     for b in re.split(r'\n(?=### )', kaartdeel.strip()))}
-assert sorted(blokken) == sorted(KAARTEN), sorted(blokken)
-body = voor + kop_kaarten + '\n' + '\n\n'.join(blokken[m] for m in KAARTEN) + '\n\n{{faq}}' + faqdeel
 assert re.findall(r'\{\{productbox model=(M\d+)\}\}', body) == KAARTEN
 
 
@@ -190,38 +184,44 @@ def soort(u):
     return None
 
 
-def bronnen(mid):
+def bronnen(mid, rijen):
     groepen = {}
-    for veld, naam in VELDEN:
-        v = modellen[mid]['specs'].get(veld)
-        if not isinstance(v, dict) or v.get('waarde') is None or not v.get('bron'):
+    for r in rijen:
+        veld, bron, datum, status = str(r[1] or '').strip(), app_store(r[3]), r[4], str(r[5] or '').strip().lower()
+        if r[0] != mid or not re.search(VELDPAT, veld, re.I):
             continue
-        status = str(v.get('status') or '').lower()
-        if 'bol' in v['bron'].lower() or status.startswith(('winkelclaim', 'niet gevonden', 'niet geopend', 'tegenstrijdig')):
+        if 'bol' in (bron + veld).lower() or status.startswith(('winkelclaim', 'niet gevonden', 'niet geopend', 'tegenstrijdig')):
             continue
-        urls = re.findall(r'https?://[^\s;()]+', v['bron'])
+        urls = re.findall(r'https?://[^\s;()]+', bron)
         for u in urls:
             s = soort(u)
             if not s:
                 continue
             host = urlparse(u).netloc.lower().removeprefix('www.')
             g = groepen.setdefault(u, {'label': s[0], 'velden': [], 'datum': None, 'host': host, 'plek': s[1]})
-            if naam not in g['velden']:
-                g['velden'].append(naam)
-            ds = str(v.get('datum') or '')[:10]
+            v = 'kernvelden (navigatie, oppervlak, helling, geluid, verbinding)' if veld.lower().startswith('kernvelden') else veld
+            if v not in g['velden']:
+                g['velden'].append(v)
+            ds = datum.strftime('%Y-%m-%d') if hasattr(datum, 'strftime') else str(datum or '')[:10]
             if re.match(r'\d{4}-\d{2}-\d{2}$', ds):
                 g['datum'] = min(filter(None, [g['datum'], ds]))
     li = []
     hosts = [g['host'] for g in groepen.values()]
     for u, g in groepen.items():
+        v = g['velden'][:6]
+        tekst = ', '.join(v) + (' en meer' if len(g['velden']) > 6 else '')
         p = urlparse(u)
         kort = 'handleiding' if '/tdrdownload/' in p.path else 'pdf-bijlage' if 'attachments' in p.path else \
             'supportartikel' if '/articles/' in p.path else p.path.rstrip('/').split('/')[-1][:40]
         plek = g['plek'] or (g['host'] + (', ' + kort if hosts.count(g['host']) > 1 else ''))
         dd = dt.date.fromisoformat(g['datum'])
-        li.append(f'  <li><div><a href="{html.escape(u)}">{esc(", ".join(g["velden"]).capitalize())} ({esc(plek)})</a><div class="rmk-sources__meta">'
+        li.append(f'  <li><div><a href="{html.escape(u)}">{esc(tekst)} ({esc(plek)})</a><div class="rmk-sources__meta">'
                   f'<span class="rmk-chip">{g["label"]}</span><span>geraadpleegd op {dd.day} {MAANDEN[dd.month - 1]} {dd.year}</span></div></div></li>')
     return li
+
+
+wb = openpyxl.load_workbook(XLSX, data_only=True)
+bronrijen = [r for r in wb['Bronnen'].iter_rows(min_row=2, values_only=True) if r[0]]
 
 
 # ---------------------------------------------------------------- pagina
@@ -266,10 +266,10 @@ delen.append('<!-- wp:html -->\n<div class="rmk-container rmk-column"><h2 style=
 delen.append(groep('<div class="rmk-faq">\n' + '\n'.join(f'  <details><summary>{esc(v)}</summary><div><p>{inline(" ".join(a.split()))}</p></div></details>' for v, a in vragen) + '\n</div>'))
 delen.append(sectie(proza('## ' + rest)))
 delen.append('<!-- wp:html -->\n<div class="rmk-container rmk-column" style="padding-top: 24px"><h2 style="font-size: var(--rmk-fs-xl)">Bronnen</h2>'
-             '<p class="rmk-small">Per model, uit handleidingen en fabrikantpagina\'s.</p></div>\n<!-- /wp:html -->')
+             '<p class="rmk-small">Per model, uit handleidingen, fabrikantpagina\'s en appwinkels.</p></div>\n<!-- /wp:html -->')
 telling = {}
 for mid in KAARTEN + TABEL_MODELLEN:
-    li = bronnen(mid)
+    li = bronnen(mid, bronrijen)
     telling[mid] = len(li)
     assert li, f'geen bronnen voor {mid}'
     naam = kaarttitel.get(mid) or modellen[mid]['naam'].replace('Segway Navimow', 'Navimow')

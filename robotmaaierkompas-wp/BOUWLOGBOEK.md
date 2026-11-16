@@ -4595,3 +4595,16 @@ Voorwaarde was dat de pagina alternatieven en hellingen behandelt. De pagina hee
 ### Nog te doen
 - [ ] Mandy: beslissen over de meldingen bij 2 (en eventueel het Excel-bestand aanleveren voor de bronnen en punt 4); de Stihl-intro aanvullen of de pagina eerst uitbreiden.
 - [ ] Mandy: de hellingpagina nalezen en publiceren; daarna Claude: `scripts/ronde106_links.py --schrijf`, controleren, cache legen.
+
+### 5. Tweede bouw (16 november, na Mandy's bericht): md versie 2 en Excel-bestand
+Aangeleverd: `pagina-robotmaaier-helling_1.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd.**
+- #531 was nog concept en precies gelijk aan de eerste bouw (geen handwerk); kopie vooraf `backups/ronde106-pagina531-voor-20261116-133032.json` (niet in git). Opnieuw gebouwd met `scripts/ronde106_bouw.py <md> <xlsx> <modellen.json>` en gezet met `scripts/ronde106_pagina.py --schrijf`: status draft, kaarten, meta en inhoud zoals bedoeld.
+- Wijzigingen in de md: kaartvolgorde **M060, M015, M069, M058, M057, M002** (kop, instructie en tekst nu gelijk; het script stopt bij verschil, het naar voren halen is eruit); keuzetabel "Tot 25%" (sense 400 en 600), nieuwe rijen "45 tot 50%" en "50 tot 55%"; Husqvarna 305 bij "Met draad"; "Waarom deze" i210 (gelijk aan de 430V) en Ecovacs (LiDAR en AI-camera).
+- **Bronnen nu uit het blad Bronnen** (velden helling, oppervlak, geluid, aandrijving, navigatie, verbinding/4G, kernvelden; filterregels als ronde 97/102) voor de 6 kaarten en 17 tabelmodellen, nu ook Stihl iMOW 4, 5, 6 en 7 EVO (Upgrade Kit). Geen winkels.
+- **Controle tegen Modellen en Scores: geen afwijkingen.** Alle hellingen, oppervlakken, geluid (LWA) en functiescores in de tabellen kloppen; 40%-groep, lager dan 40%, keuzetabel, Husqvarna 305 (40%), Cramer RM1000-RM2700 (35%) ook. Nu wel bevestigd (opmerkingen blad Modellen): 430V en 450V 50% werkgebied en 25% virtuele grens; i210 en i220 55% werkgebied en grens, drie wielen; i206 aandrijving tegenstrijdig; Mova AWD vier naafmotoren; Upgrade Kit 50% (3 en 4 EVO) en 55% (5, 6 en 7 EVO); Q110 referentiestation meegeleverd; GOAT LiDAR en AI-camera; 4G ingebouwd bij i210 (blad Overzicht).
+- Ter info: niet in de tabel met score staan de Navimow i210 LiDAR (zonder Pro, 45%, 92,7) en Ecovacs GOAT O1200 (45%, 75,9); beide uitverkocht. Stihl iMOW 3 EVO geluid: Excel 58, live 56 (niet op deze pagina).
+- Controle (390 en 1440 px): als de eerste bouw; kaarten 87,3 · 96,4 · 96,4 · 79,5 · 84,1 · 92,7.
+- `scripts/ronde106_links.py` ongewijzigd en niet gedraaid.
+
+### 6. Grote-tuinpagina #15 (gepubliceerd, niet gewijzigd)
+De zin "grootste draadloze maaier met een score" staat er **niet** (0×). Wel, in de inhoud: "De Ecovacs GOAT A3000 LiDAR Pro (79,5) is een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²)." (onder "Robotmaaier voor 3.000 m²") en "Waarom deze: een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²)."; in de kaarttekst M058 (modelgegevens, ook op de hellingpagina en andere pagina's met deze kaart): "… is een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²), met een helling tot 50% volgens Ecovacs." Ter info: met score zijn 450V (7.500 m²) en 430V (4.800 m²) groter; de FAQ op #15 zegt dat ook.
