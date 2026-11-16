@@ -4564,3 +4564,34 @@ Uitgevoerd met `scripts/ronde104.py` (via `scripts/ronde88_lib.py`): proefdraai 
 - Momentopname van alle 31 openbare adressen vóór en na: **kaarten, scores, volgorde en winkel-links overal gelijk**; tekstverschillen alleen de twee bedoelde zinnen en "Onlangs bijgewerkt" (home).
 - #10 en #508 op 390 en 1440 px (`scripts/ronde87_controle.js`): HTTP 200, geen horizontale scroll, geen "[", "]", "{", "}", alle interne links HTTP 200; alleen #cookie-instellingen als anker; als "fout" alleen googletagmanager.com en de geblokkeerde productfoto's; invulvelden alleen de tuinkeuzehulp op de hub.
 - LiteSpeed geleegd via de dataroute (modelgegevens ongewijzigd, 71 modellen). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en editortabs van #10 en #508 sluiten of herladen vóór opnieuw opslaan.
+
+## Ronde 106 (16 november 2026): conceptpagina robotmaaier-helling, linkscript klaargezet; Stihl-intro NIET gewijzigd (zonder thema-zip)
+
+Aangeleverd: `pagina-robotmaaier-helling.md`. **Het Excel-bestand is deze ronde niet aangeleverd** (op Google Drive staat alleen een versie van 5 oktober). Gecontroleerd tegen de **live modelgegevens** (`rmk/v1/modellen`, 71 modellen, met de wijzigingen t/m ronde 104) met de functiescore volgens `inc/score.php`. **Niets gepubliceerd.**
+
+### 1. Conceptpagina robotmaaier-helling (#531, concept)
+- Nieuw concept, geen bovenliggende pagina. Gebouwd met `scripts/ronde106_bouw.py` (van `ronde97_bouw.py`/`ronde102_bouw.py`), inhoud `scripts/ronde106/helling.json`, gezet met `scripts/ronde106_pagina.py`.
+- Opmaak als de grote-tuinpagina: pagina-merk, bovenschrift "Kopersgids", kruimelpad en Yoast-kruimeltitel "Robotmaaier helling", eerlijkheidsblok, FAQ (5), auteursblok. Yoast-metabeschrijving uit de md.
+- **Kaarten M015, M060, M069, M058, M057, M002 in die volgorde** (instructie en kop `modellen:`). In de hoofdtekst van de md stond de Mova (M060) vóór de i210 (M015); het i210-blok (kop, kaart, "Waarom deze") is naar voren gehaald. Thema vult kaarten en prijsblok; geen winkelnamen of winkellinks in de inhoud.
+- Tekstlinks: Hoe we beoordelen, Stihl-pagina, RTK, mailto. "Meer lezen": beste, zonder draad, kleine en grote tuin, kosten, kopen, de zeven merkpagina's. Alle interne links HTTP 200.
+- **Bronnen uit de live modelgegevens** (helling, oppervlak, geluid, vierwielaandrijving; filterregels als ronde 97) voor de 6 kaarten en 13 tabelmodellen, niet uit het blad Bronnen. Met het Excel-bestand opnieuw te bouwen zolang de pagina concept is.
+- Controle (`scripts/ronde97_controle.js`, 390 en 1440 px): geen horizontale scroll, geen "[", "]", "{", "}", geen invulvelden, ankers in orde, geen winkelverzoeken; enige "fout" googletagmanager.com. Kaarten 96,4 · 87,3 · 96,4 · 79,5 · 84,1 · 92,7.
+
+### 2. Controle van de md (gemeld, niet aangepast)
+- **Klopt:** alle hellingen, oppervlakken, geluid en functiescores in de twee tabellen; 40%-groep (308V/312V/R6V 84,5; ViAX 250/500); lager dan 40% (Eufy 32,5; WR303E/WR365E, 310E, 410VE, Sileno free 30; sense 25); Stihl EVO 45, zonder EVO 40; Cramer RM1000-RM2700 35; Mova AWD vierwielaandrijving; graden (afgerond) en de meetmethode.
+1. "Waarom deze" Ecovacs: "de grootste draadloze maaier met een score" klopt niet: 430V (4.800 m², 96,4) en 450V (7.500 m², 94,5) zijn groter.
+2. "Waarom deze" i210: "de hoogste functiescore (96,4)" is gedeeld met de 430V (zie ronde 102).
+3. Keuzetabel "45 tot 55%": 430V, 450V en GOAT halen 50%, niet 55%; tot 55% alleen i210 (en i220, zonder score).
+4. Niet te controleren zonder Excel: virtuele grens 25% bij 430V/450V; Navimow 55% "voor werkgebied en grens"; Stihl Upgrade Kit (50% voor 3/4 EVO, 55% voor 5/6/7 EVO). Ook de Stihl-pagina noemt de Upgrade Kit niet.
+5. Ter info: Sileno minimo (25%) loopt uit; de Husqvarna 305 (draad, 40%) staat niet in "Met draad".
+
+### 3. Stihl-pagina #22: intro NIET vervangen
+Voorwaarde was dat de pagina alternatieven en hellingen behandelt. De pagina heeft geen deel met draadloze alternatieven met score en prijs (alleen een link naar /robotmaaier-zonder-draad/) en noemt de Upgrade Kit en 55% nergens (alleen 40/45%). De nieuwe intro belooft beide ("Hieronder zie je … welke draadloze maaiers daar het dichtst bij komen"). Niets gewijzigd.
+
+### 4. Links: klaargezet, niet gedraaid (`scripts/ronde106_links.py`)
+- "Meer lezen", laatste regel, op Stihl #22, Husqvarna #20, Mova/Dreame #351, Navimow #264, grote tuin #15, kleine tuin #16; op pagina 1 #11 als alinea na de kopenregel: "Is je tuin steil? Zie Robotmaaier voor hellingen: welke kan hoe steil?"
+- Weigert zolang #531 geen status publish heeft (getest). `--proef-concept` (alleen lezen): alle ankers precies één keer, geen meldingen.
+
+### Nog te doen
+- [ ] Mandy: beslissen over de meldingen bij 2 (en eventueel het Excel-bestand aanleveren voor de bronnen en punt 4); de Stihl-intro aanvullen of de pagina eerst uitbreiden.
+- [ ] Mandy: de hellingpagina nalezen en publiceren; daarna Claude: `scripts/ronde106_links.py --schrijf`, controleren, cache legen.
