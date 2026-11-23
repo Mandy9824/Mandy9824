@@ -4608,3 +4608,30 @@ Aangeleverd: `pagina-robotmaaier-helling_1.md` en het nieuwste `robotmaaierkompa
 
 ### 6. Grote-tuinpagina #15 (gepubliceerd, niet gewijzigd)
 De zin "grootste draadloze maaier met een score" staat er **niet** (0×). Wel, in de inhoud: "De Ecovacs GOAT A3000 LiDAR Pro (79,5) is een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²)." (onder "Robotmaaier voor 3.000 m²") en "Waarom deze: een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²)."; in de kaarttekst M058 (modelgegevens, ook op de hellingpagina en andere pagina's met deze kaart): "… is een van de grootste draadloze maaiers met een score in onze selectie (3.000 m²), met een helling tot 50% volgens Ecovacs." Ter info: met score zijn 450V (7.500 m²) en 430V (4.800 m²) groter; de FAQ op #15 zegt dat ook.
+
+## Ronde 106 vervolg en ronde 107 (23 november 2026): links naar de hellingpagina, Stihl-intro (zonder thema-zip)
+
+Mandy: /robotmaaier-helling/ (#531) is gepubliceerd, CDN geleegd en indexering aangevraagd.
+
+### 0. Eerder op 23 november: links MET DE HAND gezet, buiten de scripts om
+Vóór deze ronde zijn met een los script (niet in de repo) op tien gepubliceerde pagina's tekstlinks naar /robotmaaier-helling/ gezet, elk een gerichte vervanging (zoektekst 1×):
+- **Nog live:** RTK #470 ("bij steile tuinen" → link), kopen #508 ("kijk naar de steilste stukken (zie robotmaaier voor hellingen)"), hub #10 ("hangt af van je tuin: hellingen" → link), zonder grensdraad #17 (FAQ helling, zin erbij), Worx #24 (FAQ steile hellingen, zin erbij), vergelijking #12 (uitleg "Helling:", "(zie robotmaaier voor hellingen)"). Alleen een zin of link toegevoegd, geen bestaande tekst of cijfers gewijzigd. #10 en #508 blijven "met de hand gewijzigd".
+- **Teruggedraaid** (botsten met `ronde106_links.py`, dat weigert als er al een link staat): Stihl #22, grote tuin #15, kleine tuin #16, pagina 1 #11. Per pagina eerst gecontroleerd dat de inhoud nog precies gelijk was aan de handversie (niemand anders had gewijzigd), daarna exact de vorige inhoud teruggezet. Kopie: `backups/terug-handlinks-voor-20261123-121433.json` (niet in git).
+
+### 1. `scripts/ronde106_links.py --schrijf`
+- Proefdraai zonder meldingen, daarna `--schrijf`. Kopie: `backups/ronde106-links-voor-20261123-121459.json` (niet in git). Alle 7 pagina's status publish gebleven, inhoud zoals bedoeld; LiteSpeed geleegd via de dataroute (71 modellen, ongewijzigd).
+- **Controle** (opgeslagen inhoud én live pagina met cache-omzeiling): de zin "Is je tuin steil? Zie Robotmaaier voor hellingen: welke kan hoe steil?" staat **precies 1×** op Stihl #22, Husqvarna #20, Mova/Dreame #351, Navimow #264, grote tuin #15, kleine tuin #16 en pagina 1 #11; op elk van die pagina's verder geen andere link naar de hellingpagina (Stihl: zie 2).
+
+### 2. Ronde 107: Stihl #22, tekst van "Het korte antwoord." vervangen (`scripts/ronde107.py`)
+- De tekst stond niet in een eigen alinea maar in dezelfde `<p>` direct na `<strong>Het korte antwoord.</strong>`. Die opening is gebleven; alleen de tekst daarna tot `</p>` is vervangen (precies 1×, exacte oude tekst in het script).
+- **Oude tekst:** "Nee: Stihl verkoopt in Nederland negen iMOW-robotmaaiers en ze werken allemaal met begrenzingsdraad. Een draadloze Stihl hebben we niet gevonden. Wil je geen draad aanleggen, kijk dan naar robotmaaier zonder draad. Kies je toch een Stihl, dan bepaalt je gazon het model: de iMOW 3 is er voor 500 m², de 4 voor 1.000 m², de 5 voor 1.500 m², de 6 EVO voor 3.000 m² en de 7 voor 5.000 m². De EVO-varianten halen 45% helling in plaats van 40%. Let op: de installatiekit met draad zit niet in de doos en kost 87 of 229 euro."
+- **Nieuwe tekst:** "Nee: alle negen iMOW-robotmaaiers die Stihl in Nederland verkoopt werken met begrenzingsdraad. Wil je geen draad, kijk dan bij onze robotmaaiers zonder draad [→ /robotmaaier-zonder-draad/]. Heb je een helling? De iMOW EVO-modellen halen 45% en volgens Stihl met een Upgrade Kit 50 of 55%; zie robotmaaier voor hellingen [→ /robotmaaier-helling/] voor de vergelijking."
+- Wat uit de intro verdween (oppervlak per model, installatiekit 87/229 euro) staat elders op de pagina nog (tabel, "Met draad: wat dat kost", FAQ).
+- **Negen:** live modelgegevens hebben precies 9 Stihl-modellen (M026-M034: iMOW 3, 3 EVO, 4, 4 EVO, 5, 5 EVO, 6 EVO, 7, 7 EVO), alle met begrenzingsdraad "ja". Klopt.
+- **Upgrade Kit:** staat niet in de live modelgegevens en het Excel-bestand is deze ronde niet aanwezig. Bevestigd in ronde 106 §5 (opmerkingen blad Modellen, 16 november): 50% voor 3 en 4 EVO, 55% voor 5, 6 en 7 EVO; de intro zegt "50 of 55%", dat past. Niet opnieuw tegen het Excel-bestand gecontroleerd.
+- Vergelijking met de kopie vooraf: alleen deze ene regel gewijzigd. Status publish gebleven. Live: beide links HTTP 200; Stihl heeft nu 2 links naar de hellingpagina (intro + "Meer lezen"), de zin "Is je tuin steil?" 1×. Kopie: `backups/ronde107-pagina22-voor-20261123-121645.json` (niet in git). LiteSpeed geleegd via de dataroute.
+
+### Nog te doen
+- [ ] Mandy: CDN-cache legen (hPanel > Prestaties > CDN).
+- [ ] Mandy: indexering aanvragen voor /stihl-robotmaaier/ (Search Console).
+- [ ] Mandy: editortabs van de gewijzigde pagina's (#10, #11, #12, #15, #16, #17, #20, #22, #24, #264, #351, #470, #508) sluiten of herladen vóór opnieuw opslaan.
