@@ -4692,3 +4692,22 @@ Aangeleverd: `pagina-robotmaaier-gps_1.md` en het nieuwste `robotmaaierkompas_mo
 ### Nog te doen
 - [ ] Mandy: beslissen over melding 1 (305, "volgens de handleiding") en de zin op #15.
 - [ ] Mandy: de GPS-pagina nalezen en publiceren; daarna Claude: `scripts/ronde109_links.py` (proef), `--schrijf`, controleren, cache legen.
+
+## Ronde 110 (24 november 2026): GPS-concept en grote-tuinpagina MET DE HAND gewijzigd (zonder thema-zip)
+
+**Let op: /robotmaaier-gps/ (#559, concept) en /robotmaaier-grote-tuin/ (#15) zijn met de hand gewijzigd.** #559 wijkt nu af van `scripts/ronde109/gps.json`: opnieuw bouwen uit `pagina-robotmaaier-gps_1.md` draait de twee zinnen hieronder terug, tenzij de md eerst wordt aangepast. #15 niet opnieuw bouwen. Uitgevoerd met `scripts/ronde110.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`; elke zoektekst precies 1×. Kopieën vooraf (niet in git): `backups/ronde88-r110-pagina559-voor-20261124-135817.json`, `backups/ronde88-r110-pagina15-voor-20261124-135819.json`. **Niets gepubliceerd.**
+
+- **Vooraf:** #15 had status publish en dezelfde wijzigingsdatum als bij de controle in ronde 109 (2026-11-23T13:15:12): niet aangepast. #559 had status concept. Het script stopt als een van beide anders is.
+1. **#559 (blijft concept):**
+   - "komen met de Connect Kit van 329 euro volgens de handleiding GPS-positie en alarm in de app erbij" → "komen met de Connect Kit van 329 euro volgens de Connect Kit-pagina van Husqvarna GPS-positie en alarm in de app erbij".
+   - "De Stihl iMOW 3 EVO heeft volgens de handleiding een mobiele verbinding (eSIM), maar werkt met begrenzingsdraad" → "De Stihl iMOW 3 EVO heeft volgens de handleiding een mobiele verbinding (eSIM); de vergelijkingstabel van Stihl zegt dat niet. Hij werkt met begrenzingsdraad".
+2. **#15 (blijft gepubliceerd), alinea "Wifi of satelliet":** "bij de Husqvarna 310E NERA werd in reviews (vertaald, niet in onze score) genoemd dat de maaier stopt als het satellietsignaal wegvalt" → "bij de Husqvarna 310E NERA werd in vier gelezen reviews (vertaald, niet in onze score) satelliet- of verbindingsverlies of slechte GPS-dekking onder bomen genoemd".
+
+### Controles
+- Vergelijking met de kopieën: alleen deze drie zinsdelen gewijzigd; status gelijk gebleven (draft, publish).
+- Live #15 (cache omzeild): HTTP 200, de nieuwe zin 1×, "stopt als het satellietsignaal" 0×. Op alle 32 gepubliceerde pagina's staat geen "stopt … satelliet" meer.
+- LiteSpeed geleegd via de dataroute (71 modellen, ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en de editortab van #15 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog te doen
+- [ ] Mandy: CDN legen.
+- [ ] Mandy: de GPS-pagina nalezen en publiceren; daarna Claude: `scripts/ronde109_links.py` (proef), `--schrijf`, controleren, cache legen.
