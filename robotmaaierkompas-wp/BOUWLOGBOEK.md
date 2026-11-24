@@ -4711,3 +4711,28 @@ Aangeleverd: `pagina-robotmaaier-gps_1.md` en het nieuwste `robotmaaierkompas_mo
 ### Nog te doen
 - [ ] Mandy: CDN legen.
 - [ ] Mandy: de GPS-pagina nalezen en publiceren; daarna Claude: `scripts/ronde109_links.py` (proef), `--schrijf`, controleren, cache legen.
+
+## Ronde 111 (24 november 2026): links naar /robotmaaier-gps/ gezet; thema 1.3.15 (niet geüpload)
+
+Mandy: /robotmaaier-gps/ (#559) is gepubliceerd (24-11 17:37). Vooraf alleen gemeld (geen wijzigingen): Amazon-knoppen op /robotmaaier-gps/ (1: M059) en /segway-navimow-robotmaaier/ (2: M016, M018), elk exact `https://www.amazon.nl/dp/<ASIN>?tag=robotmaaier-21`, geen andere tag of id; geen foto bij Amazon is een keuze van thema 1.3.13. Daarna onderzocht waarom de Coolblue-regel bij M008, M058 en M053 geen foto heeft (zie 2).
+
+### 1. `scripts/ronde109_links.py`
+- Proefdraai zonder meldingen, daarna `--schrijf`. Kopie: `backups/ronde109-links-voor-20261124-165218.json` (niet in git). Alle 8 pagina's status publish gebleven; LiteSpeed geleegd via de dataroute (71 modellen, ongewijzigd).
+- **Controle, opgeslagen inhoud én live (cache omzeild, HTTP 200):** de zin "Wil je weten welke maaier GPS heeft? Zie Robotmaaier met GPS: welke modellen hebben het echt?" en de link naar /robotmaaier-gps/ staan **precies 1×** op RTK #470, diefstal #489, Husqvarna #20, Navimow #264, Gardena #21, Worx #24 en Mova/Dreame #351 (laatste regel van "Meer lezen") en op /robotmaaier-zonder-draad/ #11 (alinea na de hellingregel). Verschil met de kopie per pagina: alleen deze ene regel.
+
+### 2. Coolblue-foto bij M008, M058, M053 (alleen onderzocht)
+- Het afbeeldingsadres staat niet in de modelgegevens (daar alleen merchant_product_id en productpagina), maar in de opgeslagen feed (optie `rmk_coolblue_feed`, veld `afbeelding` = merchant_image_url, ongewijzigd). De beheerroute toonde het niet.
+- Thema-regel: Coolblue-foto alleen bij precies `https` + host `coolblue.bynder.com`. Blad Coolblue (voorbeeldfeed 24-10): alle 14 modellen `https://coolblue.bynder.com/transform/…`.
+- Alle 33 gepubliceerde pagina's (111 kaarten): **0 Coolblue-foto's**; alleen M008, M058, M053 hebben een Coolblue-regel zonder Bol-foto. In ronde 80 (1-11) laadde de live HTML nog wel een bynder-foto bij M058: het feedadres is sindsdien veranderd (vermoeden; te bevestigen met 3).
+- Nabootsing (lokaal, thema 1.3.14): met het bynder-adres een foto; met http, Awin-beeldserver, ander domein of leeg veld geen foto, wel de Coolblue-regel. Lijst van toegestane domeinen niet aangepast.
+
+### 3. Thema 1.3.15 (niet geüpload; niets gepubliceerd)
+- **Alleen** `inc/coolblue.php`: nieuwe functie `rmk_coolblue_afbeelding_herkomst()`; `rmk_coolblue_status()` (beheerroute `GET /rmk/v1/coolblue-status`, alleen beheerders, en `wp rmk coolblue-status`) geeft per model ook `afbeelding_host` (kleine letters) en `afbeelding_schema` (`http`, `https`, ander schema of `onbekend`). Nooit de URL, pad, query, poort, gebruikersnaam, fragment of feedsleutel. Leeg veld of niet in de feed: beide null.
+- `style.css` Version 1.3.15; `RMK_VER` blijft 1.3.12 (rmk.js en CSS ongewijzigd; opmerking in `robotmaaierkompas-setup.php`). README bijgewerkt. Foto-regel, Coolblue-regel, ronde, publieke routes en alle andere bestanden ongewijzigd.
+- **Tests:** nieuw `tests/coolblue-status-test.php`: **16 OK** (bynder/https, http, Awin-beeldserver met hoofdletters, leeg, geen URL, gebruiker+poort+fragment, niet in de feed; geen URL/pad/query/sleutel in de uitvoer; velden en bovenste niveau verder gelijk; foto-regel ongewijzigd; route GET en alleen beheerders; 0 HTTP-verzoeken). Bestaand: score, bol, status, bewaking, prijs-modellen (live modelgegevens) OK; amazon-test aan/uit/zonder/tagfout OK. (`prijs-test` vraagt een WordPress-testsite, `redactie-test` een export, `coolblue-test` het voorbeeldbestand: niet aanwezig, net als bij 1.3.14.)
+- **Hele pagina's** (`tests/thema-paginas.php`, live inhoud van alle 33 gepubliceerde pagina's, live modelgegevens, Bol- en Coolblue-status): 1.3.15 tegen 1.3.14, zonder constanten én zoals live (43 Coolblue-, 31 Amazon-, 37 Bol-regels): **alle 33 pagina's byte voor byte gelijk**, 0 HTTP-verzoeken.
+- **Zip:** `robotmaaierkompas-child.zip` (niet in git), 116 bestanden, SHA-256 `292f5fb58aedc219733c3f67a95aa0a60733bf9ee61bff2f0fc7741a55ab7cae`.
+
+### Nog te doen
+- [ ] Mandy: CDN legen (links ronde 109).
+- [ ] Mandy: akkoord en 1.3.15 uploaden (Weergave > Thema's > Nieuw thema > Thema uploaden > "Vervang huidige met geüploade"; wp-config ongewijzigd). Daarna Claude: actief thema controleren, `coolblue-status` lezen en host/schema van M008, M058, M053 melden.

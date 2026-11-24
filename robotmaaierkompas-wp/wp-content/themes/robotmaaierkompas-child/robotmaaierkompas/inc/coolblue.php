@@ -574,6 +574,26 @@ function rmk_coolblue_bewaking() {
 
 /* ------------------------------------------------------------------ beheer: status, route en WP-CLI */
 
+/**
+ * 1.3.15: herkomst van merchant_image_url voor het statusoverzicht, zonder de URL zelf: alleen het domein (host, kleine
+ * letters) en het schema ("http", "https" of een ander schema). Pad, query, poort, gebruikersnaam en fragment worden
+ * nooit teruggegeven. Leeg veld: host en schema null. Geen herkenbare URL: host null en schema "onbekend".
+ * Domein en schema bestaan alleen uit letters, cijfers, punten en koppeltekens; anders "onbekend".
+ */
+function rmk_coolblue_afbeelding_herkomst( $url ) {
+	$url = trim( (string) $url );
+	if ( '' === $url ) {
+		return array( 'host' => null, 'schema' => null );
+	}
+	$p      = wp_parse_url( $url );
+	$schema = is_array( $p ) && ! empty( $p['scheme'] ) ? strtolower( (string) $p['scheme'] ) : '';
+	$host   = is_array( $p ) && ! empty( $p['host'] ) ? strtolower( (string) $p['host'] ) : '';
+	return array(
+		'host'   => preg_match( '/^[a-z0-9.-]{1,253}$/', $host ) ? $host : null,
+		'schema' => preg_match( '/^[a-z][a-z0-9.+-]{0,15}$/', $schema ) ? $schema : 'onbekend',
+	);
+}
+
 function rmk_coolblue_status() {
 	$feed = (array) get_option( RMK_CB_STORE_OPTION, array() );
 	$hist = (array) get_option( RMK_CB_LOG_OPTION, array() );
@@ -584,6 +604,7 @@ function rmk_coolblue_status() {
 			continue;
 		}
 		$p             = $feed['producten'][ $m['id'] ] ?? null;
+		$af            = $p ? rmk_coolblue_afbeelding_herkomst( $p['afbeelding'] ?? '' ) : array( 'host' => null, 'schema' => null );
 		$per[ $m['id'] ] = array(
 			'model'               => $m['naam'],
 			'merchant_product_id' => (string) $m['coolblue']['merchant_product_id'],
@@ -591,6 +612,9 @@ function rmk_coolblue_status() {
 			'prijs'               => $p ? $p['prijs'] : null,
 			'in_stock'            => $p ? $p['in_stock'] : null,
 			'op_de_site'          => (bool) rmk_coolblue_aanbod( $m ),
+			// 1.3.15: alleen domein en schema van merchant_image_url (geen pad, query of volledige URL).
+			'afbeelding_host'     => $af['host'],
+			'afbeelding_schema'   => $af['schema'],
 		);
 	}
 	$volgende = wp_next_scheduled( RMK_CB_RONDE_HOOK );
