@@ -4635,3 +4635,38 @@ Vóór deze ronde zijn met een los script (niet in de repo) op tien gepubliceerd
 - [ ] Mandy: CDN-cache legen (hPanel > Prestaties > CDN).
 - [ ] Mandy: indexering aanvragen voor /stihl-robotmaaier/ (Search Console).
 - [ ] Mandy: editortabs van de gewijzigde pagina's (#10, #11, #12, #15, #16, #17, #20, #22, #24, #264, #351, #470, #508) sluiten of herladen vóór opnieuw opslaan.
+
+## Ronde 109 (24 november 2026): conceptpagina robotmaaier-gps, linkscript klaargezet (zonder thema-zip)
+
+Aangeleverd: `pagina-robotmaaier-gps.md`. **Het Excel-bestand is deze ronde niet aangeleverd** (op Google Drive staat alleen de versie van 5 oktober). Gecontroleerd tegen de **live modelgegevens** (`rmk/v1/modellen`, 71 modellen) met de functiescore volgens `inc/score.php`, plus de bronnenlijsten van de RTK-pagina #470 en Husqvarna-pagina #20 (gebouwd uit het blad Bronnen) en eerdere Excel-controles in dit logboek. husqvarna.com is vanuit deze omgeving niet bereikbaar. **Niets gepubliceerd.**
+
+### 1. Conceptpagina robotmaaier-gps (#559, concept)
+- Nieuw concept, geen bovenliggende pagina. Gebouwd met `scripts/ronde109_bouw.py` (van `ronde106_bouw.py`), inhoud `scripts/ronde109/gps.json`, gezet met `scripts/ronde109_pagina.py --schrijf`.
+- Opmaak als de RTK-pagina: pagina-merk, bovenschrift "Uitleg", kruimelpad en Yoast-kruimeltitel "Robotmaaier met GPS", eerlijkheidsblok, FAQ (6), auteursblok. Yoast-metabeschrijving uit de md.
+- **Kaarten M015, M069, M059, M071, M047, M056 in die volgorde** (instructie, kop `modellen:` en tekst gelijk; het script stopt bij verschil). Thema vult kaarten en prijsblok; geen winkelnamen of winkellinks in de inhoud (het script controleert dat).
+- Tekstlinks: RTK-pagina (2×), diefstalpagina (4×, waaronder "zie de diefstalpagina" bij Wat we nog niet weten), mailto. "Meer lezen": beste, zonder draad, zonder grensdraad, kleine en grote tuin, helling, kopen, de zeven merkpagina's. Hoe we beoordelen via het eerlijkheidsblok. Alle 19 interne links HTTP 200.
+- **Bronnen** (6 kaarten + 24 modellen uit de tabellen): uit de live modelgegevens (navigatie, draad, GPS-tracking, oppervlak, geluid, verbinding/4G, modulekosten), aangevuld met `--extra` uit de bronnenlijsten van #470 en #20 (alleen nieuwe adressen met velden navigatie/GPS/verbinding/module/Connect Kit/referentiestation; zo komen de Connect Kit-pagina's bij 305E, 310E, 308V, 312V en R6V mee). Filterregels als ronde 97/106. Met het Excel-bestand opnieuw te bouwen zolang de pagina concept is: `python3 scripts/ronde109_bouw.py <md> <modellen.json> <xlsx>` en `scripts/ronde109_pagina.py --schrijf`.
+- Controle (`scripts/ronde97_controle.js`, 390 en 1440 px): geen horizontale scroll (tabellen schuiven op 390 px binnen hun vak), geen "[", "]", "{", "}", geen invulvelden, ankers in orde; als "fout" alleen googletagmanager.com en één geblokkeerde productfoto van het thema (media.s-bol.com). Alle tekst uit de md staat op de pagina. Kaarten 96,4 · 96,4 · 87,3 · 78,6 · 72,3 · 84,1.
+
+### 2. Husqvarna 305E en 310E NERA: Connect Kit ja of nee
+- **De Connect Kit past wel.** Bij M020 en M022 staat in het blad Bronnen (17-10, op #470 en #20) "Extra kosten: Connect Kit (mobiel) + dealerinstallatie" met de accessoirepagina van Husqvarna gefilterd op deze modellen (`automower-connect-kit/?fits-to=970819612` en `?fits-to=970819712`); 209 euro (ronde 88 en 93; ook live minpunt M022 "Connect Kit (209 euro, alleen via een dealer)").
+- **GPS-tracking: nee, standaard niet.** Modellen GPS-tracking 0 (gecontroleerd, handleiding 305E/310E 2866-001). Het blad Bronnen koppelt de kit bij deze twee niet aan GPS-tracking, alleen aan de mobiele verbinding (RTK zonder wifi). Of de kit tracking toevoegt is niet vastgesteld; de diefstalpagina zegt dat ook zo.
+- Dus: de tabelregel "Niet standaard" klopt, de diefstalpagina "Nee" + de zin eronder ook. **Niet juist:** "Wat we nog niet weten: Of de Husqvarna Connect Kit ook op de 305E en 310E NERA past": hij past; open is of hij GPS-tracking toevoegt.
+- **Ongelijke behandeling:** bij de 308V, 312V en Aspire R6V is het bewijs hetzelfde (GPS-tracking 0, kit alleen als "Extra kosten: Connect Kit (mobiel)", zelfde `fits-to=970819612` als de 305E). Alleen bij de 305 (andere kit, 329 euro) staat de kit onder "GPS-tracking, geofence-melding". Toch zeggen de tabel ("Alleen met een Connect Kit (209 euro)"), de FAQ "Kan ik GPS-tracking later toevoegen?" (308V) en de diefstal- en Husqvarna-pagina dat de V-modellen met de kit tracking krijgen. Of de 305E/310E krijgen dezelfde formulering, of de V-modellen dezelfde voorzichtigheid. Niet te beslissen zonder Excel of husqvarna.com.
+
+### 3. Overige controle van de md (gemeld, niet aangepast)
+- **Klopt:** alle groepen in het korte antwoord en de FAQ (ingebouwde tracking en satellietnavigatie per model); navigatie en tracking in alle 14 tabelrijen (Modellen); functiescores 96,4 (i210 LiDAR Pro), 96,4 (430V), 78,6 (sense 400), 72,3 (WR365E); 4.800 m², 1.600 m² en 57 dB(A); Q105 0 reviews; Mova Link 249, Dreame 69 of 99,99 (live); iMOW 3 EVO eSIM (handleiding, pluspunt M027) met draad, overige iMOW en Cramer RM met draad; Gardena free gateway, sense gratis sim; Worx cloud-RTK; Roborock referentiestation in de doos; netwerk-RTK Navimow.
+- Niet opnieuw tegen het nieuwste Excel-bestand te controleren (niet in de live gegevens): Find My Landroid 149, Eufy-module 99, Connect Kit 209, referentiestation 309 (eerder in orde bevonden, ronde 88/93/97/100).
+1. "reviews bij de Husqvarna 310E NERA … noemden dat de maaier stopt als hij het satellietsignaal kwijtraakt": Excel (ronde 97 §7) zegt "satelliet-/verbindingsverlies of slechte GPS-dekking onder bomen in 4 teksten"; "stopt" staat er niet. De RTK-pagina zegt "problemen door satelliet- of verbindingsverlies".
+2. Navimow "anders gebruik je de antenne uit de doos": geldt voor i205, i206 en X420; de LiDAR Pro-modellen hebben geen antenne nodig (RTK-pagina).
+3. Husqvarna "De 430V en 450V NERA hebben 4G ingebouwd": ook de uitlopende 410VE NERA (staat wel in tabel en FAQ). De zin over Connect Kit/referentiestation zonder wifi geldt voor 305E, 310E, 308V, 312V en R6V.
+4. Niet in de tabel, wel met score en relevant voor GPS: Navimow i105E (RTK met camera, 75,9; tracking alleen met Access+ 99,99 euro), Mova ViAX 250 en 500 (Link-module), Husqvarna 305 (draad; Connect Kit 329 euro geeft GPS). Zonder GPS-gegevens (basisniveau): X420, i220 LiDAR Pro, Mova 1600/2000 AWD (4G ingebouwd volgens opmerking Excel, ronde 100), Worx WR312E/WR342E, Cramer AiConic.
+
+### 4. Links: klaargezet, niet gedraaid (`scripts/ronde109_links.py`)
+- "Meer lezen", laatste regel, op RTK #470, diefstal #489, Husqvarna #20, Navimow #264, Gardena #21, Worx #24, Mova/Dreame #351: "Wil je weten welke maaier GPS heeft? Zie Robotmaaier met GPS: welke modellen hebben het echt?"
+- Pagina 1 #11 heeft **geen** blok "Meer lezen": daar dezelfde zin als alinea direct na de hellingregel (onder "De modellen een voor een", tussen de andere leesverwijzingen), zoals ronde 106.
+- Weigert zolang #559 geen status publish heeft. Ankers los (alleen lezen) gecontroleerd: elk blok "Meer lezen" 1×, hellingregel op #11 1×, nergens al een link naar /robotmaaier-gps/. Het script zelf is niet gedraaid.
+
+### Nog te doen
+- [ ] Mandy: beslissen over §2 (formulering 305E/310E tegenover 308V/312V/R6V en "Wat we nog niet weten") en de meldingen in §3; eventueel het nieuwste Excel-bestand aanleveren voor de bronnen.
+- [ ] Mandy: de GPS-pagina nalezen en publiceren; daarna Claude: `scripts/ronde109_links.py` (proef), `--schrijf`, controleren, cache legen.
