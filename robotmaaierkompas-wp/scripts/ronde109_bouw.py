@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Ronde 109: conceptpagina robotmaaier-gps uit pagina-robotmaaier-gps.md bouwen (afgeleid van ronde106_bouw.py).
+Tweede bouw (24 november, md versie 2 en Excel-bestand): bronnen uit het blad Bronnen.
 
 Gebruik:  python3 scripts/ronde109_bouw.py pagina-robotmaaier-gps.md modellen.json [robotmaaierkompas_modeldata_v1.xlsx]
                  [--extra=pagina470.json,pagina20.json]
@@ -39,7 +40,8 @@ KRUIMEL = 'Robotmaaier met GPS'
 KAARTEN = ['M015', 'M069', 'M059', 'M071', 'M047', 'M056']
 # Verder in de tabellen en tekst bij typenaam genoemd (bronnen, geen kaart)
 TABEL_MODELLEN = ['M016', 'M002', 'M070', 'M010', 'M072', 'M060', 'M006', 'M007', 'M066', 'M067', 'M068', 'M046',
-                  'M057', 'M004', 'M005', 'M008', 'M058', 'M053', 'M052', 'M020', 'M022', 'M011', 'M055', 'M027']
+                  'M057', 'M004', 'M005', 'M063', 'M064', 'M001', 'M008', 'M058', 'M053', 'M052', 'M020', 'M022',
+                  'M011', 'M055', 'M021', 'M027']  # md versie 2: ViAX 250/500, i105E en de 305 (Connect Kit 329 euro) erbij
 VELDPAT = (r'^navigatie|gps|tracking|verbinding|abonnement|\b4g\b|module|connect kit|find my|antidiefstal|'
            r'referentiestation|gateway|tuingrootte|geluid|kernvelden|network rtk')  # geen messen, garage of draad
 A = lambda u, t: f'<a href="{u}">{t}</a>'
@@ -50,7 +52,6 @@ LINKS = [  # (tekst in de md, met link) — elke tekst precies 1x
     ('Zie RTK, LiDAR of camera voor het verschil', f'Zie {A(RTK, "RTK, LiDAR of camera")} voor het verschil'),
     ('staat op onze pagina over diefstal en verzekering.', f'staat op onze {A(DIEF, "pagina over diefstal en verzekering")}.'),
     ('hangt van de polis af; zie diefstal en verzekering.', f'hangt van de polis af; zie {A(DIEF, "diefstal en verzekering")}.'),
-    ('zie de diefstalpagina.', f'zie {A(DIEF, "de diefstalpagina")}.'),
     ('Mail contact@robotmaaierkompas.nl.', 'Mail <a href="mailto:contact@robotmaaierkompas.nl">contact@robotmaaierkompas.nl</a>.'),
 ]
 MEER_LEZEN = ('<h2 id="meer-lezen">Meer lezen</h2>\n<ul>'
