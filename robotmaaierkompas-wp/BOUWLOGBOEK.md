@@ -4778,3 +4778,46 @@ Mandy: thema 1.3.15 geüpload, LiteSpeed en CDN geleegd. **Niets aangepast.**
 
 ### Nog te doen
 - [ ] Mandy: akkoord en 1.3.16 uploaden (Weergave > Thema's > Nieuw thema > Thema uploaden > "Vervang huidige met geüploade"; wp-config ongewijzigd), daarna LiteSpeed en CDN legen. Daarna Claude: actief thema, de 33 pagina's en de foto's van M008, M058 en M053 live controleren (laadt het echte beeld niet, dan haalt rmk.js het fotovak weg).
+
+## Ronde 113 vervolg (25 november 2026): 1.3.16 live gecontroleerd
+
+Mandy: 1.3.16 geüpload, caches geleegd. Actief thema **1.3.16** (`rmk.js?ver=1.3.12`). Alle 33 pagina's HTTP 200, geen PHP-meldingen; per pagina live gelijk aan de lokale 1.3.16-weergave (winkelregels, links, foto-schema en -domein, alt, bijschrift). Lokaal 1.3.15 tegen 1.3.16 (invoer van 25-11): zonder constanten 33 gelijk; zoals live 24 byte voor byte gelijk en 9 alleen met een Coolblue-foto erbij. Live **13 Coolblue-foto's, alle `https://image.coolblue.nl`, "Foto: Coolblue"**: Dreame A1 Pro 4×, Ecovacs GOAT A3000 LiDAR Pro 6×, Eufy C15 Solo 3×, op precies die 9 pagina's. De echte foto kon hier niet getoond worden: de netwerkregels van de cloudomgeving weigeren image.coolblue.nl; in die omgeving haalt rmk.js het fotovak weg (zoals bedoeld). Mandy kijkt zelf in de browser.
+- **Niet gepusht** (GitHub 503, "credential service temporarily unavailable"): commits ronde 112 en 113; geplande taak probeert elk uur opnieuw.
+
+## Ronde 114 (25 november 2026): 43 lege conceptsjablonen naar de prullenbak
+
+Opdracht Mandy. Uitgevoerd met `scripts/ronde114.py` (proefdraai zonder meldingen, daarna `--schrijf`). **Niet definitief verwijderd; niets gepubliceerd.**
+- **Overzicht (CSV):** `conceptpaginas-43.csv` (naar Mandy gestuurd, niet in git): ID, titel, slug, ouder, type, groep, woorden, productkaarten, inhoud, plaatshouders, datums, inkomende links. Alle 43 waren lege sjablonen uit de eerste opzet (6-10-2026, daarna niet gewijzigd), vijf sjablonen: kopersgids (27, onder #27), hulp (9, onder #65), toplijst (#14, #64), merk (#23), sectie-overzicht (#19, #25, #27, #65). Groep b (klaar om te publiceren): geen. Bij geen van de 43 een md van Mandy (alle md's in dit logboek horen bij gepubliceerde pagina's).
+- **Controles vooraf:** precies deze 43 concepten, alle gewijzigd op 2026-10-06; geen gepubliceerde pagina met een van de 43 als ouder; geen link (slug, `?page_id=`, `?p=`, navigatie-item) in de inhoud of de live HTML (menu, voettekst, kruimelpad) van de 33 gepubliceerde pagina's, in navigatie, sjabloondelen, sjablonen of herbruikbare blokken (50 bronnen), geen klassieke menu-items. Alleen de 9 hulp-concepten linkten (kruimelpad) naar concept #65.
+- **Kopie vooraf** (niet in git): `backups/ronde114-concepten-voor-20261125-162329.json` (alle 43 volledig, context=edit) en `backups/ronde114-gepubliceerd-voor-20261125-162329.json` (momentopname).
+- **Naar de prullenbak (43):** 14, 19, 23, 25, 27, 28, 29, 30, 31, 32, 33, 34, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 60, 62, 63, 64, 65, 67, 68, 69, 70, 71, 72, 73, 74, 75 (DELETE zonder force; status trash gecontroleerd; terug te zetten via Pagina's > Prullenbak). Er zijn geen concepten meer.
+- **Gepubliceerde pagina's ongewijzigd:** voor en na (na het legen van LiteSpeed) gelijk voor alle 33: status, slug, ouder, wijzigingsdatum, inhoud (SHA-256), HTTP 200 en de live `<main>`-HTML.
+
+## Ronde 115 (25 november 2026): conceptpagina stilste-robotmaaier, linkscript klaargezet (zonder thema-zip)
+
+Aangeleverd: `pagina-robotmaaier-stil.md` en het nieuwste `robotmaaierkompas_modeldata_v1.xlsx` (alleen gelezen, **niet in de repository**). **Niets gepubliceerd.**
+
+### 1. Conceptpagina stilste-robotmaaier (#574, concept)
+- Nieuw concept, geen bovenliggende pagina (slug niet in gebruik, ook niet in de prullenbak). Gebouwd met `scripts/ronde115_bouw.py` (van `ronde106_bouw.py`), inhoud `scripts/ronde115/stilste.json`, gezet met `scripts/ronde115_pagina.py --schrijf`.
+- Opmaak als de grote-tuinpagina: pagina-merk, bovenschrift "Kopersgids", kruimelpad en Yoast-kruimeltitel "Stilste robotmaaier", eerlijkheidsblok, FAQ (6), auteursblok; metabeschrijving uit de md.
+- **Kaarten M069, M071, M059, M004, M047, M015 in die volgorde** (instructie, kop en tekst gelijk). Thema vult kaarten en prijsblok; geen winkelnamen of winkellinks in de inhoud.
+- Tekstlinks: Hoe we beoordelen, hellingpagina, kopen-pagina, mailto. "Meer lezen": beste, zonder draad, kleine en grote tuin, GPS, RTK, kosten, de zeven merkpagina's. Alle 17 interne links uit de md staan erop, alle HTTP 200.
+- **Bronnen uit het blad Bronnen** (velden geluid, oppervlak, navigatie, helling, verbinding/4G, kernvelden; filterregels als ronde 97/106) voor de 6 kaarten en 35 andere genoemde modellen (tabel, X420, Mova AWD, Cramer RM1000-RM2700, Sileno max 1200, iMOW 3 EVO, Worx Landroid S en L). `cramertools.com` toegevoegd als fabrikantdomein (Cramer); winkelbronnen blijven eruit.
+- Controle (`scripts/ronde97_controle.js`, 390 en 1440 px): geen horizontale scroll (tabellen schuiven op 390 px binnen hun vak), geen "[", "]", "{", "}", geen invulvelden, ankers in orde, geen winkelverzoeken; enige "fout" googletagmanager.com. Alle tekst uit de md staat op de pagina. Kaarten 96,4 · 78,6 · 87,3 · 80,5 · 72,3 · 96,4.
+
+### 2. Controle van de md (gemeld, niet aangepast)
+- **Klopt (Modellen en Scores):** alle 23 rijen van de geluidstabel (geluid, oppervlak, navigatie, functiescore; alle "nieuw"); korte antwoord en FAQ (55: 430V, sense 400/600; groep 57; luidste Mova AWD 66, Eufy E15/E18 66,3, X420 68); Mova LiDAX Ultra 800 LWA 57 en LpA 49; scoredrempels (Instellingen: 50 → 10 … boven 65 → 2); M004 45% en M015 55% helling, 4G bij M059 en M015, sense 400 gratis sim; Cramer RM1000-RM2700 57 zonder score; Sileno max 1200 57; iMOW 3 EVO 58 (Excel; de live modelgegevens zeggen 56, zie ronde 106); "niet gevonden" bij WR342E en Cramer AiConic.
+1. **"Bij Husqvarna is het een gemeten geluidsvermogen; bij andere merken noemt de fabrikant een gegarandeerde waarde"** (onder de tabel en in "Wat we nog niet weten") **klopt niet.** Volgens Modellen/Bronnen is ook bij Gardena (sense 400/600, free 1500, max 1200), Roborock (Q105/Q110), Ecovacs (A3000) en Eufy (E18, C15) de gebruikte waarde een **gemeten** LWA (geen gegarandeerde waarde genoemd). **Gegarandeerd** is het bij Worx Vision Cloud (57, gemeten 55,0), Stihl (iMOW 3/3 EVO 58, gemeten 56; 4/4 EVO) en Gardena city. Bij Mova en Navimow staat "geluidsvermogen LWA" zonder gemeten/gegarandeerd. Bij Cramer RM en Gardena free 800 anders (zie 2).
+2. **"Worx Landroid S en L 67 dB(A)"**: Excel (M050, M051) zegt 67 dB, maar "'Geluidsniveau', soort niet vermeld" (productpagina, handleiding niet gelezen; niveau basis). Of het een LWA is, staat er niet. Hetzelfde voor Cramer RM (57/58: "'Measured Noise Level', soort geluidsniveau niet vermeld"). Dus "In deze vergelijking staat overal het geluidsvermogen" geldt niet zeker voor deze met-draadmodellen; de vergelijking in "Met draad is niet per se stiller" en de FAQ kan scheef zijn.
+3. "Grote maaiers zijn niet per se luider: de Husqvarna 430V … 55 dB(A), het laagste getal in ons overzicht" en "Waarom deze" 430V "het laagste geluid in ons overzicht": gedeeld met de Gardena sense 400 en 600 (ook 55).
+4. Tabel "De modellen zonder draad met een score" mist twee uitlopende modellen met score: Navimow i105E (58 dB(A), 500 m², 75,9) en Husqvarna 410VE NERA (60, 1.500 m², 87,3). (Uitverkocht, niet in de tabel: i210 LiDAR 59/92,7, Ecovacs O1200 61/75,9.)
+5. "Stil per tuingrootte", tot 500 m²: de Eufy C15 en C15 Solo (58,2) en de Navimow i205 AWD (59, even stil als de genoemde Q105) staan er niet bij.
+6. Ter info: WR342E: Excel vult geen geluid in omdat de conformiteitsverklaring 57/58 gegarandeerd noemt zonder duidelijke koppeling per type ("niet gevonden" is dus net te sterk). E18 en C15 zijn "gemeten" volgens de handleiding; voor E15 staat alleen "LWA".
+
+### 3. Links: klaargezet, niet gedraaid (`scripts/ronde115_links.py`)
+- "Meer lezen", laatste regel, op kleine tuin #16, grote tuin #15, helling #531, GPS #559, Husqvarna #20, Gardena #21, Navimow #264, Worx #24, Mova/Dreame #351 en Eufy #366: "Zoek je een stille maaier? Zie Stilste robotmaaier: welke maait het zachtst?"
+- Pagina 1 #11 heeft geen blok "Meer lezen": daar dezelfde zin als alinea direct na de GPS-regel (ronde 109).
+- Weigert zolang #574 geen status publish heeft. Ankers los (alleen lezen) gecontroleerd: elk blok "Meer lezen" 1×, GPS-regel op #11 1×, nergens al een link naar /stilste-robotmaaier/.
+
+### Nog te doen
+- [ ] Mandy: beslissen over de meldingen bij 2 (vooral 1 en 2); de pagina nalezen en publiceren; daarna Claude: `scripts/ronde115_links.py` (proef), `--schrijf`, controleren, cache legen.
