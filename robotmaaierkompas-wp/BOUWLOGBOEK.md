@@ -4736,3 +4736,24 @@ Mandy: /robotmaaier-gps/ (#559) is gepubliceerd (24-11 17:37). Vooraf alleen gem
 ### Nog te doen
 - [ ] Mandy: CDN legen (links ronde 109).
 - [ ] Mandy: akkoord en 1.3.15 uploaden (Weergave > Thema's > Nieuw thema > Thema uploaden > "Vervang huidige met geüploade"; wp-config ongewijzigd). Daarna Claude: actief thema controleren, `coolblue-status` lezen en host/schema van M008, M058, M053 melden.
+
+## Ronde 112 (25 november 2026): 1.3.15 live, Coolblue-afbeeldingsdomein vastgesteld (alleen gelezen)
+
+Mandy: thema 1.3.15 geüpload, LiteSpeed en CDN geleegd. **Niets aangepast.**
+
+### Controle 1.3.15
+- Actief thema `robotmaaierkompas-child` **1.3.15**; pagina's laden `rmk.js?ver=1.3.12` (zoals bedoeld).
+- Alle 33 gepubliceerde pagina's: HTTP 200, geen PHP-meldingen. Per pagina zijn de 111 kaarten met winkelregels, winkel-links en foto's live gelijk aan de lokale weergave van 1.3.15 (`tests/thema-paginas.php`, invoer van 25-11): 37 Bol-, 43 Coolblue-, 31 Amazon-regels, 37 Bol-foto's, 0 Coolblue-foto's (zelfde aantallen als 24-11).
+- Lokaal met de invoer van 25-11: 1.3.15 tegen 1.3.14, zonder constanten en zoals live, **alle 33 pagina's byte voor byte gelijk**, 0 HTTP-verzoeken.
+
+### `GET /rmk/v1/coolblue-status` (feed 25-11 04:30, 5.066 rijen, 13 gevonden, M018 niet in de feed)
+- **M008 Dreame A1 Pro, M058 Ecovacs GOAT A3000 LiDAR Pro, M053 Eufy C15 Solo: `afbeelding_host` = `image.coolblue.nl`, `afbeelding_schema` = `https`**; alle drie in de feed, op voorraad, Coolblue-regel op de site.
+- Alle 13 modellen in de feed gebruiken nu `image.coolblue.nl` (https). M018: host en schema leeg (niet in de feed).
+
+### Waarom de foto ontbreekt
+- `rmk_coolblue_afbeelding_ok()` accepteert alleen `https` + host `coolblue.bynder.com` (de voorbeeldfeed van 24-10; live gezien op 1-11 bij M058). Coolblue levert de afbeeldingen nu via `image.coolblue.nl`, dus `rmk_coolblue_foto()` geeft niets. De Coolblue-regel zelf is in orde.
+- M008, M058 en M053 zijn de enige kaarten met een Coolblue-regel en zonder geldig Bol-aanbod; daar valt het fotovak weg (de kaart toont alleen de kenmerken, zoals bedoeld zonder foto).
+- `coolblue.bynder.com` staat alleen in `inc/coolblue.php` (r. 167); geen andere hostlijst; de CSP is alleen `upgrade-insecure-requests`. De affiliatepagina (#81) zegt al: "Prijzen, beschikbaarheid en afbeeldingen van Coolblue tonen we uit hun productfeed, met bronvermelding."
+
+### Gekozen oplossing (besluit Mandy, 25-11)
+- Thema 1.3.16: `rmk_coolblue_afbeelding_ok()` accepteert **alleen** `https://image.coolblue.nl` naast `https://coolblue.bynder.com`. Geen jokertekens, geen http, geen andere subdomeinen van coolblue.nl. Originele feed-URL, niets lokaal gekopieerd, bijschrift "Foto: Coolblue". Testen zoals bij 1.3.15; niet uploaden zonder akkoord.
