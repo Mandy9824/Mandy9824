@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Ronde 115: conceptpagina stilste-robotmaaier uit pagina-robotmaaier-stil.md bouwen (afgeleid van ronde106_bouw.py).
+Tweede bouw (25 november, md versie 2 en Excel-bestand).
 
 Gebruik:  python3 scripts/ronde115_bouw.py pagina-robotmaaier-stil.md robotmaaierkompas_modeldata_v1.xlsx modellen.json
 Schrijft scripts/ronde115/stilste.json (titel, slug, inhoud, meta, kaarten). Schrijft niets naar de site.
@@ -36,7 +37,8 @@ KAARTEN = ['M069', 'M071', 'M059', 'M004', 'M047', 'M015']
 # Stihl iMOW 3 EVO) en de Worx Landroid S en L.
 TABEL_MODELLEN = ['M072', 'M005', 'M064', 'M046', 'M063', 'M011', 'M055', 'M070', 'M052', 'M053', 'M016', 'M002',
                   'M056', 'M057', 'M020', 'M022', 'M066', 'M067', 'M068', 'M058', 'M008', 'M060', 'M006', 'M007',
-                  'M018', 'M061', 'M062', 'M042', 'M043', 'M044', 'M045', 'M054', 'M027', 'M050', 'M051']
+                  'M018', 'M061', 'M062', 'M042', 'M043', 'M044', 'M045', 'M054', 'M027', 'M050', 'M051',
+                  'M001', 'M010', 'M041']  # md versie 2: i105E en 410VE in de tabel; "de Cramer RM-modellen" ook RM800
 VELDPAT = r'geluid|tuingrootte|^navigatie|helling|kernvelden|verbinding|^4g'
 A = lambda u, t: f'<a href="{u}">{t}</a>'
 LINKS = [  # (tekst in de md, met link) — elke tekst precies 1x

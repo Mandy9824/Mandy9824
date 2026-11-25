@@ -4821,3 +4821,13 @@ Aangeleverd: `pagina-robotmaaier-stil.md` en het nieuwste `robotmaaierkompas_mod
 
 ### Nog te doen
 - [ ] Mandy: beslissen over de meldingen bij 2 (vooral 1 en 2); de pagina nalezen en publiceren; daarna Claude: `scripts/ronde115_links.py` (proef), `--schrijf`, controleren, cache legen.
+
+### 4. Tweede bouw (25 november, na Mandy's bericht): md versie 2 en Excel-bestand
+Aangeleverd: `pagina-robotmaaier-stil_1.md`; Excel-bestand gelijk aan dat van de eerste bouw (zelfde SHA-256, niet in de repository). **Niets gepubliceerd.**
+- #574 was nog concept en precies gelijk aan de eerste bouw (geen handwerk); kopie vooraf `backups/ronde115-pagina574-voor-20261125-163359.json` (niet in git). Opnieuw gebouwd met `scripts/ronde115_bouw.py` en gezet met `scripts/ronde115_pagina.py --schrijf`: status draft, kaarten M069, M071, M059, M004, M047, M015, meta en inhoud zoals bedoeld.
+- Script: bronnen nu ook voor Navimow i105E (M001), Husqvarna 410VE NERA (M010) en Cramer RM800 (M041) (44 modellen, blad Bronnen).
+- Controle (390 en 1440 px) als de eerste bouw; alle tekst uit md versie 2 staat op de pagina; alle 17 interne links aanwezig; geen winkellinks in de inhoud.
+- **Wijzigingen in de md, gecontroleerd en in orde:** rij Navimow i105E (uitlopend; 58 dB(A), 500 m², RTK met camera, 75,9) en rij Husqvarna 410VE NERA (uitlopend; 60, 1.500 m², RTK met camera, 87,3); "bij vrijwel alle modellen het geluidsvermogen"; de zin "gemeten / gegarandeerd / alleen LWA" (past bij Modellen: gemeten bij o.a. Husqvarna, Gardena, Roborock, Ecovacs, Eufy E18/C15; gegarandeerd bij Worx Vision Cloud, Stihl, Gardena city; alleen LWA bij Mova en Navimow); tuingrootte tot 500 m² met Eufy C15 (58,2) en Navimow i205 AWD (59); "Met draad" Sileno max 1200 57 en iMOW 3 EVO 58 (Excel); 430V "samen met de Gardena sense" het laagste; Worx Landroid S en L 67 met "soort niet vermeld"; "Wat we nog niet weten" met "bij sommige merken gemeten, bij andere gegarandeerd".
+- **Gemeld, niet aangepast:**
+  1. "De Cramer RM-modellen noemen 57" (tabel "Stil per tuingrootte", rij Met draad; opsomming "Met draad kan ook stil zijn"; FAQ "Is een robotmaaier met draad stiller?"): de **RM800 noemt 58**, de RM1000, RM1500, RM2000 en RM2700 57 (Modellen; bij alle vijf "'Measured Noise Level', soort niet vermeld").
+  2. Ter info (ongewijzigd uit de eerste controle): iMOW 3 EVO is 58 in het Excel-bestand maar 56 in de live modelgegevens (zie ronde 106); bij de WR342E noemt het Excel-bestand 57/58 gegarandeerd zonder koppeling per type, de md zegt "niet gevonden".
