@@ -4849,3 +4849,12 @@ Uitgevoerd met `scripts/ronde116.py` (via `scripts/ronde88_lib.py`): proefdraai 
 
 ### Nog te doen
 - [ ] Mandy: CDN legen; akkoord geven voor de links (`scripts/ronde115_links.py`, klaargezet in ronde 115).
+
+## Ronde 116 vervolg (25 november 2026): links naar /stilste-robotmaaier/ gezet
+
+`scripts/ronde115_links.py`, opdracht Mandy.
+- **Proefdraai** (zonder `--schrijf`): precies de 11 verwachte pagina's, geen meldingen: "Meer lezen" (laatste regel) op kleine tuin #16, grote tuin #15, helling #531, GPS #559, Husqvarna #20, Gardena #21, Navimow #264, Worx #24, Mova/Dreame #351 en Eufy #366; alinea na de GPS-regel op /robotmaaier-zonder-draad/ #11.
+- **`--schrijf`:** kopie vooraf van alle 11 (`backups/ronde115-links-voor-20261125-171327.json`, niet in git); alle 11 opgeslagen, status publish gebleven, inhoud zoals bedoeld; LiteSpeed geleegd via de dataroute (71 modellen, ongewijzigd).
+- **Controle opgeslagen inhoud (alle 11):** de regel "Zoek je een stille maaier? Zie Stilste robotmaaier: welke maait het zachtst?" precies 1×, link naar `/stilste-robotmaaier/` precies 1×, als laatste regel van "Meer lezen" (op #11 als alinea); de inhoud zonder deze regel is exact gelijk aan de kopie (verder niets gewijzigd).
+- **Controle live** (cache omzeild): /robotmaaier-kleine-tuin/ en /robotmaaier-zonder-draad/ HTTP 200, de regel precies 1× en de link naar `/stilste-robotmaaier/` (HTTP 200).
+- [ ] Mandy: CDN legen; editortabs van #11, #15, #16, #20, #21, #24, #264, #351, #366, #531, #559 sluiten of herladen vóór opnieuw opslaan.
