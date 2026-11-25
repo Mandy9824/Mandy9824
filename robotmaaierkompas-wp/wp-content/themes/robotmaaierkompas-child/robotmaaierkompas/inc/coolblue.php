@@ -163,8 +163,26 @@ function rmk_coolblue_url_ok( $url, $host = 'www.coolblue.nl' ) {
 	return ! empty( $p['scheme'] ) && 'https' === $p['scheme'] && isset( $p['host'] ) && $host === strtolower( $p['host'] );
 }
 
+/**
+ * Afbeelding uit de feed (merchant_image_url) mag als foto: alleen https en alleen precies een van deze hosts.
+ * 1.3.16: image.coolblue.nl erbij (de live feed gebruikt dat domein sinds november 2026; ronde 112). Geen jokertekens,
+ * geen http, geen andere subdomeinen van coolblue.nl. De URL blijft het originele feedadres (nooit lokaal gekopieerd).
+ */
+function rmk_coolblue_afbeelding_hosts() {
+	return array( 'coolblue.bynder.com', 'image.coolblue.nl' );
+}
+
 function rmk_coolblue_afbeelding_ok( $url ) {
-	return rmk_coolblue_url_ok( $url, 'coolblue.bynder.com' );
+	$p = wp_parse_url( (string) $url );
+	if ( ! is_array( $p ) || isset( $p['port'] ) || isset( $p['user'] ) || isset( $p['pass'] ) ) {
+		return false; // 1.3.16: geen poort, gebruikersnaam of wachtwoord in het adres
+	}
+	foreach ( rmk_coolblue_afbeelding_hosts() as $host ) {
+		if ( rmk_coolblue_url_ok( $url, $host ) ) {
+			return true;
+		}
+	}
+	return false;
 }
 
 /* ------------------------------------------------------------------ ophalen en lezen */

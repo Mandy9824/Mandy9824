@@ -4757,3 +4757,24 @@ Mandy: thema 1.3.15 geüpload, LiteSpeed en CDN geleegd. **Niets aangepast.**
 
 ### Gekozen oplossing (besluit Mandy, 25-11)
 - Thema 1.3.16: `rmk_coolblue_afbeelding_ok()` accepteert **alleen** `https://image.coolblue.nl` naast `https://coolblue.bynder.com`. Geen jokertekens, geen http, geen andere subdomeinen van coolblue.nl. Originele feed-URL, niets lokaal gekopieerd, bijschrift "Foto: Coolblue". Testen zoals bij 1.3.15; niet uploaden zonder akkoord.
+
+## Ronde 113 (25 november 2026): thema 1.3.16, Coolblue-foto ook van image.coolblue.nl (niet geüpload)
+
+**Niets gepubliceerd; het thema is niet geüpload.** Live draait 1.3.15.
+
+### Wijziging (alleen `inc/coolblue.php`)
+- Nieuwe functie `rmk_coolblue_afbeelding_hosts()` = `coolblue.bynder.com`, `image.coolblue.nl`. `rmk_coolblue_afbeelding_ok()` accepteert alleen `https` + precies een van die twee hosts (via de bestaande `rmk_coolblue_url_ok()`; schema exact `https`, host zonder hoofdlettergevoeligheid zoals voorheen). Geen jokertekens, geen http, geen andere subdomeinen.
+- Extra (strenger, ook voor bynder): een adres met poort, gebruikersnaam of wachtwoord wordt geweigerd.
+- Ongewijzigd: de Coolblue-regel, de volgorde (geldige Bol-foto eerst), de ronde, de routes, rmk.js en de CSS. `style.css` 1.3.16; `RMK_VER` blijft 1.3.12 (opmerking in `robotmaaierkompas-setup.php`); README bijgewerkt.
+- De foto blijft het ongewijzigde feedadres (merchant_image_url), nooit lokaal gekopieerd; bijschrift "Foto: Coolblue", alt "<model>, productfoto", `data-rmk-foto-bron="coolblue"` (rmk.js haalt hem weg als Coolblue niet meer geldig is of het beeld niet laadt). CSS: vak 4:3 met `object-fit: contain`.
+
+### Tests
+- Nieuw `tests/coolblue-foto-test.php`: **36 OK**. Toegestaan: `https://image.coolblue.nl/…` (ook met hoofdletters in de host) en bynder. Geweigerd: http, zonder schema, schema in hoofdletters, images./cdn.image./www./kale coolblue.nl, coolblue.be, `image.coolblue.nl.evil.example`, `evilimage.coolblue.nl`, punt achter de host, poort, gebruikersnaam(+wachtwoord), alleen in de query, Awin-beeldserver, jokerteken, bynder met poort of http, leeg, geen URL. Kaart M008: foto met ongewijzigd adres, "Foto: Coolblue", één `<img>` lazy/async; zonder geldig adres geen fotovak maar wel de Coolblue-regel; volgorde Bol-foto eerst ongewijzigd; 0 HTTP-verzoeken.
+- Bestaand: coolblue-status (1.3.15), score, bol, status, bewaking, prijs-modellen, amazon aan/uit/zonder/tagfout: alles OK.
+- `tests/thema-paginas.php` uitgebreid: met `afbeelding_host`/`afbeelding_schema` uit coolblue-status (1.3.15+) krijgt elk product een testadres `schema://host/rmk-test/<nummer>.jpg` (het echte pad is niet nodig); zonder die velden leeg zoals voorheen.
+- **Hele pagina's** (live inhoud van de 33 pagina's, modelgegevens, Bol- en Coolblue-status van 25-11), 1.3.15 tegen 1.3.16: zonder constanten **33 byte voor byte gelijk**; zoals live **24 byte voor byte gelijk, 9 alleen met een Coolblue-foto erbij** (na terugdraaien van precies dat fotovak byte voor byte gelijk). Coolblue-foto's: **Dreame A1 Pro 4×** (beste, Mova/Dreame, grote tuin, zonder draad), **Ecovacs GOAT A3000 LiDAR Pro 6×** (beste, egels, grote tuin, helling, RTK, zonder draad), **Eufy C15 Solo 3×** (Eufy, kleine tuin, RTK); nergens anders. 0 HTTP-verzoeken.
+- **Browser** (Chromium, hub-omhulling met de 1.3.16-inhoud van beste, Mova/Dreame en Eufy; verzoeken naar image.coolblue.nl afgevangen met een effen testbeeld, niets van Coolblue opgehaald; winkels geblokkeerd), 390 en 1440 px: geen horizontale scroll, 0 JavaScript-fouten, foto's zichtbaar (`contain`) met "Foto: Coolblue", ook na rmk.js (live prijsroute).
+- **Zip:** `robotmaaierkompas-child.zip` (niet in git), 116 bestanden, SHA-256 `6993343c5c5cd1ad068b4809dbec34ebd2ba7375043f7b444c960c3ba8dc788e`.
+
+### Nog te doen
+- [ ] Mandy: akkoord en 1.3.16 uploaden (Weergave > Thema's > Nieuw thema > Thema uploaden > "Vervang huidige met geüploade"; wp-config ongewijzigd), daarna LiteSpeed en CDN legen. Daarna Claude: actief thema, de 33 pagina's en de foto's van M008, M058 en M053 live controleren (laadt het echte beeld niet, dan haalt rmk.js het fotovak weg).

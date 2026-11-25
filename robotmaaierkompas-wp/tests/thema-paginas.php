@@ -68,7 +68,11 @@ $pro = array();
 foreach ( rmk_models_data()['modellen'] as $m ) {
 	$c = $cb['modellen'][ $m['id'] ] ?? null;
 	if ( $c && $c['in_feed'] && ! empty( $m['coolblue']['product_url'] ) ) {
-		$pro[ $m['id'] ] = array( 'merchant_product_id' => $c['merchant_product_id'], 'prijs' => (float) $c['prijs'], 'in_stock' => $c['in_stock'] ? 1 : 0, 'afbeelding' => '', 'url' => $m['coolblue']['product_url'] );
+		// Ronde 113: met afbeelding_host/afbeelding_schema uit coolblue-status (thema 1.3.15+) een testadres met dat schema
+		// en die host (het echte pad staat niet in de route en is niet nodig); zonder die velden leeg, zoals voorheen.
+		$img = ! empty( $c['afbeelding_host'] ) && ! empty( $c['afbeelding_schema'] )
+			? $c['afbeelding_schema'] . '://' . $c['afbeelding_host'] . '/rmk-test/' . $c['merchant_product_id'] . '.jpg' : '';
+		$pro[ $m['id'] ] = array( 'merchant_product_id' => $c['merchant_product_id'], 'prijs' => (float) $c['prijs'], 'in_stock' => $c['in_stock'] ? 1 : 0, 'afbeelding' => $img, 'url' => $m['coolblue']['product_url'] );
 	}
 }
 update_option( RMK_CB_STORE_OPTION, array( 'opgehaald' => $GLOBALS['nu'] - 3600, 'hash' => str_repeat( 'a', 64 ), 'hash_sinds' => $GLOBALS['nu'] - 3600, 'rijen' => 2563, 'producten' => $pro ) );
