@@ -4831,3 +4831,21 @@ Aangeleverd: `pagina-robotmaaier-stil_1.md`; Excel-bestand gelijk aan dat van de
 - **Gemeld, niet aangepast:**
   1. "De Cramer RM-modellen noemen 57" (tabel "Stil per tuingrootte", rij Met draad; opsomming "Met draad kan ook stil zijn"; FAQ "Is een robotmaaier met draad stiller?"): de **RM800 noemt 58**, de RM1000, RM1500, RM2000 en RM2700 57 (Modellen; bij alle vijf "'Measured Noise Level', soort niet vermeld").
   2. Ter info (ongewijzigd uit de eerste controle): iMOW 3 EVO is 58 in het Excel-bestand maar 56 in de live modelgegevens (zie ronde 106); bij de WR342E noemt het Excel-bestand 57/58 gegarandeerd zonder koppeling per type, de md zegt "niet gevonden".
+
+## Ronde 116 (25 november 2026): stilste-robotmaaier MET DE HAND gewijzigd (zonder thema-zip)
+
+Mandy: /stilste-robotmaaier/ (#574) is gepubliceerd (25-11 17:59). **Let op: #574 is nu met de hand gewijzigd en mag niet opnieuw uit de md of met `ronde115_bouw.py` gebouwd worden** (wijkt af van `scripts/ronde115/stilste.json`). Bij het publiceren heeft de editor het auteursblok van patroonverwijzing omgezet naar losse HTML (normaal gedrag van WordPress); verder was de inhoud gelijk aan de tweede bouw.
+
+Uitgevoerd met `scripts/ronde116.py` (via `scripts/ronde88_lib.py`): proefdraai zonder meldingen, daarna `--schrijf`; elke zoektekst precies 1×; status publish gebleven. Kopie vooraf (niet in git): `backups/ronde88-r116-pagina574-voor-20261125-170101.json`. **Niets gepubliceerd.**
+1. Stil per tuingrootte, rij Met draad: "de Cramer RM-modellen noemen 57 zonder te zeggen …" → "de Cramer RM1000 tot en met RM2700 noemen 57 zonder te zeggen om welk soort geluidsniveau het gaat".
+2. Waarom sommige modellen luider zijn: "Bij de Cramer RM-modellen (57) en de Worx Landroid S en L (67, zonder score) noemt" → "Bij de Cramer RM1000 tot en met RM2700 (57) en …".
+3. FAQ "Is een robotmaaier met draad stiller?": "Bij de Cramer RM-modellen (57) en de Worx Landroid S en L (67) is niet vermeld" → "Bij de Cramer RM1000 tot en met RM2700 (57) en …".
+4. Wat we nog niet weten: "Het geluid van de Worx Landroid 4WD WR342E en de Cramer AiConic-modellen: dat hebben we niet gevonden." → "Het geluid per type bij de Worx Landroid 4WD WR342E (57 of 58 dB(A), niet per type vermeld) en bij de Cramer AiConic-modellen (niet gevonden)."
+
+### Controles
+- Opgeslagen inhoud: elke nieuwe zin precies 1×, elke oude zin 0×; vergelijking met de kopie: geen wijziging buiten deze vier zinnen.
+- Live (cache omzeild, HTTP 200): de vier nieuwe zinnen elk 1×, "Cramer RM-modellen" 0×.
+- LiteSpeed geleegd via de dataroute (71 modellen, ongewijzigd). **Mandy: CDN-cache legen** (hPanel > Prestaties > CDN) en de editortab van #574 sluiten of herladen vóór opnieuw opslaan.
+
+### Nog te doen
+- [ ] Mandy: CDN legen; akkoord geven voor de links (`scripts/ronde115_links.py`, klaargezet in ronde 115).
